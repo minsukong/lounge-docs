@@ -1,0 +1,435 @@
+<!doctype html>
+<html>
+  <head>
+    <title>frontend_tobe_presentation.md</title>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+
+    <link rel="stylesheet" href="./../assets/style/presentation-theme.css" />
+  </head>
+  <body>
+    <div class="type">FRONT-END</div>
+    <h1 id="front-end-as-is--to-be">Front-End AS-IS / TO-BE</h1>
+    <h2 id="1-as-is" class="bx">1. AS-IS</h2>
+    <p>
+      현재 앱은 WebView 방식이며 Android와 iOS 소스가 별도로 관리되고 있습니다.
+    </p>
+    <p>
+      플랫폼별 소스가 분리되어 있어 앱 기능을 변경할 때 Android와 iOS를 각각
+      확인하고 빌드해야 합니다. 같은 기능이라도 플랫폼에 따라 구현 방식이나 적용
+      시점이 달라질 수 있어 개발과 운영에 부담이 생깁니다.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>구분</th>
+          <th>현재 상황</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>앱 구조</td>
+          <td>WebView 방식으로 서비스하고 있습니다.</td>
+        </tr>
+        <tr>
+          <td>소스 관리</td>
+          <td>Android와 iOS 소스를 별도로 관리하고 있습니다.</td>
+        </tr>
+        <tr>
+          <td>개발</td>
+          <td>앱 기능 변경 시 두 플랫폼을 각각 확인해야 합니다.</td>
+        </tr>
+        <tr>
+          <td>빌드</td>
+          <td>Android와 iOS 빌드를 따로 진행해야 합니다.</td>
+        </tr>
+        <tr>
+          <td>운영</td>
+          <td>플랫폼별 기능 차이와 배포 시점 차이가 생길 수 있습니다.</td>
+        </tr>
+      </tbody>
+    </table>
+    <hr />
+    <h2 id="2-to-be" class="bx-active">2. TO-BE</h2>
+    <p>
+      서비스 화면은 웹으로 통합하고, 디바이스 기능은 Native가 담당하는 구조로
+      개선합니다.
+    </p>
+    <ul>
+      <li>화면, 콘텐츠, 서비스 기능은 웹에서 제공합니다.</li>
+      <li>푸시 알림, 위치 정보, 카메라 등은 Native가 담당합니다.</li>
+      <li>웹과 Native는 정해진 브릿지 규격으로 정보를 주고받습니다.</li>
+      <li>웹 변경은 앱 빌드 없이 배포합니다.</li>
+      <li>Native 또는 브릿지가 변경될 때만 Android와 iOS 앱을 빌드합니다.</li>
+    </ul>
+    <table>
+      <thead>
+        <tr>
+          <th>구분</th>
+          <th>TO-BE 방향</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>서비스 화면</td>
+          <td>웹으로 통합해 Android와 iOS에서 함께 사용합니다.</td>
+        </tr>
+        <tr>
+          <td>디바이스 기능</td>
+          <td>Native 영역에서 안정적으로 제공합니다.</td>
+        </tr>
+        <tr>
+          <td>연동 방식</td>
+          <td>공통 브릿지 규격을 적용합니다.</td>
+        </tr>
+        <tr>
+          <td>웹 배포</td>
+          <td>앱 빌드 없이 빠르게 반영합니다.</td>
+        </tr>
+        <tr>
+          <td>앱 배포</td>
+          <td>Native 또는 브릿지 변경 시에만 진행합니다.</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 id="기대-효과">기대 효과</h3>
+    <ul>
+      <li>같은 화면과 기능을 중복 개발하는 작업을 줄일 수 있습니다.</li>
+      <li>서비스 변경 사항을 더 빠르게 반영할 수 있습니다.</li>
+      <li>Android와 iOS의 화면과 동작을 일관되게 유지할 수 있습니다.</li>
+      <li>웹과 Native의 담당 범위가 분명해집니다.</li>
+      <li>장애가 발생했을 때 원인을 더 빠르게 확인할 수 있습니다.</li>
+    </ul>
+    <hr />
+    <h2 id="3-웹native-브릿지">3. 웹–Native 브릿지</h2>
+    <p>브릿지는 웹과 Native가 정보를 주고받기 위한 공통 규격입니다.</p>
+    <p>
+      예를 들어 웹에서 위치 정보가 필요하면 Native에 요청합니다. Native는
+      사용자의 권한을 확인한 뒤 위치 정보를 웹에 전달합니다. 푸시 알림을 눌렀을
+      때 특정 웹 화면으로 이동하는 기능도 브릿지를 통해 처리합니다.
+    </p>
+    <h3 id="nextjs-통신-예시">Next.js 통신 예시</h3>
+    <p>
+      Next.js 화면에서 위치 정보가 필요할 때 브릿지에 요청을 보냅니다. Native는
+      요청을 처리한 뒤 결과를 다시 웹에 전달합니다.
+    </p>
+    <pre class="hljs"><code><div>Next.js 화면
+  → Native에 위치 정보 요청
+  → Android 또는 iOS에서 권한 확인
+  → Native가 처리 결과 전달
+  → Next.js 화면에 결과 반영
+</div></code></pre>
+    <p>
+      Next.js에서는 Android와 iOS의 차이를 공통 함수 안에서 처리합니다.
+      화면에서는 플랫폼을 구분하지 않고 같은 함수를 호출합니다.
+    </p>
+    <pre
+      class="hljs"
+    ><code><div><span class="hljs-string">&#x27;use client&#x27;</span>;
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">requestLocation</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> bridgeWindow = <span class="hljs-variable language_">window</span> <span class="hljs-keyword">as</span> <span class="hljs-built_in">any</span>;
+  <span class="hljs-keyword">const</span> message = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>({
+    <span class="hljs-attr">requestId</span>: crypto.<span class="hljs-title function_">randomUUID</span>(),
+    <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;location.getCurrentPosition&#x27;</span>,
+    <span class="hljs-attr">params</span>: {},
+  });
+
+  <span class="hljs-comment">// Android WebView</span>
+  <span class="hljs-keyword">if</span> (bridgeWindow.<span class="hljs-property">AppBridge</span>) {
+    bridgeWindow.<span class="hljs-property">AppBridge</span>.<span class="hljs-title function_">postMessage</span>(message);
+    <span class="hljs-keyword">return</span>;
+  }
+
+  <span class="hljs-comment">// iOS WebView</span>
+  bridgeWindow.<span class="hljs-property">webkit</span>?.<span class="hljs-property">messageHandlers</span>?.<span class="hljs-property">AppBridge</span>?.<span class="hljs-title function_">postMessage</span>(message);
+}
+</div></code></pre>
+    <p>Native는 처리 결과를 Next.js에 등록된 이벤트로 전달합니다.</p>
+    <pre
+      class="hljs"
+    ><code><div><span class="hljs-title function_">useEffect</span>(<span class="hljs-function">() =&gt;</span> {
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">handleNativeMessage</span> = (<span class="hljs-params"><span class="hljs-attr">event</span>: <span class="hljs-title class_">Event</span></span>) =&gt; {
+    <span class="hljs-keyword">const</span> result = (event <span class="hljs-keyword">as</span> <span class="hljs-title class_">CustomEvent</span>).<span class="hljs-property">detail</span>;
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Native 응답:&#x27;</span>, result);
+  };
+
+  <span class="hljs-variable language_">window</span>.<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">&#x27;nativeMessage&#x27;</span>, handleNativeMessage);
+  <span class="hljs-keyword">return</span> <span class="hljs-function">() =&gt;</span> <span class="hljs-variable language_">window</span>.<span class="hljs-title function_">removeEventListener</span>(<span class="hljs-string">&#x27;nativeMessage&#x27;</span>, handleNativeMessage);
+}, []);
+</div></code></pre>
+    <p>
+      위 코드는 통신 방식에 대한 간단한 예시입니다. 실제 객체명, 메시지 형식,
+      응답 방식은 Android, iOS, 웹 담당자가 브릿지 규격을 확정한 뒤 적용합니다.
+    </p>
+    <h3 id="기본-원칙">기본 원칙</h3>
+    <ul>
+      <li>요청과 응답 형식을 통일합니다.</li>
+      <li>Android와 iOS에서 같은 기능명과 결과 형식을 사용합니다.</li>
+      <li>성공과 오류에 대한 처리 기준을 함께 정의합니다.</li>
+      <li>인증 정보와 개인정보는 안전하게 전달하고 기록에 남기지 않습니다.</li>
+      <li>브릿지에 버전을 부여해 이전 앱과의 호환성을 관리합니다.</li>
+    </ul>
+    <h3 id="우선-정의할-기능">우선 정의할 기능</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>기능</th>
+          <th>설명</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>앱 정보</td>
+          <td>앱 버전과 운영체제 정보를 확인합니다.</td>
+        </tr>
+        <tr>
+          <td>인증</td>
+          <td>웹과 Native 사이에서 인증 정보를 전달합니다.</td>
+        </tr>
+        <tr>
+          <td>권한</td>
+          <td>위치, 알림, 카메라 권한을 확인하고 요청합니다.</td>
+        </tr>
+        <tr>
+          <td>위치</td>
+          <td>현재 위치 정보를 웹에 전달합니다.</td>
+        </tr>
+        <tr>
+          <td>푸시</td>
+          <td>알림 수신과 화면 이동을 연결합니다.</td>
+        </tr>
+        <tr>
+          <td>카메라</td>
+          <td>촬영 기능을 실행하고 결과를 전달합니다.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>브릿지 규격은 Android, iOS, 웹 담당자가 함께 검토한 뒤 확정합니다.</p>
+    <hr />
+    <h2 id="4-오프라인-대응">4. 오프라인 대응</h2>
+    <p>
+      한 번 접속한 서비스 화면과 필요한 파일을 디바이스에 저장해 두면,
+      네트워크가 없는 상황에서도 일부 기능을 사용할 수 있습니다.
+    </p>
+    <p>
+      다만 모든 기능을 오프라인으로 제공할 수 있는 것은 아닙니다. 화면과 정적
+      콘텐츠처럼 서버 통신이 필요하지 않은 기능은 오프라인에서도 제공하고,
+      로그인이나 실시간 조회처럼 서버 확인이 필요한 기능은 실행을 제한합니다.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>구분</th>
+          <th>오프라인 동작</th>
+          <th>예시</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>저장 가능한 기능</td>
+          <td>사용 가능</td>
+          <td>기본 화면, 안내 콘텐츠, 이미지, 최근 조회 정보</td>
+        </tr>
+        <tr>
+          <td>디바이스 기능</td>
+          <td>부분적 사용 가능</td>
+          <td>QR 코드 확인 및 디바이스에 저장된 정보 등은 사용 가능</td>
+        </tr>
+        <tr>
+          <td>서버 통신 기능</td>
+          <td>사용 불가</td>
+          <td>로그인, 실시간 조회, 데이터 등록·수정, 결제</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3 id="오프라인-동작-방식">동작 방식</h3>
+    <ol>
+      <li>
+        온라인 상태에서 Next.js 화면과 필요한 파일을 디바이스에 저장합니다.
+      </li>
+      <li>오프라인이 되면 저장된 화면과 데이터를 우선 보여줍니다.</li>
+      <li>화면 상단에 오프라인 상태임을 안내합니다.</li>
+      <li>
+        서버 통신이 필요한 기능은 비활성화하고 온라인 연결이 필요하다는 메시지를
+        표시합니다.
+      </li>
+      <li>네트워크가 복구되면 최신 화면과 데이터로 갱신합니다.</li>
+    </ol>
+    <blockquote>
+      <p>
+        오프라인 상태입니다. 저장된 정보만 확인할 수 있으며, 로그인·조회·등록
+        기능은 네트워크 연결 후 이용할 수 있습니다.
+      </p>
+    </blockquote>
+    <h3 id="오프라인-구현-고려-사항">구현 시 고려 사항</h3>
+    <ul>
+      <li>오프라인 지원 화면과 필수 파일을 미리 정합니다.</li>
+      <li>
+        Next.js의 정적 화면과 클라이언트에서 실행되는 기능을 중심으로
+        구성합니다.
+      </li>
+      <li>
+        캐시된 화면과 데이터에 버전을 부여해 오래된 정보가 계속 노출되지 않도록
+        합니다.
+      </li>
+      <li>
+        개인정보나 인증 정보는 오프라인 저장 대상에서 제외하거나 암호화합니다.
+      </li>
+      <li>
+        웹과 Native가 같은 네트워크 상태를 사용하도록 브릿지에서 연결 상태를
+        전달합니다.
+      </li>
+      <li>
+        서버 전송이 필요한 작업을 임시 저장할지는 서비스 정책에 따라 별도로
+        결정합니다.
+      </li>
+    </ul>
+    <hr />
+    <h2 id="5-front-end-기술-구성">5. Front-End 기술 구성</h2>
+    <p>안정성, 개발 편의성, 유지보수성을 기준으로 기술을 선정했습니다.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>역할</th>
+          <th>기술</th>
+          <th>선정 이유</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>웹 서비스</td>
+          <td>Next.js, React</td>
+          <td>공통 화면을 구성하고 기능별로 관리하기 좋습니다.</td>
+        </tr>
+        <tr>
+          <td>개발 언어</td>
+          <td>TypeScript</td>
+          <td>개발 과정에서 오류를 미리 확인할 수 있습니다.</td>
+        </tr>
+        <tr>
+          <td>화면 스타일</td>
+          <td>Tailwind CSS, SCSS</td>
+          <td>일관된 화면을 빠르게 만들고 관리할 수 있습니다.</td>
+        </tr>
+        <tr>
+          <td>서버 데이터</td>
+          <td>TanStack Query</td>
+          <td>데이터 조회, 갱신, 오류 상태를 관리하기 좋습니다.</td>
+        </tr>
+        <tr>
+          <td>화면 상태</td>
+          <td>Zustand</td>
+          <td>여러 화면에서 사용하는 상태를 간단하게 관리할 수 있습니다.</td>
+        </tr>
+        <tr>
+          <td>입력 화면</td>
+          <td>React Hook Form</td>
+          <td>입력값과 오류 메시지를 효율적으로 관리할 수 있습니다.</td>
+        </tr>
+        <tr>
+          <td>공통 컴포넌트</td>
+          <td>shadcn/ui</td>
+          <td>
+            버튼과 입력창 같은 공통 요소를 서비스에 맞게 구성할 수 있습니다.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p>각 기술의 역할을 분명하게 나누고, 필요한 범위에서만 사용하겠습니다.</p>
+    <hr />
+    <h2 id="6-gitlab-cicd-배포-흐름">6. GitLab CI/CD 배포 흐름</h2>
+    <p>
+      개발자가 변경 내용을 등록하면 GitLab에서 검사, 테스트, 검토, 배포 과정을
+      순서대로 진행합니다.
+    </p>
+    <pre class="hljs"><code><div>개발 내용 등록
+  → 자동 품질 검사
+  → 기능 테스트
+  → 검토 환경 배포
+  → 담당자 확인 및 승인
+  → 운영 환경 배포
+</div></code></pre>
+    <h3 id="웹-변경">웹 변경</h3>
+    <p>
+      웹 화면이나 서비스 기능만 변경된 경우에는 자동 검사와 담당자 확인을 거쳐
+      웹에 배포합니다. Android와 iOS 앱은 다시 빌드하지 않습니다.
+    </p>
+    <h3 id="native-또는-브릿지-변경">Native 또는 브릿지 변경</h3>
+    <p>
+      디바이스 기능이나 브릿지 규격이 변경된 경우에는 Android와 iOS 앱을 각각
+      빌드하고 테스트합니다. 내부 검증을 마친 뒤 앱 배포 절차를 진행합니다.
+    </p>
+    <h3 id="운영-기준">운영 기준</h3>
+    <ul>
+      <li>모든 변경 사항은 자동 검사와 담당자 검토를 거칩니다.</li>
+      <li>운영 배포 전에 주요 기능을 검증합니다.</li>
+      <li>웹 배포에 문제가 발생하면 직전 버전으로 되돌립니다.</li>
+      <li>앱 기능에는 비상 시 해당 기능을 중지할 수 있는 장치를 마련합니다.</li>
+      <li>인증 정보와 배포 권한은 지정된 담당자만 관리합니다.</li>
+    </ul>
+    <hr />
+    <h2 id="7-진행-계획">7. 진행 계획</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>단계</th>
+          <th>진행 내용</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>현재 Android, iOS, 웹 소스와 기능을 확인합니다.</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>웹과 Native가 담당할 범위를 정합니다.</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>브릿지 규격 초안을 작성합니다.</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Android, iOS, 웹 담당자가 함께 규격을 검토합니다.</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>로그인, 위치, 푸시 기능으로 연동 방식을 검증합니다.</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>GitLab CI/CD 환경을 구성합니다.</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>검증된 기능부터 순서대로 적용합니다.</td>
+        </tr>
+      </tbody>
+    </table>
+    <hr />
+    <h2 id="8-협의가-필요한-사항">8. 협의가 필요한 사항</h2>
+    <ul>
+      <li>웹으로 전환할 화면과 Native에 유지할 기능</li>
+      <li>브릿지에서 우선 지원할 기능</li>
+      <li>오프라인에서 제공할 화면과 데이터의 범위</li>
+      <li>Android와 iOS의 최소 지원 버전</li>
+      <li>인증 정보와 개인정보 처리 방식</li>
+      <li>개발, 검토, 운영 환경의 승인 담당자</li>
+      <li>브릿지 규격서 초안 공유일, 리뷰일, 확정일</li>
+    </ul>
+    <hr />
+    <h2 id="9-정리">9. 정리</h2>
+    <p>
+      TO-BE의 핵심은 서비스 화면을 웹으로 통합하고 디바이스 기능은 Native에 두는
+      것입니다. 두 영역은 공통 브릿지 규격으로 연결합니다.
+    </p>
+    <p>
+      웹은 빠르게 변경하고 배포할 수 있도록 구성하고, Native는 디바이스 기능을
+      안정적으로 제공하는 데 집중합니다. 저장된 화면과 콘텐츠는 오프라인에서도
+      제공하되, 서버 통신이 필요한 기능은 상태를 명확히 안내하고 실행을
+      제한합니다. 이를 통해 플랫폼별 중복 작업을 줄이고 개발 속도와 운영
+      안정성을 함께 높이겠습니다.
+    </p>
+  </body>
+</html>
