@@ -1,0 +1,541 @@
+/*
+ * KRDS-inspired reusable Markdown presentation theme
+ * Reference: Korea Republic Design System (KRDS)
+ * Usage: <link rel="stylesheet" href="presentation-theme.css">
+ */
+
+:root {
+  --krds-primary-5: #ecf2fe;
+  --krds-primary-10: #d8e5fd;
+  --krds-primary-20: #b1cefb;
+  --krds-primary-50: #256ef4;
+  --krds-primary-60: #0b50d0;
+  --krds-primary-70: #083891;
+  --krds-secondary-50: #346fb2;
+  --krds-gray-0: #ffffff;
+  --krds-gray-5: #f4f5f6;
+  --krds-gray-10: #e6e8ea;
+  --krds-gray-20: #cdd1d5;
+  --krds-gray-30: #b1b8be;
+  --krds-gray-50: #6d7882;
+  --krds-gray-60: #58616a;
+  --krds-gray-70: #464c53;
+  --krds-gray-90: #1e2124;
+  --krds-information-5: #e7f4fe;
+  --krds-information-50: #0b78cb;
+  --krds-success-5: #eaf6ec;
+  --krds-success-50: #228738;
+  --krds-point-5: #fbeff0;
+  --krds-point-50: #d63d4a;
+  --runtime-legend-text: #4b5563;
+  --runtime-legend-bg: #f8fafc;
+  --runtime-legend-border: #dfe5ec;
+  --runtime-native-text: #164b86;
+  --runtime-native-bg: #eaf3ff;
+  --runtime-native-border: #a9c9ef;
+  --runtime-native-header-bg: #dcecff;
+  --runtime-native-cell-bg: rgba(234, 243, 255, 0.58);
+  --runtime-webview-text: #116149;
+  --runtime-webview-bg: #e9f8f1;
+  --runtime-webview-border: #a9dbc8;
+  --runtime-webview-header-bg: #daf2e7;
+  --runtime-webview-cell-bg: rgba(233, 248, 241, 0.62);
+  --runtime-system-text: #7a4a08;
+  --runtime-system-bg: #fff6df;
+  --runtime-system-border: #e9c977;
+  --krds-radius: 8px;
+  --krds-content-width: 1200px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--krds-gray-5);
+  scroll-behavior: smooth;
+}
+
+body {
+  max-width: var(--krds-content-width);
+  margin: 0 auto;
+  padding: 64px 48px 80px;
+  color: var(--krds-gray-90);
+  background: var(--krds-gray-0);
+  font-family:
+    "Pretendard GOV",
+    "Pretendard",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Apple SD Gothic Neo",
+    "Noto Sans KR",
+    "Segoe UI",
+    sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: var(--krds-gray-90);
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+
+h1 {
+  margin: 0 0 72px;
+  padding: 0 0 32px;
+  border-bottom: 2px solid var(--krds-gray-90);
+  font-size: 40px;
+}
+
+.type {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--krds-primary-60);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+h2 {
+  margin: 72px 0 24px;
+  padding: 0 0 16px;
+  border-bottom: 1px solid var(--krds-gray-30);
+  font-size: 32px;
+}
+
+h2.bx {
+  padding: 20px 24px;
+  background: var(--krds-gray-5);
+  border: 1px solid var(--krds-gray-30);
+  border-left: 6px solid var(--krds-gray-60);
+  border-radius: var(--krds-radius);
+}
+
+h2.bx-active {
+  padding: 20px 24px;
+  color: var(--krds-primary-70);
+  background: var(--krds-primary-5);
+  border: 1px solid var(--krds-primary-20);
+  border-left: 6px solid var(--krds-primary-50);
+  border-radius: var(--krds-radius);
+}
+
+h3 {
+  margin: 48px 0 16px;
+  font-size: 24px;
+}
+
+h4 {
+  margin: 32px 0 12px;
+  font-size: 19px;
+}
+
+p {
+  margin: 0 0 16px;
+  color: var(--krds-gray-70);
+}
+
+blockquote {
+  margin: 24px 0 40px;
+  padding: 16px 24px;
+  color: var(--krds-point-50);
+  background: var(--krds-point-5);
+  border: 0;
+  border-left: 4px solid var(--krds-point-50);
+  border-radius: var(--krds-radius);
+}
+
+blockquote p {
+  margin: 0;
+  color: inherit;
+  font-weight: 700;
+}
+
+h2 + p,
+h3 + p {
+  color: var(--krds-gray-90);
+  font-size: 19px;
+}
+
+hr {
+  height: 1px;
+  margin: 64px 0;
+  background: var(--krds-gray-20);
+  border: 0;
+}
+
+ul,
+ol {
+  margin: 16px 0 24px;
+  padding-left: 40px;
+}
+
+li {
+  margin: 8px 0;
+  padding-left: 4px;
+  color: var(--krds-gray-70);
+}
+
+li::marker {
+  color: var(--krds-gray-60);
+}
+
+a {
+  color: var(--krds-primary-60);
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+a:hover {
+  color: var(--krds-primary-70);
+  text-decoration-thickness: 2px;
+}
+
+a:focus-visible {
+  border-radius: 4px;
+  outline: 0;
+  box-shadow: 0 0 0 4px var(--krds-primary-50);
+}
+
+table {
+  width: 100%;
+  margin: 24px 0 40px;
+  overflow: hidden;
+  border: 1px solid var(--krds-gray-30);
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: var(--krds-radius);
+  font-size: 15px;
+}
+
+thead {
+  background: var(--krds-gray-5);
+}
+
+th,
+td {
+  padding: 16px;
+  border: 0;
+  border-right: 1px solid var(--krds-gray-20);
+  border-bottom: 1px solid var(--krds-gray-20);
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  color: var(--krds-gray-90);
+  font-weight: 700;
+}
+
+td {
+  color: var(--krds-gray-70);
+  background: var(--krds-gray-0);
+}
+
+tr > :last-child {
+  border-right: 0;
+}
+
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+tbody tr:hover td {
+  background: var(--krds-primary-5) !important;
+}
+
+td:first-child,
+th:first-child {
+  width: 22%;
+  font-weight: 700;
+}
+
+pre {
+  margin: 24px 0 18px;
+  padding: 24px;
+  overflow-x: auto;
+  color: #f4f7fb;
+  background: #1e2124 !important;
+  border: 1px solid #464c53;
+  border-radius: var(--krds-radius);
+  box-shadow: none;
+}
+
+pre code,
+pre code > div {
+  color: #f4f7fb !important;
+  background: transparent !important;
+  font-family: "D2Coding", "Cascadia Code", Consolas, monospace;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+:not(pre) > code {
+  padding: 2px 6px;
+  color: var(--krds-primary-70) !important;
+  background: var(--krds-primary-5);
+  border: 1px solid var(--krds-primary-10);
+  border-radius: 4px;
+  font-family: "D2Coding", "Cascadia Code", Consolas, monospace;
+  font-size: 0.92em;
+}
+
+pre .hljs-keyword,
+pre .hljs-selector-tag,
+pre .hljs-literal,
+pre .hljs-title {
+  color: #86aff9 !important;
+}
+
+pre .hljs-string,
+pre .hljs-attr,
+pre .hljs-template-variable {
+  color: #9ed9aa !important;
+}
+
+pre .hljs-number,
+pre .hljs-built_in,
+pre .hljs-type {
+  color: #ffd37a !important;
+}
+
+pre .hljs-comment,
+pre .hljs-quote {
+  color: #38d408 !important;
+}
+
+pre .hljs-variable,
+pre .hljs-params,
+pre .hljs-property {
+  color: #e9aeb4 !important;
+}
+
+@media (max-width: 767px) {
+  html {
+    background: var(--krds-gray-0);
+  }
+
+  body {
+    padding: 40px 16px 64px;
+    font-size: 17px;
+  }
+
+  h1 {
+    margin-bottom: 56px;
+    font-size: 28px;
+  }
+
+  h2 {
+    margin-top: 56px;
+    font-size: 24px;
+  }
+
+  h2[id="1-as-is"],
+  h2[id="2-to-be"] {
+    padding: 16px;
+  }
+
+  h3 {
+    margin-top: 40px;
+    font-size: 22px;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  th,
+  td {
+    min-width: 160px;
+    padding: 12px;
+  }
+
+  pre {
+    padding: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm;
+  }
+
+  html,
+  body {
+    background: #fff;
+  }
+
+  body {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    font-size: 10.5pt;
+  }
+
+  h1,
+  h2,
+  h3,
+  table,
+  pre {
+    break-inside: avoid;
+  }
+
+  h2[id="1-as-is"],
+  h2[id="2-to-be"],
+  pre,
+  thead {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}
+
+section {
+  padding: 0 20px;
+}
+
+section h2 {
+  margin-left: -18px;
+  margin-right: -18px;
+}
+
+pre:has([data-language]:not([data-language="text"])) {
+  padding-top: 48px;
+}
+[data-language]:not([data-language="text"])::before {
+  position: absolute;
+  right: 20px;
+  top: 12px;
+  content: "📄" attr(data-language);
+  color: rgb(207, 255, 95);
+}
+
+.runtime-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  align-items: center;
+  margin: 18px 0;
+  padding: 14px 16px;
+  background: var(--runtime-legend-bg);
+  border: 1px solid var(--runtime-legend-border);
+  border-radius: 10px;
+}
+
+.runtime-legend-item {
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+  color: var(--runtime-legend-text);
+  font-size: 14px;
+}
+
+.runtime-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 3px 10px;
+  border: 1px solid;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.runtime-native {
+  color: var(--runtime-native-text);
+  background: var(--runtime-native-bg);
+  border-color: var(--runtime-native-border);
+}
+
+.runtime-webview {
+  color: var(--runtime-webview-text);
+  background: var(--runtime-webview-bg);
+  border-color: var(--runtime-webview-border);
+}
+
+.runtime-system {
+  color: var(--runtime-system-text);
+  background: var(--runtime-system-bg);
+  border-color: var(--runtime-system-border);
+}
+
+.runtime-role-table .runtime-scope {
+  min-width: 176px;
+  line-height: 2.2;
+}
+
+.runtime-matrix th.runtime-native-column {
+  color: var(--runtime-native-text);
+  background: var(--runtime-native-header-bg);
+}
+
+.runtime-matrix th.runtime-webview-column {
+  color: var(--runtime-webview-text);
+  background: var(--runtime-webview-header-bg);
+}
+
+.runtime-matrix td.runtime-native-column {
+  background: var(--runtime-native-cell-bg);
+  border-left-color: var(--runtime-native-border);
+}
+
+.runtime-matrix td.runtime-webview-column {
+  background: var(--runtime-webview-cell-bg);
+  border-left-color: var(--runtime-webview-border);
+}
+
+@media (max-width: 720px) {
+  .runtime-legend {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .runtime-role-table .runtime-scope {
+    min-width: 150px;
+  }
+}
+
+@media print {
+  .runtime-native,
+  .runtime-matrix th.runtime-native-column,
+  .runtime-matrix td.runtime-native-column {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .runtime-webview,
+  .runtime-matrix th.runtime-webview-column,
+  .runtime-matrix td.runtime-webview-column {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}
