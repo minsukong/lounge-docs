@@ -539,3 +539,50 @@ pre:has([data-language]:not([data-language="text"])) {
     -webkit-print-color-adjust: exact;
   }
 }
+
+.diagram-frame {
+  margin: 32px 0 40px;
+  padding: 24px;
+  overflow-x: auto;
+  background: var(--krds-gray-0);
+  border: 1px solid var(--krds-primary-20);
+  border-radius: var(--krds-radius);
+}
+
+.diagram-frame .mermaid {
+  min-width: 680px;
+  color: var(--krds-gray-90);
+  text-align: center;
+  white-space: pre;
+}
+
+.diagram-frame svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.diagram-frame figcaption {
+  margin-top: 16px;
+  color: var(--krds-gray-60);
+  font-size: 15px;
+  text-align: center;
+}
+
+@media (max-width: 720px) {
+  .diagram-frame {
+    padding: 16px;
+  }
+}
+
+@media print {
+  .diagram-frame {
+    overflow: visible;
+    break-inside: avoid;
+  }
+
+  .diagram-frame .mermaid {
+    min-width: 0;
+  }
+}
