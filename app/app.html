@@ -714,8 +714,11 @@ sequenceDiagram
         <p>
           <strong>코드 요약:</strong> WebView의 비동기 요청을 Flutter가
           실행하고, 동일한 요청 ID를 가진 응답으로 Promise를 완료하는 전체
-          Bridge 흐름입니다. Base64는 문자열 전달용 인코딩이며 암호화나 위변조
-          방지 수단이 아닙니다.
+          Bridge 흐름입니다. 응답 JSON을 <code>runJavaScript()</code>의 문자열
+          인자로 전달할 때 따옴표·줄바꿈·한글 등으로 인한 이스케이프 오류를
+          줄이기 위해 UTF-8 Base64로 인코딩합니다. Base64는 암호화나 위변조 방지
+          수단이 아니며, 데이터 크기가 증가하므로 작은 JSON 응답에만 사용합니다.
+          WebView가 직접 메시지 전달 API를 제공한다면 생략할 수 있습니다.
         </p>
         <figure class="diagram-frame">
           <!-- prettier-ignore -->
