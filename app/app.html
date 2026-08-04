@@ -361,8 +361,8 @@ flowchart LR
         <p>
           검증된 오픈소스 라이브러리를 활용하되 버전은 Lock File로 고정하고,
           자동 취약점 점검과 정기 업데이트 절차를 적용합니다. 아래 항목은 확정된
-          기술 스택이며, 정확한 패키지 버전은 프로젝트 Lock File과 승인된 기준
-          버전을 따릅니다.
+          기술 스택이며, 정확한 패키지 버전은 Web Workspace와 Flutter 등 각
+          Toolchain의 Lock File 및 승인된 기준 버전을 따릅니다.
         </p>
 
         <table>
@@ -1675,14 +1675,16 @@ window.<span class="hljs-property">AppBridgeResponse</span> = (<span class="hljs
 
         <h3>목적</h3>
         <p>
-          <code>Codemagic</code>을 활용하여 빌드, 테스트 및 배포 과정을
-          자동화하고 일관된 개발 및 배포 환경을 제공합니다.
+          Flutter 앱은 <code>Codemagic</code>을 활용하여 빌드, 테스트 및 배포
+          과정을 자동화합니다. 웹사이트, WebView, 카드사 인앱과 백오피스는 각
+          애플리케이션의 독립 Pipeline으로 배포하며, 배포 플랫폼과 도구는 인프라
+          환경을 확인한 뒤 확정합니다. <code>TBD</code>
         </p>
         <figure class="diagram-frame diagram-frame--cicd">
           <!-- prettier-ignore -->
           <div class="mermaid">
 flowchart TD
-  accTitle: APP CI 및 CD 배포 흐름
+  accTitle: Flutter APP CI 및 CD 배포 흐름
   accDescr: 소스 변경이 Codemagic의 환경 구성, 정적 분석, 테스트와 보안 검사를 거쳐 Android와 iOS 빌드 및 QA 배포 후 수동 승인으로 운영에 배포되는 흐름입니다.
   C([소스 변경]) --> CI["Codemagic CI"]
   CI --> Q["Dependency 설치 · Code Generation · 품질 검사"]
@@ -1695,10 +1697,10 @@ flowchart TD
   A -->|"보류"| F
   A -->|"승인"| P["Production · 단계적 배포"]
           </div>
-          <figcaption>Codemagic 기반 APP CI/CD 흐름</figcaption>
+          <figcaption>Codemagic 기반 Flutter APP CI/CD 흐름</figcaption>
         </figure>
 
-        <h3>CI (Continuous Integration)</h3>
+        <h3>Flutter CI (Continuous Integration)</h3>
         <p>
           소스 코드 변경 시 자동으로 빌드 및 검증을 수행하여 코드 품질을
           유지합니다.
@@ -1726,7 +1728,7 @@ flowchart TD
           <li>서명 파일·Token·환경 Secret의 저장소 및 Build Log 노출 여부</li>
         </ul>
 
-        <h3>CD (Continuous Delivery / Deployment)</h3>
+        <h3>Flutter CD (Continuous Delivery / Deployment)</h3>
         <p>
           QA 환경은 검증 완료 후 자동 배포할 수 있으며, 운영 배포는 승인된
           Artifact와 변경 이력, 보안 점검 결과를 기준으로 수동 승인을 거칩니다.
@@ -1746,6 +1748,23 @@ flowchart TD
           <li>승인자 분리, 단계적 배포와 즉시 Rollback 계획 확인</li>
           <li>Google Play Console 배포</li>
           <li>App Store Connect(TestFlight/App Store) 배포</li>
+        </ul>
+
+        <h3>모노레포 CI/CD 기준</h3>
+        <ul>
+          <li>
+            변경 경로와 의존 관계를 기준으로 영향받는 애플리케이션과 공통 패키지의
+            Lint·Test·Build만 실행합니다.
+          </li>
+          <li>
+            공통 계약이나 패키지를 변경하면 이를 사용하는 모든 애플리케이션의 회귀
+            테스트를 필수로 수행합니다.
+          </li>
+          <li>
+            웹 애플리케이션은 Pipeline, Artifact, 환경 설정, 승인과 Rollback 이력을
+            각각 분리하고, 동일 Commit에서 생성된 결과도 애플리케이션별로 식별할 수
+            있어야 합니다.
+          </li>
         </ul>
       </section>
 
@@ -1860,7 +1879,8 @@ flowchart TD
           </li>
           <li>Pull Request 검토, 필수 CI, 보안 점검과 승인 완료 후 Merge</li>
           <li>
-            운영 배포 Commit에 Tag와 Release Note를 남기고 Artifact와 연결
+            운영 배포는 <code>&lt;app-name&gt;/v&lt;version&gt;</code> 형식의 앱별 Tag와
+            Release Note를 남기고 해당 Artifact와 연결
           </li>
           <li>
             Secret 노출 Commit은 삭제만 하지 않고 즉시 자격 증명을 폐기·교체
@@ -2020,7 +2040,8 @@ flowchart TD
       <hr />
 
       <section>
-        <h2 class="bx-active">12. Build Environment (Flavor)</h2>
+        <h2 class="bx-active">12. Build Environment</h2>
+        <h3>Flutter Flavor</h3>
         <p>
           <code>dev</code>·<code>qa</code>·<code>prod</code>는 기본 예시입니다.
           실제 환경 수와 이름, 승격 순서는 인프라·릴리스 정책과 함께 확정합니다.
@@ -2068,6 +2089,23 @@ flowchart TD
             비활성화
           </li>
         </ul>
+
+        <h3>웹 애플리케이션 환경</h3>
+        <ul>
+          <li>
+            웹사이트, WebView, 카드사 인앱과 백오피스는 애플리케이션별로
+            <code>dev</code>·<code>qa</code>·<code>prod</code> 환경과 배포 권한을
+            분리합니다.
+          </li>
+          <li>
+            Host, Cookie 범위, CORS·CSP, 인증 Redirect URI와 Origin Allowlist는
+            서비스·제휴사·환경별 승인 값으로 관리합니다.
+          </li>
+          <li>
+            브라우저에 노출되는 공개 설정과 서버·CI에서만 사용하는 Secret을
+            구분하고, Artifact·환경 설정·승인 이력을 애플리케이션별로 추적합니다.
+          </li>
+        </ul>
       </section>
 
       <hr />
@@ -2078,8 +2116,9 @@ flowchart TD
           웹사이트, Flutter 앱, 앱 내 WebView, 카드사 인앱 서비스와 백오피스 등
           Front-end 프로젝트는 하나의 저장소에서 관리하는 모노레포(Monorepo)
           구조로 구성할 예정입니다. 각 애플리케이션은 독립적으로 빌드·테스트·배포할
-          수 있도록 <code>apps</code> 아래에 분리하고, 공통 UI, API 계약, WebView
-          Bridge 규격과 개발 설정은 <code>packages</code>에서 관리합니다.
+          수 있도록 <code>apps</code> 아래에 분리합니다. Web 공통 UI와 개발 설정은
+          <code>packages</code>, 언어에 종속되지 않는 API·Bridge 규격은
+          <code>contracts</code>에서 관리합니다.
         </p>
 
         <h3>Monorepo 전체 구조</h3>
@@ -2091,21 +2130,36 @@ flowchart TD
 │   ├── card-inapp/              # 카드사 인앱 서비스
 │   └── backoffice/              # 운영·관리자 백오피스
 ├── packages/
-│   ├── ui/                      # 공통 디자인 시스템과 UI 컴포넌트
-│   ├── api-client/              # API Client, Schema와 공통 Type
-│   ├── webview-bridge/          # Native–WebView Bridge 계약
-│   ├── config/                  # TypeScript, Lint와 Style 공통 설정
-│   ├── testing/                 # 테스트 공통 설정과 도구
-│   └── utils/                   # 범용 유틸리티
+│   ├── ui/                      # Web 공통 디자인 시스템과 UI 컴포넌트
+│   ├── api-client/              # Web API Client와 생성 Type
+│   ├── webview-bridge/          # WebView Bridge 호출 Adapter
+│   ├── config/                  # Web TypeScript, Lint와 Style 공통 설정
+│   ├── testing/                 # Web 테스트 공통 설정과 도구
+│   └── utils/                   # Web 범용 유틸리티
+├── contracts/
+│   ├── api/                     # API Schema와 생성 기준
+│   └── webview-bridge/          # 플랫폼 중립 Bridge 요청·응답 규격
 ├── tooling/                     # 저장소 운영 및 자동화 도구
 └── README.md</code></pre>
         <p>
           <strong>코드 요약:</strong> 웹 프로젝트는 하나의 Workspace에서 의존성과
           공통 작업을 관리하고, 변경된 범위에 따라 Lint·Test·Build를 수행합니다.
           Flutter는 같은 저장소에 두되 Dart 의존성, Lock File과 빌드 도구는 Flutter
-          Toolchain 기준으로 별도 관리합니다. Workspace와 Task Runner 제품은 배포
-          플랫폼과 CI 환경을 확인한 뒤 확정합니다. <code>TBD</code>
+          Toolchain 기준으로 별도 관리합니다. <code>contracts</code>를 기준으로
+          TypeScript와 Dart Type을 각각 생성하거나 구현하고, 앱 내부에는 채널별
+          검증과 호출 Adapter만 둡니다. Workspace와 Task Runner 제품은 배포 플랫폼과
+          CI 환경을 확인한 뒤 확정합니다. <code>TBD</code>
         </p>
+        <blockquote>
+          <p>
+            <code>website</code>, <code>card-inapp</code>과
+            <code>backoffice</code>는 현재 계획된 배포 단위입니다. 각 프로젝트의
+            Framework와 최종 분리 범위는 별도로 확정합니다. 카드사별 독립 배포가
+            필요하면 <code>apps/card-inapp/&lt;partner&gt;</code>로 분리하고, 동일
+            애플리케이션에서 설정만 구분한다면 하나의 프로젝트로 유지합니다.
+            <code>TBD</code>
+          </p>
+        </blockquote>
 
         <h3>Flutter Native · <code>apps/mobile</code></h3>
         <pre class="hljs"><code data-language="text">lib/
@@ -2129,6 +2183,8 @@ flowchart TD
           <strong>코드 요약:</strong> <code>main.dart</code>는 앱 실행과 필수
           초기화만 담당하고, <code>app/app.dart</code>에서
           <code>ProviderScope</code>, Theme과 Router를 조립합니다.
+          <code>core/network</code>와 <code>core/webview</code>에는 공통 계약을
+          기준으로 생성하거나 구현한 Dart Adapter를 배치합니다.
         </p>
 
         <h3>Next.js WebView · <code>apps/app-webview</code></h3>
@@ -2156,9 +2212,11 @@ flowchart TD
         <p>
           <strong>코드 요약:</strong> Next.js App Router는 <code>app/</code>에서
           관리하고 Tailwind CSS 4의 전역 진입점은 <code>app/globals.css</code>에
-          둡니다. <code>components/ui</code>에는 shadcn/ui 기반 공통 컴포넌트,
-          <code>features/*/api</code>와 <code>hooks</code>에는 TanStack Query
-          연동, <code>stores</code>에는 Zustand 상태를 배치합니다.
+          둡니다. <code>components/ui</code>에는 <code>packages/ui</code>를 조합한
+          WebView 전용 컴포넌트를 둡니다. <code>lib/api</code>는
+          <code>packages/api-client</code>를 환경·인증 정책과 연결하고,
+          <code>features/*/api</code>와 <code>hooks</code>에는 기능별 TanStack
+          Query 연동을 배치합니다. <code>stores</code>에는 Zustand 상태를 둡니다.
         </p>
 
         <h3>앱 내부 구성 기준</h3>
@@ -2182,7 +2240,7 @@ flowchart TD
               <td>Flutter</td>
               <td><code>apps/mobile/lib/core</code></td>
               <td>
-                인증, Network, 보안 저장소, 로깅, WebView·Bridge 등 공통 정책과
+                인증, Network, 보안 저장소, 로깅과 공통 계약 기반 WebView·Bridge
                 Adapter
               </td>
             </tr>
@@ -2209,7 +2267,7 @@ flowchart TD
             <tr>
               <td>WebView</td>
               <td><code>apps/app-webview/src/components</code></td>
-              <td>공통 UI와 shadcn/ui 기반 재사용 컴포넌트</td>
+              <td><code>packages/ui</code> 조합과 WebView 전용 UI 컴포넌트</td>
             </tr>
             <tr>
               <td>WebView</td>
@@ -2222,7 +2280,9 @@ flowchart TD
             <tr>
               <td>WebView</td>
               <td><code>apps/app-webview/src/lib/bridge</code></td>
-              <td>AppBridge 요청·응답 타입, 검증과 공통 호출 모듈</td>
+              <td>
+                공통 Bridge 계약을 사용하는 WebView 전용 검증과 호출 Adapter
+              </td>
             </tr>
             <tr>
               <td>WebView</td>
