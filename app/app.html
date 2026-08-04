@@ -2075,13 +2075,39 @@ flowchart TD
       <section>
         <h2 class="bx-active">13. Project Structure</h2>
         <p>
-          확정된 기술 스택에 맞춰 Flutter Native와 Next.js WebView 프로젝트를
-          분리합니다. Flutter는 Feature 단위 Clean Architecture와 Riverpod을
-          적용하고, WebView는 Next.js App Router, TypeScript, Tailwind CSS,
-          TanStack Query와 Zustand를 기준으로 구성합니다.
+          웹사이트, Flutter 앱, 앱 내 WebView, 카드사 인앱 서비스와 백오피스 등
+          Front-end 프로젝트는 하나의 저장소에서 관리하는 모노레포(Monorepo)
+          구조로 구성할 예정입니다. 각 애플리케이션은 독립적으로 빌드·테스트·배포할
+          수 있도록 <code>apps</code> 아래에 분리하고, 공통 UI, API 계약, WebView
+          Bridge 규격과 개발 설정은 <code>packages</code>에서 관리합니다.
         </p>
 
-        <h3>Flutter Native</h3>
+        <h3>Monorepo 전체 구조</h3>
+        <pre class="hljs"><code data-language="text">&lt;repository-root&gt;/
+├── apps/
+│   ├── website/                 # 대외 웹사이트
+│   ├── mobile/                  # Flutter Native 앱
+│   ├── app-webview/             # 앱 내 Next.js WebView
+│   ├── card-inapp/              # 카드사 인앱 서비스
+│   └── backoffice/              # 운영·관리자 백오피스
+├── packages/
+│   ├── ui/                      # 공통 디자인 시스템과 UI 컴포넌트
+│   ├── api-client/              # API Client, Schema와 공통 Type
+│   ├── webview-bridge/          # Native–WebView Bridge 계약
+│   ├── config/                  # TypeScript, Lint와 Style 공통 설정
+│   ├── testing/                 # 테스트 공통 설정과 도구
+│   └── utils/                   # 범용 유틸리티
+├── tooling/                     # 저장소 운영 및 자동화 도구
+└── README.md</code></pre>
+        <p>
+          <strong>코드 요약:</strong> 웹 프로젝트는 하나의 Workspace에서 의존성과
+          공통 작업을 관리하고, 변경된 범위에 따라 Lint·Test·Build를 수행합니다.
+          Flutter는 같은 저장소에 두되 Dart 의존성, Lock File과 빌드 도구는 Flutter
+          Toolchain 기준으로 별도 관리합니다. Workspace와 Task Runner 제품은 배포
+          플랫폼과 CI 환경을 확인한 뒤 확정합니다. <code>TBD</code>
+        </p>
+
+        <h3>Flutter Native · <code>apps/mobile</code></h3>
         <pre class="hljs"><code data-language="text">lib/
 ├── app/
 │   ├── routing/
@@ -2105,7 +2131,7 @@ flowchart TD
           <code>ProviderScope</code>, Theme과 Router를 조립합니다.
         </p>
 
-        <h3>Next.js WebView</h3>
+        <h3>Next.js WebView · <code>apps/app-webview</code></h3>
         <pre class="hljs"><code data-language="text">src/
 ├── app/
 │   ├── &lt;route&gt;/
@@ -2135,7 +2161,7 @@ flowchart TD
           연동, <code>stores</code>에는 Zustand 상태를 배치합니다.
         </p>
 
-        <h3>구성 기준</h3>
+        <h3>앱 내부 구성 기준</h3>
         <table>
           <thead>
             <tr>
@@ -2147,14 +2173,14 @@ flowchart TD
           <tbody>
             <tr>
               <td>Flutter</td>
-              <td><code>app</code></td>
+              <td><code>apps/mobile/lib/app</code></td>
               <td>
                 앱 Root Widget, GoRouter, Theme과 Riverpod Root Scope 조립
               </td>
             </tr>
             <tr>
               <td>Flutter</td>
-              <td><code>core</code></td>
+              <td><code>apps/mobile/lib/core</code></td>
               <td>
                 인증, Network, 보안 저장소, 로깅, WebView·Bridge 등 공통 정책과
                 Adapter
@@ -2162,32 +2188,32 @@ flowchart TD
             </tr>
             <tr>
               <td>Flutter</td>
-              <td><code>features/*/presentation</code></td>
+              <td><code>apps/mobile/lib/features/*/presentation</code></td>
               <td>UI, ViewModel, Riverpod Provider와 화면 상태</td>
             </tr>
             <tr>
               <td>Flutter</td>
-              <td><code>features/*/domain</code></td>
+              <td><code>apps/mobile/lib/features/*/domain</code></td>
               <td>Entity, UseCase, Repository Interface와 업무 규칙</td>
             </tr>
             <tr>
               <td>Flutter</td>
-              <td><code>features/*/data</code></td>
+              <td><code>apps/mobile/lib/features/*/data</code></td>
               <td>Repository 구현, DTO·Model, Remote·Local DataSource</td>
             </tr>
             <tr>
               <td>WebView</td>
-              <td><code>app</code></td>
+              <td><code>apps/app-webview/src/app</code></td>
               <td>Next.js Route, Layout, Provider와 Tailwind 전역 스타일</td>
             </tr>
             <tr>
               <td>WebView</td>
-              <td><code>components</code></td>
+              <td><code>apps/app-webview/src/components</code></td>
               <td>공통 UI와 shadcn/ui 기반 재사용 컴포넌트</td>
             </tr>
             <tr>
               <td>WebView</td>
-              <td><code>features</code></td>
+              <td><code>apps/app-webview/src/features</code></td>
               <td>
                 서비스 기능별 UI, React Hook Form, API, TanStack Query Hook과
                 Type
@@ -2195,16 +2221,42 @@ flowchart TD
             </tr>
             <tr>
               <td>WebView</td>
-              <td><code>lib/bridge</code></td>
+              <td><code>apps/app-webview/src/lib/bridge</code></td>
               <td>AppBridge 요청·응답 타입, 검증과 공통 호출 모듈</td>
             </tr>
             <tr>
               <td>WebView</td>
-              <td><code>stores</code></td>
+              <td><code>apps/app-webview/src/stores</code></td>
               <td>Zustand 기반 전역 UI·클라이언트 상태</td>
             </tr>
           </tbody>
         </table>
+
+        <h3>모노레포 운영 및 배포 기준</h3>
+        <ul>
+          <li>
+            각 애플리케이션은 배포 Pipeline, 환경 변수, Version과 Rollback 단위를
+            분리하며 모노레포 전체를 항상 함께 배포하지 않습니다.
+          </li>
+          <li>
+            변경된 애플리케이션과 해당 애플리케이션이 사용하는 공통 패키지만
+            빌드·테스트하되, 공통 패키지 변경 시 모든 영향 범위의 회귀 테스트를
+            수행합니다.
+          </li>
+          <li>
+            API Endpoint, 인증 Client, WebView Origin Allowlist와 배포 Secret은
+            서비스·제휴사·환경별로 분리하고 저장소에 포함하지 않습니다.
+          </li>
+          <li>
+            배포 시점이 다른 Native 앱과 WebView가 함께 동작할 수 있도록 Bridge와
+            API 계약은 하위 호환성을 유지하고, Breaking Change는 Version을 올려
+            단계적으로 전환합니다.
+          </li>
+          <li>
+            카드사 인앱과 백오피스의 인증·권한·보안 정책은 각 채널에서 구현하며,
+            공통화가 검증된 UI·Type·Utility만 공유 패키지로 이동합니다.
+          </li>
+        </ul>
       </section>
     </main>
 
