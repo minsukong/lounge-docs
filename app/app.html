@@ -20,7 +20,7 @@
       </p>
       <blockquote>
         <p>
-          개정일: 2026-07-30 · 보안 / 요구사항 변경 시 문서와 구현을 함께
+          개정일: 2026-08-04 · 보안 / 요구사항 변경 시 문서와 구현을 함께
           갱신합니다.
         </p>
       </blockquote>
@@ -1753,17 +1753,17 @@ flowchart TD
         <h3>모노레포 CI/CD 기준</h3>
         <ul>
           <li>
-            변경 경로와 의존 관계를 기준으로 영향받는 애플리케이션과 공통 패키지의
-            Lint·Test·Build만 실행합니다.
+            변경 경로와 의존 관계를 기준으로 영향받는 애플리케이션과 공통
+            패키지의 Lint·Test·Build만 실행합니다.
           </li>
           <li>
-            공통 계약이나 패키지를 변경하면 이를 사용하는 모든 애플리케이션의 회귀
-            테스트를 필수로 수행합니다.
+            공통 계약이나 패키지를 변경하면 이를 사용하는 모든 애플리케이션의
+            회귀 테스트를 필수로 수행합니다.
           </li>
           <li>
-            웹 애플리케이션은 Pipeline, Artifact, 환경 설정, 승인과 Rollback 이력을
-            각각 분리하고, 동일 Commit에서 생성된 결과도 애플리케이션별로 식별할 수
-            있어야 합니다.
+            웹 애플리케이션은 Pipeline, Artifact, 환경 설정, 승인과 Rollback
+            이력을 각각 분리하고, 동일 Commit에서 생성된 결과도 애플리케이션별로
+            식별할 수 있어야 합니다.
           </li>
         </ul>
       </section>
@@ -1879,8 +1879,8 @@ flowchart TD
           </li>
           <li>Pull Request 검토, 필수 CI, 보안 점검과 승인 완료 후 Merge</li>
           <li>
-            운영 배포는 <code>&lt;app-name&gt;/v&lt;version&gt;</code> 형식의 앱별 Tag와
-            Release Note를 남기고 해당 Artifact와 연결
+            운영 배포는 <code>&lt;app-name&gt;/v&lt;version&gt;</code> 형식의
+            앱별 Tag와 Release Note를 남기고 해당 Artifact와 연결
           </li>
           <li>
             Secret 노출 Commit은 삭제만 하지 않고 즉시 자격 증명을 폐기·교체
@@ -2094,8 +2094,8 @@ flowchart TD
         <ul>
           <li>
             웹사이트, WebView, 카드사 인앱과 백오피스는 애플리케이션별로
-            <code>dev</code>·<code>qa</code>·<code>prod</code> 환경과 배포 권한을
-            분리합니다.
+            <code>dev</code>·<code>qa</code>·<code>prod</code> 환경과 배포
+            권한을 분리합니다.
           </li>
           <li>
             Host, Cookie 범위, CORS·CSP, 인증 Redirect URI와 Origin Allowlist는
@@ -2103,7 +2103,8 @@ flowchart TD
           </li>
           <li>
             브라우저에 노출되는 공개 설정과 서버·CI에서만 사용하는 Secret을
-            구분하고, Artifact·환경 설정·승인 이력을 애플리케이션별로 추적합니다.
+            구분하고, Artifact·환경 설정·승인 이력을 애플리케이션별로
+            추적합니다.
           </li>
         </ul>
       </section>
@@ -2115,10 +2116,10 @@ flowchart TD
         <p>
           웹사이트, Flutter 앱, 앱 내 WebView, 카드사 인앱 서비스와 백오피스 등
           Front-end 프로젝트는 하나의 저장소에서 관리하는 모노레포(Monorepo)
-          구조로 구성할 예정입니다. 각 애플리케이션은 독립적으로 빌드·테스트·배포할
-          수 있도록 <code>apps</code> 아래에 분리합니다. Web 공통 UI와 개발 설정은
-          <code>packages</code>, 언어에 종속되지 않는 API·Bridge 규격은
-          <code>contracts</code>에서 관리합니다.
+          구조로 구성할 예정입니다. 각 애플리케이션은 독립적으로
+          빌드·테스트·배포할 수 있도록 <code>apps</code> 아래에 분리합니다. Web
+          공통 UI와 개발 설정은 <code>packages</code>, 언어에 종속되지 않는
+          API·Bridge 규격은 <code>contracts</code>에서 관리합니다.
         </p>
 
         <h3>Monorepo 전체 구조</h3>
@@ -2142,21 +2143,23 @@ flowchart TD
 ├── tooling/                     # 저장소 운영 및 자동화 도구
 └── README.md</code></pre>
         <p>
-          <strong>코드 요약:</strong> 웹 프로젝트는 하나의 Workspace에서 의존성과
-          공통 작업을 관리하고, 변경된 범위에 따라 Lint·Test·Build를 수행합니다.
-          Flutter는 같은 저장소에 두되 Dart 의존성, Lock File과 빌드 도구는 Flutter
-          Toolchain 기준으로 별도 관리합니다. <code>contracts</code>를 기준으로
-          TypeScript와 Dart Type을 각각 생성하거나 구현하고, 앱 내부에는 채널별
-          검증과 호출 Adapter만 둡니다. Workspace와 Task Runner 제품은 배포 플랫폼과
-          CI 환경을 확인한 뒤 확정합니다. <code>TBD</code>
+          <strong>코드 요약:</strong> 웹 프로젝트는 하나의 Workspace에서
+          의존성과 공통 작업을 관리하고, 변경된 범위에 따라 Lint·Test·Build를
+          수행합니다. Flutter는 같은 저장소에 두되 Dart 의존성, Lock File과 빌드
+          도구는 Flutter Toolchain 기준으로 별도 관리합니다.
+          <code>contracts</code>를 기준으로 TypeScript와 Dart Type을 각각
+          생성하거나 구현하고, 앱 내부에는 채널별 검증과 호출 Adapter만 둡니다.
+          Workspace와 Task Runner 제품은 배포 플랫폼과 CI 환경을 확인한 뒤
+          확정합니다. <code>TBD</code>
         </p>
         <blockquote>
           <p>
             <code>website</code>, <code>card-inapp</code>과
             <code>backoffice</code>는 현재 계획된 배포 단위입니다. 각 프로젝트의
             Framework와 최종 분리 범위는 별도로 확정합니다. 카드사별 독립 배포가
-            필요하면 <code>apps/card-inapp/&lt;partner&gt;</code>로 분리하고, 동일
-            애플리케이션에서 설정만 구분한다면 하나의 프로젝트로 유지합니다.
+            필요하면 <code>apps/card-inapp/&lt;partner&gt;</code>로 분리하고,
+            동일 애플리케이션에서 설정만 구분한다면 하나의 프로젝트로
+            유지합니다.
             <code>TBD</code>
           </p>
         </blockquote>
@@ -2212,11 +2215,12 @@ flowchart TD
         <p>
           <strong>코드 요약:</strong> Next.js App Router는 <code>app/</code>에서
           관리하고 Tailwind CSS 4의 전역 진입점은 <code>app/globals.css</code>에
-          둡니다. <code>components/ui</code>에는 <code>packages/ui</code>를 조합한
-          WebView 전용 컴포넌트를 둡니다. <code>lib/api</code>는
+          둡니다. <code>components/ui</code>에는 <code>packages/ui</code>를
+          조합한 WebView 전용 컴포넌트를 둡니다. <code>lib/api</code>는
           <code>packages/api-client</code>를 환경·인증 정책과 연결하고,
           <code>features/*/api</code>와 <code>hooks</code>에는 기능별 TanStack
-          Query 연동을 배치합니다. <code>stores</code>에는 Zustand 상태를 둡니다.
+          Query 연동을 배치합니다. <code>stores</code>에는 Zustand 상태를
+          둡니다.
         </p>
 
         <h3>앱 내부 구성 기준</h3>
@@ -2295,8 +2299,8 @@ flowchart TD
         <h3>모노레포 운영 및 배포 기준</h3>
         <ul>
           <li>
-            각 애플리케이션은 배포 Pipeline, 환경 변수, Version과 Rollback 단위를
-            분리하며 모노레포 전체를 항상 함께 배포하지 않습니다.
+            각 애플리케이션은 배포 Pipeline, 환경 변수, Version과 Rollback
+            단위를 분리하며 모노레포 전체를 항상 함께 배포하지 않습니다.
           </li>
           <li>
             변경된 애플리케이션과 해당 애플리케이션이 사용하는 공통 패키지만
@@ -2308,9 +2312,9 @@ flowchart TD
             서비스·제휴사·환경별로 분리하고 저장소에 포함하지 않습니다.
           </li>
           <li>
-            배포 시점이 다른 Native 앱과 WebView가 함께 동작할 수 있도록 Bridge와
-            API 계약은 하위 호환성을 유지하고, Breaking Change는 Version을 올려
-            단계적으로 전환합니다.
+            배포 시점이 다른 Native 앱과 WebView가 함께 동작할 수 있도록
+            Bridge와 API 계약은 하위 호환성을 유지하고, Breaking Change는
+            Version을 올려 단계적으로 전환합니다.
           </li>
           <li>
             카드사 인앱과 백오피스의 인증·권한·보안 정책은 각 채널에서 구현하며,
@@ -2321,7 +2325,7 @@ flowchart TD
     </main>
 
     <footer>
-      <p>APP 개발 표준 초안 · TO-BE · 보안 보완본 · 2026-07-30</p>
+      <p>APP 개발 표준 초안 · TO-BE · 보안 보완본 · 2026-08-04</p>
     </footer>
     <script src="./../assets/js/common.js"></script>
     <script type="module">
