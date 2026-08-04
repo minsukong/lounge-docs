@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Front-end 모노레포의 저장소 구조, 공통화, 의존성, CI/CD 및 배포 기준을 정리합니다."
+    />
+    <title>Front-End Monorepo 공통 기준</title>
+    <link rel="stylesheet" href="./../assets/style/presentation-theme.css" />
+  </head>
+  <body>
+    <header>
+      <div class="type">FRONT-END · MONOREPO · SOURCE OF TRUTH</div>
+      <h1>Front-End Monorepo 공통 기준</h1>
+      <p>
+        Front-end 프로젝트가 함께 사용하는 저장소 구조, 공통 코드와 계약,
+        의존성, CI/CD 및 배포 원칙을 정의합니다.
+      </p>
+      <blockquote>
+        <p>
+          이 문서는 Front-end 저장소 구조의 단일 기준입니다.
+          <code>app/app.html</code>과 <code>frontend_guide/index.html</code>은 영역별
+          상세 구현을 설명하며, 저장소 구조와 운영 기준이 충돌하면 이 문서를
+          우선합니다.
+        </p>
+      </blockquote>
+      <p>Draft · Version 0.1 · 2026-08-04</p>
+    </header>
+
+    <main>
+      <section>
+        <h2 class="bx-active">1. 적용 범위와 표기</h2>
+        <p>
+          웹사이트, Flutter 앱, 앱 내 WebView, 카드사 인앱 서비스와 백오피스 등
+          Front-end 프로젝트를 하나의 저장소에서 관리합니다. 실제 저장소 이름은
+          아직 정하지 않았으므로 이 문서에서는 <code>&lt;repository-root&gt;</code>로
+          표현합니다.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">표시</th>
+              <th scope="col">의미</th>
+              <th scope="col">적용 방법</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>MUST</code></td>
+              <td>확정 원칙</td>
+              <td>구현, 검수와 배포에서 반드시 준수</td>
+            </tr>
+            <tr>
+              <td><code>TBD</code></td>
+              <td>결정 필요</td>
+              <td>담당자 합의와 승인 후 이 문서에 반영</td>
+            </tr>
+            <tr>
+              <td><code>EXAMPLE</code></td>
+              <td>참고 예시</td>
+              <td>프로젝트 조건에 맞게 변경 가능</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">2. 저장소 구조</h2>
+        <pre class="hljs"><code data-language="text">&lt;repository-root&gt;/
+├── apps/
+│   ├── website/                 # 대외 웹사이트
+│   ├── mobile/                  # Flutter Native 앱
+│   ├── app-webview/             # Front-end · 앱 내 Next.js WebView
+│   ├── card-inapp/              # 카드사 인앱 서비스
+│   └── backoffice/              # 운영·관리자 백오피스
+├── packages/
+│   ├── ui/                      # 검증된 Web 공통 UI
+│   ├── api-client/              # Web API Client와 생성 Type
+│   ├── webview-bridge/          # WebView Bridge 호출 Adapter
+│   ├── config/                  # Web 공통 개발 설정
+│   ├── testing/                 # Web 공통 테스트 설정
+│   └── utils/                   # Web 범용 유틸리티
+├── contracts/
+│   ├── api/                     # API Schema와 생성 기준
+│   └── webview-bridge/          # 플랫폼 중립 Bridge 요청·응답 규격
+├── tooling/                     # 저장소 운영 및 자동화 도구
+└── README.md</code></pre>
+
+        <h3>애플리케이션 범위</h3>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Directory</th>
+              <th scope="col">역할</th>
+              <th scope="col">기술·분리 상태</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>apps/website</code></td>
+              <td>대외 웹사이트</td>
+              <td>Framework 및 배포 단위 <code>TBD</code></td>
+            </tr>
+            <tr>
+              <td><code>apps/mobile</code></td>
+              <td>Flutter Native 앱과 기기 기능</td>
+              <td>Flutter Toolchain</td>
+            </tr>
+            <tr>
+              <td><code>apps/app-webview</code></td>
+              <td>앱 내 Front-end 서비스 화면과 업무 흐름</td>
+              <td>Next.js·React·TypeScript</td>
+            </tr>
+            <tr>
+              <td><code>apps/card-inapp</code></td>
+              <td>카드사 인앱 서비스</td>
+              <td>제휴사별 분리 방식과 Framework <code>TBD</code></td>
+            </tr>
+            <tr>
+              <td><code>apps/backoffice</code></td>
+              <td>운영·관리자 업무</td>
+              <td>Framework 및 배포 단위 <code>TBD</code></td>
+            </tr>
+          </tbody>
+        </table>
+        <blockquote>
+          <p>
+            카드사마다 독립 배포와 인증·보안 정책이 필요하면
+            <code>apps/card-inapp/&lt;partner&gt;</code>로 분리합니다. 동일
+            애플리케이션에서 설정만 구분할 수 있다면 하나의 프로젝트로 유지합니다.
+            <code>TBD</code>
+          </p>
+        </blockquote>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">3. Directory 책임</h2>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">영역</th>
+              <th scope="col">책임</th>
+              <th scope="col">금지 사항</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>apps</code></td>
+              <td>독립적으로 빌드·테스트·배포 가능한 애플리케이션</td>
+              <td>다른 앱의 내부 소스 경로를 직접 Import하지 않음</td>
+            </tr>
+            <tr>
+              <td><code>packages</code></td>
+              <td>둘 이상의 Web 애플리케이션에서 검증된 공통 구현</td>
+              <td>예상되는 재사용만으로 빈 패키지나 Wrapper를 만들지 않음</td>
+            </tr>
+            <tr>
+              <td><code>contracts</code></td>
+              <td>언어에 종속되지 않는 API·Bridge Schema와 Version 계약</td>
+              <td>특정 앱의 화면 상태나 구현 세부사항을 포함하지 않음</td>
+            </tr>
+            <tr>
+              <td><code>tooling</code></td>
+              <td>저장소 전체에서 사용하는 자동화와 운영 도구</td>
+              <td>애플리케이션 업무 로직을 포함하지 않음</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">4. 공통화와 계약 관리</h2>
+        <ul>
+          <li>
+            특정 기능이나 애플리케이션에서만 사용하는 코드는 해당 영역 가까이에
+            둡니다.
+          </li>
+          <li>
+            둘 이상의 실제 사용처가 있고 의미와 변경 이유가 같을 때만
+            <code>packages</code>로 이동합니다.
+          </li>
+          <li>
+            Web 공통 UI는 <code>packages/ui</code>, WebView 전용 조합과 Wrapper는
+            <code>apps/app-webview/src/components</code>에서 관리합니다.
+          </li>
+          <li>
+            API와 Bridge의 플랫폼 중립 원본은 <code>contracts</code>에서 관리하고,
+            TypeScript와 Dart Type 또는 Adapter는 각 Toolchain에서 별도로 생성하거나
+            구현합니다.
+          </li>
+          <li>
+            생성된 Type과 Client를 수동으로 서로 다르게 수정하지 않으며 계약 변경과
+            생성 결과를 하나의 변경으로 검증합니다.
+          </li>
+          <li>
+            Native 앱과 WebView는 배포 시점이 다르므로 Bridge와 API 계약의 하위
+            호환성을 유지하고, Breaking Change는 Version을 올려 단계적으로
+            전환합니다.
+          </li>
+        </ul>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">5. Workspace와 의존성</h2>
+        <ul>
+          <li>
+            Web 프로젝트는 하나의 Workspace에서 공통 작업과 의존성 정책을
+            관리합니다.
+          </li>
+          <li>
+            Flutter는 같은 저장소에 두되 Dart 의존성, Lock File과 빌드 도구를
+            Flutter Toolchain 기준으로 관리합니다.
+          </li>
+          <li>
+            Web Workspace와 Flutter 등 각 Toolchain의 Lock File을 변경 사항과 함께
+            검토하고 CI에서 고정 설치합니다.
+          </li>
+          <li>
+            Workspace, 패키지 관리자와 Task Runner 제품은 CI·배포 플랫폼을 확인한
+            뒤 확정합니다. <code>TBD</code>
+          </li>
+        </ul>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">6. CI/CD와 Release</h2>
+        <ul>
+          <li>
+            각 애플리케이션은 Pipeline, Artifact, 환경 설정, Version, 승인과
+            Rollback 단위를 분리하며 모노레포 전체를 항상 함께 배포하지 않습니다.
+          </li>
+          <li>
+            변경 경로와 의존 관계를 기준으로 영향받는 애플리케이션과 패키지의
+            Lint·Test·Build를 수행합니다.
+          </li>
+          <li>
+            공통 계약이나 패키지를 변경하면 이를 사용하는 모든 애플리케이션의 회귀
+            테스트를 수행합니다.
+          </li>
+          <li>
+            운영 배포는 <code>&lt;app-name&gt;/v&lt;version&gt;</code> 형식의 앱별 Tag와
+            Release Note를 남기고 해당 Artifact와 연결합니다.
+          </li>
+          <li>
+            Flutter 앱은 Codemagic 기준을 적용하고, 웹 애플리케이션의 배포 플랫폼과
+            품질 Gate는 인프라 환경을 확인한 뒤 확정합니다. <code>TBD</code>
+          </li>
+        </ul>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">7. 환경과 Secret</h2>
+        <ul>
+          <li>
+            <code>dev</code>·<code>qa</code>·<code>prod</code> 환경과 배포 권한은
+            애플리케이션별로 분리합니다.
+          </li>
+          <li>
+            API Endpoint, 인증 Client, Host, Cookie 범위, CORS·CSP, Redirect URI와
+            Origin Allowlist는 서비스·제휴사·환경별 승인 값으로 관리합니다.
+          </li>
+          <li>
+            브라우저에 노출 가능한 공개 설정과 서버·CI에서만 사용하는 Secret을
+            구분합니다.
+          </li>
+          <li>
+            Signing Key, Token과 배포 자격 증명은 저장소, 앱 Bundle, Web JavaScript와
+            Build Log에 포함하지 않습니다. <code>MUST</code>
+          </li>
+        </ul>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">8. 변경 기준과 미확정 항목</h2>
+        <h3>구조 변경 기준</h3>
+        <ul>
+          <li>
+            새 애플리케이션을 추가할 때 Owner, 배포 단위, 환경, 권한과 Rollback
+            책임을 함께 정의합니다.
+          </li>
+          <li>
+            새 공통 패키지를 추가할 때 실제 사용처, 공개 API, 의존 방향과 변경
+            책임을 확인합니다.
+          </li>
+          <li>
+            계약을 변경할 때 영향을 받는 TypeScript·Dart 생성 결과, Adapter와 출시된
+            앱 Version을 함께 검토합니다.
+          </li>
+        </ul>
+
+        <h3>우선 결정 항목</h3>
+        <ul>
+          <li>실제 저장소 이름</li>
+          <li>Web Workspace, 패키지 관리자와 Task Runner 제품</li>
+          <li>웹사이트, 카드사 인앱과 백오피스의 Framework 및 최종 분리 범위</li>
+          <li>카드사별 단일 프로젝트 또는 독립 프로젝트 구성</li>
+          <li>웹 애플리케이션별 배포 플랫폼과 CI/CD 품질 Gate</li>
+        </ul>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">9. 관련 상세 문서</h2>
+        <ul>
+          <li>
+            <a href="./../app/app.html">APP 개발 표준 초안</a> — Flutter,
+            Native–WebView 구조, 보안 및 앱 배포 기준
+          </li>
+          <li>
+            <a href="./../frontend_guide/index.html">Front-End 초기 구축 가이드</a>
+            — Next.js·React 구현과 <code>apps/app-webview/src</code> 내부 기준
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>Front-End Monorepo 공통 기준 · Draft · Version 0.1 · 2026-08-04</p>
+    </footer>
+    <script src="./../assets/js/common.js"></script>
+  </body>
+</html>
