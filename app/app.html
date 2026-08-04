@@ -1678,15 +1678,14 @@ window.<span class="hljs-property">AppBridgeResponse</span> = (<span class="hljs
           <code>Codemagic</code>을 활용하여 빌드, 테스트 및 배포 과정을
           자동화하고 일관된 개발 및 배포 환경을 제공합니다.
         </p>
-        <figure class="diagram-frame">
+        <figure class="diagram-frame diagram-frame--cicd">
           <!-- prettier-ignore -->
           <div class="mermaid">
-flowchart LR
+flowchart TD
   accTitle: APP CI 및 CD 배포 흐름
   accDescr: 소스 변경이 Codemagic의 환경 구성, 정적 분석, 테스트와 보안 검사를 거쳐 Android와 iOS 빌드 및 QA 배포 후 수동 승인으로 운영에 배포되는 흐름입니다.
   C([소스 변경]) --> CI["Codemagic CI"]
-  CI --> D["Dependency 설치 · Code Generation"]
-  D --> Q["Lint · Static Analysis · Test · Security Scan"]
+  CI --> Q["Dependency 설치 · Code Generation · 품질 검사"]
   Q --> G{"품질 기준 통과?"}
   G -->|"아니요"| F["파이프라인 중단 · 수정"]
   F -.-> C
