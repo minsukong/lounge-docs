@@ -2229,23 +2229,23 @@ flowchart TD
         </blockquote>
 
         <h3>Flutter Native · <code>apps/mobile</code></h3>
-        <pre class="hljs"><code data-language="text">lib/
-├── app/
-│   ├── routing/
-│   ├── theme/
-│   └── app.dart
-├── core/
-│   ├── auth/
-│   ├── network/
-│   ├── security/
-│   ├── storage/
-│   └── webview/
-├── features/
-│   └── &lt;feature&gt;/
-│       ├── data/
-│       ├── domain/
-│       └── presentation/
-└── main.dart</code></pre>
+        <pre class="hljs"><code data-language="text">lib/                              # Flutter 애플리케이션 소스 Root
+├── app/                          # 앱 전역 조립과 실행 설정
+│   ├── routing/                  # GoRouter Route, Guard와 Redirect 정책
+│   ├── theme/                    # 색상, Typography와 Material Theme 정의
+│   └── app.dart                  # ProviderScope, Theme, Router를 조립하는 Root Widget
+├── core/                         # 특정 기능에 종속되지 않는 공통 기반 계층
+│   ├── auth/                     # 서버 세션 상태, 로그인·로그아웃 조정과 사용자 전환 처리
+│   ├── network/                  # Dio Client, Interceptor, Timeout과 공통 오류 변환
+│   ├── security/                 # Origin 허용 목록, 입력 검증, 로그 Redaction 등 보안 정책
+│   ├── storage/                  # 승인된 로컬 저장소 Adapter와 사용자 데이터 정리
+│   └── webview/                  # WebView Controller, Navigation 정책과 Bridge Adapter
+├── features/                     # 업무 기능별로 분리한 Feature Module 모음
+│   └── &lt;feature&gt;/                # 라운지, 예약 등 개별 업무 기능 단위
+│       ├── data/                 # Repository 구현, DTO와 Remote·Local DataSource
+│       ├── domain/               # Entity, UseCase, Repository Interface와 업무 규칙
+│       └── presentation/         # 화면, ViewModel, Riverpod Provider와 UI State
+└── main.dart                     # 앱 진입점과 실행 전 필수 초기화</code></pre>
         <p>
           <strong>코드 요약:</strong> <code>main.dart</code>는 앱 실행과 필수
           초기화만 담당하고, <code>app/app.dart</code>에서
@@ -2255,27 +2255,27 @@ flowchart TD
         </p>
 
         <h3>Next.js WebView · <code>apps/app-webview</code></h3>
-        <pre class="hljs"><code data-language="text">src/
-├── app/
-│   ├── &lt;route&gt;/
-│   ├── globals.css
-│   ├── layout.tsx
-│   └── providers.tsx
-├── components/
-│   ├── common/
-│   └── ui/
-├── features/
-│   └── &lt;feature&gt;/
-│       ├── api/
-│       ├── components/
-│       ├── forms/
-│       ├── hooks/
-│       └── types/
-├── lib/
-│   ├── api/
-│   ├── bridge/
-│   └── utils/
-└── stores/</code></pre>
+        <pre class="hljs"><code data-language="text">src/                              # Next.js WebView 애플리케이션 소스 Root
+├── app/                          # App Router의 Route, Layout과 전역 Provider 구성
+│   ├── &lt;route&gt;/                  # URL별 Page, Loading, Error 등 Route Segment
+│   ├── globals.css               # Tailwind CSS 진입점과 최소 전역 스타일
+│   ├── layout.tsx                # 공통 문서 구조와 Root Layout
+│   └── providers.tsx             # TanStack Query 등 Client Provider 조립
+├── components/                   # 여러 Route와 Feature에서 재사용하는 UI
+│   ├── common/                   # WebView 공통 Layout과 조합형 컴포넌트
+│   └── ui/                       # packages/ui를 조합한 WebView 전용 UI 컴포넌트
+├── features/                     # 예약, 라운지 등 업무 기능별 Module 모음
+│   └── &lt;feature&gt;/                # 하나의 사용자 업무 흐름을 구성하는 기능 단위
+│       ├── api/                  # 기능별 Query, Mutation과 API 호출 정의
+│       ├── components/           # 해당 Feature 내부에서만 사용하는 UI
+│       ├── forms/                # Form Schema, Validation과 입력 변환
+│       ├── hooks/                # 기능별 TanStack Query 및 상태 연동 Hook
+│       └── types/                # 기능 전용 Type과 View Model 정의
+├── lib/                          # Framework·서비스 연동을 위한 공통 Adapter
+│   ├── api/                      # 공통 API Client의 환경·인증·오류 정책 연결
+│   ├── bridge/                   # Native Bridge 요청·응답 검증과 호출 Adapter
+│   └── utils/                    # 기능에 종속되지 않는 순수 Utility 함수
+└── stores/                       # Zustand 기반 전역 UI·클라이언트 상태</code></pre>
         <p>
           <strong>코드 요약:</strong> Next.js App Router는 <code>app/</code>에서
           관리하고 Tailwind CSS 4의 전역 진입점은 <code>app/globals.css</code>에
