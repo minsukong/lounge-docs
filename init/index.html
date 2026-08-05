@@ -11,6 +11,9 @@
       <div class="type">이 문서의 종류 간략하게 예시: "FRONT-END & APP"</div>
       <h1>h1 문서의 대표 제목이 들어갑니다.</h1>
       <p>문서 전체를 소개하는 간단한 설명이 들어갑니다.</p>
+      <blockquote>
+        <p>Draft · Version 0.1 · 2026-08-04 (문서의 버전, 날짜 예시)</p>
+      </blockquote>
     </header>
 
     <main>
@@ -21,7 +24,7 @@
           주제를 중심으로 작성합니다.
         </p>
 
-        <h2 class="bx-active">h2 색상 박스</h2>
+        <h2 class="bx-active">h2 주요 영역의 제목 색상 박스</h2>
 
         <h3>h3 주요 영역 안의 세부 제목이 들어갑니다.</h3>
         <p>
@@ -121,11 +124,61 @@
           </p>
         </blockquote>
       </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">다이어그램 예시</h2>
+
+        <figure class="diagram-frame">
+          <!-- prettier-ignore -->
+          <div class="mermaid">
+flowchart TD
+  accTitle: 온라인 및 오프라인 화면 처리 흐름
+  accDescr: 네트워크 상태와 승인된 캐시의 존재 여부에 따라 최신 데이터 또는 저장 데이터를 표시하고, 서버 통신이 필요한 작업을 제한한 뒤 연결 복구 시 갱신합니다.
+  A([화면 진입]) --> B{네트워크 연결 확인}
+  B -->|"예"| C["서버에서 최신 데이터 조회"]
+  C --> D["Query Cache 갱신"]
+  D --> E["최신 화면 표시"]
+  B -->|"아니요"| F{승인된 저장 데이터 확인}
+  F -->|"예"| G["저장 데이터 표시 + 오프라인 안내"]
+  F -->|"아니요"| H["오프라인 사용 불가 안내"]
+  G --> I{서버 확인이 필요한 작업 확인}
+  I -->|"예"| J["기능 제한 + 연결 필요 안내"]
+  I -->|"아니요"| K["허용된 로컬 기능 계속 사용"]
+  J -.->|"연결 복구"| C
+  K -.->|"연결 복구"| C
+          </div>
+          <figcaption>네트워크 상태에 따른 화면과 기능 처리</figcaption>
+        </figure>
+
+        <figure class="diagram-frame">
+          <!-- prettier-ignore -->
+          <div class="mermaid">
+sequenceDiagram
+  accTitle: WebView Bridge 요청과 응답 처리 흐름
+  accDescr: WebView가 고유 요청 ID를 포함한 메시지를 보내고 Flutter가 검증 및 Native 기능 실행 후 같은 ID로 응답하여 Promise를 완료하는 과정입니다.
+  participant UI as WebView UI
+  participant AB as AppBridge
+  participant F as Flutter
+  participant OS as OS / Device
+  UI->>AB: 사용자 동작으로 기능 요청
+  AB->>F: JSON Request · requestId
+  F->>F: Origin, Method, Params, 권한 검증
+  F->>OS: 승인된 Native 기능 실행
+  OS-->>F: 처리 결과
+  F-->>AB: Base64 JSON Response · 동일 requestId
+  AB-->>UI: Promise 성공 / 취소 / 오류 완료
+          </div>
+          <figcaption>WebView–Flutter Bridge 요청·응답 과정</figcaption>
+        </figure>
+      </section>
     </main>
 
     <footer>
       <p>문서 작성자, 작성일 또는 추가 안내가 들어갑니다.</p>
     </footer>
     <script src="./../assets/js/common.js"></script>
+    <script src="./../assets/js/mermaid.js"></script>
   </body>
 </html>
