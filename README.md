@@ -12,6 +12,10 @@
 
 ## UI 가이드
 
+### 상태 관리
+
+- [Zustand UI 상태 관리 가이드](./ui_guide/zustand.html)
+
 ### figma + tailwindcss = react code exports
 
 - [React Code Exports 가이드](./ui_guide/react_code_exports.html)

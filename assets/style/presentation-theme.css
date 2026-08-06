@@ -624,6 +624,7 @@ h3 {
   display: grid;
   margin: 0;
   padding: 0;
+  gap: 4px;
   list-style: none;
   counter-reset: my-counter;
 

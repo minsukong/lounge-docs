@@ -79,18 +79,18 @@
         <h3>3.1 추론 우선</h3>
         <p>값과 반환 타입이 명확하면 중복해서 작성하지 않습니다.</p>
 
-        <pre><code data-language="typescript">// 권장
-const title = "라운지 이용권";
+        <pre class="hljs"><code data-language="typescript"><span class="hljs-comment">// 권장</span>
+<span class="hljs-keyword">const</span> title = <span class="hljs-string">&quot;라운지 이용권&quot;</span>;
 
-function formatCount(count: number) {
-  return `${count}건`;
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">formatCount</span>(<span class="hljs-params"><span class="hljs-attr">count</span>: <span class="hljs-built_in">number</span></span>) {
+  <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${count}</span>건`</span>;
 }
 
-// 불필요한 중복
-const title: string = "라운지 이용권";
+<span class="hljs-comment">// 불필요한 중복</span>
+<span class="hljs-keyword">const</span> <span class="hljs-attr">title</span>: <span class="hljs-built_in">string</span> = <span class="hljs-string">&quot;라운지 이용권&quot;</span>;
 
-function formatCount(count: number): string {
-  return `${count}건`;
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">formatCount</span>(<span class="hljs-params"><span class="hljs-attr">count</span>: <span class="hljs-built_in">number</span></span>): <span class="hljs-built_in">string</span> {
+  <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${count}</span>건`</span>;
 }</code></pre>
 
         <p>
@@ -98,28 +98,28 @@ function formatCount(count: number): string {
           타입을 작성할 수 있습니다.
         </p>
 
-        <pre><code data-language="typescript">type TicketSummary = {
-  availableCount: number;
-  usedCount: number;
+        <pre class="hljs"><code data-language="typescript"><span class="hljs-keyword">type</span> <span class="hljs-title class_">TicketSummary</span> = {
+  <span class="hljs-attr">availableCount</span>: <span class="hljs-built_in">number</span>;
+  <span class="hljs-attr">usedCount</span>: <span class="hljs-built_in">number</span>;
 };
 
-export function summarizeTickets(): TicketSummary {
-  return {
-    availableCount: 2,
-    usedCount: 1,
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">summarizeTickets</span>(<span class="hljs-params"></span>): <span class="hljs-title class_">TicketSummary</span> {
+  <span class="hljs-keyword">return</span> {
+    <span class="hljs-attr">availableCount</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">usedCount</span>: <span class="hljs-number">1</span>,
   };
 }</code></pre>
 
         <h3>3.2 사용하는 곳 가까이에서 시작</h3>
         <p>한 컴포넌트에서만 사용하는 Props는 같은 파일에 둡니다.</p>
 
-        <pre><code data-language="tsx">type TicketCardProps = {
-  title: string;
-  onSelect: () =&gt; void;
+        <pre class="hljs"><code data-language="tsx"><span class="hljs-keyword">type</span> <span class="hljs-title class_">TicketCardProps</span> = {
+  <span class="hljs-attr">title</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">onSelect</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">void</span>;
 };
 
-export function TicketCard({ title, onSelect }: TicketCardProps) {
-  return &lt;button onClick={onSelect}&gt;{title}&lt;/button&gt;;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">TicketCard</span>(<span class="hljs-params">{ title, onSelect }: <span class="hljs-title class_">TicketCardProps</span></span>) {
+  <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{onSelect}</span>&gt;</span>{title}<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>;
 }</code></pre>
 
         <p>
@@ -136,18 +136,18 @@ export function TicketCard({ title, onSelect }: TicketCardProps) {
           <li>기능별 예외를 계속 추가하지 않아도 됩니다.</li>
         </ul>
 
-        <pre><code data-language="typescript">// 권장: 여러 선택 UI에서 같은 의미로 사용하는 타입
-export type SelectOption&lt;T extends string = string&gt; = {
-  label: string;
-  value: T;
+        <pre class="hljs"><code data-language="typescript"><span class="hljs-comment">// 권장: 여러 선택 UI에서 같은 의미로 사용하는 타입</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">type</span> <span class="hljs-title class_">SelectOption</span>&lt;T <span class="hljs-keyword">extends</span> <span class="hljs-built_in">string</span> = <span class="hljs-built_in">string</span>&gt; = {
+  <span class="hljs-attr">label</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">value</span>: T;
 };</code></pre>
 
-        <pre><code data-language="typescript">// 피해야 함: 관련 없는 타입을 한곳에 모음
-type CommonType = {
-  id?: string;
-  label?: string;
-  status?: string;
-  metadata?: unknown;
+        <pre class="hljs"><code data-language="typescript"><span class="hljs-comment">// 피해야 함: 관련 없는 타입을 한곳에 모음</span>
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">CommonType</span> = {
+  <span class="hljs-attr">id</span>?: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">label</span>?: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">status</span>?: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">metadata</span>?: <span class="hljs-built_in">unknown</span>;
 };</code></pre>
       </section>
 
@@ -162,10 +162,10 @@ type CommonType = {
           Union을 사용합니다.
         </p>
 
-        <pre><code data-language="typescript">type TicketStatus = "available" | "used" | "expired";
+        <pre class="hljs"><code data-language="typescript"><span class="hljs-keyword">type</span> <span class="hljs-title class_">TicketStatus</span> = <span class="hljs-string">&quot;available&quot;</span> | <span class="hljs-string">&quot;used&quot;</span> | <span class="hljs-string">&quot;expired&quot;</span>;
 
-type TicketBadgeProps = {
-  status: TicketStatus;
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">TicketBadgeProps</span> = {
+  <span class="hljs-attr">status</span>: <span class="hljs-title class_">TicketStatus</span>;
 };</code></pre>
 
         <h3>4.2 함께 존재할 수 없는 상태 구분</h3>
@@ -174,32 +174,32 @@ type TicketBadgeProps = {
           가능한 Union을 사용합니다.
         </p>
 
-        <pre><code data-language="typescript">type SubmitState =
-  | { status: "idle" }
-  | { status: "submitting" }
-  | { status: "success" }
-  | { status: "error"; message: string };</code></pre>
+        <pre class="hljs"><code data-language="typescript"><span class="hljs-keyword">type</span> <span class="hljs-title class_">SubmitState</span> =
+  | { <span class="hljs-attr">status</span>: <span class="hljs-string">&quot;idle&quot;</span> }
+  | { <span class="hljs-attr">status</span>: <span class="hljs-string">&quot;submitting&quot;</span> }
+  | { <span class="hljs-attr">status</span>: <span class="hljs-string">&quot;success&quot;</span> }
+  | { <span class="hljs-attr">status</span>: <span class="hljs-string">&quot;error&quot;</span>; <span class="hljs-attr">message</span>: <span class="hljs-built_in">string</span> };</code></pre>
 
-        <pre><code data-language="typescript">// 피해야 함: 불가능한 조합도 허용함
-type SubmitState = {
-  loading?: boolean;
-  success?: boolean;
-  errorMessage?: string;
+        <pre class="hljs"><code data-language="typescript"><span class="hljs-comment">// 피해야 함: 불가능한 조합도 허용함</span>
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">SubmitState</span> = {
+  <span class="hljs-attr">loading</span>?: <span class="hljs-built_in">boolean</span>;
+  <span class="hljs-attr">success</span>?: <span class="hljs-built_in">boolean</span>;
+  <span class="hljs-attr">errorMessage</span>?: <span class="hljs-built_in">string</span>;
 };</code></pre>
 
         <h3>4.3 작은 타입 조합</h3>
         <p>실제로 반복되는 속성만 작은 단위로 분리해 조합합니다.</p>
 
-        <pre><code data-language="typescript">type Labeled = {
-  label: string;
+        <pre class="hljs"><code data-language="typescript"><span class="hljs-keyword">type</span> <span class="hljs-title class_">Labeled</span> = {
+  <span class="hljs-attr">label</span>: <span class="hljs-built_in">string</span>;
 };
 
-type Selectable = {
-  selected: boolean;
-  onSelect: () =&gt; void;
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">Selectable</span> = {
+  <span class="hljs-attr">selected</span>: <span class="hljs-built_in">boolean</span>;
+  <span class="hljs-attr">onSelect</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">void</span>;
 };
 
-type FilterItemProps = Labeled &amp; Selectable;</code></pre>
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">FilterItemProps</span> = <span class="hljs-title class_">Labeled</span> &amp; <span class="hljs-title class_">Selectable</span>;</code></pre>
 
         <p>
           하나의 사용처만 있거나 조합 후 의미가 더 어려워지면 하나의 타입으로
@@ -229,16 +229,16 @@ type FilterItemProps = Labeled &amp; Selectable;</code></pre>
         <h3>5.1 Props는 컴포넌트의 사용법을 표현</h3>
         <p>Props 이름은 DOM 동작보다 사용자의 의도를 나타냅니다.</p>
 
-        <pre><code data-language="tsx">type ReservationCardProps = {
-  title: string;
-  onConfirm: () =&gt; void;
-  onCancel: () =&gt; void;
+        <pre class="hljs"><code data-language="tsx"><span class="hljs-keyword">type</span> <span class="hljs-title class_">ReservationCardProps</span> = {
+  <span class="hljs-attr">title</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">onConfirm</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">void</span>;
+  <span class="hljs-attr">onCancel</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">void</span>;
 };</code></pre>
 
-        <pre><code data-language="typescript">// 피해야 함
-type ReservationCardProps = {
-  text: string;
-  handleButtonClick: (value: unknown) =&gt; void;
+        <pre class="hljs"><code data-language="typescript"><span class="hljs-comment">// 피해야 함</span>
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">ReservationCardProps</span> = {
+  <span class="hljs-attr">text</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">handleButtonClick</span>: <span class="hljs-function">(<span class="hljs-params"><span class="hljs-attr">value</span>: <span class="hljs-built_in">unknown</span></span>) =&gt;</span> <span class="hljs-built_in">void</span>;
 };</code></pre>
 
         <h3>5.2 DOM Event보다 필요한 값을 전달</h3>
@@ -247,24 +247,24 @@ type ReservationCardProps = {
           필요한 값을 전달합니다.
         </p>
 
-        <pre><code data-language="tsx">type SearchInputProps = {
-  value: string;
-  onValueChange: (value: string) =&gt; void;
+        <pre class="hljs"><code data-language="tsx"><span class="hljs-keyword">type</span> <span class="hljs-title class_">SearchInputProps</span> = {
+  <span class="hljs-attr">value</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">onValueChange</span>: <span class="hljs-function">(<span class="hljs-params"><span class="hljs-attr">value</span>: <span class="hljs-built_in">string</span></span>) =&gt;</span> <span class="hljs-built_in">void</span>;
 };
 
-export function SearchInput({ value, onValueChange }: SearchInputProps) {
-  return (
-    &lt;input
-      type="search"
-      value={value}
-      onChange={(event) =&gt; onValueChange(event.currentTarget.value)}
-    /&gt;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">SearchInput</span>(<span class="hljs-params">{ value, onValueChange }: <span class="hljs-title class_">SearchInputProps</span></span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">input</span>
+      <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;search&quot;</span>
+      <span class="hljs-attr">value</span>=<span class="hljs-string">{value}</span>
+      <span class="hljs-attr">onChange</span>=<span class="hljs-string">{(event)</span> =&gt;</span> onValueChange(event.currentTarget.value)}
+    /&gt;</span>
   );
 }</code></pre>
 
-        <pre><code data-language="tsx">const [keyword, setKeyword] = useState("");
+        <pre class="hljs"><code data-language="tsx"><span class="hljs-keyword">const</span> [keyword, setKeyword] = <span class="hljs-title function_">useState</span>(<span class="hljs-string">&quot;&quot;</span>);
 
-&lt;SearchInput value={keyword} onValueChange={setKeyword} /&gt;;</code></pre>
+<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">SearchInput</span> <span class="hljs-attr">value</span>=<span class="hljs-string">{keyword}</span> <span class="hljs-attr">onValueChange</span>=<span class="hljs-string">{setKeyword}</span> /&gt;</span></span>;</code></pre>
 
         <h3>5.3 shadcn/ui 사용</h3>
         <p>
@@ -288,14 +288,14 @@ export function SearchInput({ value, onValueChange }: SearchInputProps) {
           </li>
         </ul>
 
-        <pre><code data-language="tsx">import { Button } from "@/components/ui/button";
+        <pre class="hljs"><code data-language="tsx"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Button</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/components/ui/button&quot;</span>;
 
-export function TicketActions() {
-  return (
-    &lt;div&gt;
-      &lt;Button variant="outline"&gt;취소&lt;/Button&gt;
-      &lt;Button&gt;예약하기&lt;/Button&gt;
-    &lt;/div&gt;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">TicketActions</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Button</span> <span class="hljs-attr">variant</span>=<span class="hljs-string">&quot;outline&quot;</span>&gt;</span>취소<span class="hljs-tag">&lt;/<span class="hljs-name">Button</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Button</span>&gt;</span>예약하기<span class="hljs-tag">&lt;/<span class="hljs-name">Button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
   );
 }</code></pre>
 
@@ -304,28 +304,28 @@ export function TicketActions() {
           컴포넌트에서 가져옵니다.
         </p>
 
-        <pre><code data-language="tsx">import type { ComponentProps } from "react";
-import { Button } from "@/components/ui/button";
+        <pre class="hljs"><code data-language="tsx"><span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> { <span class="hljs-title class_">ComponentProps</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>;
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Button</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/components/ui/button&quot;</span>;
 
-type SubmitButtonProps = Omit&lt;ComponentProps&lt;typeof Button&gt;, "type"&gt; &amp; {
-  isSubmitting?: boolean;
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">SubmitButtonProps</span> = <span class="hljs-title class_">Omit</span>&lt;<span class="hljs-title class_">ComponentProps</span>&lt;<span class="hljs-keyword">typeof</span> <span class="hljs-title class_">Button</span>&gt;, <span class="hljs-string">&quot;type&quot;</span>&gt; &amp; {
+  <span class="hljs-attr">isSubmitting</span>?: <span class="hljs-built_in">boolean</span>;
 };
 
-export function SubmitButton({
-  isSubmitting = false,
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">SubmitButton</span>(<span class="hljs-params">{
+  isSubmitting = <span class="hljs-literal">false</span>,
   disabled,
   children,
   ...buttonProps
-}: SubmitButtonProps) {
-  return (
-    &lt;Button
-      {...buttonProps}
-      type="submit"
-      disabled={disabled || isSubmitting}
-      aria-busy={isSubmitting}
-    &gt;
-      {isSubmitting ? "처리 중" : children}
-    &lt;/Button&gt;
+}: <span class="hljs-title class_">SubmitButtonProps</span></span>) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Button</span>
+      {<span class="hljs-attr">...buttonProps</span>}
+      <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span>
+      <span class="hljs-attr">disabled</span>=<span class="hljs-string">{disabled</span> || <span class="hljs-attr">isSubmitting</span>}
+      <span class="hljs-attr">aria-busy</span>=<span class="hljs-string">{isSubmitting}</span>
+    &gt;</span>
+      {isSubmitting ? &quot;처리 중&quot; : children}
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Button</span>&gt;</span></span>
   );
 }</code></pre>
 
@@ -335,11 +335,11 @@ export function SubmitButton({
           사용합니다.
         </p>
 
-        <pre><code data-language="tsx">// 피해야 함: 기존 Props를 다시 정의하는 의미 없는 Wrapper
-type CommonButtonProps = {
-  text: string;
-  color?: string;
-  onClick?: () =&gt; void;
+        <pre class="hljs"><code data-language="tsx"><span class="hljs-comment">// 피해야 함: 기존 Props를 다시 정의하는 의미 없는 Wrapper</span>
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">CommonButtonProps</span> = {
+  <span class="hljs-attr">text</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">color</span>?: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">onClick</span>?: <span class="hljs-function">() =&gt;</span> <span class="hljs-built_in">void</span>;
 };</code></pre>
 
         <p>
@@ -367,21 +367,21 @@ type CommonButtonProps = {
           사용합니다.
         </p>
 
-        <pre><code data-language="tsx">type SelectFieldProps&lt;T extends string&gt; = {
-  options: readonly SelectOption&lt;T&gt;[];
-  value: T;
-  onValueChange: (value: T) =&gt; void;
+        <pre class="hljs"><code data-language="tsx"><span class="hljs-keyword">type</span> <span class="hljs-title class_">SelectFieldProps</span>&lt;T <span class="hljs-keyword">extends</span> <span class="hljs-built_in">string</span>&gt; = {
+  <span class="hljs-attr">options</span>: <span class="hljs-keyword">readonly</span> <span class="hljs-title class_">SelectOption</span>&lt;T&gt;[];
+  <span class="hljs-attr">value</span>: T;
+  <span class="hljs-attr">onValueChange</span>: <span class="hljs-function">(<span class="hljs-params"><span class="hljs-attr">value</span>: T</span>) =&gt;</span> <span class="hljs-built_in">void</span>;
 };
 
-export function SelectField&lt;T extends string&gt;({
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title class_">SelectField</span>&lt;T <span class="hljs-keyword">extends</span> <span class="hljs-built_in">string</span>&gt;({
   options,
   value,
   onValueChange,
-}: SelectFieldProps&lt;T&gt;) {
-  return (
-    &lt;select
-      value={value}
-      onChange={(event) =&gt; {
+}: <span class="hljs-title class_">SelectFieldProps</span>&lt;T&gt;) {
+  <span class="hljs-keyword">return</span> (
+    <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">select</span>
+      <span class="hljs-attr">value</span>=<span class="hljs-string">{value}</span>
+      <span class="hljs-attr">onChange</span>=<span class="hljs-string">{(event)</span> =&gt;</span> {
         const selected = options.find(
           (option) =&gt; option.value === event.currentTarget.value,
         );
@@ -390,29 +390,29 @@ export function SelectField&lt;T extends string&gt;({
       }}
     &gt;
       {options.map((option) =&gt; (
-        &lt;option key={option.value} value={option.value}&gt;
+        <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{option.value}</span> <span class="hljs-attr">value</span>=<span class="hljs-string">{option.value}</span>&gt;</span>
           {option.label}
-        &lt;/option&gt;
+        <span class="hljs-tag">&lt;/<span class="hljs-name">option</span>&gt;</span>
       ))}
-    &lt;/select&gt;
+    <span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span></span>
   );
 }</code></pre>
 
-        <pre><code data-language="tsx">type TicketFilter = "all" | "available" | "used";
+        <pre class="hljs"><code data-language="tsx"><span class="hljs-keyword">type</span> <span class="hljs-title class_">TicketFilter</span> = <span class="hljs-string">&quot;all&quot;</span> | <span class="hljs-string">&quot;available&quot;</span> | <span class="hljs-string">&quot;used&quot;</span>;
 
-const ticketFilterOptions: readonly SelectOption&lt;TicketFilter&gt;[] = [
-  { label: "전체", value: "all" },
-  { label: "사용 가능", value: "available" },
-  { label: "사용 완료", value: "used" },
+<span class="hljs-keyword">const</span> <span class="hljs-attr">ticketFilterOptions</span>: <span class="hljs-keyword">readonly</span> <span class="hljs-title class_">SelectOption</span>&lt;<span class="hljs-title class_">TicketFilter</span>&gt;[] = [
+  { <span class="hljs-attr">label</span>: <span class="hljs-string">&quot;전체&quot;</span>, <span class="hljs-attr">value</span>: <span class="hljs-string">&quot;all&quot;</span> },
+  { <span class="hljs-attr">label</span>: <span class="hljs-string">&quot;사용 가능&quot;</span>, <span class="hljs-attr">value</span>: <span class="hljs-string">&quot;available&quot;</span> },
+  { <span class="hljs-attr">label</span>: <span class="hljs-string">&quot;사용 완료&quot;</span>, <span class="hljs-attr">value</span>: <span class="hljs-string">&quot;used&quot;</span> },
 ];
 
-const [filter, setFilter] = useState&lt;TicketFilter&gt;("all");
+<span class="hljs-keyword">const</span> [filter, setFilter] = useState&lt;<span class="hljs-title class_">TicketFilter</span>&gt;(<span class="hljs-string">&quot;all&quot;</span>);
 
-&lt;SelectField
-  options={ticketFilterOptions}
-  value={filter}
-  onValueChange={setFilter}
-/&gt;;</code></pre>
+<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">SelectField</span>
+  <span class="hljs-attr">options</span>=<span class="hljs-string">{ticketFilterOptions}</span>
+  <span class="hljs-attr">value</span>=<span class="hljs-string">{filter}</span>
+  <span class="hljs-attr">onValueChange</span>=<span class="hljs-string">{setFilter}</span>
+/&gt;</span></span>;</code></pre>
 
         <p>
           Generic이 단순한 Props보다 이해하기 어렵거나 하나의 사용처에만
@@ -428,9 +428,9 @@ const [filter, setFilter] = useState&lt;TicketFilter&gt;("all");
         <h3>6.1 <code>any</code>보다 <code>unknown</code></h3>
         <p>형태를 알 수 없는 값은 <code>unknown</code>으로 받고 사용 전에 확인합니다.</p>
 
-        <pre><code data-language="typescript">function getErrorMessage(error: unknown) {
-  if (error instanceof Error) return error.message;
-  return "알 수 없는 오류가 발생했습니다.";
+        <pre class="hljs"><code data-language="typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">getErrorMessage</span>(<span class="hljs-params"><span class="hljs-attr">error</span>: <span class="hljs-built_in">unknown</span></span>) {
+  <span class="hljs-keyword">if</span> (error <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">Error</span>) <span class="hljs-keyword">return</span> error.<span class="hljs-property">message</span>;
+  <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;알 수 없는 오류가 발생했습니다.&quot;</span>;
 }</code></pre>
 
         <p>
@@ -448,13 +448,13 @@ const [filter, setFilter] = useState&lt;TicketFilter&gt;("all");
           <li><code>@ts-ignore</code></li>
         </ul>
 
-        <pre><code data-language="typescript">// 피해야 함
-type User = {
-  name: string;
+        <pre class="hljs"><code data-language="typescript"><span class="hljs-comment">// 피해야 함</span>
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">User</span> = {
+  <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>;
 };
 
-const user = value as User;
-const name = user!.name;</code></pre>
+<span class="hljs-keyword">const</span> user = value <span class="hljs-keyword">as</span> <span class="hljs-title class_">User</span>;
+<span class="hljs-keyword">const</span> name = user!.<span class="hljs-property">name</span>;</code></pre>
 
         <p>
           불가피한 예외는 영향 범위를 좁히고 이유와 제거 조건을 남깁니다.
@@ -463,22 +463,22 @@ const name = user!.name;</code></pre>
         <h3>6.3 불필요한 Generic 방지</h3>
         <p>Generic은 입력과 출력의 타입 관계를 유지할 때 사용합니다.</p>
 
-        <pre><code data-language="typescript">function first&lt;T&gt;(items: readonly T[]) {
-  return items[0];
+        <pre class="hljs"><code data-language="typescript"><span class="hljs-keyword">function</span> first&lt;T&gt;(<span class="hljs-attr">items</span>: <span class="hljs-keyword">readonly</span> T[]) {
+  <span class="hljs-keyword">return</span> items[<span class="hljs-number">0</span>];
 }</code></pre>
 
-        <pre><code data-language="typescript">// 피해야 함
-type User = {
-  name: string;
+        <pre class="hljs"><code data-language="typescript"><span class="hljs-comment">// 피해야 함</span>
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">User</span> = {
+  <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>;
 };
 
-function getUserName&lt;T extends User&gt;(user: T) {
-  return user.name;
+<span class="hljs-keyword">function</span> getUserName&lt;T <span class="hljs-keyword">extends</span> <span class="hljs-title class_">User</span>&gt;(<span class="hljs-attr">user</span>: T) {
+  <span class="hljs-keyword">return</span> user.<span class="hljs-property">name</span>;
 }
 
-// 권장
-function getUserName(user: User) {
-  return user.name;
+<span class="hljs-comment">// 권장</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">getUserName</span>(<span class="hljs-params"><span class="hljs-attr">user</span>: <span class="hljs-title class_">User</span></span>) {
+  <span class="hljs-keyword">return</span> user.<span class="hljs-property">name</span>;
 }</code></pre>
       </section>
 
@@ -489,7 +489,7 @@ function getUserName(user: User) {
 
         <p>타입만 가져올 때는 <code>import type</code>을 사용합니다.</p>
 
-        <pre><code data-language="typescript">import type { Ticket } from "./ticket.types";</code></pre>
+        <pre class="hljs"><code data-language="typescript"><span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> { <span class="hljs-title class_">Ticket</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./ticket.types&quot;</span>;</code></pre>
 
         <p>
           가까운 파일은 상대 경로를 사용하고, 기능 또는 공통 영역을 가로지를 때
