@@ -641,7 +641,7 @@ h3 {
 .section-quick-menu__link {
   padding: 8px 10px;
   overflow: hidden;
-  color: #4e4e4e;
+  color: #6d6d6d;
   border-radius: calc(var(--krds-radius, 8px) / 2);
   font-size: 14px;
   font-weight: 500;
