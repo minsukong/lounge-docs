@@ -89,7 +89,8 @@
         }
 
         .code-collapse.is-collapsible::after,
-        .code-toggle {
+        .code-toggle,
+        .section-quick-menu {
           display: none;
         }
       }
@@ -146,9 +147,82 @@
     });
   };
 
+  const getSectionMenuLabel = (heading) => {
+    const label = heading.textContent.trim();
+    const labelWithoutNumber = label.replace(
+      /^(?:\d+[.)]|\d+(?:\.\d+)+[.)]?)\s+/,
+      "",
+    );
+
+    return labelWithoutNumber || label;
+  };
+
+  const initializeSectionMenu = () => {
+    const headings = [...document.querySelectorAll("h2")].filter((heading) =>
+      heading.textContent.trim(),
+    );
+
+    if (!headings.length) return;
+
+    const nav = document.createElement("nav");
+    const list = document.createElement("ol");
+    const usedIds = new Set(
+      [...document.querySelectorAll("[id]")].map((element) => element.id),
+    );
+
+    nav.className = "section-quick-menu";
+    nav.setAttribute("aria-label", "페이지 목차");
+    list.className = "section-quick-menu__list";
+
+    headings.forEach((heading, index) => {
+      const item = document.createElement("li");
+      const link = document.createElement("a");
+      let sectionId = heading.id;
+
+      if (!sectionId) {
+        let suffix = index + 1;
+        sectionId = `section-${suffix}`;
+
+        while (usedIds.has(sectionId)) {
+          suffix += 1;
+          sectionId = `section-${suffix}`;
+        }
+
+        heading.id = sectionId;
+        usedIds.add(sectionId);
+      }
+
+      heading.classList.add("section-quick-menu__target");
+      link.className = "section-quick-menu__link";
+      link.href = `#${encodeURIComponent(sectionId)}`;
+      link.textContent = getSectionMenuLabel(heading);
+      link.title = link.textContent;
+
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        const reduceMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+
+        heading.scrollIntoView({
+          behavior: reduceMotion ? "auto" : "smooth",
+          block: "start",
+        });
+      });
+
+      item.append(link);
+      item.append(link);
+      list.append(item);
+    });
+
+    nav.append(list);
+    document.body.append(nav);
+  };
+
   const initialize = () => {
     addCodeToggleStyles();
     initializeCodeBlocks();
+    initializeSectionMenu();
 
     let resizeTimer;
     window.addEventListener("resize", () => {

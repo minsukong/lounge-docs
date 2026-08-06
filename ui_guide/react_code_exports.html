@@ -27,8 +27,8 @@
       <section>
         <h2 class="bx-active">1. 문서 목적</h2>
         <p>
-          Figma 디자인을 React와 Tailwind CSS 코드로 변환할 때 필요한 역할,
-          작업 흐름과 검수 기준을 공유합니다. 자동 생성 결과는 구현 초안으로
+          Figma 디자인을 React와 Tailwind CSS 코드로 변환할 때 필요한 역할, 작업
+          흐름과 검수 기준을 공유합니다. 자동 생성 결과는 구현 초안으로
           사용하며, 최종 구조와 품질은 프론트엔드 개발자가 검수합니다.
         </p>
         <p>
@@ -106,9 +106,9 @@
             <tr>
               <td>디자이너</td>
               <td>
-                공통 컴포넌트, Auto Layout, Variables와 Styles를 우선 사용합니다.
-                코드 구조를 고려해 모든 레이어 이름을 정리할 책임은 지지
-                않습니다.
+                공통 컴포넌트, Auto Layout, Variables와 Styles를 우선
+                사용합니다. 코드 구조를 고려해 모든 레이어 이름을 정리할 책임은
+                지지 않습니다.
               </td>
             </tr>
             <tr>
@@ -154,10 +154,12 @@ flowchart LR
           </li>
           <li>기존 shadcn/ui 및 프로젝트 컴포넌트와 토큰을 우선 적용합니다.</li>
           <li>기존 요소로 표현할 수 없는 부분만 새로 작성합니다.</li>
-          <li>생성 화면을 Figma와 비교하고 프로젝트 품질 기준으로 검수합니다.</li>
+          <li>
+            생성 화면을 Figma와 비교하고 프로젝트 품질 기준으로 검수합니다.
+          </li>
         </ol>
 
-        <h3>4.1 Code Connect 도입 시 장점</h3>
+        <h3>4.1 Code Connect 도입 시 장점 <code>TBD</code></h3>
         <table>
           <thead>
             <tr>
@@ -169,8 +171,8 @@ flowchart LR
             <tr>
               <td>기존 컴포넌트 재사용</td>
               <td>
-                Figma 컴포넌트를 실제 코드의 컴포넌트 이름과 경로에 연결하여 AI의
-                임의 구현과 중복 생성을 줄일 수 있습니다.
+                Figma 컴포넌트를 실제 코드의 컴포넌트 이름과 경로에 연결하여
+                AI의 임의 구현과 중복 생성을 줄일 수 있습니다.
               </td>
             </tr>
             <tr>
@@ -197,17 +199,17 @@ flowchart LR
             <tr>
               <td>검수 비용 절감</td>
               <td>
-                잘못된 import, 불필요한 새 컴포넌트와 속성 누락을 줄여 프론트엔드
-                개발자의 반복 정리 작업을 줄일 수 있습니다.
+                잘못된 import, 불필요한 새 컴포넌트와 속성 누락을 줄여
+                프론트엔드 개발자의 반복 정리 작업을 줄일 수 있습니다.
               </td>
             </tr>
           </tbody>
         </table>
         <blockquote>
           <p>
-            <strong>TBD:</strong> Code Connect는 Figma Organization 또는
-            Enterprise 플랜 비용, 좌석과 권한, 저장소 연결 정책을 검토한 후
-            도입 여부를 결정합니다. 도입 전에도 위 흐름이 동작하도록 운영합니다.
+            Code Connect는 Figma Organization 또는 Enterprise 플랜 비용, 좌석과
+            권한, 저장소 연결 정책을 검토한 후 도입 여부를 결정합니다. 도입
+            전에도 위 흐름이 동작하도록 운영합니다.
           </p>
         </blockquote>
       </section>
@@ -260,8 +262,8 @@ flowchart LR
             가까이에 둡니다.
           </li>
           <li>
-            공통 UI를 수정할 때 기존 사용처와 키보드, 포커스 및 ARIA 동작을
-            함께 확인합니다.
+            공통 UI를 수정할 때 기존 사용처와 키보드, 포커스 및 ARIA 동작을 함께
+            확인합니다.
           </li>
         </ul>
       </section>
