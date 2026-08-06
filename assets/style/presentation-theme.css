@@ -701,3 +701,28 @@ h3,
     display: none;
   }
 }
+
+h1,
+footer {
+  &::before,
+  & > p:first-child {
+    content: "🔖";
+    display: inline-block;
+    margin-right: 4px;
+  }
+}
+footer {
+  margin-top: 100px;
+  color: var(--krds-gray-50);
+
+  &::after {
+    content: "© ebridge. All rights reserved. 본 문서는 사내 개발 기준을 위한 자료이며, 허가 없는 외부 배포 및 상업적 이용을 금지합니다.";
+    display: block;
+  }
+
+  & > p:first-child {
+    color: var(--krds-gray-50);
+    font-size: 18px;
+    font-weight: 500;
+  }
+}
