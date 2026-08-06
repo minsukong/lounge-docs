@@ -664,7 +664,7 @@ h3 {
   scroll-margin-top: var(--section-menu-scroll-offset, 32px);
 }
 
-@container layout (max-width: 1279px) {
+@container layout (max-width: 1500px) {
   .section-quick-menu {
     display: none;
   }
