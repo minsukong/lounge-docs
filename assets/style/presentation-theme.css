@@ -52,6 +52,8 @@
 }
 
 html {
+  container-type: inline-size;
+  container-name: layout;
   background: var(--krds-gray-5);
   scroll-behavior: smooth;
 }
@@ -662,7 +664,7 @@ h3 {
   scroll-margin-top: var(--section-menu-scroll-offset, 32px);
 }
 
-@media (max-width: 1279px) {
+@container layout (max-width: 1279px) {
   .section-quick-menu {
     display: none;
   }
