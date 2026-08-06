@@ -15,9 +15,7 @@
       <div class="type">FRONT-END · INITIAL GUIDE · DRAFT</div>
       <h1>Front-End 초기 구축 가이드</h1>
       <p>확정된 기술과 영역별 책임, 초기 구현 기준을 정리합니다.</p>
-      <blockquote>
-        <p>Draft · Version 0.1 · 2026-08-06</p>
-      </blockquote>
+      <p>Draft · Version 0.1 · 2026-08-06</p>
     </header>
 
     <main>
@@ -61,7 +59,7 @@
           </thead>
           <tbody>
             <tr>
-              <td><code>TBD</code></td>
+              <td><code class="badge-tbd">TBD</code></td>
               <td>결정이 필요한 항목</td>
               <td>추측해 고정하지 않고 담당자 합의 후 갱신합니다.</td>
             </tr>
@@ -74,7 +72,7 @@
         </table>
         <p>
           확정된 내용은 별도 표시 없이 일반 문장으로 작성합니다. 결정이
-          필요하거나 예시임을 밝혀야 할 때만 <code>TBD</code> 또는
+          필요하거나 예시임을 밝혀야 할 때만 <code class="badge-tbd">TBD</code> 또는
           <code>EXAMPLE</code>을 사용합니다.
         </p>
       </section>
@@ -161,13 +159,11 @@ flowchart LR
             호환성과 배포가 함께 검토되어야 합니다.
           </li>
         </ul>
-        <blockquote>
-          <p>
-            <code>TBD</code>: 로그인 주체와 인증 프로토콜, WebView 세션 생성
-            방식, 결제 단계별 Native-Web 책임, 직접 브라우저 접근 지원 범위는
-            확정 후 별도 문서에 반영합니다.
-          </p>
-        </blockquote>
+        <p>
+          <code class="badge-tbd">TBD</code> 로그인 주체와 인증 프로토콜, WebView 세션 생성
+          방식, 결제 단계별 Native-Web 책임, 직접 브라우저 접근 지원 범위는
+          확정 후 별도 문서에 반영합니다.
+        </p>
       </section>
 
       <hr />
@@ -247,13 +243,11 @@ flowchart LR
             병합하지 않습니다.
           </li>
         </ul>
-        <blockquote>
-          <p>
-            <code>TBD</code>: Server Component와 Client Component의 세부
-            경계, SSR·SSG·ISR, 캐싱 및 데이터 패칭 정책은 화면과 API 구조가
-            확정된 후 결정합니다.
-          </p>
-        </blockquote>
+        <p>
+          <code class="badge-tbd">TBD</code> Server Component와 Client Component의 세부
+          경계, SSR·SSG·ISR, 캐싱 및 데이터 패칭 정책은 화면과 API 구조가
+          확정된 후 결정합니다.
+        </p>
       </section>
 
       <hr />
@@ -302,13 +296,11 @@ flowchart LR
             만들지 않습니다.
           </li>
         </ul>
-        <blockquote>
-          <p>
-            아래 트리는 현재 목표로 하는 논리 구조입니다. 실제 사용처가 없는 빈
-            공통 패키지를 미리 만들지 않으며, Workspace 도구와 Task Runner는 CI
-            및 배포 환경을 확인한 뒤 확정합니다. <code>TBD</code>
-          </p>
-        </blockquote>
+        <p>
+          아래 트리는 현재 목표로 하는 논리 구조입니다. 실제 사용처가 없는 빈
+          공통 패키지를 미리 만들지 않으며, Workspace 도구와 Task Runner는 CI
+          및 배포 환경을 확인한 뒤 확정합니다. <code class="badge-tbd">TBD</code>
+        </p>
         <pre class="hljs"><code data-language="text">&lt;repository-root&gt;/
 ├── apps/
 │   ├── website/                 # 대외 웹사이트
@@ -338,14 +330,11 @@ flowchart LR
           생성하거나 구현하고, <code>packages</code>와 각 애플리케이션 내부에는
           언어·채널별 Adapter를 둡니다. 카드사별 독립 배포가 필요하면
           <code>apps/card-inapp/&lt;partner&gt;</code>로 분리할 수 있습니다.
-          <code>TBD</code>
+          <code class="badge-tbd">TBD</code>
         </p>
-        <blockquote>
-          <p>
-            <strong>EXAMPLE:</strong> 하나의 기능이 커진 뒤에만 다음처럼 내부
-            책임을 나눌 수 있습니다.
-          </p>
-        </blockquote>
+        <p>하나의 기능이 커진 뒤에만 다음처럼 내부
+          책임을 나눌 수 있습니다.
+        </p>
         <pre class="hljs"><code data-language="text">src/features/ticket/
         ├── api/
         ├── components/
@@ -365,12 +354,6 @@ flowchart LR
           </li>
           <li>모든 컴포넌트에 동일한 폴더·파일 세트를 강제하지 않습니다.</li>
         </ul>
-        <blockquote>
-          <p>
-            <strong>EXAMPLE:</strong> 컴포넌트가 복잡해진 경우의 확장
-            형태입니다.
-          </p>
-        </blockquote>
         <pre class="hljs"><code data-language="text">Button/
         ├── Button.tsx
         ├── Button.types.ts       # 외부 공개 타입이 커졌을 때
@@ -379,12 +362,9 @@ flowchart LR
         </code></pre>
         <h3>4.3 공통화 판단</h3>
         <p>공통화는 코드 모양이 아니라 책임과 변경 이유를 기준으로 합니다.</p>
-        <blockquote>
-          <p>
-            <strong>EXAMPLE:</strong> 다음 질문에 모두 답할 수 있을 때 공통화를
-            검토합니다.
-          </p>
-        </blockquote>
+        <p>다음 질문에 모두 답할 수 있을 때 공통화를
+          검토합니다.
+        </p>
         <ol>
           <li>둘 이상의 실제 사용처가 있는가?</li>
           <li>사용처들의 의미와 변경 이유가 같은가?</li>
@@ -445,13 +425,10 @@ flowchart LR
             변경 주기가 다르면 분리합니다.
           </li>
         </ul>
-        <blockquote>
-          <p>
-            <strong>EXAMPLE:</strong> 한 파일에서만 쓰는 짧은 props 타입은 같은
-            파일에 두고, 여러 모듈이 사용하는 공개 타입만 별도 파일로
-            분리합니다.
-          </p>
-        </blockquote>
+        <p>한 파일에서만 쓰는 짧은 props 타입은 같은
+          파일에 두고, 여러 모듈이 사용하는 공개 타입만 별도 파일로
+          분리합니다.
+        </p>
         <p>
           타입의 배치, React Props와 공통 타입의 구체적인 작성 기준은
           <a href="./../typescript_guide/index.html">TypeScript 가이드</a>를
@@ -468,30 +445,22 @@ flowchart LR
             만들지 않습니다.
           </li>
         </ul>
-        <blockquote>
-          <p>
-            <strong>EXAMPLE:</strong> 가까운 파일은 상대 경로를, 기능 또는 공통
-            영역을 가로지르는 import는 <code>@/</code> alias를 사용할 수
-            있습니다.
-          </p>
-        </blockquote>
+        <p>가까운 파일은 상대 경로를, 기능 또는 공통
+          영역을 가로지르는 import는 <code>@/</code> alias를 사용할 수
+          있습니다.
+        </p>
         <pre class="hljs"><code data-language="ts"><span class="hljs-keyword">import</span> { cn } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/lib/utils&#x27;</span>;
         <span class="hljs-keyword">import</span> { <span class="hljs-title class_">TicketCard</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./TicketCard&#x27;</span>;
         </code></pre>
-        <blockquote>
-          <p>
-            <strong>EXAMPLE:</strong> <code>index.ts</code>는 모든 폴더에 만들지
-            않습니다. 외부에 제공할 공개 API가 안정된 기능 또는 컴포넌트
-            폴더에서만 선택적으로 사용하고, 저장소 전체를 다시 내보내는 대형
-            배럴 파일은 피합니다.
-          </p>
-        </blockquote>
-        <blockquote>
-          <p>
-            <code>TBD</code>: 배럴 파일의 허용 범위와 lint 기반 import 경계
-            검사는 실제 모듈 구조가 생긴 후 확정합니다.
-          </p>
-        </blockquote>
+        <p><code>index.ts</code>는 모든 폴더에 만들지
+          않습니다. 외부에 제공할 공개 API가 안정된 기능 또는 컴포넌트
+          폴더에서만 선택적으로 사용하고, 저장소 전체를 다시 내보내는 대형
+          배럴 파일은 피합니다.
+        </p>
+        <p>
+          <code class="badge-tbd">TBD</code> 배럴 파일의 허용 범위와 lint 기반 import 경계
+          검사는 실제 모듈 구조가 생긴 후 확정합니다.
+        </p>
       </section>
 
       <hr />
@@ -524,13 +493,11 @@ flowchart LR
             >React Code Exports 가이드</a
           >를 따릅니다.
         </p>
-        <blockquote>
-          <p>
-            <code>TBD</code>: 최종 토큰 이름, breakpoint, 타이포그래피 단계,
-            컴포넌트 variant와 Figma-Code 동기화 방식은 디자인 시스템 확정 후
-            반영합니다.
-          </p>
-        </blockquote>
+        <p>
+          <code class="badge-tbd">TBD</code> 최종 토큰 이름, breakpoint, 타이포그래피 단계,
+          컴포넌트 variant와 Figma-Code 동기화 방식은 디자인 시스템 확정 후
+          반영합니다.
+        </p>
         <h3>6.2 shadcn/ui</h3>
         <ul>
           <li>shadcn/ui는 수정 가능한 프로젝트 소유 코드로 관리합니다.</li>
@@ -566,21 +533,16 @@ flowchart LR
             사용합니다.
           </li>
         </ul>
-        <blockquote>
-          <p>
-            <strong>EXAMPLE:</strong> 단순한 조건은 <code>cn</code>으로
-            처리하고, 크기·색상·상태 조합이 여러 사용처에서 반복될 때만
-            <code>cva</code>로 옮깁니다.
-          </p>
-        </blockquote>
+        <p>단순한 조건은 <code>cn</code>으로
+          처리하고, 크기·색상·상태 조합이 여러 사용처에서 반복될 때만
+          <code>cva</code>로 옮깁니다.
+        </p>
         <p>SCSS는 초기 기본 작성 방식에 포함하지 않습니다.</p>
-        <blockquote>
-          <p>
-            <code>TBD</code>: 기존 자산 연동, 복잡한 외부 스타일 덮어쓰기
-            또는 Tailwind로 표현하기 어려운 요구가 확인되면 SCSS의 도입 범위와
-            책임을 별도로 결정합니다.
-          </p>
-        </blockquote>
+        <p>
+          <code class="badge-tbd">TBD</code> 기존 자산 연동, 복잡한 외부 스타일 덮어쓰기
+          또는 Tailwind로 표현하기 어려운 요구가 확인되면 SCSS의 도입 범위와
+          책임을 별도로 결정합니다.
+        </p>
         <h3>6.4 반응형 범위</h3>
         <ul>
           <li>브랜드 사이트는 반응형 웹을 기준으로 구현합니다.</li>
@@ -588,13 +550,11 @@ flowchart LR
             Flutter 앱 내부 WebView 서비스는 합의된 모바일 앱 환경을 우선합니다.
           </li>
         </ul>
-        <blockquote>
-          <p>
-            <code>TBD</code>: 지원 화면 크기, orientation, WebView 안전
-            영역, 브랜드 사이트 breakpoint와 데스크톱 상세 기준은 디자인 확정 후
-            정합니다.
-          </p>
-        </blockquote>
+        <p>
+          <code class="badge-tbd">TBD</code> 지원 화면 크기, orientation, WebView 안전
+          영역, 브랜드 사이트 breakpoint와 데스크톱 상세 기준은 디자인 확정 후
+          정합니다.
+        </p>
       </section>
 
       <hr />
@@ -677,14 +637,12 @@ flowchart TD
             노출되지 않도록 정리합니다.
           </li>
         </ul>
-        <blockquote>
-          <p>
-            <code>TBD</code>: Query Key 상세 구조, 전역
-            <code>staleTime</code>, retry, invalidation, prefetch, hydration,
-            Server Component와의 책임 및 오프라인 mutation 정책은 별도 TanStack
-            Query 가이드에서 결정합니다.
-          </p>
-        </blockquote>
+        <p>
+          <code class="badge-tbd">TBD</code> Query Key 상세 구조, 전역
+          <code>staleTime</code>, retry, invalidation, prefetch, hydration,
+          Server Component와의 책임 및 오프라인 mutation 정책은 별도 TanStack
+          Query 가이드에서 결정합니다.
+        </p>
         <h3>7.2 Zustand</h3>
         <ul>
           <li>
@@ -707,14 +665,12 @@ flowchart TD
           있지만, store 수와 중복 초기화 코드가 늘어날 수 있습니다. 실제 공유
           상태가 생긴 뒤 관련 상태와 변경 이유를 기준으로 나눕니다.
         </p>
-        <blockquote>
-          <p>
-            <code>TBD</code>: Store 분리 단위, Persist 허용 범위와 Selector의
-            최종 규칙은 실제 상태 요구가 확인된 후
-            <a href="./../ui_guide/zustand.html">Zustand UI 상태 관리 가이드</a
-            >에서 확정합니다.
-          </p>
-        </blockquote>
+        <p>
+          <code class="badge-tbd">TBD</code> Store 분리 단위, Persist 허용 범위와 Selector의
+          최종 규칙은 실제 상태 요구가 확인된 후
+          <a href="./../ui_guide/zustand.html">Zustand UI 상태 관리 가이드</a
+          >에서 확정합니다.
+        </p>
         <h3>7.3 React Hook Form</h3>
         <ul>
           <li>
@@ -736,13 +692,11 @@ flowchart TD
           React Hook Form은 폼 상태 도구이며 모든 검증 규칙을 대신 정의하지
           않습니다.
         </p>
-        <blockquote>
-          <p>
-            <code>TBD</code>: Zod 등 스키마 검증 도구, 서버 오류 매핑 형식,
-            공통 Form Field의 범위와 API 요청 타입 연결 방식은 별도 폼
-            가이드에서 확정합니다.
-          </p>
-        </blockquote>
+        <p>
+          <code class="badge-tbd">TBD</code> Zod 등 스키마 검증 도구, 서버 오류 매핑 형식,
+          공통 Form Field의 범위와 API 요청 타입 연결 방식은 별도 폼
+          가이드에서 확정합니다.
+        </p>
       </section>
 
       <hr />
@@ -803,14 +757,11 @@ sequenceDiagram
           </li>
           <li>앱이 지원한다고 확인된 허용 기능만 호출합니다.</li>
         </ul>
-        <blockquote>
-          <p>
-            <strong>EXAMPLE:</strong> 웹 측 adapter는 Promise 기반 API와 요청
-            식별자를 사용해 비동기 요청과 응답을 연결할 수 있습니다. 이는 통신
-            개념을 설명하는 예시이며 실제 전역 객체명, 필드명과 오류 형식은 계약
-            확정 후 적용합니다.
-          </p>
-        </blockquote>
+        <p>
+          웹 측 adapter는 Promise 기반 API와 요청 식별자를 사용해 비동기 요청과
+          응답을 연결할 수 있습니다. 실제 전역 객체명, 필드명과 오류 형식은 계약
+          확정 후 적용합니다.
+        </p>
         <pre class="hljs"><code data-language="ts"><span class="hljs-keyword">type</span> <span class="hljs-title class_">NativeCapability</span> = <span class="hljs-string">&#x27;location&#x27;</span> | <span class="hljs-string">&#x27;qrScan&#x27;</span>;
         
         <span class="hljs-keyword">interface</span> <span class="hljs-title class_">NativeBridge</span> {
@@ -818,14 +769,12 @@ sequenceDiagram
           request&lt;T&gt;(<span class="hljs-attr">capability</span>: <span class="hljs-title class_">NativeCapability</span>, <span class="hljs-attr">params</span>?: <span class="hljs-built_in">unknown</span>): <span class="hljs-title class_">Promise</span>&lt;T&gt;;
         }
         </code></pre>
-        <blockquote>
-          <p>
-            <code>TBD</code>: 채널 이름, 메시지 규격,
-            <code>requestId</code>, Bridge 버전, 허용 Method, 오류 코드,
-            timeout, 중복 요청과 호환성 정책은 Flutter·Android·iOS·Web 담당자가
-            합의한 Bridge 계약에서 확정합니다.
-          </p>
-        </blockquote>
+        <p>
+          <code class="badge-tbd">TBD</code> 채널 이름, 메시지 규격,
+          <code>requestId</code>, Bridge 버전, 허용 Method, 오류 코드,
+          timeout, 중복 요청과 호환성 정책은 Flutter·Android·iOS·Web 담당자가
+          합의한 Bridge 계약에서 확정합니다.
+        </p>
       </section>
 
       <hr />
@@ -878,14 +827,12 @@ flowchart TD
             연결이 필요한 작업은 명확히 제한합니다.
           </li>
         </ul>
-        <blockquote>
-          <p>
-            <code>TBD</code>: 오프라인에서 제공할 화면, 이용권
-            조회·표시·사용 범위, Native 영속 캐시 대상, TTL, 암호화, 네트워크
-            복구 후 동기화, 충돌과 중복 사용 방지 정책은 서비스·보안 정책 확정
-            후 결정합니다.
-          </p>
-        </blockquote>
+        <p>
+          <code class="badge-tbd">TBD</code> 오프라인에서 제공할 화면, 이용권
+          조회·표시·사용 범위, Native 영속 캐시 대상, TTL, 암호화, 네트워크
+          복구 후 동기화, 충돌과 중복 사용 방지 정책은 서비스·보안 정책 확정
+          후 결정합니다.
+        </p>
       </section>
 
       <hr />
@@ -923,13 +870,11 @@ flowchart TD
             확인합니다.
           </li>
         </ul>
-        <blockquote>
-          <p>
-            <code>TBD</code>: WCAG 목표 수준, 색상 대비 수치 검수,
-            스크린리더 테스트 범위와 접근성 인증 일정은 별도 품질 계획에서
-            확정합니다.
-          </p>
-        </blockquote>
+        <p>
+          <code class="badge-tbd">TBD</code> WCAG 목표 수준, 색상 대비 수치 검수,
+          스크린리더 테스트 범위와 접근성 인증 일정은 별도 품질 계획에서
+          확정합니다.
+        </p>
       </section>
 
       <hr />
@@ -981,20 +926,15 @@ flowchart TD
           </li>
           <li>Storybook은 초기 구축 범위에 포함하지 않습니다.</li>
         </ul>
-        <blockquote>
-          <p>
-            <strong>EXAMPLE:</strong> 도구 후보는 단위·컴포넌트 테스트에
-            Vitest와 React Testing Library, E2E에 Playwright, API mock이 필요할
-            때 MSW입니다.
-          </p>
-        </blockquote>
-        <blockquote>
-          <p>
-            <code>TBD</code>: 테스트 도구의 최종 조합, E2E 실행 환경, API
-            mocking 방식, 커버리지 기준, formatter, pre-commit 검사와 CI 품질
-            게이트는 개발·배포 환경 확정 후 결정합니다.
-          </p>
-        </blockquote>
+        <p>도구 후보는 단위·컴포넌트 테스트에
+          Vitest와 React Testing Library, E2E에 Playwright, API mock이 필요할
+          때 MSW입니다.
+        </p>
+        <p>
+          <code class="badge-tbd">TBD</code> 테스트 도구의 최종 조합, E2E 실행 환경, API
+          mocking 방식, 커버리지 기준, formatter, pre-commit 검사와 CI 품질
+          게이트는 개발·배포 환경 확정 후 결정합니다.
+        </p>
       </section>
 
       <hr />
