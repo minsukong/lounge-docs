@@ -22,12 +22,12 @@
 
     <main>
       <section>
-        <h2 class="bx-active">0. 문서 적용 기준</h2>
+        <div class="h3">문서 적용 기준</div>
         <p>
           이 문서는 확정된 원칙과 검토 중인 설계, 참고 구현을 구분하여
           사용합니다.
-          <code class="badge-tbd">TBD</code>와 <code>EXAMPLE</code>은 승인 전까지 개발 계약이나
-          고정 사양으로 해석하지 않습니다.
+          <code class="badge-tbd">TBD</code>와 <code>EXAMPLE</code>은 승인
+          전까지 개발 계약이나 고정 사양으로 해석하지 않습니다.
         </p>
         <table>
           <thead>
@@ -325,7 +325,8 @@ flowchart LR
               </td>
               <td>
                 WebView가 다운로드를 요청하고 Native가 검증·저장·열기를 수행하는
-                구성을 권장합니다. 최종 구현 범위는 <code class="badge-tbd">TBD</code>
+                구성을 권장합니다. 최종 구현 범위는
+                <code class="badge-tbd">TBD</code>
               </td>
             </tr>
             <tr>
@@ -693,9 +694,9 @@ sequenceDiagram
           연결할 고유 ID를 사용합니다. 채널 이름·JSON 규격·Method·오류 코드와
           실행 제한은 구현 전에 계약으로 확정해야 합니다. 아래
           <code>AppBridge</code> 규격은 <code>EXAMPLE</code>이며,
-          <code class="badge-tbd">TBD</code> 항목입니다. Bridge는 신뢰된 HTTPS Main Frame에서만
-          활성화하고 인증·결제 사업자 등 제3자 페이지에서는 제거하거나
-          비활성화합니다.
+          <code class="badge-tbd">TBD</code> 항목입니다. Bridge는 신뢰된 HTTPS
+          Main Frame에서만 활성화하고 인증·결제 사업자 등 제3자 페이지에서는
+          제거하거나 비활성화합니다.
         </p>
 
         <h4>처리 흐름</h4>
@@ -1475,11 +1476,11 @@ window.<span class="hljs-property">AppBridgeResponse</span> = (<span class="hljs
         <h3>캐시 관리 방향</h3>
         <p>
           데이터는 공개·사용자별·민감 정보로 분류하고 저장 위치와 만료 시간을
-          명시합니다. Native 영속 캐시의 범위는 <code class="badge-tbd">TBD</code>이며, 승인
-          전에는 채택한 인증 방식에 필요한 장기 자격 증명과 비민감 앱 설정만
-          저장합니다. 오프라인 기능을 채택하면 데이터 등급·TTL·필요한 암호화와
-          로그아웃·사용자 전환 시 삭제 기준을 먼저 확정합니다.
-          개인정보·예약·결제 응답은 서버에서
+          명시합니다. Native 영속 캐시의 범위는
+          <code class="badge-tbd">TBD</code>이며, 승인 전에는 채택한 인증 방식에
+          필요한 장기 자격 증명과 비민감 앱 설정만 저장합니다. 오프라인 기능을
+          채택하면 데이터 등급·TTL·필요한 암호화와 로그아웃·사용자 전환 시 삭제
+          기준을 먼저 확정합니다. 개인정보·예약·결제 응답은 서버에서
           <code>Cache-Control: no-store</code>를 적용합니다.
         </p>
 
@@ -1493,8 +1494,8 @@ window.<span class="hljs-property">AppBridgeResponse</span> = (<span class="hljs
         </p>
         <p>
           WebView 상태 도구의 선택은
-          <a href="./../frontend_guide/index.html">Front-End 개발 가이드</a
-          >를 따르고, 공유 UI 상태의 Store·Selector·초기화 기준은
+          <a href="./../frontend_guide/index.html">Front-End 개발 가이드</a>를
+          따르고, 공유 UI 상태의 Store·Selector·초기화 기준은
           <a href="./../ui_guide/zustand.html">Zustand UI 상태 관리 가이드</a>를
           따릅니다.
         </p>
@@ -1659,7 +1660,8 @@ window.<span class="hljs-property">AppBridgeResponse</span> = (<span class="hljs
         <h2 class="bx-active">6. BO에서 제공하는 APP 관리 기능</h2>
         <p>
           아래 기능은 BO 범위 후보입니다. 실제 제공 기능과 우선순위, 운영 권한은
-          서비스·운영·개발 담당자가 합의한 뒤 확정합니다. <code class="badge-tbd">TBD</code>
+          서비스·운영·개발 담당자가 합의한 뒤 확정합니다.
+          <code class="badge-tbd">TBD</code>
         </p>
         <table>
           <thead>
@@ -2220,9 +2222,8 @@ flowchart TD
           <code>website</code>, <code>card-inapp</code>과
           <code>backoffice</code>는 현재 계획된 배포 단위입니다. 각 프로젝트의
           Framework와 최종 분리 범위는 별도로 확정합니다. 카드사별 독립 배포가
-          필요하면 <code>apps/card-inapp/&lt;partner&gt;</code>로 분리하고,
-          동일 애플리케이션에서 설정만 구분한다면 하나의 프로젝트로
-          유지합니다.
+          필요하면 <code>apps/card-inapp/&lt;partner&gt;</code>로 분리하고, 동일
+          애플리케이션에서 설정만 구분한다면 하나의 프로젝트로 유지합니다.
           <code class="badge-tbd">TBD</code>
         </p>
 
