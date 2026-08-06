@@ -20,7 +20,7 @@
       </p>
       <blockquote>
         <p>
-          개정일: 2026-08-05 · 보안 / 요구사항 변경 시 문서와 구현을 함께
+          개정일: 2026-08-06 · 보안 / 요구사항 변경 시 문서와 구현을 함께
           갱신합니다.
         </p>
       </blockquote>
@@ -28,7 +28,7 @@
 
     <main>
       <section>
-        <h2 class="bx-active">문서 적용 기준</h2>
+        <h2 class="bx-active">0. 문서 적용 기준</h2>
         <p>
           이 문서는 확정된 원칙과 검토 중인 설계, 참고 구현을 구분하여
           사용합니다.
@@ -62,7 +62,8 @@
           </tbody>
         </table>
 
-        <h3>우선 결정 항목 (TBD)</h3>
+        <h3>우선 결정 항목</h3>
+        <p><code>TBD</code>: 아래 항목은 담당자 합의와 승인 후 확정합니다.</p>
         <table>
           <thead>
             <tr>
@@ -569,7 +570,7 @@ flowchart LR
           관련 데이터를 정책에 따라 정리합니다.
         </p>
 
-        <h4>인증 설계 결정 항목 (TBD)</h4>
+        <h4>인증 설계 결정 항목 <code>TBD</code></h4>
         <ul>
           <li>로그인·재인증·계정 복구 요구사항과 서버 세션 정책</li>
           <li>세션 만료 시간, 연장 조건과 동시 로그인 허용 범위</li>
@@ -748,7 +749,7 @@ sequenceDiagram
           뿐 암호화 수단은 아닙니다.
         </p>
 
-        <h4>요청 규격 (초안 · TBD)</h4>
+        <h4>요청 규격 (초안) <code>TBD</code></h4>
         <table>
           <thead>
             <tr>
@@ -799,7 +800,7 @@ sequenceDiagram
           예시입니다. <code>requestId</code>로 이후 Native 응답을 식별합니다.
         </p>
 
-        <h4>응답 규격 (초안 · TBD)</h4>
+        <h4>응답 규격 (초안) <code>TBD</code></h4>
         <table>
           <thead>
             <tr>
@@ -852,7 +853,7 @@ sequenceDiagram
           반환하는 성공 응답 예시입니다.
         </p>
 
-        <h4>허용 Method (초안 · TBD)</h4>
+        <h4>허용 Method (초안) <code>TBD</code></h4>
         <table>
           <thead>
             <tr>
@@ -905,7 +906,7 @@ sequenceDiagram
           </tbody>
         </table>
 
-        <h4>공통 오류 코드 (초안 · TBD)</h4>
+        <h4>공통 오류 코드 (초안) <code>TBD</code></h4>
         <table>
           <thead>
             <tr>
@@ -1495,6 +1496,13 @@ window.<span class="hljs-property">AppBridgeResponse</span> = (<span class="hljs
           UI와 클라이언트 상태를 관리합니다. Query Key에는 사용자 식별 범위를
           포함하고 로그아웃·계정 전환 시 Query Cache와 사용자 상태를
           초기화합니다.
+        </p>
+        <p>
+          WebView 상태 도구의 선택은
+          <a href="./../frontend_guide/index.html">Front-End 초기 구축 가이드</a
+          >를 따르고, 공유 UI 상태의 Store·Selector·초기화 기준은
+          <a href="./../ui_guide/zustand.html">Zustand UI 상태 관리 가이드</a>를
+          따릅니다.
         </p>
 
         <h3>성능 최적화</h3>
@@ -2391,7 +2399,7 @@ flowchart TD
     </main>
 
     <footer>
-      <p>APP 개발 표준 초안 · TO-BE · 보안 보완본 · 2026-08-05</p>
+      <p>APP 개발 표준 초안 · TO-BE · 보안 보완본 · 2026-08-06</p>
     </footer>
     <script src="./../assets/js/common.js"></script>
     <script src="./../assets/js/mermaid.js"></script>

@@ -16,7 +16,7 @@
       <h1>Front-End 초기 구축 가이드</h1>
       <p>확정된 기술과 영역별 책임, 초기 구현 기준을 정리합니다.</p>
       <blockquote>
-        <p>Draft · Version 0.1 · 2026-08-04</p>
+        <p>Draft · Version 0.1 · 2026-08-06</p>
       </blockquote>
     </header>
 
@@ -61,7 +61,7 @@
           </thead>
           <tbody>
             <tr>
-              <td><strong>TBD</strong></td>
+              <td><code>TBD</code></td>
               <td>결정이 필요한 항목</td>
               <td>추측해 고정하지 않고 담당자 합의 후 갱신합니다.</td>
             </tr>
@@ -163,7 +163,7 @@ flowchart LR
         </ul>
         <blockquote>
           <p>
-            <strong>TBD:</strong> 로그인 주체와 인증 프로토콜, WebView 세션 생성
+            <code>TBD</code>: 로그인 주체와 인증 프로토콜, WebView 세션 생성
             방식, 결제 단계별 Native-Web 책임, 직접 브라우저 접근 지원 범위는
             확정 후 별도 문서에 반영합니다.
           </p>
@@ -249,7 +249,7 @@ flowchart LR
         </ul>
         <blockquote>
           <p>
-            <strong>TBD:</strong> Server Component와 Client Component의 세부
+            <code>TBD</code>: Server Component와 Client Component의 세부
             경계, SSR·SSG·ISR, 캐싱 및 데이터 패칭 정책은 화면과 API 구조가
             확정된 후 결정합니다.
           </p>
@@ -306,10 +306,10 @@ flowchart LR
           <p>
             아래 트리는 현재 목표로 하는 논리 구조입니다. 실제 사용처가 없는 빈
             공통 패키지를 미리 만들지 않으며, Workspace 도구와 Task Runner는 CI
-            및 배포 환경을 확인한 뒤 확정합니다. <strong>TBD</strong>
+            및 배포 환경을 확인한 뒤 확정합니다. <code>TBD</code>
           </p>
         </blockquote>
-        <pre><code data-language="text">&lt;repository-root&gt;/
+        <pre class="hljs"><code data-language="text">&lt;repository-root&gt;/
 ├── apps/
 │   ├── website/                 # 대외 웹사이트
 │   ├── mobile/                  # Flutter Native 앱
@@ -346,7 +346,7 @@ flowchart LR
             책임을 나눌 수 있습니다.
           </p>
         </blockquote>
-        <pre><code data-language="text">src/features/ticket/
+        <pre class="hljs"><code data-language="text">src/features/ticket/
         ├── api/
         ├── components/
         ├── forms/
@@ -371,7 +371,7 @@ flowchart LR
             형태입니다.
           </p>
         </blockquote>
-        <pre><code data-language="text">Button/
+        <pre class="hljs"><code data-language="text">Button/
         ├── Button.tsx
         ├── Button.types.ts       # 외부 공개 타입이 커졌을 때
         ├── Button.variants.ts    # variant 조합이 복잡해졌을 때
@@ -452,6 +452,11 @@ flowchart LR
             분리합니다.
           </p>
         </blockquote>
+        <p>
+          타입의 배치, React Props와 공통 타입의 구체적인 작성 기준은
+          <a href="./../typescript_guide/index.html">TypeScript 가이드</a>를
+          따릅니다.
+        </p>
         <h3>5.2 Import alias와 배럴 파일</h3>
         <ul>
           <li>
@@ -470,8 +475,8 @@ flowchart LR
             있습니다.
           </p>
         </blockquote>
-        <pre><code data-language="ts">import { cn } from &#39;@/lib/utils&#39;;
-        import { TicketCard } from &#39;./TicketCard&#39;;
+        <pre class="hljs"><code data-language="ts"><span class="hljs-keyword">import</span> { cn } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/lib/utils&#x27;</span>;
+        <span class="hljs-keyword">import</span> { <span class="hljs-title class_">TicketCard</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./TicketCard&#x27;</span>;
         </code></pre>
         <blockquote>
           <p>
@@ -483,7 +488,7 @@ flowchart LR
         </blockquote>
         <blockquote>
           <p>
-            <strong>TBD:</strong> 배럴 파일의 허용 범위와 lint 기반 import 경계
+            <code>TBD</code>: 배럴 파일의 허용 범위와 lint 기반 import 경계
             검사는 실제 모듈 구조가 생긴 후 확정합니다.
           </p>
         </blockquote>
@@ -513,9 +518,15 @@ flowchart LR
             토큰이 없으면 임시 값임을 드러내고 토큰 확정 후 정리합니다.
           </li>
         </ul>
+        <p>
+          Figma 화면을 React 코드로 옮기는 작업 흐름과 완료 기준은
+          <a href="./../ui_guide/react_code_exports.html"
+            >React Code Exports 가이드</a
+          >를 따릅니다.
+        </p>
         <blockquote>
           <p>
-            <strong>TBD:</strong> 최종 토큰 이름, breakpoint, 타이포그래피 단계,
+            <code>TBD</code>: 최종 토큰 이름, breakpoint, 타이포그래피 단계,
             컴포넌트 variant와 Figma-Code 동기화 방식은 디자인 시스템 확정 후
             반영합니다.
           </p>
@@ -565,7 +576,7 @@ flowchart LR
         <p>SCSS는 초기 기본 작성 방식에 포함하지 않습니다.</p>
         <blockquote>
           <p>
-            <strong>TBD:</strong> 기존 자산 연동, 복잡한 외부 스타일 덮어쓰기
+            <code>TBD</code>: 기존 자산 연동, 복잡한 외부 스타일 덮어쓰기
             또는 Tailwind로 표현하기 어려운 요구가 확인되면 SCSS의 도입 범위와
             책임을 별도로 결정합니다.
           </p>
@@ -579,7 +590,7 @@ flowchart LR
         </ul>
         <blockquote>
           <p>
-            <strong>TBD:</strong> 지원 화면 크기, orientation, WebView 안전
+            <code>TBD</code>: 지원 화면 크기, orientation, WebView 안전
             영역, 브랜드 사이트 breakpoint와 데스크톱 상세 기준은 디자인 확정 후
             정합니다.
           </p>
@@ -668,7 +679,7 @@ flowchart TD
         </ul>
         <blockquote>
           <p>
-            <strong>TBD:</strong> Query Key 상세 구조, 전역
+            <code>TBD</code>: Query Key 상세 구조, 전역
             <code>staleTime</code>, retry, invalidation, prefetch, hydration,
             Server Component와의 책임 및 오프라인 mutation 정책은 별도 TanStack
             Query 가이드에서 결정합니다.
@@ -698,9 +709,10 @@ flowchart TD
         </p>
         <blockquote>
           <p>
-            <strong>TBD:</strong> store 분리 단위, persist 허용 범위와 selector
-            규칙은 실제 상태 요구가 확인된 후 별도 Zustand 가이드에서
-            확정합니다.
+            <code>TBD</code>: Store 분리 단위, Persist 허용 범위와 Selector의
+            최종 규칙은 실제 상태 요구가 확인된 후
+            <a href="./../ui_guide/zustand.html">Zustand UI 상태 관리 가이드</a
+            >에서 확정합니다.
           </p>
         </blockquote>
         <h3>7.3 React Hook Form</h3>
@@ -726,7 +738,7 @@ flowchart TD
         </p>
         <blockquote>
           <p>
-            <strong>TBD:</strong> Zod 등 스키마 검증 도구, 서버 오류 매핑 형식,
+            <code>TBD</code>: Zod 등 스키마 검증 도구, 서버 오류 매핑 형식,
             공통 Form Field의 범위와 API 요청 타입 연결 방식은 별도 폼
             가이드에서 확정합니다.
           </p>
@@ -799,16 +811,16 @@ sequenceDiagram
             확정 후 적용합니다.
           </p>
         </blockquote>
-        <pre><code data-language="ts">type NativeCapability = &#39;location&#39; | &#39;qrScan&#39;;
+        <pre class="hljs"><code data-language="ts"><span class="hljs-keyword">type</span> <span class="hljs-title class_">NativeCapability</span> = <span class="hljs-string">&#x27;location&#x27;</span> | <span class="hljs-string">&#x27;qrScan&#x27;</span>;
         
-        interface NativeBridge {
-          isAvailable(capability: NativeCapability): boolean;
-          request&lt;T&gt;(capability: NativeCapability, params?: unknown): Promise&lt;T&gt;;
+        <span class="hljs-keyword">interface</span> <span class="hljs-title class_">NativeBridge</span> {
+          <span class="hljs-title function_">isAvailable</span>(<span class="hljs-attr">capability</span>: <span class="hljs-title class_">NativeCapability</span>): <span class="hljs-built_in">boolean</span>;
+          request&lt;T&gt;(<span class="hljs-attr">capability</span>: <span class="hljs-title class_">NativeCapability</span>, <span class="hljs-attr">params</span>?: <span class="hljs-built_in">unknown</span>): <span class="hljs-title class_">Promise</span>&lt;T&gt;;
         }
         </code></pre>
         <blockquote>
           <p>
-            <strong>TBD:</strong> 채널 이름, 메시지 규격,
+            <code>TBD</code>: 채널 이름, 메시지 규격,
             <code>requestId</code>, Bridge 버전, 허용 Method, 오류 코드,
             timeout, 중복 요청과 호환성 정책은 Flutter·Android·iOS·Web 담당자가
             합의한 Bridge 계약에서 확정합니다.
@@ -868,7 +880,7 @@ flowchart TD
         </ul>
         <blockquote>
           <p>
-            <strong>TBD:</strong> 오프라인에서 제공할 화면, 이용권
+            <code>TBD</code>: 오프라인에서 제공할 화면, 이용권
             조회·표시·사용 범위, Native 영속 캐시 대상, TTL, 암호화, 네트워크
             복구 후 동기화, 충돌과 중복 사용 방지 정책은 서비스·보안 정책 확정
             후 결정합니다.
@@ -913,7 +925,7 @@ flowchart TD
         </ul>
         <blockquote>
           <p>
-            <strong>TBD:</strong> WCAG 목표 수준, 색상 대비 수치 검수,
+            <code>TBD</code>: WCAG 목표 수준, 색상 대비 수치 검수,
             스크린리더 테스트 범위와 접근성 인증 일정은 별도 품질 계획에서
             확정합니다.
           </p>
@@ -978,7 +990,7 @@ flowchart TD
         </blockquote>
         <blockquote>
           <p>
-            <strong>TBD:</strong> 테스트 도구의 최종 조합, E2E 실행 환경, API
+            <code>TBD</code>: 테스트 도구의 최종 조합, E2E 실행 환경, API
             mocking 방식, 커버리지 기준, formatter, pre-commit 검사와 CI 품질
             게이트는 개발·배포 환경 확정 후 결정합니다.
           </p>
@@ -1020,7 +1032,10 @@ flowchart TD
       <section>
         <h2 class="bx-active">13. 미확정 항목 목록</h2>
 
-        <p>아래 항목은 합의 전까지 구현 표준으로 간주하지 않습니다.</p>
+        <p>
+          <code>TBD</code>: 아래 항목은 합의 전까지 구현 표준으로 간주하지
+          않습니다.
+        </p>
         <h3>서비스와 화면</h3>
         <ul>
           <li>IA, 주요 사용자 흐름과 라우트 그룹</li>
@@ -1102,16 +1117,18 @@ flowchart TD
           </li>
         </ul>
         <p>
-          상세 문서 후보는 TanStack Query, Zustand, 폼, 라우팅, Bridge 계약,
-          테스트, 접근성 및 배포 가이드입니다. 상세 문서를 추가하더라도 이
-          문서의 핵심 원칙인 단순한 시작, 명확한 책임, 실제 필요에 따른 확장을
-          유지합니다.
+          현재 상세 문서는 <a href="./../typescript_guide/index.html">TypeScript</a>,
+          <a href="./../ui_guide/react_code_exports.html">React Code Exports</a>,
+          <a href="./../ui_guide/zustand.html">Zustand</a> 가이드입니다. 다음 상세
+          문서 후보는 TanStack Query, 폼, 라우팅, Bridge 계약, 테스트, 접근성 및
+          배포 가이드입니다. 상세 문서를 추가하더라도 단순한 시작, 명확한 책임,
+          실제 필요에 따른 확장 원칙을 유지합니다.
         </p>
       </section>
     </main>
 
     <footer>
-      <p>Front-End 초기 구축 가이드 · Draft · Version 0.1 · 2026-08-04</p>
+      <p>Front-End 초기 구축 가이드 · Draft · Version 0.1 · 2026-08-06</p>
     </footer>
     <script src="./../assets/js/common.js"></script>
     <script src="./../assets/js/mermaid.js"></script>
