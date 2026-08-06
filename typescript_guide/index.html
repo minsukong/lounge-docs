@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Front-End 프로젝트에서 TypeScript와 React를 간결하고 일관되게 사용하는 기준을 정리합니다."
+    />
+    <title>TypeScript 가이드</title>
+    <link rel="stylesheet" href="./../assets/style/presentation-theme.css" />
+  </head>
+  <body>
+    <header>
+      <div class="type">FRONT-END · TYPESCRIPT GUIDE</div>
+      <h1>TypeScript 가이드</h1>
+      <p>
+        TypeScript와 React를 효율적으로 사용하기 위한 최소 기준과 코드 예시를
+        정리합니다.
+      </p>
+      <blockquote>
+        <p>Draft · Version 0.1 · 2026-08-06</p>
+      </blockquote>
+    </header>
+
+    <main>
+      <section>
+        <h2 class="bx-active">1. 문서 목적</h2>
+
+        <p>
+          이 문서는 Front-End 프로젝트에서 TypeScript와 React를 간결하고
+          일관되게 사용하는 기준을 제공합니다. 문법이나 상세 설계를 모두
+          설명하지 않고, 코드 작성과 리뷰에 자주 필요한 규칙을 예시 중심으로
+          정리합니다.
+        </p>
+        <p>
+          전체 구조는
+          <a href="./../monorepo/index.html">Front-End Monorepo 공통 기준</a>,
+          Front-End 기술과 책임은
+          <a href="./../frontend_guide/index.html">Front-End 초기 구축 가이드</a
+          >를 참고합니다. 현재 폴더 구조는 확정안이 아니므로 이 문서에서 별도
+          경로를 고정하지 않습니다.
+        </p>
+        <p>
+          API 계약, 데이터 모델 계층, Runtime Schema와 상태 관리 도구의 상세
+          규칙은 각 설계가 확정된 후 별도 가이드에서 다룹니다.
+        </p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">2. 핵심 원칙</h2>
+
+        <ol>
+          <li>추론 가능한 타입은 TypeScript에 맡깁니다.</li>
+          <li>
+            Props, 함수 입력과 모듈 경계처럼 중요한 계약은 타입으로 표현합니다.
+          </li>
+          <li>타입은 사용하는 코드 가까이에서 시작합니다.</li>
+          <li>
+            의미와 변경 이유가 같은 사용처가 생겼을 때만 공통화합니다.
+          </li>
+          <li>
+            작은 타입을 조합하고, 사용처가 없는 추상화는 만들지 않습니다.
+          </li>
+          <li>
+            <code>any</code>, 근거 없는 타입 단언과 불필요한 Generic을
+            피합니다.
+          </li>
+        </ol>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">3. 타입 작성과 배치</h2>
+
+        <h3>3.1 추론 우선</h3>
+        <p>값과 반환 타입이 명확하면 중복해서 작성하지 않습니다.</p>
+
+        <pre><code data-language="typescript">// 권장
+const title = "라운지 이용권";
+
+function formatCount(count: number) {
+  return `${count}건`;
+}
+
+// 불필요한 중복
+const title: string = "라운지 이용권";
+
+function formatCount(count: number): string {
+  return `${count}건`;
+}</code></pre>
+
+        <p>
+          공개 함수의 반환 구조가 복잡하거나 변경 영향을 명확히 보여야 하면 반환
+          타입을 작성할 수 있습니다.
+        </p>
+
+        <pre><code data-language="typescript">type TicketSummary = {
+  availableCount: number;
+  usedCount: number;
+};
+
+export function summarizeTickets(): TicketSummary {
+  return {
+    availableCount: 2,
+    usedCount: 1,
+  };
+}</code></pre>
+
+        <h3>3.2 사용하는 곳 가까이에서 시작</h3>
+        <p>한 컴포넌트에서만 사용하는 Props는 같은 파일에 둡니다.</p>
+
+        <pre><code data-language="tsx">type TicketCardProps = {
+  title: string;
+  onSelect: () =&gt; void;
+};
+
+export function TicketCard({ title, onSelect }: TicketCardProps) {
+  return &lt;button onClick={onSelect}&gt;{title}&lt;/button&gt;;
+}</code></pre>
+
+        <p>
+          타입 파일과 공통 폴더는 미리 만들지 않습니다. 실제로 여러 파일에서
+          같은 의미로 사용되고, 별도 관리가 더 이해하기 쉬울 때 분리합니다.
+        </p>
+
+        <h3>3.3 공통화 기준</h3>
+        <p>다음 조건을 만족할 때 공통 타입으로 분리합니다.</p>
+        <ul>
+          <li>둘 이상의 실제 사용처가 있습니다.</li>
+          <li>사용처에서 의미와 변경 이유가 같습니다.</li>
+          <li>공통화 후 코드가 더 짧고 이해하기 쉽습니다.</li>
+          <li>기능별 예외를 계속 추가하지 않아도 됩니다.</li>
+        </ul>
+
+        <pre><code data-language="typescript">// 권장: 여러 선택 UI에서 같은 의미로 사용하는 타입
+export type SelectOption&lt;T extends string = string&gt; = {
+  label: string;
+  value: T;
+};</code></pre>
+
+        <pre><code data-language="typescript">// 피해야 함: 관련 없는 타입을 한곳에 모음
+type CommonType = {
+  id?: string;
+  label?: string;
+  status?: string;
+  metadata?: unknown;
+};</code></pre>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">4. 타입 표현 방법</h2>
+
+        <h3>4.1 정해진 값은 Union으로 제한</h3>
+        <p>
+          가능한 값이 정해져 있으면 넓은 <code>string</code>보다 Literal
+          Union을 사용합니다.
+        </p>
+
+        <pre><code data-language="typescript">type TicketStatus = "available" | "used" | "expired";
+
+type TicketBadgeProps = {
+  status: TicketStatus;
+};</code></pre>
+
+        <h3>4.2 함께 존재할 수 없는 상태 구분</h3>
+        <p>
+          상태에 따라 필요한 값이 다르면 Optional 속성을 나열하기보다 판별
+          가능한 Union을 사용합니다.
+        </p>
+
+        <pre><code data-language="typescript">type SubmitState =
+  | { status: "idle" }
+  | { status: "submitting" }
+  | { status: "success" }
+  | { status: "error"; message: string };</code></pre>
+
+        <pre><code data-language="typescript">// 피해야 함: 불가능한 조합도 허용함
+type SubmitState = {
+  loading?: boolean;
+  success?: boolean;
+  errorMessage?: string;
+};</code></pre>
+
+        <h3>4.3 작은 타입 조합</h3>
+        <p>실제로 반복되는 속성만 작은 단위로 분리해 조합합니다.</p>
+
+        <pre><code data-language="typescript">type Labeled = {
+  label: string;
+};
+
+type Selectable = {
+  selected: boolean;
+  onSelect: () =&gt; void;
+};
+
+type FilterItemProps = Labeled &amp; Selectable;</code></pre>
+
+        <p>
+          하나의 사용처만 있거나 조합 후 의미가 더 어려워지면 하나의 타입으로
+          작성합니다.
+        </p>
+
+        <h3>4.4 <code>type</code>과 <code>interface</code></h3>
+        <ul>
+          <li>
+            Union, Utility Type과 함수 타입은 <code>type</code>을 사용합니다.
+          </li>
+          <li>
+            객체 형태는 <code>type</code>과 <code>interface</code> 모두 사용할 수
+            있습니다.
+          </li>
+          <li>
+            동일한 역할에 두 방식을 섞기보다 주변 코드와 일관성을 유지합니다.
+          </li>
+        </ul>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">5. React에서 타입 활용</h2>
+
+        <h3>5.1 Props는 컴포넌트의 사용법을 표현</h3>
+        <p>Props 이름은 DOM 동작보다 사용자의 의도를 나타냅니다.</p>
+
+        <pre><code data-language="tsx">type ReservationCardProps = {
+  title: string;
+  onConfirm: () =&gt; void;
+  onCancel: () =&gt; void;
+};</code></pre>
+
+        <pre><code data-language="typescript">// 피해야 함
+type ReservationCardProps = {
+  text: string;
+  handleButtonClick: (value: unknown) =&gt; void;
+};</code></pre>
+
+        <h3>5.2 DOM Event보다 필요한 값을 전달</h3>
+        <p>
+          공통 입력 컴포넌트는 DOM Event를 외부로 그대로 전달하지 않고 사용처가
+          필요한 값을 전달합니다.
+        </p>
+
+        <pre><code data-language="tsx">type SearchInputProps = {
+  value: string;
+  onValueChange: (value: string) =&gt; void;
+};
+
+export function SearchInput({ value, onValueChange }: SearchInputProps) {
+  return (
+    &lt;input
+      type="search"
+      value={value}
+      onChange={(event) =&gt; onValueChange(event.currentTarget.value)}
+    /&gt;
+  );
+}</code></pre>
+
+        <pre><code data-language="tsx">const [keyword, setKeyword] = useState("");
+
+&lt;SearchInput value={keyword} onValueChange={setKeyword} /&gt;;</code></pre>
+
+        <h3>5.3 shadcn/ui 사용</h3>
+        <p>
+          shadcn/ui는 외부 라이브러리를 감싸서 사용하는 방식이 아니라,
+          프로젝트가 생성된 컴포넌트 소스를 소유하고 수정하는 방식으로
+          사용합니다.
+        </p>
+        <ul>
+          <li>설치된 컴포넌트와 Props를 먼저 그대로 사용합니다.</li>
+          <li>
+            프로젝트 전체에 적용할 디자인과 동작은 해당 UI 원형에서
+            수정합니다.
+          </li>
+          <li>특정 기능의 조합과 업무 동작은 기능 코드 가까이에 둡니다.</li>
+          <li>
+            단순히 이름이나 스타일을 바꾸기 위한 공통 Wrapper는 만들지
+            않습니다.
+          </li>
+          <li>
+            수정할 때 기존 사용처와 키보드·포커스·ARIA 동작을 함께 확인합니다.
+          </li>
+        </ul>
+
+        <pre><code data-language="tsx">import { Button } from "@/components/ui/button";
+
+export function TicketActions() {
+  return (
+    &lt;div&gt;
+      &lt;Button variant="outline"&gt;취소&lt;/Button&gt;
+      &lt;Button&gt;예약하기&lt;/Button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+
+        <p>
+          컴포넌트 Props가 필요하면 같은 타입을 다시 작성하지 않고 실제
+          컴포넌트에서 가져옵니다.
+        </p>
+
+        <pre><code data-language="tsx">import type { ComponentProps } from "react";
+import { Button } from "@/components/ui/button";
+
+type SubmitButtonProps = Omit&lt;ComponentProps&lt;typeof Button&gt;, "type"&gt; &amp; {
+  isSubmitting?: boolean;
+};
+
+export function SubmitButton({
+  isSubmitting = false,
+  disabled,
+  children,
+  ...buttonProps
+}: SubmitButtonProps) {
+  return (
+    &lt;Button
+      {...buttonProps}
+      type="submit"
+      disabled={disabled || isSubmitting}
+      aria-busy={isSubmitting}
+    &gt;
+      {isSubmitting ? "처리 중" : children}
+    &lt;/Button&gt;
+  );
+}</code></pre>
+
+        <p>
+          <code>SubmitButton</code>처럼 반복되는 동작이 있을 때만 Wrapper로
+          분리합니다. 한 화면에서만 필요하면 기존 <code>Button</code>을 직접
+          사용합니다.
+        </p>
+
+        <pre><code data-language="tsx">// 피해야 함: 기존 Props를 다시 정의하는 의미 없는 Wrapper
+type CommonButtonProps = {
+  text: string;
+  color?: string;
+  onClick?: () =&gt; void;
+};</code></pre>
+
+        <p>
+          Variant가 프로젝트 전체에서 반복되면 Wrapper를 추가하기보다
+          shadcn/ui 컴포넌트의 원본 Variant를 확장합니다. 한 화면의 스타일
+          차이는 <code>className</code>과 <code>cn</code>으로 처리하고, 반복되는
+          Variant 조합이 확인된 경우에만 <code>cva</code>로 이동합니다.
+        </p>
+        <p>
+          Dialog, Select와 같은 복합 컴포넌트는 설치된 구현과 공식 문서의 구성
+          순서를 따릅니다. 이동은 Link, 실행은 Button처럼 HTML 의미를 유지하며,
+          링크를 버튼처럼 표시해야 할 때는 설치한 shadcn/ui 구현이 제공하는 조합
+          방식이나 스타일 Helper를 사용합니다.
+        </p>
+        <blockquote>
+          <p>
+            참고:
+            <a href="https://ui.shadcn.com/docs">shadcn/ui 공식 문서</a>
+          </p>
+        </blockquote>
+
+        <h3>5.4 공통 타입을 React에서 사용</h3>
+        <p>
+          공통 타입은 컴포넌트의 구체적인 사용법을 단순하게 만들 때
+          사용합니다.
+        </p>
+
+        <pre><code data-language="tsx">type SelectFieldProps&lt;T extends string&gt; = {
+  options: readonly SelectOption&lt;T&gt;[];
+  value: T;
+  onValueChange: (value: T) =&gt; void;
+};
+
+export function SelectField&lt;T extends string&gt;({
+  options,
+  value,
+  onValueChange,
+}: SelectFieldProps&lt;T&gt;) {
+  return (
+    &lt;select
+      value={value}
+      onChange={(event) =&gt; {
+        const selected = options.find(
+          (option) =&gt; option.value === event.currentTarget.value,
+        );
+
+        if (selected) onValueChange(selected.value);
+      }}
+    &gt;
+      {options.map((option) =&gt; (
+        &lt;option key={option.value} value={option.value}&gt;
+          {option.label}
+        &lt;/option&gt;
+      ))}
+    &lt;/select&gt;
+  );
+}</code></pre>
+
+        <pre><code data-language="tsx">type TicketFilter = "all" | "available" | "used";
+
+const ticketFilterOptions: readonly SelectOption&lt;TicketFilter&gt;[] = [
+  { label: "전체", value: "all" },
+  { label: "사용 가능", value: "available" },
+  { label: "사용 완료", value: "used" },
+];
+
+const [filter, setFilter] = useState&lt;TicketFilter&gt;("all");
+
+&lt;SelectField
+  options={ticketFilterOptions}
+  value={filter}
+  onValueChange={setFilter}
+/&gt;;</code></pre>
+
+        <p>
+          Generic이 단순한 Props보다 이해하기 어렵거나 하나의 사용처에만
+          필요하면 구체적인 타입을 사용합니다.
+        </p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">6. 피해야 할 타입 사용</h2>
+
+        <h3>6.1 <code>any</code>보다 <code>unknown</code></h3>
+        <p>형태를 알 수 없는 값은 <code>unknown</code>으로 받고 사용 전에 확인합니다.</p>
+
+        <pre><code data-language="typescript">function getErrorMessage(error: unknown) {
+  if (error instanceof Error) return error.message;
+  return "알 수 없는 오류가 발생했습니다.";
+}</code></pre>
+
+        <p>
+          모든 API 응답을 <code>unknown</code>으로 다시 검증한다는 의미는
+          아닙니다. 사용자 입력, JSON 파싱, Storage와 Bridge처럼 실제로 형태를
+          신뢰할 수 없는 경계에 적용합니다.
+        </p>
+
+        <h3>6.2 타입 단언 최소화</h3>
+        <p>다음 문법은 타입 오류를 숨기는 용도로 사용하지 않습니다.</p>
+        <ul>
+          <li><code>any</code></li>
+          <li>근거 없는 <code>as</code></li>
+          <li>Non-null 단언 <code>!</code></li>
+          <li><code>@ts-ignore</code></li>
+        </ul>
+
+        <pre><code data-language="typescript">// 피해야 함
+type User = {
+  name: string;
+};
+
+const user = value as User;
+const name = user!.name;</code></pre>
+
+        <p>
+          불가피한 예외는 영향 범위를 좁히고 이유와 제거 조건을 남깁니다.
+        </p>
+
+        <h3>6.3 불필요한 Generic 방지</h3>
+        <p>Generic은 입력과 출력의 타입 관계를 유지할 때 사용합니다.</p>
+
+        <pre><code data-language="typescript">function first&lt;T&gt;(items: readonly T[]) {
+  return items[0];
+}</code></pre>
+
+        <pre><code data-language="typescript">// 피해야 함
+type User = {
+  name: string;
+};
+
+function getUserName&lt;T extends User&gt;(user: T) {
+  return user.name;
+}
+
+// 권장
+function getUserName(user: User) {
+  return user.name;
+}</code></pre>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">7. Import와 공개 타입</h2>
+
+        <p>타입만 가져올 때는 <code>import type</code>을 사용합니다.</p>
+
+        <pre><code data-language="typescript">import type { Ticket } from "./ticket.types";</code></pre>
+
+        <p>
+          가까운 파일은 상대 경로를 사용하고, 기능 또는 공통 영역을 가로지를 때
+          <code>@/</code> alias를 사용할 수 있습니다.
+        </p>
+        <p>
+          <code>index.ts</code>는 안정된 공개 API가 있는 영역에서만 선택적으로
+          사용합니다. 모든 타입을 다시 내보내는 대형 배럴 파일은 만들지
+          않습니다.
+        </p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">8. 코드 리뷰 체크리스트</h2>
+
+        <ul>
+          <li>타입이 코드의 의미를 더 명확하게 만드는가?</li>
+          <li>추론 가능한 타입을 불필요하게 반복하지 않았는가?</li>
+          <li>기능 전용 타입이 너무 일찍 공통화되지 않았는가?</li>
+          <li>Props와 콜백 이름이 사용 의도를 표현하는가?</li>
+          <li>
+            기존 shadcn/ui 컴포넌트를 불필요한 Wrapper로 다시 감싸지 않았는가?
+          </li>
+          <li>
+            shadcn/ui 수정 후 키보드·포커스·ARIA 동작을 유지하는가?
+          </li>
+          <li>
+            <code>any</code>, 타입 단언과 Non-null 단언을 줄일 수 없는가?
+          </li>
+          <li>
+            Generic과 Utility Type이 원래 코드보다 이해하기 쉬운가?
+          </li>
+          <li>
+            사용처가 없는 타입 파일이나 Wrapper를 미리 만들지 않았는가?
+          </li>
+        </ul>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">9. 추후 확정 항목</h2>
+
+        <ul>
+          <li>공통 <code>tsconfig</code>의 세부 Compiler Option</li>
+          <li>파일명과 타입명 세부 Convention</li>
+          <li>배럴 파일과 모듈 경계의 자동 검사 범위</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>TypeScript 가이드 · Draft · Version 0.1 · 2026-08-06</p>
+    </footer>
+    <script src="./../assets/js/common.js"></script>
+    <script src="./../assets/js/mermaid.js"></script>
+  </body>
+</html>

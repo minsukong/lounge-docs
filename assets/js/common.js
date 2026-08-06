@@ -2,6 +2,7 @@
 
 (() => {
   const COLLAPSED_HEIGHT = 320;
+  const SECTION_ACTIVATION_OFFSET = 120;
   const codeBlocks = [];
 
   const addCodeToggleStyles = () => {
@@ -166,6 +167,7 @@
 
     const nav = document.createElement("nav");
     const list = document.createElement("ol");
+    const links = [];
     const usedIds = new Set(
       [...document.querySelectorAll("[id]")].map((element) => element.id),
     );
@@ -197,6 +199,7 @@
       link.href = `#${encodeURIComponent(sectionId)}`;
       link.textContent = getSectionMenuLabel(heading);
       link.title = link.textContent;
+      links.push(link);
 
       link.addEventListener("click", (event) => {
         event.preventDefault();
@@ -211,12 +214,74 @@
       });
 
       item.append(link);
-      item.append(link);
       list.append(item);
     });
 
     nav.append(list);
     document.body.append(nav);
+
+    let activeIndex = -1;
+    let scrollFrame;
+
+    const keepActiveLinkVisible = (link) => {
+      const linkRect = link.getBoundingClientRect();
+      const navRect = nav.getBoundingClientRect();
+
+      if (linkRect.top < navRect.top) {
+        nav.scrollTop -= navRect.top - linkRect.top + 12;
+      } else if (linkRect.bottom > navRect.bottom) {
+        nav.scrollTop += linkRect.bottom - navRect.bottom + 12;
+      }
+    };
+
+    const setActiveLink = (nextIndex) => {
+      if (nextIndex === activeIndex) return;
+
+      activeIndex = nextIndex;
+      links.forEach((link, index) => {
+        const isActive = index === activeIndex;
+
+        link.classList.toggle("is-active", isActive);
+
+        if (isActive) {
+          link.setAttribute("aria-current", "location");
+          keepActiveLinkVisible(link);
+        } else {
+          link.removeAttribute("aria-current");
+        }
+      });
+    };
+
+    const updateActiveLink = () => {
+      scrollFrame = undefined;
+      let nextIndex = 0;
+
+      headings.forEach((heading, index) => {
+        if (heading.getBoundingClientRect().top <= SECTION_ACTIVATION_OFFSET) {
+          nextIndex = index;
+        }
+      });
+
+      const pageBottom = window.scrollY + window.innerHeight;
+      const documentBottom = document.documentElement.scrollHeight;
+
+      if (window.scrollY > 0 && pageBottom >= documentBottom - 2) {
+        nextIndex = headings.length - 1;
+      }
+
+      setActiveLink(nextIndex);
+    };
+
+    const scheduleActiveLinkUpdate = () => {
+      if (scrollFrame !== undefined) return;
+      scrollFrame = window.requestAnimationFrame(updateActiveLink);
+    };
+
+    window.addEventListener("scroll", scheduleActiveLinkUpdate, {
+      passive: true,
+    });
+    window.addEventListener("resize", scheduleActiveLinkUpdate);
+    updateActiveLink();
   };
 
   const initialize = () => {
