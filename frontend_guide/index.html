@@ -5,17 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="확정된 기술과 영역별 책임, Front-End 초기 구현 기준을 정리합니다."
+      content="확정된 기술과 영역별 책임, Front-End 구현 기준을 정리합니다."
     />
-    <title>Front-End 초기 구축 가이드</title>
+    <title>Front-End 개발 가이드</title>
     <link rel="stylesheet" href="./../assets/style/presentation-theme.css" />
   </head>
   <body>
     <header>
-      <div class="type">FRONT-END · INITIAL GUIDE · DRAFT</div>
-      <h1>Front-End 초기 구축 가이드</h1>
-      <p>확정된 기술과 영역별 책임, 초기 구현 기준을 정리합니다.</p>
-      <p>Draft · Version 0.1 · 2026-08-06</p>
+      <div class="type">FRONT-END · GUIDE</div>
+      <h1>Front-End 개발 가이드</h1>
+      <p>확정된 기술과 영역별 책임, 구현 기준을 정리합니다.</p>
     </header>
 
     <main>
@@ -23,7 +22,7 @@
         <h2 class="bx-active">1. 문서 목적</h2>
 
         <p>
-          현재 확정된 기술과 영역별 책임, 초기 구현 기준을 공유합니다. 정해지지
+          현재 확정된 기술과 영역별 책임, 구현 기준을 공유합니다. 정해지지
           않은 설계를 미리 고정하지 않고, 변경과 유지보수가 쉬운 구현을 위한
           최소 기준만 제공합니다.
         </p>
@@ -162,7 +161,7 @@ flowchart LR
         <p>
           <code class="badge-tbd">TBD</code> 로그인 주체와 인증 프로토콜, WebView 세션 생성
           방식, 결제 단계별 Native-Web 책임, 직접 브라우저 접근 지원 범위는
-          확정 후 별도 문서에 반영합니다.
+          확정 후 반영합니다.
         </p>
       </section>
 
@@ -537,7 +536,7 @@ flowchart LR
           처리하고, 크기·색상·상태 조합이 여러 사용처에서 반복될 때만
           <code>cva</code>로 옮깁니다.
         </p>
-        <p>SCSS는 초기 기본 작성 방식에 포함하지 않습니다.</p>
+        <p>SCSS는 기본 작성 방식에 포함하지 않습니다.</p>
         <p>
           <code class="badge-tbd">TBD</code> 기존 자산 연동, 복잡한 외부 스타일 덮어쓰기
           또는 Tailwind로 표현하기 어려운 요구가 확인되면 SCSS의 도입 범위와
@@ -640,8 +639,8 @@ flowchart TD
         <p>
           <code class="badge-tbd">TBD</code> Query Key 상세 구조, 전역
           <code>staleTime</code>, retry, invalidation, prefetch, hydration,
-          Server Component와의 책임 및 오프라인 mutation 정책은 별도 TanStack
-          Query 가이드에서 결정합니다.
+          Server Component와의 책임 및 오프라인 mutation 정책은 실제 데이터
+          요구와 운영 환경이 확인된 후 결정합니다.
         </p>
         <h3>7.2 Zustand</h3>
         <ul>
@@ -694,8 +693,8 @@ flowchart TD
         </p>
         <p>
           <code class="badge-tbd">TBD</code> Zod 등 스키마 검증 도구, 서버 오류 매핑 형식,
-          공통 Form Field의 범위와 API 요청 타입 연결 방식은 별도 폼
-          가이드에서 확정합니다.
+          공통 Form Field의 범위와 API 요청 타입 연결 방식은 실제 폼과 API
+          구조가 확인된 후 결정합니다.
         </p>
       </section>
 
@@ -897,13 +896,13 @@ flowchart TD
           <li>여러 기능에서 반복 사용되는 공통 UI의 주요 동작</li>
           <li>IA와 흐름이 확정된 뒤의 핵심 사용자 E2E 시나리오</li>
         </ul>
-        <h3>11.2 초기 강제 대상이 아닌 것</h3>
+        <h3>11.2 강제 대상이 아닌 것</h3>
         <ul>
           <li>단순 표시 컴포넌트마다 작성하는 형식적인 테스트</li>
           <li>Tailwind 클래스 문자열과 내부 구현 세부사항</li>
           <li>모든 hook, variant, adapter에 대한 일괄 테스트</li>
           <li>라이브러리 자체 동작을 다시 검증하는 테스트</li>
-          <li>근거 없이 정한 초기 커버리지 백분율</li>
+          <li>근거 없이 정한 커버리지 백분율</li>
         </ul>
         <h3>11.3 기본 품질 기준</h3>
         <ul>
@@ -924,7 +923,7 @@ flowchart TD
             AI 생성 코드도 사람이 작성한 코드와 같은 리뷰와 검증 기준을
             적용합니다.
           </li>
-          <li>Storybook은 초기 구축 범위에 포함하지 않습니다.</li>
+          <li>Storybook은 기본 도구에 포함하지 않습니다.</li>
         </ul>
         <p>도구 후보는 단위·컴포넌트 테스트에
           Vitest와 React Testing Library, E2E에 Playwright, API mock이 필요할
@@ -1032,40 +1031,10 @@ flowchart TD
           <li>오류 수집, 로깅, 분석 및 모니터링 도구</li>
         </ul>
       </section>
-
-      <hr />
-
-      <section>
-        <h2 class="bx-active">14. 문서 확장 원칙</h2>
-
-        <p>
-          이 문서는 초기 구축을 위한 최소 기준입니다. 다음 조건이 생기면 주제별
-          상세 가이드를 별도 문서로 분리합니다.
-        </p>
-        <ul>
-          <li>같은 질문이나 구현 패턴이 반복될 때</li>
-          <li>서로 다른 구현 때문에 실제 유지보수 문제가 생길 때</li>
-          <li>
-            보안, 결제, 인증 또는 앱 호환성처럼 별도 검토가 필요한 계약이 확정될
-            때
-          </li>
-          <li>
-            문서의 한 절이 초기 참여자가 빠르게 이해하기 어려울 정도로 커질 때
-          </li>
-        </ul>
-        <p>
-          현재 상세 문서는 <a href="./../typescript_guide/index.html">TypeScript</a>,
-          <a href="./../ui_guide/react_code_exports.html">React Code Exports</a>,
-          <a href="./../ui_guide/zustand.html">Zustand</a> 가이드입니다. 다음 상세
-          문서 후보는 TanStack Query, 폼, 라우팅, Bridge 계약, 테스트, 접근성 및
-          배포 가이드입니다. 상세 문서를 추가하더라도 단순한 시작, 명확한 책임,
-          실제 필요에 따른 확장 원칙을 유지합니다.
-        </p>
-      </section>
     </main>
 
     <footer>
-      <p>Front-End 초기 구축 가이드 · Draft · Version 0.1 · 2026-08-06</p>
+      <p>Front-End 개발 가이드</p>
     </footer>
     <script src="./../assets/js/common.js"></script>
     <script src="./../assets/js/mermaid.js"></script>

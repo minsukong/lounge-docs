@@ -4,8 +4,8 @@
 
 - [html template](./init/index.html)
 - [Front-End Monorepo 공통 기준](./monorepo/index.html)
-- [APP 개발 표준 초안](./app/app.html)
-- [Front-End 초기 구축 가이드](./frontend_guide/index.html)
+- [APP 개발 표준](./app/app.html)
+- [Front-End 개발 가이드](./frontend_guide/index.html)
 - [typescript 가이드](./typescript_guide/index.html)
 
 ---
