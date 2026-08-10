@@ -19,3 +19,4 @@
 ### figma + tailwindcss = react code exports
 
 - [React Code Exports 가이드](./ui_guide/react_code_exports.html)
+- [디자인 토큰 가이드](./ui_guide/design_tokens.html)

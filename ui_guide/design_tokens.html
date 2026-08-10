@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Tokens Studio, Figma Variables, shadcn/ui와 Tailwind CSS 4 사이의 디자인 토큰 관리 기준을 정리합니다."
+    />
+    <title>디자인 토큰 가이드</title>
+    <link rel="stylesheet" href="./../assets/style/presentation-theme.css" />
+  </head>
+  <body>
+    <header>
+      <div class="type">FRONT-END · UI GUIDE · DESIGN TOKENS</div>
+      <h1>디자인 토큰 가이드</h1>
+      <p>
+        Tokens Studio와 Figma Variables의 디자인 결정을 shadcn/ui와 Tailwind
+        CSS 4 코드에 연결하기 위한 핵심 기준을 정리합니다.
+      </p>
+    </header>
+
+    <main>
+      <section>
+        <h2 class="bx-active">1. 목적과 범위</h2>
+        <p>
+          이 문서는 디자인 값의 이름, 사용 범위와 코드 연결 방식을 정의합니다.
+          Figma 화면을 React 코드로 변환하는 절차는
+          <a href="./react_code_exports.html">React Code Exports 가이드</a>를
+          따릅니다.
+        </p>
+        <ul>
+          <li>디자인 토큰은 반복되는 모든 숫자가 아니라 합의된 디자인 결정입니다.</li>
+          <li>화면 코드에서는 원시 값보다 의미 기반 토큰을 우선합니다.</li>
+          <li>실제 사용처가 없는 토큰과 컴포넌트별 토큰을 미리 만들지 않습니다.</li>
+          <li>Tokens Studio 무료 기능 안에서 유지할 수 있는 구조로 시작합니다.</li>
+        </ul>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">2. 현재 프로젝트 기준</h2>
+        <p>
+          애플리케이션은 React 19, Tailwind CSS 4와 shadcn/ui를 사용합니다.
+          정확한 버전과 기술 책임은
+          <a href="./../frontend_guide/index.html">Front-End 개발 가이드</a>와
+          프로젝트 Lock File을 기준으로 합니다.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">파일 또는 도구</th>
+              <th scope="col">현재 역할</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tokens Studio</td>
+              <td>Token Set 작성과 Figma Variables·Styles 반영</td>
+            </tr>
+            <tr>
+              <td>Figma Variables</td>
+              <td>디자인에서 색상, 간격과 크기를 재사용</td>
+            </tr>
+            <tr>
+              <td><code>components.json</code></td>
+              <td>shadcn/ui의 CSS Variables 사용과 Tailwind CSS 경로 설정</td>
+            </tr>
+            <tr>
+              <td><code>src/app/globals.css</code></td>
+              <td>실제 CSS 값과 Tailwind theme variable 연결</td>
+            </tr>
+            <tr>
+              <td><code>src/components/ui</code></td>
+              <td>프로젝트가 소유하고 수정하는 shadcn/ui 컴포넌트</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          현재 <code>components.json</code>은 <code>cssVariables</code>를 사용하고,
+          Tailwind CSS 4 기준으로 별도 <code>tailwind.config</code> 경로를 두지
+          않습니다. <code>globals.css</code>는 <code>:root</code>와
+          <code>.dark</code>의 값을 <code>@theme inline</code>으로 연결합니다.
+        </p>
+        <p>
+          shadcn/ui 설정은 <code>base-nova</code> style, neutral base color와
+          Lucide icon을 사용합니다. 이 설정은 새로 추가되는 컴포넌트 코드에
+          영향을 주므로 개별 화면 작업에서 임의로 변경하지 않습니다.
+        </p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">3. 토큰 연결 구조</h2>
+        <p>
+          Tokens Studio와 Figma는 디자인 값을 관리하고, 코드에서는 승인된 값을
+          CSS Variables와 Tailwind 유틸리티로 사용합니다. 무료 운영에서는 자동
+          변환을 전제로 하지 않고 변경 시 두 영역을 함께 확인합니다.
+        </p>
+        <figure class="diagram-frame">
+          <!-- prettier-ignore -->
+          <div class="mermaid">
+flowchart LR
+  accTitle: 디자인 토큰을 Figma와 React 코드에 연결하는 구조
+  accDescr: Tokens Studio의 base와 semantic Token Set을 Figma Variables에 반영하고, 승인된 값을 globals.css의 CSS Variables와 Tailwind theme variable로 연결하여 shadcn UI와 기능 컴포넌트에서 사용합니다.
+  A["Tokens Studio · base / semantic"] --> B["Figma Variables / Styles"]
+  A --> C["승인된 토큰 값 확인"]
+  C --> D["globals.css · :root / .dark"]
+  D --> E["Tailwind CSS 4 · @theme inline"]
+  E --> F["bg-background · text-foreground 등"]
+  F --> G["shadcn/ui와 기능 컴포넌트"]
+          </div>
+          <figcaption>Tokens Studio에서 Tailwind CSS 4 코드까지의 연결</figcaption>
+        </figure>
+        <blockquote>
+          <p>
+            가이드의 기준 원본은 이 문서이며, 현재 코드에서 실제 적용되는 값의
+            기준은 <code>globals.css</code>입니다. 두 값이 다르면 어느 한쪽을
+            임의로 덮어쓰지 않고 변경 의도와 영향 범위를 먼저 확인합니다.
+          </p>
+        </blockquote>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">4. 토큰 분류와 이름</h2>
+        <h3>4.1 Base Token</h3>
+        <p>
+          Base Token은 실제 값의 재료입니다. Tokens Studio에서는
+          <code>base</code> Token Set으로 관리하고, 의미를 가진 화면 코드에서
+          직접 사용하는 것은 지양합니다.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">분류</th>
+              <th scope="col">이름</th>
+              <th scope="col">적용 기준</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Color</td>
+              <td><code>color.neutral.*</code>, <code>color.brand.*</code></td>
+              <td>실제 팔레트가 확정된 범위만 작성</td>
+            </tr>
+            <tr>
+              <td>Spacing</td>
+              <td><code>spacing.1</code>, <code>spacing.2</code>, <code>spacing.3</code>, <code>spacing.4</code>, <code>spacing.6</code>, <code>spacing.8</code>, <code>spacing.10</code>, <code>spacing.12</code></td>
+              <td>Tailwind 기본 간격과 맞춘 4px 배수의 실제 사용 값</td>
+            </tr>
+            <tr>
+              <td>Radius</td>
+              <td><code>radius.sm</code>, <code>radius.md</code>, <code>radius.lg</code>, <code>radius.xl</code></td>
+              <td>현재 <code>--radius</code> 기준과 일치</td>
+            </tr>
+            <tr>
+              <td>Typography</td>
+              <td><code>font.sans</code>, <code>font.heading</code>, <code>font.mono</code></td>
+              <td>확정된 font family만 관리</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          Tailwind가 이미 제공하는 모든 간격, 글자 크기와 그림자를 Tokens Studio에
+          다시 만들지 않습니다. Figma와 코드가 함께 사용해야 하는 값만 관리합니다.
+        </p>
+
+        <h3>4.2 Semantic Token</h3>
+        <p>
+          Semantic Token은 값이 아니라 사용 목적을 표현하며
+          <code>semantic</code> Token Set으로 관리합니다. 화면 코드와
+          shadcn/ui는 이 이름을 기본 계약으로 사용합니다.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">범위</th>
+              <th scope="col">현재 사용 토큰</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>화면</td>
+              <td><code>background</code>, <code>foreground</code></td>
+            </tr>
+            <tr>
+              <td>Surface</td>
+              <td><code>card</code>, <code>card-foreground</code>, <code>popover</code>, <code>popover-foreground</code></td>
+            </tr>
+            <tr>
+              <td>Action</td>
+              <td><code>primary</code>, <code>primary-foreground</code>, <code>secondary</code>, <code>secondary-foreground</code></td>
+            </tr>
+            <tr>
+              <td>보조 상태</td>
+              <td><code>muted</code>, <code>muted-foreground</code>, <code>accent</code>, <code>accent-foreground</code></td>
+            </tr>
+            <tr>
+              <td>오류와 입력</td>
+              <td><code>destructive</code>, <code>border</code>, <code>input</code>, <code>ring</code></td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          <code>sidebar-*</code>와 <code>chart-*</code>는 해당 UI가 실제로 사용될
+          때 유지합니다. 성공, 경고와 안내 색상은 디자인과 사용 의미가 확정되기
+          전까지 Tailwind의 <code>green</code>, <code>yellow</code>,
+          <code>blue</code> 계열로 임의 생성하지 않습니다.
+        </p>
+        <p>
+          <code class="badge-tbd">TBD</code>: 브랜드 팔레트, 성공·경고·안내
+          토큰과 프로젝트 typography 단계는 디자인 확정 후 Base Token과
+          Semantic Token에 각각 반영합니다.
+        </p>
+
+        <h3>4.3 Component Token</h3>
+        <p>
+          Button이나 Card별 토큰은 기본적으로 만들지 않습니다. Semantic Token과
+          shadcn/ui variant로 표현하기 어렵고 같은 변경 이유가 반복될 때만
+          추가합니다.
+        </p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">5. Tokens Studio 무료 운영</h2>
+        <p>
+          무료 라이선스에서는 Token Set을 Figma의 Variables와 Styles로 내보낼 수
+          있습니다. Token Set마다 Variable Collection이 생성되며, Collection
+          안의 Mode 생성과 다른 Figma 파일의 Variable 참조는 지원되지 않습니다.
+          자세한 범위는
+          <a href="https://docs.tokens.studio/figma/export/token-sets">Tokens Studio Token Set 내보내기</a>를
+          확인합니다.
+        </p>
+        <ul>
+          <li><code>base</code>와 <code>semantic</code> 두 Token Set으로 시작합니다.</li>
+          <li><code>semantic</code>은 <code>base</code> 값을 참조합니다.</li>
+          <li>무료 범위에서 Theme와 여러 Mode를 자동 생성하는 흐름을 전제로 하지 않습니다.</li>
+          <li>Token 이름과 타입을 바꿀 때 Figma 사용처와 코드 영향을 함께 확인합니다.</li>
+          <li>여러 Token Set과 Mode가 실제로 필요해진 뒤 유료 기능이나 자동화를 검토합니다.</li>
+        </ul>
+        <p>
+          <code class="badge-tbd">TBD</code>: Tokens Studio JSON을 저장소에서
+          관리할 경로와 동기화 방식은 첫 프로젝트 토큰 값이 승인된 뒤 결정합니다.
+          값이 확정되기 전에는 빈 토큰 파일이나 변환 파이프라인을 만들지 않습니다.
+        </p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">6. Figma Variables 적용</h2>
+        <ul>
+          <li>색상, 간격과 크기는 반복되는 화면별 값보다 Variable을 우선합니다.</li>
+          <li>Auto Layout의 간격은 승인된 spacing 값에 맞춥니다.</li>
+          <li>Semantic Token은 실제 사용 목적이 드러나는 이름으로 연결합니다.</li>
+          <li>공통 컴포넌트 인스턴스는 Variables와 함께 유지합니다.</li>
+          <li>Tokens Studio에서 지원하지 않는 타입은 억지로 Variable로 변환하지 않습니다.</li>
+        </ul>
+        <p>
+          무료 Token Set 내보내기에서는 Mode를 만들 수 없으므로, 현재 코드의
+          <code>.dark</code> 값은 Figma와 자동 동기화되는 것으로 간주하지 않습니다.
+        </p>
+        <p>
+          <code class="badge-tbd">TBD</code>: 다크 모드가 제품 요구사항으로
+          확정되면 Figma Mode 관리와 코드 동기화 방식을 별도로 결정합니다.
+        </p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">7. Tailwind CSS 4와 shadcn/ui 연결</h2>
+        <h3>7.1 Tailwind CSS 4 연결</h3>
+        <p>
+          실제 색상값은 <code>:root</code>와 <code>.dark</code>에 정의하고,
+          Tailwind 유틸리티로 노출할 이름은 최상위 <code>@theme inline</code>에서
+          연결합니다. Tailwind CSS의 theme variable은 사용할 유틸리티 API를
+          결정합니다. 자세한 동작은
+          <a href="https://tailwindcss.com/docs/theme">Tailwind CSS Theme Variables</a>를
+          확인합니다.
+        </p>
+        <pre
+          class="hljs"
+        ><code data-language="css"><span class="hljs-keyword">@theme</span> inline {
+  <span class="hljs-attr">--color-background</span>: <span class="hljs-built_in">var</span>(--background);
+  <span class="hljs-attr">--color-foreground</span>: <span class="hljs-built_in">var</span>(--foreground);
+  <span class="hljs-attr">--color-primary</span>: <span class="hljs-built_in">var</span>(--primary);
+  <span class="hljs-attr">--color-primary-foreground</span>: <span class="hljs-built_in">var</span>(--primary-foreground);
+  <span class="hljs-attr">--color-border</span>: <span class="hljs-built_in">var</span>(--border);
+  <span class="hljs-attr">--radius-lg</span>: <span class="hljs-built_in">var</span>(--radius);
+}</code></pre>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Semantic Token</th>
+              <th scope="col">CSS Variable</th>
+              <th scope="col">Tailwind 사용</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>background</code></td>
+              <td><code>--background</code></td>
+              <td><code>bg-background</code></td>
+            </tr>
+            <tr>
+              <td><code>foreground</code></td>
+              <td><code>--foreground</code></td>
+              <td><code>text-foreground</code></td>
+            </tr>
+            <tr>
+              <td><code>primary</code></td>
+              <td><code>--primary</code></td>
+              <td><code>bg-primary</code>, <code>text-primary</code></td>
+            </tr>
+            <tr>
+              <td><code>border</code></td>
+              <td><code>--border</code></td>
+              <td><code>border-border</code></td>
+            </tr>
+            <tr>
+              <td><code>ring</code></td>
+              <td><code>--ring</code></td>
+              <td><code>ring-ring</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>7.2 shadcn/ui 관리</h3>
+        <ul>
+          <li>shadcn/ui 컴포넌트의 기본 Semantic Token 계약을 우선 유지합니다.</li>
+          <li>새 컴포넌트를 추가하기 전에 <code>src/components/ui</code>의 기존 구현을 확인합니다.</li>
+          <li>CLI로 추가한 코드는 외부 패키지의 숨은 구현이 아니라 프로젝트가 소유하고 검수하는 코드로 취급합니다.</li>
+          <li>기능 의미가 있는 조합은 shadcn/ui 원형을 억지로 확장하지 않고 해당 기능 가까이에 둡니다.</li>
+          <li>variant는 실제로 반복되는 상태가 확인될 때 추가하고 조건부 class는 기존 <code>cn</code>을 사용합니다.</li>
+          <li>공통 UI 수정 시 기존 사용처와 키보드, 포커스 및 ARIA 동작을 함께 확인합니다.</li>
+          <li>CLI로 컴포넌트를 덮어쓰기 전에 프로젝트 수정 내용을 확인합니다.</li>
+          <li>같은 역할의 스타일을 Tailwind 클래스와 별도 CSS에 중복 작성하지 않습니다.</li>
+        </ul>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">8. 변경과 동기화</h2>
+        <ol>
+          <li>변경할 토큰의 사용 목적과 영향을 확인합니다.</li>
+          <li>Tokens Studio의 Base Token과 Semantic Token 참조를 수정합니다.</li>
+          <li>Figma Variables 또는 Styles를 다시 내보내고 주요 컴포넌트를 확인합니다.</li>
+          <li><code>globals.css</code>의 실제 값과 <code>@theme inline</code> 연결을 갱신합니다.</li>
+          <li>기존 shadcn/ui와 기능 화면에서 대비, 상태와 반응형 결과를 확인합니다.</li>
+          <li>관련 AI 요약 문서와 가이드 내용이 달라졌는지 확인합니다.</li>
+        </ol>
+        <p>
+          토큰 이름 변경은 단순한 값 변경보다 영향이 큽니다. 기존 Tailwind
+          클래스와 Figma Variable 사용처를 먼저 찾고 한 변경에서 함께 수정합니다.
+        </p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">9. 리뷰 체크리스트</h2>
+        <ul>
+          <li>새 토큰이 실제로 반복되는 디자인 결정인가?</li>
+          <li>Base Token과 Semantic Token의 역할이 구분되어 있는가?</li>
+          <li>컴포넌트에서 원시 색상과 임의 값을 불필요하게 사용하지 않았는가?</li>
+          <li>Figma Variables와 <code>globals.css</code>의 이름 및 값이 일치하는가?</li>
+          <li>shadcn/ui의 기존 Semantic Token과 접근성 동작을 유지하는가?</li>
+          <li>사용하지 않는 Component Token과 자동화 구조를 미리 추가하지 않았는가?</li>
+          <li>미확정된 브랜드, 상태와 다크 모드 값을 확정된 기준처럼 사용하지 않았는가?</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>디자인 토큰 가이드</p>
+    </footer>
+    <script src="./../assets/js/common.js"></script>
+    <script src="./../assets/js/mermaid.js"></script>
+  </body>
+</html>
