@@ -14,6 +14,10 @@
         .then((res) => res.text())
         .then((markdown) => {
           document.querySelector("#content").innerHTML = marked.parse(markdown);
+
+          const mermaidScript = document.createElement("script");
+          mermaidScript.src = "./../../assets/js/mermaid.js";
+          document.body.append(mermaidScript);
         });
     </script>
   </body>
