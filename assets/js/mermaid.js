@@ -37,6 +37,45 @@ void (async () => {
   await document.fonts.ready;
   await mermaid.run({ querySelector: ".mermaid" });
 
+  const trimSequenceLifelines = (svg, padding = 12) => {
+    const lifelines = [...svg.querySelectorAll(".actor-line")];
+
+    if (!lifelines.length) return;
+
+    const content = [
+      ...svg.querySelectorAll(
+        [
+          ".messageLine0",
+          ".messageLine1",
+          ".messageText",
+          ".note",
+          ".noteText",
+          ".labelBox",
+          ".labelText",
+          ".loopLine",
+          ".loopText",
+          '[class^="activation"]',
+        ].join(", "),
+      ),
+    ];
+    const bottoms = content
+      .map((element) => element.getBBox())
+      .filter((box) => box.width > 0 || box.height > 0)
+      .map((box) => box.y + box.height);
+
+    if (!bottoms.length) return;
+
+    const endY = Math.ceil(Math.max(...bottoms) + padding);
+
+    lifelines.forEach((line) => {
+      const startY = Number(line.getAttribute("y1"));
+
+      if (Number.isFinite(startY) && endY > startY) {
+        line.setAttribute("y2", String(endY));
+      }
+    });
+  };
+
   const cropMermaidViewBox = (svg, padding = 24) => {
     const groups = [...svg.querySelectorAll(":scope > g")];
     const boxes = groups
@@ -66,7 +105,8 @@ void (async () => {
     svg.style.maxWidth = `${Math.ceil(width + padding * 2)}px`;
   };
 
-  document
-    .querySelectorAll(".diagram-frame svg")
-    .forEach((svg) => cropMermaidViewBox(svg));
+  document.querySelectorAll(".diagram-frame svg").forEach((svg) => {
+    trimSequenceLifelines(svg);
+    cropMermaidViewBox(svg);
+  });
 })();
