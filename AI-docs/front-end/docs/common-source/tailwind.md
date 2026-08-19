@@ -63,6 +63,36 @@ export default config
 
 `style`, `baseColor`, alias는 이미 설치된 프로젝트 설정을 우선합니다. 이 파일의 목적은 컴포넌트 생성 위치와 토큰 사용 방식을 정하는 것입니다. Button, Input, Dialog 등을 한 번에 생성하지 않고 실제 화면에서 필요한 항목만 추가합니다.
 
+## `base-nova`가 의미하는 것
+
+`base-nova`는 설치할 패키지 이름이나 색상 테마 이름이 아닙니다. shadcn CLI가 컴포넌트 코드를 생성할 때 참고하는 **컴포넌트 구현 방식과 시각 스타일의 조합**입니다.
+
+| 이름 | 의미 | 생성 코드에 미치는 영향 |
+| --- | --- | --- |
+| `base` | Dialog, Select 같은 동작을 Base UI로 구현 | Base UI에 맞는 import, prop과 컴포넌트 구조 생성 |
+| `nova` | padding과 margin을 줄인 간결한 시각 스타일 | 컴포넌트의 기본 크기, 간격과 Tailwind 클래스 구성 |
+
+예를 들어 `shadcn add dialog`를 실행하면 CLI는 `components.json`의 `style`을 읽고 Base UI를 사용하는 Nova 스타일의 Dialog 코드를 생성합니다. 생성된 코드는 패키지 내부에 숨겨지지 않고 프로젝트의 `src/components/ui`에 추가되므로 필요한 부분을 직접 수정할 수 있습니다.
+
+### 다른 설정과의 차이
+
+| 설정 | 결정하는 내용 |
+| --- | --- |
+| `style: "base-nova"` | 컴포넌트가 사용할 UI 라이브러리와 기본 구조·간격 |
+| `tailwind.baseColor: "neutral"` | 처음 생성하는 중립 색상 계열 |
+| `tailwind.cssVariables: true` | `primary`, `background` 같은 의미 기반 토큰 사용 여부 |
+| `iconLibrary: "lucide"` | 생성 코드에서 사용할 아이콘 라이브러리 |
+
+`base-nova`를 선택해도 브랜드 색상과 다크 모드 값이 확정되는 것은 아닙니다. 브랜드 색상, 배경색과 radius는 `globals.css`의 토큰으로 별도 관리합니다. 따라서 디자인이 바뀌더라도 Base UI와 Nova 구조를 유지하면서 토큰 값만 교체할 수 있습니다.
+
+### 나중에 변경할 때 주의할 점
+
+shadcn은 컴포넌트 코드를 프로젝트에 복사하는 방식입니다. 이미 Button이나 Dialog를 생성한 뒤 `components.json`의 `style`만 바꿔도 기존 파일은 자동으로 변경되지 않습니다.
+
+다른 UI 라이브러리나 시각 스타일로 바꾸려면 새 생성 결과와 기존 파일의 차이를 확인하고, 프로젝트에서 수정한 내용과 함께 병합해야 합니다. 따라서 실제 저장소를 만들 때 Base UI 사용 여부와 Nova 스타일 적용 여부를 먼저 확인한 뒤 첫 컴포넌트를 생성합니다.
+
+현재 가이드의 예시 코드는 `base-nova`를 기준으로 작성되어 있습니다. 실제 프로젝트에서 다른 값을 선택하면 `components.json`, shadcn 컴포넌트 import와 관련 예시를 선택한 값에 맞게 함께 갱신합니다.
+
 ## 3단계: 디자인 전 사용할 토큰 정의
 
 ### `apps/app-webview/src/app/globals.css`
