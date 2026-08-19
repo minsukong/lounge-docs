@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>테스트 공통 설정과 구현 예시</title>
+    <link rel="stylesheet" href="../../../../assets/style/presentation-theme.css" />
+  </head>
+  <body>
+    <header>
+      <div class="type">FRONT-END · TEST</div>
+      <h1>테스트 공통 설정과 구현 예시</h1>
+      <p>Vitest, Testing Library와 Query Provider 기반의 실전 테스트 소스를 설명합니다.</p>
+    </header>
+
+    <main>
+<section>
+<h2 class="bx-active">1. 적용 목적</h2>
+<p>Vitest와 React Testing Library로 Client Component를 사용자 관점에서 검증할 수 있는 최소 환경입니다. Query 컴포넌트도 실제 <code>QueryClientProvider</code> 아래에서 렌더링하며, 각 테스트는 독립된 QueryClient를 사용합니다.</p>
+<pre class="hljs"><code data-language="text">apps/app-webview/
+├── vitest.config.ts
+└── src/test/
+    ├── render-with-providers.tsx
+    └── setup.ts</code></pre>
+<p>개발 의존성은 <code>vitest</code>, <code>jsdom</code>, <code>@vitejs/plugin-react</code>, <code>@testing-library/react</code>, <code>@testing-library/user-event</code>, <code>@testing-library/jest-dom</code>입니다. 기존 테스트 실행 도구가 있으면 중복 설치하지 않고 설정과 렌더링 함수를 병합합니다.</p>
+
+</section>
+
+<hr />
+
+<section>
+<h2 class="bx-active">2. 1단계: Vitest 설정</h2>
+<h3><code>apps/app-webview/vitest.config.ts</code></h3>
+<pre class="hljs"><code data-language="ts"><span class="hljs-keyword">import</span> path <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;node:path&quot;</span>
+<span class="hljs-keyword">import</span> { fileURLToPath } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;node:url&quot;</span>
+<span class="hljs-keyword">import</span> react <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@vitejs/plugin-react&quot;</span>
+<span class="hljs-keyword">import</span> { defineConfig } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vitest/config&quot;</span>
+
+<span class="hljs-keyword">const</span> appRoot = path.dirname(fileURLToPath(<span class="hljs-keyword">import</span>.meta.url))
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> defineConfig({
+  plugins: [react()],
+  resolve: {
+    alias: {
+      <span class="hljs-string">&quot;@&quot;</span>: path.resolve(appRoot, <span class="hljs-string">&quot;src&quot;</span>),
+    },
+  },
+  test: {
+    environment: <span class="hljs-string">&quot;jsdom&quot;</span>,
+    setupFiles: [<span class="hljs-string">&quot;./src/test/setup.ts&quot;</span>],
+    restoreMocks: <span class="hljs-literal">true</span>,
+    clearMocks: <span class="hljs-literal">true</span>,
+  },
+})</code></pre>
+<p>기존 Vite alias 플러그인이나 workspace 공통 설정이 있다면 alias를 중복 선언하지 않습니다. Server Component와 Next route 통합을 억지로 jsdom에서 실행하지 않고, 순수 함수나 Client Component 단위만 이 환경에서 검증합니다.</p>
+
+</section>
+
+<hr />
+
+<section>
+<h2 class="bx-active">3. 2단계: DOM matcher와 정리</h2>
+<h3><code>src/test/setup.ts</code></h3>
+<pre class="hljs"><code data-language="ts"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;@testing-library/jest-dom/vitest&quot;</span>
+<span class="hljs-keyword">import</span> { cleanup } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@testing-library/react&quot;</span>
+<span class="hljs-keyword">import</span> { afterEach } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vitest&quot;</span>
+
+afterEach(() =&gt; {
+  cleanup()
+})</code></pre>
+<p>Vitest 설정 또는 현재 Testing Library 버전이 자동 정리를 제공하더라도 명시적 setup 하나로 팀의 실행 환경을 고정할 수 있습니다. 기존 전역 mock이 있다면 이 파일에서 테스트 분리에 필요한 항목만 추가합니다.</p>
+
+</section>
+
+<hr />
+
+<section>
+<h2 class="bx-active">4. 3단계: Provider가 필요한 컴포넌트 렌더링</h2>
+<h3><code>src/test/render-with-providers.tsx</code></h3>
+<pre class="hljs"><code data-language="tsx"><span class="hljs-keyword">import</span> {
+  <span class="hljs-title class_">QueryClient</span>,
+  <span class="hljs-title class_">QueryClientProvider</span>,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@tanstack/react-query&quot;</span>
+<span class="hljs-keyword">import</span> {
+  render,
+  <span class="hljs-keyword">type</span> <span class="hljs-title class_">RenderOptions</span>,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@testing-library/react&quot;</span>
+<span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> { <span class="hljs-title class_">ReactElement</span>, <span class="hljs-title class_">ReactNode</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> createTestQueryClient() {
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">QueryClient</span>({
+    defaultOptions: {
+      queries: {
+        retry: <span class="hljs-literal">false</span>,
+      },
+      mutations: {
+        retry: <span class="hljs-literal">false</span>,
+      },
+    },
+  })
+}
+
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">RenderWithProvidersOptions</span> = <span class="hljs-title class_">Omit</span>&lt;<span class="hljs-title class_">RenderOptions</span>, <span class="hljs-string">&quot;wrapper&quot;</span>&gt; &amp; {
+  queryClient?: <span class="hljs-title class_">QueryClient</span>
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> renderWithProviders(
+  ui: <span class="hljs-title class_">ReactElement</span>,
+  {
+    queryClient = createTestQueryClient(),
+    ...renderOptions
+  }: <span class="hljs-title class_">RenderWithProvidersOptions</span> = {},
+) {
+  <span class="hljs-keyword">function</span> <span class="hljs-title class_">Wrapper</span>({ children }: { children: <span class="hljs-title class_">ReactNode</span> }) {
+    <span class="hljs-keyword">return</span> (
+      &lt;<span class="hljs-selector-tag">QueryClientProvider</span> <span class="hljs-attr">client</span>={queryClient}&gt;
+        {children}
+      &lt;/<span class="hljs-selector-tag">QueryClientProvider</span>&gt;
+    )
+  }
+
+  <span class="hljs-keyword">return</span> {
+    queryClient,
+    ...render(ui, { wrapper: <span class="hljs-title class_">Wrapper</span>, ...renderOptions }),
+  }
+}</code></pre>
+<p>운영 QueryClient를 재사용하지 않는 이유는 테스트 간 캐시와 재시도를 분리하기 위해서입니다. Redux, Router, Theme Provider 등이 실제로 생기면 테스트용 Wrapper에 필요한 Provider만 추가합니다.</p>
+
+</section>
+
+<hr />
+
+<section>
+<h2 class="bx-active">5. Query 컴포넌트 테스트 예시</h2>
+<h3><code>src/features/example/greeting.tsx</code></h3>
+<pre class="hljs"><code data-language="tsx"><span class="hljs-string">&quot;use client&quot;</span>
+
+<span class="hljs-keyword">import</span> { useQuery } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@tanstack/react-query&quot;</span>
+
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">GreetingProps</span> = {
+  loadGreeting: () =&gt; <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-selector-tag">string</span>&gt;
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title class_">Greeting</span>({ loadGreeting }: <span class="hljs-title class_">GreetingProps</span>) {
+  <span class="hljs-keyword">const</span> query = useQuery({
+    queryKey: [<span class="hljs-string">&quot;greeting&quot;</span>],
+    queryFn: loadGreeting,
+  })
+
+  <span class="hljs-keyword">if</span> (query.isPending) <span class="hljs-keyword">return</span> &lt;<span class="hljs-selector-tag">p</span>&gt;불러오는 중&lt;/<span class="hljs-selector-tag">p</span>&gt;
+  <span class="hljs-keyword">if</span> (query.isError) <span class="hljs-keyword">return</span> &lt;<span class="hljs-selector-tag">p</span> <span class="hljs-attr">role</span>=<span class="hljs-string">&quot;alert&quot;</span>&gt;불러오지 못했습니다.&lt;/<span class="hljs-selector-tag">p</span>&gt;
+
+  <span class="hljs-keyword">return</span> &lt;<span class="hljs-selector-tag">p</span>&gt;{query.data}&lt;/<span class="hljs-selector-tag">p</span>&gt;
+}</code></pre>
+<h3><code>greeting.test.tsx</code></h3>
+<pre class="hljs"><code data-language="tsx"><span class="hljs-keyword">import</span> { screen } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@testing-library/react&quot;</span>
+<span class="hljs-keyword">import</span> { describe, expect, it, vi } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vitest&quot;</span>
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Greeting</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/features/example/greeting&quot;</span>
+<span class="hljs-keyword">import</span> { renderWithProviders } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/test/render-with-providers&quot;</span>
+
+describe(<span class="hljs-string">&quot;Greeting&quot;</span>, () =&gt; {
+  it(<span class="hljs-string">&quot;조회가 끝나면 받은 내용을 표시한다&quot;</span>, <span class="hljs-keyword">async</span> () =&gt; {
+    <span class="hljs-keyword">const</span> loadGreeting = vi.fn().mockResolvedValue(<span class="hljs-string">&quot;안녕하세요&quot;</span>)
+
+    renderWithProviders(&lt;<span class="hljs-selector-tag">Greeting</span> <span class="hljs-attr">loadGreeting</span>={loadGreeting} /&gt;)
+
+    expect(screen.getByText(<span class="hljs-string">&quot;불러오는 중&quot;</span>)).toBeInTheDocument()
+    expect(<span class="hljs-keyword">await</span> screen.findByText(<span class="hljs-string">&quot;안녕하세요&quot;</span>)).toBeInTheDocument()
+    expect(loadGreeting).toHaveBeenCalledTimes(<span class="hljs-number">1</span>)
+  })
+
+  it(<span class="hljs-string">&quot;조회가 실패하면 오류 상태를 표시한다&quot;</span>, <span class="hljs-keyword">async</span> () =&gt; {
+    <span class="hljs-keyword">const</span> loadGreeting = vi.fn().mockRejectedValue(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&quot;network&quot;</span>))
+
+    renderWithProviders(&lt;<span class="hljs-selector-tag">Greeting</span> <span class="hljs-attr">loadGreeting</span>={loadGreeting} /&gt;)
+
+    expect(<span class="hljs-keyword">await</span> screen.findByRole(<span class="hljs-string">&quot;alert&quot;</span>)).toHaveTextContent(
+      <span class="hljs-string">&quot;불러오지 못했습니다.&quot;</span>,
+    )
+  })
+})</code></pre>
+<p>Query 라이브러리 내부 캐시 구현을 검사하지 않고 로딩, 성공, 오류 상태에서 사용자가 보는 결과만 확인합니다.</p>
+
+</section>
+
+<hr />
+
+<section>
+<h2 class="bx-active">6. 실제 폼 상호작용 테스트</h2>
+<p>React 문서의 <code>ProfileNameForm</code>처럼 저장 함수를 전달받는 컴포넌트는 network mock 없이 제출 동작을 검증할 수 있습니다.</p>
+<pre class="hljs"><code data-language="tsx"><span class="hljs-keyword">import</span> { render, screen } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@testing-library/react&quot;</span>
+<span class="hljs-keyword">import</span> userEvent <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@testing-library/user-event&quot;</span>
+<span class="hljs-keyword">import</span> { describe, expect, it, vi } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vitest&quot;</span>
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">ProfileNameForm</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/features/profile/profile-name-form&quot;</span>
+
+describe(<span class="hljs-string">&quot;ProfileNameForm&quot;</span>, () =&gt; {
+  it(<span class="hljs-string">&quot;공백을 제거한 이름을 저장 함수에 전달한다&quot;</span>, <span class="hljs-keyword">async</span> () =&gt; {
+    <span class="hljs-keyword">const</span> user = userEvent.setup()
+    <span class="hljs-keyword">const</span> onSave = vi.fn().mockResolvedValue(<span class="hljs-literal">undefined</span>)
+
+    render(&lt;<span class="hljs-selector-tag">ProfileNameForm</span> <span class="hljs-attr">initialName</span>=<span class="hljs-string">&quot;기존 이름&quot;</span> <span class="hljs-attr">onSave</span>={onSave} /&gt;)
+
+    <span class="hljs-keyword">const</span> input = screen.getByRole(<span class="hljs-string">&quot;textbox&quot;</span>, { name: <span class="hljs-string">&quot;이름&quot;</span> })
+    <span class="hljs-keyword">await</span> user.clear(input)
+    <span class="hljs-keyword">await</span> user.<span class="hljs-keyword">type</span>(input, <span class="hljs-string">&quot;  새 이름  &quot;</span>)
+    <span class="hljs-keyword">await</span> user.click(screen.getByRole(<span class="hljs-string">&quot;button&quot;</span>, { name: <span class="hljs-string">&quot;저장&quot;</span> }))
+
+    expect(onSave).toHaveBeenCalledWith(<span class="hljs-string">&quot;새 이름&quot;</span>)
+  })
+})</code></pre>
+<p>프로젝트가 모든 컴포넌트 테스트에 Provider 포함 렌더링 함수를 쓰기로 했다면 <code>renderWithProviders</code>로 통일합니다.</p>
+
+</section>
+
+<hr />
+
+<section>
+<h2 class="bx-active">7. 테스트 대상을 고르는 기준</h2>
+<table>
+<thead>
+<tr>
+<th scope="col">우선 테스트</th>
+<th scope="col">이유</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>응답 검증과 입력값 검증의 실패 분기</td>
+<td>외부 입력 오류가 화면 전체에 전파될 수 있음</td>
+</tr>
+<tr>
+<td>submit·취소·재시도 같은 사용자 동작</td>
+<td>회귀 시 실제 업무 흐름이 막힘</td>
+</tr>
+<tr>
+<td>로딩·빈 결과·오류·성공 전환</td>
+<td>비동기 화면의 핵심 동작</td>
+</tr>
+<tr>
+<td>label·설명·오류의 접근성 연결</td>
+<td>시각 확인만으로 놓치기 쉬움</td>
+</tr>
+</tbody></table>
+<p>다음은 기본적으로 테스트하지 않습니다.</p>
+<ul>
+<li>Tailwind class 문자열 전체와 pixel 배치</li>
+<li>shadcn/Base UI가 이미 보장하는 내부 DOM과 keyboard 구현</li>
+<li>Lucide SVG path</li>
+<li>단순히 prop을 그대로 출력하는 표시 컴포넌트</li>
+<li>구현 함수 이름, state 변수와 hook 호출 횟수</li>
+</ul>
+
+</section>
+
+<hr />
+
+<section>
+<h2 class="bx-active">8. 실행과 실패 해석</h2>
+<pre class="hljs"><code data-language="text">npm run typecheck
+npm run lint
+npm run test</code></pre>
+<p>alias 오류는 <code>vitest.config.ts</code>와 실제 <code>tsconfig</code> 경로가 같은지 확인합니다. <code>document is not defined</code>는 jsdom 환경 연결을, jest-dom matcher 오류는 setup 파일 로딩을 확인합니다. Query 테스트가 오래 멈추면 테스트 QueryClient의 재시도 설정과 종료되지 않은 timer를 먼저 확인합니다.</p>
+</section></main>
+
+    <footer>
+      <p>테스트 공통 설정과 구현 예시</p>
+    </footer>
+    <script src="../../../../assets/js/common.js"></script>
+  </body>
+</html>

@@ -4,10 +4,11 @@
 
 ## 프로젝트 기준
 
-- 실제 애플리케이션은 `apps/app-webview`입니다.
+- 실제 애플리케이션은 추후 `apps/app-webview`에 생성할 예정입니다.
+- 현재는 애플리케이션 저장소 생성 전에 구현 가이드와 참고 소스를 선행 작성하는 단계입니다.
 - 화면 코드는 React 19와 TypeScript로 작성합니다.
 - 스타일은 Tailwind CSS 4와 `src/app/globals.css`의 의미 기반 토큰을 사용합니다.
-- Next.js 16 App Router 규칙은 `apps/app-webview/AGENTS.md`와 설치된 Next.js 문서를 따릅니다.
+- 실제 저장소가 생성된 이후 Next.js 16 App Router 규칙은 `apps/app-webview/AGENTS.md`와 설치된 Next.js 문서를 따릅니다.
 - 기존 `src/components/ui`의 shadcn/ui와 프로젝트 컴포넌트를 새 코드보다 우선합니다.
 - 요청하지 않은 기능, 상태, 공통화 또는 패키지를 미리 추가하지 않습니다.
 
@@ -22,25 +23,30 @@
 
 ## AI 문서 확인 흐름
 
-AI는 작업을 시작할 때 이 `AGENTS.md`를 먼저 읽습니다. 이후 작업 종류를 판단해 필요한 `docs/ai/` 요약만 확인하고, 요약만으로 세부 기준을 판단하기 어려울 때 연결된 HTML 상세 가이드로 이동합니다.
+AI는 작업을 시작할 때 이 `AGENTS.md`를 먼저 읽습니다. 이후 작업 종류를 판단해 필요한 `docs/ai/` 요약만 확인하고, 요약만으로 세부 기준을 판단하기 어려울 때 연결된 상세 가이드로 이동합니다.
 
 <figure class="diagram-frame">
   <!-- prettier-ignore -->
   <div class="mermaid">
 flowchart TD
   accTitle: AI의 Front-end 가이드 확인 흐름
-  accDescr: AI는 작업 요청을 받으면 AGENTS.md를 먼저 읽고 작업 종류에 맞는 docs/ai 요약 문서를 선택한 뒤, 세부 기준이 필요할 때만 연결된 HTML 상세 가이드를 확인합니다.
+  accDescr: AI는 작업 요청을 받으면 AGENTS.md를 먼저 읽고 작업 종류에 맞는 docs/ai 요약 문서를 선택한 뒤, 세부 기준이 필요할 때만 연결된 상세 가이드를 확인합니다.
   A([작업 요청]) --> B["AGENTS.md 먼저 읽기"]
   B --> C{"어떤 작업인가?"}
   C -->|"프로젝트 구조·기능·상태"| P["docs/ai/project.md"]
   C -->|"UI·컴포넌트·스타일"| U["docs/ai/ui.md + design-tokens.md"]
   C -->|"Figma 구현"| F["docs/ai/figma.md + ui.md + design-tokens.md"]
   C -->|"Lint·Test·품질"| Q["docs/ai/quality.md"]
+  C -->|"공통 소스·설정·유틸리티"| CS["docs/ai/common-source.md"]
   C -->|"Ollama·Continue·로컬 LLM"| L["docs/ai/local-llm.md"]
   P -->|"세부 기준이 필요할 때"| PH["frontend_guide/index.html + monorepo/index.html"]
   U -->|"세부 기준이 필요할 때"| UH["frontend_guide/index.html + UI 상세 가이드"]
   F -->|"세부 기준이 필요할 때"| FH["react_code_exports.html + design_tokens.html"]
   Q -->|"세부 기준이 필요할 때"| QH["lint_guide/index.html + test_guide/index.html"]
+  CS --> CSR{"apps/app-webview가 존재하는가?"}
+  CSR -->|"예"| CSS["기존 소스와 설치 package 확인"]
+  CSR -->|"아니오"| CSH["docs/common-source 실전 가이드 확인"]
+  CSS -->|"구현 기준 확인"| CSH
   L -->|"세부 기준이 필요할 때"| LH["react_code_exports.html"]
   </div>
   <figcaption>AGENTS.md에서 작업별 요약과 상세 HTML 가이드로 이동하는 흐름</figcaption>
@@ -51,32 +57,47 @@ flowchart TD
 - 프로젝트 구조와 공통 기준: [Front-End 개발 가이드](../../frontend_guide/index.html), [Front-End Monorepo 공통 기준](../../monorepo/index.html)
 - UI와 Figma 구현: [React Code Exports 가이드](../../ui_guide/react_code_exports.html), [디자인 토큰 가이드](../../ui_guide/design_tokens.html)
 - 품질 확인: [Lint 가이드](../../lint_guide/index.html), [Test 가이드](../../test_guide/index.html)
+- 공통 소스 구현: [공통 소스 가이드](./docs/common-source/index.md), [테스트 공통 소스](./docs/common-source/test.md), [통합 사용 예시](./docs/common-source/recipes.md), [공통 소스 카탈로그](./docs/common-source/catalog.md)
 
 ## 작업별 필수 문서
 
 ```text
 docs/
-└─ ai/
-   ├─ project.md        # 프로젝트 구조, 기능 및 상태 작업
-   ├─ ui.md             # UI, 컴포넌트 및 스타일 작업
-   ├─ design-tokens.md  # 디자인 토큰 및 스타일 기준
-   ├─ figma.md          # Figma URL 및 디자인 구현 작업
-   ├─ quality.md        # Lint, Test 및 품질 확인
-   └─ local-llm.md      # Ollama, Continue 및 로컬 LLM 작업
+├─ ai/
+│  ├─ project.md        # 프로젝트 구조, 기능 및 상태 작업
+│  ├─ ui.md             # UI, 컴포넌트 및 스타일 작업
+│  ├─ design-tokens.md  # 디자인 토큰 및 스타일 기준
+│  ├─ figma.md          # Figma URL 및 디자인 구현 작업
+│  ├─ quality.md        # Lint, Test 및 품질 확인
+│  ├─ common-source.md  # 공통 소스 가이드 작업 진입점
+│  └─ local-llm.md      # Ollama, Continue 및 로컬 LLM 작업
+└─ common-source/
+   ├─ index.md          # 가이드 범위와 적용 절차
+   ├─ tailwind.md       # Tailwind CSS 기반 구현 가이드
+   ├─ react.md          # React 공통 소스 구현 가이드
+   ├─ typescript.md     # TypeScript 설정과 유틸리티 가이드
+   ├─ test.md           # Vitest와 Testing Library 공통 테스트 가이드
+   ├─ recipes.md        # 공통 소스를 연결한 기능 단위 통합 예시
+   └─ catalog.md        # 구현 항목과 도입 조건 체크리스트
 ```
 
 - UI 작업에서는 `docs/ai/ui.md`와 `docs/ai/design-tokens.md`를 함께 읽습니다.
 - Figma 구현 작업에서는 `docs/ai/figma.md`, `docs/ai/ui.md`, `docs/ai/design-tokens.md`를 함께 읽습니다.
+- 공통 소스 작업에서는 `docs/ai/common-source.md`를 먼저 읽고 작업 영역에 해당하는 `docs/common-source/` 상세 가이드와 카탈로그를 확인합니다.
+- `apps/app-webview`가 존재하면 기존 소스와 설치 package를 먼저 조사합니다. 아직 존재하지 않으면 문서의 참고 구현과 교체 지점을 기준으로 가이드를 작성하며, 실제 적용이나 검증이 끝난 것처럼 표현하지 않습니다.
 
 현재 작업과 관련 없는 문서는 읽지 않습니다. 문서에 없는 요구는 기존 소스와 사용자 요청을 우선 확인하고 임의로 확대하지 않습니다.
 
 ## 가이드 원본과 동기화
 
-- **_상세 가이드의 기준 원본은 형제 폴더 `lounge-docs`입니다._**
+- **_기존 프로젝트 상세 가이드의 기준 원본은 형제 폴더 `lounge-docs`입니다._**
 - `docs/ai/`는 코딩에 필요한 핵심 결정만 담은 요약입니다.
 - 두 내용이 충돌하면 `lounge-docs`를 따릅니다.
 - 원본 가이드 변경이 구현 규칙에 영향을 주면 관련 `docs/ai/` 문서도 함께 갱신합니다.
 - 배경 설명, 설치 과정과 긴 검증 결과를 `docs/ai/`에 중복 복사하지 않습니다.
+- 현재 실제 애플리케이션 저장소는 생성 전이며, `docs/common-source/*.md`는 저장소 생성 후 빠르게 적용하기 위한 구현 기준과 참고 코드입니다. 같은 이름의 HTML은 사람이 읽기 위한 보기입니다.
+- `lounge-docs`에는 실제 애플리케이션 `.ts`, `.tsx`, CSS 또는 package 설정 파일을 추가하지 않습니다.
+- 실제 앱 저장소의 경로와 공개 API가 확정되거나 바뀌면 `docs/common-source/catalog.md`와 관련 가이드를 실제 상태에 맞게 갱신합니다.
 
 ## 기본 확인
 

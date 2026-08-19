@@ -256,17 +256,234 @@ ollama run qwen3.8:27b</code></pre>
 
         <h3>5.3 Cline 설정</h3>
         <p>
-          VS Code에 Cline 확장을 설치하고 LLM Provider를 Ollama로 선택합니다.
-          Ollama의 기본 주소를 사용하고 모델에는
-          <code>qwen3.8:27b</code>를 지정합니다.
+          VS Code에 Cline 확장을 설치한 뒤 Cline의 API 설정으로 이동합니다.
+          <strong>API Provider</strong>에서 <code>Ollama</code>를 선택하고,
+          Ollama의 기본 주소와 사용할 모델을 지정합니다.
         </p>
-        <ul>
-          <li>Provider: <code>Ollama</code></li>
-          <li>Base URL: <code>http://localhost:11434</code></li>
-          <li>Model: <code>qwen3.8:27b</code></li>
-        </ul>
+        <ol>
+          <li>Cline 설정에서 <strong>API Configuration</strong>을 엽니다.</li>
+          <li><strong>API Provider</strong>에서 <code>Ollama</code>를 선택합니다.</li>
+          <li>Base URL은 <code>http://localhost:11434</code>로 설정합니다.</li>
+          <li>Model에서 <code>qwen3.8:27b</code>를 선택합니다.</li>
+          <li>
+            <strong>Model Context Window</strong>는 속도와 프로젝트 문맥의
+            균형을 고려해 <strong>64K</strong>로 설정합니다. 숫자를 직접
+            입력하는 화면에서는 <code>65536</code>을 입력합니다.
+          </li>
+        </ol>
+        <p>
+          Context Window를 변경한 뒤 설정을 저장하고 새 작업에서 선택한 모델과
+          컨텍스트 크기가 적용되었는지 확인합니다. 128K는 대규모 저장소나 매우
+          긴 대화를 한 번에 유지해야 할 때만 선택적으로 사용합니다. 이 경우
+          Cline 화면에서는 <strong>130K(128K 토큰)</strong>로 설정하고, 숫자를
+          직접 입력하는 화면에서는 <code>131072</code>를 입력합니다.
+        </p>
 
-        <h3>5.4 Figma Desktop MCP 설정</h3>
+        <h4>초기 컨텍스트 사용량</h4>
+        <p>
+          현재 테스트 환경에서는 Figma Desktop MCP와 Tavily MCP를 활성화한 새
+          채팅에서 <code>안녕</code>처럼 짧은 메시지만 입력해도 약 18.2K의
+          컨텍스트가 바로 사용되는 것을 확인했습니다. 이는 사용자 메시지 자체의
+          크기가 아니라 Cline이 Agent 작업을 시작하기 위해 미리 전달하는 기본
+          컨텍스트가 함께 계산된 결과입니다.
+        </p>
+        <p>초기 컨텍스트에는 일반적으로 다음 정보가 포함됩니다.</p>
+        <ul>
+          <li>Cline의 시스템 지침과 도구 사용 규칙</li>
+          <li>파일 읽기, 수정, 명령 실행과 브라우저 등 기본 도구 정의</li>
+          <li>Figma와 Tavily MCP가 제공하는 도구 이름, 설명 및 입력 구조</li>
+          <li>Cline Rules, 작업 환경과 모델에 전달되는 기타 기본 정보</li>
+        </ul>
+        <p>
+          따라서 MCP 서버와 도구를 많이 활성화할수록 실제 대화를 시작하기 전의
+          컨텍스트 사용량도 커질 수 있습니다. 약 18.2K는 현재 구성에서 관찰한
+          값이며 Cline 버전, 활성 도구, MCP 서버와 프로젝트 설정에 따라
+          달라집니다. 64K 설정에서는 이 초기 사용량을 제외한 나머지 공간에 대화,
+          파일 내용과 도구 실행 결과가 누적되므로 한 채팅에는 하나의 작업 목표만
+          유지하고 필요하면 새 채팅으로 분리합니다. 자세한 컨텍스트 구성은
+          <a href="https://docs.cline.bot/core-workflows/task-management">Cline Task Management</a>를
+          참고합니다.
+        </p>
+
+        <h4><code>/newtask</code>로 작업 이어가기</h4>
+        <p>
+          <code>/newtask</code>는 현재 채팅을 단순히 종료하는 명령이 아니라,
+          지금까지의 핵심 내용을 정리해 깨끗한 컨텍스트의 새 Task로 전달하는
+          작업 인계 기능입니다. 컨텍스트가 많이 찼지만 동일한 목표를 계속
+          진행해야 하거나, 조사와 계획을 마치고 구현 단계로 전환할 때 사용합니다.
+        </p>
+        <ol>
+          <li>채팅 입력창에 <code>/newtask</code>를 입력합니다.</li>
+          <li>Cline이 현재 대화에서 인계할 내용을 요약해 제안합니다.</li>
+          <li>목표, 완료 작업, 관련 파일과 다음 단계가 정확한지 확인합니다.</li>
+          <li>누락되거나 잘못 요약된 내용을 직접 보완한 뒤 새 Task 생성을 승인합니다.</li>
+          <li>새 Task에서 요약된 컨텍스트를 기준으로 작업을 계속합니다.</li>
+        </ol>
+        <p>새 Task를 시작하기 전에 인계 요약에 다음 항목이 포함되었는지 확인합니다.</p>
+        <ul>
+          <li>최종 목표와 현재 작업 범위</li>
+          <li>이미 결정한 구현 방향과 변경하면 안 되는 제약 조건</li>
+          <li>완료한 작업, 수정한 파일과 현재 검증 결과</li>
+          <li>해결되지 않은 문제, 확인이 필요한 항목과 다음 작업 순서</li>
+        </ul>
+        <p>
+          새 Task에는 전체 대화와 모든 도구 출력이 그대로 복사되지 않습니다.
+          Figma와 Tavily MCP 연결 설정은 계속 사용할 수 있지만, 이전 검색 결과나
+          Figma 분석 내용은 인계 요약에 포함되어야 새 Task가 알 수 있습니다.
+          따라서 중요한 결정과 근거가 빠지지 않았는지 확인한 뒤 전환합니다.
+        </p>
+
+        <h4>주요 슬래시 명령</h4>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">명령</th>
+              <th scope="col">기능</th>
+              <th scope="col">권장 사용 시점</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>/newtask</code></td>
+              <td>현재 작업의 핵심 내용을 요약해 새 Task로 인계</td>
+              <td>컨텍스트가 많이 찼거나 작업 단계를 전환할 때</td>
+            </tr>
+            <tr>
+              <td><code>/smol</code></td>
+              <td>핵심 내용을 유지하면서 현재 대화 기록을 압축</td>
+              <td>같은 Task를 유지하면서 컨텍스트 공간만 확보할 때</td>
+            </tr>
+            <tr>
+              <td><code>/newrule</code></td>
+              <td>반복해서 적용할 프로젝트 또는 개인 규칙 생성</td>
+              <td>같은 코딩 기준이나 금지사항을 매번 설명하고 있을 때</td>
+            </tr>
+            <tr>
+              <td><code>/deep-planning</code></td>
+              <td>코드베이스를 조사하고 상세 구현 계획과 후속 Task 생성</td>
+              <td>여러 영역에 영향을 주는 복잡한 기능이나 구조 변경 전</td>
+            </tr>
+            <tr>
+              <td><code>/explain-changes</code></td>
+              <td>Git Diff의 변경 내용을 설명하며 VS Code에서만 사용 가능</td>
+              <td>미커밋 변경, 커밋 또는 브랜치 차이를 검토할 때</td>
+            </tr>
+            <tr>
+              <td><code>/reportbug</code></td>
+              <td>Cline 진단 정보를 포함해 문제 보고 준비</td>
+              <td>Cline 자체 오류, 비정상 종료 또는 반복되는 오동작을 보고할 때</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          현재 설치 버전에서 지원되는 명령은 채팅 입력창에 <code>/</code>를
+          입력해 확인합니다. 명령 상세와 변경 사항은
+          <a href="https://docs.cline.bot/core-workflows/using-commands">Cline Using Commands</a>를
+          참고합니다.
+        </p>
+
+        <h3>5.4 로컬 LLM 테스트 및 권장 사양</h3>
+        <p>
+          아래 기준은 약 17GB인 <code>qwen3.8:27b</code> 모델을 Ollama와
+          Cline에서 사용하는 환경을 전제로 합니다.
+        </p>
+
+        <h4>테스트 환경</h4>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">구분</th>
+              <th scope="col">테스트 사양</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CPU</td>
+              <td>AMD Ryzen 9 7950X3D</td>
+            </tr>
+            <tr>
+              <td>GPU</td>
+              <td>NVIDIA GeForce RTX 4090 24GB</td>
+            </tr>
+            <tr>
+              <td>메모리</td>
+              <td>DDR5 96GB</td>
+            </tr>
+            <tr>
+              <td>저장 장치</td>
+              <td>NVMe Gen4 SSD 1TB</td>
+            </tr>
+            <tr>
+              <td>모델</td>
+              <td><code>qwen3.8:27b</code>, 약 17GB</td>
+            </tr>
+          </tbody>
+        </table>
+        <blockquote>
+          <p>
+            <strong>테스트 결과</strong>: 약 17GB 모델과 128K 토큰 컨텍스트를
+            사용한 고사양 환경에서는 응답 속도와 추론 품질이 모두
+            실사용 가능한 수준이었습니다. 다만 64K보다 응답이 느려질 수 있으므로
+            일반 개발 PC와 반복 작업에서는 64K를 기본값으로 권장합니다.
+          </p>
+        </blockquote>
+        <p>
+          위 장비는 검증 결과가 좋은 고사양 테스트 환경이며 모든 개발 PC의
+          필수 사양은 아닙니다. 로컬 LLM에서는 GPU 연산 성능뿐 아니라 모델과
+          컨텍스트를 처리할 수 있는 VRAM 용량이 중요합니다.
+        </p>
+
+        <h4>개발 PC 권장 기준</h4>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">사용 범위</th>
+              <th scope="col">GPU</th>
+              <th scope="col">시스템 메모리</th>
+              <th scope="col">CPU</th>
+              <th scope="col">운영 기준</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>64K 기본 권장</td>
+              <td>VRAM 24GB</td>
+              <td>64GB</td>
+              <td>최신 8코어 이상</td>
+              <td>Cline을 이용한 일반적인 코딩 작업의 기본 권장선</td>
+            </tr>
+            <tr>
+              <td>64K 여유 구성</td>
+              <td>VRAM 24GB</td>
+              <td>64~96GB</td>
+              <td>최신 12코어급 권장</td>
+              <td>개발 서버와 다른 작업 도구를 함께 사용할 때 여유 확보</td>
+            </tr>
+            <tr>
+              <td>실행 가능한 최소</td>
+              <td>VRAM 16GB</td>
+              <td>64GB</td>
+              <td>최신 12코어급</td>
+              <td>모델 일부가 CPU로 이동하여 응답 속도가 크게 느려질 수 있음</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          비용과 성능의 균형을 고려하면 RTX 3090 24GB, 시스템 메모리 64GB,
+          최신 8~12코어 CPU와 NVMe SSD 1TB 구성을 권장합니다. RTX 3090은
+          RTX 4090보다 연산 속도는 낮지만 VRAM이 동일하게 24GB이므로 약 17GB
+          모델의 64K 컨텍스트를 사용하는 개발 PC에 적합합니다.
+        </p>
+        <p>
+          64K는 일반적인 코드 조사, Figma 화면 구현과 웹검색 결과 정리에 필요한
+          문맥을 확보하면서 128K보다 빠르게 작업하기 위한 기본값입니다. 다른 GPU
+          사용 프로그램을 최소화하고 <code>ollama ps</code>에서 모델이 가능한 한
+          <code>100% GPU</code>로 적재되었는지 확인합니다. 세부 내용은
+          <a href="https://docs.ollama.com/context-length">Ollama Context length</a>와
+          <a href="https://docs.ollama.com/faq">Ollama FAQ</a>를 참고합니다.
+        </p>
+
+        <h3>5.5 Figma Desktop MCP 설정</h3>
         <p>
           Figma Desktop에서 선택한 레이어 또는 프레임 정보를 Cline에 전달하려면
           Cline의 MCP 설정에 다음 서버를 등록합니다.
@@ -292,7 +509,92 @@ ollama run qwen3.8:27b</code></pre>
           컴포넌트, 디자인 토큰 및 구현 규칙을 함께 확인한 뒤 결과를 적용합니다.
         </p>
 
-        <h3>5.5 React Code Exports 작업 흐름</h3>
+        <h3>5.6 Cline 웹검색과 Tavily MCP</h3>
+        <h4>Cline 기본 브라우저 도구</h4>
+        <p>
+          Cline은 기본 브라우저 도구를 사용해 웹페이지를 열고, 화면을 탐색하고,
+          검색 사이트의 결과와 문서 내용을 확인할 수 있습니다. 별도의 검색 API
+          가입 없이 사용할 수 있지만 웹사이트 화면을 직접 조작하는 방식이므로
+          검색 결과 수집과 여러 출처 비교에는 시간이 더 걸릴 수 있습니다.
+          브라우저 사용은 Cline의 승인 설정에서 허용해야 합니다.
+        </p>
+        <p>
+          특정 URL의 공식 문서를 읽거나 구현 화면을 확인하는 작업에는 기본
+          브라우저를 사용하고, 최신 자료를 여러 출처에서 검색하고 정리하는
+          작업에는 Tavily MCP를 사용합니다.
+        </p>
+
+        <h4>Tavily MCP 설정</h4>
+        <p>
+          Tavily는 AI Agent용 웹검색 서비스로, 검색 결과와 관련 페이지 내용을
+          Cline이 처리하기 쉬운 형태로 제공합니다. 기존 MCP 설정의
+          <code>mcpServers</code>에 다음 항목을 추가합니다.
+        </p>
+        <pre class="hljs"><code data-language="json">"tavily": {
+  "type": "streamableHttp",
+  "url": "https://mcp.tavily.com/mcp/",
+  "headers": {
+    "Authorization": "Bearer YOUR_TAVILY_API_KEY"
+  },
+  "disabled": false,
+  "autoApprove": []
+}</code></pre>
+        <p>
+          <code>YOUR_TAVILY_API_KEY</code>는 Tavily에서 발급받은 키로 교체합니다.
+          API 키가 포함된 설정 파일은 저장소에 커밋하지 않습니다. 처음에는
+          <code>autoApprove</code>를 비워 두고 검색 도구 호출 내용을 확인한 뒤
+          승인합니다.
+        </p>
+
+        <h4>무료 및 유료 사용 구분</h4>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">구분</th>
+              <th scope="col">제공량 또는 비용</th>
+              <th scope="col">사용 기준</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Researcher 무료</td>
+              <td>매월 1,000 API 크레딧, 카드 등록 불필요</td>
+              <td>개인 개발과 필요한 공식 문서 검색에 기본 사용</td>
+            </tr>
+            <tr>
+              <td>기본 검색</td>
+              <td>요청 1회당 1크레딧</td>
+              <td>무료 범위에서 우선 사용</td>
+            </tr>
+            <tr>
+              <td>고급 검색</td>
+              <td>요청 1회당 2크레딧</td>
+              <td>기본 검색 결과가 부족할 때만 사용</td>
+            </tr>
+            <tr>
+              <td>Pay As You Go</td>
+              <td>크레딧당 미화 0.008달러</td>
+              <td>무료 제공량을 초과하고 사용량이 일정하지 않을 때 선택</td>
+            </tr>
+            <tr>
+              <td>월간 유료 플랜</td>
+              <td>월 30달러·4,000크레딧부터 사용량별 단계 제공</td>
+              <td>팀에서 반복적으로 많은 검색을 수행할 때 검토</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          이 가이드에서는 무료 Researcher 플랜을 기준으로 기본 검색을 우선
+          사용합니다. 사이트 전체 탐색이나 대규모 Research 요청은 크레딧을
+          빠르게 소비할 수 있으므로 필요한 공식 문서와 최신 정보 확인 범위로
+          제한합니다. 가격과 크레딧 정책은 변경될 수 있으므로
+          <a href="https://docs.tavily.com/documentation/api-credits">Tavily Credits &amp; Pricing</a>에서
+          현재 기준을 확인합니다.
+        </p>
+        <pre class="hljs"><code data-language="text">Tavily를 사용해 관련 기술의 최신 공식 문서를 검색하고,
+핵심 내용과 출처 URL을 함께 정리해줘.</code></pre>
+
+        <h3>5.7 React Code Exports 작업 흐름</h3>
         <ol>
           <li>Figma에서 구현할 레이어 또는 프레임을 선택합니다.</li>
           <li>Cline에 <code>현재 figma에서 선택된 레이어(프레임) 정보/코딩</code>이라고 요청합니다.</li>
@@ -303,7 +605,7 @@ ollama run qwen3.8:27b</code></pre>
           <li>구현 화면을 Figma와 비교하고 차이를 수정합니다.</li>
         </ol>
 
-        <h3>5.6 검수 기준</h3>
+        <h3>5.8 검수 기준</h3>
         <ul>
           <li>Figma에서 의도한 레이어 또는 프레임을 정확히 선택했는가?</li>
           <li>기존 컴포넌트와 디자인 토큰을 우선 사용했는가?</li>
