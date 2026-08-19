@@ -93,7 +93,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
 ### 미확정 항목
 
-`staleTime`, `gcTime`, `retry`, `refetchOnWindowFocus`, 전역 오류 처리는 API 특성과 UX 정책입니다. 정책이 확정되면 `createQueryClient`의 `defaultOptions`에 명시합니다. 확정 전에는 임의의 숫자나 전역 toast를 넣지 않습니다.
+`staleTime`은 조회 결과를 다시 확인하지 않고 최신으로 보는 시간이고, `gcTime`은 화면에서 더 이상 쓰지 않는 캐시를 메모리에 남겨 두는 시간입니다. 두 값과 `retry`, `refetchOnWindowFocus`, 전역 오류 처리는 API 특성과 UX 정책에 맞춰 결정합니다. 정책이 확정되면 `createQueryClient`의 `defaultOptions`에 명시하고, 확정 전에는 임의의 숫자나 전역 toast를 넣지 않습니다.
 
 ## 구현 예시 2: 중복 제출을 막는 `SubmitButton`
 

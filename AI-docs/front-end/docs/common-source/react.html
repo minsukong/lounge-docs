@@ -91,7 +91,7 @@
 }</code></pre>
 <p>최상위 layout은 Server Component로 유지하고 Provider만 Client Component로 둡니다. Query Devtools처럼 개발에서만 필요한 도구와 특정 화면 경로만 쓰는 Context는 이 Provider에 무조건 넣지 않습니다.</p>
 <h3>미확정 항목</h3>
-<p><code>staleTime</code>, <code>gcTime</code>, <code>retry</code>, <code>refetchOnWindowFocus</code>, 전역 오류 처리는 API 특성과 UX 정책입니다. 정책이 확정되면 <code>createQueryClient</code>의 <code>defaultOptions</code>에 명시합니다. 확정 전에는 임의의 숫자나 전역 toast를 넣지 않습니다.</p>
+<p><code>staleTime</code>은 조회 결과를 다시 확인하지 않고 최신으로 보는 시간이고, <code>gcTime</code>은 화면에서 더 이상 쓰지 않는 캐시를 메모리에 남겨 두는 시간입니다. 두 값과 <code>retry</code>, <code>refetchOnWindowFocus</code>, 전역 오류 처리는 API 특성과 UX 정책에 맞춰 결정합니다. 정책이 확정되면 <code>createQueryClient</code>의 <code>defaultOptions</code>에 명시하고, 확정 전에는 임의의 숫자나 전역 toast를 넣지 않습니다.</p>
 
 </section>
 

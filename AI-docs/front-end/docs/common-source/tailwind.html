@@ -4,74 +4,52 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tailwind CSS와 UI 공통 설정</title>
-    <link
-      rel="stylesheet"
-      href="../../../../assets/style/presentation-theme.css"
-    />
+    <link rel="stylesheet" href="../../../../assets/style/presentation-theme.css" />
   </head>
   <body>
     <header>
       <div class="type">FRONT-END · TAILWIND & UI</div>
       <h1>Tailwind CSS와 UI 공통 설정</h1>
-      <p>
-        Tailwind CSS 4 토큰, shadcn <code>base-nova</code> 설정과 화면 적용
-        예시를 설명합니다.
-      </p>
+      <p>Tailwind CSS 4 토큰, shadcn base-nova 설정과 화면 적용 예시를 설명합니다.</p>
     </header>
 
     <main>
-      <section>
-        <h2 class="bx-active">1. 적용 목적</h2>
-        <p>
-          디자인 시안이 없어도 컴포넌트가 색상값이나 radius 값에 직접 묶이지
-          않도록 공통 설정을 준비할 때 사용합니다. 적용 후 화면 코드는
-          <code>bg-primary</code>, <code>text-muted-foreground</code>,
-          <code>border-input</code>처럼 역할 이름만 사용하고, 디자인 확정 후에는
-          토큰 값만 교체할 수 있습니다.
-        </p>
-        <p>적용 파일은 다음 네 개입니다.</p>
-        <pre class="hljs"><code data-language="text">apps/app-webview/
+<section>
+<h2 class="bx-active">1. 적용 목적</h2>
+<p>디자인 시안이 없어도 컴포넌트가 색상값이나 radius 값에 직접 묶이지 않도록 공통 설정을 준비할 때 사용합니다. 적용 후 화면 코드는 <code>bg-primary</code>, <code>text-muted-foreground</code>, <code>border-input</code>처럼 역할 이름만 사용하고, 디자인 확정 후에는 토큰 값만 교체할 수 있습니다.</p>
+<p>적용 파일은 다음 네 개입니다.</p>
+<pre class="hljs"><code data-language="text">apps/app-webview/
 ├── components.json
 ├── postcss.config.mjs
 └── src/
     ├── app/globals.css
     └── lib/utils.ts</code></pre>
-        <p>
-          필요한 패키지는 <code>tailwindcss</code>,
-          <code>@tailwindcss/postcss</code>, <code>tw-animate-css</code>,
-          <code>clsx</code>, <code>tailwind-merge</code>입니다. shadcn
-          컴포넌트를 생성한다면 프로젝트가 선택한 Base UI·Lucide 관련 패키지도
-          실제 registry 결과에 맞춰 설치합니다.
-        </p>
-      </section>
+<p>필요한 패키지는 <code>tailwindcss</code>, <code>@tailwindcss/postcss</code>, <code>tw-animate-css</code>, <code>clsx</code>, <code>tailwind-merge</code>입니다. shadcn 컴포넌트를 생성한다면 프로젝트가 선택한 Base UI·Lucide 관련 패키지도 실제 registry 결과에 맞춰 설치합니다.</p>
 
-      <hr />
+</section>
 
-      <section>
-        <h2 class="bx-active">2. 1단계: Tailwind CSS 4 연결</h2>
-        <h3><code>apps/app-webview/postcss.config.mjs</code></h3>
-        <pre
-          class="hljs"
-        ><code data-language="js"><span class="hljs-keyword">const</span> config = {
+<hr />
+
+<section>
+<h2 class="bx-active">2. 1단계: Tailwind CSS 4 연결</h2>
+<h3><code>apps/app-webview/postcss.config.mjs</code></h3>
+<pre class="hljs"><code data-language="js"><span class="hljs-keyword">const</span> config = {
   plugins: {
     <span class="hljs-string">&quot;@tailwindcss/postcss&quot;</span>: {},
   },
 }
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> config</code></pre>
-        <p>
-          기존 PostCSS 플러그인이 있다면 제거하지 말고 Tailwind 플러그인만
-          병합합니다. Tailwind CSS 4에서는 이 설정만을 위해
-          <code>tailwind.config.js</code>를 새로 만들지 않습니다.
-        </p>
-      </section>
+<p>기존 PostCSS 플러그인이 있다면 제거하지 말고 Tailwind 플러그인만 병합합니다. Tailwind CSS 4에서는 이 설정만을 위해 <code>tailwind.config.js</code>를 새로 만들지 않습니다.</p>
 
-      <hr />
+</section>
 
-      <section>
-        <h2 class="bx-active">3. 2단계: shadcn 생성 경로 고정</h2>
-        <h3><code>apps/app-webview/components.json</code></h3>
-        <pre class="hljs"><code data-language="json">{
+<hr />
+
+<section>
+<h2 class="bx-active">3. 2단계: shadcn 생성 경로 고정</h2>
+<h3><code>apps/app-webview/components.json</code></h3>
+<pre class="hljs"><code data-language="json">{
   <span class="hljs-attr">&quot;$schema&quot;</span>: <span class="hljs-string">&quot;https://ui.shadcn.com/schema.json&quot;</span>,
   <span class="hljs-attr">&quot;style&quot;</span>: <span class="hljs-string">&quot;base-nova&quot;</span>,
   <span class="hljs-attr">&quot;rsc&quot;</span>: <span class="hljs-literal">true</span>,
@@ -92,116 +70,74 @@
     <span class="hljs-attr">&quot;hooks&quot;</span>: <span class="hljs-string">&quot;@/hooks&quot;</span>
   }
 }</code></pre>
-        <p>
-          <code>style</code>, <code>baseColor</code>, alias는 이미 설치된
-          프로젝트 설정을 우선합니다. 이 파일의 목적은 컴포넌트 생성 위치와 토큰
-          사용 방식을 정하는 것입니다. Button, Input, Dialog 등을 한 번에
-          생성하지 않고 실제 화면에서 필요한 항목만 추가합니다.
-        </p>
-      </section>
+<p><code>style</code>, <code>baseColor</code>, alias는 이미 설치된 프로젝트 설정을 우선합니다. 이 파일의 목적은 컴포넌트 생성 위치와 토큰 사용 방식을 정하는 것입니다. Button, Input, Dialog 등을 한 번에 생성하지 않고 실제 화면에서 필요한 항목만 추가합니다.</p>
 
-      <hr />
+</section>
 
-      <section>
-        <h2 class="bx-active">4. 'base-nova'가 의미하는 것</h2>
-        <p>
-          <code>base-nova</code>는 설치할 패키지 이름이나 색상 테마 이름이
-          아닙니다. shadcn CLI가 컴포넌트 코드를 생성할 때 참고하는
-          <strong>컴포넌트 구현 방식과 시각 스타일의 조합</strong>입니다.
-        </p>
-        <table>
-          <thead>
-            <tr>
-              <th scope="col">이름</th>
-              <th scope="col">의미</th>
-              <th scope="col">생성 코드에 미치는 영향</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>base</code></td>
-              <td>Dialog, Select 같은 동작을 Base UI로 구현</td>
-              <td>Base UI에 맞는 import, prop과 컴포넌트 구조 생성</td>
-            </tr>
-            <tr>
-              <td><code>nova</code></td>
-              <td>padding과 margin을 줄인 간결한 시각 스타일</td>
-              <td>컴포넌트의 기본 크기, 간격과 Tailwind 클래스 구성</td>
-            </tr>
-          </tbody>
-        </table>
-        <p>
-          예를 들어 <code>shadcn add dialog</code>를 실행하면 CLI는
-          <code>components.json</code>의 <code>style</code>을 읽고 Base UI를
-          사용하는 Nova 스타일의 Dialog 코드를 생성합니다. 생성된 코드는 패키지
-          내부에 숨겨지지 않고 프로젝트의 <code>src/components/ui</code>에
-          추가되므로 필요한 부분을 직접 수정할 수 있습니다.
-        </p>
-        <h3>다른 설정과의 차이</h3>
-        <table>
-          <thead>
-            <tr>
-              <th scope="col">설정</th>
-              <th scope="col">결정하는 내용</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>style: &quot;base-nova&quot;</code></td>
-              <td>컴포넌트가 사용할 UI 라이브러리와 기본 구조·간격</td>
-            </tr>
-            <tr>
-              <td><code>tailwind.baseColor: &quot;neutral&quot;</code></td>
-              <td>처음 생성하는 중립 색상 계열</td>
-            </tr>
-            <tr>
-              <td><code>tailwind.cssVariables: true</code></td>
-              <td>
-                <code>primary</code>, <code>background</code> 같은 의미 기반
-                토큰 사용 여부
-              </td>
-            </tr>
-            <tr>
-              <td><code>iconLibrary: &quot;lucide&quot;</code></td>
-              <td>생성 코드에서 사용할 아이콘 라이브러리</td>
-            </tr>
-          </tbody>
-        </table>
-        <p>
-          <code>base-nova</code>를 선택해도 브랜드 색상과 다크 모드 값이
-          확정되는 것은 아닙니다. 브랜드 색상, 배경색과 radius는
-          <code>globals.css</code>의 토큰으로 별도 관리합니다. 따라서 디자인이
-          바뀌더라도 Base UI와 Nova 구조를 유지하면서 토큰 값만 교체할 수
-          있습니다.
-        </p>
-        <h3>나중에 변경할 때 주의할 점</h3>
-        <p>
-          shadcn은 컴포넌트 코드를 프로젝트에 복사하는 방식입니다. 이미
-          Button이나 Dialog를 생성한 뒤 <code>components.json</code>의
-          <code>style</code>만 바꿔도 기존 파일은 자동으로 변경되지 않습니다.
-        </p>
-        <p>
-          다른 UI 라이브러리나 시각 스타일로 바꾸려면 새 생성 결과와 기존 파일의
-          차이를 확인하고, 프로젝트에서 수정한 내용과 함께 병합해야 합니다.
-          따라서 실제 저장소를 만들 때 Base UI 사용 여부와 Nova 스타일 적용
-          여부를 먼저 확인한 뒤 첫 컴포넌트를 생성합니다.
-        </p>
-        <p>
-          현재 가이드의 예시 코드는 <code>base-nova</code>를 기준으로 작성되어
-          있습니다. 실제 프로젝트에서 다른 값을 선택하면
-          <code>components.json</code>, shadcn 컴포넌트 import와 관련 예시를
-          선택한 값에 맞게 함께 갱신합니다.
-        </p>
-      </section>
+<hr />
 
-      <hr />
+<section>
+<h2 class="bx-active">4. <code>base-nova</code>가 의미하는 것</h2>
+<p><code>base-nova</code>는 설치할 패키지 이름이나 색상 테마 이름이 아닙니다. shadcn CLI가 컴포넌트 코드를 생성할 때 참고하는 <strong>컴포넌트 구현 방식과 시각 스타일의 조합</strong>입니다.</p>
+<table>
+<thead>
+<tr>
+<th scope="col">이름</th>
+<th scope="col">의미</th>
+<th scope="col">생성 코드에 미치는 영향</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>base</code></td>
+<td>Dialog, Select 같은 동작을 Base UI로 구현</td>
+<td>Base UI에 맞는 import, prop과 컴포넌트 구조 생성</td>
+</tr>
+<tr>
+<td><code>nova</code></td>
+<td>padding과 margin을 줄인 간결한 시각 스타일</td>
+<td>컴포넌트의 기본 크기, 간격과 Tailwind 클래스 구성</td>
+</tr>
+</tbody></table>
+<p>예를 들어 <code>shadcn add dialog</code>를 실행하면 CLI는 <code>components.json</code>의 <code>style</code>을 읽고 Base UI를 사용하는 Nova 스타일의 Dialog 코드를 생성합니다. 생성된 코드는 패키지 내부에 숨겨지지 않고 프로젝트의 <code>src/components/ui</code>에 추가되므로 필요한 부분을 직접 수정할 수 있습니다.</p>
+<h3>다른 설정과의 차이</h3>
+<table>
+<thead>
+<tr>
+<th scope="col">설정</th>
+<th scope="col">결정하는 내용</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>style: &quot;base-nova&quot;</code></td>
+<td>컴포넌트가 사용할 UI 라이브러리와 기본 구조·간격</td>
+</tr>
+<tr>
+<td><code>tailwind.baseColor: &quot;neutral&quot;</code></td>
+<td>처음 생성하는 중립 색상 계열</td>
+</tr>
+<tr>
+<td><code>tailwind.cssVariables: true</code></td>
+<td><code>primary</code>, <code>background</code> 같은 의미 기반 토큰 사용 여부</td>
+</tr>
+<tr>
+<td><code>iconLibrary: &quot;lucide&quot;</code></td>
+<td>생성 코드에서 사용할 아이콘 라이브러리</td>
+</tr>
+</tbody></table>
+<p><code>base-nova</code>를 선택해도 브랜드 색상과 다크 모드 값이 확정되는 것은 아닙니다. 브랜드 색상, 배경색과 radius는 <code>globals.css</code>의 토큰으로 별도 관리합니다. 따라서 디자인이 바뀌더라도 Base UI와 Nova 구조를 유지하면서 토큰 값만 교체할 수 있습니다.</p>
+<h3>나중에 변경할 때 주의할 점</h3>
+<p>shadcn은 컴포넌트 코드를 프로젝트에 복사하는 방식입니다. 이미 Button이나 Dialog를 생성한 뒤 <code>components.json</code>의 <code>style</code>만 바꿔도 기존 파일은 자동으로 변경되지 않습니다.</p>
+<p>다른 UI 라이브러리나 시각 스타일로 바꾸려면 새 생성 결과와 기존 파일의 차이를 확인하고, 프로젝트에서 수정한 내용과 함께 병합해야 합니다. 따라서 실제 저장소를 만들 때 Base UI 사용 여부와 Nova 스타일 적용 여부를 먼저 확인한 뒤 첫 컴포넌트를 생성합니다.</p>
+<p>현재 가이드의 예시 코드는 <code>base-nova</code>를 기준으로 작성되어 있습니다. 실제 프로젝트에서 다른 값을 선택하면 <code>components.json</code>, shadcn 컴포넌트 import와 관련 예시를 선택한 값에 맞게 함께 갱신합니다.</p>
 
-      <section>
-        <h2 class="bx-active">5. 3단계: 디자인 전 사용할 토큰 정의</h2>
-        <h3><code>apps/app-webview/src/app/globals.css</code></h3>
-        <pre
-          class="hljs"
-        ><code data-language="css"><span class="hljs-keyword">@import</span> <span class="hljs-string">&quot;tailwindcss&quot;</span>;
+</section>
+
+<hr />
+
+<section>
+<h2 class="bx-active">5. 3단계: 디자인 전 사용할 토큰 정의</h2>
+<h3><code>apps/app-webview/src/app/globals.css</code></h3>
+<pre class="hljs"><code data-language="css"><span class="hljs-keyword">@import</span> <span class="hljs-string">&quot;tailwindcss&quot;</span>;
 <span class="hljs-keyword">@import</span> <span class="hljs-string">&quot;tw-animate-css&quot;</span>;
 
 <span class="hljs-keyword">@custom-variant</span> dark (&amp;:is(.dark *));
@@ -283,35 +219,23 @@
     <span class="hljs-keyword">@apply</span> bg-background text-foreground;
   }
 }</code></pre>
-        <p>
-          위 값은 화면 개발을 시작할 수 있게 하는 중립 색상 임시값입니다. 브랜드
-          확정값으로 보지 않습니다. 디자인이 나오면
-          <code>@theme inline</code>이나 컴포넌트 클래스를 먼저 바꾸지 말고
-          <code>:root</code>와 <code>.dark</code>의 값부터 교체합니다.
-        </p>
-      </section>
+<p><code>:root</code>와 <code>.dark</code>는 실제 색상값을 정의하고, <code>@theme inline</code>은 그 값을 <code>bg-background</code>, <code>text-primary</code> 같은 Tailwind 클래스와 연결합니다. 위 값은 화면 개발을 시작할 수 있게 하는 중립 색상 임시값이므로 브랜드 확정값으로 보지 않습니다. 디자인이 나오면 연결 구조나 컴포넌트 클래스를 먼저 바꾸지 말고 <code>:root</code>와 <code>.dark</code>의 값부터 교체합니다.</p>
 
-      <hr />
+</section>
 
-      <section>
-        <h2 class="bx-active">6. 4단계: 클래스 병합 함수</h2>
-        <h3><code>apps/app-webview/src/lib/utils.ts</code></h3>
-        <pre
-          class="hljs"
-        ><code data-language="ts"><span class="hljs-keyword">import</span> { clsx, <span class="hljs-keyword">type</span> <span class="hljs-title class_">ClassValue</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;clsx&quot;</span>
+<hr />
+
+<section>
+<h2 class="bx-active">6. 4단계: 클래스 병합 함수</h2>
+<h3><code>apps/app-webview/src/lib/utils.ts</code></h3>
+<pre class="hljs"><code data-language="ts"><span class="hljs-keyword">import</span> { clsx, <span class="hljs-keyword">type</span> <span class="hljs-title class_">ClassValue</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;clsx&quot;</span>
 <span class="hljs-keyword">import</span> { twMerge } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;tailwind-merge&quot;</span>
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> cn(...inputs: <span class="hljs-title class_">ClassValue</span>[]) {
   <span class="hljs-keyword">return</span> twMerge(clsx(inputs))
 }</code></pre>
-        <p>
-          <code>cn</code>은 조건부 클래스를 모으고 같은 Tailwind 속성의 충돌을
-          해결합니다. 아래처럼 기본 배치 규칙은 유지하면서 호출자가 폭이나
-          간격을 바꿀 수 있습니다.
-        </p>
-        <pre
-          class="hljs"
-        ><code data-language="tsx"><span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> { <span class="hljs-title class_">ComponentProps</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>
+<p><code>cn</code>은 조건부 클래스를 모으고 같은 Tailwind 속성의 충돌을 해결합니다. 아래처럼 기본 배치 규칙은 유지하면서 호출자가 폭이나 간격을 바꿀 수 있습니다.</p>
+<pre class="hljs"><code data-language="tsx"><span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> { <span class="hljs-title class_">ComponentProps</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>
 <span class="hljs-keyword">import</span> { cn } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/lib/utils&quot;</span>
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title class_">Section</span>({ className, ...props }: <span class="hljs-title class_">ComponentProps</span>&lt;<span class="hljs-string">&quot;section&quot;</span>&gt;) {
@@ -322,29 +246,19 @@
     /&gt;
   )
 }</code></pre>
-        <pre
-          class="hljs"
-        ><code data-language="tsx">&lt;<span class="hljs-selector-tag">Section</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;max-w-screen-lg py-10&quot;</span>&gt;
+<pre class="hljs"><code data-language="tsx">&lt;<span class="hljs-selector-tag">Section</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;max-w-screen-lg py-10&quot;</span>&gt;
   &lt;<span class="hljs-selector-tag">h1</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;text-2xl font-semibold&quot;</span>&gt;내 정보&lt;/<span class="hljs-selector-tag">h1</span>&gt;
 &lt;/<span class="hljs-selector-tag">Section</span>&gt;</code></pre>
-        <p>
-          이 <code>Section</code>은 실제 페이지 둘 이상에서 동일한 너비와 여백
-          규칙이 확인될 때만 공통 컴포넌트로 둡니다. 아직 화면 배치가 정해지지
-          않았다면 사용 화면 가까이에 둔 채 반복 여부를 확인합니다.
-        </p>
-      </section>
+<p>이 <code>Section</code>은 실제 페이지 둘 이상에서 동일한 너비와 여백 규칙이 확인될 때만 공통 컴포넌트로 둡니다. 아직 화면 배치가 정해지지 않았다면 사용 화면 가까이에 둔 채 반복 여부를 확인합니다.</p>
 
-      <hr />
+</section>
 
-      <section>
-        <h2 class="bx-active">7. 실제 화면 작성 예시</h2>
-        <p>
-          의미 기반 토큰을 사용한 컴포넌트는 디자인 값이 바뀌어도 화면 구조를
-          다시 작성하지 않습니다.
-        </p>
-        <pre
-          class="hljs"
-        ><code data-language="tsx"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Button</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/components/ui/button&quot;</span>
+<hr />
+
+<section>
+<h2 class="bx-active">7. 실제 화면 작성 예시</h2>
+<p>의미 기반 토큰을 사용한 컴포넌트는 디자인 값이 바뀌어도 화면 구조를 다시 작성하지 않습니다.</p>
+<pre class="hljs"><code data-language="tsx"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Button</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/components/ui/button&quot;</span>
 <span class="hljs-keyword">import</span> { <span class="hljs-title class_">Input</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/components/ui/input&quot;</span>
 <span class="hljs-keyword">import</span> { <span class="hljs-title class_">Label</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/components/ui/label&quot;</span>
 
@@ -370,24 +284,16 @@
     &lt;/<span class="hljs-selector-tag">section</span>&gt;
   )
 }</code></pre>
-        <p>
-          여기서 <code>bg-white</code>, <code>text-gray-500</code>,
-          <code>border-gray-200</code>, <code>bg-blue-600</code>처럼 역할이
-          드러나지 않는 색상 클래스를 섞지 않습니다. <code>p-4</code>,
-          <code>gap-2</code> 같은 간격은 디자인 확정 후 컴포넌트 구조와 함께
-          조정할 수 있습니다.
-        </p>
-      </section>
+<p>여기서 <code>bg-white</code>, <code>text-gray-500</code>, <code>border-gray-200</code>, <code>bg-blue-600</code>처럼 역할이 드러나지 않는 색상 클래스를 섞지 않습니다. <code>p-4</code>, <code>gap-2</code> 같은 간격은 디자인 확정 후 컴포넌트 구조와 함께 조정할 수 있습니다.</p>
 
-      <hr />
+</section>
 
-      <section>
-        <h2 class="bx-active">8. 디자인 값 교체 예시</h2>
-        <p>
-          브랜드 주색이 확정되면 사용처의 <code>bg-primary</code>를 모두 찾는
-          대신 토큰 값만 바꿉니다.
-        </p>
-        <pre class="hljs"><code data-language="css">:root {
+<hr />
+
+<section>
+<h2 class="bx-active">8. 디자인 값 교체 예시</h2>
+<p>브랜드 주색이 확정되면 사용처의 <code>bg-primary</code>를 모두 찾는 대신 토큰 값만 바꿉니다.</p>
+<pre class="hljs"><code data-language="css">:root {
   <span class="hljs-attr">--primary</span>: oklch(<span class="hljs-number">0.55</span> <span class="hljs-number">0.19</span> <span class="hljs-number">255</span>);
   <span class="hljs-attr">--primary-foreground</span>: oklch(<span class="hljs-number">0.985</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span>);
   <span class="hljs-attr">--ring</span>: oklch(<span class="hljs-number">0.62</span> <span class="hljs-number">0.16</span> <span class="hljs-number">255</span>);
@@ -398,78 +304,59 @@
   <span class="hljs-attr">--primary-foreground</span>: oklch(<span class="hljs-number">0.16</span> <span class="hljs-number">0.03</span> <span class="hljs-number">255</span>);
   <span class="hljs-attr">--ring</span>: oklch(<span class="hljs-number">0.72</span> <span class="hljs-number">0.14</span> <span class="hljs-number">255</span>);
 }</code></pre>
-        <p>
-          이 값도 교체 방법을 보여 주는 코드일 뿐 Lounge 브랜드 값이 아닙니다.
-          실제 값은 디자인 토큰 원본에서 가져옵니다.
-        </p>
-      </section>
+<p>이 값도 교체 방법을 보여 주는 코드일 뿐 Lounge 브랜드 값이 아닙니다. 실제 값은 디자인 토큰 원본에서 가져옵니다.</p>
 
-      <hr />
+</section>
 
-      <section>
-        <h2 class="bx-active">9. 상태별 확인 목록</h2>
-        <table>
-          <thead>
-            <tr>
-              <th scope="col">상태</th>
-              <th scope="col">확인할 클래스 또는 동작</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>기본 면</td>
-              <td>
-                <code>bg-background</code>, <code>bg-card</code>, 대응
-                <code>*-foreground</code>
-              </td>
-            </tr>
-            <tr>
-              <td>마우스 올림·선택</td>
-              <td>
-                <code>bg-accent</code>, <code>text-accent-foreground</code>
-              </td>
-            </tr>
-            <tr>
-              <td>입력</td>
-              <td>
-                <code>border-input</code>, 잘못된 입력 표시, placeholder 대비
-              </td>
-            </tr>
-            <tr>
-              <td>키보드 포커스</td>
-              <td><code>ring-ring</code>, 포커스가 배경과 구분되는지</td>
-            </tr>
-            <tr>
-              <td>비활성화</td>
-              <td>색상만이 아니라 실제 <code>disabled</code> 속성이 있는지</td>
-            </tr>
-            <tr>
-              <td>위험 동작</td>
-              <td><code>destructive</code>가 일반 primary와 구분되는지</td>
-            </tr>
-            <tr>
-              <td>어두운 화면</td>
-              <td>
-                <code>.dark</code> 상위에서 모든 의미 기반 토큰이 적용되는지
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
+<hr />
 
-      <hr />
+<section>
+<h2 class="bx-active">9. 상태별 확인 목록</h2>
+<table>
+<thead>
+<tr>
+<th scope="col">상태</th>
+<th scope="col">확인할 클래스 또는 동작</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>기본 면</td>
+<td><code>bg-background</code>, <code>bg-card</code>, 대응 <code>*-foreground</code></td>
+</tr>
+<tr>
+<td>마우스 올림·선택</td>
+<td><code>bg-accent</code>, <code>text-accent-foreground</code></td>
+</tr>
+<tr>
+<td>입력</td>
+<td><code>border-input</code>, 잘못된 입력 표시, placeholder 대비</td>
+</tr>
+<tr>
+<td>키보드 포커스</td>
+<td><code>ring-ring</code>, 포커스가 배경과 구분되는지</td>
+</tr>
+<tr>
+<td>비활성화</td>
+<td>색상만이 아니라 실제 <code>disabled</code> 속성이 있는지</td>
+</tr>
+<tr>
+<td>위험 동작</td>
+<td><code>destructive</code>가 일반 primary와 구분되는지</td>
+</tr>
+<tr>
+<td>어두운 화면</td>
+<td><code>.dark</code> 상위에서 모든 의미 기반 토큰이 적용되는지</td>
+</tr>
+</tbody></table>
 
-      <section>
-        <h2 class="bx-active">10. 미확정 항목</h2>
-        <p>
-          글자 크기 체계, 간격 체계, 화면 너비 기준, 테마 저장 방식, 차트와
-          사이드바 토큰은 실제 디자인이나 사용할 컴포넌트가 정해진 뒤
-          추가합니다. Button, Input, Dialog 같은 기본 UI 컴포넌트는 shadcn이
-          생성한 코드를 우선하며 같은 기능을 다시 감싸는 컴포넌트를 미리 만들지
-          않습니다.
-        </p>
-      </section>
-    </main>
+</section>
+
+<hr />
+
+<section>
+<h2 class="bx-active">10. 미확정 항목</h2>
+<p>글자 크기 체계, 간격 체계, 화면 너비 기준, 테마 저장 방식, 차트와 사이드바 토큰은 실제 디자인이나 사용할 컴포넌트가 정해진 뒤 추가합니다. Button, Input, Dialog 같은 기본 UI 컴포넌트는 shadcn이 생성한 코드를 우선하며 같은 기능을 다시 감싸는 컴포넌트를 미리 만들지 않습니다.</p>
+</section></main>
 
     <footer>
       <p>Tailwind CSS와 UI 공통 설정</p>
