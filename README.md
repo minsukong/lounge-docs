@@ -7,6 +7,8 @@
 - [APP 개발 표준](./app/app.html)
 - [Front-End 개발 가이드](./frontend_guide/index.html)
 - [typescript 가이드](./typescript_guide/index.html)
+- [Lint 가이드](./lint_guide/index.html)
+- [테스트 가이드](./test_guide/index.html)
 
 ---
 
