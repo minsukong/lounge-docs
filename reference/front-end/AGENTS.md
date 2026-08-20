@@ -25,6 +25,33 @@
 
 AI는 작업을 시작할 때 이 `AGENTS.md`를 먼저 읽습니다. 이후 작업 종류를 판단해 필요한 `docs/ai/` 요약만 확인하고, 요약만으로 세부 기준을 판단하기 어려울 때 연결된 상세 가이드로 이동합니다.
 
+### 작업별 AI 요약 문서
+
+| 필요한 작업 | 확인할 문서 | 문서 내용 |
+| --- | --- | --- |
+| 프로젝트 구조, 기능과 상태 관리 기준 확인 | [Markdown](./docs/ai/project.md) · [HTML](./docs/ai/project.html) | 앱 범위, 기술 스택, 디렉터리 구조와 상태 배치 원칙 |
+| UI, 컴포넌트와 스타일 구현 | [Markdown](./docs/ai/ui.md) · [HTML](./docs/ai/ui.html) | React·TypeScript 출력, Tailwind CSS, 컴포넌트 재사용과 접근성 기준 |
+| 디자인 토큰과 스타일 값 연결 | [Markdown](./docs/ai/design-tokens.md) · [HTML](./docs/ai/design-tokens.html) | 의미 기반 토큰, shadcn/ui 설정, Figma Variables와 Tokens Studio 기준 |
+| Figma 화면을 애플리케이션 코드로 구현 | [Markdown](./docs/ai/figma.md) · [HTML](./docs/ai/figma.html) | 구현 전 조사, 기존 코드 매핑, React 구현과 시각·품질 확인 흐름 |
+| TypeScript, Lint, Test와 Build 품질 확인 | [Markdown](./docs/ai/quality.md) · [HTML](./docs/ai/quality.html) | 검사 도구의 역할, 테스트 범위와 기본 검증 명령 |
+| 공통 설정, 컴포넌트와 유틸리티 가이드 작성 | [Markdown](./docs/ai/common-source.md) · [HTML](./docs/ai/common-source.html) | 공통 소스 상세 가이드 진입점, 작성 원칙과 실제 저장소 적용 기준 |
+| Ollama, Continue와 로컬 LLM 활용 | [Markdown](./docs/ai/local-llm.md) · [HTML](./docs/ai/local-llm.html) | 로컬 모델에 맡길 범위, 검토 방식과 외부 모델 전환 기준 |
+
+### 문서 계층과 적용 기준
+
+```text
+AGENTS.md
+└─ 프로젝트 전체 원칙과 작업별 문서 선택
+   └─ docs/ai/*.md
+      └─ 현재 작업에 필요한 핵심 판단 요약
+         └─ docs/common-source/*.md
+            └─ 실제 파일에 가까운 구현 예시와 적용 절차
+               └─ apps/app-webview/*
+                  └─ 저장소 생성 후 확인된 실제 소스와 설정
+```
+
+이 계층은 문서를 확인하는 흐름입니다. 실제 애플리케이션 저장소가 생성된 뒤에는 설치된 package, 기존 source와 app 내부 `AGENTS.md`를 먼저 확인하고, `docs/common-source/`의 코드를 그대로 덮어쓰지 않고 비교·병합합니다. 예시의 API, 브랜드 값, 업무 문구와 상태 정책은 확정된 제품 계약으로 교체합니다.
+
 <figure class="diagram-frame">
   <!-- prettier-ignore -->
   <div class="mermaid">
@@ -59,6 +86,21 @@ flowchart TD
 - 품질 확인: [Lint 가이드](../../lint_guide/index.html), [Test 가이드](../../test_guide/index.html)
 - 공통 소스 구현: [공통 소스 가이드](./docs/common-source/index.md), [테스트 공통 소스](./docs/common-source/test.md), [통합 사용 예시](./docs/common-source/recipes.md), [공통 소스 카탈로그](./docs/common-source/catalog.md)
 
+### 공통 소스 구현 문서
+
+`docs/common-source/`는 작업 지침을 반복하는 문서가 아니라 실제 저장소에 적용할 파일 단위 예시, 적용 조건과 교체 지점을 제공합니다. 공통 소스 작업에서는 먼저 진입 문서를 확인하고 현재 작업 영역에 해당하는 문서만 추가로 읽습니다.
+
+| 필요한 작업 | 확인할 문서 | 문서 내용 |
+| --- | --- | --- |
+| 공통 소스 문서의 범위와 적용 순서 확인 | [Markdown](./docs/common-source/index.md) · [HTML](./docs/common-source/index.html) | 문서별 역할, 권장 파일 구조, 적용 순서와 완료 기준 |
+| Tailwind CSS와 shadcn/ui 공통 설정 | [Markdown](./docs/common-source/tailwind.md) · [HTML](./docs/common-source/tailwind.html) | PostCSS, `components.json`, 디자인 토큰, `globals.css`와 `cn` 구현 예시 |
+| React Provider와 반복되는 폼 동작 구현 | [Markdown](./docs/common-source/react.md) · [HTML](./docs/common-source/react.html) | QueryClient 생명주기, Provider, `SubmitButton`과 `FormField` 구현 예시 |
+| TypeScript 설정과 외부 입력 검증 | [Markdown](./docs/common-source/typescript.md) · [HTML](./docs/common-source/typescript.html) | 공통 compiler 설정, type guard, 오류 변환과 union 분기 검사 예시 |
+| Client Component와 Query 테스트 환경 구성 | [Markdown](./docs/common-source/test.md) · [HTML](./docs/common-source/test.html) | Vitest, Testing Library, 공통 렌더링 함수와 사용자 동작 테스트 예시 |
+| 공통 소스를 한 기능에 연결 | [Markdown](./docs/common-source/recipes.md) · [HTML](./docs/common-source/recipes.html) | 프로필 조회·검증·수정·상태 처리와 테스트를 연결한 통합 예시 |
+| 적용 조건, package와 미확정 항목 확인 | [Markdown](./docs/common-source/catalog.md) · [HTML](./docs/common-source/catalog.html) | 파일별 도입 조건, 함께 적용할 코드, 필요한 package, TBD와 검증 목록 |
+| 현재 준비 수준과 저장소 생성 후 순서 확인 | [Markdown](./docs/common-source/briefing.md) · [HTML](./docs/common-source/briefing.html) | 가이드의 활용 범위, 한계, 실제 적용 순서와 다음 검토 시점 |
+
 ## 작업별 필수 문서
 
 ```text
@@ -78,7 +120,8 @@ docs/
    ├─ typescript.md     # TypeScript 설정과 유틸리티 가이드
    ├─ test.md           # Vitest와 Testing Library 공통 테스트 가이드
    ├─ recipes.md        # 공통 소스를 연결한 기능 단위 통합 예시
-   └─ catalog.md        # 구현 항목과 도입 조건 체크리스트
+   ├─ catalog.md        # 구현 항목과 도입 조건 체크리스트
+   └─ briefing.md       # 준비 수준과 저장소 생성 후 적용 순서
 ```
 
 - UI 작업에서는 `docs/ai/ui.md`와 `docs/ai/design-tokens.md`를 함께 읽습니다.
