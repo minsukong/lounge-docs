@@ -1,0 +1,827 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="한국어 원문 추출, 로컬 LLM 번역, 언어별 카탈로그와 디바이스 언어 적용 기준을 정리합니다."
+    />
+    <title>Front-End 다국어 및 로컬 LLM 번역 가이드</title>
+    <link rel="stylesheet" href="./../assets/style/presentation-theme.css" />
+  </head>
+  <body>
+    <header>
+      <div class="type">FRONT-END · I18N · LOCAL LLM</div>
+      <h1>Front-End 다국어 및 로컬 LLM 번역 가이드</h1>
+      <p>
+        한국어 원문을 추출하고 로컬 LLM으로 번역한 뒤, 앱 설정과 디바이스
+        언어에 맞는 화면을 제공하는 기준을 정리합니다.
+      </p>
+    </header>
+
+    <main>
+      <section>
+        <h2 class="bx-active">1. 문서 목적</h2>
+        <p>
+          이 문서는 <code>apps/app-webview</code>에서 개발자가 한국어 문구를
+          소스 코드에 작성하고, 추출된 메시지를 로컬 LLM으로 번역한 뒤, 실행
+          환경의 언어에 맞는 번역을 표시하는 기준을 정의합니다.
+        </p>
+        <p>
+          다국어 처리는 메시지 작성, 번역 생성과 실행 중 언어 선택을 분리합니다.
+          로컬 LLM은 개발 과정에서 번역 카탈로그를 만드는 데만 사용하고 사용자
+          요청을 처리하는 실행 경로에서는 호출하지 않습니다.
+        </p>
+        <p>
+          전체 저장소 구조와 공통화 기준은
+          <a href="./../monorepo/index.html">Front-End Monorepo 공통 기준</a>을
+          우선합니다. Next.js WebView의 구현 기준은
+          <a href="./../frontend_guide/index.html">Front-End 개발 가이드</a>를
+          함께 따릅니다.
+        </p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">2. 적용 범위와 핵심 원칙</h2>
+        <p>
+          한국어를 원본 언어로 사용하고 한국어, 중국어 간체, 일본어와 영어를
+          제공하는 Next.js WebView 애플리케이션에 적용합니다.
+        </p>
+        <ul>
+          <li>개발자는 번역 키를 먼저 만들지 않고 한국어 메시지를 코드에 작성합니다.</li>
+          <li>추출 도구가 정적으로 확인할 수 있는 메시지만 번역 대상으로 사용합니다.</li>
+          <li>자동 생성 ID와 원문, 번역 및 사용 위치를 언어별 카탈로그에서 관리합니다.</li>
+          <li>로컬 LLM은 비어 있거나 원문이 변경된 번역만 생성합니다.</li>
+          <li>번역 카탈로그는 소스 코드와 함께 검토하고 저장소에 반영합니다.</li>
+          <li>실행 중에는 준비된 카탈로그만 읽으며 LLM을 호출하지 않습니다.</li>
+          <li>
+            지원 언어는 한국어(<code>ko</code>), 중국어 간체(<code>zh-CN</code>),
+            일본어(<code>ja</code>)와 영어(<code>en</code>)입니다.
+          </li>
+          <li>지원하지 않는 디바이스 언어는 영어로 표시합니다.</li>
+          <li>
+            중국어 간체 또는 일본어 번역이 누락되면 영어를 사용하고, 영어도
+            누락된 경우 한국어 원문을 사용합니다.
+          </li>
+          <li>변수, ICU 문법과 React 요소 자리표시자는 번역 전후에 유지합니다.</li>
+        </ul>
+        <blockquote>
+          <p>
+            자동 번역 결과는 번역 후보입니다. 결제, 환불, 개인정보, 약관, 이용
+            조건처럼 의미 오류의 영향이 큰 문구는 별도 검토 없이 확정 문구로
+            사용하지 않습니다.
+          </p>
+        </blockquote>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">3. 처리 흐름과 책임</h2>
+        <figure class="diagram-frame">
+          <!-- prettier-ignore -->
+          <div class="mermaid">
+flowchart LR
+  accTitle: 한국어 메시지에서 다국어 화면까지의 처리 흐름
+  accDescr: React 코드에 작성한 한국어 메시지를 추출해 언어별 JSON을 갱신하고, 로컬 LLM 번역과 구조 검증 및 컴파일을 거쳐 앱 설정 또는 디바이스 언어에 맞는 화면을 표시합니다.
+  A["React 코드에 한국어 메시지 작성"] --> B["메시지 추출"]
+  B --> C["언어별 JSON 카탈로그 갱신"]
+  C --> D["로컬 LLM이 누락 번역 생성"]
+  D --> E["ID·변수·ICU 구조 검증"]
+  E --> F["실행용 카탈로그 컴파일"]
+  F --> G["앱 설정 또는 디바이스 언어 선택"]
+  G --> H["번역된 화면 표시"]
+          </div>
+          <figcaption>한국어 원문 작성부터 다국어 화면 표시까지의 처리 과정</figcaption>
+        </figure>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">단계</th>
+              <th scope="col">책임</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>메시지 작성</td>
+              <td>개발자가 한국어 원문과 필요한 문맥을 코드에 작성</td>
+            </tr>
+            <tr>
+              <td>추출</td>
+              <td>소스 파일을 검색하고 자동 ID와 카탈로그를 생성·병합</td>
+            </tr>
+            <tr>
+              <td>번역</td>
+              <td>로컬 LLM이 누락 항목만 대상 언어로 변환</td>
+            </tr>
+            <tr>
+              <td>검증</td>
+              <td>키, 변수, ICU 문법, 태그와 JSON 구조를 코드로 검사</td>
+            </tr>
+            <tr>
+              <td>컴파일</td>
+              <td>번역 카탈로그를 애플리케이션이 읽을 수 있는 형식으로 변환</td>
+            </tr>
+            <tr>
+              <td>언어 선택</td>
+              <td>앱 설정과 디바이스 언어를 지원 언어에 매핑</td>
+            </tr>
+            <tr>
+              <td>실행</td>
+              <td>선택한 카탈로그를 로드하고 영어 fallback 적용</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">4. 코드에서 메시지 작성</h2>
+        <p>
+          번역할 JSX 문구는 메시지 추출 도구가 인식하는 정적 표현으로 작성합니다.
+          아래 코드는 Lingui Macro를 사용하는 참고 구현입니다.
+        </p>
+        <pre class="hljs"><code data-language="tsx"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">Trans</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">'@lingui/react/macro'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">LoginButton</span>() {
+  <span class="hljs-keyword">return</span> (
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">Trans</span>&gt;</span>로그인<span class="hljs-tag">&lt;/<span class="hljs-name">Trans</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+  );
+}</code></pre>
+        <p>동적 값은 메시지 안의 변수로 전달합니다.</p>
+        <pre class="hljs"><code data-language="tsx"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">WelcomeMessageProps</span> {
+  <span class="hljs-attr">name</span>: <span class="hljs-built_in">string</span>;
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">WelcomeMessage</span>({ name }: <span class="hljs-title class_">WelcomeMessageProps</span>) {
+  <span class="hljs-keyword">return</span> <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;&lt;<span class="hljs-name">Trans</span>&gt;</span>{name}님, 환영합니다<span class="hljs-tag">&lt;/<span class="hljs-name">Trans</span>&gt;&lt;/<span class="hljs-name">p</span>&gt;</span>;
+}</code></pre>
+        <p>
+          번역 품질에 필요한 설명은 메시지 가까이에 둡니다. 같은 한국어가 문맥에
+          따라 다르게 번역되어야 하면 <code>context</code>를 지정합니다.
+        </p>
+        <pre class="hljs"><code data-language="tsx"><span class="hljs-tag">&lt;<span class="hljs-name">Trans</span> <span class="hljs-attr">comment</span>=<span class="hljs-string">"로그인 화면의 제출 버튼"</span>&gt;</span>로그인<span class="hljs-tag">&lt;/<span class="hljs-name">Trans</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">Trans</span> <span class="hljs-attr">context</span>=<span class="hljs-string">"dialog-confirm"</span>&gt;</span>확인<span class="hljs-tag">&lt;/<span class="hljs-name">Trans</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">Trans</span> <span class="hljs-attr">context</span>=<span class="hljs-string">"identity-verification"</span>&gt;</span>확인<span class="hljs-tag">&lt;/<span class="hljs-name">Trans</span>&gt;</span></code></pre>
+        <p>
+          메시지는 추출기가 정적으로 읽을 수 있어야 합니다. 변수에 저장한 일반
+          문자열을 나중에 번역 함수에 넘기는 패턴은 사용하지 않습니다.
+        </p>
+        <pre class="hljs"><code data-language="tsx"><span class="hljs-comment">// 추출기가 label의 실제 값을 확인할 수 없습니다.</span>
+<span class="hljs-keyword">const</span> label = <span class="hljs-title function_">getLoginLabel</span>();
+<span class="hljs-keyword">return</span> <span class="hljs-tag">&lt;<span class="hljs-name">button</span>&gt;</span>{label}<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>;</code></pre>
+        <p>
+          서버에서 받은 사용자 콘텐츠, 상품명과 API 오류 문구를 자동으로 UI 번역
+          메시지로 간주하지 않습니다. 서버 콘텐츠의 다국어 계약은 UI 카탈로그와
+          별도로 정의합니다.
+        </p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">5. 자동 생성 ID 원리</h2>
+        <p>
+          명시적인 <code>id</code>가 없는 메시지는 정규화된 원본 메시지와
+          <code>context</code>를 기준으로 짧은 해시 ID를 생성합니다.
+        </p>
+        <pre class="hljs"><code data-language="text">원본 JSX
+&lt;Trans&gt;{name}님, 환영합니다&lt;/Trans&gt;
+
+정규화된 메시지
+{name}님, 환영합니다
+
+ID 입력
+정규화된 메시지 + context
+
+생성 결과
+F2kQpA</code></pre>
+        <ul>
+          <li>같은 원문과 같은 <code>context</code>는 같은 ID를 사용합니다.</li>
+          <li>같은 메시지가 여러 파일에 있어도 하나의 번역으로 병합됩니다.</li>
+          <li>파일 경로나 줄 번호는 사용 위치 정보이며 ID의 의미로 사용하지 않습니다.</li>
+          <li>띄어쓰기, 문장부호, 변수 또는 React 요소 구조가 바뀌면 새 ID가 만들어질 수 있습니다.</li>
+          <li><code>context</code>가 다르면 원문이 같아도 다른 ID를 만듭니다.</li>
+          <li>원문 변경으로 새 ID가 생긴 항목은 새 번역 대상으로 처리합니다.</li>
+        </ul>
+        <p>
+          자동 ID를 기본으로 사용합니다. 외부 시스템이 특정 키를 참조하거나 원문
+          변경과 관계없이 식별자를 유지해야 하는 실제 요구가 있으면 명시적 ID를
+          검토할 수 있습니다.
+        </p>
+        <pre class="hljs"><code data-language="tsx"><span class="hljs-tag">&lt;<span class="hljs-name">Trans</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"auth.login.submit"</span>&gt;</span>로그인<span class="hljs-tag">&lt;/<span class="hljs-name">Trans</span>&gt;</span></code></pre>
+        <p>
+          명시적 ID는 이름 관리와 중복 방지 책임이 개발자에게 생기므로 모든
+          메시지에 일괄 적용하지 않습니다.
+        </p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">6. 카탈로그 위치와 자동 생성</h2>
+        <p>
+          언어 카탈로그는 사용하는 애플리케이션 가까이에 둡니다. 아직 실제
+          애플리케이션 저장소가 생성되지 않았으므로 아래 경로는 적용 시 기존
+          구조와 비교할 참고 구성입니다.
+        </p>
+        <pre class="hljs"><code data-language="text">apps/app-webview/
+├── lingui.config.ts
+├── scripts/
+│   ├── translate.ts
+│   └── check-i18n.ts
+└── src/
+    └── locales/
+        ├── ko/
+        │   ├── messages.json
+        │   └── messages.ts
+        ├── zh-CN/
+        │   ├── messages.json
+        │   └── messages.ts
+        ├── ja/
+        │   ├── messages.json
+        │   └── messages.ts
+        └── en/
+            ├── messages.json
+            └── messages.ts</code></pre>
+        <ul>
+          <li><code>messages.json</code>은 원문, 번역과 문맥을 보존하는 검토 대상입니다.</li>
+          <li><code>messages.ts</code>는 실행을 위해 컴파일한 생성 파일입니다.</li>
+          <li><code>scripts/translate.ts</code>는 로컬 LLM 호출과 번역 병합을 담당합니다.</li>
+          <li><code>scripts/check-i18n.ts</code>는 카탈로그와 변수 보존 규칙을 검증합니다.</li>
+          <li>
+            여러 애플리케이션이 같은 번역 정책을 실제로 공유하기 전에는 공통
+            패키지로 이동하지 않습니다.
+          </li>
+        </ul>
+        <p>
+          Lingui JSON의 <code>lingui</code> 스타일은 원문, 번역, 설명과 사용
+          위치를 함께 저장할 수 있어 로컬 LLM에 문맥을 전달하기 쉽습니다.
+        </p>
+        <pre class="hljs"><code data-language="json">{
+  <span class="hljs-attr">"F2kQpA"</span>: {
+    <span class="hljs-attr">"translation"</span>: <span class="hljs-string">"Welcome, {name}"</span>,
+    <span class="hljs-attr">"message"</span>: <span class="hljs-string">"{name}님, 환영합니다"</span>,
+    <span class="hljs-attr">"description"</span>: <span class="hljs-string">"홈 화면의 사용자 인사말"</span>,
+    <span class="hljs-attr">"origin"</span>: [[<span class="hljs-string">"src/components/WelcomeMessage.tsx"</span>, <span class="hljs-number">8</span>]]
+  }
+}</code></pre>
+        <p>다음 설정은 카탈로그 위치와 지원 언어를 설명하는 참고 구현입니다.</p>
+        <pre class="hljs"><code data-language="typescript"><span class="hljs-keyword">import</span> { defineConfig } <span class="hljs-keyword">from</span> <span class="hljs-string">'@lingui/cli'</span>;
+<span class="hljs-keyword">import</span> { formatter } <span class="hljs-keyword">from</span> <span class="hljs-string">'@lingui/format-json'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title function_">defineConfig</span>({
+  <span class="hljs-attr">sourceLocale</span>: <span class="hljs-string">'ko'</span>,
+  <span class="hljs-attr">locales</span>: [<span class="hljs-string">'ko'</span>, <span class="hljs-string">'zh-CN'</span>, <span class="hljs-string">'ja'</span>, <span class="hljs-string">'en'</span>],
+  <span class="hljs-attr">fallbackLocales</span>: {
+    <span class="hljs-string">'zh-CN'</span>: [<span class="hljs-string">'en'</span>, <span class="hljs-string">'ko'</span>],
+    <span class="hljs-attr">ja</span>: [<span class="hljs-string">'en'</span>, <span class="hljs-string">'ko'</span>],
+    <span class="hljs-attr">en</span>: <span class="hljs-string">'ko'</span>,
+  },
+  <span class="hljs-attr">catalogs</span>: [
+    {
+      <span class="hljs-attr">path</span>: <span class="hljs-string">'&lt;rootDir&gt;/src/locales/{locale}/messages'</span>,
+      <span class="hljs-attr">include</span>: [<span class="hljs-string">'&lt;rootDir&gt;/src'</span>],
+    },
+  ],
+  <span class="hljs-attr">format</span>: <span class="hljs-title function_">formatter</span>({
+    <span class="hljs-attr">style</span>: <span class="hljs-string">'lingui'</span>,
+    <span class="hljs-attr">origins</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">indentation</span>: <span class="hljs-number">2</span>,
+  }),
+  <span class="hljs-attr">compileNamespace</span>: <span class="hljs-string">'es'</span>,
+});</code></pre>
+        <p>
+          <code>{locale}</code>는 언어 코드로 치환됩니다. 중국어는 중국 본토에서
+          사용하는 간체 카탈로그인 <code>zh-CN</code>을 기준으로 합니다. 정확한
+          패키지 버전은 실제 애플리케이션의 Lock File을 확인한 뒤 확정합니다.
+        </p>
+        <h3>JSON 자동 생성과 갱신</h3>
+        <p>
+          <code>i18n:extract</code>를 실행하면 소스 코드의 번역 메시지를 검색합니다.
+          설정한 locale의 디렉터리나 <code>messages.json</code>이 없으면 만들고,
+          이미 있으면 기존 번역을 보존하면서 새 메시지를 병합합니다.
+        </p>
+        <pre class="hljs"><code data-language="text">코드에 &lt;Trans&gt;로그인&lt;/Trans&gt; 추가
+→ i18n:extract 실행
+→ ko, zh-CN, ja, en의 messages.json 생성 또는 갱신
+→ 같은 자동 ID를 네 카탈로그에 추가
+→ 한국어 원문 기록
+→ 대상 언어 translation은 빈 값으로 유지</code></pre>
+        <ul>
+          <li>같은 원문과 <code>context</code>는 기존 ID와 번역을 유지합니다.</li>
+          <li>새 원문은 네 언어 카탈로그에 같은 새 ID로 추가합니다.</li>
+          <li>원문을 수정하면 새 ID가 만들어지고 새 번역 대상으로 처리합니다.</li>
+          <li>파일만 이동하면 ID는 유지되고 사용 위치 정보가 갱신됩니다.</li>
+          <li>삭제된 메시지는 obsolete 상태로 남긴 뒤 정리 명령에서 제거할 수 있습니다.</li>
+        </ul>
+        <p>
+          소스 파일을 저장하는 것만으로 JSON이 항상 생성되는 것은 아닙니다. 개발
+          중 <code>i18n:watch</code>를 실행하면 파일 변경을 감지해 자동 추출하고,
+          그 외 환경에서는 <code>i18n:extract</code>를 명시적으로 실행합니다.
+        </p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">7. 로컬 LLM 번역</h2>
+        <p>
+          로컬 LLM 번역기는 추출 도구를 대체하지 않습니다. 추출된 카탈로그에서
+          번역이 비어 있거나 원문이 바뀐 항목을 찾아 대상 언어의
+          <code>translation</code>만 생성합니다.
+        </p>
+        <h3>7.1 누락 번역 선별</h3>
+        <p>
+          <code>scripts/translate.ts</code>는 대상 언어 카탈로그의
+          <code>translation</code>이 비어 있는 항목만 선택합니다. 자동 ID를
+          기본으로 사용하면 한국어 원문이 바뀔 때 새 ID가 만들어지므로 새 번역
+          대상으로 구분할 수 있습니다.
+        </p>
+        <pre class="hljs"><code data-language="typescript"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">CatalogEntry</span> {
+  <span class="hljs-attr">message</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">translation</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">description</span>?: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">origin</span>?: <span class="hljs-title class_">Array</span>&lt;[<span class="hljs-built_in">string</span>, <span class="hljs-built_in">number</span>]&gt;;
+}
+
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">Catalog</span> = <span class="hljs-title class_">Record</span>&lt;<span class="hljs-built_in">string</span>, <span class="hljs-title class_">CatalogEntry</span>&gt;;
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">findMissingTranslations</span>(catalog: <span class="hljs-title class_">Catalog</span>) {
+  <span class="hljs-keyword">return</span> <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">entries</span>(catalog)
+    .<span class="hljs-title function_">filter</span>(([, entry]) =&gt; entry.translation.<span class="hljs-title function_">trim</span>() === <span class="hljs-string">''</span>)
+    .<span class="hljs-title function_">map</span>(([id, entry]) =&gt; ({
+      id,
+      <span class="hljs-attr">source</span>: entry.message,
+      <span class="hljs-attr">description</span>: entry.description,
+      <span class="hljs-attr">origin</span>: entry.origin,
+    }));
+}</code></pre>
+        <ul>
+          <li>비어 있는 번역만 생성하고 기존 번역은 보존합니다.</li>
+          <li>원문 변경으로 새 ID가 생기면 새 항목으로 번역합니다.</li>
+          <li>명시적 ID의 원문 변경은 별도 원문 Hash로 감지합니다.</li>
+          <li>전체 재번역은 개발자가 명시적으로 <code>--force</code>를 전달한 경우에만 허용합니다.</li>
+        </ul>
+
+        <h3>7.2 Ollama 연결과 구조화 응답</h3>
+        <p>
+          Ollama Endpoint와 모델 이름은 코드에 고정하지 않고 환경 변수로
+          전달합니다. Endpoint 기본값은 개발자 장비의 로컬 API로 제한합니다.
+          기본 모델은 <code>qwen3.5:4b</code>를 권장합니다. 약 4.66B 파라미터,
+          3.4GB 크기의 양자화 모델로 201개 언어권을 지원하여 한·중·일·영 UI
+          문구 번역과 JSON 형식 준수 사이의 균형이 좋습니다.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">구분</th>
+              <th scope="col">모델</th>
+              <th scope="col">대략적인 크기</th>
+              <th scope="col">적용 기준</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>기본 권장</td>
+              <td><code>qwen3.5:4b</code></td>
+              <td>3.4GB</td>
+              <td>속도·번역 품질·구조화 응답의 균형이 필요한 기본 개발 환경</td>
+            </tr>
+            <tr>
+              <td>최소 사양</td>
+              <td><code>qwen3:1.7b</code></td>
+              <td>1.4GB</td>
+              <td>메모리가 제한된 장비. 짧은 문구 위주로 사용하고 검수를 강화</td>
+            </tr>
+            <tr>
+              <td>품질 우선</td>
+              <td><code>qwen3.5:9b</code></td>
+              <td>6.6GB</td>
+              <td>긴 안내문, 미묘한 어조 등에서 4B 결과가 부족할 때 선택</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          위 크기는 Ollama에 표시되는 모델 파일 기준이며 실제 실행 메모리와는
+          다를 수 있습니다. 팀의 일반 개발 장비에서 동일한 샘플 문구를 번역해
+          속도, 변수 보존, 용어 일관성을 확인한 뒤 모델 태그를 고정합니다.
+          <a href="https://ollama.com/library/qwen3.5" target="_blank" rel="noreferrer">Qwen 3.5 모델 정보</a>와
+          <a href="https://ollama.com/library/qwen3" target="_blank" rel="noreferrer">Qwen 3 모델 정보</a>를
+          기준으로 크기와 지원 범위를 확인합니다.
+        </p>
+        <pre class="hljs"><code data-language="bash"><span class="hljs-comment"># 최초 한 번 모델을 내려받습니다.</span>
+<span class="hljs-built_in">ollama</span> pull qwen3.5:4b</code></pre>
+        <pre class="hljs"><code data-language="typescript"><span class="hljs-keyword">const</span> <span class="hljs-variable constant_">OLLAMA_URL</span> =
+  process.env.<span class="hljs-property">OLLAMA_URL</span> ?? <span class="hljs-string">'http://127.0.0.1:11434'</span>;
+
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">OLLAMA_MODEL</span> =
+  process.env.<span class="hljs-property">OLLAMA_MODEL</span> ?? <span class="hljs-string">'qwen3.5:4b'</span>;</code></pre>
+        <p>
+          번역 전용 <a href="https://ollama.com/library/translategemma" target="_blank" rel="noreferrer"><code>translategemma:4b</code></a>도
+          3.3GB급 후보지만, 이 가이드는
+          번역과 함께 ID 대응, JSON Schema, 변수 보존을 한 번에 요구합니다.
+          따라서 기본값으로 바로 교체하지 않고 같은 검증 문구로 비교한 뒤
+          채택합니다.
+        </p>
+        <p>
+          모델에는 자유 형식 텍스트가 아니라 JSON Schema를 전달합니다. 응답은
+          요청한 ID, 원문과 번역만 포함하며 추가 필드를 허용하지 않습니다.
+          Ollama의 <a href="https://docs.ollama.com/capabilities/structured-outputs" target="_blank" rel="noreferrer">구조화 출력</a>은
+          <code>format</code>에 JSON Schema를 전달해 응답 형식을 제한합니다.
+        </p>
+        <pre class="hljs"><code data-language="typescript"><span class="hljs-keyword">const</span> translationSchema = {
+  <span class="hljs-attr">type</span>: <span class="hljs-string">'object'</span>,
+  <span class="hljs-attr">properties</span>: {
+    <span class="hljs-attr">translations</span>: {
+      <span class="hljs-attr">type</span>: <span class="hljs-string">'array'</span>,
+      <span class="hljs-attr">items</span>: {
+        <span class="hljs-attr">type</span>: <span class="hljs-string">'object'</span>,
+        <span class="hljs-attr">properties</span>: {
+          <span class="hljs-attr">id</span>: { <span class="hljs-attr">type</span>: <span class="hljs-string">'string'</span> },
+          <span class="hljs-attr">source</span>: { <span class="hljs-attr">type</span>: <span class="hljs-string">'string'</span> },
+          <span class="hljs-attr">translation</span>: { <span class="hljs-attr">type</span>: <span class="hljs-string">'string'</span> },
+        },
+        <span class="hljs-attr">required</span>: [<span class="hljs-string">'id'</span>, <span class="hljs-string">'source'</span>, <span class="hljs-string">'translation'</span>],
+        <span class="hljs-attr">additionalProperties</span>: <span class="hljs-literal">false</span>,
+      },
+    },
+  },
+  <span class="hljs-attr">required</span>: [<span class="hljs-string">'translations'</span>],
+  <span class="hljs-attr">additionalProperties</span>: <span class="hljs-literal">false</span>,
+};</code></pre>
+        <p>
+          요청은 Streaming을 끄고 낮은 temperature를 사용합니다. HTTP 실패,
+          JSON 파싱 실패 또는 Schema 불일치는 번역 실패로 처리합니다.
+        </p>
+        <pre class="hljs"><code data-language="typescript"><span class="hljs-keyword">async function</span> <span class="hljs-title function_">requestTranslations</span>(
+  locale: <span class="hljs-string">'zh-CN'</span> | <span class="hljs-string">'ja'</span> | <span class="hljs-string">'en'</span>,
+  messages: <span class="hljs-built_in">unknown</span>[],
+) {
+  <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">`${OLLAMA_URL}/api/chat`</span>, {
+    <span class="hljs-attr">method</span>: <span class="hljs-string">'POST'</span>,
+    <span class="hljs-attr">headers</span>: { <span class="hljs-string">'Content-Type'</span>: <span class="hljs-string">'application/json'</span> },
+    <span class="hljs-attr">body</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>({
+      <span class="hljs-attr">model</span>: <span class="hljs-variable constant_">OLLAMA_MODEL</span>,
+      <span class="hljs-attr">stream</span>: <span class="hljs-literal">false</span>,
+      <span class="hljs-attr">format</span>: translationSchema,
+      <span class="hljs-attr">options</span>: { <span class="hljs-attr">temperature</span>: <span class="hljs-number">0</span> },
+      <span class="hljs-attr">messages</span>: [
+        { <span class="hljs-attr">role</span>: <span class="hljs-string">'system'</span>, <span class="hljs-attr">content</span>: <span class="hljs-title function_">createSystemPrompt</span>(locale) },
+        { <span class="hljs-attr">role</span>: <span class="hljs-string">'user'</span>, <span class="hljs-attr">content</span>: <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>({ messages }) },
+      ],
+    }),
+  });
+
+  <span class="hljs-keyword">if</span> (!response.ok) {
+    <span class="hljs-keyword">throw new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">`Ollama 요청 실패: ${response.status}`</span>);
+  }
+
+  <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
+  <span class="hljs-keyword">return</span> <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(result.message.content);
+}</code></pre>
+        <pre class="hljs"><code data-language="json">{
+  <span class="hljs-attr">"translations"</span>: [
+    {
+      <span class="hljs-attr">"id"</span>: <span class="hljs-string">"F2kQpA"</span>,
+      <span class="hljs-attr">"source"</span>: <span class="hljs-string">"{name}님, 환영합니다"</span>,
+      <span class="hljs-attr">"translation"</span>: <span class="hljs-string">"Welcome, {name}"</span>
+    }
+  ]
+}</code></pre>
+
+        <h3>7.3 프롬프트와 용어집</h3>
+        <p>
+          프롬프트에는 서비스 문맥과 보존 규칙을 포함합니다. 대상 언어만 바꾸고
+          ID, 원문과 자리표시자는 입력값을 그대로 반환하도록 지시합니다.
+        </p>
+        <pre class="hljs"><code data-language="typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">createSystemPrompt</span>(locale: <span class="hljs-built_in">string</span>) {
+  <span class="hljs-keyword">return</span> <span class="hljs-string">`
+당신은 모바일 라운지 서비스의 UI 번역기입니다.
+
+원본 언어: 한국어
+대상 언어: ${locale}
+
+번역 기준:
+- 모바일 UI에 맞게 짧고 자연스럽게 번역합니다.
+- 제품명과 고유명사는 원문을 유지합니다.
+- {name}, {count} 같은 변수는 변경하지 않습니다.
+- ICU plural/select 문법과 React 요소 자리표시자를 변경하지 않습니다.
+- id와 source는 입력값을 그대로 반환합니다.
+- 중국어는 간체를 사용합니다.
+- 번역 외의 설명을 반환하지 않습니다.
+`</span>;
+}</code></pre>
+        <p>번역 프롬프트에는 최소한 다음 정보를 포함합니다.</p>
+        <ul>
+          <li>서비스와 화면의 성격</li>
+          <li>원본 언어와 대상 언어</li>
+          <li>모바일 UI 문체와 존댓말 기준</li>
+          <li>제품명, 업무 용어와 번역하지 않을 문자열</li>
+          <li>메시지 설명과 사용 위치</li>
+          <li>보존할 변수, ICU 문법과 React 요소 자리표시자</li>
+          <li>번역 외의 설명을 반환하지 않는 출력 규칙</li>
+        </ul>
+        <p>
+          서비스 용어는 별도 용어집으로 관리하고 모든 언어 요청에 함께
+          전달합니다. 용어집은 제품명과 업무 용어의 번역을 일관되게 유지하는
+          기준이며 모델의 기존 지식보다 우선합니다.
+        </p>
+        <pre class="hljs"><code data-language="json">{
+  <span class="hljs-attr">"라운지"</span>: {
+    <span class="hljs-attr">"en"</span>: <span class="hljs-string">"Lounge"</span>,
+    <span class="hljs-attr">"zh-CN"</span>: <span class="hljs-string">"贵宾休息室"</span>,
+    <span class="hljs-attr">"ja"</span>: <span class="hljs-string">"ラウンジ"</span>
+  },
+  <span class="hljs-attr">"이용권"</span>: {
+    <span class="hljs-attr">"en"</span>: <span class="hljs-string">"Pass"</span>,
+    <span class="hljs-attr">"zh-CN"</span>: <span class="hljs-string">"使用券"</span>,
+    <span class="hljs-attr">"ja"</span>: <span class="hljs-string">"利用券"</span>
+  }
+}</code></pre>
+
+        <h3>7.4 배치 처리와 검증</h3>
+        <p>
+          로컬 모델에는 언어별로 작은 배치를 순차 전송합니다. 한 배치의 모든
+          항목이 검증을 통과한 경우에만 메모리의 카탈로그에 병합하고, 전체 처리가
+          끝난 뒤 파일을 한 번 저장합니다.
+        </p>
+        <pre class="hljs"><code data-language="typescript"><span class="hljs-keyword">const</span> targetLocales = [<span class="hljs-string">'zh-CN'</span>, <span class="hljs-string">'ja'</span>, <span class="hljs-string">'en'</span>] <span class="hljs-keyword">as const</span>;
+<span class="hljs-keyword">const</span> batchSize = <span class="hljs-number">30</span>;
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> locale <span class="hljs-keyword">of</span> targetLocales) {
+  <span class="hljs-keyword">const</span> catalog = <span class="hljs-keyword">await</span> <span class="hljs-title function_">readCatalog</span>(locale);
+  <span class="hljs-keyword">const</span> missing = <span class="hljs-title function_">findMissingTranslations</span>(catalog);
+
+  <span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> batch <span class="hljs-keyword">of</span> <span class="hljs-title function_">chunk</span>(missing, batchSize)) {
+    <span class="hljs-keyword">const</span> result = <span class="hljs-keyword">await</span> <span class="hljs-title function_">requestTranslations</span>(locale, batch);
+    <span class="hljs-title function_">validateTranslations</span>(batch, result.translations);
+    <span class="hljs-title function_">mergeTranslations</span>(catalog, result.translations);
+  }
+
+  <span class="hljs-keyword">await</span> <span class="hljs-title function_">writeCatalog</span>(locale, catalog);
+}</code></pre>
+        <p>LLM 결과는 다음 조건을 모두 통과해야 저장합니다.</p>
+        <ul>
+          <li>요청한 ID가 모두 있고 요청하지 않은 ID가 없는가?</li>
+          <li>응답의 source가 요청한 한국어 원문과 같은가?</li>
+          <li>translation이 비어 있지 않은가?</li>
+          <li><code>{name}</code>, <code>{count}</code> 등 변수 집합이 같은가?</li>
+          <li>ICU 문법과 React 요소 자리표시자가 유지됐는가?</li>
+          <li>제품명과 번역 금지 용어가 용어집 기준과 일치하는가?</li>
+        </ul>
+        <pre class="hljs"><code data-language="typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">extractVariables</span>(message: <span class="hljs-built_in">string</span>) {
+  <span class="hljs-keyword">return</span> [...message.<span class="hljs-title function_">matchAll</span>(<span class="hljs-regexp">/\{([a-zA-Z_][\w]*)(?:,|\})/g</span>)]
+    .<span class="hljs-title function_">map</span>((match) =&gt; match[<span class="hljs-number">1</span>])
+    .<span class="hljs-title function_">sort</span>();
+}
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">validateVariables</span>(source: <span class="hljs-built_in">string</span>, translation: <span class="hljs-built_in">string</span>) {
+  <span class="hljs-keyword">const</span> sourceVariables = <span class="hljs-title function_">extractVariables</span>(source);
+  <span class="hljs-keyword">const</span> translatedVariables = <span class="hljs-title function_">extractVariables</span>(translation);
+
+  <span class="hljs-keyword">if</span> (<span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(sourceVariables) !== <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(translatedVariables)) {
+    <span class="hljs-keyword">throw new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">`번역 변수 불일치: ${source}`</span>);
+  }
+}</code></pre>
+        <p>
+          정규식 검사는 기본 변수 누락을 빠르게 찾기 위한 검사입니다. ICU 전체
+          문법은 마지막에 <code>lingui compile --strict</code>로 다시 검증합니다.
+          한 항목이라도 실패하면 해당 배치를 저장하지 않고 명령을 오류로
+          종료합니다.
+        </p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">8. 실행 언어 결정</h2>
+        <p>실행 언어는 다음 우선순위로 결정합니다.</p>
+        <ol>
+          <li>사용자가 앱 설정에서 직접 선택하고 저장한 언어</li>
+          <li>Native 앱이 WebView 초기 요청에 전달한 앱 또는 디바이스 언어</li>
+          <li>HTTP <code>Accept-Language</code></li>
+          <li>브라우저의 <code>navigator.languages</code></li>
+          <li>영어</li>
+        </ol>
+        <p>
+          언어 코드는 BCP 47 형식으로 받은 뒤 프로젝트가 지원하는 언어로
+          정규화합니다.
+        </p>
+        <pre class="hljs"><code data-language="typescript"><span class="hljs-keyword">const</span> supportedLocales = [<span class="hljs-string">'ko'</span>, <span class="hljs-string">'zh-CN'</span>, <span class="hljs-string">'ja'</span>, <span class="hljs-string">'en'</span>] <span class="hljs-keyword">as const</span>;
+
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">SupportedLocale</span> = (<span class="hljs-keyword">typeof</span> supportedLocales)[<span class="hljs-built_in">number</span>];
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">normalizeLocale</span>(locale: <span class="hljs-built_in">string</span>): <span class="hljs-title class_">SupportedLocale</span> {
+  <span class="hljs-keyword">const</span> normalized = locale.<span class="hljs-title function_">toLowerCase</span>();
+
+  <span class="hljs-keyword">if</span> (normalized === <span class="hljs-string">'ko'</span> || normalized.<span class="hljs-title function_">startsWith</span>(<span class="hljs-string">'ko-'</span>)) <span class="hljs-keyword">return</span> <span class="hljs-string">'ko'</span>;
+  <span class="hljs-keyword">if</span> (normalized === <span class="hljs-string">'ja'</span> || normalized.<span class="hljs-title function_">startsWith</span>(<span class="hljs-string">'ja-'</span>)) <span class="hljs-keyword">return</span> <span class="hljs-string">'ja'</span>;
+  <span class="hljs-keyword">if</span> (
+    normalized === <span class="hljs-string">'zh'</span> ||
+    normalized.<span class="hljs-title function_">startsWith</span>(<span class="hljs-string">'zh-cn'</span>) ||
+    normalized.<span class="hljs-title function_">startsWith</span>(<span class="hljs-string">'zh-hans'</span>) ||
+    normalized.<span class="hljs-title function_">startsWith</span>(<span class="hljs-string">'zh-sg'</span>)
+  ) {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">'zh-CN'</span>;
+  }
+
+  <span class="hljs-keyword">return</span> <span class="hljs-string">'en'</span>;
+}</code></pre>
+        <p>
+          앱 설정에서 사용자가 선택한 언어는 디바이스 언어보다 우선합니다.
+          언어를 변경하면 지원 언어인지 검증하고 선택값을 저장한 뒤 해당
+          카탈로그를 다시 로드합니다. 앱 설정값이 없을 때만 디바이스 언어를
+          사용합니다.
+        </p>
+        <p>
+          <code>zh-CN</code>, <code>zh-Hans</code>와 <code>zh-SG</code>는 중국어
+          간체로 연결합니다. 현재 지원하지 않는 중국어 번체(<code>zh-TW</code>,
+          <code>zh-HK</code>, <code>zh-Hant</code>)와 그 밖의 언어는 영어로
+          연결합니다.
+        </p>
+        <p>
+          첫 화면이 fallback 언어로 표시된 뒤 선택 언어로 바뀌는 현상을 피하려면
+          최초 문서 요청 전에 언어를 결정해야 합니다. Native가 전달할 Header,
+          URL, Cookie 또는 Bridge 계약은 Flutter와 Web 담당자가 합의한 뒤
+          적용합니다.
+        </p>
+        <p>
+          일반 브라우저 접근을 지원하면 <code>Accept-Language</code>를 우선
+          사용하고 <code>navigator.languages</code>는 보조 수단으로 사용합니다.
+          locale은 지원 목록으로 검증하며 임의 문자열을 import 경로에 연결하지
+          않습니다.
+        </p>
+        <pre class="hljs"><code data-language="typescript"><span class="hljs-keyword">const</span> loaders = {
+  <span class="hljs-attr">ko</span>: () =&gt; <span class="hljs-keyword">import</span>(<span class="hljs-string">'@/locales/ko/messages'</span>),
+  <span class="hljs-string">'zh-CN'</span>: () =&gt; <span class="hljs-keyword">import</span>(<span class="hljs-string">'@/locales/zh-CN/messages'</span>),
+  <span class="hljs-attr">ja</span>: () =&gt; <span class="hljs-keyword">import</span>(<span class="hljs-string">'@/locales/ja/messages'</span>),
+  <span class="hljs-attr">en</span>: () =&gt; <span class="hljs-keyword">import</span>(<span class="hljs-string">'@/locales/en/messages'</span>),
+} <span class="hljs-keyword">satisfies</span> <span class="hljs-title class_">Record</span>&lt;<span class="hljs-title class_">SupportedLocale</span>, () =&gt; <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-built_in">unknown</span>&gt;&gt;;</code></pre>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">9. 개발과 배포 흐름</h2>
+        <p>다국어 작업은 추출, 번역, 검증과 컴파일 단계를 분리합니다.</p>
+        <pre class="hljs"><code data-language="json">{
+  <span class="hljs-attr">"scripts"</span>: {
+    <span class="hljs-attr">"i18n:extract"</span>: <span class="hljs-string">"lingui extract"</span>,
+    <span class="hljs-attr">"i18n:watch"</span>: <span class="hljs-string">"lingui extract --watch"</span>,
+    <span class="hljs-attr">"i18n:translate"</span>: <span class="hljs-string">"tsx scripts/translate.ts"</span>,
+    <span class="hljs-attr">"i18n:check"</span>: <span class="hljs-string">"tsx scripts/check-i18n.ts"</span>,
+    <span class="hljs-attr">"i18n:compile"</span>: <span class="hljs-string">"lingui compile --typescript"</span>,
+    <span class="hljs-attr">"i18n:update"</span>: <span class="hljs-string">"pnpm i18n:extract &amp;&amp; pnpm i18n:translate &amp;&amp; pnpm i18n:check &amp;&amp; pnpm i18n:compile"</span>
+  }
+}</code></pre>
+        <p>
+          개발자는 문구 작업을 마친 뒤 <code>pnpm i18n:update</code> 한 번으로
+          추출, 자동 번역, 검증과 컴파일을 순서대로 실행합니다. 파일 저장마다
+          LLM을 호출하지 않으며 <code>i18n:watch</code>는 JSON 추출만 자동으로
+          수행합니다.
+        </p>
+        <ol>
+          <li>코드에 한국어 메시지를 작성하거나 수정합니다.</li>
+          <li><code>i18n:extract</code>로 카탈로그를 갱신합니다.</li>
+          <li><code>i18n:translate</code>로 누락 번역을 생성합니다.</li>
+          <li>생성된 Diff와 고위험 문구를 검토합니다.</li>
+          <li><code>i18n:check</code>로 구조와 변수를 검증합니다.</li>
+          <li><code>i18n:compile</code>로 실행 카탈로그를 생성합니다.</li>
+          <li>TypeScript 검사, Lint, Test와 Build를 실행합니다.</li>
+        </ol>
+        <p>
+          로컬 LLM은 개발자 장비의 선택적 생성 도구입니다. CI와 운영 Build가
+          로컬 Ollama의 실행 여부에 의존하지 않도록 합니다.
+        </p>
+        <pre class="hljs"><code data-language="text">개발자 장비
+pnpm i18n:update
+→ 번역 JSON Diff 검토
+→ JSON과 소스 코드 커밋
+
+CI 및 배포
+pnpm i18n:check
+→ pnpm i18n:compile
+→ TypeScript 검사, Lint, Test와 Build</code></pre>
+        <p>CI에서는 자동 번역을 실행하지 않고 다음 상태를 검사합니다.</p>
+        <ul>
+          <li>소스에서 추출한 메시지와 카탈로그가 동기화되어 있는가?</li>
+          <li>지원 언어에 누락 번역이 있는가?</li>
+          <li>모든 카탈로그의 ID와 원문 연결이 유효한가?</li>
+          <li>원문과 번역의 변수, ICU 선택문과 요소 자리표시자가 일치하는가?</li>
+          <li>실행용 카탈로그가 정상적으로 컴파일되는가?</li>
+        </ul>
+        <p>
+          누락 번역이 있으면 CI가 임의로 번역하지 않고 실패 원인을 표시합니다.
+          개발자가 로컬 번역 명령을 실행하고 결과를 검토한 뒤 반영합니다.
+        </p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">10. 검증 기준</h2>
+        <p>번역 완료 여부는 JSON 파싱 성공만으로 판단하지 않습니다.</p>
+        <h3>카탈로그 구조</h3>
+        <ul>
+          <li>모든 대상 언어에 원본과 같은 메시지 ID가 존재합니다.</li>
+          <li><code>translation</code>은 문자열이며 예상하지 않은 객체나 배열을 허용하지 않습니다.</li>
+          <li>원본 카탈로그에 없는 ID를 대상 카탈로그에 임의로 추가하지 않습니다.</li>
+          <li>생성 중 오류가 발생하면 일부 결과만 저장하지 않습니다.</li>
+        </ul>
+        <h3>메시지 보존</h3>
+        <ul>
+          <li><code>{name}</code>, <code>{count}</code> 등 변수 이름과 집합이 원문과 같습니다.</li>
+          <li>ICU <code>plural</code>, <code>select</code>, <code>selectOrdinal</code> 구조가 컴파일됩니다.</li>
+          <li>React 요소 자리표시자가 누락되거나 중복되지 않습니다.</li>
+          <li>URL, 이메일, 코드, 제품명과 번역 금지 용어가 정책대로 유지됩니다.</li>
+          <li>줄바꿈과 공백이 UI 의미를 갖는 경우 번역에서도 보존합니다.</li>
+        </ul>
+        <h3>실행 동작</h3>
+        <ul>
+          <li>지원 언어별 대표 화면을 렌더링할 수 있습니다.</li>
+          <li>지원하지 않는 디바이스 locale은 영어로 정규화됩니다.</li>
+          <li>중국어 간체와 일본어 번역 누락 시 영어 fallback이 표시됩니다.</li>
+          <li>영어 번역도 누락된 경우 한국어 원문이 표시됩니다.</li>
+          <li>앱 설정에서 선택한 언어가 디바이스 언어보다 우선합니다.</li>
+          <li>Server와 Client가 다른 언어로 렌더링해 hydration 불일치를 만들지 않습니다.</li>
+          <li>날짜, 시간, 숫자와 통화도 선택한 locale로 포맷합니다.</li>
+        </ul>
+        <h3>리뷰</h3>
+        <ul>
+          <li>짧고 문맥이 불분명한 메시지에는 설명 또는 context가 있습니다.</li>
+          <li>동일 업무 용어가 화면마다 다르게 번역되지 않습니다.</li>
+          <li>버튼, 제목과 본문이 대상 언어의 모바일 UI 문체에 맞습니다.</li>
+          <li>번역 후 길이가 늘어난 상태에서도 주요 화면이 깨지지 않습니다.</li>
+          <li>고위험 문구는 별도 검토 근거가 있습니다.</li>
+        </ul>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">11. 피해야 할 구현</h2>
+        <ul>
+          <li>React 렌더링 중 Ollama 또는 외부 번역 API를 호출하지 않습니다.</li>
+          <li>사용자 입력이나 서버 응답을 자동으로 LLM 번역해 표시하지 않습니다.</li>
+          <li>번역되지 않은 문장을 숨기기 위해 빈 문자열을 사용하지 않습니다.</li>
+          <li>원본 변수와 태그를 프롬프트 지시만으로 보호했다고 판단하지 않습니다.</li>
+          <li>번역 파일의 기존 값을 매 실행마다 전체 덮어쓰기 하지 않습니다.</li>
+          <li>디바이스 locale을 검증 없이 동적 import에 사용하지 않습니다.</li>
+          <li>실제 공통 사용처가 없는데 다국어 코드를 공통 패키지로 이동하지 않습니다.</li>
+          <li>생성된 실행 카탈로그를 사람이 직접 수정하지 않습니다.</li>
+        </ul>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">12. 적용 전 결정 항목</h2>
+        <p>아래 항목은 실제 애플리케이션과 제품 요구가 확인된 후 확정합니다.</p>
+        <ul>
+          <li>중국어 번체를 별도 지원할지 여부</li>
+          <li>Lingui 도입 여부와 실제 설치 버전</li>
+          <li>JSON 카탈로그의 정확한 경로와 컴파일 결과 위치</li>
+          <li>로컬 LLM 제품, 모델 태그, 장비별 실행 기준과 배치 크기</li>
+          <li>서비스 용어집의 소유자, 파일 형식과 변경 승인 절차</li>
+          <li>고위험 문구의 검토 담당자와 승인 기록 방식</li>
+          <li>Native가 WebView에 locale을 전달할 Header, URL, Cookie 또는 Bridge 계약</li>
+          <li>앱 언어 선택값의 저장 위치와 Native-Web 동기화 계약</li>
+          <li>일반 브라우저 직접 접근 여부와 locale route 정책</li>
+          <li>누락 번역을 CI 오류로 처리할 시점과 배포 품질 Gate</li>
+        </ul>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">13. 완료 확인사항</h2>
+        <ul>
+          <li>한국어 원문을 코드 가까이에서 찾고 수정할 수 있는가?</li>
+          <li>메시지 추출이 기존 번역을 보존하면서 새 항목을 병합하는가?</li>
+          <li>자동 ID 변경 조건과 context 사용 기준을 이해할 수 있는가?</li>
+          <li>로컬 LLM이 누락 번역만 생성하고 기존 번역을 보호하는가?</li>
+          <li>변수, ICU 문법과 React 요소가 자동 검증되는가?</li>
+          <li>CI와 운영 Build가 로컬 LLM 없이 실행되는가?</li>
+          <li>첫 화면부터 선택된 locale이 일관되게 적용되는가?</li>
+          <li>앱에서 선택한 언어가 디바이스 언어보다 우선하는가?</li>
+          <li>미지원 locale은 영어로, 영어 누락은 한국어 원문으로 대체되는가?</li>
+          <li>고위험 문구에 별도 검토 근거가 남는가?</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <p>Front-End 다국어 및 로컬 LLM 번역 가이드</p>
+    </footer>
+    <script src="./../assets/js/common.js"></script>
+    <script src="./../assets/js/mermaid.js"></script>
+  </body>
+</html>
