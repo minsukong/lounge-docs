@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="한국어 원문 추출, 로컬 LLM 번역, 언어별 카탈로그와 디바이스 언어 적용 기준을 정리합니다."
+      content="Flutter WebView의 한국어 원문 추출, 로컬 LLM 번역, Lingui 카탈로그와 기기 번역 기준을 정리합니다."
     />
     <title>Front-End 다국어 및 로컬 LLM 번역 가이드</title>
     <link rel="stylesheet" href="./../assets/style/presentation-theme.css" />
@@ -15,8 +15,8 @@
       <div class="type">FRONT-END · I18N · LOCAL LLM</div>
       <h1>Front-End 다국어 및 로컬 LLM 번역 가이드</h1>
       <p>
-        한국어 원문을 추출하고 로컬 LLM으로 번역한 뒤, 앱 설정과 디바이스
-        언어에 맞는 화면을 제공하는 기준을 정리합니다.
+        Flutter 앱의 Next.js WebView에서 한국어 원문을 추출하고 로컬 LLM으로
+        번역한 뒤, 앱 설정과 디바이스 언어에 맞는 화면을 제공하는 기준을 정리합니다.
       </p>
     </header>
 
@@ -24,14 +24,21 @@
       <section>
         <h2 class="bx-active">1. 문서 목적</h2>
         <p>
-          이 문서는 <code>apps/app-webview</code>에서 개발자가 한국어 문구를
-          소스 코드에 작성하고, 추출된 메시지를 로컬 LLM으로 번역한 뒤, 실행
-          환경의 언어에 맞는 번역을 표시하는 기준을 정의합니다.
+          이 문서는 <code>apps/mobile</code>의 Flutter 앱이 호스팅하는
+          <code>apps/app-webview</code>에서 개발자가 한국어 문구를 소스 코드에
+          작성하고, 추출된 메시지를 로컬 LLM으로 번역한 뒤, 실행 환경의 언어에
+          맞는 번역을 표시하는 기준을 정의합니다.
         </p>
         <p>
           다국어 처리는 메시지 작성, 번역 생성과 실행 중 언어 선택을 분리합니다.
           로컬 LLM은 개발 과정에서 번역 카탈로그를 만드는 데만 사용하고 사용자
           요청을 처리하는 실행 경로에서는 호출하지 않습니다.
+        </p>
+        <p>
+          Flutter 앱은 앱 언어 저장, 디바이스 locale 확인과 온디바이스 번역을
+          담당합니다. Next.js WebView는 Lingui 카탈로그 로드, 번역 UI와 원문
+          fallback을 담당하며 두 영역의 요청과 응답은
+          <code>contracts/webview-bridge</code> 계약으로 연결합니다.
         </p>
         <p>
           전체 저장소 구조와 공통화 기준은
@@ -48,7 +55,7 @@
         <h2 class="bx-active">2. 적용 범위와 핵심 원칙</h2>
         <p>
           한국어를 원본 언어로 사용하고 한국어, 중국어 간체, 일본어와 영어를
-          제공하는 Next.js WebView 애플리케이션에 적용합니다.
+          제공하는 Flutter 앱과 그 안의 Next.js WebView 애플리케이션에 적용합니다.
         </p>
         <ul>
           <li>개발자는 번역 키를 먼저 만들지 않고 한국어 메시지를 코드에 작성합니다.</li>
@@ -57,6 +64,14 @@
           <li>로컬 LLM은 비어 있거나 원문이 변경된 번역만 생성합니다.</li>
           <li>번역 카탈로그는 소스 코드와 함께 검토하고 저장소에 반영합니다.</li>
           <li>실행 중에는 준비된 카탈로그만 읽으며 LLM을 호출하지 않습니다.</li>
+          <li>앱 언어 선택값과 기기 기능 지원 여부는 Flutter 앱을 기준으로 판단합니다.</li>
+          <li>WebView는 OS 버전을 추측하지 않고 Flutter Bridge의 capability를 사용합니다.</li>
+          <li>
+            리뷰, 댓글과 게시글처럼 사용자가 작성한 콘텐츠는 Lingui 카탈로그에
+            포함하지 않고, 사용자가 요청한 경우에만 기기에서 번역합니다.
+          </li>
+          <li>기기 번역이 지원되지 않거나 실패하면 기능만 비활성화하고 원문을 표시합니다.</li>
+          <li>사용자명, 브랜드명, 모델 번호와 코드 등 고유 식별값은 번역하지 않습니다.</li>
           <li>
             지원 언어는 한국어(<code>ko</code>), 중국어 간체(<code>zh-CN</code>),
             일본어(<code>ja</code>)와 영어(<code>en</code>)입니다.
@@ -89,9 +104,9 @@ flowchart LR
   accDescr: React 코드에 작성한 한국어 메시지를 추출해 언어별 JSON을 갱신하고, 로컬 LLM 번역과 구조 검증 및 컴파일을 거쳐 앱 설정 또는 디바이스 언어에 맞는 화면을 표시합니다.
   A["1. 한국어 메시지 작성<br/>React 코드"] --> B["2. 카탈로그 생성<br/>메시지 추출 · 언어별 JSON 갱신"]
   B --> C["3. 로컬 번역<br/>누락 번역 · 구조 검증 · 컴파일"]
-  C --> D["4. 런타임 적용<br/>언어 선택 · 번역 화면 표시"]
+  C --> D["4. 런타임 적용<br/>Flutter 앱 언어 · 번역 화면"]
           </div>
-          <figcaption>한국어 원문 작성부터 다국어 화면 표시까지의 처리 과정</figcaption>
+          <figcaption>서비스가 관리하는 정적 UI 문구의 작성부터 화면 표시까지의 처리 과정</figcaption>
         </figure>
         <table>
           <thead>
@@ -123,7 +138,7 @@ flowchart LR
             </tr>
             <tr>
               <td>언어 선택</td>
-              <td>앱 설정과 디바이스 언어를 지원 언어에 매핑</td>
+              <td>Flutter가 앱 설정과 디바이스 언어를 지원 언어에 매핑해 WebView에 전달</td>
             </tr>
             <tr>
               <td>실행</td>
@@ -602,7 +617,7 @@ F2kQpA</code></pre>
         <p>실행 언어는 다음 우선순위로 결정합니다.</p>
         <ol>
           <li>사용자가 앱 설정에서 직접 선택하고 저장한 언어</li>
-          <li>Native 앱이 WebView 초기 요청에 전달한 앱 또는 디바이스 언어</li>
+          <li>Flutter 앱이 WebView 초기 요청에 전달한 앱 또는 디바이스 언어</li>
           <li>HTTP <code>Accept-Language</code></li>
           <li>브라우저의 <code>navigator.languages</code></li>
           <li>영어</li>
@@ -633,9 +648,9 @@ F2kQpA</code></pre>
 }</code></pre>
         <p>
           앱 설정에서 사용자가 선택한 언어는 디바이스 언어보다 우선합니다.
-          언어를 변경하면 지원 언어인지 검증하고 선택값을 저장한 뒤 해당
-          카탈로그를 다시 로드합니다. 앱 설정값이 없을 때만 디바이스 언어를
-          사용합니다.
+          Flutter 앱을 선택값의 기준 저장소로 사용하고, WebView에서 언어를
+          변경하면 Bridge로 Flutter에 저장을 요청한 뒤 해당 카탈로그를 다시
+          로드합니다. 저장된 앱 설정값이 없을 때만 디바이스 언어를 사용합니다.
         </p>
         <p>
           <code>zh-CN</code>, <code>zh-Hans</code>와 <code>zh-SG</code>는 중국어
@@ -645,9 +660,9 @@ F2kQpA</code></pre>
         </p>
         <p>
           첫 화면이 fallback 언어로 표시된 뒤 선택 언어로 바뀌는 현상을 피하려면
-          최초 문서 요청 전에 언어를 결정해야 합니다. Native가 전달할 Header,
-          URL, Cookie 또는 Bridge 계약은 Flutter와 Web 담당자가 합의한 뒤
-          적용합니다.
+          최초 문서 요청 전에 언어를 결정해야 합니다. Flutter가 초기 WebView
+          요청에 전달할 Header, URL 또는 Cookie와, 실행 중 변경에 사용할 Bridge
+          계약을 Flutter와 Web 담당자가 합의한 뒤 적용합니다.
         </p>
         <p>
           일반 브라우저 접근을 지원하면 <code>Accept-Language</code>를 우선
@@ -666,7 +681,278 @@ F2kQpA</code></pre>
       <hr />
 
       <section>
-        <h2 class="bx-active">9. 개발과 배포 흐름</h2>
+        <h2 class="bx-active">9. 동적 콘텐츠와 기기 번역</h2>
+        <p>
+          Lingui와 로컬 Ollama 번역은 서비스가 의미를 관리하고 배포 전에 확정할
+          수 있는 정적 문구에 적용합니다. 리뷰, 댓글과 게시글처럼 실행 중 계속
+          생성되는 사용자 콘텐츠는 별도 JSON으로 추출하지 않습니다. 사용자가
+          번역을 요청한 경우 Next.js WebView가 Flutter 앱의 온디바이스 번역
+          기능을 Bridge로 호출합니다.
+        </p>
+        <blockquote>
+          <p>
+            서비스가 의미를 책임지는 문구는 배포 전에 번역하고, 사용자가 작성한
+            문구는 필요한 순간 기기에서 번역합니다.
+          </p>
+        </blockquote>
+
+        <h3>9.1 콘텐츠 분류</h3>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">콘텐츠</th>
+              <th scope="col">예시</th>
+              <th scope="col">처리 방식</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>서비스 정적 문구</td>
+              <td>버튼, 메뉴, 화면 제목, 안내와 오류 문구</td>
+              <td>Lingui 추출 후 로컬 LLM으로 번역하고 배포</td>
+            </tr>
+            <tr>
+              <td>백엔드 시스템 메시지</td>
+              <td>주문 상태, 처리 결과와 오류</td>
+              <td>완성 문장 대신 메시지 코드와 변수를 전달하고 프론트에서 Lingui 적용</td>
+            </tr>
+            <tr>
+              <td>사용자 작성 콘텐츠</td>
+              <td>리뷰, 댓글, 게시글, 채팅과 사용자 소개</td>
+              <td>원문을 기본 표시하고 요청 시 기기에서 번역</td>
+            </tr>
+            <tr>
+              <td>고유 식별값</td>
+              <td>닉네임, 브랜드명, 모델 번호, URL과 코드</td>
+              <td>원문 유지</td>
+            </tr>
+            <tr>
+              <td>운영·고위험 콘텐츠</td>
+              <td>공지, 약관, 결제, 환불과 개인정보 문구</td>
+              <td>언어별 검수본을 관리하며 기기 번역을 확정 문구로 사용하지 않음</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>9.2 실행 흐름</h3>
+        <pre class="hljs"><code data-language="text">리뷰·댓글 원문 표시
+→ 사용자가 ‘번역 보기’ 선택
+→ WebView가 현재 화면에 필요한 문자열을 Flutter Bridge로 전달
+→ Flutter가 기기에 설치된 번역 모델로 처리
+→ WebView가 번역 결과와 ‘기기에서 번역됨’을 표시
+→ 같은 콘텐츠는 기기 캐시에서 재사용
+
+번역 기능 미지원·모델 미설치·실패
+→ 원문을 유지하고 다시 시도할 수 있게 표시</code></pre>
+        <p>
+          전체 목록을 한 번에 번역하지 않습니다. 사용자가 번역을 요청했거나 자동
+          번역 설정을 켠 경우에도 현재 화면에 보이는 항목만 작은 배치로 처리합니다.
+          원문 보기 기능을 항상 제공하고 번역 결과임을 화면에 표시합니다.
+        </p>
+
+        <h3>9.3 Flutter 구성과 지원 기준</h3>
+        <p>
+          Android와 iOS의 동작을 통일하기 위해 Flutter에서 ML Kit 온디바이스
+          번역을 호출합니다. WebView 연결은 Flutter 공식
+          <code>webview_flutter</code>, 번역은 Native ML Kit을 Platform Channel로
+          연결하는 <code>google_mlkit_translation</code>을 시작 후보로 사용합니다.
+          번역 패키지는 Google 공식 Flutter 패키지가 아니므로 실제 앱에서
+          빌드와 대표 언어 조합을 검증한 뒤 Lock File에 반영합니다.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">항목</th>
+              <th scope="col">적용 시작 권장값</th>
+              <th scope="col">확인 기준</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Flutter·Dart</td>
+              <td>Flutter 3.44 이상 · Dart 3.12 이상</td>
+              <td><code>google_mlkit_translation 0.15.1</code>의 Dart 요구사항</td>
+            </tr>
+            <tr>
+              <td>WebView</td>
+              <td><code>webview_flutter 4.14.1</code></td>
+              <td>JavaScript Channel과 결과 콜백 동작</td>
+            </tr>
+            <tr>
+              <td>기기 번역</td>
+              <td><code>google_mlkit_translation 0.15.1</code></td>
+              <td>한국어·영어·일본어·중국어 번역과 모델 관리</td>
+            </tr>
+            <tr>
+              <td>iOS</td>
+              <td>Deployment Target 15.5 이상 · 64-bit · Xcode 16 이상</td>
+              <td>Podfile, Runner Target과 실제 빌드 설정을 동일하게 유지</td>
+            </tr>
+            <tr>
+              <td>Android</td>
+              <td><code>minSdk 24</code> · <code>targetSdk 35+</code> · <code>compileSdk 36+</code></td>
+              <td>Flutter 지원 범위, ML Kit와 Google Play 정책</td>
+            </tr>
+          </tbody>
+        </table>
+        <pre class="hljs"><code data-language="yaml"><span class="hljs-attr">dependencies</span>:
+  <span class="hljs-attr">webview_flutter</span>: <span class="hljs-string">^4.14.1</span>
+  <span class="hljs-attr">google_mlkit_translation</span>: <span class="hljs-string">^0.15.1</span></code></pre>
+        <p>
+          위 버전은 적용을 시작하기 위한 기준입니다. 실제 도입 시 최신 Flutter
+          Stable, 패키지 변경 기록과 각 스토어 정책을 다시 확인하고 검증된 버전을
+          <code>pubspec.lock</code>으로 고정합니다.
+        </p>
+        <ul>
+          <li>
+            <a href="https://pub.dev/packages/webview_flutter" target="_blank" rel="noreferrer">Flutter 공식 WebView 패키지</a>
+          </li>
+          <li>
+            <a href="https://pub.dev/packages/google_mlkit_translation" target="_blank" rel="noreferrer">Flutter ML Kit 번역 패키지</a>
+          </li>
+          <li>
+            <a href="https://docs.flutter.dev/reference/supported-platforms" target="_blank" rel="noreferrer">Flutter 지원 플랫폼</a>
+          </li>
+          <li>
+            <a href="https://developers.google.com/ml-kit/language/translation" target="_blank" rel="noreferrer">ML Kit 온디바이스 번역</a>
+          </li>
+          <li>
+            <a href="https://developer.android.com/google/play/requirements/target-sdk" target="_blank" rel="noreferrer">Google Play Target API 정책</a>
+          </li>
+          <li>
+            <a href="https://developers.google.com/ml-kit/language/translation/translation-terms" target="_blank" rel="noreferrer">ML Kit 번역 표시·사용 지침</a>
+          </li>
+        </ul>
+
+        <h3>9.4 Flutter Bridge와 capability 계약</h3>
+        <p>
+          WebView는 OS 버전이나 설치된 번역 모델을 직접 판단하지 않습니다.
+          Flutter가 플랫폼, 언어 조합과 모델 상태를 확인해 capability로 전달하고,
+          WebView는 <code>available</code> 상태에 따라 번역 UI를 노출합니다.
+        </p>
+        <pre class="hljs"><code data-language="typescript"><span class="hljs-keyword">type</span> <span class="hljs-title class_">DeviceTranslationStatus</span> =
+  | <span class="hljs-string">'available'</span>
+  | <span class="hljs-string">'modelDownloadRequired'</span>
+  | <span class="hljs-string">'downloading'</span>
+  | <span class="hljs-string">'unsupportedPlatform'</span>
+  | <span class="hljs-string">'unsupportedLanguage'</span>
+  | <span class="hljs-string">'offline'</span>
+  | <span class="hljs-string">'failed'</span>;
+
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">ContentTranslationRequest</span> = {
+  <span class="hljs-attr">requestId</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">id</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">text</span>: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">sourceLocale</span>?: <span class="hljs-built_in">string</span>;
+  <span class="hljs-attr">targetLocale</span>: <span class="hljs-title class_">SupportedLocale</span>;
+  <span class="hljs-attr">sourceVersion</span>: <span class="hljs-built_in">string</span>;
+};
+
+<span class="hljs-keyword">declare global</span> {
+  <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Window</span> {
+    <span class="hljs-attr">LoungeTranslate</span>?: { <span class="hljs-title function_">postMessage</span>(message: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">void</span> };
+    <span class="hljs-attr">loungeCapabilities</span>?: {
+      <span class="hljs-attr">deviceTranslation</span>: {
+        <span class="hljs-attr">available</span>: <span class="hljs-built_in">boolean</span>;
+        <span class="hljs-attr">status</span>: <span class="hljs-title class_">DeviceTranslationStatus</span>;
+        <span class="hljs-attr">supportedLocales</span>: <span class="hljs-title class_">SupportedLocale</span>[];
+      };
+    };
+  }
+}
+
+<span class="hljs-keyword">const</span> canTranslate =
+  window.<span class="hljs-property">loungeCapabilities</span>?.<span class="hljs-property">deviceTranslation</span>.<span class="hljs-property">available</span> === <span class="hljs-literal">true</span>;
+
+<span class="hljs-keyword">if</span> (canTranslate) {
+  window.<span class="hljs-property">LoungeTranslate</span>?.<span class="hljs-title function_">postMessage</span>(
+    <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>({ <span class="hljs-attr">type</span>: <span class="hljs-string">'translate'</span>, <span class="hljs-attr">payload</span>: request }),
+  );
+}</code></pre>
+        <pre class="hljs"><code data-language="dart"><span class="hljs-keyword">final</span> controller = <span class="hljs-title class_">WebViewController</span>()
+  ..<span class="hljs-title function_">setJavaScriptMode</span>(<span class="hljs-title class_">JavaScriptMode</span>.unrestricted)
+  ..<span class="hljs-title function_">addJavaScriptChannel</span>(
+    <span class="hljs-string">'LoungeTranslate'</span>,
+    <span class="hljs-attr">onMessageReceived</span>: handleTranslationMessage,
+  );</code></pre>
+        <p>
+          Flutter는 JavaScript Channel로 받은 요청을 검증하고 ML Kit으로 번역한
+          뒤 <code>runJavaScript</code>로 요청 ID와 결과를 반환합니다. 사용자
+          콘텐츠를 JavaScript 문자열에 직접 보간하지 않고 JSON으로 직렬화하며,
+          요청 크기, timeout, 취소와 중복 응답은 Bridge 공통 계약으로 관리합니다.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">상태</th>
+              <th scope="col">WebView 처리</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>available</code></td>
+              <td>번역 보기 또는 자동 번역 기능 제공</td>
+            </tr>
+            <tr>
+              <td><code>modelDownloadRequired</code></td>
+              <td>모델 다운로드 크기와 네트워크 사용을 안내한 뒤 동의 시 진행</td>
+            </tr>
+            <tr>
+              <td><code>downloading</code></td>
+              <td>진행 상태를 표시하고 중복 요청 방지</td>
+            </tr>
+            <tr>
+              <td><code>unsupportedPlatform</code>·<code>unsupportedLanguage</code></td>
+              <td>번역 UI를 숨기고 원문 표시</td>
+            </tr>
+            <tr>
+              <td><code>offline</code>·<code>failed</code></td>
+              <td>원문을 유지하고 필요한 경우 다시 시도 제공</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          기기 번역은 선택 기능입니다. 지원되지 않는 기기, 언어 조합이나 모델
+          상태 때문에 리뷰와 게시글 열람이 실패해서는 안 됩니다. 단, 패키지가
+          요구하는 최소 OS보다 낮은 기기는 번역 기능만 비활성화되는 것이 아니라
+          앱 설치 대상에서 제외됩니다. 더 낮은 OS에서도 앱 자체를 제공해야 한다면
+          패키지 도입 전에 별도 Native 구현 또는 지원 정책을 결정합니다.
+        </p>
+        <p>
+          일반 모바일 WebView에서 브라우저의 페이지 번역 기능을 코드로 강제
+          실행하는 방식은 공통 기능으로 사용하지 않습니다. Chrome Translator
+          API 역시 모바일을 지원하지 않으므로 WebView 번역 계약으로 전제하지 않습니다.
+          <a href="https://developer.chrome.com/docs/ai/translator-api" target="_blank" rel="noreferrer">Chrome Translator API 제약</a>을
+          함께 확인합니다.
+        </p>
+
+        <h3>9.5 캐시와 안전 기준</h3>
+        <p>
+          같은 콘텐츠를 반복 번역하지 않도록 결과를 기기에 저장합니다. 캐시 키는
+          콘텐츠 ID, 원문 버전과 대상 언어를 조합합니다. 원문이 수정되면 버전이
+          달라지므로 이전 번역을 자동으로 재사용하지 않습니다.
+        </p>
+        <pre class="hljs"><code data-language="typescript"><span class="hljs-keyword">const</span> cacheKey = [
+  <span class="hljs-string">'ugc-translation'</span>,
+  item.<span class="hljs-property">id</span>,
+  item.<span class="hljs-property">updatedAt</span>,
+  targetLocale,
+].<span class="hljs-title function_">join</span>(<span class="hljs-string">':'</span>);</code></pre>
+        <ul>
+          <li>여러 항목과 긴 문장을 저장할 수 있도록 IndexedDB를 우선 검토합니다.</li>
+          <li>Flutter가 관리하는 번역 모델은 언어별 약 30MB이므로 요청된 언어만 내려받습니다.</li>
+          <li>번역 모델 최초 다운로드에는 네트워크·저장 공간 안내와 진행 상태를 제공합니다.</li>
+          <li>지원 여부, 모델 준비 상태와 실패 결과를 구분하고 원문을 fallback으로 사용합니다.</li>
+          <li>번역된 사용자 콘텐츠도 신뢰할 수 없는 입력으로 취급하고 HTML로 직접 삽입하지 않습니다.</li>
+          <li>기기 번역은 일상적인 사용자 콘텐츠에만 사용하고 법률·결제 문구에는 사용하지 않습니다.</li>
+          <li>자동 번역 설정은 선택 사항이며 기본값과 데이터·배터리 정책은 제품 요구로 확정합니다.</li>
+        </ul>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">10. 개발과 배포 흐름</h2>
         <p>다국어 작업은 추출, 번역, 검증과 컴파일 단계를 분리합니다.</p>
         <pre class="hljs"><code data-language="json">{
   <span class="hljs-attr">"scripts"</span>: {
@@ -706,6 +992,18 @@ CI 및 배포
 pnpm i18n:check
 → pnpm i18n:compile
 → TypeScript 검사, Lint, Test와 Build</code></pre>
+        <p>
+          Flutter 앱의 검증은 Web 번역 카탈로그 생성과 분리합니다. Flutter CI는
+          패키지 설치, 정적 검사, 테스트와 플랫폼 Build를 수행하고 Bridge
+          capability 및 번역 요청·응답 계약을 대표 기기에서 확인합니다.
+        </p>
+        <pre class="hljs"><code data-language="text">Flutter 앱
+flutter pub get
+→ flutter analyze
+→ flutter test
+→ Android App Bundle Build
+→ iOS No-Codesign Build
+→ Flutter–WebView Bridge 통합 검사</code></pre>
         <p>CI에서는 자동 번역을 실행하지 않고 다음 상태를 검사합니다.</p>
         <ul>
           <li>소스에서 추출한 메시지와 카탈로그가 동기화되어 있는가?</li>
@@ -713,6 +1011,7 @@ pnpm i18n:check
           <li>모든 카탈로그의 ID와 원문 연결이 유효한가?</li>
           <li>원문과 번역의 변수, ICU 선택문과 요소 자리표시자가 일치하는가?</li>
           <li>실행용 카탈로그가 정상적으로 컴파일되는가?</li>
+          <li>Flutter와 WebView의 locale 및 기기 번역 계약이 호환되는가?</li>
         </ul>
         <p>
           누락 번역이 있으면 CI가 임의로 번역하지 않고 실패 원인을 표시합니다.
@@ -723,7 +1022,7 @@ pnpm i18n:check
       <hr />
 
       <section>
-        <h2 class="bx-active">10. 검증 기준</h2>
+        <h2 class="bx-active">11. 검증 기준</h2>
         <p>번역 완료 여부는 JSON 파싱 성공만으로 판단하지 않습니다.</p>
         <h3>카탈로그 구조</h3>
         <ul>
@@ -750,7 +1049,16 @@ pnpm i18n:check
           <li>Server와 Client가 다른 언어로 렌더링해 hydration 불일치를 만들지 않습니다.</li>
           <li>날짜, 시간, 숫자와 통화도 선택한 locale로 포맷합니다.</li>
         </ul>
-        <h3>리뷰</h3>
+        <h3>Flutter 기기 번역</h3>
+        <ul>
+          <li>지원 기기에서는 Flutter capability를 받은 뒤에만 번역 UI가 표시됩니다.</li>
+          <li>미지원 플랫폼·언어와 Bridge가 없는 일반 브라우저에서는 원문을 표시합니다.</li>
+          <li>모델 다운로드, 오프라인과 번역 실패가 리뷰·게시글 열람을 막지 않습니다.</li>
+          <li>한국어·영어·일본어·중국어 간 대표 문장을 실제 Android와 iOS 기기에서 확인합니다.</li>
+          <li>콘텐츠 수정 후 이전 버전의 기기 캐시가 사용되지 않습니다.</li>
+          <li>Flutter 앱과 WebView의 요청 ID, timeout, 취소와 오류 코드가 일치합니다.</li>
+        </ul>
+        <h3>번역 품질 리뷰</h3>
         <ul>
           <li>짧고 문맥이 불분명한 메시지에는 설명 또는 context가 있습니다.</li>
           <li>동일 업무 용어가 화면마다 다르게 번역되지 않습니다.</li>
@@ -763,10 +1071,15 @@ pnpm i18n:check
       <hr />
 
       <section>
-        <h2 class="bx-active">11. 피해야 할 구현</h2>
+        <h2 class="bx-active">12. 피해야 할 구현</h2>
         <ul>
           <li>React 렌더링 중 Ollama 또는 외부 번역 API를 호출하지 않습니다.</li>
-          <li>사용자 입력이나 서버 응답을 자동으로 LLM 번역해 표시하지 않습니다.</li>
+          <li>사용자 입력이나 서버 응답을 개발용 Ollama로 실행 중 번역하지 않습니다.</li>
+          <li>모바일 WebView에서 브라우저 페이지 번역 기능을 강제 호출할 수 있다고 전제하지 않습니다.</li>
+          <li>WebView의 User-Agent나 OS 버전 문자열만으로 기기 번역 지원 여부를 판단하지 않습니다.</li>
+          <li>Flutter Bridge가 존재한다는 이유만으로 모델과 언어 조합까지 지원된다고 가정하지 않습니다.</li>
+          <li>번역 결과나 사용자 원문을 이스케이프 없이 <code>runJavaScript</code>에 연결하지 않습니다.</li>
+          <li>화면에 보이지 않는 사용자 콘텐츠까지 미리 전부 기기 번역하지 않습니다.</li>
           <li>번역되지 않은 문장을 숨기기 위해 빈 문자열을 사용하지 않습니다.</li>
           <li>원본 변수와 태그를 프롬프트 지시만으로 보호했다고 판단하지 않습니다.</li>
           <li>번역 파일의 기존 값을 매 실행마다 전체 덮어쓰기 하지 않습니다.</li>
@@ -779,7 +1092,7 @@ pnpm i18n:check
       <hr />
 
       <section>
-        <h2 class="bx-active">12. 적용 전 결정 항목</h2>
+        <h2 class="bx-active">13. 적용 전 결정 항목</h2>
         <p>아래 항목은 실제 애플리케이션과 제품 요구가 확인된 후 확정합니다.</p>
         <ul>
           <li>중국어 번체를 별도 지원할지 여부</li>
@@ -788,8 +1101,14 @@ pnpm i18n:check
           <li>로컬 LLM 제품, 모델 태그, 장비별 실행 기준과 배치 크기</li>
           <li>서비스 용어집의 소유자, 파일 형식과 변경 승인 절차</li>
           <li>고위험 문구의 검토 담당자와 승인 기록 방식</li>
-          <li>Native가 WebView에 locale을 전달할 Header, URL, Cookie 또는 Bridge 계약</li>
-          <li>앱 언어 선택값의 저장 위치와 Native-Web 동기화 계약</li>
+          <li>Flutter가 WebView에 locale을 전달할 Header, URL, Cookie와 Bridge 계약</li>
+          <li>앱 언어 선택값의 Flutter 저장 위치와 Flutter-Web 동기화 계약</li>
+          <li>Flutter·Dart, <code>webview_flutter</code>와 번역 패키지의 실제 고정 버전</li>
+          <li>iOS Deployment Target, Xcode, Android minSdk·targetSdk·compileSdk 기준</li>
+          <li>최소 OS 미만 기기의 앱 지원 여부와 동적 번역 제공 범위</li>
+          <li>WebView-Flutter 번역 Bridge의 capability, 요청 크기, 배치, 취소와 오류 계약</li>
+          <li>번역 모델 다운로드 안내, 자동 번역 기본값과 기기 캐시 보존 기간</li>
+          <li>온디바이스 번역 SDK의 표시·고지 요건과 개인정보 안내</li>
           <li>일반 브라우저 직접 접근 여부와 locale route 정책</li>
           <li>누락 번역을 CI 오류로 처리할 시점과 배포 품질 Gate</li>
         </ul>
@@ -798,7 +1117,7 @@ pnpm i18n:check
       <hr />
 
       <section>
-        <h2 class="bx-active">13. 완료 확인사항</h2>
+        <h2 class="bx-active">14. 완료 확인사항</h2>
         <ul>
           <li>한국어 원문을 코드 가까이에서 찾고 수정할 수 있는가?</li>
           <li>메시지 추출이 기존 번역을 보존하면서 새 항목을 병합하는가?</li>
@@ -808,7 +1127,13 @@ pnpm i18n:check
           <li>CI와 운영 Build가 로컬 LLM 없이 실행되는가?</li>
           <li>첫 화면부터 선택된 locale이 일관되게 적용되는가?</li>
           <li>앱에서 선택한 언어가 디바이스 언어보다 우선하는가?</li>
+          <li>Flutter가 앱 언어를 저장하고 WebView에 일관되게 전달하는가?</li>
           <li>미지원 locale은 영어로, 영어 누락은 한국어 원문으로 대체되는가?</li>
+          <li>정적 UI 문구와 사용자 작성 콘텐츠의 번역 경로가 분리되어 있는가?</li>
+          <li>WebView가 OS 문자열 대신 Flutter capability로 번역 기능을 노출하는가?</li>
+          <li>기기 번역이 실패하거나 지원되지 않을 때 원문을 표시하는가?</li>
+          <li>최소 OS와 SDK 설정이 Flutter·ML Kit·스토어 요구사항을 만족하는가?</li>
+          <li>콘텐츠 수정 시 기기에 저장된 이전 번역을 재사용하지 않는가?</li>
           <li>고위험 문구에 별도 검토 근거가 남는가?</li>
         </ul>
       </section>
