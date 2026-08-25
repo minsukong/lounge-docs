@@ -52,8 +52,8 @@
         <p>
           정확한 패키지 버전은 프로젝트의 Lock File을 기준으로 하며, 기술별
           책임과 상세 구현 원칙은
-          <a href="./../frontend_guide/index.html">Front-End 개발 가이드</a
-          >를 따릅니다.
+          <a href="./../frontend_guide/index.html">Front-End 개발 가이드</a>를
+          따릅니다.
         </p>
         <p>
           생성된 컴포넌트의 Props와 UI 타입 작성은
@@ -61,8 +61,8 @@
           따릅니다.
         </p>
         <p>
-          Tokens Studio, Figma Variables, shadcn/ui와 Tailwind CSS 4 사이의
-          토큰 이름과 연결 방식은
+          Tokens Studio, Figma Variables, shadcn/ui와 Tailwind CSS 4 사이의 토큰
+          이름과 연결 방식은
           <a href="./design_tokens.html">디자인 토큰 가이드</a>를 따릅니다.
         </p>
         <table>
@@ -213,23 +213,21 @@ flowchart LR
           </tbody>
         </table>
         <p>
-          <code class="badge-tbd">TBD</code> Code Connect는 Figma Organization 또는 Enterprise
-          플랜 비용, 좌석과 권한, 저장소 연결 정책을 검토한 후 도입 여부를
-          결정합니다. 도입 전에도 위 흐름이 동작하도록 운영합니다.
+          <code class="badge-tbd">TBD</code> Code Connect는 Figma Organization
+          또는 Enterprise 플랜 비용, 좌석과 권한, 저장소 연결 정책을 검토한 후
+          도입 여부를 결정합니다. 도입 전에도 위 흐름이 동작하도록 운영합니다.
         </p>
       </section>
 
       <hr />
 
-<section>
-        <h2 class="bx-active">
-          5. VS Code, Cline 및 로컬 LLM을 이용한 구현
-        </h2>
+      <section>
+        <h2 class="bx-active">5. VS Code, Cline 및 로컬 LLM을 이용한 구현</h2>
         <p>
-          VS Code에서 Cline과 Ollama 기반 로컬 LLM을 사용해 React와 Tailwind
-          CSS 구현 초안을 작성할 수 있습니다. 이 가이드의 기본 로컬 모델은
-          <code>qwen3.8:27b</code>입니다. 생성된 코드의 구조와 품질을 최종
-          판단하는 주체는 프론트엔드 개발자입니다.
+          VS Code에서 Cline과 Ollama 기반 로컬 LLM을 사용해 React와 Tailwind CSS
+          구현 초안을 작성할 수 있습니다. 이 가이드의 기본 로컬 모델은
+          <code>qwen3.8:27b-mtp-q4_K_M</code>입니다. 생성된 코드의 구조와 품질을
+          최종 판단하는 주체는 프론트엔드 개발자입니다.
         </p>
         <p>
           사람과 LLM이 작성한 코드의 공통 품질 기준은
@@ -240,19 +238,27 @@ flowchart LR
         <h3>5.1 도구와 책임</h3>
         <ul>
           <li>VS Code는 소스 편집, Diff 확인과 검증 명령 실행에 사용합니다.</li>
-          <li>Cline은 프로젝트 컨텍스트와 Figma 정보를 바탕으로 코드를 생성하고 수정합니다.</li>
-          <li>Ollama는 <code>qwen3.8:27b</code> 모델을 로컬에서 실행합니다.</li>
+          <li>
+            Cline은 프로젝트 컨텍스트와 Figma 정보를 바탕으로 코드를 생성하고
+            수정합니다.
+          </li>
+          <li>
+            Ollama는 <code>qwen3.8:27b-mtp-q4_K_M</code> 모델을 로컬에서
+            실행합니다.
+          </li>
           <li>파일 변경과 명령 실행 전후에 범위와 결과를 사람이 확인합니다.</li>
         </ul>
 
         <h3>5.2 Ollama와 Qwen 설치</h3>
         <p>
-          Ollama를 설치한 뒤 다음 명령으로 기본 모델을 내려받고 실행 여부를
-          확인합니다.
+          Ollama를 설치한 뒤 Ollama 표시 기준 약 18GB인 MTP Q4_K_M 기본 모델을
+          다음 명령으로 내려받고 실행 여부를 확인합니다.
         </p>
-        <pre class="hljs"><code data-language="bash">ollama pull qwen3.8:27b
+        <pre
+          class="hljs"
+        ><code data-language="bash">ollama pull qwen3.8:27b-mtp-q4_K_M
 ollama list
-ollama run qwen3.8:27b</code></pre>
+ollama run qwen3.8:27b-mtp-q4_K_M</code></pre>
 
         <h3>5.3 Cline 설정</h3>
         <p>
@@ -262,9 +268,11 @@ ollama run qwen3.8:27b</code></pre>
         </p>
         <ol>
           <li>Cline 설정에서 <strong>API Configuration</strong>을 엽니다.</li>
-          <li><strong>API Provider</strong>에서 <code>Ollama</code>를 선택합니다.</li>
+          <li>
+            <strong>API Provider</strong>에서 <code>Ollama</code>를 선택합니다.
+          </li>
           <li>Base URL은 <code>http://localhost:11434</code>로 설정합니다.</li>
-          <li>Model에서 <code>qwen3.8:27b</code>를 선택합니다.</li>
+          <li>Model에서 <code>qwen3.8:27b-mtp-q4_K_M</code>를 선택합니다.</li>
           <li>
             <strong>Model Context Window</strong>는 속도와 프로젝트 문맥의
             균형을 고려해 <strong>64K</strong>로 설정합니다. 숫자를 직접
@@ -281,11 +289,23 @@ ollama run qwen3.8:27b</code></pre>
 
         <h4>초기 컨텍스트 사용량</h4>
         <p>
-          현재 테스트 환경에서는 Figma Desktop MCP와 Tavily MCP를 활성화한 새
-          채팅에서 <code>안녕</code>처럼 짧은 메시지만 입력해도 약 18.2K의
-          컨텍스트가 바로 사용되는 것을 확인했습니다. 이는 사용자 메시지 자체의
-          크기가 아니라 Cline이 Agent 작업을 시작하기 위해 미리 전달하는 기본
-          컨텍스트가 함께 계산된 결과입니다.
+          동일하거나 유사한 Cline 및 MCP 구성에서 Figma Desktop MCP와 Tavily
+          MCP를 활성화하고, 새 채팅에 <code>안녕</code>처럼 짧은 메시지를
+          입력했을 때 다음과 같은 초기 컨텍스트 사용량이 관찰되었습니다.
+        </p>
+        <ul>
+          <li>
+            일반 <code>qwen3.8:27b</code>: 약 <strong>18.2K</strong> — 기존
+            테스트 관찰값
+          </li>
+          <li>
+            <code>qwen3.8:27b-mtp-q4_K_M</code>: 약 <strong>7~8K</strong> —
+            사용자 실측값
+          </li>
+        </ul>
+        <p>
+          이는 사용자 메시지 자체의 크기뿐 아니라 Cline이 Agent 작업을 시작하기
+          위해 미리 전달하는 기본 컨텍스트가 함께 계산된 결과입니다.
         </p>
         <p>초기 컨텍스트에는 일반적으로 다음 정보가 포함됩니다.</p>
         <ul>
@@ -296,13 +316,17 @@ ollama run qwen3.8:27b</code></pre>
         </ul>
         <p>
           따라서 MCP 서버와 도구를 많이 활성화할수록 실제 대화를 시작하기 전의
-          컨텍스트 사용량도 커질 수 있습니다. 약 18.2K는 현재 구성에서 관찰한
-          값이며 Cline 버전, 활성 도구, MCP 서버와 프로젝트 설정에 따라
-          달라집니다. 64K 설정에서는 이 초기 사용량을 제외한 나머지 공간에 대화,
+          컨텍스트 사용량도 커질 수 있습니다. 위의 18.2K와 7~8K는 각 테스트
+          환경에서 관찰된 값입니다. MTP의 주된 목적은 출력 생성 가속이며, MTP
+          자체가 Cline의 시스템 및 MCP 컨텍스트 토큰을 원리적으로 줄인다고
+          단정할 수 없습니다. 모델과 토크나이저, 도구 스키마 처리 방식, Cline
+          버전, 활성 도구, MCP 서버 및 프로젝트 설정 차이에 따라 값이 달라질 수
+          있습니다. 64K 설정에서는 이 초기 사용량을 제외한 나머지 공간에 대화,
           파일 내용과 도구 실행 결과가 누적되므로 한 채팅에는 하나의 작업 목표만
           유지하고 필요하면 새 채팅으로 분리합니다. 자세한 컨텍스트 구성은
-          <a href="https://docs.cline.bot/core-workflows/task-management">Cline Task Management</a>를
-          참고합니다.
+          <a href="https://docs.cline.bot/core-workflows/task-management"
+            >Cline Task Management</a
+          >를 참고합니다.
         </p>
 
         <h4><code>/newtask</code>로 작업 이어가기</h4>
@@ -310,16 +334,23 @@ ollama run qwen3.8:27b</code></pre>
           <code>/newtask</code>는 현재 채팅을 단순히 종료하는 명령이 아니라,
           지금까지의 핵심 내용을 정리해 깨끗한 컨텍스트의 새 Task로 전달하는
           작업 인계 기능입니다. 컨텍스트가 많이 찼지만 동일한 목표를 계속
-          진행해야 하거나, 조사와 계획을 마치고 구현 단계로 전환할 때 사용합니다.
+          진행해야 하거나, 조사와 계획을 마치고 구현 단계로 전환할 때
+          사용합니다.
         </p>
         <ol>
           <li>채팅 입력창에 <code>/newtask</code>를 입력합니다.</li>
           <li>Cline이 현재 대화에서 인계할 내용을 요약해 제안합니다.</li>
           <li>목표, 완료 작업, 관련 파일과 다음 단계가 정확한지 확인합니다.</li>
-          <li>누락되거나 잘못 요약된 내용을 직접 보완한 뒤 새 Task 생성을 승인합니다.</li>
+          <li>
+            누락되거나 잘못 요약된 내용을 직접 보완한 뒤 새 Task 생성을
+            승인합니다.
+          </li>
           <li>새 Task에서 요약된 컨텍스트를 기준으로 작업을 계속합니다.</li>
         </ol>
-        <p>새 Task를 시작하기 전에 인계 요약에 다음 항목이 포함되었는지 확인합니다.</p>
+        <p>
+          새 Task를 시작하기 전에 인계 요약에 다음 항목이 포함되었는지
+          확인합니다.
+        </p>
         <ul>
           <li>최종 목표와 현재 작업 범위</li>
           <li>이미 결정한 구현 방향과 변경하면 안 되는 제약 조건</li>
@@ -371,21 +402,25 @@ ollama run qwen3.8:27b</code></pre>
             <tr>
               <td><code>/reportbug</code></td>
               <td>Cline 진단 정보를 포함해 문제 보고 준비</td>
-              <td>Cline 자체 오류, 비정상 종료 또는 반복되는 오동작을 보고할 때</td>
+              <td>
+                Cline 자체 오류, 비정상 종료 또는 반복되는 오동작을 보고할 때
+              </td>
             </tr>
           </tbody>
         </table>
         <p>
           현재 설치 버전에서 지원되는 명령은 채팅 입력창에 <code>/</code>를
           입력해 확인합니다. 명령 상세와 변경 사항은
-          <a href="https://docs.cline.bot/core-workflows/using-commands">Cline Using Commands</a>를
-          참고합니다.
+          <a href="https://docs.cline.bot/core-workflows/using-commands"
+            >Cline Using Commands</a
+          >를 참고합니다.
         </p>
 
         <h3>5.4 로컬 LLM 테스트 및 권장 사양</h3>
         <p>
-          아래 기준은 약 17GB인 <code>qwen3.8:27b</code> 모델을 Ollama와
-          Cline에서 사용하는 환경을 전제로 합니다.
+          아래 기준은 Ollama 표시 기준 약 18GB인
+          <code>qwen3.8:27b-mtp-q4_K_M</code> 모델을 Ollama와 Cline에서 사용하는
+          환경을 전제로 합니다.
         </p>
 
         <h4>테스트 환경</h4>
@@ -415,21 +450,21 @@ ollama run qwen3.8:27b</code></pre>
             </tr>
             <tr>
               <td>모델</td>
-              <td><code>qwen3.8:27b</code>, 약 17GB</td>
+              <td><code>qwen3.8:27b-mtp-q4_K_M</code>, 약 18GB</td>
             </tr>
           </tbody>
         </table>
         <blockquote>
           <p>
-            <strong>테스트 결과</strong>: 약 17GB 모델과 128K 토큰 컨텍스트를
-            사용한 고사양 환경에서는 응답 속도와 추론 품질이 모두
+            <strong>테스트 결과</strong>: 약 18GB MTP Q4_K_M 모델과 128K 토큰
+            컨텍스트를 사용한 고사양 환경에서는 응답 속도와 추론 품질이 모두
             실사용 가능한 수준이었습니다. 다만 64K보다 응답이 느려질 수 있으므로
             일반 개발 PC와 반복 작업에서는 64K를 기본값으로 권장합니다.
           </p>
         </blockquote>
         <p>
-          위 장비는 검증 결과가 좋은 고사양 테스트 환경이며 모든 개발 PC의
-          필수 사양은 아닙니다. 로컬 LLM에서는 GPU 연산 성능뿐 아니라 모델과
+          위 장비는 검증 결과가 좋은 고사양 테스트 환경이며 모든 개발 PC의 필수
+          사양은 아닙니다. 로컬 LLM에서는 GPU 연산 성능뿐 아니라 모델과
           컨텍스트를 처리할 수 있는 VRAM 용량이 중요합니다.
         </p>
 
@@ -464,23 +499,26 @@ ollama run qwen3.8:27b</code></pre>
               <td>VRAM 16GB</td>
               <td>64GB</td>
               <td>최신 12코어급</td>
-              <td>모델 일부가 CPU로 이동하여 응답 속도가 크게 느려질 수 있음</td>
+              <td>
+                모델 일부가 CPU로 이동하여 응답 속도가 크게 느려질 수 있음
+              </td>
             </tr>
           </tbody>
         </table>
         <p>
-          비용과 성능의 균형을 고려하면 RTX 3090 24GB, 시스템 메모리 64GB,
-          최신 8~12코어 CPU와 NVMe SSD 1TB 구성을 권장합니다. RTX 3090은
-          RTX 4090보다 연산 속도는 낮지만 VRAM이 동일하게 24GB이므로 약 17GB
-          모델의 64K 컨텍스트를 사용하는 개발 PC에 적합합니다.
+          비용과 성능의 균형을 고려하면 RTX 3090 24GB, 시스템 메모리 64GB, 최신
+          8~12코어 CPU와 NVMe SSD 1TB 구성을 권장합니다. RTX 3090은 RTX 4090보다
+          연산 속도는 낮지만 VRAM이 동일하게 24GB이므로 약 18GB 모델의 64K
+          컨텍스트를 사용하는 개발 PC에 적합합니다.
         </p>
         <p>
           64K는 일반적인 코드 조사, Figma 화면 구현과 웹검색 결과 정리에 필요한
           문맥을 확보하면서 128K보다 빠르게 작업하기 위한 기본값입니다. 다른 GPU
           사용 프로그램을 최소화하고 <code>ollama ps</code>에서 모델이 가능한 한
           <code>100% GPU</code>로 적재되었는지 확인합니다. 세부 내용은
-          <a href="https://docs.ollama.com/context-length">Ollama Context length</a>와
-          <a href="https://docs.ollama.com/faq">Ollama FAQ</a>를 참고합니다.
+          <a href="https://docs.ollama.com/context-length"
+            >Ollama Context length</a
+          >와 <a href="https://docs.ollama.com/faq">Ollama FAQ</a>를 참고합니다.
         </p>
 
         <h3>5.5 Figma Desktop MCP 설정</h3>
@@ -499,10 +537,12 @@ ollama run qwen3.8:27b</code></pre>
   }
 }</code></pre>
         <p>
-          Figma Desktop에서 코드로 변환할 레이어 또는 프레임을 선택한 뒤
-          Cline에 다음과 같이 명령합니다.
+          Figma Desktop에서 코드로 변환할 레이어 또는 프레임을 선택한 뒤 Cline에
+          다음과 같이 명령합니다.
         </p>
-        <pre class="hljs"><code data-language="text">현재 figma에서 선택된 레이어(프레임) 정보/코딩</code></pre>
+        <pre
+          class="hljs"
+        ><code data-language="text">현재 figma에서 선택된 레이어(프레임) 정보/코딩</code></pre>
         <p>
           이 명령을 사용하면 현재 Figma에서 선택된 부분의 정보를 읽어 해당
           영역의 소스 코드를 생성할 수 있습니다. 선택 대상과 프로젝트의 기존
@@ -540,10 +580,10 @@ ollama run qwen3.8:27b</code></pre>
   "autoApprove": []
 }</code></pre>
         <p>
-          <code>YOUR_TAVILY_API_KEY</code>는 Tavily에서 발급받은 키로 교체합니다.
-          API 키가 포함된 설정 파일은 저장소에 커밋하지 않습니다. 처음에는
-          <code>autoApprove</code>를 비워 두고 검색 도구 호출 내용을 확인한 뒤
-          승인합니다.
+          <code>YOUR_TAVILY_API_KEY</code>는 Tavily에서 발급받은 키로
+          교체합니다. API 키가 포함된 설정 파일은 저장소에 커밋하지 않습니다.
+          처음에는 <code>autoApprove</code>를 비워 두고 검색 도구 호출 내용을
+          확인한 뒤 승인합니다.
         </p>
 
         <h4>무료 및 유료 사용 구분</h4>
@@ -588,20 +628,33 @@ ollama run qwen3.8:27b</code></pre>
           사용합니다. 사이트 전체 탐색이나 대규모 Research 요청은 크레딧을
           빠르게 소비할 수 있으므로 필요한 공식 문서와 최신 정보 확인 범위로
           제한합니다. 가격과 크레딧 정책은 변경될 수 있으므로
-          <a href="https://docs.tavily.com/documentation/api-credits">Tavily Credits &amp; Pricing</a>에서
-          현재 기준을 확인합니다.
+          <a href="https://docs.tavily.com/documentation/api-credits"
+            >Tavily Credits &amp; Pricing</a
+          >에서 현재 기준을 확인합니다.
         </p>
-        <pre class="hljs"><code data-language="text">Tavily를 사용해 관련 기술의 최신 공식 문서를 검색하고,
+        <pre
+          class="hljs"
+        ><code data-language="text">Tavily를 사용해 관련 기술의 최신 공식 문서를 검색하고,
 핵심 내용과 출처 URL을 함께 정리해줘.</code></pre>
 
         <h3>5.7 React Code Exports 작업 흐름</h3>
         <ol>
           <li>Figma에서 구현할 레이어 또는 프레임을 선택합니다.</li>
-          <li>Cline에 <code>현재 figma에서 선택된 레이어(프레임) 정보/코딩</code>이라고 요청합니다.</li>
+          <li>
+            Cline에
+            <code>현재 figma에서 선택된 레이어(프레임) 정보/코딩</code>이라고
+            요청합니다.
+          </li>
           <li>관련 컴포넌트, Tailwind 토큰과 디자인 토큰을 먼저 확인합니다.</li>
-          <li>기존 요소를 우선 재사용하고 불명확한 동작이나 데이터는 담당자에게 확인합니다.</li>
+          <li>
+            기존 요소를 우선 재사용하고 불명확한 동작이나 데이터는 담당자에게
+            확인합니다.
+          </li>
           <li>생성된 Diff를 검토하고 승인한 범위만 반영합니다.</li>
-          <li><code>typecheck</code>, <code>lint</code>와 필요한 production build를 실행합니다.</li>
+          <li>
+            <code>typecheck</code>, <code>lint</code>와 필요한 production
+            build를 실행합니다.
+          </li>
           <li>구현 화면을 Figma와 비교하고 차이를 수정합니다.</li>
         </ol>
 
@@ -609,16 +662,23 @@ ollama run qwen3.8:27b</code></pre>
         <ul>
           <li>Figma에서 의도한 레이어 또는 프레임을 정확히 선택했는가?</li>
           <li>기존 컴포넌트와 디자인 토큰을 우선 사용했는가?</li>
-          <li>작업 범위를 벗어난 파일, 의존성 또는 설정을 변경하지 않았는가?</li>
-          <li>확인되지 않은 API, 상태 관리 구조 또는 공통화를 추가하지 않았는가?</li>
+          <li>
+            작업 범위를 벗어난 파일, 의존성 또는 설정을 변경하지 않았는가?
+          </li>
+          <li>
+            확인되지 않은 API, 상태 관리 구조 또는 공통화를 추가하지 않았는가?
+          </li>
           <li>최종 Diff를 사람이 검토했는가?</li>
-          <li><code>typecheck</code>, <code>lint</code>와 필요한 build를 통과했는가?</li>
+          <li>
+            <code>typecheck</code>, <code>lint</code>와 필요한 build를
+            통과했는가?
+          </li>
         </ul>
         <blockquote>
           <p>
-            LLM과 Agent는 구현 속도를 높이는 작업 도구이며 승인 주체가
-            아닙니다. 생성된 코드는 사람이 작성한 코드와 같은 리뷰 및 검증
-            기준을 적용합니다.
+            LLM과 Agent는 구현 속도를 높이는 작업 도구이며 승인 주체가 아닙니다.
+            생성된 코드는 사람이 작성한 코드와 같은 리뷰 및 검증 기준을
+            적용합니다.
           </p>
         </blockquote>
       </section>
