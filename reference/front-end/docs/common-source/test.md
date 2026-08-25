@@ -60,6 +60,8 @@ afterEach(() => {
 
 Vitest 설정 또는 현재 Testing Library 버전이 자동 정리를 제공하더라도 명시적 setup 하나로 팀의 실행 환경을 고정할 수 있습니다. 기존 전역 mock이 있다면 이 파일에서 테스트 분리에 필요한 항목만 추가합니다.
 
+API 함수와 parser까지 통과하는 테스트가 생기면 [API Mock 구현 예시](./api-mocking.md)의 MSW server lifecycle을 이 파일에 병합합니다. 별도의 setup 파일을 중복 등록하지 않고 기존 `afterEach`에서 `cleanup()`과 `server.resetHandlers()`를 함께 실행합니다. API를 호출하지 않는 컴포넌트 테스트만 있다면 MSW를 미리 추가하지 않습니다.
+
 ## 3단계: Provider가 필요한 컴포넌트 렌더링
 
 ### `src/test/render-with-providers.tsx`
@@ -204,6 +206,8 @@ describe("ProfileNameForm", () => {
 
 프로젝트가 모든 컴포넌트 테스트에 Provider 포함 렌더링 함수를 쓰기로 했다면 `renderWithProviders`로 통일합니다.
 
+화면이 실제 기능 API를 호출하는 통합 예시는 [공통 소스 통합 사용 예시](./recipes.md)처럼 MSW handler로 응답을 제어합니다. 단순 폼처럼 network 경계가 책임이 아닌 테스트는 함수를 prop으로 전달해 더 작게 검증합니다.
+
 ## 테스트 대상을 고르는 기준
 
 | 우선 테스트 | 이유 |
@@ -220,6 +224,7 @@ describe("ProfileNameForm", () => {
 - Lucide SVG path
 - 단순히 prop을 그대로 출력하는 표시 컴포넌트
 - 구현 함수 이름, state 변수와 hook 호출 횟수
+- `fetch`를 우회하도록 API 모듈 전체를 Mock한 통합 테스트
 
 ## 실행과 실패 해석
 
@@ -230,3 +235,5 @@ npm run test
 ```
 
 alias 오류는 `vitest.config.ts`와 실제 `tsconfig` 경로가 같은지 확인합니다. `document is not defined`는 jsdom 환경 연결을, jest-dom matcher 오류는 setup 파일 로딩을 확인합니다. Query 테스트가 오래 멈추면 테스트 QueryClient의 재시도 설정과 종료되지 않은 timer를 먼저 확인합니다.
+
+MSW를 연결한 테스트에서 처리되지 않은 요청 오류가 발생하면 handler의 path와 method가 기능 API와 같은지 확인합니다. 테스트가 종료되지 않으면 무한 지연 handler, 남은 timer와 `server.close()` 실행 여부를 확인합니다.

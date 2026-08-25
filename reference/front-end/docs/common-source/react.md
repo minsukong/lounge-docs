@@ -91,6 +91,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
 최상위 layout은 Server Component로 유지하고 Provider만 Client Component로 둡니다. Query Devtools처럼 개발에서만 필요한 도구와 특정 화면 경로만 쓰는 Context는 이 Provider에 무조건 넣지 않습니다.
 
+[세션과 회원 경계 구현 예시](./session.md)의 세션 Query도 같은 `AppProviders` 아래에서 실행합니다. 세션을 사용한다는 이유로 별도의 QueryClient나 전역 회원 Context를 추가하지 않고, 로그아웃 뒤 cache 초기화 범위만 실제 공개 데이터와 사용자 데이터 구성에 맞춰 결정합니다.
+
 ### 미확정 항목
 
 `staleTime`은 조회 결과를 다시 확인하지 않고 최신으로 보는 시간이고, `gcTime`은 화면에서 더 이상 쓰지 않는 캐시를 메모리에 남겨 두는 시간입니다. 두 값과 `retry`, `refetchOnWindowFocus`, 전역 오류 처리는 API 특성과 UX 정책에 맞춰 결정합니다. 정책이 확정되면 `createQueryClient`의 `defaultOptions`에 명시하고, 확정 전에는 임의의 숫자나 전역 toast를 넣지 않습니다.

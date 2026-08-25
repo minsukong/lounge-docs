@@ -140,25 +140,22 @@ export function parseProfile(value: unknown): Profile {
 }
 ```
 
-### fetch 응답에서 검증 함수 호출
+### 요청 함수에서 검증 함수 호출
 
 ```ts
 import { parseProfile } from "@/features/profile/api/parse-profile"
 import type { Profile } from "@/features/profile/model/profile"
+import { request } from "@/lib/http/request"
 
-export async function getProfile(signal?: AbortSignal): Promise<Profile> {
-  const response = await fetch("/api/profile", { signal })
-
-  if (!response.ok) {
-    throw new Error(`프로필 조회 실패: ${response.status}`)
-  }
-
-  const data: unknown = await response.json()
-  return parseProfile(data)
+export function getProfile(signal?: AbortSignal): Promise<Profile> {
+  return request("/api/members/me", {
+    signal,
+    parse: parseProfile,
+  })
 }
 ```
 
-`/api/profile`, 응답 필드와 오류 타입은 통합 흐름을 보여 주기 위한 교체 지점입니다. 실제 backend 계약이 정해지면 이 세 부분을 바꾸고 응답 검증 테스트 데이터도 함께 갱신합니다. `response.json() as Profile`처럼 검증 없이 단언하지 않습니다.
+공통 요청 함수는 [API 요청 기반 구현 예시](./network.md)의 본문 읽기와 HTTP 오류 처리를 담당하고, 기능별 parser는 성공 응답을 `unknown`에서 확인합니다. `/api/members/me`, 응답 필드와 오류 형식은 교체 지점입니다. 실제 backend 계약이 정해지면 기능 API, parser 테스트와 Mock fixture를 함께 갱신하며 `response.json() as Profile`처럼 검증 없이 단언하지 않습니다.
 
 ### 응답 검증 테스트
 

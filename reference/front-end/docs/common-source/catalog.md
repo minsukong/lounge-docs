@@ -18,8 +18,11 @@
 | [Tailwind CSS와 UI 설정](./tailwind.md) | `src/lib/utils.ts` | 조건부 클래스와 충돌 병합 | 기존 `cn` 존재 여부와 클래스 병합 |
 | [TypeScript 공통 설정과 검사 함수](./typescript.md) | `tsconfig.base.json` | 저장소 공통 strict 기준 | workspace 전체 오류 범위 |
 | [TypeScript 공통 설정과 검사 함수](./typescript.md) | `apps/app-webview/tsconfig.json` | Next 설정과 alias | Next가 생성한 설정과 app typecheck |
+| [API 요청 기반 구현 예시](./network.md) | `src/lib/http/http-error.ts` | HTTP 상태와 응답 본문 보존 | 기존 오류 type과 상태 처리 방식 |
+| [API 요청 기반 구현 예시](./network.md) | `src/lib/http/request.ts` | 본문 읽기와 기능별 parser 연결 | 기존 fetch wrapper와 runtime 지원 범위 |
 | [테스트 공통 설정](./test.md) | `vitest.config.ts` | Client Component 테스트 환경 | 기존 테스트 실행 도구, alias와 테스트 실행 |
 | [테스트 공통 설정](./test.md) | `src/test/setup.ts` | DOM matcher와 테스트 종료 후 정리 | jest-dom matcher 실행 |
+| [API Mock 구현 예시](./api-mocking.md) | `src/mocks/server.ts` | 테스트에서 API handler 실행 | 기존 Mock 도구와 Node 테스트 환경 |
 
 ## 실제 사용처와 함께 적용할 코드
 
@@ -35,6 +38,9 @@
 | `isRecord`, `hasOwn` | `src/lib/type-guards.ts` | 외부 입력 검증에서 같은 객체 검사가 반복될 때 | API·Bridge 응답 검증 |
 | `getErrorMessage` | `src/lib/errors.ts` | `unknown` 오류의 기본 문구 처리가 반복될 때 | query·mutation 오류 |
 | `assertNever` | `src/lib/exhaustiveness.ts` | 구분 가능한 union의 모든 분기를 검사할 때 | 화면 상태 `switch` |
+| `parseSession`, `getSession` | `src/features/session/` | 로그인 상태를 처음 확인할 때 | 계정 요약·보호 화면 |
+| `useLogoutMutation` | `src/features/session/queries/session-queries.ts` | 로그아웃과 사용자 cache 초기화가 필요할 때 | 계정 메뉴 |
+| `handlers`, fixture | `src/mocks/` | Backend 없이 실제 요청 경계를 검증할 때 | 세션·회원 화면 테스트 |
 
 ## 함께 적용할 파일
 
@@ -44,8 +50,11 @@
 | QueryClient·Provider | `get-query-client.ts`, `providers.tsx`, layout 연결 | Query 정책과 추가 Provider |
 | 폼 공통 컴포넌트 | `submit-button.tsx`, `form-field.tsx`, 두 테스트 | 기존 shadcn import와 실제 반복 동작 |
 | 외부 입력 검증 | `type-guards.ts`, 기능별 응답 검증 함수와 테스트 | 실제 응답 형식과 오류 타입 |
+| API 요청 경계 | `http-error.ts`, `request.ts`, 기능별 API와 parser | 기본 URL, 인증, timeout과 공통 오류 계약 |
+| 세션 경계 | 세션 model·parser·API·Query | 인증 방식, 세션 응답과 로그아웃 뒤 이동 |
 | 테스트 설정 | `vitest.config.ts`, `setup.ts`, `render-with-providers.tsx` | 기존 테스트 실행 도구, alias와 전역 mock |
-| 프로필 통합 예시 | 프로필 기능 파일 전체 | 실제 API 경로, 응답 형식, 입력값 검증, 문구와 화면 경로 |
+| API Mock | fixture, handler, browser·server 연결 | 실제 path·status와 개발 Mock 활성화 위치 |
+| 프로필 통합 예시 | 프로필 기능 파일 전체, API Mock handler | 실제 API 경로, 응답 형식, 입력값 검증, 문구와 화면 경로 |
 
 코드 파일만 복사하고 사용 예와 테스트를 생략하면 내보낸 함수와 컴포넌트가 실제 요구에 맞는지 확인할 수 없습니다. 실제 적용 시에는 최소 한 개의 사용처와 해당 동작 테스트를 같은 변경에 포함합니다.
 
@@ -62,6 +71,7 @@
 | 서버 상태 | `@tanstack/react-query` |
 | 테스트 실행 | `vitest`, `jsdom`, `@vitejs/plugin-react` |
 | 컴포넌트 테스트 | `@testing-library/react`, `@testing-library/user-event`, `@testing-library/jest-dom` |
+| API Mock | `msw` |
 
 ## 미확정 항목
 
@@ -70,7 +80,9 @@
 | 항목 | 결정해야 할 내용 | 확정 후 작업 |
 | --- | --- | --- |
 | 브랜드와 UI 토큰 | 색상, 글자 체계, 간격, 화면 너비 기준과 테마 저장 방식 | `globals.css` 토큰 값과 UI 예제 갱신 |
-| API 요청 코드와 공통 응답 형식 | 기본 URL, 인증, 오류 형식과 제한 시간 | 첫 API에서 요청 코드와 응답 검증 함수 구현 |
+| API 연결 정책 | 기본 URL, 인증 전달, 공통 오류 형식과 제한 시간 | `request` 연결 경계와 기능별 오류 처리 갱신 |
+| 세션 계약 | 세션 path·응답, 만료·갱신과 로그아웃 뒤 이동 | 세션 parser·Query·Mock과 cache 초기화 범위 갱신 |
+| 개발 API Mock | 활성화 환경변수와 Next.js bootstrap 위치 | production 제외 조건과 브라우저 Mock 시작 코드 연결 |
 | WebView Bridge 연동 | 호출 이름, 전달 값, 버전, 제한 시간과 플랫폼 오류 | 승인된 Bridge 계약으로 타입과 연동 코드 구현 |
 | Query 기본 정책 | 캐시, 재시도, 다시 조회하는 시점과 오프라인 동작 | `QueryClient` 기본 설정과 테스트 갱신 |
 | 폼 입력값 검증 도구 | schema 도구, 브라우저·서버 검증 범위와 오류 형식 | 실제 폼에서 입력값 검증 연결 |
@@ -121,6 +133,8 @@
 [ ] 실제 사용처가 없는 컴포넌트나 도우미 함수를 추가하지 않았다.
 [ ] 업무 계약 type을 전역 common 폴더에 올리지 않았다.
 [ ] 사용처와 테스트를 함께 추가했다.
+[ ] API 테스트가 요청 함수와 parser를 우회하지 않는다.
+[ ] 세션과 회원 상세 데이터를 하나의 전역 상태로 합치지 않았다.
 [ ] typecheck, lint와 test를 통과했다.
 [ ] 통합 영향이 있으면 build까지 확인했다.
 ```

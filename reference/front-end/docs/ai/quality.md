@@ -31,4 +31,5 @@ npm run test
 ```
 
 - 병합 또는 통합 영향이 있는 변경에서는 `npm run build`도 실행합니다.
-- E2E, API Mock과 커버리지 기준은 실제 필요가 생길 때 추가합니다.
+- E2E와 커버리지 기준은 실제 필요가 생길 때 추가합니다.
+- Backend가 준비되기 전 화면 개발이나 API 경계 테스트에 API Mock이 필요하면 MSW를 선택적으로 사용합니다. 실제 API 경로와 응답 fixture는 확정 계약으로 취급하지 않으며, 도입 기준은 [API Mock 가이드](../common-source/api-mocking.md)를 확인합니다.

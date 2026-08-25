@@ -256,6 +256,36 @@ export function ProfilePanel() {
 
 여기서 `bg-white`, `text-gray-500`, `border-gray-200`, `bg-blue-600`처럼 역할이 드러나지 않는 색상 클래스를 섞지 않습니다. `p-4`, `gap-2` 같은 간격은 디자인 확정 후 컴포넌트 구조와 함께 조정할 수 있습니다.
 
+## WebView viewport 기본 확인
+
+모바일 WebView에서 화면 높이는 주소창과 시스템 UI 변화가 반영되는 `dvh`를 우선 사용합니다. 상태바와 홈 표시 영역까지 콘텐츠를 확장하는 구성이면 Next.js viewport에 `viewportFit: "cover"`를 지정하고 실제로 가려지는 화면 경계에만 safe area를 적용합니다.
+
+### `apps/app-webview/src/app/layout.tsx`
+
+```tsx
+import type { Viewport } from "next"
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+}
+```
+
+```tsx
+import type { ReactNode } from "react"
+
+export function ScreenLayout({ children }: { children: ReactNode }) {
+  return (
+    <main className="min-h-dvh pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]">
+      {children}
+    </main>
+  )
+}
+```
+
+Native container가 이미 inset을 적용한다면 WebView에서 같은 padding을 다시 넣지 않습니다. `100vh` 고정 높이, 모든 컴포넌트의 개별 safe area와 임의의 기기별 숫자를 피하고 실제 iOS·Android container에서 키보드가 열린 상태까지 확인합니다.
+
 ## 디자인 값 교체 예시
 
 브랜드 주색이 확정되면 사용처의 `bg-primary`를 모두 찾는 대신 토큰 값만 바꿉니다.
@@ -290,4 +320,4 @@ export function ProfilePanel() {
 
 ## 미확정 항목
 
-글자 크기 체계, 간격 체계, 화면 너비 기준, 테마 저장 방식, 차트와 사이드바 토큰은 실제 디자인이나 사용할 컴포넌트가 정해진 뒤 추가합니다. Button, Input, Dialog 같은 기본 UI 컴포넌트는 shadcn이 생성한 코드를 우선하며 같은 기능을 다시 감싸는 컴포넌트를 미리 만들지 않습니다.
+글자 크기 체계, 간격 체계, 화면 너비 기준, 테마 저장 방식, 차트와 사이드바 토큰은 실제 디자인이나 사용할 컴포넌트가 정해진 뒤 추가합니다. Native container의 inset 처리와 키보드 resize 방식은 WebView 계약이 확인되면 viewport 예시와 함께 갱신합니다. Button, Input, Dialog 같은 기본 UI 컴포넌트는 shadcn이 생성한 코드를 우선하며 같은 기능을 다시 감싸는 컴포넌트를 미리 만들지 않습니다.

@@ -10,7 +10,10 @@
 - Tailwind와 shadcn 작업은 `docs/common-source/tailwind.md`를 읽습니다.
 - React component와 Provider 작업은 `docs/common-source/react.md`를 읽습니다.
 - TypeScript 설정과 runtime guard 작업은 `docs/common-source/typescript.md`를 읽습니다.
+- API 요청 함수와 기능별 응답 검증 작업은 `docs/common-source/network.md`를 읽습니다.
+- 로그인 상태, 로그아웃과 회원 데이터 경계 작업은 `docs/common-source/session.md`를 읽습니다.
 - Vitest와 Testing Library 공통 환경 작업은 `docs/common-source/test.md`를 읽습니다.
+- Backend 없이 API 상태를 재현하거나 API 경계 테스트를 작성할 때는 `docs/common-source/api-mocking.md`를 읽습니다.
 - 공통 소스를 기능 단위로 연결하는 방법은 `docs/common-source/recipes.md`를 읽습니다.
 - `docs/common-source/catalog.md`는 실제 source 목록이 아니라 조사·구현 체크리스트로 사용합니다.
 

@@ -2,7 +2,7 @@
 
 ## 예시의 목적
 
-이 문서는 앞의 공통 소스를 한 기능에서 어떻게 연결하는지 보여 줍니다. 프로필 조회와 표시 이름 수정 흐름을 예로 들어 QueryClient·Provider, 실행 시 응답 검증, `FormField`, `SubmitButton`, 오류 변환과 테스트 렌더링 함수를 함께 사용합니다.
+이 문서는 앞의 공통 소스를 한 기능에서 어떻게 연결하는지 보여 줍니다. 프로필 조회와 표시 이름 수정 흐름을 예로 들어 QueryClient·Provider, 공통 요청 함수, 실행 시 응답 검증, `FormField`, `SubmitButton`, 오류 변환과 API Mock을 함께 사용합니다.
 
 프로필 API 경로와 응답 필드는 아직 프로젝트 계약으로 확정된 값이 아닙니다. 아래 코드는 구조와 연결 방법을 그대로 활용하고, **API 경로·요청 본문·응답 검증·업무 문구**를 실제 계약으로 교체하는 구현 예시입니다.
 
@@ -21,7 +21,7 @@ apps/app-webview/src/
     └── profile-screen.test.tsx
 ```
 
-먼저 `AppProviders`, `FormField`, `SubmitButton`, `getErrorMessage`, `renderWithProviders`가 준비되어 있어야 합니다.
+먼저 `AppProviders`, `request`, `FormField`, `SubmitButton`, `getErrorMessage`, `renderWithProviders`가 준비되어 있어야 합니다. 조회부터 수정까지의 테스트에는 [API Mock 구현 예시](./api-mocking.md)의 MSW server와 기본 handler도 연결합니다.
 
 ## 1단계: 데이터 모델과 API 응답 검증
 
@@ -74,37 +74,27 @@ import type {
   Profile,
   UpdateProfileInput,
 } from "@/features/profile/model/profile"
+import { request } from "@/lib/http/request"
 
-async function readProfileResponse(response: Response): Promise<Profile> {
-  if (!response.ok) {
-    throw new Error(`프로필 요청 실패: ${response.status}`)
-  }
-
-  const data: unknown = await response.json()
-  return parseProfile(data)
+export function getProfile(signal?: AbortSignal): Promise<Profile> {
+  return request("/api/members/me", {
+    signal,
+    parse: parseProfile,
+  })
 }
 
-export async function getProfile(signal?: AbortSignal): Promise<Profile> {
-  const response = await fetch("/api/profile", { signal })
-  return readProfileResponse(response)
-}
-
-export async function updateProfile(
+export function updateProfile(
   input: UpdateProfileInput,
 ): Promise<Profile> {
-  const response = await fetch("/api/profile", {
+  return request("/api/members/me", {
     method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(input),
+    body: input,
+    parse: parseProfile,
   })
-
-  return readProfileResponse(response)
 }
 ```
 
-조회와 수정이 같은 응답 형식을 사용하므로 `readProfileResponse`를 같은 API 모듈 안에서 재사용합니다. 인증 header, 기본 URL과 공통 오류 형식이 확정되면 프로젝트의 API 요청 방식에 맞춰 fetch 부분만 교체합니다.
+조회와 수정은 [API 요청 기반 구현 예시](./network.md)의 전송 경계를 공유하고, 성공 본문은 모두 `parseProfile`로 검증합니다. `/api/members/me`, 인증 header, 기본 URL과 공통 오류 형식은 교체 지점이며 실제 계약이 정해지면 기능 API, parser와 Mock handler를 함께 바꿉니다.
 
 ## 2단계: 조회·수정 Hook
 
@@ -278,40 +268,29 @@ export default function ProfilePage() {
 ```tsx
 import { screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import { beforeEach, describe, expect, it, vi } from "vitest"
-import {
-  getProfile,
-  updateProfile,
-} from "@/features/profile/api/profile-api"
+import { http, HttpResponse } from "msw"
+import { describe, expect, it, vi } from "vitest"
 import { ProfileScreen } from "@/features/profile/components/profile-screen"
+import { server } from "@/mocks/server"
 import { renderWithProviders } from "@/test/render-with-providers"
 
-vi.mock("@/features/profile/api/profile-api", () => ({
-  getProfile: vi.fn(),
-  updateProfile: vi.fn(),
-}))
-
-const mockedGetProfile = vi.mocked(getProfile)
-const mockedUpdateProfile = vi.mocked(updateProfile)
-
 describe("ProfileScreen", () => {
-  beforeEach(() => {
-    mockedGetProfile.mockReset()
-    mockedUpdateProfile.mockReset()
-  })
-
   it("조회한 이름을 수정하고 저장 완료를 표시한다", async () => {
     const user = userEvent.setup()
-    mockedGetProfile.mockResolvedValue({
-      id: "user-1",
-      displayName: "기존 이름",
-      introduction: null,
-    })
-    mockedUpdateProfile.mockResolvedValue({
-      id: "user-1",
-      displayName: "새 이름",
-      introduction: null,
-    })
+    const updateRequest = vi.fn()
+
+    server.use(
+      http.patch("/api/members/me", async ({ request }) => {
+        const body = await request.json()
+        updateRequest(body)
+
+        return HttpResponse.json({
+          id: "member-1",
+          displayName: "새 이름",
+          introduction: null,
+        })
+      }),
+    )
 
     renderWithProviders(<ProfileScreen />)
 
@@ -320,8 +299,8 @@ describe("ProfileScreen", () => {
     await user.type(input, "새 이름")
     await user.click(screen.getByRole("button", { name: "저장" }))
 
-    expect(mockedUpdateProfile).toHaveBeenCalledTimes(1)
-    expect(mockedUpdateProfile.mock.calls[0]?.[0]).toEqual({
+    expect(updateRequest).toHaveBeenCalledTimes(1)
+    expect(updateRequest).toHaveBeenCalledWith({
       displayName: "새 이름",
     })
     expect(await screen.findByRole("status")).toHaveTextContent("저장했습니다.")
@@ -329,11 +308,14 @@ describe("ProfileScreen", () => {
 
   it("짧은 이름은 API를 호출하지 않고 오류를 연결한다", async () => {
     const user = userEvent.setup()
-    mockedGetProfile.mockResolvedValue({
-      id: "user-1",
-      displayName: "기존 이름",
-      introduction: null,
-    })
+    const updateRequest = vi.fn()
+
+    server.use(
+      http.patch("/api/members/me", () => {
+        updateRequest()
+        return HttpResponse.json({})
+      }),
+    )
 
     renderWithProviders(<ProfileScreen />)
 
@@ -345,22 +327,24 @@ describe("ProfileScreen", () => {
     expect(input).toHaveAccessibleDescription(
       "2자 이상 입력하세요. 표시 이름은 2자 이상 입력하세요.",
     )
-    expect(mockedUpdateProfile).not.toHaveBeenCalled()
+    expect(updateRequest).not.toHaveBeenCalled()
   })
 })
 ```
+
+API 모듈을 `vi.mock`으로 교체하지 않으므로 `request`, HTTP 응답 읽기와 `parseProfile`까지 실제 경계를 통과합니다. 테스트마다 필요한 응답만 `server.use`로 덮어쓰고 공통 setup의 `server.resetHandlers()`가 다음 테스트 전에 기본 handler로 되돌립니다.
 
 ## 실제 프로젝트에서 반드시 교체할 곳
 
 | 교체 지점 | 예제 값 | 실제 적용 기준 |
 | --- | --- | --- |
-| API 경로 | `/api/profile` | backend 또는 BFF 계약 |
+| API 경로 | `/api/members/me` | backend 또는 BFF 계약 |
 | method·요청 본문 | `PATCH`, `{ displayName }` | 수정 API 명세 |
 | 응답 필드 | `id`, `displayName`, `introduction` | 실제 응답 형식 |
-| 인증·오류 | 단순 fetch와 status 오류 | 프로젝트 API 요청 방식과 오류 형식 |
+| 인증·오류 | 공통 `request`와 `HttpError` | 인증 전달과 실제 공통 오류 형식 |
 | 캐시 갱신 | 수정 응답을 `setQueryData` | 실제 수정 응답 범위 |
 | 입력값 검증 | 2자 이상 | 기획·서버 검증 규칙 |
 | 성공·오류 문구 | 문서의 한국어 문구 | UX writing 기준 |
 | route | `/profile` | 실제 App Router 구조 |
 
-교체 후에는 응답 검증 테스트 데이터, mutation 호출 검증과 화면 문구 테스트를 같은 작업에서 갱신합니다.
+교체 후에는 응답 검증 테스트 데이터, MSW fixture·handler, mutation 요청 검증과 화면 문구 테스트를 같은 작업에서 갱신합니다.

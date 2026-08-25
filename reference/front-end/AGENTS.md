@@ -84,7 +84,7 @@ flowchart TD
 - 프로젝트 구조와 공통 기준: [Front-End 개발 가이드](../../frontend_guide/index.html), [Front-End Monorepo 공통 기준](../../monorepo/index.html)
 - UI와 Figma 구현: [React Code Exports 가이드](../../ui_guide/react_code_exports.html), [디자인 토큰 가이드](../../ui_guide/design_tokens.html)
 - 품질 확인: [Lint 가이드](../../lint_guide/index.html), [Test 가이드](../../test_guide/index.html)
-- 공통 소스 구현: [공통 소스 가이드](./docs/common-source/index.md), [테스트 공통 소스](./docs/common-source/test.md), [통합 사용 예시](./docs/common-source/recipes.md), [공통 소스 카탈로그](./docs/common-source/catalog.md)
+- 공통 소스 구현: [공통 소스 가이드](./docs/common-source/index.md), [API 요청 기반](./docs/common-source/network.md), [세션 경계](./docs/common-source/session.md), [API Mock](./docs/common-source/api-mocking.md), [테스트 공통 소스](./docs/common-source/test.md), [통합 사용 예시](./docs/common-source/recipes.md), [공통 소스 카탈로그](./docs/common-source/catalog.md)
 
 ### 공통 소스 구현 문서
 
@@ -96,7 +96,10 @@ flowchart TD
 | Tailwind CSS와 shadcn/ui 공통 설정 | [Markdown](./docs/common-source/tailwind.md) · [HTML](./docs/common-source/tailwind.html) | PostCSS, `components.json`, 디자인 토큰, `globals.css`와 `cn` 구현 예시 |
 | React Provider와 반복되는 폼 동작 구현 | [Markdown](./docs/common-source/react.md) · [HTML](./docs/common-source/react.html) | QueryClient 생명주기, Provider, `SubmitButton`과 `FormField` 구현 예시 |
 | TypeScript 설정과 외부 입력 검증 | [Markdown](./docs/common-source/typescript.md) · [HTML](./docs/common-source/typescript.html) | 공통 compiler 설정, type guard, 오류 변환과 union 분기 검사 예시 |
+| API 요청과 기능별 응답 검증 연결 | [Markdown](./docs/common-source/network.md) · [HTML](./docs/common-source/network.html) | HTTP 오류, 공통 요청 함수와 기능별 parser 연결 예시 |
+| 로그인 상태와 회원 데이터 경계 | [Markdown](./docs/common-source/session.md) · [HTML](./docs/common-source/session.html) | 세션 model·parser·Query와 로그아웃 cache 초기화 기준 |
 | Client Component와 Query 테스트 환경 구성 | [Markdown](./docs/common-source/test.md) · [HTML](./docs/common-source/test.html) | Vitest, Testing Library, 공통 렌더링 함수와 사용자 동작 테스트 예시 |
+| Backend 없이 API 상태 재현 | [Markdown](./docs/common-source/api-mocking.md) · [HTML](./docs/common-source/api-mocking.html) | MSW fixture·handler와 개발·테스트 연결 예시 |
 | 공통 소스를 한 기능에 연결 | [Markdown](./docs/common-source/recipes.md) · [HTML](./docs/common-source/recipes.html) | 프로필 조회·검증·수정·상태 처리와 테스트를 연결한 통합 예시 |
 | 적용 조건, package와 미확정 항목 확인 | [Markdown](./docs/common-source/catalog.md) · [HTML](./docs/common-source/catalog.html) | 파일별 도입 조건, 함께 적용할 코드, 필요한 package, TBD와 검증 목록 |
 | 현재 준비 수준과 저장소 생성 후 순서 확인 | [Markdown](./docs/common-source/briefing.md) · [HTML](./docs/common-source/briefing.html) | 가이드의 활용 범위, 한계, 실제 적용 순서와 다음 검토 시점 |
@@ -118,7 +121,10 @@ docs/
    ├─ tailwind.md       # Tailwind CSS 기반 구현 가이드
    ├─ react.md          # React 공통 소스 구현 가이드
    ├─ typescript.md     # TypeScript 설정과 유틸리티 가이드
+   ├─ network.md        # API 요청과 응답 검증 경계 가이드
+   ├─ session.md        # 세션과 회원 데이터 경계 가이드
    ├─ test.md           # Vitest와 Testing Library 공통 테스트 가이드
+   ├─ api-mocking.md    # MSW 기반 API Mock 가이드
    ├─ recipes.md        # 공통 소스를 연결한 기능 단위 통합 예시
    ├─ catalog.md        # 구현 항목과 도입 조건 체크리스트
    └─ briefing.md       # 준비 수준과 저장소 생성 후 적용 순서

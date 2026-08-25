@@ -227,10 +227,9 @@ flowchart LR
                 <span class="runtime-badge runtime-system">서버 인증</span>
               </td>
               <td>
-                사용자는 내장 WebView의 로그인 화면에서 인증합니다. 서버가 자격
-                증명을 검증하고 Secure·HttpOnly Cookie 기반 세션을
-                발급·관리하며, 로그아웃과 세션 만료 시 관련 인증 데이터를
-                정리합니다.
+                승인된 로그인 흐름에 따라 Native와 WebView의 역할을 나눕니다.
+                서버 또는 인증 시스템이 자격 증명과 권한을 최종 검증하며, 인증
+                상태의 전달·저장·폐기는 확정된 계약을 따릅니다.
               </td>
             </tr>
             <tr>
@@ -520,8 +519,8 @@ flowchart LR
         <ol>
           <li>
             앱 시작 시 Native Splash에서 버전·점검·인증 상태를 확인합니다.
-            WebView에서 유효한 서버 세션을 확인하고, 세션이 없거나 만료됐으면
-            내장 WebView 로그인 화면으로 이동합니다.
+            승인된 인증 시스템에서 유효한 상태를 확인하고, 비로그인 또는 만료
+            상태의 이동 경로는 확정된 로그인 흐름을 따릅니다.
           </li>
           <li>
             카메라, 사진 선택, 권한, 설정 등 Native 기능은
@@ -557,36 +556,40 @@ flowchart LR
         <h3>인증 및 WebView 세션 설계 기준</h3>
         <p>
           자격 증명의 발급·검증·폐기와 권한의 최종 판단은 서버가 담당합니다.
-          사용자는 내장 WebView에 제공되는 로그인 화면에서 인증하며, 로그인 성공
-          후 서버가 발급한 세션은 보안 Cookie를 통해 유지합니다. 앱은 로그인
-          자격 증명이나 세션 값을 직접 생성·판단하지 않으며, WebView의 세션
-          유효성과 사용자 권한은 서버 응답을 기준으로 처리합니다.
-          로그인·로그아웃, 세션 만료와 사용자 전환 시에는 WebView의 Cookie 및
-          관련 데이터를 정책에 따라 정리합니다.
+          로그인 화면의 위치, 인증 프로토콜, Native 참여 범위와 WebView의 인증
+          상태 전달 방식은 아직 확정하지 않습니다. 앱은 자격 증명이나 인증 상태를
+          임의로 생성·판단하지 않고 승인된 인증 시스템의 응답을 기준으로 처리합니다.
+        </p>
+        <p>
+          <code class="badge-tbd">TBD</code> Cookie, token 또는 별도 세션 교환 방식 중
+          무엇을 사용할지와 로그인·로그아웃·만료·사용자 전환 시 정리할 데이터는
+          인증·API·배포 구조가 확정된 뒤 반영합니다.
         </p>
 
         <h4>인증 설계 결정 항목</h4>
         <ul>
-          <li>로그인·재인증·계정 복구 요구사항과 서버 세션 정책</li>
-          <li>세션 만료 시간, 연장 조건과 동시 로그인 허용 범위</li>
+          <li>로그인 주체·화면, 인증 제공자·프로토콜과 재인증·계정 복구 요구사항</li>
+          <li>인증 상태의 단일 기준, 만료·연장 조건과 동시 로그인 허용 범위</li>
           <li>
-            WebView 세션 생성 방식, Cookie 도메인·Path·SameSite와 Redirect
-            토폴로지
+            WebView 인증 상태 생성·전달 방식과 Cookie 또는 token의 저장·전송 정책
           </li>
           <li>
-            갱신·폐기·로그아웃·계정 전환 시 Cookie와 WebView 데이터를 정리하는
-            방법
+            갱신·폐기·로그아웃·계정 전환 시 Native와 WebView 데이터를 정리하는 방법
           </li>
         </ul>
         <blockquote>
           <p>
-            인증 상태의 단일 기준은 서버 세션으로 유지합니다. 비밀번호와 세션
-            식별자는 URL, Bridge, WebView JavaScript, Analytics, 로그에 노출하지
-            않습니다.
+            인증 상태와 권한의 최종 기준은 승인된 서버 또는 인증 시스템으로
+            유지합니다. 비밀번호, token과 세션 식별자는 URL, Bridge, Analytics,
+            로그에 노출하지 않습니다.
           </p>
         </blockquote>
 
-        <h4>내장 WebView 로그인 흐름</h4>
+        <h4>Cookie 기반 WebView 인증을 채택한 경우의 흐름</h4>
+        <p>
+          아래 흐름은 WebView 로그인과 서버 관리 Cookie 세션을 채택했을 때의
+          참고 구조입니다. 현재 확정된 로그인 또는 세션 계약이 아닙니다.
+        </p>
         <pre class="hljs"><code data-language="text">Native Splash
   → Main WebView 또는 로그인 화면 진입
     → 사용자가 WebView 로그인 화면에 자격 증명 입력
@@ -603,8 +606,8 @@ flowchart LR
           <!-- prettier-ignore -->
           <div class="mermaid">
 sequenceDiagram
-  accTitle: 내장 WebView 로그인 흐름
-  accDescr: 사용자가 WebView 로그인 화면에서 인증하고 서버가 보안 Cookie 세션을 발급하는 흐름입니다.
+  accTitle: Cookie 기반 WebView 인증 참고 흐름
+  accDescr: Cookie 기반 WebView 인증을 채택한 경우 사용자가 WebView에서 인증하고 서버가 보안 Cookie 세션을 발급하는 참고 흐름입니다.
   participant U as 사용자
   participant N as Flutter Native
   participant BE as Backend
@@ -620,10 +623,11 @@ sequenceDiagram
   BE-->>W: Main 화면 응답
   W-->>U: Main 화면 표시
           </div>
-          <figcaption>내장 WebView 로그인과 서버 세션 생성</figcaption>
+          <figcaption>Cookie 기반 WebView 인증을 채택한 경우의 참고 흐름</figcaption>
         </figure>
         <p class="diagram-description">
-          <strong>다이어그램 설명:</strong> Flutter Native는 로그인 또는 Main
+          <strong>다이어그램 설명:</strong> Cookie 기반 인증을 채택한다면 Flutter
+          Native는 로그인 또는 Main
           URL을 WebView에 표시하지만 사용자의 자격 증명을 직접 읽거나 저장하지
           않습니다. 사용자가 WebView에서 로그인하면 Backend가 자격 증명과 계정
           상태를 검증하고 Secure·HttpOnly Cookie를 발급합니다. 이후 보호된
@@ -647,7 +651,7 @@ sequenceDiagram
               <td>HTTPS 요청에만 사용하고 Native·WebView·로그에 저장 금지</td>
             </tr>
             <tr>
-              <td>WebView Session</td>
+              <td>WebView Cookie Session을 채택한 경우</td>
               <td>서버 관리 + Cookie</td>
               <td>
                 <code>Secure; HttpOnly</code> 필수. SameSite·Domain·Path와
@@ -665,28 +669,34 @@ sequenceDiagram
         <h4>갱신·만료·로그아웃 기준</h4>
         <ul>
           <li>
-            서버 세션의 만료·연장 정책을 일관되게 적용하고, 세션 갱신에 실패하면
-            내장 WebView 로그인 화면으로 이동합니다.
+            채택한 인증 수단의 만료·연장 정책을 일관되게 적용하고, 갱신 실패 후
+            이동할 화면은 승인된 인증 흐름에 맞춥니다.
           </li>
           <li>
             Splash의 로그인 상태는 저장값 존재 여부만으로 확정하지 않고 만료,
-            서버 폐기, 계정 상태와 활성 세션 생성 결과를 확인합니다.
+            서버 폐기, 계정 상태와 승인된 인증 시스템의 확인 결과를 사용합니다.
           </li>
           <li>
-            로그아웃 시 사용 중인 서버 자격 증명·WebView 세션·Push 사용자 연결을
-            폐기하고, WebView Cookie·DOM Storage, 사용자별 Query
-            Cache·클라이언트 상태와 민감 임시 파일을 삭제합니다.
+            로그아웃 시 채택한 인증 자격 증명·WebView 인증 상태·Push 사용자 연결을
+            폐기하고, 실제로 사용한 Cookie·DOM Storage, 사용자별 Query Cache,
+            클라이언트 상태와 민감 임시 파일을 정책에 따라 삭제합니다.
           </li>
           <li>
             로그아웃·계정 전환 후 뒤로가기로 보호 페이지가 다시 보이지 않도록
             WebView History를 초기화하고 로그인 Route로 교체합니다.
           </li>
           <li>
-            인증 응답과 개인정보 화면은 <code>Cache-Control: no-store</code>를
-            적용하고, 로그아웃 응답에는 적용 가능 범위에서
-            <code>Clear-Site-Data</code>를 사용합니다.
+            인증 응답과 개인정보 화면의 캐시 정책, 로그아웃 응답의
+            <code>Clear-Site-Data</code> 적용 여부는 인증·배포 구조와 브라우저 지원
+            범위를 확인해 결정합니다.
           </li>
         </ul>
+        <p>
+          인증 계약 확정 전 프론트엔드의 상태 모델과 회원 데이터 분리는
+          <a href="./../reference/front-end/docs/common-source/session.html"
+            >세션과 회원 경계 구현 예시</a
+          >를 참고합니다.
+        </p>
 
         <h3>WebView Bridge 설계 기준</h3>
         <p>
@@ -1514,7 +1524,7 @@ window.<span class="hljs-property">AppBridgeResponse</span> = (<span class="hljs
           <li>API 중복 호출 방지</li>
           <li>Pagination 적용</li>
           <li>필요한 시점에만 데이터 조회(Lazy Loading)</li>
-          <li>서버 세션 확인과 갱신 요청의 불필요한 중복 방지</li>
+          <li>인증 상태 확인과 갱신 요청의 불필요한 중복 방지</li>
           <li>Mutation 자동 재시도 금지 또는 서버 Idempotency Key 적용</li>
         </ul>
 
@@ -1978,7 +1988,8 @@ flowchart TD
             Dio Interceptor에서 Trace ID, Timeout과 표준 오류 형식을 공통 처리
           </li>
           <li>
-            401은 서버 세션 만료로 처리하고 내장 WebView 로그인 화면으로 이동
+            401의 비로그인·만료·갱신 실패 의미를 API 계약에 따라 구분하고 승인된
+            인증 흐름으로 이동
           </li>
           <li>403은 권한 부족으로 처리하며 세션 갱신을 반복하지 않음</li>
           <li>
@@ -2027,14 +2038,14 @@ flowchart TD
         <h2 class="bx-active">11. Security</h2>
         <h3>인증 및 세션</h3>
         <ul>
-          <li>내장 WebView에서 로그인하고 서버가 자격 증명·계정 상태를 검증</li>
+          <li>승인된 인증 시스템이 자격 증명·계정 상태와 권한을 최종 검증</li>
           <li>
-            WebView Cookie 세션에는 HttpOnly·Secure를 적용하고 JavaScript의
-            Token 직접 접근 금지. SameSite·Domain·Path는 사이트 구조에 맞춰 결정
+            Cookie 기반 세션을 채택하면 HttpOnly·Secure를 적용하고
+            SameSite·Domain·Path는 사이트와 Redirect 구조에 맞춰 결정
           </li>
           <li>
-            서버 세션의 갱신·폐기와 완전한 로그아웃을 지원하고 사용자 전환 시
-            Cookie와 관련 WebView 데이터 정리
+            채택한 인증 상태의 갱신·폐기와 완전한 로그아웃을 지원하고 사용자
+            전환 시 실제 사용한 Cookie, token과 관련 WebView 데이터 정리
           </li>
           <li>
             Cookie 기반 인증의 상태 변경 요청은 CSRF Token과 Origin/Referer 검증
@@ -2236,7 +2247,7 @@ flowchart TD
 │   ├── theme/                    # 색상, Typography와 Material Theme 정의
 │   └── app.dart                  # ProviderScope, Theme, Router를 조립하는 Root Widget
 ├── core/                         # 특정 기능에 종속되지 않는 공통 기반 계층
-│   ├── auth/                     # 서버 세션 상태, 로그인·로그아웃 조정과 사용자 전환 처리
+│   ├── auth/                     # 인증 상태, 로그인·로그아웃 조정과 사용자 전환 처리
 │   ├── network/                  # Dio Client, Interceptor, Timeout과 공통 오류 변환
 │   ├── security/                 # Origin 허용 목록, 입력 검증, 로그 Redaction 등 보안 정책
 │   ├── storage/                  # 승인된 로컬 저장소 Adapter와 사용자 데이터 정리

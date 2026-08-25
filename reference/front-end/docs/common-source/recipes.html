@@ -16,9 +16,8 @@
     <main>
 <section>
 <h2 class="bx-active">1. 예시의 목적</h2>
-<p>이 문서는 앞의 공통 소스를 한 기능에서 어떻게 연결하는지 보여 줍니다. 프로필 조회와 표시 이름 수정 흐름을 예로 들어 QueryClient·Provider, 실행 시 응답 검증, <code>FormField</code>, <code>SubmitButton</code>, 오류 변환과 테스트 렌더링 함수를 함께 사용합니다.</p>
+<p>이 문서는 앞의 공통 소스를 한 기능에서 어떻게 연결하는지 보여 줍니다. 프로필 조회와 표시 이름 수정 흐름을 예로 들어 QueryClient·Provider, 공통 요청 함수, 실행 시 응답 검증, <code>FormField</code>, <code>SubmitButton</code>, 오류 변환과 API Mock을 함께 사용합니다.</p>
 <p>프로필 API 경로와 응답 필드는 아직 프로젝트 계약으로 확정된 값이 아닙니다. 아래 코드는 구조와 연결 방법을 그대로 활용하고, <strong>API 경로·요청 본문·응답 검증·업무 문구</strong>를 실제 계약으로 교체하는 구현 예시입니다.</p>
-
 </section>
 
 <hr />
@@ -35,8 +34,7 @@
     ├── model/profile.ts
     ├── queries/profile-queries.ts
     └── profile-screen.test.tsx</code></pre>
-<p>먼저 <code>AppProviders</code>, <code>FormField</code>, <code>SubmitButton</code>, <code>getErrorMessage</code>, <code>renderWithProviders</code>가 준비되어 있어야 합니다.</p>
-
+<p>먼저 <code>AppProviders</code>, <code>request</code>, <code>FormField</code>, <code>SubmitButton</code>, <code>getErrorMessage</code>, <code>renderWithProviders</code>가 준비되어 있어야 합니다. 조회부터 수정까지의 테스트에는 <a href="./api-mocking.html">API Mock 구현 예시</a>의 MSW server와 기본 handler도 연결합니다.</p>
 </section>
 
 <hr />
@@ -57,17 +55,17 @@
 <pre class="hljs"><code data-language="ts"><span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> { <span class="hljs-title class_">Profile</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/features/profile/model/profile&quot;</span>
 <span class="hljs-keyword">import</span> { hasOwn, isNonEmptyString, isRecord } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/lib/type-guards&quot;</span>
 
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> parseProfile(value: unknown): <span class="hljs-title class_">Profile</span> {
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">parseProfile</span>(value: unknown): <span class="hljs-title class_">Profile</span> {
   <span class="hljs-keyword">if</span> (
-    !isRecord(value) ||
-    !hasOwn(value, <span class="hljs-string">&quot;id&quot;</span>) ||
-    !isNonEmptyString(value.id) ||
-    !hasOwn(value, <span class="hljs-string">&quot;displayName&quot;</span>) ||
-    !isNonEmptyString(value.displayName) ||
-    !hasOwn(value, <span class="hljs-string">&quot;introduction&quot;</span>) ||
+    !<span class="hljs-title function_">isRecord</span>(value) ||
+    !<span class="hljs-title function_">hasOwn</span>(value, <span class="hljs-string">&quot;id&quot;</span>) ||
+    !<span class="hljs-title function_">isNonEmptyString</span>(value.id) ||
+    !<span class="hljs-title function_">hasOwn</span>(value, <span class="hljs-string">&quot;displayName&quot;</span>) ||
+    !<span class="hljs-title function_">isNonEmptyString</span>(value.displayName) ||
+    !<span class="hljs-title function_">hasOwn</span>(value, <span class="hljs-string">&quot;introduction&quot;</span>) ||
     !(<span class="hljs-keyword">typeof</span> value.introduction === <span class="hljs-string">&quot;string&quot;</span> || value.introduction === <span class="hljs-literal">null</span>)
   ) {
-    throw <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&quot;프로필 응답 형식이 올바르지 않습니다.&quot;</span>)
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&quot;프로필 응답 형식이 올바르지 않습니다.&quot;</span>)
   }
 
   <span class="hljs-keyword">return</span> {
@@ -82,36 +80,25 @@
   <span class="hljs-title class_">Profile</span>,
   <span class="hljs-title class_">UpdateProfileInput</span>,
 } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/features/profile/model/profile&quot;</span>
+<span class="hljs-keyword">import</span> { request } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/lib/http/request&quot;</span>
 
-<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> readProfileResponse(response: <span class="hljs-title class_">Response</span>): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-selector-tag">Profile</span>&gt; {
-  <span class="hljs-keyword">if</span> (!response.ok) {
-    throw <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">`프로필 요청 실패: ${response.status}`</span>)
-  }
-
-  <span class="hljs-keyword">const</span> data: unknown = <span class="hljs-keyword">await</span> response.json()
-  <span class="hljs-keyword">return</span> parseProfile(data)
-}
-
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> getProfile(signal?: <span class="hljs-title class_">AbortSignal</span>): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-selector-tag">Profile</span>&gt; {
-  <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> fetch(<span class="hljs-string">&quot;/api/profile&quot;</span>, { signal })
-  <span class="hljs-keyword">return</span> readProfileResponse(response)
-}
-
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> updateProfile(
-  input: <span class="hljs-title class_">UpdateProfileInput</span>,
-): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-selector-tag">Profile</span>&gt; {
-  <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> fetch(<span class="hljs-string">&quot;/api/profile&quot;</span>, {
-    method: <span class="hljs-string">&quot;PATCH&quot;</span>,
-    headers: {
-      <span class="hljs-string">&quot;Content-Type&quot;</span>: <span class="hljs-string">&quot;application/json&quot;</span>,
-    },
-    body: <span class="hljs-title class_">JSON</span>.stringify(input),
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">getProfile</span>(signal?: <span class="hljs-title class_">AbortSignal</span>): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-title class_">Profile</span>&gt; {
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">request</span>(<span class="hljs-string">&quot;/api/members/me&quot;</span>, {
+    signal,
+    parse: parseProfile,
   })
+}
 
-  <span class="hljs-keyword">return</span> readProfileResponse(response)
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">updateProfile</span>(
+  input: <span class="hljs-title class_">UpdateProfileInput</span>,
+): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-title class_">Profile</span>&gt; {
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">request</span>(<span class="hljs-string">&quot;/api/members/me&quot;</span>, {
+    method: <span class="hljs-string">&quot;PATCH&quot;</span>,
+    body: input,
+    parse: parseProfile,
+  })
 }</code></pre>
-<p>조회와 수정이 같은 응답 형식을 사용하므로 <code>readProfileResponse</code>를 같은 API 모듈 안에서 재사용합니다. 인증 header, 기본 URL과 공통 오류 형식이 확정되면 프로젝트의 API 요청 방식에 맞춰 fetch 부분만 교체합니다.</p>
-
+<p>조회와 수정은 <a href="./network.html">API 요청 기반 구현 예시</a>의 전송 경계를 공유하고, 성공 본문은 모두 <code>parseProfile</code>로 검증합니다. <code>/api/members/me</code>, 인증 header, 기본 URL과 공통 오류 형식은 교체 지점이며 실제 계약이 정해지면 기능 API, parser와 Mock handler를 함께 바꿉니다.</p>
 </section>
 
 <hr />
@@ -127,25 +114,24 @@
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> profileQueryKey = [<span class="hljs-string">&quot;profile&quot;</span>, <span class="hljs-string">&quot;me&quot;</span>] <span class="hljs-keyword">as</span> <span class="hljs-keyword">const</span>
 
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> useProfileQuery() {
-  <span class="hljs-keyword">return</span> useQuery({
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">useProfileQuery</span>() {
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">useQuery</span>({
     queryKey: profileQueryKey,
-    queryFn: ({ signal }) =&gt; getProfile(signal),
+    queryFn: ({ signal }) =&gt; <span class="hljs-title function_">getProfile</span>(signal),
   })
 }
 
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> useUpdateProfileMutation() {
-  <span class="hljs-keyword">const</span> queryClient = useQueryClient()
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">useUpdateProfileMutation</span>() {
+  <span class="hljs-keyword">const</span> queryClient = <span class="hljs-title function_">useQueryClient</span>()
 
-  <span class="hljs-keyword">return</span> useMutation({
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">useMutation</span>({
     mutationFn: updateProfile,
-    onSuccess(profile) {
-      queryClient.setQueryData(profileQueryKey, profile)
+    <span class="hljs-title function_">onSuccess</span>(profile) {
+      queryClient.<span class="hljs-title function_">setQueryData</span>(profileQueryKey, profile)
     },
   })
 }</code></pre>
 <p><code>queryKey</code>를 컴포넌트마다 문자열로 작성하지 않습니다. 수정 응답이 최신 프로필 전체를 돌려준다는 예시 형식이므로 캐시를 직접 갱신했습니다. 실제 응답이 일부 필드만 반환하면 <code>invalidateQueries</code> 등 실제 응답 형식에 맞는 방법으로 바꿉니다.</p>
-
 </section>
 
 <hr />
@@ -168,97 +154,96 @@
 <span class="hljs-keyword">import</span> { getErrorMessage } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/lib/errors&quot;</span>
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title class_">ProfileScreen</span>() {
-  <span class="hljs-keyword">const</span> profileQuery = useProfileQuery()
+  <span class="hljs-keyword">const</span> profileQuery = <span class="hljs-title function_">useProfileQuery</span>()
 
   <span class="hljs-keyword">if</span> (profileQuery.isPending) {
-    <span class="hljs-keyword">return</span> &lt;<span class="hljs-selector-tag">p</span> <span class="hljs-attr">aria-live</span>=<span class="hljs-string">&quot;polite&quot;</span>&gt;프로필을 불러오는 중입니다.&lt;/<span class="hljs-selector-tag">p</span>&gt;
+    <span class="hljs-keyword">return</span> &lt;p aria-live=<span class="hljs-string">&quot;polite&quot;</span>&gt;프로필을 불러오는 중입니다.&lt;/p&gt;
   }
 
   <span class="hljs-keyword">if</span> (profileQuery.isError) {
     <span class="hljs-keyword">return</span> (
-      &lt;<span class="hljs-selector-tag">section</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;grid gap-3&quot;</span> <span class="hljs-attr">role</span>=<span class="hljs-string">&quot;alert&quot;</span>&gt;
-        &lt;<span class="hljs-selector-tag">p</span>&gt;{getErrorMessage(profileQuery.error, <span class="hljs-string">&quot;프로필을 불러오지 못했습니다.&quot;</span>)}&lt;/<span class="hljs-selector-tag">p</span>&gt;
-        &lt;<span class="hljs-selector-tag">Button</span> <span class="hljs-keyword">type</span>=<span class="hljs-string">&quot;button&quot;</span> <span class="hljs-attr">variant</span>=<span class="hljs-string">&quot;secondary&quot;</span> <span class="hljs-attr">onClick</span>={() =&gt; profileQuery.refetch()}&gt;
+      &lt;section className=<span class="hljs-string">&quot;grid gap-3&quot;</span> role=<span class="hljs-string">&quot;alert&quot;</span>&gt;
+        &lt;p&gt;{<span class="hljs-title function_">getErrorMessage</span>(profileQuery.error, <span class="hljs-string">&quot;프로필을 불러오지 못했습니다.&quot;</span>)}&lt;/p&gt;
+        &lt;<span class="hljs-title class_">Button</span> <span class="hljs-keyword">type</span>=<span class="hljs-string">&quot;button&quot;</span> variant=<span class="hljs-string">&quot;secondary&quot;</span> onClick={() =&gt; profileQuery.<span class="hljs-title function_">refetch</span>()}&gt;
           다시 시도
-        &lt;/<span class="hljs-selector-tag">Button</span>&gt;
-      &lt;/<span class="hljs-selector-tag">section</span>&gt;
+        &lt;/<span class="hljs-title class_">Button</span>&gt;
+      &lt;/section&gt;
     )
   }
 
-  <span class="hljs-keyword">return</span> &lt;<span class="hljs-selector-tag">ProfileForm</span> <span class="hljs-attr">profile</span>={profileQuery.data} /&gt;
+  <span class="hljs-keyword">return</span> &lt;<span class="hljs-title class_">ProfileForm</span> profile={profileQuery.data} /&gt;
 }
 
 <span class="hljs-keyword">function</span> <span class="hljs-title class_">ProfileForm</span>({ profile }: { profile: <span class="hljs-title class_">Profile</span> }) {
-  <span class="hljs-keyword">const</span> mutation = useUpdateProfileMutation()
-  <span class="hljs-keyword">const</span> [nameError, setNameError] = useState&lt;<span class="hljs-selector-tag">string</span>&gt;()
+  <span class="hljs-keyword">const</span> mutation = <span class="hljs-title function_">useUpdateProfileMutation</span>()
+  <span class="hljs-keyword">const</span> [nameError, setNameError] = useState&lt;string&gt;()
 
-  <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> handleSubmit(event: <span class="hljs-title class_">FormEvent</span>&lt;<span class="hljs-selector-tag">HTMLFormElement</span>&gt;) {
-    event.preventDefault()
+  <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">handleSubmit</span>(event: <span class="hljs-title class_">FormEvent</span>&lt;<span class="hljs-title class_">HTMLFormElement</span>&gt;) {
+    event.<span class="hljs-title function_">preventDefault</span>()
     <span class="hljs-keyword">const</span> formData = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormData</span>(event.currentTarget)
-    <span class="hljs-keyword">const</span> displayName = <span class="hljs-title class_">String</span>(formData.get(<span class="hljs-string">&quot;displayName&quot;</span>) ?? <span class="hljs-string">&quot;&quot;</span>).trim()
+    <span class="hljs-keyword">const</span> displayName = <span class="hljs-title class_">String</span>(formData.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;displayName&quot;</span>) ?? <span class="hljs-string">&quot;&quot;</span>).<span class="hljs-title function_">trim</span>()
 
     <span class="hljs-keyword">if</span> (displayName.length &lt; <span class="hljs-number">2</span>) {
-      setNameError(<span class="hljs-string">&quot;표시 이름은 2자 이상 입력하세요.&quot;</span>)
+      <span class="hljs-title function_">setNameError</span>(<span class="hljs-string">&quot;표시 이름은 2자 이상 입력하세요.&quot;</span>)
       <span class="hljs-keyword">return</span>
     }
 
-    setNameError(<span class="hljs-literal">undefined</span>)
-    <span class="hljs-keyword">await</span> mutation.mutateAsync({ displayName }).<span class="hljs-keyword">catch</span>(() =&gt; <span class="hljs-literal">undefined</span>)
+    <span class="hljs-title function_">setNameError</span>(<span class="hljs-literal">undefined</span>)
+    <span class="hljs-keyword">await</span> mutation.<span class="hljs-title function_">mutateAsync</span>({ displayName }).<span class="hljs-keyword">catch</span>(() =&gt; <span class="hljs-literal">undefined</span>)
   }
 
   <span class="hljs-keyword">return</span> (
-    &lt;<span class="hljs-selector-tag">form</span>
-      <span class="hljs-attr">onSubmit</span>={handleSubmit}
-      <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;grid gap-4 rounded-lg border bg-card p-4 text-card-foreground&quot;</span>
+    &lt;form
+      onSubmit={handleSubmit}
+      className=<span class="hljs-string">&quot;grid gap-4 rounded-lg border bg-card p-4 text-card-foreground&quot;</span>
     &gt;
-      &lt;<span class="hljs-selector-tag">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;space-y-1&quot;</span>&gt;
-        &lt;<span class="hljs-selector-tag">h1</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;text-xl font-semibold&quot;</span>&gt;프로필&lt;/<span class="hljs-selector-tag">h1</span>&gt;
-        &lt;<span class="hljs-selector-tag">p</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;text-sm text-muted-foreground&quot;</span>&gt;
+      &lt;div className=<span class="hljs-string">&quot;space-y-1&quot;</span>&gt;
+        &lt;h1 className=<span class="hljs-string">&quot;text-xl font-semibold&quot;</span>&gt;프로필&lt;/h1&gt;
+        &lt;p className=<span class="hljs-string">&quot;text-sm text-muted-foreground&quot;</span>&gt;
           앱에 표시할 이름을 관리합니다.
-        &lt;/<span class="hljs-selector-tag">p</span>&gt;
-      &lt;/<span class="hljs-selector-tag">div</span>&gt;
+        &lt;/p&gt;
+      &lt;/div&gt;
 
-      &lt;<span class="hljs-selector-tag">FormField</span>
-        <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;display-name&quot;</span>
-        <span class="hljs-attr">label</span>=<span class="hljs-string">&quot;표시 이름&quot;</span>
-        <span class="hljs-attr">hint</span>=<span class="hljs-string">&quot;2자 이상 입력하세요.&quot;</span>
-        <span class="hljs-attr">error</span>={nameError}
+      &lt;<span class="hljs-title class_">FormField</span>
+        id=<span class="hljs-string">&quot;display-name&quot;</span>
+        label=<span class="hljs-string">&quot;표시 이름&quot;</span>
+        hint=<span class="hljs-string">&quot;2자 이상 입력하세요.&quot;</span>
+        error={nameError}
         required
       &gt;
         {(controlProps) =&gt; (
-          &lt;<span class="hljs-selector-tag">Input</span>
+          &lt;<span class="hljs-title class_">Input</span>
             {...controlProps}
-            <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;displayName&quot;</span>
-            <span class="hljs-attr">defaultValue</span>={profile.displayName}
-            <span class="hljs-attr">autoComplete</span>=<span class="hljs-string">&quot;name&quot;</span>
+            name=<span class="hljs-string">&quot;displayName&quot;</span>
+            defaultValue={profile.displayName}
+            autoComplete=<span class="hljs-string">&quot;name&quot;</span>
             required
           /&gt;
         )}
-      &lt;/<span class="hljs-selector-tag">FormField</span>&gt;
+      &lt;/<span class="hljs-title class_">FormField</span>&gt;
 
       {mutation.isError ? (
-        &lt;<span class="hljs-selector-tag">p</span> <span class="hljs-attr">role</span>=<span class="hljs-string">&quot;alert&quot;</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;text-sm text-destructive&quot;</span>&gt;
-          {getErrorMessage(mutation.error, <span class="hljs-string">&quot;프로필을 저장하지 못했습니다.&quot;</span>)}
-        &lt;/<span class="hljs-selector-tag">p</span>&gt;
+        &lt;p role=<span class="hljs-string">&quot;alert&quot;</span> className=<span class="hljs-string">&quot;text-sm text-destructive&quot;</span>&gt;
+          {<span class="hljs-title function_">getErrorMessage</span>(mutation.error, <span class="hljs-string">&quot;프로필을 저장하지 못했습니다.&quot;</span>)}
+        &lt;/p&gt;
       ) : <span class="hljs-literal">null</span>}
 
       {mutation.isSuccess ? (
-        &lt;<span class="hljs-selector-tag">p</span> <span class="hljs-attr">role</span>=<span class="hljs-string">&quot;status&quot;</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;text-sm text-muted-foreground&quot;</span>&gt;
+        &lt;p role=<span class="hljs-string">&quot;status&quot;</span> className=<span class="hljs-string">&quot;text-sm text-muted-foreground&quot;</span>&gt;
           저장했습니다.
-        &lt;/<span class="hljs-selector-tag">p</span>&gt;
+        &lt;/p&gt;
       ) : <span class="hljs-literal">null</span>}
 
-      &lt;<span class="hljs-selector-tag">SubmitButton</span>
-        <span class="hljs-attr">pending</span>={mutation.isPending}
-        <span class="hljs-attr">pendingContent</span>=<span class="hljs-string">&quot;저장 중&quot;</span>
+      &lt;<span class="hljs-title class_">SubmitButton</span>
+        pending={mutation.isPending}
+        pendingContent=<span class="hljs-string">&quot;저장 중&quot;</span>
       &gt;
         저장
-      &lt;/<span class="hljs-selector-tag">SubmitButton</span>&gt;
-    &lt;/<span class="hljs-selector-tag">form</span>&gt;
+      &lt;/<span class="hljs-title class_">SubmitButton</span>&gt;
+    &lt;/form&gt;
   )
 }</code></pre>
 <p>화면 상태와 업무 문구는 프로필 기능에서 관리합니다. <code>SubmitButton</code>은 저장 API를 모르고, <code>FormField</code>는 프로필 입력값 검증을 모릅니다. 공통 컴포넌트에는 반복 동작만 두고 업무 규칙은 각 기능에 두는 구조입니다.</p>
-
 </section>
 
 <hr />
@@ -270,13 +255,12 @@
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title class_">ProfilePage</span>() {
   <span class="hljs-keyword">return</span> (
-    &lt;<span class="hljs-selector-tag">main</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;mx-auto w-full max-w-xl px-4 py-6&quot;</span>&gt;
-      &lt;<span class="hljs-selector-tag">ProfileScreen</span> /&gt;
-    &lt;/<span class="hljs-selector-tag">main</span>&gt;
+    &lt;main className=<span class="hljs-string">&quot;mx-auto w-full max-w-xl px-4 py-6&quot;</span>&gt;
+      &lt;<span class="hljs-title class_">ProfileScreen</span> /&gt;
+    &lt;/main&gt;
   )
 }</code></pre>
 <p><code>page.tsx</code>는 Server Component로 유지됩니다. 실제 서비스에서 서버 사전 조회와 hydration을 적용한다면 QueryClient 생성, <code>dehydrate</code>, <code>HydrationBoundary</code>를 route 요구에 맞춰 추가합니다. 모든 route에 미리 적용하지 않습니다.</p>
-
 </section>
 
 <hr />
@@ -286,77 +270,69 @@
 <h3><code>src/features/profile/profile-screen.test.tsx</code></h3>
 <pre class="hljs"><code data-language="tsx"><span class="hljs-keyword">import</span> { screen } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@testing-library/react&quot;</span>
 <span class="hljs-keyword">import</span> userEvent <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@testing-library/user-event&quot;</span>
-<span class="hljs-keyword">import</span> { beforeEach, describe, expect, it, vi } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vitest&quot;</span>
-<span class="hljs-keyword">import</span> {
-  getProfile,
-  updateProfile,
-} <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/features/profile/api/profile-api&quot;</span>
+<span class="hljs-keyword">import</span> { http, <span class="hljs-title class_">HttpResponse</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;msw&quot;</span>
+<span class="hljs-keyword">import</span> { describe, expect, it, vi } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vitest&quot;</span>
 <span class="hljs-keyword">import</span> { <span class="hljs-title class_">ProfileScreen</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/features/profile/components/profile-screen&quot;</span>
+<span class="hljs-keyword">import</span> { server } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/mocks/server&quot;</span>
 <span class="hljs-keyword">import</span> { renderWithProviders } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/test/render-with-providers&quot;</span>
 
-vi.mock(<span class="hljs-string">&quot;@/features/profile/api/profile-api&quot;</span>, () =&gt; ({
-  getProfile: vi.fn(),
-  updateProfile: vi.fn(),
-}))
+<span class="hljs-title function_">describe</span>(<span class="hljs-string">&quot;ProfileScreen&quot;</span>, () =&gt; {
+  <span class="hljs-title function_">it</span>(<span class="hljs-string">&quot;조회한 이름을 수정하고 저장 완료를 표시한다&quot;</span>, <span class="hljs-keyword">async</span> () =&gt; {
+    <span class="hljs-keyword">const</span> user = userEvent.<span class="hljs-title function_">setup</span>()
+    <span class="hljs-keyword">const</span> updateRequest = vi.<span class="hljs-title function_">fn</span>()
 
-<span class="hljs-keyword">const</span> mockedGetProfile = vi.mocked(getProfile)
-<span class="hljs-keyword">const</span> mockedUpdateProfile = vi.mocked(updateProfile)
+    server.<span class="hljs-title function_">use</span>(
+      http.<span class="hljs-title function_">patch</span>(<span class="hljs-string">&quot;/api/members/me&quot;</span>, <span class="hljs-keyword">async</span> ({ request }) =&gt; {
+        <span class="hljs-keyword">const</span> body = <span class="hljs-keyword">await</span> request.<span class="hljs-title function_">json</span>()
+        <span class="hljs-title function_">updateRequest</span>(body)
 
-describe(<span class="hljs-string">&quot;ProfileScreen&quot;</span>, () =&gt; {
-  beforeEach(() =&gt; {
-    mockedGetProfile.mockReset()
-    mockedUpdateProfile.mockReset()
-  })
+        <span class="hljs-keyword">return</span> <span class="hljs-title class_">HttpResponse</span>.<span class="hljs-title function_">json</span>({
+          id: <span class="hljs-string">&quot;member-1&quot;</span>,
+          displayName: <span class="hljs-string">&quot;새 이름&quot;</span>,
+          introduction: <span class="hljs-literal">null</span>,
+        })
+      }),
+    )
 
-  it(<span class="hljs-string">&quot;조회한 이름을 수정하고 저장 완료를 표시한다&quot;</span>, <span class="hljs-keyword">async</span> () =&gt; {
-    <span class="hljs-keyword">const</span> user = userEvent.setup()
-    mockedGetProfile.mockResolvedValue({
-      id: <span class="hljs-string">&quot;user-1&quot;</span>,
-      displayName: <span class="hljs-string">&quot;기존 이름&quot;</span>,
-      introduction: <span class="hljs-literal">null</span>,
-    })
-    mockedUpdateProfile.mockResolvedValue({
-      id: <span class="hljs-string">&quot;user-1&quot;</span>,
-      displayName: <span class="hljs-string">&quot;새 이름&quot;</span>,
-      introduction: <span class="hljs-literal">null</span>,
-    })
+    <span class="hljs-title function_">renderWithProviders</span>(&lt;<span class="hljs-title class_">ProfileScreen</span> /&gt;)
 
-    renderWithProviders(&lt;<span class="hljs-selector-tag">ProfileScreen</span> /&gt;)
-
-    <span class="hljs-keyword">const</span> input = <span class="hljs-keyword">await</span> screen.findByRole(<span class="hljs-string">&quot;textbox&quot;</span>, { name: /표시 이름/ })
-    <span class="hljs-keyword">await</span> user.clear(input)
+    <span class="hljs-keyword">const</span> input = <span class="hljs-keyword">await</span> screen.<span class="hljs-title function_">findByRole</span>(<span class="hljs-string">&quot;textbox&quot;</span>, { name: /표시 이름/ })
+    <span class="hljs-keyword">await</span> user.<span class="hljs-title function_">clear</span>(input)
     <span class="hljs-keyword">await</span> user.<span class="hljs-keyword">type</span>(input, <span class="hljs-string">&quot;새 이름&quot;</span>)
-    <span class="hljs-keyword">await</span> user.click(screen.getByRole(<span class="hljs-string">&quot;button&quot;</span>, { name: <span class="hljs-string">&quot;저장&quot;</span> }))
+    <span class="hljs-keyword">await</span> user.<span class="hljs-title function_">click</span>(screen.<span class="hljs-title function_">getByRole</span>(<span class="hljs-string">&quot;button&quot;</span>, { name: <span class="hljs-string">&quot;저장&quot;</span> }))
 
-    expect(mockedUpdateProfile).toHaveBeenCalledTimes(<span class="hljs-number">1</span>)
-    expect(mockedUpdateProfile.mock.calls[<span class="hljs-number">0</span>]?.[<span class="hljs-number">0</span>]).toEqual({
+    <span class="hljs-title function_">expect</span>(updateRequest).<span class="hljs-title function_">toHaveBeenCalledTimes</span>(<span class="hljs-number">1</span>)
+    <span class="hljs-title function_">expect</span>(updateRequest).<span class="hljs-title function_">toHaveBeenCalledWith</span>({
       displayName: <span class="hljs-string">&quot;새 이름&quot;</span>,
     })
-    expect(<span class="hljs-keyword">await</span> screen.findByRole(<span class="hljs-string">&quot;status&quot;</span>)).toHaveTextContent(<span class="hljs-string">&quot;저장했습니다.&quot;</span>)
+    <span class="hljs-title function_">expect</span>(<span class="hljs-keyword">await</span> screen.<span class="hljs-title function_">findByRole</span>(<span class="hljs-string">&quot;status&quot;</span>)).<span class="hljs-title function_">toHaveTextContent</span>(<span class="hljs-string">&quot;저장했습니다.&quot;</span>)
   })
 
-  it(<span class="hljs-string">&quot;짧은 이름은 API를 호출하지 않고 오류를 연결한다&quot;</span>, <span class="hljs-keyword">async</span> () =&gt; {
-    <span class="hljs-keyword">const</span> user = userEvent.setup()
-    mockedGetProfile.mockResolvedValue({
-      id: <span class="hljs-string">&quot;user-1&quot;</span>,
-      displayName: <span class="hljs-string">&quot;기존 이름&quot;</span>,
-      introduction: <span class="hljs-literal">null</span>,
-    })
+  <span class="hljs-title function_">it</span>(<span class="hljs-string">&quot;짧은 이름은 API를 호출하지 않고 오류를 연결한다&quot;</span>, <span class="hljs-keyword">async</span> () =&gt; {
+    <span class="hljs-keyword">const</span> user = userEvent.<span class="hljs-title function_">setup</span>()
+    <span class="hljs-keyword">const</span> updateRequest = vi.<span class="hljs-title function_">fn</span>()
 
-    renderWithProviders(&lt;<span class="hljs-selector-tag">ProfileScreen</span> /&gt;)
+    server.<span class="hljs-title function_">use</span>(
+      http.<span class="hljs-title function_">patch</span>(<span class="hljs-string">&quot;/api/members/me&quot;</span>, () =&gt; {
+        <span class="hljs-title function_">updateRequest</span>()
+        <span class="hljs-keyword">return</span> <span class="hljs-title class_">HttpResponse</span>.<span class="hljs-title function_">json</span>({})
+      }),
+    )
 
-    <span class="hljs-keyword">const</span> input = <span class="hljs-keyword">await</span> screen.findByRole(<span class="hljs-string">&quot;textbox&quot;</span>, { name: /표시 이름/ })
-    <span class="hljs-keyword">await</span> user.clear(input)
+    <span class="hljs-title function_">renderWithProviders</span>(&lt;<span class="hljs-title class_">ProfileScreen</span> /&gt;)
+
+    <span class="hljs-keyword">const</span> input = <span class="hljs-keyword">await</span> screen.<span class="hljs-title function_">findByRole</span>(<span class="hljs-string">&quot;textbox&quot;</span>, { name: /표시 이름/ })
+    <span class="hljs-keyword">await</span> user.<span class="hljs-title function_">clear</span>(input)
     <span class="hljs-keyword">await</span> user.<span class="hljs-keyword">type</span>(input, <span class="hljs-string">&quot;한&quot;</span>)
-    <span class="hljs-keyword">await</span> user.click(screen.getByRole(<span class="hljs-string">&quot;button&quot;</span>, { name: <span class="hljs-string">&quot;저장&quot;</span> }))
+    <span class="hljs-keyword">await</span> user.<span class="hljs-title function_">click</span>(screen.<span class="hljs-title function_">getByRole</span>(<span class="hljs-string">&quot;button&quot;</span>, { name: <span class="hljs-string">&quot;저장&quot;</span> }))
 
-    expect(input).toHaveAccessibleDescription(
+    <span class="hljs-title function_">expect</span>(input).<span class="hljs-title function_">toHaveAccessibleDescription</span>(
       <span class="hljs-string">&quot;2자 이상 입력하세요. 표시 이름은 2자 이상 입력하세요.&quot;</span>,
     )
-    expect(mockedUpdateProfile).not.toHaveBeenCalled()
+    <span class="hljs-title function_">expect</span>(updateRequest).not.<span class="hljs-title function_">toHaveBeenCalled</span>()
   })
 })</code></pre>
-
+<p>API 모듈을 <code>vi.mock</code>으로 교체하지 않으므로 <code>request</code>, HTTP 응답 읽기와 <code>parseProfile</code>까지 실제 경계를 통과합니다. 테스트마다 필요한 응답만 <code>server.use</code>로 덮어쓰고 공통 setup의 <code>server.resetHandlers()</code>가 다음 테스트 전에 기본 handler로 되돌립니다.</p>
 </section>
 
 <hr />
@@ -373,7 +349,7 @@ describe(<span class="hljs-string">&quot;ProfileScreen&quot;</span>, () =&gt; {
 </thead>
 <tbody><tr>
 <td>API 경로</td>
-<td><code>/api/profile</code></td>
+<td><code>/api/members/me</code></td>
 <td>backend 또는 BFF 계약</td>
 </tr>
 <tr>
@@ -388,8 +364,8 @@ describe(<span class="hljs-string">&quot;ProfileScreen&quot;</span>, () =&gt; {
 </tr>
 <tr>
 <td>인증·오류</td>
-<td>단순 fetch와 status 오류</td>
-<td>프로젝트 API 요청 방식과 오류 형식</td>
+<td>공통 <code>request</code>와 <code>HttpError</code></td>
+<td>인증 전달과 실제 공통 오류 형식</td>
 </tr>
 <tr>
 <td>캐시 갱신</td>
@@ -412,8 +388,9 @@ describe(<span class="hljs-string">&quot;ProfileScreen&quot;</span>, () =&gt; {
 <td>실제 App Router 구조</td>
 </tr>
 </tbody></table>
-<p>교체 후에는 응답 검증 테스트 데이터, mutation 호출 검증과 화면 문구 테스트를 같은 작업에서 갱신합니다.</p>
-</section></main>
+<p>교체 후에는 응답 검증 테스트 데이터, MSW fixture·handler, mutation 요청 검증과 화면 문구 테스트를 같은 작업에서 갱신합니다.</p>
+</section>
+    </main>
 
     <footer>
       <p>공통 소스 통합 사용 예시</p>

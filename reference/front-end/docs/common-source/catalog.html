@@ -18,7 +18,6 @@
 <h2 class="bx-active">1. 문서 사용법</h2>
 <p>현재는 실제 <code>apps/app-webview</code> 저장소를 만들기 전에 구현 가이드와 예시 코드를 준비하는 단계입니다. 이 문서는 작성된 예시 코드, 적용 조건과 아직 결정되지 않은 항목을 한곳에서 확인할 때 사용합니다.</p>
 <p>이 문서에서는 별도의 상태 이름을 만들지 않습니다. <code class="badge-tbd">TBD</code> 표시가 없으면 현재 기술 기준으로 작성할 수 있는 참고 구현이고, <code class="badge-tbd">TBD</code>가 있으면 기획이나 실제 저장소 구성이 확정되기 전에는 구현하지 않는 항목입니다.</p>
-
 </section>
 
 <hr />
@@ -72,6 +71,18 @@
 <td>Next가 생성한 설정과 app typecheck</td>
 </tr>
 <tr>
+<td><a href="./network.html">API 요청 기반 구현 예시</a></td>
+<td><code>src/lib/http/http-error.ts</code></td>
+<td>HTTP 상태와 응답 본문 보존</td>
+<td>기존 오류 type과 상태 처리 방식</td>
+</tr>
+<tr>
+<td><a href="./network.html">API 요청 기반 구현 예시</a></td>
+<td><code>src/lib/http/request.ts</code></td>
+<td>본문 읽기와 기능별 parser 연결</td>
+<td>기존 fetch wrapper와 runtime 지원 범위</td>
+</tr>
+<tr>
 <td><a href="./test.html">테스트 공통 설정</a></td>
 <td><code>vitest.config.ts</code></td>
 <td>Client Component 테스트 환경</td>
@@ -83,8 +94,13 @@
 <td>DOM matcher와 테스트 종료 후 정리</td>
 <td>jest-dom matcher 실행</td>
 </tr>
+<tr>
+<td><a href="./api-mocking.html">API Mock 구현 예시</a></td>
+<td><code>src/mocks/server.ts</code></td>
+<td>테스트에서 API handler 실행</td>
+<td>기존 Mock 도구와 Node 테스트 환경</td>
+</tr>
 </tbody></table>
-
 </section>
 
 <hr />
@@ -149,8 +165,25 @@
 <td>구분 가능한 union의 모든 분기를 검사할 때</td>
 <td>화면 상태 <code>switch</code></td>
 </tr>
+<tr>
+<td><code>parseSession</code>, <code>getSession</code></td>
+<td><code>src/features/session/</code></td>
+<td>로그인 상태를 처음 확인할 때</td>
+<td>계정 요약·보호 화면</td>
+</tr>
+<tr>
+<td><code>useLogoutMutation</code></td>
+<td><code>src/features/session/queries/session-queries.ts</code></td>
+<td>로그아웃과 사용자 cache 초기화가 필요할 때</td>
+<td>계정 메뉴</td>
+</tr>
+<tr>
+<td><code>handlers</code>, fixture</td>
+<td><code>src/mocks/</code></td>
+<td>Backend 없이 실제 요청 경계를 검증할 때</td>
+<td>세션·회원 화면 테스트</td>
+</tr>
 </tbody></table>
-
 </section>
 
 <hr />
@@ -186,18 +219,32 @@
 <td>실제 응답 형식과 오류 타입</td>
 </tr>
 <tr>
+<td>API 요청 경계</td>
+<td><code>http-error.ts</code>, <code>request.ts</code>, 기능별 API와 parser</td>
+<td>기본 URL, 인증, timeout과 공통 오류 계약</td>
+</tr>
+<tr>
+<td>세션 경계</td>
+<td>세션 model·parser·API·Query</td>
+<td>인증 방식, 세션 응답과 로그아웃 뒤 이동</td>
+</tr>
+<tr>
 <td>테스트 설정</td>
 <td><code>vitest.config.ts</code>, <code>setup.ts</code>, <code>render-with-providers.tsx</code></td>
 <td>기존 테스트 실행 도구, alias와 전역 mock</td>
 </tr>
 <tr>
+<td>API Mock</td>
+<td>fixture, handler, browser·server 연결</td>
+<td>실제 path·status와 개발 Mock 활성화 위치</td>
+</tr>
+<tr>
 <td>프로필 통합 예시</td>
-<td>프로필 기능 파일 전체</td>
+<td>프로필 기능 파일 전체, API Mock handler</td>
 <td>실제 API 경로, 응답 형식, 입력값 검증, 문구와 화면 경로</td>
 </tr>
 </tbody></table>
 <p>코드 파일만 복사하고 사용 예와 테스트를 생략하면 내보낸 함수와 컴포넌트가 실제 요구에 맞는지 확인할 수 없습니다. 실제 적용 시에는 최소 한 개의 사용처와 해당 동작 테스트를 같은 변경에 포함합니다.</p>
-
 </section>
 
 <hr />
@@ -240,8 +287,11 @@
 <td>컴포넌트 테스트</td>
 <td><code>@testing-library/react</code>, <code>@testing-library/user-event</code>, <code>@testing-library/jest-dom</code></td>
 </tr>
+<tr>
+<td>API Mock</td>
+<td><code>msw</code></td>
+</tr>
 </tbody></table>
-
 </section>
 
 <hr />
@@ -263,9 +313,19 @@
 <td><code>globals.css</code> 토큰 값과 UI 예제 갱신</td>
 </tr>
 <tr>
-<td>API 요청 코드와 공통 응답 형식</td>
-<td>기본 URL, 인증, 오류 형식과 제한 시간</td>
-<td>첫 API에서 요청 코드와 응답 검증 함수 구현</td>
+<td>API 연결 정책</td>
+<td>기본 URL, 인증 전달, 공통 오류 형식과 제한 시간</td>
+<td><code>request</code> 연결 경계와 기능별 오류 처리 갱신</td>
+</tr>
+<tr>
+<td>세션 계약</td>
+<td>세션 path·응답, 만료·갱신과 로그아웃 뒤 이동</td>
+<td>세션 parser·Query·Mock과 cache 초기화 범위 갱신</td>
+</tr>
+<tr>
+<td>개발 API Mock</td>
+<td>활성화 환경변수와 Next.js bootstrap 위치</td>
+<td>production 제외 조건과 브라우저 Mock 시작 코드 연결</td>
 </tr>
 <tr>
 <td>WebView Bridge 연동</td>
@@ -304,7 +364,6 @@
 </tr>
 </tbody></table>
 <p>예를 들어 API가 정해지지 않았는데 <code>ApiResponse&lt;T&gt;</code>를 먼저 만들면 API마다 선택 속성과 예외 분기가 쌓입니다. 통합 예시의 응답 검증 함수처럼 기능별 응답 형식에서 시작하고, 둘 이상의 API가 같은 형식을 실제로 공유할 때만 공통화합니다.</p>
-
 </section>
 
 <hr />
@@ -318,7 +377,6 @@
 <li>실제 저장소가 있으면 적용 코드와 테스트를 함께 갱신합니다.</li>
 <li>이 문서의 경로, 내보내는 항목과 검증 내용을 실제 상태와 맞춥니다.</li>
 </ol>
-
 </section>
 
 <hr />
@@ -334,7 +392,6 @@
 가이드에서 교체한 지점:
 검증 명령과 결과:
 남아 있는 TBD:</code></pre>
-
 </section>
 
 <hr />
@@ -346,7 +403,6 @@
 [ ] 예제의 API 경로, 토큰 값과 문구를 확정값으로 표현하지 않았다.
 [ ] 참고 코드마다 적용 조건과 교체 지점을 작성했다.
 [ ] Markdown과 HTML의 내용이 일치한다.</code></pre>
-
 </section>
 
 <hr />
@@ -357,9 +413,12 @@
 [ ] 실제 사용처가 없는 컴포넌트나 도우미 함수를 추가하지 않았다.
 [ ] 업무 계약 type을 전역 common 폴더에 올리지 않았다.
 [ ] 사용처와 테스트를 함께 추가했다.
+[ ] API 테스트가 요청 함수와 parser를 우회하지 않는다.
+[ ] 세션과 회원 상세 데이터를 하나의 전역 상태로 합치지 않았다.
 [ ] typecheck, lint와 test를 통과했다.
 [ ] 통합 영향이 있으면 build까지 확인했다.</code></pre>
-</section></main>
+</section>
+    </main>
 
     <footer>
       <p>공통 소스 적용 항목</p>
