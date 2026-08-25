@@ -32,6 +32,12 @@
         <p>상태가 몇 가지로 정해져 있으면 넓은 <code>string</code>보다 Literal Union을 사용합니다. 불가능한 값이 컴파일 단계에서 들어오지 못하게 하는 것이 목적입니다.</p>
         <h3>null 처리</h3>
         <p><code>null</code>과 <code>undefined</code> 가능성을 조건문으로 확인합니다. <code>!</code>로 검사를 건너뛰면 실제 실행 오류 가능성은 사라지지 않습니다.</p>
+        <h3>상태를 판별 가능한 Union으로 표현</h3>
+        <p><code>isLoading</code>, <code>isError</code>, <code>data?</code>처럼 서로 모순될 수 있는 속성을 늘어놓기보다 상태를 구분하는 Literal 속성을 둡니다. 각 분기에서 필요한 값만 가지게 하여 로딩인데 데이터가 있는 것 같은 불가능한 조합을 타입 단계에서 제거합니다.</p>
+        <h3>누락 없는 분기</h3>
+        <p><code>switch</code>의 마지막에서 <code>never</code>를 확인하면 새 상태가 추가됐을 때 빠진 UI 처리를 발견할 수 있습니다. 기본값으로 조용히 흡수하면 제품 상태가 추가되어도 기존 화면으로 잘못 표시될 수 있습니다.</p>
+        <h3>타입 보존 도구의 목적</h3>
+        <p><code>satisfies</code>는 값의 구체적인 추론을 유지하면서 요구 형태를 검사할 때 사용합니다. Generic은 입력과 출력의 실제 관계가 있을 때만 사용하며, 타입을 고급스럽게 보이게 하려는 Wrapper에는 추가하지 않습니다.</p>
       </section>
       <hr />
       <section>
@@ -67,6 +73,8 @@ Union과 Narrowing으로 더 단순하게 만들 수 있는지 먼저 설명해�
           <li>추론 가능한 값에 타입을 반복하지 않는 이유를 설명할 수 있습니다.</li>
           <li><code>string</code>과 Literal Union 중 적절한 방식을 선택할 수 있습니다.</li>
           <li><code>any</code>, <code>as</code>와 <code>!</code>가 오류를 숨길 수 있음을 설명할 수 있습니다.</li>
+          <li>판별 가능한 Union과 누락 없는 분기로 불가능한 상태를 제거할 수 있습니다.</li>
+          <li><code>satisfies</code>, Generic과 타입 단언을 각각 어떤 근거로 선택하는지 설명할 수 있습니다.</li>
         </ul>
         <p><a href="./01-javascript-foundations.html">이전 단계</a> · <a href="./03-typescript-boundaries.html">3단계 TypeScript 경계로</a></p>
       </section>

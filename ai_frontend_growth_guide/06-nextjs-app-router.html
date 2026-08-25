@@ -32,6 +32,12 @@
         <p>상태, Event, Effect와 브라우저 API가 필요하지 않은 컴포넌트는 Server Component로 유지합니다. <code>&quot;use client&quot;</code>는 필요한 Client 경계의 시작을 의미합니다.</p>
         <h3>미확정 정책</h3>
         <p>SSR·SSG·ISR, 캐싱, Route Handler와 Server Action의 세부 정책은 화면과 API 구조가 확정되기 전까지 AI가 임의로 정하지 않습니다.</p>
+        <h3>Server·Client 경계의 데이터 제약</h3>
+        <p>Server Component에서 Client Component로 전달하는 Props는 직렬화 가능한 값이어야 합니다. Browser API, Client Hook과 Event Handler는 Server에서 실행할 수 없고, 서버 전용 비밀값과 모듈이 Client Bundle로 넘어가지 않도록 Import 경계를 확인합니다.</p>
+        <h3>Hydration과 첫 화면 일치</h3>
+        <p>서버가 만든 HTML과 브라우저의 첫 렌더링 결과가 달라지면 Hydration 문제가 생깁니다. 렌더링 중 <code>window</code>, 현재 시각, 무작위 값과 Client Storage를 직접 읽어 첫 결과를 바꾸지 않습니다. Client에서만 알 수 있는 값은 명시적인 대기 상태와 동기화 경계를 둡니다.</p>
+        <h3>Route 상태와 오류 경계</h3>
+        <p>공유·복원해야 하는 검색과 필터는 URL 상태를 우선 검토합니다. Route의 Loading·Error·Not Found와 컴포넌트 내부의 Query 상태가 각각 어떤 실패를 담당하는지 정하고, 같은 오류를 여러 경계에서 중복 처리하지 않습니다.</p>
       </section>
       <hr />
       <section>
@@ -68,6 +74,8 @@
           <li>Route와 Layout의 책임을 설명할 수 있습니다.</li>
           <li>Client Component가 필요한 이유를 구체적으로 말할 수 있습니다.</li>
           <li>확정된 App Router 규칙과 미확정 렌더링 정책을 구분할 수 있습니다.</li>
+          <li>Hydration 불일치와 Client Bundle로 서버 전용 코드가 유입되는 위험을 찾을 수 있습니다.</li>
+          <li>URL, Route 경계와 컴포넌트 상태의 책임을 구분할 수 있습니다.</li>
         </ul>
         <p><a href="./05-react-effects-and-forms.html">이전 단계</a> · <a href="./07-tailwind-ui-accessibility.html">7단계 Tailwind UI와 접근성으로</a></p>
       </section>

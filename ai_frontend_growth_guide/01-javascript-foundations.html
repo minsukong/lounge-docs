@@ -32,6 +32,12 @@
         <p><code>map</code>은 각 값을 변환하고, <code>filter</code>는 조건에 맞는 값만 남기며, <code>find</code>는 첫 번째 값을 찾습니다. 화면에 표시할 파생 목록은 원본과 조건에서 계산합니다.</p>
         <h3>비동기 처리</h3>
         <p><code>async</code> 함수는 Promise를 반환합니다. <code>await</code> 성공 결과뿐 아니라 HTTP 실패, 네트워크 오류와 취소도 고려합니다.</p>
+        <h3>실행 순서와 오래된 값</h3>
+        <p>동기 코드, Microtask와 Timer의 실행 순서를 구분하고 비동기 Callback이 생성될 때 주변 값을 기억하는 Closure를 이해합니다. 요청이 끝났을 때 화면이나 선택한 사용자가 이미 바뀌었을 수 있으므로, 응답 도착 순서가 실행 시작 순서와 같다고 가정하지 않습니다.</p>
+        <h3>얕은 복사와 변경 영향</h3>
+        <p>Spread는 한 단계만 복사합니다. 중첩 객체를 복사한 뒤 내부 값을 직접 변경하면 이전 값과 참조를 공유할 수 있습니다. AI가 불변성을 지킨다고 설명하더라도 실제로 변경된 깊이와 참조를 확인합니다.</p>
+        <h3>요청 수명과 정리</h3>
+        <p><code>AbortController</code>와 <code>AbortSignal</code>은 더 이상 필요하지 않은 요청을 취소하는 경계입니다. 취소를 일반 장애와 같은 사용자 오류로 표시하지 않으며, Timer·Event Listener·구독은 생성한 위치와 대응되는 정리 경로를 가집니다.</p>
       </section>
       <hr />
       <section>
@@ -67,6 +73,8 @@
           <li><code>map</code>, <code>filter</code>와 <code>find</code>의 차이를 설명할 수 있습니다.</li>
           <li>기존 객체를 직접 수정한 코드를 찾을 수 있습니다.</li>
           <li><code>async</code> 함수의 성공과 실패 경로를 구분할 수 있습니다.</li>
+          <li>비동기 응답 순서가 달라질 때 오래된 결과가 화면을 덮는 문제를 발견할 수 있습니다.</li>
+          <li>Closure, 얕은 복사와 정리되지 않은 외부 작업이 만드는 버그를 설명할 수 있습니다.</li>
         </ul>
         <p><a href="./curriculum.html">교육 과정으로</a> · <a href="./02-typescript-basics.html">2단계 TypeScript 기본으로</a></p>
       </section>

@@ -36,6 +36,18 @@
           <li>정적 UI → 상호작용 → 데이터 연결 → 오류 상태 순서 구현</li>
           <li>위험 기반 Test, Typecheck, Lint와 실제 WebView 확인</li>
         </ol>
+        <h3>API가 확정되지 않은 기능의 진행 기준</h3>
+        <p>API가 없다는 이유로 화면과 상태 설계를 멈추지 않습니다. 현재 확인된 사용자 행동을 기준으로 임시 Request·Response 가정, Runtime Parser, Fixture와 MSW Handler를 한곳에 격리하고 로딩·빈 값·오류·완료 상태까지 구현합니다. 가정은 계약이 아니라 교체 대상임을 문서와 코드 가까이에 남깁니다.</p>
+        <p>계약이 확정되면 Path·Method·Status·필드를 Handler와 Parser에 반영하고 관련 Fixture와 테스트를 함께 갱신합니다. 화면이 Mock 전용 필드에 직접 의존하지 않았다면 Query와 컴포넌트 구조를 다시 만들 필요가 없어야 합니다.</p>
+        <h3>세션에서 회원 기능까지의 통합 과제</h3>
+        <ol>
+          <li>세션 확인 중, 비로그인, 로그인과 확인 실패를 구분합니다.</li>
+          <li>로그인 사용자만 회원 Query를 실행하고 세션과 회원 모델을 분리합니다.</li>
+          <li>회원 조회·수정의 성공, 필드 오류, 권한 실패와 네트워크 오류를 Mock으로 재현합니다.</li>
+          <li>수정 성공 후 Cache 반영과 오류 후 입력 보존을 확인합니다.</li>
+          <li>로그아웃과 사용자 전환 뒤 이전 사용자 데이터가 남지 않는지 확인합니다.</li>
+        </ol>
+        <p>구현 기준은 <a href="../reference/front-end/docs/common-source/network.html">요청 계층</a>, <a href="../reference/front-end/docs/common-source/session.html">세션과 회원 경계</a>, <a href="../reference/front-end/docs/common-source/api-mocking.html">API Mock</a> 문서를 함께 사용합니다.</p>
       </section>
       <hr />
       <section>
@@ -59,6 +71,9 @@ API·Bridge 계약 질문, 재사용 코드와 작은 구현 단계를 먼저 �
           <li>로딩, 빈 값, 오류, 취소와 중복 제출을 필요한 범위에서 처리했는가?</li>
           <li>의미 있는 HTML, 토큰, 키보드와 Focus를 유지하는가?</li>
           <li>변경 위험에 맞는 Test와 실제 화면 검증 근거가 있는가?</li>
+          <li>Mock의 임시 가정과 확정된 제품 계약이 코드와 설명에서 구분되는가?</li>
+          <li>계약 변경 지점이 Parser·Fixture·Handler에 모여 있고 화면이 Mock 전용 형태에 결합되지 않았는가?</li>
+          <li>AI가 조사 범위를 벗어난 파일, 새 계층과 일정 계획을 임의로 확장하지 않았는가?</li>
         </ul>
       </section>
       <hr />
@@ -73,6 +88,9 @@ API·Bridge 계약 질문, 재사용 코드와 작은 구현 단계를 먼저 �
           <li>담당자와 확인한 계약과 아직 미확정인 항목</li>
           <li>자동 검사와 직접 확인한 결과</li>
           <li>다음 변경에서 주의해야 할 회귀 위험</li>
+          <li>API 미확정 상태에서 사용한 Mock 가정과 계약 확정 후 교체할 경계</li>
+          <li>로그아웃·사용자 전환 때 제거해야 할 사용자 범위 상태</li>
+          <li>자동 검사와 실제 화면·Network·WebView 검증이 각각 보장하는 범위</li>
         </ul>
         <blockquote>
           <p>과정 완료는 AI 없이 모든 코드를 작성하는 상태가 아닙니다. AI에게 더 정확한 맥락을 제공하고 잘못된 가정과 구현을 발견하며 제품과 기술 결정에 책임질 수 있는 상태입니다.</p>

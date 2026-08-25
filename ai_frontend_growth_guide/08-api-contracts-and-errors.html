@@ -26,6 +26,7 @@
       <hr />
       <section>
         <h2 class="bx-active">2. 구현 전 계약 확인</h2>
+        <p>요청 계층의 책임과 교체 지점은 <a href="../reference/front-end/docs/common-source/network.html">API 요청 계층 구현 가이드</a>를 기준으로 확인합니다. 문서의 URL, 인증 방식과 오류 형태는 참고 구현이며 실제 계약이 아닙니다.</p>
         <table>
           <thead><tr><th scope="col">영역</th><th scope="col">확인할 내용</th></tr></thead>
           <tbody>
@@ -37,17 +38,28 @@
           </tbody>
         </table>
         <p>문서와 실제 응답이 다르면 AI가 임의로 한쪽에 맞추지 않고 Backend 담당자에게 차이를 확인합니다.</p>
+        <h3>공통 요청 계층의 책임</h3>
+        <p>공통 요청 함수는 Base URL 결합, Header, 응답 본문 처리, Timeout·취소와 공통 오류 형태처럼 전송 계층의 반복만 담당합니다. 업무별 Endpoint, 응답 Parser, Query Key와 사용자 문구는 기능 가까이에 둡니다. 모든 API를 하나의 거대한 Service Class나 Generic Wrapper에 넣지 않습니다.</p>
+        <h3>응답 본문과 Status를 함께 해석</h3>
+        <p><code>response.ok</code>만 확인하거나 모든 성공 응답에 <code>json()</code>을 호출하지 않습니다. <code>204</code>, 비어 있는 본문, JSON이 아닌 오류 응답과 잘못된 Content-Type을 구분합니다. 외부 JSON은 <code>unknown</code>으로 받아 기능 Parser를 통과시킨 뒤 화면에 전달합니다.</p>
+        <h3>오류의 계층</h3>
+        <p>요청 취소, Timeout, 오프라인·네트워크 실패, HTTP 오류, 업무 오류와 응답 형식 오류는 원인과 사용자 행동이 다릅니다. 공통 계층은 진단 가능한 형태를 제공하고, 재시도·재로그인·입력 수정 같은 UX는 기능과 확정 계약에서 결정합니다.</p>
+        <h3>401을 단정하지 않기</h3>
+        <p>모든 <code>401</code>을 즉시 로그아웃으로 바꾸지 않습니다. 세션 조회의 비로그인 표현, Token 갱신 실패와 기능 API의 인증 만료가 같은지 확인합니다. <code>403</code>은 로그인 여부와 별개의 권한 실패로 다룹니다.</p>
       </section>
       <hr />
       <section>
         <h2 class="bx-active">3. 코드 읽기</h2>
         <pre class="hljs"><code data-language="typescript"><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">requestTickets</span>(<span class="hljs-params">signal: AbortSignal</span>) {
   <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">&quot;/api/tickets&quot;</span>, { signal });
-  <span class="hljs-keyword">if</span> (response.status === <span class="hljs-number">401</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SessionExpiredError</span>();
-  <span class="hljs-keyword">if</span> (!response.ok) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RequestFailedError</span>();
-  <span class="hljs-keyword">return</span> response.<span class="hljs-title function_">json</span>();
+  <span class="hljs-keyword">if</span> (!response.ok) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RequestFailedError</span>(response.status);
+  }
+
+  <span class="hljs-keyword">const</span> data: <span class="hljs-built_in">unknown</span> = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>();
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">parseTickets</span>(data);
 }</code></pre>
-        <p>오류 종류를 구분하면 화면에서 재로그인, 재시도와 업무 안내를 다르게 처리할 수 있습니다. 실제 오류 Class와 공통 응답 구조는 API 계약이 확정된 뒤 적용합니다.</p>
+        <p>요청 함수는 HTTP Status를 보존하고 외부 JSON을 Parser로 검증합니다. <code>401</code>이 세션 만료인지 이 함수에서 단정하지 않으며, 실제 오류 Class와 공통 응답 구조는 API 계약이 확정된 뒤 적용합니다.</p>
       </section>
       <hr />
       <section>
@@ -68,6 +80,9 @@
           <li>API 구현 전에 nullable과 오류 계약을 질문할 수 있습니다.</li>
           <li>사용자에게 필요한 오류 상태를 구분할 수 있습니다.</li>
           <li>서버 오류 원문과 Stack Trace를 그대로 노출하면 안 되는 이유를 설명할 수 있습니다.</li>
+          <li><code>204</code>, JSON 오류, Timeout, 취소와 응답 검증 실패를 구분할 수 있습니다.</li>
+          <li>공통 요청 계층과 기능별 API·Parser의 책임을 나누고 과도한 Wrapper를 거부할 수 있습니다.</li>
+          <li>API 미확정 값이 코드 어디에 격리되어 있고 계약 확정 후 무엇을 교체할지 설명할 수 있습니다.</li>
         </ul>
         <p><a href="./07-tailwind-ui-accessibility.html">이전 단계</a> · <a href="./09-server-and-client-state.html">9단계 서버·클라이언트 상태로</a></p>
       </section>

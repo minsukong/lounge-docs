@@ -32,6 +32,12 @@
         <p>TypeScript 타입은 실행 시 사라집니다. JSON 파싱, Storage, 사용자 입력과 Bridge 응답처럼 형태를 신뢰할 수 없는 값은 <code>unknown</code>으로 받고 필요한 속성을 확인합니다.</p>
         <h3>계약과 화면 타입</h3>
         <p>API 응답과 화면 모델의 의미와 변경 주기가 다르면 분리합니다. 아직 API Schema와 생성 방식이 확정되지 않았다면 임의의 공통 타입 체계를 만들지 않습니다.</p>
+        <h3>검증은 경계에서 한 번 수행</h3>
+        <p>응답을 사용하는 컴포넌트마다 Optional Chaining으로 방어하지 않습니다. API, Storage 또는 Bridge Adapter가 외부 값을 검증하고 내부에는 확인된 타입만 반환합니다. 검증 실패는 빈 값으로 숨기지 않고 계약 불일치로 식별할 수 있어야 합니다.</p>
+        <h3>형태 검증과 의미 검증</h3>
+        <p>속성이 존재하고 문자열이라는 확인만으로 업무상 유효한 값이 되지는 않습니다. 날짜 형식, 허용 상태, 식별자와 nullable 의미는 확정 계약에 맞춰 검증합니다. 계약이 미확정이면 Parser와 Fixture가 임시 가정임을 분명히 남깁니다.</p>
+        <h3>생성 타입의 한계</h3>
+        <p>OpenAPI 등에서 타입을 생성해도 실제 네트워크 응답을 Runtime에 자동 검증하는 것은 아닙니다. 생성 타입, Runtime Schema와 수동 Guard 중 무엇을 사용할지는 계약 원본과 도구가 확정된 뒤 정하되, 외부 값을 근거 없이 단언하지 않는 원칙은 유지합니다.</p>
       </section>
       <hr />
       <section>
@@ -43,7 +49,11 @@
 
 <span class="hljs-keyword">function</span> <span class="hljs-title function_">isTicket</span>(<span class="hljs-params">value: unknown</span>): value is Ticket {
   <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> value !== <span class="hljs-string">&quot;object&quot;</span> || value === <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
-  <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;id&quot;</span> <span class="hljs-keyword">in</span> value &amp;&amp; <span class="hljs-string">&quot;status&quot;</span> <span class="hljs-keyword">in</span> value;
+  <span class="hljs-keyword">if</span> (!(<span class="hljs-string">&quot;id&quot;</span> <span class="hljs-keyword">in</span> value) || <span class="hljs-keyword">typeof</span> value.id !== <span class="hljs-string">&quot;string&quot;</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  <span class="hljs-keyword">return</span> (
+    <span class="hljs-string">&quot;status&quot;</span> <span class="hljs-keyword">in</span> value &amp;&amp;
+    (value.status === <span class="hljs-string">&quot;available&quot;</span> || value.status === <span class="hljs-string">&quot;used&quot;</span>)
+  );
 }</code></pre>
         <p>Type Guard는 외부 값을 실제로 확인한 뒤 해당 분기 안에서 구체적인 타입으로 사용할 수 있게 합니다. 실제 계약이 확정되면 필드별 검증 범위를 계약에 맞춥니다.</p>
       </section>
@@ -66,6 +76,8 @@ TypeScript 타입만 있으면 충분한 값과 Runtime 검증이 필요한 값�
           <li>Props 타입이 컴포넌트 사용법을 표현하는지 검토할 수 있습니다.</li>
           <li>타입 선언만으로 외부 응답이 안전해지지 않는 이유를 설명할 수 있습니다.</li>
           <li>Runtime Guard가 필요한 경계를 선택할 수 있습니다.</li>
+          <li>형태가 잘못된 응답과 업무상 빈 응답을 서로 다른 실패로 처리할 수 있습니다.</li>
+          <li>생성된 타입이 Runtime 검증을 대신하지 못하는 이유를 설명할 수 있습니다.</li>
         </ul>
         <p><a href="./02-typescript-basics.html">이전 단계</a> · <a href="./04-react-components-and-state.html">4단계 React 컴포넌트와 상태로</a></p>
       </section>
