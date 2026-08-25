@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Next.js App Router의 Route, Layout과 Server·Client Component 경계를 익힙니다." />
+    <title>6. Next.js App Router</title>
+    <link rel="stylesheet" href="./../assets/style/presentation-theme.css" />
+  </head>
+  <body>
+    <header>
+      <div class="type">FRONT-END EDUCATION · STEP 06</div>
+      <h1>6. Next.js App Router</h1>
+      <p>라우팅과 렌더링 책임을 이해하고 필요한 컴포넌트만 Client로 전환합니다.</p>
+    </header>
+    <main>
+      <section>
+        <h2 class="bx-active">1. 학습 목표</h2>
+        <p><a href="./05-react-effects-and-forms.html">이전: React Effect와 폼</a> · <a href="./curriculum.html">교육 과정</a> · <a href="./07-tailwind-ui-accessibility.html">다음: Tailwind UI와 접근성</a></p>
+        <ul>
+          <li><code>page</code>, <code>layout</code>, Loading과 Error 경계의 역할을 구분합니다.</li>
+          <li>Server Component를 기본으로 두고 Client 전환 이유를 설명합니다.</li>
+          <li>브라우저 API와 Client State가 필요한 작은 경계만 분리합니다.</li>
+        </ul>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">2. 꼭 알아야 할 내용</h2>
+        <h3>App Router 파일</h3>
+        <p><code>page</code>는 Route의 화면, <code>layout</code>은 하위 Route가 공유하는 UI를 담당합니다. 예약 파일과 실제 배치는 앱이 생성된 뒤 설치된 Next.js 문서와 내부 기준을 확인합니다.</p>
+        <h3>Server 기본</h3>
+        <p>상태, Event, Effect와 브라우저 API가 필요하지 않은 컴포넌트는 Server Component로 유지합니다. <code>&quot;use client&quot;</code>는 필요한 Client 경계의 시작을 의미합니다.</p>
+        <h3>미확정 정책</h3>
+        <p>SSR·SSG·ISR, 캐싱, Route Handler와 Server Action의 세부 정책은 화면과 API 구조가 확정되기 전까지 AI가 임의로 정하지 않습니다.</p>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">3. 코드 읽기</h2>
+        <pre class="hljs"><code data-language="tsx"><span class="hljs-comment">// page.tsx · Server Component</span>
+<span class="hljs-keyword">export default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">TicketPage</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">TicketFilter</span> /&gt;</span></span>;
+}
+
+<span class="hljs-comment">// TicketFilter.tsx · 상태와 Event가 필요한 Client 경계</span>
+<span class="hljs-string">&quot;use client&quot;</span>;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">TicketFilter</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> [filter, setFilter] = <span class="hljs-title function_">useState</span>(<span class="hljs-string">&quot;all&quot;</span>);
+  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">FilterButtons</span> <span class="hljs-attr">value</span>=<span class="hljs-string">{filter}</span> <span class="hljs-attr">onValueChange</span>=<span class="hljs-string">{setFilter}</span> /&gt;</span></span>;
+}</code></pre>
+        <p>Route 전체를 Client로 바꾸지 않고 상호작용이 시작되는 작은 컴포넌트를 경계로 둡니다.</p>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">4. AI와 함께 연습</h2>
+        <ol>
+          <li>화면의 각 컴포넌트가 상태, Event 또는 브라우저 API를 사용하는지 표시하게 합니다.</li>
+          <li>Client 전환이 필요한 가장 작은 경계를 제안하게 합니다.</li>
+          <li>현재 프로젝트에서 확정되지 않은 캐싱과 데이터 패칭 가정을 따로 적게 합니다.</li>
+        </ol>
+        <pre class="hljs"><code data-language="text">이 화면에서 Server Component를 기본으로 유지하고,
+상태·Event·브라우저 API가 필요한 가장 작은 Client 경계를 찾아줘.
+캐싱과 데이터 패칭 정책은 추측하지 말고 확인 항목으로 분리해줘.</code></pre>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">5. 완료 확인</h2>
+        <ul>
+          <li>Route와 Layout의 책임을 설명할 수 있습니다.</li>
+          <li>Client Component가 필요한 이유를 구체적으로 말할 수 있습니다.</li>
+          <li>확정된 App Router 규칙과 미확정 렌더링 정책을 구분할 수 있습니다.</li>
+        </ul>
+        <p><a href="./05-react-effects-and-forms.html">이전 단계</a> · <a href="./07-tailwind-ui-accessibility.html">7단계 Tailwind UI와 접근성으로</a></p>
+      </section>
+    </main>
+    <footer><p>6. Next.js App Router</p></footer>
+    <script src="./../assets/js/common.js"></script>
+  </body>
+</html>

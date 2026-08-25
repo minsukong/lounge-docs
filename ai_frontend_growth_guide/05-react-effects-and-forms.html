@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="React Event와 Effect를 구분하고 폼 입력, 제출 및 오류 상태를 설계합니다." />
+    <title>5. React Effect와 폼</title>
+    <link rel="stylesheet" href="./../assets/style/presentation-theme.css" />
+  </head>
+  <body>
+    <header>
+      <div class="type">FRONT-END EDUCATION · STEP 05</div>
+      <h1>5. React Effect와 폼</h1>
+      <p>사용자 동작과 외부 시스템 동기화를 구분하고 폼의 상태와 오류를 설계합니다.</p>
+    </header>
+    <main>
+      <section>
+        <h2 class="bx-active">1. 학습 목표</h2>
+        <p><a href="./04-react-components-and-state.html">이전: React 컴포넌트와 상태</a> · <a href="./curriculum.html">교육 과정</a> · <a href="./06-nextjs-app-router.html">다음: Next.js App Router</a></p>
+        <ul>
+          <li>사용자 Event와 외부 시스템 동기화를 위한 Effect를 구분합니다.</li>
+          <li>입력 값, 필드 오류, 제출 상태와 서버 오류를 구분합니다.</li>
+          <li>제출 중 중복 요청을 막고 사용자에게 진행 상태를 제공합니다.</li>
+        </ul>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">2. 꼭 알아야 할 내용</h2>
+        <h3>Event 우선</h3>
+        <p>버튼 클릭이나 폼 제출 때문에 실행되는 코드는 Event Handler에 둡니다. State가 바뀔 때 다른 State를 맞추기 위한 Effect는 파생 값이나 Event로 바꿀 수 있는지 먼저 확인합니다.</p>
+        <h3>Effect의 역할</h3>
+        <p>Effect는 브라우저 API, 외부 위젯, 구독처럼 React 밖의 시스템과 화면 상태를 동기화할 때 사용합니다. 의존성 경고를 없애기 위해 동작을 임의로 바꾸거나 규칙을 끄지 않습니다.</p>
+        <h3>폼 책임</h3>
+        <p>React Hook Form은 입력·제출 상태를 관리할 필요가 있는 폼에서 사용합니다. 필드 검증, 서버 업무 오류와 네트워크 오류는 같은 의미로 처리하지 않습니다.</p>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">3. 코드 읽기</h2>
+        <pre class="hljs"><code data-language="tsx"><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">handleSubmit</span>(<span class="hljs-params">values: ReservationValues</span>) {
+  <span class="hljs-keyword">if</span> (isSubmitting) <span class="hljs-keyword">return</span>;
+  <span class="hljs-title function_">setIsSubmitting</span>(<span class="hljs-literal">true</span>);
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">await</span> <span class="hljs-title function_">saveReservation</span>(values);
+  } <span class="hljs-keyword">finally</span> {
+    <span class="hljs-title function_">setIsSubmitting</span>(<span class="hljs-literal">false</span>);
+  }
+}</code></pre>
+        <p>제출은 사용자 Event에서 시작하며 중복 실행을 막습니다. 실제 구현에서는 성공, 필드 오류, 업무 오류와 네트워크 오류에 맞는 화면 결과를 연결합니다.</p>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">4. AI와 함께 연습</h2>
+        <ol>
+          <li>기존 <code>useEffect</code>마다 어떤 외부 시스템과 동기화하는지 AI에게 설명하게 합니다.</li>
+          <li>폼의 입력·제출·성공·실패 상태를 먼저 나열하게 합니다.</li>
+          <li>중복 제출과 서버 오류 원문 노출 여부를 검토하게 합니다.</li>
+        </ol>
+        <pre class="hljs"><code data-language="text">이 컴포넌트의 useEffect마다 동기화하는 외부 시스템을 설명해줘.
+Event나 렌더링 중 계산으로 바꿀 수 있는 Effect를 구분하고,
+폼 제출의 중복 실행과 오류 상태도 함께 검토해줘.</code></pre>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">5. 완료 확인</h2>
+        <ul>
+          <li>Event와 Effect의 차이를 실제 코드로 설명할 수 있습니다.</li>
+          <li>폼 값과 서버 상태를 같은 Store에 넣지 않는 이유를 설명할 수 있습니다.</li>
+          <li>필드 오류, 업무 오류와 네트워크 오류를 구분할 수 있습니다.</li>
+        </ul>
+        <p><a href="./04-react-components-and-state.html">이전 단계</a> · <a href="./06-nextjs-app-router.html">6단계 Next.js App Router로</a></p>
+      </section>
+    </main>
+    <footer><p>5. React Effect와 폼</p></footer>
+    <script src="./../assets/js/common.js"></script>
+  </body>
+</html>

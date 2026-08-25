@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AI와 함께 하나의 기능을 요구와 계약 확인부터 구현, 테스트와 리뷰까지 완성합니다." />
+    <title>12. 기능 통합과 리뷰</title>
+    <link rel="stylesheet" href="./../assets/style/presentation-theme.css" />
+  </head>
+  <body>
+    <header>
+      <div class="type">FRONT-END EDUCATION · STEP 12</div>
+      <h1>12. 기능 통합과 리뷰</h1>
+      <p>앞 단계의 판단을 연결해 실제 기능을 안전하게 완성하고 병합 여부를 결정합니다.</p>
+    </header>
+    <main>
+      <section>
+        <h2 class="bx-active">1. 통합 목표</h2>
+        <p><a href="./11-testing-and-debugging.html">이전: 테스트와 디버깅</a> · <a href="./curriculum.html">교육 과정</a></p>
+        <ul>
+          <li>사용자 행동과 완료 조건을 구현 전에 정의합니다.</li>
+          <li>상태, 타입, API·Bridge 계약과 실패 경로를 연결합니다.</li>
+          <li>AI의 Diff와 실제 검사 결과를 검토해 병합 여부를 판단합니다.</li>
+        </ul>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">2. 통합 실습 기능</h2>
+        <p>실제 프로젝트에서 작은 기능 하나를 선택합니다. 예를 들어 이용권 목록 조회와 필터, 예약자 정보 입력 또는 지원 여부를 포함한 QR 스캔 진입처럼 하나의 사용자 목표가 분명한 기능이 적절합니다.</p>
+        <p>기능 전체를 한 번에 생성하지 않고 다음 순서로 진행합니다.</p>
+        <ol>
+          <li>사용자 행동, 정상·로딩·빈 값·오류·취소 상태 정의</li>
+          <li>기존 소스, 컴포넌트, 토큰과 설치 package 조사</li>
+          <li>Backend 또는 App 계약 확인과 미확정 항목 분리</li>
+          <li>Props, 외부 입력과 State 소유자 설계</li>
+          <li>정적 UI → 상호작용 → 데이터 연결 → 오류 상태 순서 구현</li>
+          <li>위험 기반 Test, Typecheck, Lint와 실제 WebView 확인</li>
+        </ol>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">3. AI 작업 요청</h2>
+        <pre class="hljs"><code data-language="text">이 기능을 프로젝트 가이드와 기존 소스를 기준으로 조사해줘.
+바로 구현하지 말고 사용자 행동, 화면 상태, 상태 소유자, 필요한 타입,
+API·Bridge 계약 질문, 재사용 코드와 작은 구현 단계를 먼저 정리해줘.
+
+확인되지 않은 요구는 추측하지 말고 별도로 표시해줘.
+합의 후에는 한 단계씩 구현하고 각 단계마다 변경 이유와 검사 결과를 설명해줘.</code></pre>
+        <p>AI의 설명은 실제 명령 결과나 브라우저 검증을 대신하지 않습니다. 확인하지 못한 항목은 완료 결과에 남깁니다.</p>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">4. 병합 전 리뷰</h2>
+        <ul>
+          <li>요청하지 않은 기능, 상태, package와 공통화를 추가하지 않았는가?</li>
+          <li>타입 오류를 <code>any</code>, 근거 없는 <code>as</code>, <code>!</code>와 검사 비활성화로 숨기지 않았는가?</li>
+          <li>서버, 폼과 UI 상태의 소유자가 구분되어 있는가?</li>
+          <li>API·Bridge 계약의 미확정 사항을 코드로 고정하지 않았는가?</li>
+          <li>로딩, 빈 값, 오류, 취소와 중복 제출을 필요한 범위에서 처리했는가?</li>
+          <li>의미 있는 HTML, 토큰, 키보드와 Focus를 유지하는가?</li>
+          <li>변경 위험에 맞는 Test와 실제 화면 검증 근거가 있는가?</li>
+        </ul>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">5. 과정 완료 기준</h2>
+        <p>다음 내용을 AI의 도움을 받아도 좋지만 최종적으로 개발자가 설명하고 승인할 수 있어야 합니다.</p>
+        <ul>
+          <li>이 기능의 사용자 목표와 실패 경로</li>
+          <li>컴포넌트와 파일을 나눈 이유</li>
+          <li>각 State의 소유자와 선택한 도구</li>
+          <li>외부 입력을 검증하는 경계</li>
+          <li>담당자와 확인한 계약과 아직 미확정인 항목</li>
+          <li>자동 검사와 직접 확인한 결과</li>
+          <li>다음 변경에서 주의해야 할 회귀 위험</li>
+        </ul>
+        <blockquote>
+          <p>과정 완료는 AI 없이 모든 코드를 작성하는 상태가 아닙니다. AI에게 더 정확한 맥락을 제공하고 잘못된 가정과 구현을 발견하며 제품과 기술 결정에 책임질 수 있는 상태입니다.</p>
+        </blockquote>
+        <p><a href="./11-testing-and-debugging.html">이전 단계</a> · <a href="./curriculum.html">교육 과정 다시 보기</a> · <a href="./index.html">AI 협업 성장 가이드</a></p>
+      </section>
+    </main>
+    <footer><p>12. 기능 통합과 리뷰</p></footer>
+    <script src="./../assets/js/common.js"></script>
+  </body>
+</html>

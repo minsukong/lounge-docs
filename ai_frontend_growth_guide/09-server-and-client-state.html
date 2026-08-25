@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="상태의 소유자와 수명에 따라 React, URL, React Hook Form, TanStack Query와 Zustand를 선택합니다." />
+    <title>9. 서버·클라이언트 상태</title>
+    <link rel="stylesheet" href="./../assets/style/presentation-theme.css" />
+  </head>
+  <body>
+    <header>
+      <div class="type">FRONT-END EDUCATION · STEP 09</div>
+      <h1>9. 서버·클라이언트 상태</h1>
+      <p>도구부터 선택하지 않고 상태가 어디에서 생기고 얼마나 유지되는지 판단합니다.</p>
+    </header>
+    <main>
+      <section>
+        <h2 class="bx-active">1. 학습 목표</h2>
+        <p><a href="./08-api-contracts-and-errors.html">이전: API 계약과 오류</a> · <a href="./curriculum.html">교육 과정</a> · <a href="./10-webview-bridge-and-security.html">다음: WebView Bridge와 보안</a></p>
+        <ul>
+          <li>지역 UI, URL, 폼, 서버와 공유 클라이언트 상태를 구분합니다.</li>
+          <li>서버 데이터를 TanStack Query 밖의 Store에 복제하지 않습니다.</li>
+          <li>React로 해결되지 않는 공유 UI 상태에만 Zustand를 검토합니다.</li>
+        </ul>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">2. 상태 도구 선택</h2>
+        <table>
+          <thead><tr><th scope="col">상태</th><th scope="col">기본 선택</th></tr></thead>
+          <tbody>
+            <tr><td>한 컴포넌트 또는 가까운 트리의 UI</td><td>React 지역 상태</td></tr>
+            <tr><td>주소로 공유·복원할 검색과 필터</td><td>URL 상태 검토</td></tr>
+            <tr><td>입력, 필드 오류와 제출</td><td>React Hook Form</td></tr>
+            <tr><td>서버에서 조회·변경하는 데이터</td><td>TanStack Query</td></tr>
+            <tr><td>서로 떨어진 UI가 공유하는 클라이언트 상태</td><td>Zustand 검토</td></tr>
+          </tbody>
+        </table>
+        <p>서버 상태, 폼 상태와 UI 상태를 양방향으로 복제하면 동기화 규칙과 버그가 늘어납니다. 기존 방식으로 충분하면 새 Store를 만들지 않습니다.</p>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">3. 코드 읽기</h2>
+        <pre class="hljs"><code data-language="tsx"><span class="hljs-keyword">const</span> ticketQuery = <span class="hljs-title function_">useQuery</span>({
+  queryKey: [<span class="hljs-string">&quot;tickets&quot;</span>, memberId],
+  queryFn: ({ signal }) =&gt; <span class="hljs-title function_">requestTickets</span>(memberId, signal),
+});
+
+<span class="hljs-keyword">if</span> (ticketQuery.isPending) <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">LoadingState</span> /&gt;</span></span>;
+<span class="hljs-keyword">if</span> (ticketQuery.isError) <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ErrorState</span> /&gt;</span></span>;
+<span class="hljs-keyword">if</span> (ticketQuery.data.length === <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">EmptyState</span> /&gt;</span></span>;</code></pre>
+        <p>Query가 서버 데이터와 요청 상태를 소유합니다. 같은 데이터를 Zustand나 별도 State에 복사하지 않고 화면은 Query 결과를 렌더링합니다. Query Key와 캐시 정책은 실제 요구가 확정된 뒤 정합니다.</p>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">4. AI와 함께 연습</h2>
+        <ol>
+          <li>화면의 모든 상태를 소유자와 수명 기준으로 분류하게 합니다.</li>
+          <li>서버 데이터가 Zustand나 지역 State에 복제됐는지 찾게 합니다.</li>
+          <li>로그아웃과 사용자 전환 때 초기화할 캐시와 UI 상태를 구분하게 합니다.</li>
+        </ol>
+        <pre class="hljs"><code data-language="text">이 기능의 상태를 지역 UI, URL, 폼, 서버, 공유 클라이언트 상태로 분류해줘.
+현재 도구가 적절한 이유를 설명하고, 서버 데이터나 파생 값이 다른 Store에
+중복 저장된 부분과 사용자 전환 시 초기화할 항목을 찾아줘.</code></pre>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">5. 완료 확인</h2>
+        <ul>
+          <li>상태 도구를 소유자와 수명으로 선택할 수 있습니다.</li>
+          <li>TanStack Query 데이터와 Zustand 상태를 구분할 수 있습니다.</li>
+          <li>Persist가 필요한 실제 요구와 보안 위험을 설명할 수 있습니다.</li>
+        </ul>
+        <p><a href="./08-api-contracts-and-errors.html">이전 단계</a> · <a href="./10-webview-bridge-and-security.html">10단계 WebView Bridge와 보안으로</a></p>
+      </section>
+    </main>
+    <footer><p>9. 서버·클라이언트 상태</p></footer>
+    <script src="./../assets/js/common.js"></script>
+  </body>
+</html>
