@@ -36,6 +36,8 @@
 
 ## 요청 안전성
 
+- 기획 흐름과 Backend API 계약이 확정되기 전에는 endpoint, method, status, 요청·응답 필드, parser, fixture, handler와 Mock을 만들지 않습니다. 확인 질문과 `TBD`만 남기고 승인된 계약이 전달된 뒤 구현합니다.
+- Swagger 또는 OpenAPI 제공을 미리 가정하지 않고 실제로 전달된 승인 문서를 기준으로 사용합니다.
 - 화면 이동, 검색어나 필터 변경으로 필요 없어진 요청은 `AbortSignal`을 실제 `fetch`까지 전달해 취소합니다.
 - 검색어, 필터, 페이지와 사용자처럼 응답을 구분하는 값을 Query Key에 포함합니다.
 - 늦게 도착한 이전 응답이 최신 조건의 화면을 덮어쓰지 않게 합니다.
@@ -62,8 +64,10 @@
 ## 검증
 
 - 정상 네트워크와 저속 Network Throttling에서 대표 화면을 확인합니다.
-- MSW 지연 응답으로 API 처리 지연, 취소, Timeout과 오류 전환을 반복 검증합니다.
-- MSW `delay()`만으로 Bundle, 이미지와 폰트가 느리게 전송되는 환경까지 검증했다고 판단하지 않습니다.
+- Chrome 개발자 도구의 Network 탭에서 `Disable cache`와 팀이 선택한 저속 Profile을 적용한 뒤 최초 로딩과 갱신을 확인하고, `Offline` 전환 전·중·후의 화면 보존과 복구를 확인합니다.
+- API 처리 지연과 오류 상태는 사용할 수 있는 Backend 개발·테스트 환경에서 먼저 확인하되 별도 재현 환경 제공을 전제로 두지 않습니다.
+- 승인된 API 계약이 있고 실제 환경에서 필요한 상태를 반복 재현하기 어렵다면 MSW 같은 도구를 Front-end 테스트 범위에서 선택할 수 있습니다. Front-end 책임자 또는 프로젝트 담당자와 범위·관리 책임을 정하고 Backend에 공유합니다.
+- Mock 결과만으로 실제 Backend 연동과 저속 네트워크 검증이 끝났다고 판단하지 않습니다.
 - 요청 도중 Offline, 빠른 검색 조건 변경, 버튼 연속 실행과 이전 응답의 늦은 도착을 확인합니다.
 - 변경 전후를 같은 기기, Build와 네트워크 조건에서 비교합니다.
 - LCP, CLS, INP, 요청 수, 전송량과 Bundle을 확인하되 Lighthouse 종합 점수 하나만으로 합격 여부를 결정하지 않습니다.
@@ -72,7 +76,6 @@
 ## 세부 구현 기준
 
 - 요청 함수, 응답 검증과 취소 신호: [API 요청 기반](../common-source/network.md)
-- API 지연과 오류 재현: [API Mock](../common-source/api-mocking.md)
+- API 지연과 오류 재현 도구 판단: [API Mock 도입 판단 기준](../common-source/api-mocking.md)
 - 사용자 상태 전환 테스트: [테스트 공통 소스](../common-source/test.md)
 - 전체 판단 기준과 리뷰 체크리스트: [네트워크 지연 대응 및 성능 검증 가이드](../../../../performance_guide/draft.md)
-

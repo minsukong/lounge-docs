@@ -16,12 +16,13 @@
     <main>
 <section>
 <h2 class="bx-active">1. 적용 목적</h2>
-<p>API 경로, 인증 방식과 공통 응답 형식이 확정되기 전에도 화면과 기능 코드를 같은 요청 경계 위에서 작성할 수 있도록 최소 HTTP 기반을 제공합니다. 이 문서의 코드는 서버 응답 형식을 임의로 통일하지 않고, 기능별 응답 검증 함수를 요청 코드에 연결합니다.</p>
+<p>Backend 담당자가 승인한 API 계약이 전달된 뒤 화면과 기능 코드를 같은 요청 경계 위에서 작성할 수 있도록 최소 HTTP 기반을 제공합니다. 이 문서의 코드는 서버 응답 형식을 임의로 통일하지 않고, 승인된 계약의 기능별 응답 검증 함수를 요청 코드에 연결합니다.</p>
+<p>기획 흐름과 API 계약이 확정되기 전에는 이 예시를 실제 코드로 옮기지 않습니다. endpoint, method, status, 요청·응답 필드와 인증 방식은 확인 질문과 <code class="badge-tbd">TBD</code>로만 남기며 Swagger 또는 OpenAPI 제공도 미리 가정하지 않습니다.</p>
 <p>다음 조건에서 적용합니다.</p>
 <ul>
 <li>둘 이상의 기능이 <code>fetch</code>의 상태 확인, JSON 읽기와 오류 변환을 반복합니다.</li>
-<li>API가 미확정이어도 Mock 응답으로 화면 개발과 테스트를 시작해야 합니다.</li>
-<li>실제 계약이 정해졌을 때 기능 코드를 모두 고치지 않고 요청 경계만 교체해야 합니다.</li>
+<li>Backend가 승인한 계약과 실제 호출 환경이 확인되었습니다.</li>
+<li>기능별 계약을 유지하면서 반복되는 HTTP 전송 책임만 분리해야 합니다.</li>
 </ul>
 <p>다음 내용은 확정하지 않습니다.</p>
 <ul>
@@ -154,7 +155,7 @@
     parse: parseProfile,
   })
 }</code></pre>
-<p>Query가 전달한 <code>AbortSignal</code>을 그대로 <code>fetch</code>까지 연결합니다. path, method와 요청 본문은 API 계약이 확정되면 기능 API에서 바꾸고, 공통 요청 함수는 바꾸지 않습니다.</p>
+<p>Query가 전달한 <code>AbortSignal</code>을 그대로 <code>fetch</code>까지 연결합니다. 예시의 path, method와 요청 본문을 먼저 구현해 나중에 교체하지 않고, 승인된 API 계약을 확인한 뒤 기능 API를 작성합니다.</p>
 </section>
 
 <hr />
@@ -190,6 +191,7 @@
 <li>오류 응답의 상태 코드와 본문을 잃지 않습니다.</li>
 <li><code>204</code>와 빈 응답을 정상 처리합니다.</li>
 <li>Query의 취소 signal이 <code>fetch</code>까지 전달됩니다.</li>
+<li>기획과 API 계약 확정 전에 요청 함수와 기능 API를 선행 구현하지 않았습니다.</li>
 <li>인증, URL과 timeout의 미확정 값이 확정된 기준처럼 들어가지 않습니다.</li>
 </ul>
 </section>

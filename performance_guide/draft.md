@@ -23,6 +23,8 @@ Front-end는 요청 상태를 구분하고, 사용자 입력을 보존하며, �
 
 서버는 권한, 데이터 정합성, 중복 처리와 멱등성을 최종 보장합니다. UI에서 버튼을 비활성화하는 것만으로 서버의 중복 처리 책임을 대신하지 않습니다.
 
+기획 흐름과 Backend API 계약이 확정되기 전에는 endpoint, method, status, 요청·응답 필드, parser, fixture, handler와 Mock을 구현하지 않습니다. 이 단계에서는 필요한 화면 상태와 Backend 확인 질문만 정리하고, 담당자가 승인한 계약과 개발 환경이 전달된 뒤 네트워크 코드를 구현합니다. Swagger 또는 OpenAPI 제공도 확정 전에는 가정하지 않습니다.
+
 데이터베이스 Query Cache, CDN 구성, API Gateway, 서버 Transaction과 운영 도구 선정은 이 문서에서 확정하지 않습니다.
 
 ## 3. 핵심 원칙
@@ -187,11 +189,23 @@ Offline에서 제공할 화면, 저장 대상, 데이터 수명, 재연결 동�
 | --- | --- | --- |
 | 정상 네트워크 | 일반 개발 환경 | 정상 기능과 기준 측정값 |
 | 네트워크 제한 | 낮은 대역폭과 높은 지연 | Bundle, 이미지와 API를 포함한 실제 전송 지연 |
-| API 응답 지연 | 서버 처리가 늦은 상황 | 로딩 UI, 입력 보존, 취소와 Timeout 처리 |
+| API 응답 지연 | 실제 Backend 환경 또는 승인된 계약 기반의 Front-end 재현 도구 | 로딩 UI, 입력 보존, 취소와 Timeout 처리 |
 | 연결 중단 | 요청 전 또는 요청 도중 Offline | 오류 구분, 화면 유지와 복구 동작 |
 | 불안정 연결 | 실패와 복구 반복 | 재시도, 중복 요청과 재연결 갱신 |
 
-브라우저의 Network Throttling은 대역폭과 지연을 포함한 전송 환경을 확인하는 데 사용합니다. MSW의 `delay()`는 API 서버 응답이 늦는 상황을 반복 재현하는 데 사용합니다. MSW 지연만으로 Bundle, 이미지와 폰트 다운로드가 느린 환경까지 검증했다고 판단하지 않습니다.
+브라우저의 Network Throttling은 대역폭과 지연을 포함한 전송 환경을 확인하는 데 사용합니다. API 처리 지연과 오류 상태는 사용할 수 있는 Backend 개발·테스트 환경에서 먼저 확인하되, Backend가 별도 재현 환경을 제공한다고 가정하지 않습니다. 승인된 API 계약이 있고 실제 환경에서 필요한 상태를 반복 재현하기 어렵다면 MSW 같은 도구를 Front-end 테스트 범위에서 선택할 수 있습니다. 도입 범위와 관리 책임은 Front-end 책임자 또는 프로젝트 담당자와 정하고 Backend에 공유하며, 실제 Backend 연동 검증을 대신하지 않습니다.
+
+### Chrome에서 저속 네트워크와 Offline 확인
+
+1. 확인할 화면을 연 뒤 Chrome 개발자 도구의 `Network` 탭으로 이동합니다.
+2. 캐시 영향을 줄이기 위해 개발자 도구가 열린 상태에서 `Disable cache`를 선택합니다.
+3. Throttling 목록에서 제공되는 저속 Profile을 선택합니다. Chrome 버전에 따라 Profile 이름이 다를 수 있으므로 팀에서 선택한 Profile 이름과 조건을 결과에 기록합니다.
+4. 페이지를 새로고침하고 최초 로딩, Skeleton 또는 Spinner, 이미지·폰트, API 완료 순서와 Layout 이동을 확인합니다.
+5. 기존 데이터가 있는 화면에서는 다시 조회해 전체 화면이 불필요하게 초기화되지 않는지 확인합니다.
+6. Throttling을 `Offline`으로 바꿔 화면 진입 전 연결 없음과 요청 도중 연결 중단을 각각 확인합니다.
+7. 다시 `Online`으로 전환해 입력값과 기존 화면이 보존되는지, 재시도 또는 자동 갱신이 중복 요청 없이 복구되는지 확인합니다.
+
+저속 Profile은 실제 서버 처리 지연과 같지 않습니다. Chrome Throttling은 전송 환경 검증에 사용하고, 특정 API의 긴 처리·오류·응답 순서 역전은 실제 환경 또는 승인된 계약에서 파생한 Front-end 재현 도구로 별도 확인합니다.
 
 ## 12. 필수 검증 시나리오
 
@@ -248,7 +262,7 @@ Lighthouse의 단일 종합 점수만으로 합격 여부를 결정하지 않습
 2. 최초 로딩, 갱신, 성공, Empty, Timeout, Offline과 오류 상태를 정의합니다.
 3. 설치된 shadcn/ui와 기존 프로젝트 컴포넌트에서 표시 방식을 선택합니다.
 4. 취소, 순서 역전, 중복 실행과 입력 보존을 구현합니다.
-5. 정상 응답과 API 지연을 자동 테스트로 확인합니다.
+5. 계약 확정 후 사용할 수 있는 Backend 환경과 필요한 경우 승인된 계약 기반의 Front-end 재현 도구에서 정상 응답과 API 지연을 확인합니다.
 6. 실제 Network Throttling과 연결 중단 환경에서 대표 화면을 확인합니다.
 7. 변경 전후 성능과 실패 복구 결과를 기록합니다.
 8. Lint, Type Check, Test와 Build 결과를 함께 확인한 뒤 사람이 승인합니다.
@@ -282,7 +296,7 @@ Lighthouse의 단일 종합 점수만으로 합격 여부를 결정하지 않습
 ### 검증 근거
 
 - 정상, 저속, API 지연과 연결 중단 환경을 구분해 확인했는가?
-- MSW 지연만으로 저속 네트워크 검증을 대신하지 않았는가?
+- 사용할 수 있는 Backend 환경을 먼저 확인하고, Mock 도구의 Front-end 테스트 범위와 관리 책임을 프로젝트 내부에서 정했는가?
 - 변경 전후를 같은 조건에서 비교했는가?
 - 미확정 Timeout, 재시도와 성능 기준을 임의로 확정하지 않았는가?
 
@@ -290,7 +304,6 @@ Lighthouse의 단일 종합 점수만으로 합격 여부를 결정하지 않습
 
 - API 요청, 오류 본문, 응답 검증과 취소 신호 연결은 [API 요청 기반 구현 예시](../reference/front-end/docs/common-source/network.md)를 따릅니다.
 - 서버 데이터와 Query 상태 관리는 [Front-End 개발 가이드](../frontend_guide/index.html)를 따릅니다.
-- API 지연, 오류와 취소 시나리오 재현은 [API Mock 구현 예시](../reference/front-end/docs/common-source/api-mocking.md)를 따릅니다.
+- API 지연과 오류 재현에 별도 도구가 필요하면 [API Mock 도입 판단 기준](../reference/front-end/docs/common-source/api-mocking.md)을 확인하되 Backend와 합의하기 전에는 도입하지 않습니다.
 - 사용자 관점의 상태 전환 검증은 [테스트 공통 설정과 구현 예시](../reference/front-end/docs/common-source/test.md)와 [테스트 가이드](../test_guide/index.html)를 따릅니다.
 - Skeleton, Spinner, Progress와 Toast UI는 [shadcn/ui Components](https://ui.shadcn.com/docs/components)를 참고하되 실제 프로젝트에 설치된 소스와 디자인 토큰을 우선합니다.
-

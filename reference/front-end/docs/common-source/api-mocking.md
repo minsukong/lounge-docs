@@ -1,217 +1,66 @@
-# API Mock 구현 예시
+# API Mock 도입 판단 기준
 
 ## 적용 목적
 
-API와 기획이 확정되기 전에도 실제 `fetch` 경계를 사용하는 화면 개발과 테스트를 진행하도록 Mock Service Worker 기반 예시를 제공합니다. Mock은 서버 계약의 확정본이 아니라 프론트엔드가 현재 가정한 시나리오이며, 계약이 바뀌면 fixture와 handler를 함께 교체합니다.
+API Mock은 프로젝트 기본 도구가 아닙니다. 기획 흐름과 Backend API 계약이 확정된 뒤, 사용할 수 있는 실제 개발·테스트 환경만으로 Front-end가 필요한 지연·오류 상태를 안정적으로 반복 재현하기 어려울 때 도입 여부를 판단합니다. Backend가 별도 네트워크 테스트 환경을 제공할 것이라고 전제하지 않습니다.
 
-다음 조건에서 적용합니다.
+API 계약이 확정되기 전에는 endpoint, method, status, 요청·응답 필드, parser, fixture와 handler를 Front-end가 임의로 만들지 않습니다. Swagger 또는 OpenAPI 제공도 미리 가정하지 않으며, Backend 담당자가 실제로 전달하고 승인한 계약만 기준으로 사용합니다.
 
-- backend가 없거나 endpoint가 준비되지 않아도 화면 상태를 개발해야 합니다.
-- 로딩, 비로그인, 권한 실패와 서버 오류를 반복해서 재현해야 합니다.
-- 테스트가 API 함수를 직접 Mock하지 않고 실제 요청·응답 파싱 경계를 통과해야 합니다.
+## 우선순위
 
-필요 package는 `msw`입니다. 실제 설치 버전과 기존 Mock 도구를 확인한 뒤 개발 의존성으로 추가합니다.
+1. 기획에서 사용자 흐름과 화면 상태를 확정합니다.
+2. Backend 담당자가 승인한 API 계약과 개발·테스트 환경을 확인합니다.
+3. 사용할 수 있는 실제 환경에서 정상, 지연, 권한, 오류와 연결 복구 상태를 어디까지 확인할 수 있는지 파악합니다.
+4. 필요한 상태를 반복 재현하기 어렵다면 Front-end 테스트에 필요한 상태와 Mock의 범위를 정리합니다.
+5. Front-end 책임자 또는 프로젝트 담당자와 목적·관리 책임·폐기 조건을 정하고 Backend에 공유한 뒤 기존 도구와 package를 확인해 MSW 등 적절한 방식을 선택합니다.
 
-## 적용할 파일
+Backend가 없다는 이유만으로 Front-end가 별도의 API 계약과 Mock 서버를 먼저 만들지 않습니다.
 
-```text
-src/mocks/
-├─ browser.ts
-├─ server.ts
-├─ handlers.ts
-└─ fixtures/
-   ├─ member.ts
-   └─ session.ts
-```
+## 도입 전 확인
 
-handler는 API별 업무 코드 가까이에 둘 수도 있습니다. handler와 fixture가 많아지기 전에는 환경별 폴더와 추상화 계층을 추가하지 않습니다.
+- 승인된 endpoint, method, status와 요청·응답 형식이 있는가?
+- 실제 Backend 개발·테스트 환경을 우선 사용할 수 있는가?
+- 현재 사용할 수 있는 Backend 환경에서 지연과 주요 오류 상태를 재현할 수 있는가?
+- Mock으로 확인하려는 Front-end 동작이 구체적인가?
+- Front-end 책임자 또는 프로젝트 담당자와 기준 데이터, 관리 책임과 폐기 시점을 정했는가?
+- Mock이 Backend 계약을 대신하거나 변경하지 않는다는 점을 Backend에 공유했는가?
+- 실제 연동 테스트와 Mock 테스트의 역할이 구분되어 있는가?
 
-## Fixture
+승인된 API 계약이 없거나 Mock의 Front-end 테스트 범위와 관리 책임이 정해지지 않았다면 구현을 시작하지 않고 확인 질문과 `TBD`만 남깁니다.
 
-### `src/mocks/fixtures/session.ts`
+## 도입 후 사용 원칙
 
-```ts
-export const authenticatedSessionFixture = {
-  authenticated: true,
-  user: {
-    id: "member-1",
-    displayName: "라운지 사용자",
-  },
-} as const
+- Handler와 fixture는 승인된 API 계약에서 파생합니다.
+- Mock 데이터가 실제 계약보다 먼저 API 구조를 결정하지 않게 합니다.
+- 실제 Backend 환경을 사용할 수 있는 통합 검증을 Mock으로 대체하지 않습니다.
+- 정상 응답뿐 아니라 합의된 지연, 오류와 취소 상태만 필요한 범위에서 재현합니다.
+- 처리하지 않은 요청이 실제 외부 환경으로 빠져나가지 않도록 테스트 환경을 분리합니다.
+- Production 실행과 Bundle에는 Mock을 포함하지 않습니다.
+- 계약이 바뀌면 실제 연동 코드, parser, 테스트 데이터와 Mock을 같은 작업에서 갱신합니다.
+- Mock 유지 비용이 실제 환경 사용 이점보다 커지면 제거합니다.
 
-export const anonymousSessionFixture = {
-  authenticated: false,
-} as const
-```
+## MSW의 위치
 
-### `src/mocks/fixtures/member.ts`
+MSW는 위 조건을 확인한 뒤 선택할 수 있는 후보 중 하나입니다. `fetch`를 사용하는 Front-end 요청 경계에서 응답을 대체할 수 있지만 다음을 보장하지 않습니다.
 
-```ts
-export const memberFixture = {
-  id: "member-1",
-  displayName: "라운지 사용자",
-  introduction: "프로필 소개",
-} as const
-```
+- 실제 Backend가 계약을 지키는지
+- 인증, Cookie, CORS와 Proxy가 올바르게 동작하는지
+- 실제 서버 처리 시간과 운영 네트워크 성능
+- 권한, 데이터 정합성과 중복 처리
 
-Fixture 값은 디자인과 API 계약이 아니라 화면 상태를 확인하기 위한 데이터입니다. 필드가 확정되면 parser의 테스트 데이터와 함께 갱신합니다.
+따라서 MSW 테스트를 통과해도 실제 개발·테스트 서버 연동을 별도로 확인합니다.
 
-## 기본 Handler
+## 네트워크 지연 검증과 구분
 
-### `src/mocks/handlers.ts`
-
-```ts
-import { delay, http, HttpResponse } from "msw"
-import { memberFixture } from "@/mocks/fixtures/member"
-import { authenticatedSessionFixture } from "@/mocks/fixtures/session"
-
-export const handlers = [
-  http.get("/api/session", () => {
-    return HttpResponse.json(authenticatedSessionFixture)
-  }),
-
-  http.delete("/api/session", () => {
-    return new HttpResponse(null, { status: 204 })
-  }),
-
-  http.get("/api/members/me", async () => {
-    await delay(300)
-    return HttpResponse.json(memberFixture)
-  }),
-
-  http.patch("/api/members/me", async ({ request }) => {
-    const body = (await request.json()) as { displayName?: unknown }
-
-    if (typeof body.displayName !== "string" || body.displayName.length < 2) {
-      return HttpResponse.json(
-        { message: "입력값을 확인해 주세요." },
-        { status: 400 },
-      )
-    }
-
-    return HttpResponse.json({
-      ...memberFixture,
-      displayName: body.displayName,
-    })
-  }),
-]
-```
-
-`/api/session`, `/api/members/me`, 응답 필드와 오류 본문은 모두 교체 지점입니다. Mock handler가 실제 계약보다 먼저 작성되었음을 API 명세로 오해하지 않습니다.
-
-## 브라우저와 테스트에서 Handler 공유
-
-### `src/mocks/browser.ts`
-
-```ts
-import { setupWorker } from "msw/browser"
-import { handlers } from "@/mocks/handlers"
-
-export const worker = setupWorker(...handlers)
-```
-
-### `src/mocks/server.ts`
-
-```ts
-import { setupServer } from "msw/node"
-import { handlers } from "@/mocks/handlers"
-
-export const server = setupServer(...handlers)
-```
-
-브라우저 Mock은 개발 환경에서만 시작하고 production bundle과 실행 흐름에 포함하지 않습니다. Next.js App Router에서 Mock을 시작하는 위치는 실제 Client·Server 요청 위치와 설치된 MSW 버전을 확인해 결정합니다.
-
-`TBD`: 개발 Mock 활성화 환경변수 이름과 시작 위치는 실제 애플리케이션 bootstrap 구조가 생긴 뒤 결정합니다.
-
-## Vitest 연결
-
-기존 `src/test/setup.ts`에 server lifecycle을 연결합니다.
-
-```ts
-import "@testing-library/jest-dom/vitest"
-import { cleanup } from "@testing-library/react"
-import { afterAll, afterEach, beforeAll } from "vitest"
-import { server } from "@/mocks/server"
-
-beforeAll(() => {
-  server.listen({ onUnhandledRequest: "error" })
-})
-
-afterEach(() => {
-  cleanup()
-  server.resetHandlers()
-})
-
-afterAll(() => {
-  server.close()
-})
-```
-
-테스트에서는 처리하지 않은 요청을 오류로 만들어 예상하지 않은 실제 네트워크 접근을 막습니다. 각 테스트 뒤 handler를 초기화하여 다른 테스트의 상태가 섞이지 않게 합니다.
-
-## 상태별 Handler 교체
-
-테스트 안에서 필요한 상태만 덮어씁니다.
-
-```ts
-import { delay, http, HttpResponse } from "msw"
-import { server } from "@/mocks/server"
-
-server.use(
-  http.get("/api/session", () => {
-    return HttpResponse.json({ authenticated: false })
-  }),
-)
-
-server.use(
-  http.get("/api/members/me", () => {
-    return HttpResponse.json(
-      { message: "로그인이 필요합니다." },
-      { status: 401 },
-    )
-  }),
-)
-
-server.use(
-  http.get("/api/members/me", async () => {
-    await delay("infinite")
-    return HttpResponse.json({})
-  }),
-)
-```
-
-한 테스트에서는 하나의 상태만 교체합니다. 인증 없음, 권한 부족, 서버 오류와 지연을 하나의 거대한 scenario handler로 묶지 않습니다.
-
-## 먼저 준비할 시나리오
-
-- 세션 확인 중
-- 비로그인
-- 로그인 사용자
-- 회원 정보 조회 성공
-- 입력값 오류 `400`
-- 인증 만료 `401`
-- 권한 부족 `403`
-- 서버 오류 `500`
-- 응답 지연과 요청 취소
-- 빈 응답 `204`
-
-화면이 아직 없는 시나리오까지 미리 만들지 않습니다. 세션과 첫 회원 화면에서 실제로 사용하는 상태부터 추가합니다.
-
-## API 확정 후 교체 기준
-
-1. 실제 API 명세의 path, method와 status를 handler에 반영합니다.
-2. parser 테스트와 fixture 필드를 함께 갱신합니다.
-3. 화면이 Mock 전용 필드나 문구에 의존하지 않는지 확인합니다.
-4. 실제 개발 서버 사용 시 브라우저 Mock을 비활성화합니다.
-5. 통합 테스트가 처리되지 않은 실제 네트워크 요청을 만들지 않는지 확인합니다.
-
-Mock을 제거한 뒤 화면 코드를 다시 작성해야 한다면 API 경계가 분리되지 않은 것입니다. 화면은 같은 Query와 API 함수를 사용하고 Mock 활성화 여부만 달라야 합니다.
+브라우저 Network Throttling은 Bundle, 이미지, 폰트와 API 전송이 모두 느린 환경을 확인합니다. API Mock의 응답 지연은 합의된 서버 처리 지연 시나리오만 재현합니다. Mock 응답 지연만으로 저속 네트워크 검증을 완료했다고 판단하지 않습니다.
 
 ## 적용 확인
 
-- 개발과 테스트가 같은 기본 handler를 사용합니다.
-- 테스트별 handler가 다음 테스트에 남지 않습니다.
-- 처리되지 않은 테스트 요청은 즉시 실패합니다.
-- API 함수와 parser를 우회하지 않습니다.
-- Mock 응답을 확정된 backend 계약으로 표현하지 않습니다.
-- production에서 Mock이 시작되지 않습니다.
+- 기획과 Backend API 계약 확정 전에 Mock을 만들지 않았습니다.
+- Swagger 또는 OpenAPI 제공을 임의로 가정하지 않았습니다.
+- 실제 Backend 환경을 우선 확인했습니다.
+- Front-end 책임자 또는 프로젝트 담당자와 Mock의 필요성, 범위와 관리 책임을 정했습니다.
+- Mock이 API 계약을 대신하지 않는다는 점을 Backend에 공유했습니다.
+- Handler와 fixture가 승인된 계약에서 파생되었습니다.
+- Mock이 실제 Backend 연동 검증을 대신하지 않습니다.
+- Production에 Mock이 포함되지 않습니다.

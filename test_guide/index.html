@@ -79,13 +79,13 @@
           <li>과도한 Mock으로 실제 연결 오류를 숨기지 않습니다.</li>
         </ul>
         <p>
-          Backend가 준비되기 전 화면 개발이나 API 경계 테스트에 Mock이 필요하면
-          MSW를 선택적으로 사용할 수 있습니다. 실제 API 경로와 응답 fixture는
-          확정 계약으로 취급하지 않고 교체 가능한 테스트 데이터로 관리합니다.
-          도입 조건과 연결 예시는
+          기획과 Backend API 계약이 확정되기 전에는 API Mock, fixture와 handler를
+          만들지 않습니다. 계약 확정 후 사용할 수 있는 Backend 환경에서 필요한 상태를
+          재현하기 어렵다면 Front-end 책임자 또는 프로젝트 담당자와 테스트 범위와
+          관리 책임을 정한 뒤
           <a href="./../reference/front-end/docs/common-source/api-mocking.html"
-            >API Mock 구현 예시</a
-          >를 확인합니다.
+            >API Mock 도입 판단 기준</a
+          >을 확인합니다.
         </p>
         <p>
           <code class="badge-tbd">TBD</code> Bridge Mock의 공통 fixture와 실제 API
@@ -114,7 +114,7 @@
         <ul>
           <li>단위·컴포넌트: Vitest, React Testing Library, <code>@testing-library/user-event</code>, <code>@testing-library/jest-dom</code></li>
           <li>E2E: Playwright</li>
-          <li>API Mock: MSW</li>
+          <li>API Mock: 프로젝트 기본 도구가 아니며 합의 후 후보를 결정</li>
         </ul>
         <pre class="hljs"><code data-language="bash"><span class="hljs-built_in">npm</span> run test
 <span class="hljs-built_in">npm</span> run test:watch
@@ -150,8 +150,9 @@
           <li>오류 영향이 큰 순수 로직이나 핵심 컴포넌트부터 시작합니다.</li>
           <li>반복되는 설정이 확인된 경우에만 공통 테스트 도구를 만듭니다.</li>
           <li>
-            Backend 없이 API 상태 재현이 필요하면 MSW를, 여러 시스템 경계를
-            통과하는 핵심 흐름이 생기면 Playwright를 각각 검토합니다.
+            승인된 API 계약과 Backend 환경으로 재현하기 어려운 상태가 확인되면
+            양측 담당자가 API Mock 도입 여부를 협의하고, 여러 시스템 경계를
+            통과하는 핵심 흐름이 생기면 Playwright를 검토합니다.
           </li>
           <li>실행 시간과 안정성을 확인한 뒤 CI 범위를 확정합니다.</li>
         </ol>

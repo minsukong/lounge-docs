@@ -6,6 +6,8 @@
 
 이 폴더에는 애플리케이션 파일을 직접 저장하지 않습니다. 코드 블록의 경로대로 실제 `apps/app-webview`에 옮기되, 같은 책임의 기존 파일이 있으면 새 파일을 만들지 말고 필요한 부분만 병합합니다.
 
+기획 흐름과 Backend API 계약이 확정되기 전에는 API·세션 구현 예시와 Mock을 실제 코드로 옮기지 않습니다. Backend 확인 질문과 `TBD`만 정리하고, 승인된 계약과 개발 환경이 전달된 뒤 필요한 문서만 적용합니다.
+
 ## 작업별 문서
 
 | 필요한 작업 | 열어 볼 문서 | 확인할 파일과 코드 |
@@ -17,7 +19,7 @@
 | API 요청과 오류 처리를 한 경계로 모으기 | [API 요청 기반 구현 예시](./network.md) | `HttpError`, `request`, 기능별 parser 연결 |
 | 로그인 확인·비로그인·로그아웃 상태 나누기 | [세션과 회원 경계 구현 예시](./session.md) | 세션 model·parser·Query와 cache 초기화 |
 | 공통 컴포넌트를 실제 동작으로 검증하기 | [테스트 공통 설정](./test.md) | Vitest 설정, setup, `renderWithProviders` |
-| Backend 없이 API 상태를 재현하기 | [API Mock 구현 예시](./api-mocking.md) | MSW fixture·handler와 개발·테스트 연결 |
+| 계약 확정 후 API Mock 필요성 판단하기 | [API Mock 도입 판단 기준](./api-mocking.md) | Backend 환경 우선, 담당자 합의와 선택 도구 기준 |
 | 공통 코드를 한 기능에서 함께 쓰기 | [통합 사용 예시](./recipes.md) | 조회·상태·수정 폼을 연결한 프로필 예시 |
 | 적용 대상과 교체 지점만 빠르게 확인하기 | [공통 소스 적용 항목](./catalog.md) | 파일별 적용 조건과 점검 목록 |
 | 가이드의 준비 수준과 실제 적용 순서 확인하기 | [공통 소스 가이드 활용 브리핑](./briefing.md) | 시작 가능한 범위, 한계와 저장소 생성 후 적용 순서 |
@@ -26,7 +28,7 @@
 
 1. 문서의 **사용 조건**에서 현재 기능과 책임이 같은지 확인합니다.
 2. **적용 파일**에서 실제 저장소에 같은 파일이나 내보내는 항목이 있는지 검색합니다.
-3. 첫 API에서는 공통 요청 함수와 기능별 parser를 연결하고 API 계약이 확정되지 않았다면 필요한 상태만 Mock으로 재현합니다.
+3. 첫 API는 Backend가 승인한 계약과 개발 환경이 전달된 뒤 공통 요청 함수와 기능별 parser에 연결합니다.
 4. 세션이 필요한 첫 화면에서 로그인 상태와 회원 데이터를 분리해 적용합니다.
 5. **완성 코드**를 기존 구현과 비교해 새 파일 생성 또는 병합을 선택합니다.
 6. **사용 예시**까지 연결해 import만 되고 실제로는 쓰이지 않는 공통 코드를 남기지 않습니다.
@@ -66,11 +68,6 @@ apps/app-webview/
     │   ├── errors.ts
     │   ├── type-guards.ts
     │   └── utils.ts
-    ├── mocks/
-    │   ├── fixtures/
-    │   ├── browser.ts
-    │   ├── handlers.ts
-    │   └── server.ts
     └── test/
         ├── render-with-providers.tsx
         └── setup.ts
@@ -90,7 +87,7 @@ apps/app-webview/
 | API 요청 함수 | 본문 읽기, `HttpError`와 parser 연결 | 기본 URL, 인증 전달, timeout과 공통 오류 계약 |
 | 세션 경계 | 로그인 확인 상태와 회원 상세 데이터의 분리 | 실제 세션 응답, 만료·갱신과 이동 정책 |
 | 테스트 도구 | DOM 환경, jest-dom, Provider 포함 렌더링 함수 | 기존 실행 도구, alias, 전역 mock 정책 |
-| API Mock | fixture·handler·테스트 lifecycle 구조 | 실제 path·응답과 개발 Mock 활성화 방식 |
+| API Mock | 승인된 계약과 양측 합의 후 선택적으로 적용 | 실제 환경으로 재현하기 어려운 상태와 관리 책임 |
 
 ## 공통 폴더에 둘 기준
 

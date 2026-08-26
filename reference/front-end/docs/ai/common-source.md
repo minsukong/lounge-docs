@@ -12,9 +12,10 @@
 - TypeScript 설정과 runtime guard 작업은 `docs/common-source/typescript.md`를 읽습니다.
 - API 요청 함수와 기능별 응답 검증 작업은 `docs/common-source/network.md`를 읽습니다.
 - 네트워크 지연, Loading, Timeout, 재시도, Offline 또는 성능 검증이 포함되면 `docs/ai/performance.md`를 함께 읽습니다.
+- 기획 흐름과 Backend API 계약이 확정되기 전에는 API 요청 함수, parser, fixture, handler와 Mock을 구현하지 않습니다. Backend 확인 질문과 `TBD`만 정리합니다.
 - 로그인 상태, 로그아웃과 회원 데이터 경계 작업은 `docs/common-source/session.md`를 읽습니다.
 - Vitest와 Testing Library 공통 환경 작업은 `docs/common-source/test.md`를 읽습니다.
-- Backend 없이 API 상태를 재현하거나 API 경계 테스트를 작성할 때는 `docs/common-source/api-mocking.md`를 읽습니다.
+- 계약 확정 후 사용할 수 있는 Backend 환경만으로 필요한 상태 재현이 어렵고 Front-end 테스트용 Mock의 범위와 관리 책임을 프로젝트 내부에서 정했을 때 `docs/common-source/api-mocking.md`를 읽습니다.
 - 인증·권한, 외부 HTML·URL, 개인정보, Client 저장소, Bridge와 파일 경계가 포함되면 `docs/ai/security.md`와 상세 보안 가이드를 함께 읽습니다.
 - 공통 소스를 기능 단위로 연결하는 방법은 `docs/common-source/recipes.md`를 읽습니다.
 - `docs/common-source/catalog.md`는 실제 source 목록이 아니라 조사·구현 체크리스트로 사용합니다.

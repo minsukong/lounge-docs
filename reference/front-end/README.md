@@ -78,7 +78,7 @@ AGENTS.md            # 전체 원칙 + 작업별 문서 선택
 | API 요청과 응답 검증            | `network.md`    | `HttpError`, 공통 요청 함수, 기능별 parser                          |
 | 로그인 상태와 회원 데이터 경계  | `session.md`    | 세션 model·parser·Query, 로그아웃 cache 초기화                      |
 | 테스트 환경 구성                | `test.md`       | Vitest, Testing Library, `renderWithProviders`                      |
-| Backend 없이 API 상태 재현      | `api-mocking.md` | MSW fixture·handler, 개발·테스트 연결                               |
+| 계약 확정 후 API Mock 판단      | `api-mocking.md` | Backend 환경 우선, 담당자 합의와 선택 도구 기준                     |
 | 공통 소스를 기능에 연결         | `recipes.md`    | 조회·검증·수정·상태·테스트를 연결한 프로필 예시                     |
 | 적용 조건, package, 미확정      | `catalog.md`    | 파일별 도입 조건, 함께 적용할 코드, package, TBD 목록               |
 | 준비 수준, 적용 순서            | `briefing.md`   | 활용 범위, 한계, 저장소 생성 후 적용 순서와 검토 시점               |

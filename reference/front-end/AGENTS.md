@@ -11,6 +11,9 @@
 - 실제 저장소가 생성된 이후 Next.js 16 App Router 규칙은 `apps/app-webview/AGENTS.md`와 설치된 Next.js 문서를 따릅니다.
 - 기존 `src/components/ui`의 shadcn/ui와 프로젝트 컴포넌트를 새 코드보다 우선합니다.
 - 요청하지 않은 기능, 상태, 공통화 또는 패키지를 미리 추가하지 않습니다.
+- 기획 흐름과 Backend API 계약이 확정되기 전에는 endpoint, method, status, 요청·응답 필드, API 함수, parser, fixture, handler와 Mock을 구현하지 않습니다. Backend 확인 질문과 `TBD`만 남깁니다.
+- Swagger 또는 OpenAPI 제공을 미리 가정하지 않고 Backend 담당자가 실제로 전달하고 승인한 계약을 기준으로 구현합니다.
+- MSW는 기본 도구가 아닙니다. 승인된 API 계약을 기준으로 실제 Backend 환경에서 필요한 지연·오류 상태를 반복 재현하기 어렵다면 Front-end 테스트 범위에서 선택적으로 검토합니다. Backend의 별도 재현 환경 제공을 전제로 두지 않으며, 도입 범위와 관리 책임은 Front-end 책임자 또는 프로젝트 담당자와 정하고 Backend에 공유합니다.
 
 ## AI 생성 코드 기준
 
@@ -74,7 +77,7 @@ flowchart TD
   U -->|"세부 기준이 필요할 때"| UH["frontend_guide/index.html + UI 상세 가이드"]
   F -->|"세부 기준이 필요할 때"| FH["react_code_exports.html + design_tokens.html"]
   Q -->|"세부 기준이 필요할 때"| QH["lint_guide/index.html + test_guide/index.html"]
-  N -->|"세부 기준이 필요할 때"| NH["performance_guide/draft.md + network.md + api-mocking.md"]
+  N -->|"세부 기준이 필요할 때"| NH["performance_guide/draft.md + 승인된 API 계약"]
   S -->|"세부 기준이 필요할 때"| SH["security_guide/index.html + 실제 인증·배포 설정"]
   CS --> CSR{"apps/app-webview가 존재하는가?"}
   CSR -->|"예"| CSS["기존 소스와 설치 package 확인"]
@@ -107,7 +110,7 @@ flowchart TD
 | API 요청과 기능별 응답 검증 연결 | [Markdown](./docs/common-source/network.md) · [HTML](./docs/common-source/network.html) | HTTP 오류, 공통 요청 함수와 기능별 parser 연결 예시 |
 | 로그인 상태와 회원 데이터 경계 | [Markdown](./docs/common-source/session.md) · [HTML](./docs/common-source/session.html) | 세션 model·parser·Query와 로그아웃 cache 초기화 기준 |
 | Client Component와 Query 테스트 환경 구성 | [Markdown](./docs/common-source/test.md) · [HTML](./docs/common-source/test.html) | Vitest, Testing Library, 공통 렌더링 함수와 사용자 동작 테스트 예시 |
-| Backend 없이 API 상태 재현 | [Markdown](./docs/common-source/api-mocking.md) · [HTML](./docs/common-source/api-mocking.html) | MSW fixture·handler와 개발·테스트 연결 예시 |
+| 계약 확정 후 API Mock 필요성 판단 | [Markdown](./docs/common-source/api-mocking.md) · [HTML](./docs/common-source/api-mocking.html) | Backend 환경 우선, 담당자 합의와 선택 도구 기준 |
 | 공통 소스를 한 기능에 연결 | [Markdown](./docs/common-source/recipes.md) · [HTML](./docs/common-source/recipes.html) | 프로필 조회·검증·수정·상태 처리와 테스트를 연결한 통합 예시 |
 | 적용 조건, package와 미확정 항목 확인 | [Markdown](./docs/common-source/catalog.md) · [HTML](./docs/common-source/catalog.html) | 파일별 도입 조건, 함께 적용할 코드, 필요한 package, TBD와 검증 목록 |
 | 현재 준비 수준과 저장소 생성 후 순서 확인 | [Markdown](./docs/common-source/briefing.md) · [HTML](./docs/common-source/briefing.html) | 가이드의 활용 범위, 한계, 실제 적용 순서와 다음 검토 시점 |
@@ -134,7 +137,7 @@ docs/
    ├─ network.md        # API 요청과 응답 검증 경계 가이드
    ├─ session.md        # 세션과 회원 데이터 경계 가이드
    ├─ test.md           # Vitest와 Testing Library 공통 테스트 가이드
-   ├─ api-mocking.md    # MSW 기반 API Mock 가이드
+   ├─ api-mocking.md    # 계약 확정 후 API Mock 도입 판단 기준
    ├─ recipes.md        # 공통 소스를 연결한 기능 단위 통합 예시
    ├─ catalog.md        # 구현 항목과 도입 조건 체크리스트
    └─ briefing.md       # 준비 수준과 저장소 생성 후 적용 순서

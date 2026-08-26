@@ -2,9 +2,9 @@
 
 ## 예시의 목적
 
-이 문서는 앞의 공통 소스를 한 기능에서 어떻게 연결하는지 보여 줍니다. 프로필 조회와 표시 이름 수정 흐름을 예로 들어 QueryClient·Provider, 공통 요청 함수, 실행 시 응답 검증, `FormField`, `SubmitButton`, 오류 변환과 API Mock을 함께 사용합니다.
+이 문서는 기획과 Backend API 계약이 승인된 뒤 앞의 공통 소스를 한 기능에서 어떻게 연결하는지 보여 주는 참고 예시입니다. 프로필 조회와 표시 이름 수정 흐름을 예로 들어 QueryClient·Provider, 공통 요청 함수, 실행 시 응답 검증, `FormField`, `SubmitButton`과 오류 변환을 함께 사용합니다.
 
-프로필 API 경로와 응답 필드는 아직 프로젝트 계약으로 확정된 값이 아닙니다. 아래 코드는 구조와 연결 방법을 그대로 활용하고, **API 경로·요청 본문·응답 검증·업무 문구**를 실제 계약으로 교체하는 구현 예시입니다.
+프로필 API 경로와 응답 필드는 프로젝트 계약이 아닙니다. 계약 확정 전에는 아래 경로·method·요청 본문·응답 parser를 실제 코드로 옮기지 않고 질문과 `TBD`만 기록합니다. Swagger/OpenAPI를 포함한 전달 형식도 미리 가정하지 않습니다.
 
 ## 완성 후 파일 구조
 
@@ -21,7 +21,7 @@ apps/app-webview/src/
     └── profile-screen.test.tsx
 ```
 
-먼저 `AppProviders`, `request`, `FormField`, `SubmitButton`, `getErrorMessage`, `renderWithProviders`가 준비되어 있어야 합니다. 조회부터 수정까지의 테스트에는 [API Mock 구현 예시](./api-mocking.md)의 MSW server와 기본 handler도 연결합니다.
+계약 확정 후 적용할 때는 `AppProviders`, `request`, `FormField`, `SubmitButton`, `getErrorMessage`, `renderWithProviders`가 준비되어 있어야 합니다. API 연동 검증은 Backend가 제공하거나 양측이 합의한 개발·테스트 환경을 우선합니다.
 
 ## 1단계: 데이터 모델과 API 응답 검증
 
@@ -94,7 +94,7 @@ export function updateProfile(
 }
 ```
 
-조회와 수정은 [API 요청 기반 구현 예시](./network.md)의 전송 경계를 공유하고, 성공 본문은 모두 `parseProfile`로 검증합니다. `/api/members/me`, 인증 header, 기본 URL과 공통 오류 형식은 교체 지점이며 실제 계약이 정해지면 기능 API, parser와 Mock handler를 함께 바꿉니다.
+조회와 수정은 [API 요청 기반 구현 예시](./network.md)의 전송 경계를 공유하고, 성공 본문은 모두 `parseProfile`로 검증합니다. `/api/members/me`, 인증 header, 기본 URL과 공통 오류 형식은 예시일 뿐입니다. Backend가 승인한 계약과 환경이 전달된 뒤 기능 API와 parser를 작성합니다.
 
 ## 2단계: 조회·수정 Hook
 
@@ -261,78 +261,11 @@ export default function ProfilePage() {
 
 `page.tsx`는 Server Component로 유지됩니다. 실제 서비스에서 서버 사전 조회와 hydration을 적용한다면 QueryClient 생성, `dehydrate`, `HydrationBoundary`를 route 요구에 맞춰 추가합니다. 모든 route에 미리 적용하지 않습니다.
 
-## 5단계: 조회부터 수정까지 테스트
+## 5단계: 계약 확정 후 테스트
 
-### `src/features/profile/profile-screen.test.tsx`
+기획과 Backend API 계약이 확정된 뒤 사용할 수 있는 개발·테스트 환경에서 조회와 수정 흐름을 검증합니다. 실제 환경에서 재현하기 어려운 상태가 있다면 Front-end 책임자 또는 프로젝트 담당자와 테스트 범위·관리 책임을 정한 뒤 승인된 계약에서 fixture와 handler를 파생할 수 있습니다.
 
-```tsx
-import { screen } from "@testing-library/react"
-import userEvent from "@testing-library/user-event"
-import { http, HttpResponse } from "msw"
-import { describe, expect, it, vi } from "vitest"
-import { ProfileScreen } from "@/features/profile/components/profile-screen"
-import { server } from "@/mocks/server"
-import { renderWithProviders } from "@/test/render-with-providers"
-
-describe("ProfileScreen", () => {
-  it("조회한 이름을 수정하고 저장 완료를 표시한다", async () => {
-    const user = userEvent.setup()
-    const updateRequest = vi.fn()
-
-    server.use(
-      http.patch("/api/members/me", async ({ request }) => {
-        const body = await request.json()
-        updateRequest(body)
-
-        return HttpResponse.json({
-          id: "member-1",
-          displayName: "새 이름",
-          introduction: null,
-        })
-      }),
-    )
-
-    renderWithProviders(<ProfileScreen />)
-
-    const input = await screen.findByRole("textbox", { name: /표시 이름/ })
-    await user.clear(input)
-    await user.type(input, "새 이름")
-    await user.click(screen.getByRole("button", { name: "저장" }))
-
-    expect(updateRequest).toHaveBeenCalledTimes(1)
-    expect(updateRequest).toHaveBeenCalledWith({
-      displayName: "새 이름",
-    })
-    expect(await screen.findByRole("status")).toHaveTextContent("저장했습니다.")
-  })
-
-  it("짧은 이름은 API를 호출하지 않고 오류를 연결한다", async () => {
-    const user = userEvent.setup()
-    const updateRequest = vi.fn()
-
-    server.use(
-      http.patch("/api/members/me", () => {
-        updateRequest()
-        return HttpResponse.json({})
-      }),
-    )
-
-    renderWithProviders(<ProfileScreen />)
-
-    const input = await screen.findByRole("textbox", { name: /표시 이름/ })
-    await user.clear(input)
-    await user.type(input, "한")
-    await user.click(screen.getByRole("button", { name: "저장" }))
-
-    expect(input).toHaveAccessibleDescription(
-      "2자 이상 입력하세요. 표시 이름은 2자 이상 입력하세요.",
-    )
-    expect(updateRequest).not.toHaveBeenCalled()
-  })
-})
-```
-
-API 모듈을 `vi.mock`으로 교체하지 않으므로 `request`, HTTP 응답 읽기와 `parseProfile`까지 실제 경계를 통과합니다. 테스트마다 필요한 응답만 `server.use`로 덮어쓰고 공통 setup의 `server.resetHandlers()`가 다음 테스트 전에 기본 handler로 되돌립니다.
+단순 폼 검증은 network 경계를 만들지 않고 함수를 주입해 작게 테스트할 수 있습니다. API 연동 테스트는 실제 Backend 환경을 우선하며 Mock 결과만으로 통합 검증을 완료했다고 판단하지 않습니다.
 
 ## 실제 프로젝트에서 반드시 교체할 곳
 
@@ -347,4 +280,4 @@ API 모듈을 `vi.mock`으로 교체하지 않으므로 `request`, HTTP 응답 �
 | 성공·오류 문구 | 문서의 한국어 문구 | UX writing 기준 |
 | route | `/profile` | 실제 App Router 구조 |
 
-교체 후에는 응답 검증 테스트 데이터, MSW fixture·handler, mutation 요청 검증과 화면 문구 테스트를 같은 작업에서 갱신합니다.
+계약 적용 후에는 응답 검증 테스트 데이터, mutation 요청 검증과 화면 문구 테스트를 같은 작업에서 갱신합니다. 별도 Mock을 사용하기로 합의한 경우에만 해당 fixture와 handler도 함께 관리합니다.

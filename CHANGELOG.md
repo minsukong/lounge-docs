@@ -13,6 +13,58 @@
 
 ## 2026-08-26
 
+### Chrome 네트워크 검증 절차와 Front-end Mock 사용 기준 보완
+
+#### 변경 목적
+
+- Backend가 별도의 지연·오류 재현 환경을 제공한다는 보장이 없는 프로젝트 여건에서도 Front-end가 느린 네트워크와 Offline UX를 직접 검증할 수 있게 했습니다.
+- API 계약을 Front-end가 선행 정의하지 않는 원칙은 유지하면서, 계약 확정 후 MSW 같은 도구를 Front-end 테스트 범위에서 현실적으로 선택할 수 있도록 기준을 조정했습니다.
+
+#### 주요 변경
+
+- 성능 가이드에 Chrome 개발자 도구의 `Network`, `Disable cache`, 저속 Profile과 `Offline` 전환을 이용한 단계별 검증 절차를 추가했습니다.
+- 저속 전송 환경은 Chrome Network Throttling으로, 특정 API의 처리 지연·오류·응답 순서 역전은 실제 환경 또는 승인된 계약 기반의 Front-end 재현 도구로 확인하도록 역할을 구분했습니다.
+- Backend의 테스트 환경 제공이나 Mock 도구 승인 자체를 필수 전제로 두지 않고, Front-end 책임자 또는 프로젝트 담당자와 사용 범위·관리 책임·폐기 조건을 정한 뒤 Backend에 공유하도록 변경했습니다.
+- Root·Front-end 지침, AI 요약, 성장·테스트 가이드와 API Mock 판단 문서의 관련 표현을 같은 기준으로 맞췄습니다.
+
+#### 유지한 제한
+
+- 기획과 Backend API 계약 확정 전에는 endpoint, method, status, 요청·응답 필드, parser, fixture와 handler를 만들지 않습니다.
+- MSW와 기타 Mock은 실제 Backend 계약 준수, 인증, CORS, 데이터 정합성과 운영 네트워크 검증을 대신하지 않습니다.
+
+#### 검증
+
+- Markdown과 HTML의 Chrome 검증 절차, Mock 적용 조건과 관련 문서 표현을 확인했습니다.
+- 계약 확정 전 Mock 금지와 Swagger/OpenAPI 미가정 원칙이 유지되는지 확인했습니다.
+
+### API 계약 확정 전 선행 구현 제한과 Mock 기준 조정
+
+#### 변경 목적
+
+- 기획과 Backend API 계약이 확정되지 않은 현재 단계에서 Front-end가 endpoint, 응답 구조와 Mock 계약을 먼저 만드는 것으로 해석될 수 있는 기준을 제거했습니다.
+- Backend가 제공할 Swagger 또는 OpenAPI를 미리 가정하지 않고, 실제로 전달되고 승인된 계약과 개발 환경을 기준으로 구현하도록 책임을 명확히 했습니다.
+- 네트워크 지연 대응 원칙은 유지하되 재현 도구와 API 계약은 Front-end가 단독으로 결정하지 않게 했습니다.
+
+#### 주요 변경
+
+- Root와 Front-end AI 지침에 계약 확정 전 API 함수, parser, fixture, handler와 Mock을 구현하지 않는 원칙을 추가했습니다.
+- API 요청 기반 문서는 Backend가 승인한 계약과 개발 환경이 전달된 뒤 적용하는 참고 구현으로 변경했습니다.
+- API Mock 문서에서 선행 MSW 구현 코드와 임시 endpoint·fixture를 제거하고, 실제 Backend 환경 우선과 양측 담당자 합의를 확인하는 도입 판단 기준으로 교체했습니다.
+- 성능 가이드와 AI 요약에서 API 지연·오류 재현은 Backend 개발·테스트 환경을 우선하고 Mock 도구는 합의 후 선택하도록 변경했습니다.
+- 공통 소스 진입점·브리핑·카탈로그·테스트, Front-End·Test 가이드와 성장 과정의 Mock 선행 개발 내용을 같은 기준으로 수정했습니다.
+- API 미확정 단계에서는 사용자 흐름, 필요한 화면 상태, Backend 확인 질문과 `TBD`만 정리하고 구현은 계약 승인 후 시작하도록 통일했습니다.
+
+#### 미확정 상태 유지
+
+- API 문서 형식, endpoint, method, status, 요청·응답 필드, 인증, 오류, timeout과 재시도 정책을 확정하지 않았습니다.
+- API Mock 도구, 대상 상태, 기준 데이터, 관리 책임과 폐기 시점은 실제 필요가 확인되고 Front-end·Backend 담당자가 합의한 뒤 결정합니다.
+
+#### 검증
+
+- MSW가 프로젝트 기본 도구이거나 Backend 미완성 상태의 우회 구현처럼 남아 있는지 관련 사람용·AI용 문서를 확인했습니다.
+- Markdown과 HTML의 계약 우선순위, Mock 도입 조건과 주요 내부 링크를 확인했습니다.
+- 과거 변경 기록은 당시 작업 이력으로 유지하고 이번 변경에서 현재 적용 기준을 명시했습니다.
+
 ### Front-End 네트워크 지연 대응 및 성능 검증 가이드 초안 추가
 
 #### 변경 목적
@@ -28,7 +80,7 @@
 - Skeleton, Spinner, Progress와 Toast는 기존 shadcn/ui 및 프로젝트 컴포넌트를 우선 사용하고 목적에 따라 선택하도록 했습니다.
 - Timeout 값과 재시도 정책은 shadcn/ui가 아닌 API·Backend·제품 UX 계약에서 결정하도록 책임을 분리했습니다.
 - 요청 취소, 응답 순서 역전, 중복 제출, 사용자 입력 보존과 연결 복구 기준을 추가했습니다.
-- Network Throttling, MSW 응답 지연과 연결 중단 테스트의 목적을 구분했습니다.
+- Network Throttling, Backend가 제공하거나 합의한 지연 환경과 연결 중단 테스트의 목적을 구분했습니다.
 - Core Web Vitals, 전송량과 Bundle 확인은 네트워크 지연 대응 이후의 성능 회귀 검증으로 연결했습니다.
 - Front-end AI 진입점, 참고 소스 README, UI·품질·공통 소스 요약에서 API·Query·비동기 UI와 성능 작업 시 새 AI 문서를 선택하도록 연결했습니다.
 
@@ -39,7 +91,7 @@
 
 #### 검증
 
-- 기존 Front-End 개발 가이드, API 요청 기반, API Mock과 테스트 문서의 확정 원칙에 모순되지 않는지 확인했습니다.
+- 기존 Front-End 개발 가이드, API 요청 기반, API Mock 도입 판단과 테스트 문서의 확정 원칙에 모순되지 않는지 확인했습니다.
 - shadcn/ui는 로딩·진행·피드백 UI 기준으로만 연결하고 통신 정책을 대신하지 않도록 구분했습니다.
 - AI 요약의 Markdown·HTML 연결, 진입 문서의 내부 링크와 Mermaid 작업 분기를 확인했습니다.
 - 사람용 상세 가이드는 HTML 적용 전 단계이므로 `performance_guide/index.html`과 공통 가이드 목록 링크를 추가하지 않았습니다.

@@ -650,10 +650,10 @@ flowchart TD
           요구와 운영 환경이 확인된 후 결정합니다.
         </p>
         <p>
-          API 계약 확정 전 공통 요청 함수와 응답 검증 경계는
+          Backend가 승인한 API 계약과 개발 환경이 제공된 뒤 공통 요청 함수와 응답 검증 경계는
           <a href="./../reference/front-end/docs/common-source/network.html"
             >API 요청 기반 구현 예시</a
-          >를 참고하되, 예시의 경로와 응답 필드를 제품 계약으로 사용하지 않습니다.
+          >를 참고해 구현합니다. 계약 확정 전에는 endpoint, method, status, 요청·응답 필드와 parser를 선행 작성하지 않습니다.
         </p>
         <h3>7.2 Zustand</h3>
         <ul>
@@ -991,15 +991,17 @@ flowchart TD
           <li>Storybook은 기본 도구에 포함하지 않습니다.</li>
         </ul>
         <p>도구 후보는 단위·컴포넌트 테스트에
-          Vitest와 React Testing Library, E2E에 Playwright입니다. Backend가
-          준비되기 전 화면 개발이나 API 경계 테스트에 Mock이 필요하면 MSW를
-          선택적으로 사용합니다.
+          Vitest와 React Testing Library, E2E에 Playwright입니다. API Mock은
+          기획과 Backend 계약이 확정된 뒤 사용할 수 있는 실제 환경에서 필요한 상태를
+          재현하기 어렵다면 Front-end 책임자 또는 프로젝트 담당자와 테스트 범위와
+          관리 책임을 정한 뒤 검토합니다.
         </p>
         <p>
-          MSW 도입 조건과 개발·테스트 연결은
+          Mock 도구 도입 판단은
           <a href="./../reference/front-end/docs/common-source/api-mocking.html"
-            >API Mock 구현 예시</a
-          >를 확인합니다. 예시의 API 경로와 fixture는 실제 계약 확정 후 교체합니다.
+            >API Mock 도입 판단 기준</a
+          >을 확인합니다. Swagger 또는 OpenAPI 제공을 미리 가정하거나 Front-end가
+          endpoint와 fixture를 먼저 만들지 않습니다.
         </p>
         <p>
           <code class="badge-tbd">TBD</code> 테스트 도구의 최종 조합, E2E 실행 환경, API

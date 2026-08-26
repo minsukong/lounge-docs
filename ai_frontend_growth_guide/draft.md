@@ -10,7 +10,7 @@
 
 외부 입력, 인증·권한, 개인정보, Client 저장소, CSP, Bridge와 의존성 보안의 상세 기준은 [Front-End 보안과 개인정보 가이드](../security_guide/index.html)를 따릅니다.
 
-API가 확정되기 전의 요청 계층, 세션·회원 경계와 Mock 기반 개발은 각각 [API 요청 계층](../reference/front-end/docs/common-source/network.html), [세션과 회원 경계](../reference/front-end/docs/common-source/session.html), [API Mock](../reference/front-end/docs/common-source/api-mocking.html) 가이드를 기준으로 학습합니다. 이 문서들의 URL, 필드와 인증 예시는 확정 계약이 아니라 교체 가능한 참고 구현입니다.
+API 요청 계층과 세션·회원 경계는 기획 흐름과 Backend API 계약이 확정된 뒤 각각 [API 요청 계층](../reference/front-end/docs/common-source/network.html), [세션과 회원 경계](../reference/front-end/docs/common-source/session.html)를 기준으로 학습합니다. 계약 확정 전에는 Backend 확인 질문과 `TBD`만 정리하며, [API Mock](../reference/front-end/docs/common-source/api-mocking.html)은 실제 환경 우선과 양측 담당자 합의를 전제로 도입 여부만 판단합니다.
 
 > AI는 구현 속도를 높이는 협업 도구입니다. AI를 많이 사용하는 것 자체는 문제가 아니지만, 확인되지 않은 제품 계약과 기술 결정을 AI의 추측으로 확정하지 않습니다.
 
@@ -204,20 +204,19 @@ AI가 만든 화면은 의미 있는 HTML, Label, 키보드, Focus, 접근 가�
 
 AI에게 오류를 바로 수정하도록 요청하기 전에 원인, 영향을 받는 범위와 가능한 해결 방법을 설명하도록 합니다. 수정 후에는 같은 문제가 다시 발생하지 않도록 필요한 테스트 또는 검수 항목을 남깁니다.
 
-Parser는 입력과 출력을 직접 검증하고, 컴포넌트는 사용자 행동과 보이는 결과를 검증합니다. API 함수 자체를 Mock하면 요청 경계를 우회할 수 있으므로 URL, Method, Parser와 오류 변환을 확인할 때는 MSW 같은 네트워크 경계 Mock을 사용합니다. 자동 Test가 실제 Layout, Focus, WebView와 배포 구성을 보장한다고 가정하지 않습니다.
+Parser는 승인된 계약의 입력과 출력을 직접 검증하고, 컴포넌트는 사용자 행동과 보이는 결과를 검증합니다. 계약 확정 후 사용할 수 있는 Backend 환경에서 필요한 상태를 재현하기 어렵다면 Front-end 책임자 또는 프로젝트 담당자와 범위·관리 책임을 정한 Mock 도구를 테스트에 사용할 수 있습니다. 자동 Test가 실제 API, Layout, Focus, WebView와 배포 구성을 보장한다고 가정하지 않습니다.
 
-### 6.6 API 미확정 상태에서의 기능 개발
+### 6.6 API 미확정 상태에서의 진행 기준
 
-API가 확정되지 않았어도 현재 확인된 사용자 행동을 기준으로 요청 함수, Runtime Parser, Fixture와 Mock Handler를 교체 가능한 경계에 둡니다. 화면은 동일한 Query와 API 함수를 사용하고 Mock 활성화 여부만 달라야 합니다.
+기획 흐름과 Backend API 계약이 확정되지 않았다면 요청 함수, Runtime Parser, Fixture와 Mock Handler를 구현하지 않습니다. Swagger 또는 OpenAPI 제공을 미리 가정하지 않고, 현재 단계에서는 다음 Backend 확인 질문과 화면 상태 목록만 정리합니다.
 
-- `204`, 빈 본문, JSON 오류, Timeout, 취소와 응답 검증 실패를 구분합니다.
-- 세션 확인 중, 비로그인, 로그인과 확인 실패를 구분합니다.
-- 세션에는 최소 사용자 정보만 두고 회원 상세 데이터는 별도 Query로 관리합니다.
-- Mutation 뒤 무효화, Cache 직접 갱신과 낙관적 갱신의 근거를 결정합니다.
-- 로그아웃과 사용자 전환 뒤 이전 사용자의 Cache와 Persist 상태를 정리합니다.
-- API 확정 후 Path·Method·Status·Parser·Fixture·Handler를 함께 갱신합니다.
+- 사용자 행동과 필요한 화면 상태가 무엇인지 확인합니다.
+- Backend가 제공할 기능, 권한과 데이터 소유 경계를 질문합니다.
+- endpoint, method, status, 요청·응답 필드, 인증과 오류 계약을 `TBD`로 남깁니다.
+- 계약이 승인된 뒤 Path·Method·Status에 맞춰 API 함수와 Parser를 처음 작성합니다.
+- 실제 환경에서 재현하기 어려운 테스트 상태가 확인되면 Backend와 Mock 도구 사용 여부를 협의합니다.
 
-Mock은 Backend 명세가 아닙니다. Mock 전용 필드나 문구가 화면까지 퍼져 실제 계약 확정 후 UI를 다시 작성해야 한다면 경계가 잘못된 것입니다.
+Backend가 없다는 이유만으로 Front-end가 임시 API 계약과 Mock 서버를 먼저 만들지 않습니다.
 
 ### 6.7 Front-End 보안과 개인정보
 
@@ -367,7 +366,7 @@ Bridge 계약이 확정되기 전에는 전역 객체명이나 메시지 필드�
 - 요구와 디자인에서 사용자 행동, 상태와 미확정 항목을 추출합니다.
 - 기존 가이드와 소스에서 재사용할 코드와 변경 경계를 찾습니다.
 - AI가 제안한 상태 소유자, 타입, Client 경계와 추상화의 필요성을 검토합니다.
-- API 미확정 상태에서는 Mock으로 개발하고 확정 뒤 Parser·Fixture·Handler를 함께 교체합니다.
+- API 미확정 상태에서는 확인 질문과 `TBD`만 정리하고 승인된 계약이 전달된 뒤 API 함수와 Parser를 구현합니다.
 - 세션·회원·서버·폼·UI 상태의 수명과 사용자 전환 시 정리 범위를 추적합니다.
 - Typecheck, Lint, Test, Build와 실제 화면·Network·WebView 검증의 보장 범위를 구분합니다.
 - AI가 만든 Diff에서 요청 범위 초과, 근거 없는 가정, 보안상 위험과 회귀 가능성을 발견합니다.

@@ -2,7 +2,7 @@
 
 ## 적용 목적
 
-인증 API와 회원 정보가 확정되기 전에도 화면이 로그인 확인 중, 비로그인과 로그인 상태를 일관되게 처리하도록 프론트엔드 경계를 제공합니다. 세션은 현재 사용자를 식별하는 최소 상태이고, 회원 프로필과 권한 전체를 담는 전역 객체가 아닙니다.
+이 문서는 인증 API와 회원 정보에 관한 기획 및 Backend 계약이 승인된 뒤, 화면이 로그인 확인 중·비로그인·로그인 상태를 일관되게 처리하도록 경계를 적용하는 참고 예시입니다. 계약 확정 전에는 세션 path, method, 응답 필드, parser와 query를 구현하지 않고 질문과 `TBD`만 기록합니다. 세션은 현재 사용자를 식별하는 최소 상태이고, 회원 프로필과 권한 전체를 담는 전역 객체가 아닙니다.
 
 이 문서는 다음 내용을 확정하지 않습니다.
 
@@ -41,7 +41,7 @@ export type Session =
   | { status: "authenticated"; user: SessionUser }
 ```
 
-`loading`은 서버 데이터가 아니라 Query의 요청 상태로 표현합니다. `SessionUser` 필드는 참고 구현을 위한 최소 예시이며 실제 식별자와 표시 정보가 확정되면 parser, fixture와 함께 교체합니다.
+`loading`은 서버 데이터가 아니라 Query의 요청 상태로 표현합니다. `SessionUser` 필드는 참고 구조일 뿐이며 Backend가 승인한 실제 식별자와 표시 정보가 전달된 뒤 model과 parser를 작성합니다.
 
 세션에 회원 프로필의 모든 입력값, 알림 설정과 업무 데이터를 추가하지 않습니다. 로그인 여부와 관계없이 별도로 갱신되는 데이터는 회원 query에서 관리합니다.
 
@@ -82,7 +82,7 @@ export function parseSession(value: unknown): Session {
 }
 ```
 
-응답 검증은 실제 세션 계약이 정해지면 교체합니다. `response.json() as Session`처럼 외부 값을 바로 단언하지 않습니다.
+응답 검증은 Backend가 승인한 실제 세션 계약을 기준으로 작성합니다. 계약 확정 전에는 예시 parser를 실제 코드에 선행 구현하지 않으며, 확정 후에도 `response.json() as Session`처럼 외부 값을 바로 단언하지 않습니다.
 
 ## 세션 API
 
@@ -179,7 +179,7 @@ export function AccountSummary() {
 - 회원: 프로필 조회·수정, 약관 상태, 설정과 실제 업무 데이터
 - 권한: route와 행동을 허용하는 제품 정책
 
-회원 API가 정해지면 `features/member/api`, `model`, `queries`, `components`에서 시작합니다. 세션 사용자와 회원 상세 응답이 실제로 같은 계약일 때만 type과 parser를 공유합니다.
+Backend가 승인한 회원 API 계약과 개발 환경이 전달되면 `features/member/api`, `model`, `queries`, `components`에서 시작합니다. 세션 사용자와 회원 상세 응답이 실제로 같은 계약일 때만 type과 parser를 공유합니다.
 
 ## 저장 위치 기준
 
@@ -198,3 +198,4 @@ export function AccountSummary() {
 - logout 뒤 이전 사용자 cache가 남지 않습니다.
 - `401`과 `403`을 같은 방식으로 처리하지 않습니다.
 - 인증 저장 방식과 route를 확정된 값처럼 작성하지 않습니다.
+- Swagger/OpenAPI를 포함한 API 전달 형식을 미리 가정하지 않습니다.
