@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="AI가 만든 Front-end 기능을 외부 입력, 인증·권한, 개인정보, Client 저장소, WebView와 의존성 관점에서 검토합니다." />
+    <title>13. Front-End 보안과 개인정보</title>
+    <link rel="stylesheet" href="./../assets/style/presentation-theme.css" />
+  </head>
+  <body>
+    <header>
+      <div class="type">FRONT-END EDUCATION · STEP 13</div>
+      <h1>13. Front-End 보안과 개인정보</h1>
+      <p>Client를 신뢰하지 않고 기능의 입력, 출력, 저장과 전달 경계를 끝까지 추적합니다.</p>
+    </header>
+    <main>
+      <section>
+        <h2 class="bx-active">1. 학습 목표</h2>
+        <p><a href="./12-feature-integration-and-review.html">이전: 기능 통합과 리뷰</a> · <a href="./curriculum.html">교육 과정</a> · <a href="../security_guide/index.html">보안 기준 원본</a></p>
+        <ul>
+          <li>Browser와 WebView Client가 신뢰 경계가 아닌 이유를 설명합니다.</li>
+          <li>외부 입력에서 화면, URL, 저장소, 로그와 Bridge까지 데이터 흐름을 추적합니다.</li>
+          <li>AI가 만든 코드의 XSS, 권한 오해, Secret·개인정보 노출과 사용자 전환 위험을 발견합니다.</li>
+          <li>Front-end가 처리할 항목과 Backend·App·배포 계약이 필요한 항목을 구분합니다.</li>
+        </ul>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">2. 반드시 이해할 보안 경계</h2>
+        <table>
+          <thead><tr><th scope="col">경계</th><th scope="col">개발자가 판단할 내용</th></tr></thead>
+          <tbody>
+            <tr><td>입력</td><td>API, URL, Storage, 외부 SDK와 Bridge 응답을 어디에서 Runtime 검증하는가?</td></tr>
+            <tr><td>출력</td><td>React Escape를 유지하는가? HTML, URL, Script와 CSS의 위험한 실행 경계가 있는가?</td></tr>
+            <tr><td>인증·권한</td><td>UI 제한과 Backend 최종 검증을 구분하는가? <code>401</code>과 <code>403</code>의 의미를 단정하지 않는가?</td></tr>
+            <tr><td>저장</td><td>자격 증명, 개인정보, Query Cache와 Persist 상태의 수명과 삭제 조건은 무엇인가?</td></tr>
+            <tr><td>전달</td><td>URL, Network, Redirect, Deep Link, Bridge, 분석과 로그에 어떤 값이 포함되는가?</td></tr>
+            <tr><td>실행 환경</td><td>Client Bundle에 공개되는 환경값, CSP, 외부 Script와 허용 Origin은 무엇인가?</td></tr>
+            <tr><td>공급망</td><td>새 package가 필요한가? Lock File, 실제 설치·배포 Version, 공식 보안 공지와 업데이트 책임을 확인했는가?</td></tr>
+          </tbody>
+        </table>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">3. 흔한 잘못된 판단</h2>
+        <ul>
+          <li>TypeScript 타입이 있으므로 API와 Bridge 응답도 안전하다고 판단합니다.</li>
+          <li>React가 기본 Escape하므로 <code>dangerouslySetInnerHTML</code>과 동적 URL도 자동으로 안전하다고 생각합니다.</li>
+          <li>Menu와 Button을 숨겼으므로 권한이 통제됐다고 표현합니다.</li>
+          <li>환경변수 이름에 Secret이 들어가면 Client에서도 보호된다고 생각합니다.</li>
+          <li>Cookie의 <code>SameSite</code>만으로 모든 CSRF가 해결됐다고 단정합니다.</li>
+          <li>Client의 MIME·확장자 검사만으로 업로드 파일이 안전하다고 판단합니다.</li>
+          <li>CSP를 추가했으므로 XSS 원인을 수정하지 않아도 된다고 생각합니다.</li>
+          <li><code>npm audit fix --force</code>를 검토 없이 실행해 취약점과 Breaking Change가 모두 해결됐다고 판단합니다.</li>
+          <li>프로젝트 생성 때 최신 Version을 설치했으므로 이후 React·Next.js 보안 공지를 확인하지 않아도 된다고 생각합니다.</li>
+          <li>WAF, 입력 검증이나 CSP를 적용했으므로 취약한 Framework package를 업데이트하지 않아도 된다고 판단합니다.</li>
+        </ul>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">4. 기능 단위 보안 리뷰</h2>
+        <ol>
+          <li>기능이 받는 값을 API, 사용자 입력, URL, Storage, SDK와 Bridge로 나눕니다.</li>
+          <li>각 값이 검증되고 변환되는 파일과 최종 출력·저장·전달 위치를 연결합니다.</li>
+          <li>인증, 권한, CSRF, CORS, Cookie와 세션 정책 중 확인된 계약만 표시합니다.</li>
+          <li>사용자 전환, 오류, 취소, 중복 실행과 오래된 응답에서 남는 데이터를 확인합니다.</li>
+          <li>Client Bundle, Source Map, Network, 로그와 분석 도구에서 노출되는 값을 확인합니다.</li>
+          <li>React·Next.js 공식 보안 공지와 Lock File, 실제 설치·배포 Version을 비교하고 고위험 취약점의 Patch·재배포 여부를 확인합니다.</li>
+          <li>자동 Test와 실제 Browser·WebView·Backend 통합 검증의 범위를 구분합니다.</li>
+        </ol>
+        <pre class="hljs"><code data-language="text">이 기능을 Front-End 보안 기준으로 검토해줘.
+
+먼저 외부 입력 → 검증 → 화면·저장·전달의 데이터 흐름을 작성해줘.
+그다음 XSS, URL·Redirect, 인증·권한, Cookie·CSRF, Client 저장소,
+환경변수·Secret, 로그·개인정보, Bridge·파일과 새 의존성을 검토해줘.
+
+확인한 파일과 설정을 근거로 작성하고 Backend·App·배포 계약은
+추측하지 마. 수정은 요청하지 않았으므로 문제와 확인 방법만 제시해줘.</code></pre>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">5. 통합 실습</h2>
+        <p>12단계에서 완성한 기능을 그대로 사용해 보안 리뷰를 수행합니다. 새 기능을 만들기보다 이미 구현한 세션·회원 조회·수정 또는 Bridge 기능의 데이터 흐름을 추적합니다.</p>
+        <ul>
+          <li>외부 응답 Parser와 잘못된 응답 테스트</li>
+          <li>권한 없는 사용자와 다른 사용자 식별자 처리</li>
+          <li>로그아웃 후 Cache·Persist·폼 입력 정리</li>
+          <li>민감정보가 URL, 로그, Mock Fixture와 오류 화면에 없는지 확인</li>
+          <li>Redirect·외부 URL 또는 Bridge Method의 허용 범위 확인</li>
+          <li>확인하지 못한 Backend·App·CSP·Cookie 계약 목록 작성</li>
+          <li>React2Shell을 사례로 공식 공지 확인, 영향 Version 판별, Patch·재배포와 자격 증명 교체 판단 연습</li>
+        </ul>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">6. 과정 완료 기준</h2>
+        <ul>
+          <li>신뢰하지 않는 입력과 위험한 출력 지점을 코드에서 찾을 수 있습니다.</li>
+          <li>인증, 권한과 UI 제한의 책임을 구분할 수 있습니다.</li>
+          <li>자격 증명과 개인정보의 저장·전달·삭제 경로를 설명할 수 있습니다.</li>
+          <li>Client 검증, 자동 Test와 서버·기기 통합 검증의 한계를 설명할 수 있습니다.</li>
+          <li>React·Next.js의 공식 보안 공지를 기준으로 실제 설치·배포 Version의 영향 여부와 필요한 대응을 판단할 수 있습니다.</li>
+          <li>AI의 “안전하다”는 설명을 근거 없이 승인하지 않고 확인할 파일과 설정을 지정할 수 있습니다.</li>
+          <li>확인된 문제, 미확정 계약과 검증하지 못한 위험을 구분해 병합 여부를 판단할 수 있습니다.</li>
+        </ul>
+        <p><a href="./12-feature-integration-and-review.html">이전 단계</a> · <a href="./curriculum.html">교육 과정 다시 보기</a> · <a href="../security_guide/index.html">Front-End 보안 기준 확인</a></p>
+      </section>
+    </main>
+    <footer><p>13. Front-End 보안과 개인정보</p></footer>
+    <script src="./../assets/js/common.js"></script>
+  </body>
+</html>

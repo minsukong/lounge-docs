@@ -6,19 +6,78 @@
 
 - 새로운 변경 내역은 이 안내 바로 아래에 추가합니다.
 - 가장 최근 변경 내역이 위에 오도록 날짜 내림차순으로 정리합니다.
+- 같은 날짜의 변경은 날짜 제목을 반복하지 않고 하나의 날짜 아래에 작업별 수정 내역을 이어서 기록합니다.
 - 저장소를 옮겨도 기록을 유지할 수 있도록 commit hash와 저장소별 식별자는 작성하지 않습니다.
 - 변경한 파일 목록만 나열하지 않고 변경 목적, 주요 내용, 미확정 항목과 검증 결과를 함께 기록합니다.
 - 같은 작업에서 Markdown과 HTML을 함께 수정했다면 하나의 변경 항목으로 기록합니다.
 
-## 2026-08-26 — AI 협업 Front-end 성장 과정 실무 기준 보강
+## 2026-08-26
 
-### 변경 목적
+### React·Next.js Framework 보안 업데이트 원칙 보강
+
+#### 변경 목적
+
+- 프로젝트 생성 시 최신 안정 Version을 사용하더라도 개발·운영 중 발표되는 Framework 취약점에 계속 대응하도록 기준을 명확히 했습니다.
+- React2Shell 같은 개별 취약점의 오래된 Version 목록을 고정하지 않고 공식 보안 공지를 현재 판단 기준으로 사용하게 했습니다.
+
+#### 주요 변경
+
+- 보안 가이드에 React·Next.js 공식 공지 확인, 선언·설치·배포 Version 비교와 고위험 취약점 우선 대응 기준을 추가했습니다.
+- WAF, 입력 검증과 CSP가 취약 package의 공식 Patch를 대신할 수 없음을 명시했습니다.
+- 외부에 노출된 취약 Version은 Patch·재배포와 함께 로그, 영향 범위와 자격 증명 교체 필요성을 검토하도록 했습니다.
+- AI 보안 요약과 성장 가이드에 같은 판단 기준을 압축하고 React2Shell을 Framework 취약점 대응의 대표 사례로 연결했습니다.
+
+#### 검증
+
+- 사람용 Markdown·HTML, AI용 요약과 성장 가이드에 동일한 운영 원칙이 반영됐는지 확인했습니다.
+- 특정 과거 Patch Version을 고정하지 않고 React와 Next.js 공식 Security Advisories를 기준으로 연결했습니다.
+
+### Front-End 보안과 개인정보 기준 추가
+
+#### 변경 목적
+
+- 성장 가이드에 포함된 보안 학습 기준을 실제 구현과 리뷰에서 사용할 수 있는 전체 가이드 기준 원본으로 연결했습니다.
+- 사람용 상세 문서와 AI용 압축 지침을 분리하여 AI가 모든 문서를 읽지 않고도 보안 관련 작업에서 필요한 기준을 선택하게 했습니다.
+- 기존 Front-End, APP, Monorepo와 공통 소스 문서에 흩어진 보안 내용을 유지하면서 세부 판단의 단일 기준을 추가했습니다.
+
+#### 주요 변경
+
+- [`security_guide/index.html`](./security_guide/index.html)과 [`security_guide/draft.md`](./security_guide/draft.md)를 추가했습니다.
+  - Client 신뢰 경계, 외부 입력과 XSS, URL·Redirect, 인증·권한과 세션을 정리했습니다.
+  - Cookie·CSRF·CORS, 환경변수·Secret, Client 저장소, 개인정보와 로그 기준을 추가했습니다.
+  - CSP, 외부 리소스, WebView Bridge, 파일, 의존성과 공급망 검토 기준을 추가했습니다.
+  - 변경 위험별 검증, 사고 기록과 AI 보안 리뷰 요청·병합 체크리스트를 추가했습니다.
+- [`security.md`](./reference/front-end/docs/ai/security.md)와 [`security.html`](./reference/front-end/docs/ai/security.html)을 추가했습니다.
+  - AI가 보안 관련 작업 전에 확인할 필수 원칙과 위험 코드 패턴을 압축했습니다.
+  - 확인된 코드와 미확정 Backend·App·배포 계약을 분리해 보고하도록 했습니다.
+- [`13-frontend-security-and-privacy.html`](./ai_frontend_growth_guide/13-frontend-security-and-privacy.html)을 성장 과정에 추가했습니다.
+  - 12단계에서 완성한 기능을 대상으로 입력, 출력, 저장, 전달과 사용자 전환 경계를 추적합니다.
+  - 보안 용어 암기보다 AI의 구현에서 위험을 발견하고 병합 여부를 판단하는 것을 완료 기준으로 정의했습니다.
+- 성장 가이드의 원본·HTML·교육 과정과 12단계 이동 링크를 13단계에 연결했습니다.
+- Root README, Front-End·APP·Monorepo 가이드, Front-end AI 진입점·README·품질·공통 소스 요약에 보안 기준 링크를 추가했습니다.
+
+#### 미확정 상태 유지
+
+- 인증 제공자, Cookie 또는 token 방식, CSRF 구현, CSP Directive 값, CORS와 허용 Origin을 확정하지 않았습니다.
+- Redirect URI, 개인정보 분류·보존 기간, 파일 허용 형식과 외부 Script 목록을 실제 제품·배포 계약 전까지 교체 항목으로 유지했습니다.
+- Front-end 문서가 Backend 권한 검증, Native 보안 저장소와 조직의 보안 정책을 대신하지 않도록 책임을 구분했습니다.
+
+#### 검증
+
+- OWASP XSS·CSRF·Logging, MDN CSP·Cookie, Next.js 환경변수와 npm 보안 문서를 기준으로 핵심 원칙을 확인했습니다.
+- 신규·연결 HTML의 Section, Heading, Code Block과 닫는 태그 구조를 확인했습니다.
+- Markdown과 HTML의 내부 링크, 공통 자산 경로와 정적 코드 하이라이트를 확인했습니다.
+- Monorepo의 보안 링크가 환경·Secret 영역에 배치됐는지 확인했습니다.
+
+### AI 협업 Front-end 성장 과정 실무 기준 보강
+
+#### 변경 목적
 
 - 교육 문서를 기초 용어 소개가 아니라 AI와 함께 실제 Front-end 기능을 설계, 구현, 검증하고 병합할 수 있는 판단 기준으로 강화했습니다.
 - 새로 추가된 API 요청 계층, 세션·회원 경계와 API Mock 가이드를 성장 과정에 연결했습니다.
 - 쉬운 설명보다 실행 원리, 실패 조건, 상태 수명과 교체 경계를 정확히 이해하는 것을 과정 완료 기준으로 삼았습니다.
 
-### 주요 변경
+#### 주요 변경
 
 - [`draft.md`](./ai_frontend_growth_guide/draft.md)와 [`index.html`](./ai_frontend_growth_guide/index.html)
   - JavaScript 비동기 실행, Closure, 요청 취소와 자원 정리를 추가했습니다.
@@ -37,31 +96,31 @@
   - 통합 단계에 Mock 기반 개발에서 실제 API 계약으로 전환하는 과제와 완료 기준을 추가했습니다.
   - Bridge 예시가 검증 없이 Generic 반환 타입을 신뢰하지 않도록 `unknown` 경계로 수정했습니다.
 
-### 미확정 상태 유지
+#### 미확정 상태 유지
 
 - API Path, Method, 응답 필드, 인증 저장 방식, 세션 갱신과 Cache 정책을 새 기준에서 확정하지 않았습니다.
 - MSW와 공통 요청 구현은 실제 애플리케이션의 설치 package와 기존 구조를 확인한 뒤 적용하도록 유지했습니다.
 - Backend, App, 보안 정책과 개발 일정은 Front-end 교육 문서가 대신 결정하지 않습니다.
 
-### 검증
+#### 검증
 
 - 성장 과정의 모든 HTML에서 Section, Heading, Code Block과 닫는 태그 수를 확인했습니다.
 - 수정된 HTML의 내부 링크와 공통 자산 경로가 실제 파일로 연결되는지 확인했습니다.
 - `text`가 아닌 코드 블록에 정적 `hljs-*` 구문 강조가 유지되는지 확인했습니다.
 - 기존 `401 = 세션 만료` 단정과 검증되지 않은 Bridge Generic 반환 예시를 제거했습니다.
 
-## 2026-08-26 — Front-end 공통 소스와 AI 작업 기준 정비
+### Front-end 공통 소스와 AI 작업 기준 정비
 
 - 작업 기간: 2026-08-25 ~ 2026-08-26
 
-### 변경 목적
+#### 변경 목적
 
 - 기획, 디자인과 API가 확정되기 전에도 한 명의 Front-end 개발자가 공통 기반과 화면 개발을 준비할 수 있게 합니다.
 - API가 확정되지 않은 상태에서 endpoint, 인증 방식과 서버 응답을 임의로 확정하지 않습니다.
 - 사람용 상세 가이드와 AI용 요약·작업 진입점을 분리하고, AI가 작업과 관련된 문서만 선택해서 읽게 합니다.
 - 단일 파일이나 지정 폴더 리뷰가 전체 프로젝트 조사와 구현 계획으로 확대되지 않게 합니다.
 
-### 1. Cline 리뷰 범위 제한 규칙 추가
+#### 1. Cline 리뷰 범위 제한 규칙 추가
 
 [`review-scope.md`](./.clinerules/review-scope.md)를 추가했습니다.
 
@@ -71,7 +130,7 @@
 - 구현 요청이 없는 리뷰는 읽기 전용으로 처리합니다.
 - 근거가 확인된 결과만 제한된 개수로 답하고 일정·공수 추정을 만들지 않습니다.
 
-### 2. API 요청 기반 가이드 추가
+#### 2. API 요청 기반 가이드 추가
 
 [`network.md`](./reference/front-end/docs/common-source/network.md)와 [`network.html`](./reference/front-end/docs/common-source/network.html)을 추가했습니다.
 
@@ -81,7 +140,7 @@
 - 외부 응답을 기능별 parser로 검증하고 `response.json() as Type` 사용을 피하도록 했습니다.
 - API URL, 인증 전달 방식, timeout과 공통 응답 형식은 미확정 항목으로 남겼습니다.
 
-### 3. 세션과 회원 데이터 경계 가이드 추가
+#### 3. 세션과 회원 데이터 경계 가이드 추가
 
 [`session.md`](./reference/front-end/docs/common-source/session.md)와 [`session.html`](./reference/front-end/docs/common-source/session.html)을 추가했습니다.
 
@@ -92,7 +151,7 @@
 - 모든 `401`을 즉시 전역 로그아웃으로 처리하지 않고 실제 API 계약을 확인하도록 했습니다.
 - Cookie, token, 로그인 화면, 만료·갱신과 이동 route는 확정하지 않았습니다.
 
-### 4. MSW 기반 API Mock 가이드 추가
+#### 4. MSW 기반 API Mock 가이드 추가
 
 [`api-mocking.md`](./reference/front-end/docs/common-source/api-mocking.md)와 [`api-mocking.html`](./reference/front-end/docs/common-source/api-mocking.html)을 추가했습니다.
 
@@ -103,11 +162,11 @@
 - Mock endpoint와 fixture는 확정된 서버 계약이 아니라 교체 가능한 Front-end 가정임을 명시했습니다.
 - Production에서는 Mock이 시작되지 않도록 했습니다.
 
-### 5. 기존 공통 소스 가이드 연결 보강
+#### 5. 기존 공통 소스 가이드 연결 보강
 
 `reference/front-end/docs/common-source/`의 기존 Markdown과 HTML을 함께 갱신했습니다.
 
-#### 진입점과 준비 상태
+##### 진입점과 준비 상태
 
 - [`index.md`](./reference/front-end/docs/common-source/index.md) · [`index.html`](./reference/front-end/docs/common-source/index.html)
   - 신규 3개 문서의 역할, 적용 순서와 권장 파일 구조를 추가했습니다.
@@ -118,7 +177,7 @@
   - `HttpError`, `request`, 세션, MSW, 필요한 package와 도입 조건을 추가했습니다.
   - API 연결 정책, 세션 계약과 Mock 활성화 위치를 미확정 항목으로 구분했습니다.
 
-#### 구현 예시
+##### 구현 예시
 
 - [`typescript.md`](./reference/front-end/docs/common-source/typescript.md) · [`typescript.html`](./reference/front-end/docs/common-source/typescript.html)
   - 직접 `fetch`하는 예시를 공통 `request`와 기능별 parser를 사용하는 구조로 변경했습니다.
@@ -134,7 +193,7 @@
   - endpoint를 `/api/members/me`로 통일했습니다.
   - API 모듈 직접 Mock을 MSW handler 교체 방식으로 변경했습니다.
 
-### 6. 사람용·AI용 문서 진입점 동기화
+#### 6. 사람용·AI용 문서 진입점 동기화
 
 - [`README.md`](./README.md)
   - 실제 `reference/front-end/docs/` 경로를 명확하게 표시했습니다.
@@ -150,7 +209,7 @@
 
 `AGENTS.html`과 `docs/ai/common-source.html`, `docs/ai/quality.html`은 해당 Markdown을 동적으로 읽으므로 별도 본문을 복제하지 않았습니다.
 
-### 7. 상위 Front-end·APP·테스트 가이드 정합성 수정
+#### 7. 상위 Front-end·APP·테스트 가이드 정합성 수정
 
 - [`frontend_guide/index.html`](./frontend_guide/index.html)
   - 인증 계약 확정 전에는 세션 경계 가이드를 참고하도록 연결했습니다.
@@ -167,7 +226,7 @@
   - 기존 Cookie 기반 로그인 다이어그램과 저장 기준은 채택 시 참고할 조건부 예시로 변경했습니다.
   - `401`을 무조건 서버 세션 만료로 처리하지 않고 API 계약에 따라 의미를 구분하도록 했습니다.
 
-### 8. 이번 변경으로 통일한 기준
+#### 8. 이번 변경으로 통일한 기준
 
 - API path, method, 응답 필드와 오류 형식은 확정 전 예시로만 사용합니다.
 - 인증 방식과 저장 위치를 Front-end 문서에서 임의로 확정하지 않습니다.
@@ -178,7 +237,7 @@
 - 실제 애플리케이션이 생성된 뒤에는 설치된 package와 기존 source가 문서 예시보다 우선합니다.
 - 사람은 상세 HTML을 보고, AI는 `AGENTS.md`에서 시작해 현재 작업에 필요한 요약과 상세 문서만 읽습니다.
 
-### 9. 아직 확정하지 않은 항목
+#### 9. 아직 확정하지 않은 항목
 
 - 화면 목록, 사용자 흐름, 디자인과 반응형 세부 기준
 - API origin, endpoint, method, 요청·응답과 공통 오류 계약
@@ -190,7 +249,7 @@
 
 확정된 항목은 관련 가이드의 `TBD`, parser, fixture, handler와 예시 경로에 함께 반영합니다.
 
-### 10. 검증 결과
+#### 10. 검증 결과
 
 - 신규 3개 문서와 기존 공통 소스 문서의 Markdown·HTML 내용을 동기화했습니다.
 - HTML 코드 블록의 표시 코드와 Markdown 원문이 일치하는지 확인했습니다.
@@ -199,3 +258,5 @@
 - 수정한 HTML의 주요 Section, Table, Figure와 목록 태그 구조를 확인했습니다.
 - 확정형 Cookie·서버 세션 문장이 조건부 예시 밖에 남아 있지 않은지 확인했습니다.
 - 공통 소스 HTML을 Desktop 너비에서 확인했으며 새 문서 3종은 Mobile 너비에서도 확인했습니다.
+
+

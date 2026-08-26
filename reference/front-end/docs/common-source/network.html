@@ -162,6 +162,7 @@
 <section>
 <h2 class="bx-active">6. 인증과 기본 URL 연결 기준</h2>
 <p>인증 방식이 확정되기 전에는 localStorage token, 임의의 Authorization header 또는 Cookie 이름을 예제에 넣지 않습니다.</p>
+<p>Cookie·CSRF·CORS, Client Secret과 민감정보 전달의 상세 기준은 <a href="../../../../security_guide/index.html">Front-End 보안과 개인정보 가이드</a>를 함께 확인합니다.</p>
 <ul>
 <li>같은 origin의 Cookie 인증이면 브라우저 기본 동작을 우선하고 필요한 경우에만 <code>credentials</code>를 명시합니다.</li>
 <li>다른 origin을 호출하면 CORS와 Cookie 정책을 backend 계약과 함께 확인합니다.</li>

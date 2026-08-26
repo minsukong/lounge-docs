@@ -149,6 +149,8 @@ Query가 전달한 `AbortSignal`을 그대로 `fetch`까지 연결합니다. pat
 
 인증 방식이 확정되기 전에는 localStorage token, 임의의 Authorization header 또는 Cookie 이름을 예제에 넣지 않습니다.
 
+Cookie·CSRF·CORS, Client Secret과 민감정보 전달의 상세 기준은 [Front-End 보안과 개인정보 가이드](../../../../security_guide/index.html)를 함께 확인합니다.
+
 - 같은 origin의 Cookie 인증이면 브라우저 기본 동작을 우선하고 필요한 경우에만 `credentials`를 명시합니다.
 - 다른 origin을 호출하면 CORS와 Cookie 정책을 backend 계약과 함께 확인합니다.
 - token header가 필요하면 token을 직접 읽는 코드를 `request`에 넣지 않고, 인증 상태의 소유 위치가 확정된 뒤 header를 만드는 경계를 연결합니다.

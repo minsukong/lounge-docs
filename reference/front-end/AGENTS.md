@@ -34,6 +34,7 @@ AI는 작업을 시작할 때 이 `AGENTS.md`를 먼저 읽습니다. 이후 작
 | 디자인 토큰과 스타일 값 연결 | [Markdown](./docs/ai/design-tokens.md) · [HTML](./docs/ai/design-tokens.html) | 의미 기반 토큰, shadcn/ui 설정, Figma Variables와 Tokens Studio 기준 |
 | Figma 화면을 애플리케이션 코드로 구현 | [Markdown](./docs/ai/figma.md) · [HTML](./docs/ai/figma.html) | 구현 전 조사, 기존 코드 매핑, React 구현과 시각·품질 확인 흐름 |
 | TypeScript, Lint, Test와 Build 품질 확인 | [Markdown](./docs/ai/quality.md) · [HTML](./docs/ai/quality.html) | 검사 도구의 역할, 테스트 범위와 기본 검증 명령 |
+| 인증·권한, 외부 입력, 개인정보와 보안 검토 | [Markdown](./docs/ai/security.md) · [HTML](./docs/ai/security.html) | XSS, URL, Client 저장소, Cookie·CSRF, Secret, Bridge, 파일과 의존성 기준 |
 | 공통 설정, 컴포넌트와 유틸리티 가이드 작성 | [Markdown](./docs/ai/common-source.md) · [HTML](./docs/ai/common-source.html) | 공통 소스 상세 가이드 진입점, 작성 원칙과 실제 저장소 적용 기준 |
 | Ollama, Continue와 로컬 LLM 활용 | [Markdown](./docs/ai/local-llm.md) · [HTML](./docs/ai/local-llm.html) | 로컬 모델에 맡길 범위, 검토 방식과 외부 모델 전환 기준 |
 
@@ -64,12 +65,14 @@ flowchart TD
   C -->|"UI·컴포넌트·스타일"| U["docs/ai/ui.md + design-tokens.md"]
   C -->|"Figma 구현"| F["docs/ai/figma.md + ui.md + design-tokens.md"]
   C -->|"Lint·Test·품질"| Q["docs/ai/quality.md"]
+  C -->|"인증·권한·외부 입력·보안"| S["docs/ai/security.md"]
   C -->|"공통 소스·설정·유틸리티"| CS["docs/ai/common-source.md"]
   C -->|"Ollama·Continue·로컬 LLM"| L["docs/ai/local-llm.md"]
   P -->|"세부 기준이 필요할 때"| PH["frontend_guide/index.html + monorepo/index.html"]
   U -->|"세부 기준이 필요할 때"| UH["frontend_guide/index.html + UI 상세 가이드"]
   F -->|"세부 기준이 필요할 때"| FH["react_code_exports.html + design_tokens.html"]
   Q -->|"세부 기준이 필요할 때"| QH["lint_guide/index.html + test_guide/index.html"]
+  S -->|"세부 기준이 필요할 때"| SH["security_guide/index.html + 실제 인증·배포 설정"]
   CS --> CSR{"apps/app-webview가 존재하는가?"}
   CSR -->|"예"| CSS["기존 소스와 설치 package 확인"]
   CSR -->|"아니오"| CSH["docs/common-source 실전 가이드 확인"]
@@ -84,6 +87,7 @@ flowchart TD
 - 프로젝트 구조와 공통 기준: [Front-End 개발 가이드](../../frontend_guide/index.html), [Front-End Monorepo 공통 기준](../../monorepo/index.html)
 - UI와 Figma 구현: [React Code Exports 가이드](../../ui_guide/react_code_exports.html), [디자인 토큰 가이드](../../ui_guide/design_tokens.html)
 - 품질 확인: [Lint 가이드](../../lint_guide/index.html), [Test 가이드](../../test_guide/index.html)
+- 보안과 개인정보: [Front-End 보안과 개인정보 가이드](../../security_guide/index.html)
 - 공통 소스 구현: [공통 소스 가이드](./docs/common-source/index.md), [API 요청 기반](./docs/common-source/network.md), [세션 경계](./docs/common-source/session.md), [API Mock](./docs/common-source/api-mocking.md), [테스트 공통 소스](./docs/common-source/test.md), [통합 사용 예시](./docs/common-source/recipes.md), [공통 소스 카탈로그](./docs/common-source/catalog.md)
 
 ### 공통 소스 구현 문서
@@ -114,6 +118,7 @@ docs/
 │  ├─ design-tokens.md  # 디자인 토큰 및 스타일 기준
 │  ├─ figma.md          # Figma URL 및 디자인 구현 작업
 │  ├─ quality.md        # Lint, Test 및 품질 확인
+│  ├─ security.md       # 인증·권한, 외부 입력, 개인정보 및 보안 검토
 │  ├─ common-source.md  # 공통 소스 가이드 작업 진입점
 │  └─ local-llm.md      # Ollama, Continue 및 로컬 LLM 작업
 └─ common-source/
@@ -132,6 +137,7 @@ docs/
 
 - UI 작업에서는 `docs/ai/ui.md`와 `docs/ai/design-tokens.md`를 함께 읽습니다.
 - Figma 구현 작업에서는 `docs/ai/figma.md`, `docs/ai/ui.md`, `docs/ai/design-tokens.md`를 함께 읽습니다.
+- 인증·권한, 외부 HTML·URL, 개인정보, Client 저장소, Bridge, 파일 또는 새 의존성이 포함된 작업에서는 `docs/ai/security.md`를 함께 읽습니다.
 - 공통 소스 작업에서는 `docs/ai/common-source.md`를 먼저 읽고 작업 영역에 해당하는 `docs/common-source/` 상세 가이드와 카탈로그를 확인합니다.
 - `apps/app-webview`가 존재하면 기존 소스와 설치 package를 먼저 조사합니다. 아직 존재하지 않으면 문서의 참고 구현과 교체 지점을 기준으로 가이드를 작성하며, 실제 적용이나 검증이 끝난 것처럼 표현하지 않습니다.
 

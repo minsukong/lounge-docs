@@ -8,6 +8,8 @@
 
 구체적인 기술과 구현 기준은 [Front-End 개발 가이드](../frontend_guide/index.html)를 따릅니다. TypeScript 작성 기준과 테스트 범위는 각각 [TypeScript 가이드](../typescript_guide/index.html)와 [테스트 가이드](../test_guide/index.html)를 함께 확인합니다.
 
+외부 입력, 인증·권한, 개인정보, Client 저장소, CSP, Bridge와 의존성 보안의 상세 기준은 [Front-End 보안과 개인정보 가이드](../security_guide/index.html)를 따릅니다.
+
 API가 확정되기 전의 요청 계층, 세션·회원 경계와 Mock 기반 개발은 각각 [API 요청 계층](../reference/front-end/docs/common-source/network.html), [세션과 회원 경계](../reference/front-end/docs/common-source/session.html), [API Mock](../reference/front-end/docs/common-source/api-mocking.html) 가이드를 기준으로 학습합니다. 이 문서들의 URL, 필드와 인증 예시는 확정 계약이 아니라 교체 가능한 참고 구현입니다.
 
 > AI는 구현 속도를 높이는 협업 도구입니다. AI를 많이 사용하는 것 자체는 문제가 아니지만, 확인되지 않은 제품 계약과 기술 결정을 AI의 추측으로 확정하지 않습니다.
@@ -216,6 +218,20 @@ API가 확정되지 않았어도 현재 확인된 사용자 행동을 기준으�
 - API 확정 후 Path·Method·Status·Parser·Fixture·Handler를 함께 갱신합니다.
 
 Mock은 Backend 명세가 아닙니다. Mock 전용 필드나 문구가 화면까지 퍼져 실제 계약 확정 후 UI를 다시 작성해야 한다면 경계가 잘못된 것입니다.
+
+### 6.7 Front-End 보안과 개인정보
+
+보안은 별도 담당자가 마지막에 확인하는 부가 작업이 아니라 기능의 입력, 출력, 저장과 전달 경계를 설계하는 기준입니다.
+
+- API, URL, Storage, 외부 SDK와 Bridge 응답을 신뢰하지 않습니다.
+- React의 기본 Escape를 유지하고 HTML·URL·Script 실행 경계를 검토합니다.
+- UI 제한과 Backend의 인증·권한 최종 검증을 구분합니다.
+- 자격 증명과 개인정보가 Client Bundle, URL, 저장소, Bridge, 로그와 분석 도구에 남지 않게 합니다.
+- Cookie 인증의 CSRF·CORS·SameSite와 CSP 실제 값은 Backend·배포 계약으로 확인합니다.
+- Client 파일 검증과 Native 검증이 Backend 검증을 대신하지 않는다는 점을 설명할 수 있어야 합니다.
+- 새 package의 필요성, Lock File, Audit 결과와 업데이트 책임을 확인합니다.
+
+기능 통합이 끝나면 [13단계 Front-End 보안과 개인정보](./13-frontend-security-and-privacy.html)에서 동일 기능의 데이터 흐름과 미확정 보안 계약을 검토합니다.
 
 ## 7. AI 요청과 검토 기준
 

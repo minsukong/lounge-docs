@@ -18,6 +18,7 @@ reference/front-end/
     │   ├── design-tokens.md
     │   ├── figma.md
     │   ├── quality.md
+    │   ├── security.md
     │   ├── common-source.md
     │   └── local-llm.md
     └── common-source/ # 파일 단위 예시 코드와 적용 절차
@@ -58,10 +59,11 @@ AGENTS.md            # 전체 원칙 + 작업별 문서 선택
 | 디자인 토큰, 스타일 값 연결    | `design-tokens.md` | 의미 기반 토큰, shadcn/ui, Figma Variables, Tokens Studio |
 | Figma 화면을 앱 코드로 구현    | `figma.md`         | 구현 전 조사, 기존 코드 매핑, React 구현과 품질 확인      |
 | TypeScript, Lint, Test, Build  | `quality.md`       | 검사 도구 역할, 테스트 범위와 기본 검증 명령              |
+| 인증·권한, 개인정보와 보안 검토 | `security.md`      | XSS, URL, 저장소, Cookie·CSRF, Secret, Bridge와 의존성 기준 |
 | 공통 설정·컴포넌트·유틸리티    | `common-source.md` | 공통 소스 상세 가이드 진입점과 적용 기준                  |
 | Ollama, Continue, 로컬 LLM     | `local-llm.md`     | 로컬 모델에 맡길 범위, 검토 방식, 외부 모델 전환 기준     |
 
-> UI 작업은 `ui.md` + `design-tokens.md`, Figma 구현은 `figma.md` + `ui.md` + `design-tokens.md`를 함께 읽습니다.
+> UI 작업은 `ui.md` + `design-tokens.md`, Figma 구현은 `figma.md` + `ui.md` + `design-tokens.md`를 함께 읽습니다. 인증·권한·외부 입력·개인정보·저장소·Bridge가 포함된 작업은 `security.md`도 확인합니다.
 
 ### docs/common-source/ — 파일 단위 구현 예시
 

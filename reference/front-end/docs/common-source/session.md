@@ -183,6 +183,8 @@ export function AccountSummary() {
 
 ## 저장 위치 기준
 
+자격 증명, 개인정보, Client 저장소와 사용자 전환의 상세 기준은 [Front-End 보안과 개인정보 가이드](../../../../security_guide/index.html)를 함께 확인합니다.
+
 - 인증 token을 localStorage에 저장하는 예시를 미리 제공하지 않습니다.
 - WebView native storage를 사용할 경우 Bridge 계약과 초기화 순서를 먼저 확인합니다.
 - 브라우저 Cookie를 사용할 경우 JavaScript 접근 여부, SameSite, Secure와 domain 정책을 backend·배포 기준과 함께 결정합니다.
