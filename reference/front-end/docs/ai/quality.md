@@ -32,5 +32,6 @@ npm run test
 ```
 
 - 병합 또는 통합 영향이 있는 변경에서는 `npm run build`도 실행합니다.
+- API, Query, 비동기 UI, 이미지, 폰트 또는 초기 전송에 영향을 주는 변경은 `performance.md`에서 저속 네트워크, 연결 중단과 성능 회귀 검증 기준을 추가로 확인합니다.
 - E2E와 커버리지 기준은 실제 필요가 생길 때 추가합니다.
 - Backend가 준비되기 전 화면 개발이나 API 경계 테스트에 API Mock이 필요하면 MSW를 선택적으로 사용합니다. 실제 API 경로와 응답 fixture는 확정 계약으로 취급하지 않으며, 도입 기준은 [API Mock 가이드](../common-source/api-mocking.md)를 확인합니다.

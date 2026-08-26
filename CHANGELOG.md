@@ -13,6 +13,37 @@
 
 ## 2026-08-26
 
+### Front-End 네트워크 지연 대응 및 성능 검증 가이드 초안 추가
+
+#### 변경 목적
+
+- 느린 네트워크, API 응답 지연과 연결 중단 상황에서 Front-end가 화면 상태, 사용자 입력과 요청 안전성을 유지하는 기준을 마련했습니다.
+- 기존 문서에 나뉘어 있던 로딩·오류·빈 상태, 요청 취소, 중복 방지와 Offline 원칙을 실제 검증 흐름으로 연결했습니다.
+
+#### 주요 변경
+
+- [`performance_guide/draft.md`](./performance_guide/draft.md)를 추가했습니다.
+- AI 코딩용 요약인 [`performance.md`](./reference/front-end/docs/ai/performance.md)와 HTML 보기를 추가했습니다.
+- 최초 로딩, 기존 데이터 갱신, 변경 중, 지연, Timeout, Offline과 오류 상태를 구분했습니다.
+- Skeleton, Spinner, Progress와 Toast는 기존 shadcn/ui 및 프로젝트 컴포넌트를 우선 사용하고 목적에 따라 선택하도록 했습니다.
+- Timeout 값과 재시도 정책은 shadcn/ui가 아닌 API·Backend·제품 UX 계약에서 결정하도록 책임을 분리했습니다.
+- 요청 취소, 응답 순서 역전, 중복 제출, 사용자 입력 보존과 연결 복구 기준을 추가했습니다.
+- Network Throttling, MSW 응답 지연과 연결 중단 테스트의 목적을 구분했습니다.
+- Core Web Vitals, 전송량과 Bundle 확인은 네트워크 지연 대응 이후의 성능 회귀 검증으로 연결했습니다.
+- Front-end AI 진입점, 참고 소스 README, UI·품질·공통 소스 요약에서 API·Query·비동기 UI와 성능 작업 시 새 AI 문서를 선택하도록 연결했습니다.
+
+#### 미확정 상태 유지
+
+- Skeleton 상세 디자인과 표시 시점, API별 Timeout, 재시도 횟수, Offline 지원 범위와 성능 Budget은 실제 화면·API·운영 환경 확정 후 결정하도록 남겼습니다.
+- CDN, 데이터베이스 Cache, API Gateway, 서버 Transaction과 운영 도구는 Front-end 초안에서 확정하지 않았습니다.
+
+#### 검증
+
+- 기존 Front-End 개발 가이드, API 요청 기반, API Mock과 테스트 문서의 확정 원칙에 모순되지 않는지 확인했습니다.
+- shadcn/ui는 로딩·진행·피드백 UI 기준으로만 연결하고 통신 정책을 대신하지 않도록 구분했습니다.
+- AI 요약의 Markdown·HTML 연결, 진입 문서의 내부 링크와 Mermaid 작업 분기를 확인했습니다.
+- 사람용 상세 가이드는 HTML 적용 전 단계이므로 `performance_guide/index.html`과 공통 가이드 목록 링크를 추가하지 않았습니다.
+
 ### 로컬 LLM 실사용 평가와 모델 선택 원칙 추가
 
 #### 변경 목적
