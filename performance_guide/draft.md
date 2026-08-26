@@ -304,6 +304,6 @@ Lighthouse의 단일 종합 점수만으로 합격 여부를 결정하지 않습
 
 - API 요청, 오류 본문, 응답 검증과 취소 신호 연결은 [API 요청 기반 구현 예시](../reference/front-end/docs/common-source/network.md)를 따릅니다.
 - 서버 데이터와 Query 상태 관리는 [Front-End 개발 가이드](../frontend_guide/index.html)를 따릅니다.
-- API 지연과 오류 재현에 별도 도구가 필요하면 [API Mock 도입 판단 기준](../reference/front-end/docs/common-source/api-mocking.md)을 확인하되 Backend와 합의하기 전에는 도입하지 않습니다.
+- API 지연과 오류 재현에 별도 도구가 필요하면 [API Mock 도입 판단 기준](../reference/front-end/docs/common-source/api-mocking.md)을 확인합니다. 승인된 API 계약을 기준으로 Front-end 책임자 또는 프로젝트 담당자와 테스트 범위·관리 책임을 정하고 Backend에는 계약을 대신하지 않는 도구임을 공유합니다.
 - 사용자 관점의 상태 전환 검증은 [테스트 공통 설정과 구현 예시](../reference/front-end/docs/common-source/test.md)와 [테스트 가이드](../test_guide/index.html)를 따릅니다.
 - Skeleton, Spinner, Progress와 Toast UI는 [shadcn/ui Components](https://ui.shadcn.com/docs/components)를 참고하되 실제 프로젝트에 설치된 소스와 디자인 토큰을 우선합니다.

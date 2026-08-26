@@ -15,7 +15,7 @@
 
 ### 네트워크 지연·Offline 검증과 API Mock 기준 정리
 
-- [`performance_guide/draft.md`](./performance_guide/draft.md)에 느린 네트워크, API 응답 지연, Timeout, Offline과 연결 복구 시 Front-end 처리 기준을 추가했습니다.
+- [`performance_guide/draft.md`](./performance_guide/draft.md)와 [`performance_guide/index.html`](./performance_guide/index.html)에 느린 네트워크, API 응답 지연, Timeout, Offline과 연결 복구 시 Front-end 처리 기준을 추가했습니다.
 - 최초 로딩과 기존 데이터 갱신을 구분하고 Skeleton, Spinner, Progress와 Toast는 설치된 shadcn/ui 및 프로젝트 컴포넌트를 우선 사용하도록 했습니다.
 - Chrome 개발자 도구의 `Network`, `Disable cache`, 저속 Profile과 `Offline` 전환을 이용한 단계별 검증 절차를 추가했습니다.
 - Chrome Network Throttling은 Bundle·이미지·폰트·API를 포함한 저속 전송 환경 확인에 사용합니다.
@@ -24,6 +24,7 @@
 - API 계약 확정 후 실제 환경으로 필요한 상태를 반복 재현하기 어렵다면 Front-end 책임자 또는 프로젝트 담당자와 범위·관리 책임·폐기 조건을 정한 뒤 MSW 같은 도구를 선택할 수 있습니다. 이 도구가 API 계약을 대신하지 않는다는 점은 Backend에 공유합니다.
 - MSW는 실제 Backend의 계약 준수, 인증, Cookie, CORS, 데이터 정합성과 운영 네트워크 검증을 대신하지 않으며 Production 실행과 Bundle에 포함하지 않습니다.
 - 사람용 가이드, AI 요약, 성장·테스트 가이드와 공통 소스 문서의 관련 기준을 같은 내용으로 맞췄습니다.
+- 최종 Markdown을 프로젝트 HTML 템플릿 구조로 변환하고 Root README에서 사람용 가이드로 연결했습니다.
 
 #### API 확정 전 제한
 
@@ -34,7 +35,7 @@
 
 #### 주요 문서
 
-- [`performance_guide/draft.md`](./performance_guide/draft.md)
+- [`performance_guide/draft.md`](./performance_guide/draft.md) · [`performance_guide/index.html`](./performance_guide/index.html)
 - [`performance.md`](./reference/front-end/docs/ai/performance.md)
 - [`api-mocking.md`](./reference/front-end/docs/common-source/api-mocking.md) · [`api-mocking.html`](./reference/front-end/docs/common-source/api-mocking.html)
 - [`network.md`](./reference/front-end/docs/common-source/network.md) · [`network.html`](./reference/front-end/docs/common-source/network.html)
