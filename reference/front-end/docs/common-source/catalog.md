@@ -22,7 +22,7 @@
 | [API 요청 기반 구현 예시](./network.md) | `src/lib/http/request.ts` | 계약 확정 후 본문 읽기와 기능별 parser 연결 | 기존 fetch wrapper와 runtime 지원 범위 |
 | [테스트 공통 설정](./test.md) | `vitest.config.ts` | Client Component 테스트 환경 | 기존 테스트 실행 도구, alias와 테스트 실행 |
 | [테스트 공통 설정](./test.md) | `src/test/setup.ts` | DOM matcher와 테스트 종료 후 정리 | jest-dom matcher 실행 |
-| [API Mock 도입 판단 기준](./api-mocking.md) | 합의 후 결정 | 승인된 계약과 양측 합의 후 선택 | 실제 환경으로 재현하기 어려운 상태와 관리 책임 |
+| [API Mock 도입 판단 기준](./api-mocking.md) | Front-end 범위에서 결정 | 승인된 계약 이후 필요할 때 선택 | 실제 환경으로 재현하기 어려운 상태와 관리 책임 |
 
 ## 실제 사용처와 함께 적용할 코드
 
@@ -54,7 +54,7 @@
 | API 요청 경계 | `http-error.ts`, `request.ts`, 기능별 API와 parser | 기본 URL, 인증, timeout과 공통 오류 계약 |
 | 세션 경계 | 세션 model·parser·API·Query | 인증 방식, 세션 응답과 로그아웃 뒤 이동 |
 | 테스트 설정 | `vitest.config.ts`, `setup.ts`, `render-with-providers.tsx` | 기존 테스트 실행 도구, alias와 전역 mock |
-| API Mock | 합의 후 선택한 도구와 기준 데이터 | 실제 환경 우선, 승인 계약과 관리 책임 |
+| API Mock | Front-end 범위에서 선택한 도구와 승인된 계약 기반 데이터 | 실제 환경 우선, 승인 계약과 관리 책임 |
 | 프로필 통합 예시 | 프로필 기능 파일 전체, API Mock handler | 실제 API 경로, 응답 형식, 입력값 검증, 문구와 화면 경로 |
 
 코드 파일만 복사하고 사용 예와 테스트를 생략하면 내보낸 함수와 컴포넌트가 실제 요구에 맞는지 확인할 수 없습니다. 실제 적용 시에는 최소 한 개의 사용처와 해당 동작 테스트를 같은 변경에 포함합니다.
@@ -72,7 +72,7 @@
 | 서버 상태 | `@tanstack/react-query` |
 | 테스트 실행 | `vitest`, `jsdom`, `@vitejs/plugin-react` |
 | 컴포넌트 테스트 | `@testing-library/react`, `@testing-library/user-event`, `@testing-library/jest-dom` |
-| API Mock | 프로젝트 기본 package가 아니며 합의 후 도구 결정 |
+| API Mock | 프로젝트 기본 package가 아니며 승인된 계약 이후 Front-end 테스트 필요에 따라 도구 결정 |
 
 ## 미확정 항목
 
@@ -83,7 +83,7 @@
 | 브랜드와 UI 토큰 | 색상, 글자 체계, 간격, 화면 너비 기준과 테마 저장 방식 | `globals.css` 토큰 값과 UI 예제 갱신 |
 | API 연결 정책 | 기본 URL, 인증 전달, 공통 오류 형식과 제한 시간 | `request` 연결 경계와 기능별 오류 처리 갱신 |
 | 세션 계약 | 세션 path·응답, 만료·갱신과 로그아웃 뒤 이동 | 계약 확정 후 세션 parser·Query와 cache 초기화 범위 구현 |
-| 개발 API Mock | 도입 필요성, 대상 상태, 기준 데이터와 관리 책임 | Backend와 합의한 경우에만 production 제외 조건과 선택 도구 연결 |
+| 개발 API Mock | 도입 필요성, 대상 상태와 Front-end 관리 책임 | 승인된 API 계약 이후 Front-end 범위에서 production 제외 조건과 선택 도구 연결 |
 | WebView Bridge 연동 | 호출 이름, 전달 값, 버전, 제한 시간과 플랫폼 오류 | 승인된 Bridge 계약으로 타입과 연동 코드 구현 |
 | Query 기본 정책 | 캐시, 재시도, 다시 조회하는 시점과 오프라인 동작 | `QueryClient` 기본 설정과 테스트 갱신 |
 | 폼 입력값 검증 도구 | schema 도구, 브라우저·서버 검증 범위와 오류 형식 | 실제 폼에서 입력값 검증 연결 |

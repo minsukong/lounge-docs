@@ -236,4 +236,4 @@ npm run test
 
 alias 오류는 `vitest.config.ts`와 실제 `tsconfig` 경로가 같은지 확인합니다. `document is not defined`는 jsdom 환경 연결을, jest-dom matcher 오류는 setup 파일 로딩을 확인합니다. Query 테스트가 오래 멈추면 테스트 QueryClient의 재시도 설정과 종료되지 않은 timer를 먼저 확인합니다.
 
-합의된 Mock 도구를 연결한 테스트는 승인된 계약의 path와 method를 사용하는지 확인합니다. 테스트가 종료되지 않으면 남은 요청, timer와 도구 종료 lifecycle을 확인합니다.
+Front-end 테스트 범위에서 선택한 Mock 도구를 연결한 테스트는 승인된 계약의 path와 method를 사용하는지 확인합니다. 테스트가 종료되지 않으면 남은 요청, timer와 도구 종료 lifecycle을 확인합니다.

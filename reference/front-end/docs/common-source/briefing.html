@@ -65,7 +65,7 @@
 <tr>
 <td>API Mock</td>
 <td>계약 확정 후에도 실제 환경에서 재현하기 어려운 상태의 선택 도구</td>
-<td>Backend 환경 우선, 담당자 합의와 관리 책임</td>
+<td>Backend 환경 우선, Front-end 범위와 관리 책임</td>
 </tr>
 <tr>
 <td>통합 사용</td>
@@ -73,7 +73,7 @@
 <td>API 경로, 인증, 응답 형식, 문구와 route</td>
 </tr>
 </tbody></table>
-<p><a href="./tailwind.html">Tailwind CSS와 UI 설정</a>은 디자인 값이 바뀌어도 화면 코드의 역할 이름을 유지할 수 있게 합니다. <a href="./react.html">React 공통 코드</a>와 <a href="./typescript.html">TypeScript 공통 설정과 검사 함수</a>는 서버 상태와 외부 입력을 기능 코드에 연결하는 기준을 제공합니다. <a href="./network.html">API 요청 기반 구현 예시</a>와 <a href="./session.html">세션과 회원 경계 구현 예시</a>는 계약을 추측하지 않고 요청과 로그인 상태의 경계를 준비합니다. <a href="./test.html">테스트 공통 설정</a>, <a href="./api-mocking.html">API Mock 구현 예시</a>와 <a href="./recipes.html">통합 사용 예시</a>는 이 코드가 실제 요청 흐름에서 동작하는지 확인하는 방법을 보여 줍니다.</p>
+<p><a href="./tailwind.html">Tailwind CSS와 UI 설정</a>은 디자인 값이 바뀌어도 화면 코드의 역할 이름을 유지할 수 있게 합니다. <a href="./react.html">React 공통 코드</a>와 <a href="./typescript.html">TypeScript 공통 설정과 검사 함수</a>는 서버 상태와 외부 입력을 기능 코드에 연결하는 기준을 제공합니다. <a href="./network.html">API 요청 기반 구현 예시</a>와 <a href="./session.html">세션과 회원 경계 구현 예시</a>는 계약을 추측하지 않고 요청과 로그인 상태의 경계를 준비합니다. <a href="./test.html">테스트 공통 설정</a>, <a href="./api-mocking.html">API Mock 도입 판단 기준</a>과 <a href="./recipes.html">통합 사용 예시</a>는 실제 요청 흐름을 검증할 범위와 적용 조건을 보여 줍니다.</p>
 </section>
 
 <hr />
@@ -103,7 +103,7 @@
 <li>첫 서버 상태 기능이 생길 때 QueryClient와 Provider를 적용합니다.</li>
 <li>Backend가 승인한 계약과 개발 환경이 제공되면 공통 <code>request</code>와 기능별 parser를 첫 API에 연결합니다.</li>
 <li>로그인이 필요한 첫 화면에서 세션 Query를 적용하고 회원 상세 데이터와 cache 범위를 분리합니다.</li>
-<li>실제 환경에서 재현하기 어려운 상태가 확인되면 Backend와 Mock 도구 사용 여부와 범위를 협의합니다.</li>
+<li>실제 환경에서 재현하기 어려운 상태가 확인되면 Front-end 책임자 또는 프로젝트 담당자가 Front-end 테스트 범위와 관리 책임을 정해 Mock 도구를 검토합니다. API 동작과 기준 데이터는 승인된 계약을 따릅니다.</li>
 <li>동일한 폼 동작이 반복될 때 <code>SubmitButton</code>과 <code>FormField</code>의 공통 위치를 결정합니다.</li>
 <li>실제 적용 결과에 맞춰 <a href="./catalog.html">공통 소스 적용 항목</a>의 경로, 교체 지점과 미확정 항목을 갱신합니다.</li>
 </ol>

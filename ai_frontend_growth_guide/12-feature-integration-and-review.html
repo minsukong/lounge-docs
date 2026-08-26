@@ -38,7 +38,7 @@
         </ol>
 <h3>API가 확정되지 않은 기능의 진행 기준</h3>
 <p>기획 흐름과 Backend API 계약이 확정되지 않았다면 Request·Response 가정, Runtime Parser, Fixture와 Handler를 구현하지 않습니다. 현재 확인된 사용자 행동, 필요한 화면 상태와 Backend 질문을 정리하고 endpoint, method, status, 필드와 인증 방식은 <code class="badge-tbd">TBD</code>로 남깁니다.</p>
-<p>Backend가 승인한 계약과 개발 환경이 전달되면 Path·Method·Status에 맞춰 기능 API와 Parser를 처음 작성합니다. 실제 환경에서 재현하기 어려운 상태가 확인된 경우에만 양측 담당자가 Mock 도구의 필요성과 범위를 협의합니다.</p>
+<p>Backend가 승인한 계약과 사용할 수 있는 개발 환경이 전달되면 Path·Method·Status에 맞춰 기능 API와 Parser를 처음 작성합니다. 실제 환경에서 재현하기 어려운 상태가 확인된 경우에만 Front-end 책임자 또는 프로젝트 담당자가 Front-end 테스트 범위와 관리 책임을 정해 Mock 도구를 검토합니다. Backend가 제공해야 하는 환경과 API 동작은 확인되기 전까지 <code class="badge-tbd">TBD</code>로 유지합니다.</p>
         <h3>세션에서 회원 기능까지의 통합 과제</h3>
         <ol>
           <li>세션 확인 중, 비로그인, 로그인과 확인 실패를 구분합니다.</li>
@@ -47,7 +47,7 @@
           <li>수정 성공 후 Cache 반영과 오류 후 입력 보존을 확인합니다.</li>
           <li>로그아웃과 사용자 전환 뒤 이전 사용자 데이터가 남지 않는지 확인합니다.</li>
         </ol>
-<p>계약 확정 후 구현 기준은 <a href="../reference/front-end/docs/common-source/network.html">요청 계층</a>과 <a href="../reference/front-end/docs/common-source/session.html">세션과 회원 경계</a>를 사용합니다. 별도 재현 도구가 필요하고 합의된 경우에만 <a href="../reference/front-end/docs/common-source/api-mocking.html">API Mock 도입 판단 기준</a>을 확인합니다.</p>
+<p>계약 확정 후 구현 기준은 <a href="../reference/front-end/docs/common-source/network.html">요청 계층</a>과 <a href="../reference/front-end/docs/common-source/session.html">세션과 회원 경계</a>를 사용합니다. 실제 환경에서 별도 재현 도구가 필요한 경우 <a href="../reference/front-end/docs/common-source/api-mocking.html">API Mock 도입 판단 기준</a>을 확인합니다.</p>
       </section>
       <hr />
       <section>

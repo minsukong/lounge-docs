@@ -114,7 +114,7 @@
         <ul>
           <li>단위·컴포넌트: Vitest, React Testing Library, <code>@testing-library/user-event</code>, <code>@testing-library/jest-dom</code></li>
           <li>E2E: Playwright</li>
-          <li>API Mock: 프로젝트 기본 도구가 아니며 합의 후 후보를 결정</li>
+          <li>API Mock: 프로젝트 기본 도구가 아니며 승인된 계약 이후 Front-end 테스트 필요에 따라 후보를 결정</li>
         </ul>
         <pre class="hljs"><code data-language="bash"><span class="hljs-built_in">npm</span> run test
 <span class="hljs-built_in">npm</span> run test:watch
@@ -150,8 +150,8 @@
           <li>오류 영향이 큰 순수 로직이나 핵심 컴포넌트부터 시작합니다.</li>
           <li>반복되는 설정이 확인된 경우에만 공통 테스트 도구를 만듭니다.</li>
           <li>
-            승인된 API 계약과 Backend 환경으로 재현하기 어려운 상태가 확인되면
-            양측 담당자가 API Mock 도입 여부를 협의하고, 여러 시스템 경계를
+            승인된 API 계약과 사용할 수 있는 Backend 환경으로 재현하기 어려운 상태가 확인되면
+            Front-end 책임자 또는 프로젝트 담당자가 Front-end 테스트 범위와 관리 책임을 정해 API Mock을 검토하고, 여러 시스템 경계를
             통과하는 핵심 흐름이 생기면 Playwright를 검토합니다.
           </li>
           <li>실행 시간과 안정성을 확인한 뒤 CI 범위를 확정합니다.</li>

@@ -4,6 +4,9 @@
 
 ## 프로젝트 기준
 
+- 이 저장소는 Front-end 구현과 검토를 위한 가이드입니다. Front-end가 독립적으로 결정할 수 있는 UI, 상태 처리, 접근성, 브라우저 검증과 Front-end 테스트 원칙만 현재 기준으로 확정합니다.
+- 기획, 업무 규칙, API·인증·데이터 계약, Backend 제공 환경, Native App 책임, 배포·운영처럼 다른 담당자 또는 전체 프로젝트 협의가 필요한 내용은 승인되기 전까지 모두 미확정으로 취급합니다.
+- Front-end 기술이라도 실제 애플리케이션의 package, 구성과 사용처가 확인되어야 하는 선택은 후보 또는 `TBD`로 남깁니다.
 - 실제 애플리케이션은 추후 `apps/app-webview`에 생성할 예정입니다.
 - 현재는 애플리케이션 저장소 생성 전에 구현 가이드와 참고 소스를 선행 작성하는 단계입니다.
 - 화면 코드는 React 19와 TypeScript로 작성합니다.
@@ -110,7 +113,7 @@ flowchart TD
 | API 요청과 기능별 응답 검증 연결 | [Markdown](./docs/common-source/network.md) · [HTML](./docs/common-source/network.html) | HTTP 오류, 공통 요청 함수와 기능별 parser 연결 예시 |
 | 로그인 상태와 회원 데이터 경계 | [Markdown](./docs/common-source/session.md) · [HTML](./docs/common-source/session.html) | 세션 model·parser·Query와 로그아웃 cache 초기화 기준 |
 | Client Component와 Query 테스트 환경 구성 | [Markdown](./docs/common-source/test.md) · [HTML](./docs/common-source/test.html) | Vitest, Testing Library, 공통 렌더링 함수와 사용자 동작 테스트 예시 |
-| 계약 확정 후 API Mock 필요성 판단 | [Markdown](./docs/common-source/api-mocking.md) · [HTML](./docs/common-source/api-mocking.html) | Backend 환경 우선, 담당자 합의와 선택 도구 기준 |
+| 계약 확정 후 API Mock 필요성 판단 | [Markdown](./docs/common-source/api-mocking.md) · [HTML](./docs/common-source/api-mocking.html) | Backend 환경 우선, Front-end 범위·책임과 선택 도구 기준 |
 | 공통 소스를 한 기능에 연결 | [Markdown](./docs/common-source/recipes.md) · [HTML](./docs/common-source/recipes.html) | 프로필 조회·검증·수정·상태 처리와 테스트를 연결한 통합 예시 |
 | 적용 조건, package와 미확정 항목 확인 | [Markdown](./docs/common-source/catalog.md) · [HTML](./docs/common-source/catalog.html) | 파일별 도입 조건, 함께 적용할 코드, 필요한 package, TBD와 검증 목록 |
 | 현재 준비 수준과 저장소 생성 후 순서 확인 | [Markdown](./docs/common-source/briefing.md) · [HTML](./docs/common-source/briefing.html) | 가이드의 활용 범위, 한계, 실제 적용 순서와 다음 검토 시점 |

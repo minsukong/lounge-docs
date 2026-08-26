@@ -19,7 +19,7 @@
 | API 요청과 오류 처리를 한 경계로 모으기 | [API 요청 기반 구현 예시](./network.md) | `HttpError`, `request`, 기능별 parser 연결 |
 | 로그인 확인·비로그인·로그아웃 상태 나누기 | [세션과 회원 경계 구현 예시](./session.md) | 세션 model·parser·Query와 cache 초기화 |
 | 공통 컴포넌트를 실제 동작으로 검증하기 | [테스트 공통 설정](./test.md) | Vitest 설정, setup, `renderWithProviders` |
-| 계약 확정 후 API Mock 필요성 판단하기 | [API Mock 도입 판단 기준](./api-mocking.md) | Backend 환경 우선, 담당자 합의와 선택 도구 기준 |
+| 계약 확정 후 API Mock 필요성 판단하기 | [API Mock 도입 판단 기준](./api-mocking.md) | Backend 환경 우선, Front-end 범위·책임과 선택 도구 기준 |
 | 공통 코드를 한 기능에서 함께 쓰기 | [통합 사용 예시](./recipes.md) | 조회·상태·수정 폼을 연결한 프로필 예시 |
 | 적용 대상과 교체 지점만 빠르게 확인하기 | [공통 소스 적용 항목](./catalog.md) | 파일별 적용 조건과 점검 목록 |
 | 가이드의 준비 수준과 실제 적용 순서 확인하기 | [공통 소스 가이드 활용 브리핑](./briefing.md) | 시작 가능한 범위, 한계와 저장소 생성 후 적용 순서 |
@@ -87,7 +87,7 @@ apps/app-webview/
 | API 요청 함수 | 본문 읽기, `HttpError`와 parser 연결 | 기본 URL, 인증 전달, timeout과 공통 오류 계약 |
 | 세션 경계 | 로그인 확인 상태와 회원 상세 데이터의 분리 | 실제 세션 응답, 만료·갱신과 이동 정책 |
 | 테스트 도구 | DOM 환경, jest-dom, Provider 포함 렌더링 함수 | 기존 실행 도구, alias, 전역 mock 정책 |
-| API Mock | 승인된 계약과 양측 합의 후 선택적으로 적용 | 실제 환경으로 재현하기 어려운 상태와 관리 책임 |
+| API Mock | 승인된 계약 이후 Front-end 테스트 범위에서 선택적으로 적용 | 실제 환경으로 재현하기 어려운 상태와 관리 책임 |
 
 ## 공통 폴더에 둘 기준
 

@@ -21,7 +21,7 @@ apps/app-webview/src/
     └── profile-screen.test.tsx
 ```
 
-계약 확정 후 적용할 때는 `AppProviders`, `request`, `FormField`, `SubmitButton`, `getErrorMessage`, `renderWithProviders`가 준비되어 있어야 합니다. API 연동 검증은 Backend가 제공하거나 양측이 합의한 개발·테스트 환경을 우선합니다.
+계약 확정 후 적용할 때는 `AppProviders`, `request`, `FormField`, `SubmitButton`, `getErrorMessage`, `renderWithProviders`가 준비되어 있어야 합니다. 사용할 수 있고 승인된 개발·테스트 환경이 있다면 API 연동 검증에 우선 사용합니다. 해당 환경의 제공 여부와 범위는 확인되기 전까지 `TBD`입니다.
 
 ## 1단계: 데이터 모델과 API 응답 검증
 
@@ -280,4 +280,4 @@ export default function ProfilePage() {
 | 성공·오류 문구 | 문서의 한국어 문구 | UX writing 기준 |
 | route | `/profile` | 실제 App Router 구조 |
 
-계약 적용 후에는 응답 검증 테스트 데이터, mutation 요청 검증과 화면 문구 테스트를 같은 작업에서 갱신합니다. 별도 Mock을 사용하기로 합의한 경우에만 해당 fixture와 handler도 함께 관리합니다.
+계약 적용 후에는 응답 검증 테스트 데이터, mutation 요청 검증과 화면 문구 테스트를 같은 작업에서 갱신합니다. Front-end 테스트 범위에서 별도 Mock을 선택한 경우에만 해당 fixture와 handler도 함께 관리합니다.

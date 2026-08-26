@@ -10,7 +10,7 @@
 
 외부 입력, 인증·권한, 개인정보, Client 저장소, CSP, Bridge와 의존성 보안의 상세 기준은 [Front-End 보안과 개인정보 가이드](../security_guide/index.html)를 따릅니다.
 
-API 요청 계층과 세션·회원 경계는 기획 흐름과 Backend API 계약이 확정된 뒤 각각 [API 요청 계층](../reference/front-end/docs/common-source/network.html), [세션과 회원 경계](../reference/front-end/docs/common-source/session.html)를 기준으로 학습합니다. 계약 확정 전에는 Backend 확인 질문과 `TBD`만 정리하며, [API Mock](../reference/front-end/docs/common-source/api-mocking.html)은 실제 환경 우선과 양측 담당자 합의를 전제로 도입 여부만 판단합니다.
+API 요청 계층과 세션·회원 경계는 기획 흐름과 Backend API 계약이 확정된 뒤 각각 [API 요청 계층](../reference/front-end/docs/common-source/network.html), [세션과 회원 경계](../reference/front-end/docs/common-source/session.html)를 기준으로 학습합니다. 계약 확정 전에는 Backend 확인 질문과 `TBD`만 정리합니다. [API Mock](../reference/front-end/docs/common-source/api-mocking.html)은 승인된 계약 이후 실제 환경에서 필요한 상태를 반복 재현하기 어려울 때 Front-end 테스트 범위와 관리 책임을 정해 선택적으로 검토합니다.
 
 > AI는 구현 속도를 높이는 협업 도구입니다. AI를 많이 사용하는 것 자체는 문제가 아니지만, 확인되지 않은 제품 계약과 기술 결정을 AI의 추측으로 확정하지 않습니다.
 
@@ -214,7 +214,7 @@ Parser는 승인된 계약의 입력과 출력을 직접 검증하고, 컴포넌
 - Backend가 제공할 기능, 권한과 데이터 소유 경계를 질문합니다.
 - endpoint, method, status, 요청·응답 필드, 인증과 오류 계약을 `TBD`로 남깁니다.
 - 계약이 승인된 뒤 Path·Method·Status에 맞춰 API 함수와 Parser를 처음 작성합니다.
-- 실제 환경에서 재현하기 어려운 테스트 상태가 확인되면 Backend와 Mock 도구 사용 여부를 협의합니다.
+- 실제 환경에서 재현하기 어려운 테스트 상태가 확인되면 Front-end 책임자 또는 프로젝트 담당자가 Front-end 테스트 범위와 관리 책임을 정해 Mock 도구를 검토합니다. API 동작과 기준 데이터는 승인된 계약이 전달되기 전까지 `TBD`로 둡니다.
 
 Backend가 없다는 이유만으로 Front-end가 임시 API 계약과 Mock 서버를 먼저 만들지 않습니다.
 
