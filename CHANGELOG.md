@@ -15,6 +15,9 @@
 
 ### 네트워크 지연·Offline 검증과 API Mock 기준 정리
 
+- 문서의 독자 수준을 성능 전문가가 아닌 시니어 Front-end 개발자로 맞추고, “느림”의 원인 구분과 실제 기능에 필요한 항목만 적용한다는 읽기 기준을 추가했습니다.
+- Skeleton·Spinner·Progress·Toast, Cache·Background 갱신·Optimistic Update, Query Key, 멱등성, Timeout·Retry, Offline Queue와 Network Throttling 용어를 처음 나오는 문맥에서 설명했습니다.
+- Core Web Vitals, LCP·CLS·INP, Bundle·Chunk·Main Thread, Lighthouse, 성능 회귀와 성능 Budget의 의미와 측정 목적을 보강했습니다.
 - 이 저장소는 Front-end 가이드이며 Front-end가 독립적으로 결정할 수 있는 구현·검증 원칙만 현재 기준으로 확정합니다. 기획, 업무 규칙, API·인증·데이터 계약, Backend 제공 환경, Native App 책임과 배포·운영처럼 다른 담당 영역이 필요한 내용은 승인 전까지 미확정으로 유지합니다.
 - 보안 문서에 적힌 Backend·Native App·배포 책임은 Front-end가 확인해야 할 외부 조건이며, 현재 프로젝트에서 구현이나 제공이 확정됐다는 의미가 아님을 명시했습니다.
 - [`performance_guide/draft.md`](./performance_guide/draft.md)와 [`performance_guide/index.html`](./performance_guide/index.html)에 느린 네트워크, API 응답 지연, Timeout, Offline과 연결 복구 시 Front-end 처리 기준을 추가했습니다.
@@ -60,6 +63,10 @@
 
 ### Front-end 보안과 개인정보 기준 추가
 
+- 문서의 독자 수준을 보안 전문가가 아닌 시니어 Front-end 개발자로 명확히 맞추고, 각 보안 기준에서 의미·확인 범위·Front-end 행동을 함께 이해할 수 있도록 설명을 보강했습니다.
+- “신뢰하지 않는다”는 값의 사용 금지가 아니라 저장·전달 당시의 상태를 단정하지 않고 위험도에 맞게 확인한다는 뜻으로 정의했으며, Storage는 UI 설정과 권한·사용자 데이터의 검증 수준을 구분했습니다.
+- 보안 용어를 삭제하거나 지나치게 단순화하지 않고, XSS, Sanitizer, Tag·Attribute, URL Scheme, CSRF, CORS, Origin, CSP, Client Bundle, Source Map과 공급망 보안이 처음 나오는 위치에 한글 의미와 원어 설명을 추가했습니다.
+- 아직 정하지 않은 Sanitizer 도구와 HTML 허용 범위는 승인된 것처럼 표현하지 않고 미정 상태로 바로잡았습니다.
 - [`security_guide/index.html`](./security_guide/index.html)과 [`security_guide/draft.md`](./security_guide/draft.md)를 추가했습니다.
 - Client 신뢰 경계, XSS, URL·Redirect, 인증·권한, Cookie·CSRF·CORS, Secret, 저장소, 개인정보·로그, CSP, WebView Bridge와 공급망 기준을 정리했습니다.
 - AI용 요약인 [`security.md`](./reference/front-end/docs/ai/security.md)와 [`security.html`](./reference/front-end/docs/ai/security.html)을 추가했습니다.
