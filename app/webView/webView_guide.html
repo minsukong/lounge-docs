@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+          name="description"
+          content="Flutter WebView의 패키지 선정, 플랫폼 요구사항, 기본 설정, 보안 및 호환성 검증 기준"
+  />
+  <title>Flutter WebView 설정 가이드</title>
+  <link rel="stylesheet" href="./../../assets/style/presentation-theme.css" />
+</head>
+<body>
+<header>
+  <div class="type">FLUTTER · APP · WEBVIEW</div>
+  <h1>Flutter WebView 설정 가이드</h1>
+  <p>
+    Flutter 애플리케이션에서 WebView를 적용하기 위한 패키지, 플랫폼 설정,
+    실행 엔진, 보안 및 호환성 검증 기준을 정리합니다.
+  </p>
+</header>
+
+<main>
+  <section>
+    <h2 class="bx-active">1. 문서 목적과 적용 범위</h2>
+    <p>
+      이 문서는 Flutter의 공식 WebView 플러그인인
+      <code>webview_flutter</code>를 사용하는 Android 및 iOS
+      애플리케이션에 적용합니다.
+    </p>
+    <p>
+      WebView 시작 URL, 인증 방식, JavaScript Bridge 계약, 허용 도메인과
+      외부 앱 호출 정책은 프로젝트 담당자가 합의한 뒤 확정합니다.
+    </p>
+    <p>
+      Native와 WebView의 역할, 인증·세션 및 Bridge의 상위 기준은
+      <a href="./../app.html">APP 개발 표준</a>을 함께 적용합니다.
+    </p>
+  </section>
+
+  <hr />
+
+  <section>
+    <h2 class="bx-active">2. 패키지 선정과 버전 기준</h2>
+    <p>
+      Flutter 공식 플러그인인 <code>webview_flutter</code>를 사용합니다.
+      문서 작성 시 확인한 최신 안정 버전은 <code>4.14.1</code>입니다.
+    </p>
+    <pre
+            class="hljs"
+    ><code data-language="yaml"><span class="hljs-attr">dependencies</span>:
+  <span class="hljs-attr">webview_flutter</span>: <span class="hljs-string">^4.14.1</span></code></pre>
+    <p>
+      최신 버전을 자동으로 사용하는 규칙으로 해석하지 않습니다. 실제
+      프로젝트의 Flutter·Dart SDK와 호환성을 확인하고 승인된 버전을
+      <code>pubspec.lock</code>에 고정합니다.
+    </p>
+    <table>
+      <thead>
+      <tr>
+        <th scope="col">패키지</th>
+        <th scope="col">역할</th>
+        <th scope="col">추가 방법</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><code>webview_flutter</code></td>
+        <td>공통 WebView Controller와 Widget API</td>
+        <td>기본 의존성으로 추가</td>
+      </tr>
+      <tr>
+        <td><code>webview_flutter_android</code></td>
+        <td>Android 전용 WebView 구현과 기능</td>
+        <td>기본적으로 자동 포함, 전용 API를 직접 Import할 때 명시</td>
+      </tr>
+      <tr>
+        <td><code>webview_flutter_wkwebview</code></td>
+        <td>iOS 전용 WKWebView 구현과 기능</td>
+        <td>기본적으로 자동 포함, 전용 API를 직접 Import할 때 명시</td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <hr />
+
+  <section>
+    <h2 class="bx-active">3. 지원 환경과 WebView 엔진</h2>
+    <p>
+      <code>webview_flutter</code>는 Chrome 또는 Safari 앱을 직접 실행하지
+      않고 운영체제가 제공하는 WebView 엔진을 Flutter 화면 안에 표시합니다.
+    </p>
+    <table>
+      <thead>
+      <tr>
+        <th scope="col">구분</th>
+        <th scope="col">최소 지원 환경</th>
+        <th scope="col">사용 엔진</th>
+        <th scope="col">적용 기준</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>Flutter</td>
+        <td>프로젝트 승인 버전</td>
+        <td>해당 없음</td>
+        <td>SDK 버전과 지원 플랫폼 범위를 함께 고정</td>
+      </tr>
+      <tr>
+        <td>Dart</td>
+        <td>3.10 이상</td>
+        <td>해당 없음</td>
+        <td><code>webview_flutter 4.14.1</code> 요구사항</td>
+      </tr>
+      <tr>
+        <td>Android</td>
+        <td>Android SDK 24 이상</td>
+        <td>Android System WebView</td>
+        <td>Android OS와 설치된 System WebView 버전으로 검증</td>
+      </tr>
+      <tr>
+        <td>iOS</td>
+        <td>iOS 15 이상</td>
+        <td><code>WKWebView</code></td>
+        <td>최신 Flutter SDK의 공식 지원 범위를 프로젝트 기준으로 적용</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <h3>플러그인 최소 조건과 프로젝트 기준</h3>
+    <p>
+      <code>webview_flutter 4.14.1</code>의 패키지 문서에는 iOS 13 이상으로
+      표시되어 있습니다. 그러나 최신 Flutter SDK의 공식 지원 범위는 iOS 15
+      이상이므로 신규 프로젝트는 iOS 15를 최소 지원 버전으로 설정합니다.
+      iOS 13 또는 14를 지원해야 하는 기존 프로젝트는 사용 중인 Flutter SDK와
+      플러그인 버전을 별도로 검증합니다.
+    </p>
+
+    <h3>프로젝트 설정값</h3>
+    <table>
+      <thead>
+      <tr>
+        <th scope="col">설정 항목</th>
+        <th scope="col">적용값</th>
+        <th scope="col">설정 위치</th>
+        <th scope="col">확인 사항</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>Android <code>minSdk</code></td>
+        <td>24 이상</td>
+        <td><code>android/app/build.gradle.kts</code></td>
+        <td>기존 값이 더 높으면 유지</td>
+      </tr>
+      <tr>
+        <td>iOS Deployment Target</td>
+        <td>15.0 이상</td>
+        <td>Xcode Runner Target</td>
+        <td>Podfile 설정과 동일하게 유지</td>
+      </tr>
+      <tr>
+        <td>iOS Platform</td>
+        <td>15.0 이상</td>
+        <td><code>ios/Podfile</code></td>
+        <td>Xcode Deployment Target과 동일하게 유지</td>
+      </tr>
+      <tr>
+        <td>WebView 패키지</td>
+        <td>4.14.1</td>
+        <td><code>pubspec.yaml</code></td>
+        <td><code>pubspec.lock</code>에서 실제 선택 버전 확인</td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <hr />
+
+  <section>
+    <h2 class="bx-active">4. Chrome과 Safari 호환성 기준</h2>
+    <table>
+      <thead>
+      <tr>
+        <th scope="col">플랫폼</th>
+        <th scope="col">피해야 할 표기</th>
+        <th scope="col">권장 표기</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>Android</td>
+        <td>Chrome 특정 버전 이상 지원</td>
+        <td>Android SDK 24 이상과 프로젝트 검증 대상 System WebView 지원</td>
+      </tr>
+      <tr>
+        <td>iOS</td>
+        <td>Safari 특정 버전 이상 지원</td>
+        <td>iOS 15 이상에서 제공되는 WKWebView 지원</td>
+      </tr>
+      <tr>
+        <td>공통</td>
+        <td>최신 브라우저 지원</td>
+        <td>지원 OS와 WebView 엔진에서 프로젝트 사용 기능을 검증</td>
+      </tr>
+      </tbody>
+    </table>
+    <p>
+      Android System WebView는 Chromium 기반이지만 Chrome 앱과 업데이트
+      상태가 다를 수 있습니다. WKWebView와 Safari도 WebKit을 공유하지만
+      실행 환경과 제공 기능이 완전히 같지는 않습니다.
+    </p>
+    <p>
+      JavaScript, CSS 또는 Web API의 지원 여부가 중요하면 최소·최신 지원
+      OS의 실제 WebView에서 기능 단위로 검증합니다.
+    </p>
+  </section>
+
+  <hr />
+
+  <section>
+    <h2 class="bx-active">5. 패키지 설치</h2>
+    <p>프로젝트 루트에서 패키지를 추가하고 선택된 버전을 확인합니다.</p>
+    <pre class="hljs"><code data-language="bash"><span class="hljs-built_in">flutter</span> pub add webview_flutter
+<span class="hljs-built_in">flutter</span> pub get</code></pre>
+    <p>
+      설치 결과는 <code>pubspec.yaml</code>과 <code>pubspec.lock</code>을 함께
+      확인합니다. 플랫폼 전용 API를 직접 사용하지 않으면 구현 패키지를
+      별도로 추가하지 않습니다.
+    </p>
+  </section>
+
+  <hr />
+
+  <section>
+    <h2 class="bx-active">6. Android 설정</h2>
+    <h3>최소 SDK</h3>
+    <p>Android의 <code>minSdk</code>를 24 이상으로 설정합니다.</p>
+    <pre
+            class="hljs"
+    ><code data-language="kotlin"><span class="hljs-title function_">android</span> {
+  <span class="hljs-title function_">defaultConfig</span> {
+    minSdk = <span class="hljs-number">24</span>
+  }
+}</code></pre>
+
+    <h3>인터넷 권한</h3>
+    <p>외부 웹 페이지를 표시하려면 인터넷 권한을 선언합니다.</p>
+    <pre
+            class="hljs"
+    ><code data-language="xml"><span class="hljs-tag">&lt;<span class="hljs-name">uses-permission</span> <span class="hljs-attr">android:name</span>=<span class="hljs-string">&quot;android.permission.INTERNET&quot;</span> /&gt;</span></code></pre>
+
+    <h3>HTTP 통신</h3>
+    <p>
+      WebView 콘텐츠는 HTTPS를 사용합니다. 개발 환경에서 HTTP가 불가피한
+      경우에도 전체 통신을 허용하지 않고 Network Security Configuration으로
+      필요한 개발 도메인만 제한적으로 허용합니다.
+    </p>
+  </section>
+
+  <hr />
+
+  <section>
+    <h2 class="bx-active">7. iOS 설정</h2>
+    <h3>Deployment Target</h3>
+    <p>
+      Xcode의 Runner Target과 <code>ios/Podfile</code>을 모두 iOS 15 이상으로
+      설정합니다.
+    </p>
+    <pre
+            class="hljs"
+    ><code data-language="ruby"><span class="hljs-title function_">platform</span> <span class="hljs-symbol">:ios</span>, <span class="hljs-string">'15.0'</span></code></pre>
+
+    <h3>App Transport Security</h3>
+    <p>
+      HTTPS 사용을 원칙으로 합니다. HTTP 연결이 필요해도
+      <code>NSAllowsArbitraryLoads</code>로 모든 연결을 허용하지 않고 필요한
+      개발 도메인만 예외로 등록합니다.
+    </p>
+    <p>
+      카메라, 마이크 또는 위치정보를 사용하는 경우에는 실제 사용하는 기능에
+      해당하는 목적 문구를 <code>Info.plist</code>에 등록합니다.
+    </p>
+  </section>
+
+  <hr />
+
+  <section>
+    <h2 class="bx-active">8. 기본 구현</h2>
+    <p>
+      <code>WebViewController</code>에서 동작을 설정한 뒤
+      <code>WebViewWidget</code>에 전달합니다. 아래 URL과 이동 정책은 실제
+      프로젝트 계약으로 교체해야 합니다.
+    </p>
+    <pre
+            class="hljs"
+    ><code data-language="dart"><span class="hljs-keyword">import</span> <span class="hljs-string">'package:flutter/material.dart'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">'package:webview_flutter/webview_flutter.dart'</span>;
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">WebViewPage</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">StatefulWidget</span> {
+  <span class="hljs-keyword">const</span> <span class="hljs-title function_">WebViewPage</span>({<span class="hljs-keyword">super</span>.key});
+
+  <span class="hljs-meta">@override</span>
+  <span class="hljs-title class_">State</span>&lt;<span class="hljs-title class_">WebViewPage</span>&gt; <span class="hljs-title function_">createState</span>() =&gt; <span class="hljs-title class_">_WebViewPageState</span>();
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">_WebViewPageState</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">State</span>&lt;<span class="hljs-title class_">WebViewPage</span>&gt; {
+  <span class="hljs-keyword">late</span> <span class="hljs-keyword">final</span> <span class="hljs-title class_">WebViewController</span> _controller;
+
+  <span class="hljs-meta">@override</span>
+  <span class="hljs-keyword">void</span> <span class="hljs-title function_">initState</span>() {
+    <span class="hljs-keyword">super</span>.initState();
+    _controller = <span class="hljs-title class_">WebViewController</span>()
+      ..setJavaScriptMode(<span class="hljs-title class_">JavaScriptMode</span>.unrestricted)
+      ..setNavigationDelegate(
+        <span class="hljs-title class_">NavigationDelegate</span>(
+          onPageStarted: (<span class="hljs-title class_">String</span> url) {},
+          onPageFinished: (<span class="hljs-title class_">String</span> url) {},
+          onHttpError: (<span class="hljs-title class_">HttpResponseError</span> error) {},
+          onWebResourceError: (<span class="hljs-title class_">WebResourceError</span> error) {},
+          onNavigationRequest: (<span class="hljs-title class_">NavigationRequest</span> request) {
+            <span class="hljs-keyword">final</span> <span class="hljs-title class_">Uri</span>? uri = <span class="hljs-title class_">Uri</span>.tryParse(request.url);
+            <span class="hljs-keyword">if</span> (uri == <span class="hljs-literal">null</span> || uri.scheme != <span class="hljs-string">'https'</span>) {
+              <span class="hljs-keyword">return</span> <span class="hljs-title class_">NavigationDecision</span>.prevent;
+            }
+            <span class="hljs-keyword">return</span> <span class="hljs-title class_">NavigationDecision</span>.navigate;
+          },
+        ),
+      )
+      ..loadRequest(<span class="hljs-title class_">Uri</span>.parse(<span class="hljs-string">'https://example.com'</span>));
+  }
+
+  <span class="hljs-meta">@override</span>
+  <span class="hljs-title class_">Widget</span> <span class="hljs-title function_">build</span>(<span class="hljs-title class_">BuildContext</span> context) {
+    <span class="hljs-keyword">return</span> <span class="hljs-title class_">Scaffold</span>(
+      body: <span class="hljs-title class_">SafeArea</span>(
+        child: <span class="hljs-title class_">WebViewWidget</span>(controller: _controller),
+      ),
+    );
+  }
+}</code></pre>
+    <p>
+      JavaScript는 서비스 동작에 필요한 경우에만 활성화합니다. 신뢰할 수
+      없는 외부 페이지를 표시하면서 JavaScript를 무조건 허용하지 않습니다.
+    </p>
+  </section>
+
+  <hr />
+
+  <section>
+    <h2 class="bx-active">9. URL 이동과 JavaScript Bridge</h2>
+    <h3>URL 이동 제어</h3>
+    <p>
+      허용 여부를 URL 문자열의 부분 일치로 판단하지 않습니다. URL을
+      <code>Uri</code>로 파싱하고 scheme과 host를 정확히 비교합니다.
+    </p>
+    <ul>
+      <li>WebView 내부 이동 허용 도메인</li>
+      <li>외부 브라우저로 전달할 URL</li>
+      <li>전화, 이메일, 지도 앱 및 Custom Scheme 호출</li>
+      <li>Intent URL, 새 창, 팝업과 파일 다운로드 처리</li>
+    </ul>
+    <p>
+      위 정책은 앱과 웹 담당자가 승인한 뒤 구현합니다.
+    </p>
+
+    <h3>JavaScript Bridge</h3>
+    <p>
+      Bridge 메시지는 신뢰할 수 없는 입력으로 취급합니다. 허용된 도메인과
+      명령인지 확인하고, 요청 필드와 값의 형식을 검증한 뒤 Native 기능을
+      실행합니다.
+    </p>
+    <ul>
+      <li>Bridge를 인증 토큰 전달 수단으로 사용하지 않습니다.</li>
+      <li>임의 코드나 전달받은 함수를 실행하지 않습니다.</li>
+      <li>토큰, 비밀번호와 개인정보를 URL·메시지·로그에 남기지 않습니다.</li>
+      <li>Bridge 이름, 요청·응답 및 오류 규격은 승인된 계약으로 관리합니다.</li>
+    </ul>
+  </section>
+
+  <hr />
+
+  <section>
+    <h2 class="bx-active">10. 세션, 오류와 보안</h2>
+    <h3>쿠키와 세션</h3>
+    <p>
+      로그인 쿠키의 생성 주체, Domain·Path·Secure·SameSite 속성, 로그아웃
+      시 삭제 범위와 앱 재실행 시 세션 유지 정책을 사전에 합의합니다. 인증
+      토큰은 URL Query Parameter에 포함하지 않습니다.
+    </p>
+
+    <h3>오류 상태</h3>
+    <ul>
+      <li>최초 로딩과 정상 표시</li>
+      <li>네트워크 연결 실패와 HTTP 오류</li>
+      <li>SSL 또는 인증서 오류</li>
+      <li>허용되지 않은 URL 이동</li>
+      <li>세션 만료와 콘텐츠 렌더링 실패</li>
+    </ul>
+    <p>
+      오류가 발생해도 빈 화면만 표시하지 않고 오류 안내, 재시도와 화면 종료
+      방법을 제공합니다. SSL 인증서 오류를 무시하고 연결을 계속하지 않습니다.
+    </p>
+  </section>
+
+  <hr />
+
+  <section>
+    <h2 class="bx-active">11. 디버깅과 호환성 검증</h2>
+    <h3>디버깅</h3>
+    <p>
+      Android는 Chrome DevTools의 원격 디버깅, iOS는 Safari Web Inspector로
+      WebView 콘텐츠를 확인합니다. WebView 디버깅 기능은 개발 빌드에서만
+      활성화하고 운영 빌드에서는 비활성화합니다.
+    </p>
+
+    <h3>플랫폼 검증 환경</h3>
+    <table>
+      <thead>
+      <tr>
+        <th scope="col">플랫폼</th>
+        <th scope="col">필수 검증 환경</th>
+        <th scope="col">주요 확인 항목</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>Android</td>
+        <td>최소·최신 Android와 System WebView</td>
+        <td>화면 복귀, 키보드, 권한, 파일 선택과 엔진 업데이트 차이</td>
+      </tr>
+      <tr>
+        <td>iOS</td>
+        <td>최소·최신 iOS의 WKWebView</td>
+        <td>화면 복귀, 키보드, 권한, 파일 선택과 WebKit 차이</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <h3>공통 검증 항목</h3>
+    <ul>
+      <li>페이지 로딩, 재시도와 네트워크 단절·지연</li>
+      <li>로그인, 로그아웃, 쿠키와 세션 유지</li>
+      <li>JavaScript Bridge와 허용되지 않은 요청 차단</li>
+      <li>외부 URL, Custom Scheme와 뒤로 가기</li>
+      <li>HTTP·SSL 오류와 사용자 안내</li>
+      <li>Safe Area, 화면 회전, 접근성 글자 크기와 다크 모드</li>
+      <li>메모리 사용량과 화면 종료 후 리소스 해제</li>
+    </ul>
+  </section>
+
+  <hr />
+
+  <section>
+    <h2 class="bx-active">12. 우선 결정 항목</h2>
+    <p>다음 항목은 실제 애플리케이션 요구사항과 담당자 합의 후 확정합니다.</p>
+    <table>
+      <thead>
+      <tr>
+        <th scope="col">항목</th>
+        <th scope="col">결정할 내용</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>SDK와 패키지</td>
+        <td>Flutter·Dart 버전과 고정할 <code>webview_flutter</code> 버전</td>
+      </tr>
+      <tr>
+        <td>접속 범위</td>
+        <td>시작 URL, 허용 도메인과 외부 앱 호출 정책</td>
+      </tr>
+      <tr>
+        <td>인증</td>
+        <td>쿠키와 세션 생성·유지·삭제 정책</td>
+      </tr>
+      <tr>
+        <td>Bridge</td>
+        <td>채널명, 요청·응답·오류 계약과 허용 기능</td>
+      </tr>
+      <tr>
+        <td>기기 기능</td>
+        <td>파일, 카메라, 위치, 마이크와 다운로드 범위</td>
+      </tr>
+      <tr>
+        <td>사용자 경험</td>
+        <td>로딩, 오류, 재시도, 세션 만료와 종료 화면</td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+</main>
+
+<footer>
+  <p>Flutter WebView 설정 가이드</p>
+</footer>
+<script src="./../../assets/js/common.js"></script>
+</body>
+</html>
