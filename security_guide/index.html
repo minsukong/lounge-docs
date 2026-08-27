@@ -225,13 +225,36 @@
           <li>보안상 중요한 Sanitizer, 인증 SDK와 WebView package는 업데이트 기준과 Owner를 정합니다.</li>
         </ul>
 
+        <h3>공급망 침해 사례</h3>
+        <p>정상적인 package도 관리자 계정이나 배포 권한이 탈취되면 공격자가 악성 Version을 공식 Registry에 게시할 수 있습니다. 2026년 Axios npm 공급망 침해에서는 탈취된 관리자 계정으로 악성 Version과 하위 의존성이 약 3시간 동안 배포됐습니다. Axios는 현재 프로젝트의 사용 기술이 아니며, 이 사례는 유명 package와 공식 Registry도 무조건 신뢰할 수 없다는 점을 설명하기 위한 예시입니다. 실제 사고 내용은 <a href="https://github.com/axios/axios/issues/10636">Axios 공식 사후 보고서</a>에서 확인합니다.</p>
+
+        <h3>예방과 탐지</h3>
+        <ul>
+          <li>필요하지 않은 package는 추가하지 않습니다. 직접 의존성 하나를 추가하면 하위 의존성과 설치 Script도 함께 신뢰해야 합니다.</li>
+          <li>의존성 업데이트 PR은 <code>package.json</code>뿐 아니라 Lock File의 Version, 새 하위 의존성, 출처와 설치 Script 변경을 함께 검토합니다.</li>
+          <li>최신 Version을 자동 병합하지 않고 공식 Release·Security Advisory와 유지보수 상태를 확인합니다.</li>
+          <li>CI는 승인된 Lock File을 변경하지 않는 <code>npm ci</code> 등 재현 가능한 설치를 사용합니다.</li>
+          <li>지원되는 package는 Registry 서명과 Provenance(어떤 소스와 배포 과정에서 package가 만들어졌는지 확인하는 출처 증명)를 <code>npm audit signatures</code> 등으로 확인합니다. 서명이 유효해도 코드의 안전성까지 보장하는 것은 아닙니다.</li>
+          <li><code>npm audit</code>, 의존성 알림과 보안 공지를 함께 확인합니다. 공개되기 전의 공격이나 정상 배포 권한을 이용한 악성 Version은 <code>npm audit</code>만으로 즉시 발견하지 못할 수 있습니다.</li>
+        </ul>
+
+        <h3>악성 package를 설치한 경우</h3>
+        <ul>
+          <li><code>package.json</code>만 보지 않고 Lock File과 실제 설치 트리에서 영향 Version과 새 하위 의존성을 확인합니다.</li>
+          <li>설치 Script가 실행됐거나 악성 코드 실행 가능성을 배제할 수 없으면 단순한 package 교체가 아니라 개발 PC·CI Runner의 침해 사고로 취급하고 네트워크 연결과 추가 사용을 중지합니다.</li>
+          <li>영향받지 않은 별도 환경에서 npm, Git, CI/CD, Cloud와 배포에 사용한 Token·Secret·Key를 폐기·교체합니다.</li>
+          <li>문제 Version, <code>node_modules</code>, package Cache와 해당 환경에서 만든 Build Artifact를 신뢰하지 않습니다. 승인된 안전 Version과 Lock File을 기준으로 깨끗한 PC 또는 새 CI Runner에서 다시 설치·검증·빌드합니다.</li>
+          <li>영향 시간의 설치·CI·배포·로그와 외부 통신 기록을 확인하고, 감염 가능 환경에서 생성한 배포 Artifact는 폐기 후 재배포합니다.</li>
+          <li>Front-end 담당자가 임의로 사고 종료를 판단하지 않고 프로젝트 책임자와 공유하여 계정·배포·인프라 영향 범위와 추가 조치를 결정합니다.</li>
+        </ul>
+
         <h3>React와 Next.js 보안 업데이트</h3>
         <p>RCE(Remote Code Execution)는 공격자가 원격에서 서버나 실행 환경에 임의 코드를 실행하는 취약점입니다. WAF(Web Application Firewall)는 악성 요청을 차단하는 보조 장치이며, Patch는 취약점을 수정한 공식 업데이트입니다.</p>
         <ul>
-          <li>React와 Next.js는 프로젝트 생성 시점의 최신 안정 Version을 사용합니다.</li>
+          <li>React와 Next.js는 프로젝트 생성 시점에 공식 지원 상태, 보안 공지와 프로젝트 호환성을 확인한 최신 안정 Version을 후보로 선택하고, 검증 후 Lock File로 고정합니다.</li>
           <li><code>package.json</code>의 선언만 보지 않고 Lock File, 실제 설치 Version과 배포된 Version이 일치하는지 확인합니다.</li>
           <li>React와 Next.js 공식 보안 공지를 지속해서 확인하고, Release 또는 배포 전에는 현재 사용 Version에 적용되는 공지가 없는지 다시 확인합니다.</li>
-          <li>RCE, 인증 우회와 정보 노출처럼 영향이 큰 취약점은 일반 기능 작업보다 우선하여 최신 지원 보안 Version으로 업데이트하고 검증 후 재배포합니다.</li>
+          <li>RCE, 인증 우회와 정보 노출처럼 영향이 큰 취약점은 일반 기능 작업보다 우선하여 현재 사용 계열에서 취약점이 수정된 공식 지원 Version으로 업데이트하고 검증 후 재배포합니다. 현재 계열에 수정 Version이 없으면 상위 Version 전환과 영향을 검토합니다.</li>
           <li>WAF, 입력 검증, CSP와 코드 리뷰는 추가 방어 계층이며 취약한 Framework package의 공식 Patch를 대신하지 않습니다.</li>
           <li>취약한 Version이 외부에 노출됐을 가능성이 있으면 Patch와 재배포만으로 종료하지 않고 로그와 노출 범위를 확인하며 환경변수, API Key, Session Secret 등 자격 증명 교체 필요성을 검토합니다.</li>
         </ul>
