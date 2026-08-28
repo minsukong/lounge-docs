@@ -65,6 +65,12 @@
           이름과 연결 방식은
           <a href="./design_tokens.html">디자인 토큰 가이드</a>를 따릅니다.
         </p>
+        <p>
+          구현한 공통 컴포넌트의 사용법, 상태와 변경 사항을 관리하는 방법은
+          <a href="./../storybook_guide/index.html">Storybook 운영 가이드</a>를
+          따릅니다. Storybook은 Code Connect를 대체하지 않지만, 개발자와 AI가
+          실제 컴포넌트의 공개 API와 사용 예시를 확인하는 기준 문서로 사용합니다.
+        </p>
         <table>
           <thead>
             <tr>
@@ -150,7 +156,8 @@ flowchart LR
   B --> C["기존 컴포넌트와 토큰 매핑"]
   C --> D["React와 Tailwind CSS 초안 생성"]
   D --> E["화면 비교와 품질 검수"]
-  E --> F["프론트엔드 승인"]
+  E --> F["공통 컴포넌트 Story 작성 또는 갱신"]
+  F --> G["프론트엔드 승인"]
           </div>
           <figcaption>React Code Exports 기본 흐름</figcaption>
         </figure>
@@ -163,6 +170,10 @@ flowchart LR
           <li>기존 요소로 표현할 수 없는 부분만 새로 작성합니다.</li>
           <li>
             생성 화면을 Figma와 비교하고 프로젝트 품질 기준으로 검수합니다.
+          </li>
+          <li>
+            새로 만들거나 공개 API를 변경한 공통·재사용 컴포넌트는 Story를 함께
+            작성하거나 갱신하고 정적 Storybook 빌드로 확인합니다.
           </li>
         </ol>
 
@@ -217,6 +228,115 @@ flowchart LR
           또는 Enterprise 플랜 비용, 좌석과 권한, 저장소 연결 정책을 검토한 후
           도입 여부를 결정합니다. 도입 전에도 위 흐름이 동작하도록 운영합니다.
         </p>
+
+        <h3>4.2 Code Connect 미도입 시 기존 컴포넌트 연결</h3>
+        <p>
+          Code Connect를 도입하기 전에는 Figma의 공통 컴포넌트에 실제 코드
+          컴포넌트 정보를 기록하고, Cline이 구현 전에 프로젝트 소스를 검색하도록
+          하여 기존 컴포넌트를 우선 사용합니다. 이 방식은 Code Connect의 자동
+          매핑을 대체하지 않지만, 컴포넌트 이름과 import 경로를 추측하는 범위를
+          줄이기 위한 기본 운영 방식입니다.
+        </p>
+
+        <h4>작성 대상과 내용</h4>
+        <p>
+          모든 Frame과 내부 레이어에 정보를 작성하지 않습니다. Button, Input,
+          Dialog, Card와 같이 실제 React 컴포넌트에 대응하는 Figma Main
+          Component 또는 Component Set을 대상으로 합니다.
+        </p>
+        <ul>
+          <li>코드의 컴포넌트 이름과 named export</li>
+          <li>프로젝트에서 사용하는 import 경로</li>
+          <li>주요 Props와 variant</li>
+          <li>컴포넌트의 사용 목적과 중요한 제약</li>
+          <li>가능한 경우 실제 코드 또는 컴포넌트 문서의 Dev resource 링크</li>
+        </ul>
+        <pre class="hljs"><code data-language="text">Code component: Button
+Import: @/components/ui/button
+Props: variant, size, disabled
+Usage: 일반적인 사용자 action에 사용
+Source: Dev resource 참고</code></pre>
+        <p>
+          로컬 절대 경로는 다른 작업자가 사용할 수 없으므로 기록하지 않습니다.
+          import alias, 저장소 상대 경로 또는 팀이 접근할 수 있는 소스 링크를
+          사용합니다. Figma와 코드의 variant 이름이 다르면 대응 관계를 설명에
+          함께 기록합니다. 아직 구현이나 경로가 확정되지 않은 항목은 추측하지
+          않고 <code>Code mapping: TBD</code>로 표시합니다.
+        </p>
+
+        <h4>Figma 작성 방법</h4>
+        <ol>
+          <li>컴포넌트 라이브러리의 원본 Figma 파일을 엽니다.</li>
+          <li>
+            Instance가 아니라 Main Component, Component Set 또는 설명이 필요한
+            개별 Variant를 선택합니다.
+          </li>
+          <li>
+            Design Mode의 Component configuration에서 Description을 열고 코드
+            컴포넌트 정보를 입력합니다.
+          </li>
+          <li>
+            실제 코드나 문서 URL이 있으면 Documentation link 또는 Dev Mode의
+            Dev resource로 연결합니다.
+          </li>
+          <li>
+            공통 링크는 개별 Instance가 아니라 Main Component에 연결하여 모든
+            Instance에서 같은 정보를 확인할 수 있게 합니다.
+          </li>
+          <li>라이브러리로 운영하는 경우 변경 내용을 검토한 뒤 Publish합니다.</li>
+        </ol>
+        <p>
+          Description을 수정하려면 원본 Figma Design 파일의 편집 권한이
+          필요합니다. Dev Mode에서는 Description과 연결된 리소스를 확인하고,
+          권한이 허용된 경우 실제 코드나 문서의 Dev resource를 추가합니다.
+        </p>
+
+        <h4>구축과 운영 책임</h4>
+        <ul>
+          <li>
+            구축 기간에는 Figma Design 편집 권한이 있는 담당자가 구현된 공통
+            컴포넌트의 이름, import 경로와 사용 설명을 원본 컴포넌트에
+            작성합니다.
+          </li>
+          <li>
+            프론트엔드 개발자는 실제 코드의 export, Props, variant와 소스 링크가
+            정확한지 확인합니다.
+          </li>
+          <li>
+            운영 이후 프론트엔드 개발자는 Dev Mode를 기본으로 사용합니다.
+            Description 변경이 필요한 경우 회사의 좌석 관리 정책에 따라 해당
+            개발자에게 일시적으로 Figma Design 편집 권한을 부여합니다.
+          </li>
+          <li>
+            Figma 계정과 로그인 정보는 공유하지 않으며, 관리자 기능으로 개인
+            계정의 좌석과 권한을 변경합니다.
+          </li>
+          <li>
+            컴포넌트 이름, 경로 또는 공개 API가 변경되면 코드와 Figma 설명을
+            함께 갱신합니다.
+          </li>
+        </ul>
+
+        <h4>Cline 구현 기준</h4>
+        <ol>
+          <li>선택된 Figma 요소가 공통 컴포넌트 Instance인지 확인합니다.</li>
+          <li>Description과 Dev resource에서 코드 컴포넌트 정보를 확인합니다.</li>
+          <li>
+            안내된 경로의 실제 파일을 읽어 export, Props와 variant를 검증합니다.
+          </li>
+          <li>
+            현재 기능, 애플리케이션 공통 UI와 <code>packages/ui</code>에서 기존
+            사용 예시를 검색합니다.
+          </li>
+          <li>
+            확인된 컴포넌트를 import하여 사용하고, 존재하지 않는 경로나 API는
+            추측하지 않습니다.
+          </li>
+          <li>
+            기존 컴포넌트로 표현할 수 없는 부분만 새로 작성하고 그 이유를 변경
+            설명에 남깁니다.
+          </li>
+        </ol>
       </section>
 
       <hr />
@@ -673,7 +793,20 @@ ollama run qwen3.8:27b-mtp-q4_K_M</code></pre>
             <code>현재 figma에서 선택된 레이어(프레임) 정보/코딩</code>이라고
             요청합니다.
           </li>
-          <li>관련 컴포넌트, Tailwind 토큰과 디자인 토큰을 먼저 확인합니다.</li>
+          <li>
+            코드를 작성하기 전에 현재 기능, 애플리케이션의 공통 UI와
+            <code>packages/ui</code> 순서로 같은 역할의 기존 컴포넌트를
+            검색합니다.
+          </li>
+          <li>
+            사용할 컴포넌트의 실제 파일, export, Props, variant와 기존 사용
+            예시를 확인합니다. 존재하지 않는 import 경로, Props, variant 또는
+            토큰은 추측하지 않습니다.
+          </li>
+          <li>
+            <code>globals.css</code>의 Semantic Token과 기존 Tailwind 사용
+            방식을 확인합니다.
+          </li>
           <li>
             기존 요소를 우선 재사용하고 불명확한 동작이나 데이터는 담당자에게
             확인합니다.
@@ -690,6 +823,17 @@ ollama run qwen3.8:27b-mtp-q4_K_M</code></pre>
         <ul>
           <li>Figma에서 의도한 레이어 또는 프레임을 정확히 선택했는가?</li>
           <li>기존 컴포넌트와 디자인 토큰을 우선 사용했는가?</li>
+          <li>
+            기존 컴포넌트의 실제 파일, export, Props와 variant를 확인했는가?
+          </li>
+          <li>
+            기존 컴포넌트로 표현할 수 있는 요소를 native JSX와 Tailwind로
+            중복 구현하지 않았는가?
+          </li>
+          <li>
+            생성된 import가 실제 경로와 export를 가리키는지 TypeScript 검사로
+            확인했는가?
+          </li>
           <li>
             작업 범위를 벗어난 파일, 의존성 또는 설정을 변경하지 않았는가?
           </li>
@@ -774,6 +918,18 @@ ollama run qwen3.8:27b-mtp-q4_K_M</code></pre>
         <ul>
           <li>기존 컴포넌트가 있으면 동일한 요소를 새로 생성하지 않습니다.</li>
           <li>
+            app-webview에서만 사용하는 shadcn/ui 원형과 Wrapper는
+            <code>apps/app-webview/src/components/ui</code>에서 관리합니다.
+          </li>
+          <li>
+            둘 이상의 Web 애플리케이션에서 실제로 재사용되고 의미와 변경 이유가
+            같은 UI 원형만 <code>packages/ui</code>에서 관리합니다.
+          </li>
+          <li>
+            기존 컴포넌트를 사용할 때 파일명만으로 판단하지 않고 실제 named
+            export, Props, variant와 import alias를 확인합니다.
+          </li>
+          <li>
             디자인과 코드의 이름 또는 값이 다르면 한쪽을 임의로 정답으로
             간주하지 않고 차이를 확인합니다.
           </li>
@@ -833,6 +989,41 @@ ollama run qwen3.8:27b-mtp-q4_K_M</code></pre>
             파일을 미리 만들지 않습니다.
           </li>
         </ul>
+
+        <h3>8.1 Storybook 등록 기준</h3>
+        <p>
+          Storybook은 구현된 컴포넌트의 목록, 사용법과 주요 상태를 확인하는 개발
+          문서로 운영합니다. AI 도구는 Story 초안 작성, 누락 점검과 빌드 확인을
+          지원할 수 있지만, 등록 대상과 실제 상태의 정확성은 프론트엔드 개발자가
+          검수합니다.
+        </p>
+        <ul>
+          <li>
+            <code>apps/app-webview/src/components/ui</code>,
+            <code>packages/ui</code>와 독립적으로 재사용되는 기능 컴포넌트를 우선
+            등록합니다.
+          </li>
+          <li>
+            실제 export와 Props를 기준으로 기본 상태, variant, size, disabled,
+            loading, error와 empty 중 구현된 상태만 Story로 작성합니다.
+          </li>
+          <li>
+            공개 Props, variant 또는 시각적 상태를 변경한 작업에서는 관련 Story도
+            같은 변경에 포함합니다.
+          </li>
+          <li>
+            페이지 전체, 한 번만 쓰는 단순 레이아웃, 타입·상수·도우미 파일과 과도한
+            Mock이 필요한 내부 컴포넌트는 기본 등록 대상에서 제외합니다.
+          </li>
+          <li>
+            Storybook을 위해 제품 코드에 사용하지 않는 Props, variant, wrapper나
+            Mock 전용 구조를 추가하지 않습니다.
+          </li>
+          <li>
+            Story가 없는 컴포넌트를 AI로 점검할 때는 파일 수만 비교하지 않고 대상,
+            근거와 제외 사유를 먼저 확인한 뒤 필요한 Story만 추가합니다.
+          </li>
+        </ul>
       </section>
 
       <hr />
@@ -845,6 +1036,11 @@ ollama run qwen3.8:27b-mtp-q4_K_M</code></pre>
           <li>의미 있는 HTML과 키보드·포커스 기본 동작을 유지하는가?</li>
           <li>모바일 및 필요한 반응형 범위를 확인했는가?</li>
           <li>불필요한 공통화와 파일 분리가 없는가?</li>
+          <li>
+            공통·재사용 컴포넌트를 새로 만들거나 공개 API를 변경했다면 Story를
+            작성 또는 갱신했는가?
+          </li>
+          <li>해당되는 경우 정적 Storybook 빌드를 통과하는가?</li>
           <li>TypeScript 검사, lint와 production build를 통과하는가?</li>
         </ul>
         <blockquote>

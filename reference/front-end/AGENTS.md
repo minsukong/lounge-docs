@@ -27,6 +27,45 @@
 - 단순 정적 HTML 결과로 끝내지 말고 현재 Next.js 애플리케이션에 동작하는 컴포넌트로 구현합니다.
 - Figma export와 AI 생성 결과는 초안으로 보고 구조, 토큰, 접근성 및 반응형 동작을 검토합니다.
 
+### Figma UI 구현 전 확인
+
+- 코드를 작성하기 전에 선택된 Figma 요소가 공통 컴포넌트 Instance인지 확인합니다.
+- Figma Main Component의 Description과 Dev resource에 코드 컴포넌트 이름, import 경로 또는 소스 링크가 있으면 먼저 확인합니다.
+- Figma에 기록된 정보만으로 구현하지 않고 안내된 실제 코드 파일을 읽어 named export, Props와 variant를 검증합니다.
+- 다음 순서로 같은 역할의 기존 구현과 사용 예시를 검색합니다.
+  1. 현재 feature 내부 컴포넌트
+  2. 현재 application의 `src/components/ui`
+  3. `packages/ui`
+- `globals.css`의 Semantic Token과 기존 Tailwind 사용 방식을 확인합니다.
+
+### 기존 UI 컴포넌트 사용
+
+- 같은 역할의 기존 컴포넌트가 있으면 새 컴포넌트나 native JSX로 중복 구현하지 않습니다.
+- import 경로, export, Props, variant와 디자인 토큰을 추측하지 않습니다.
+- Figma Description과 실제 코드가 다르면 어느 한쪽을 임의로 정답으로 간주하지 않고 차이를 사용자에게 알립니다.
+- app-webview에서만 사용하는 shadcn/ui 원형과 Wrapper는 `apps/app-webview/src/components/ui`에 둡니다.
+- 둘 이상의 Web application에서 실제로 재사용되고 의미와 변경 이유가 같은 UI 원형만 `packages/ui`에 둡니다.
+- 예약, 이용권, 라운지처럼 업무 의미가 있는 컴포넌트는 해당 feature 가까이에 둡니다.
+- 기존 컴포넌트로 표현할 수 없는 부분만 새로 작성하고 완료 보고에 그 이유를 남깁니다.
+
+### UI 구현 검증과 완료 보고
+
+- 변경 후 프로젝트에 정의된 TypeScript 검사와 lint를 실행합니다.
+- 필요한 경우 production build를 실행합니다.
+- 완료 보고에 재사용한 기존 컴포넌트, 새로 만든 컴포넌트, 사용한 Semantic Token과 검증 결과를 포함합니다.
+
+### Storybook 반자동 운영
+
+- Storybook이 도입된 이후 공통 UI 컴포넌트를 새로 만들면 같은 변경에서 Story를 작성합니다.
+- 기존 컴포넌트의 공개 Props 또는 variant를 변경하면 실제 코드와 사용처를 확인하고 Story도 함께 갱신합니다.
+- Story는 실제 export와 TypeScript Props를 기준으로 작성하며 존재하지 않는 상태를 추측하지 않습니다.
+- 기본 상태와 실제로 지원하는 주요 variant, size, disabled, loading, error 및 empty 상태만 작성합니다.
+- 타입, utility, helper, export 전용 파일, 내부 구현과 한 화면에서만 사용하는 단순 UI에는 Story를 강제하지 않습니다.
+- Storybook을 위해 사용하지 않는 제품 Props, variant, Wrapper 또는 Mock을 추가하지 않습니다.
+- 공통 UI의 Story 누락과 실제 코드 불일치를 점검할 때 먼저 대상, 근거와 제외 사유를 보고하고 승인된 항목만 수정합니다.
+- 완료 전에 Storybook 정적 Build와 프로젝트에 합의된 Story 검사를 실행합니다.
+- 완료 보고에 추가하거나 수정한 Story, 표현한 주요 상태, 검증 결과와 재현하지 못한 환경 의존성을 포함합니다.
+
 ## AI 문서 확인 흐름
 
 AI는 작업을 시작할 때 이 `AGENTS.md`를 먼저 읽습니다. 이후 작업 종류를 판단해 필요한 `docs/ai/` 요약만 확인하고, 요약만으로 세부 기준을 판단하기 어려울 때 연결된 상세 가이드로 이동합니다.
@@ -39,6 +78,7 @@ AI는 작업을 시작할 때 이 `AGENTS.md`를 먼저 읽습니다. 이후 작
 | UI, 컴포넌트와 스타일 구현 | [Markdown](./docs/ai/ui.md) · [HTML](./docs/ai/ui.html) | React·TypeScript 출력, Tailwind CSS, 컴포넌트 재사용과 접근성 기준 |
 | 디자인 토큰과 스타일 값 연결 | [Markdown](./docs/ai/design-tokens.md) · [HTML](./docs/ai/design-tokens.html) | 의미 기반 토큰, shadcn/ui 설정, Figma Variables와 Tokens Studio 기준 |
 | Figma 화면을 애플리케이션 코드로 구현 | [Markdown](./docs/ai/figma.md) · [HTML](./docs/ai/figma.html) | 구현 전 조사, 기존 코드 매핑, React 구현과 시각·품질 확인 흐름 |
+| Storybook Story 작성과 누락 점검 | [Markdown](./docs/ai/storybook.md) · [HTML](./docs/ai/storybook.html) | 작성 시점과 대상, 실제 상태, 반자동 운영과 완료 기준 |
 | TypeScript, Lint, Test와 Build 품질 확인 | [Markdown](./docs/ai/quality.md) · [HTML](./docs/ai/quality.html) | 검사 도구의 역할, 테스트 범위와 기본 검증 명령 |
 | 네트워크 지연, 비동기 UI와 성능 검증 | [Markdown](./docs/ai/performance.md) · [HTML](./docs/ai/performance.html) | Loading·Timeout·Offline 처리, 요청 안전성과 저속 네트워크 검증 |
 | 인증·권한, 외부 입력, 개인정보와 보안 검토 | [Markdown](./docs/ai/security.md) · [HTML](./docs/ai/security.html) | XSS, URL, Client 저장소, Cookie·CSRF, Secret, Bridge, 파일과 의존성 기준 |
@@ -71,6 +111,7 @@ flowchart TD
   C -->|"프로젝트 구조·기능·상태"| P["docs/ai/project.md"]
   C -->|"UI·컴포넌트·스타일"| U["docs/ai/ui.md + design-tokens.md"]
   C -->|"Figma 구현"| F["docs/ai/figma.md + ui.md + design-tokens.md"]
+  C -->|"Story 작성·점검"| SB["docs/ai/storybook.md"]
   C -->|"Lint·Test·품질"| Q["docs/ai/quality.md"]
   C -->|"네트워크 지연·비동기 UI·성능"| N["docs/ai/performance.md"]
   C -->|"인증·권한·외부 입력·보안"| S["docs/ai/security.md"]
@@ -79,6 +120,7 @@ flowchart TD
   P -->|"세부 기준이 필요할 때"| PH["frontend_guide/index.html + monorepo/index.html"]
   U -->|"세부 기준이 필요할 때"| UH["frontend_guide/index.html + UI 상세 가이드"]
   F -->|"세부 기준이 필요할 때"| FH["react_code_exports.html + design_tokens.html"]
+  SB -->|"세부 기준이 필요할 때"| SBH["storybook_guide/index.html + common-source/storybook.md"]
   Q -->|"세부 기준이 필요할 때"| QH["lint_guide/index.html + test_guide/index.html"]
   N -->|"세부 기준이 필요할 때"| NH["performance_guide/draft.md + 승인된 API 계약"]
   S -->|"세부 기준이 필요할 때"| SH["security_guide/index.html + 실제 인증·배포 설정"]
@@ -95,10 +137,11 @@ flowchart TD
 
 - 프로젝트 구조와 공통 기준: [Front-End 개발 가이드](../../frontend_guide/index.html), [Front-End Monorepo 공통 기준](../../monorepo/index.html)
 - UI와 Figma 구현: [React Code Exports 가이드](../../ui_guide/react_code_exports.html), [디자인 토큰 가이드](../../ui_guide/design_tokens.html)
+- Storybook 운영: [Storybook 운영 가이드](../../storybook_guide/index.html), [Storybook 적용 가이드](./docs/common-source/storybook.md)
 - 품질 확인: [Lint 가이드](../../lint_guide/index.html), [Test 가이드](../../test_guide/index.html)
 - 네트워크 지연과 성능: [네트워크 지연 대응 및 성능 검증 가이드](../../performance_guide/draft.md)
 - 보안과 개인정보: [Front-End 보안과 개인정보 가이드](../../security_guide/index.html)
-- 공통 소스 구현: [공통 소스 가이드](./docs/common-source/index.md), [API 요청 기반](./docs/common-source/network.md), [세션 경계](./docs/common-source/session.md), [API Mock](./docs/common-source/api-mocking.md), [테스트 공통 소스](./docs/common-source/test.md), [통합 사용 예시](./docs/common-source/recipes.md), [공통 소스 카탈로그](./docs/common-source/catalog.md)
+- 공통 소스 구현: [공통 소스 가이드](./docs/common-source/index.md), [API 요청 기반](./docs/common-source/network.md), [세션 경계](./docs/common-source/session.md), [API Mock](./docs/common-source/api-mocking.md), [테스트 공통 소스](./docs/common-source/test.md), [Storybook 적용](./docs/common-source/storybook.md), [통합 사용 예시](./docs/common-source/recipes.md), [공통 소스 카탈로그](./docs/common-source/catalog.md)
 
 ### 공통 소스 구현 문서
 
@@ -113,6 +156,7 @@ flowchart TD
 | API 요청과 기능별 응답 검증 연결 | [Markdown](./docs/common-source/network.md) · [HTML](./docs/common-source/network.html) | HTTP 오류, 공통 요청 함수와 기능별 parser 연결 예시 |
 | 로그인 상태와 회원 데이터 경계 | [Markdown](./docs/common-source/session.md) · [HTML](./docs/common-source/session.html) | 세션 model·parser·Query와 로그아웃 cache 초기화 기준 |
 | Client Component와 Query 테스트 환경 구성 | [Markdown](./docs/common-source/test.md) · [HTML](./docs/common-source/test.html) | Vitest, Testing Library, 공통 렌더링 함수와 사용자 동작 테스트 예시 |
+| 공통 컴포넌트 Storybook 구성과 검수 | [Markdown](./docs/common-source/storybook.md) · [HTML](./docs/common-source/storybook.html) | `.storybook`, Story 배치, Autodocs와 정적 Build 적용 기준 |
 | 계약 확정 후 API Mock 필요성 판단 | [Markdown](./docs/common-source/api-mocking.md) · [HTML](./docs/common-source/api-mocking.html) | Backend 환경 우선, Front-end 범위·책임과 선택 도구 기준 |
 | 공통 소스를 한 기능에 연결 | [Markdown](./docs/common-source/recipes.md) · [HTML](./docs/common-source/recipes.html) | 프로필 조회·검증·수정·상태 처리와 테스트를 연결한 통합 예시 |
 | 적용 조건, package와 미확정 항목 확인 | [Markdown](./docs/common-source/catalog.md) · [HTML](./docs/common-source/catalog.html) | 파일별 도입 조건, 함께 적용할 코드, 필요한 package, TBD와 검증 목록 |
@@ -127,6 +171,7 @@ docs/
 │  ├─ ui.md             # UI, 컴포넌트 및 스타일 작업
 │  ├─ design-tokens.md  # 디자인 토큰 및 스타일 기준
 │  ├─ figma.md          # Figma URL 및 디자인 구현 작업
+│  ├─ storybook.md      # Story 작성, 갱신과 누락 점검
 │  ├─ quality.md        # Lint, Test 및 품질 확인
 │  ├─ performance.md    # 네트워크 지연, 비동기 UI 및 성능 검증
 │  ├─ security.md       # 인증·권한, 외부 입력, 개인정보 및 보안 검토
@@ -140,6 +185,7 @@ docs/
    ├─ network.md        # API 요청과 응답 검증 경계 가이드
    ├─ session.md        # 세션과 회원 데이터 경계 가이드
    ├─ test.md           # Vitest와 Testing Library 공통 테스트 가이드
+   ├─ storybook.md      # Storybook 구성과 Story 적용 가이드
    ├─ api-mocking.md    # 계약 확정 후 API Mock 도입 판단 기준
    ├─ recipes.md        # 공통 소스를 연결한 기능 단위 통합 예시
    ├─ catalog.md        # 구현 항목과 도입 조건 체크리스트
@@ -148,6 +194,7 @@ docs/
 
 - UI 작업에서는 `docs/ai/ui.md`와 `docs/ai/design-tokens.md`를 함께 읽습니다.
 - Figma 구현 작업에서는 `docs/ai/figma.md`, `docs/ai/ui.md`, `docs/ai/design-tokens.md`를 함께 읽습니다.
+- 공통·재사용 컴포넌트를 생성하거나 공개 Props와 variant를 변경하는 작업에서는 `docs/ai/storybook.md`를 함께 읽습니다.
 - API, Query, Loading, Timeout, Offline, 이미지·폰트 로딩 또는 성능에 영향을 주는 작업에서는 `docs/ai/performance.md`를 함께 읽습니다.
 - 인증·권한, 외부 HTML·URL, 개인정보, Client 저장소, Bridge, 파일 또는 새 의존성이 포함된 작업에서는 `docs/ai/security.md`를 함께 읽습니다.
 - 공통 소스 작업에서는 `docs/ai/common-source.md`를 먼저 읽고 작업 영역에 해당하는 `docs/common-source/` 상세 가이드와 카탈로그를 확인합니다.
@@ -175,5 +222,7 @@ npm run typecheck
 npm run lint
 npm run test
 ```
+
+Story를 추가하거나 변경한 작업에서는 실제 `package.json`에 정의된 Storybook 정적 Build 명령도 실행합니다. Script가 아직 없으면 존재하는 것처럼 추측하지 않고 미구성 상태를 보고합니다.
 
 병합 또는 통합 영향이 있는 변경에서는 `npm run build`도 확인합니다.

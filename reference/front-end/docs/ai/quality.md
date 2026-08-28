@@ -1,6 +1,6 @@
-# Lint와 Test 핵심 규칙
+# Lint, Test와 Storybook 품질 핵심 규칙
 
-> 기준 원본: `lounge-docs/lint_guide/index.html`, `lounge-docs/test_guide/index.html`
+> 기준 원본: `lounge-docs/lint_guide/index.html`, `lounge-docs/test_guide/index.html`, `lounge-docs/storybook_guide/index.html`
 >
 > 이 문서는 AI 코딩용 요약입니다. 충돌하거나 세부 판단이 필요하면 기준 원본을 확인합니다.
 
@@ -9,6 +9,7 @@
 - TypeScript 검사는 타입과 모듈 경계의 오류를 확인합니다.
 - Lint는 코드를 실행하지 않고 정적 패턴, Next.js 규칙과 기본 접근성 오류를 확인합니다.
 - Test는 코드를 실행해 사용자 동작과 실제 결과를 확인합니다.
+- Storybook은 공통 컴포넌트의 실제 렌더링, 공개 API와 주요 상태를 애플리케이션 화면과 분리해 확인합니다.
 - Lint가 디자인 의도와 모든 접근성을 판단한다고 가정하지 않습니다.
 
 ## 테스트 범위
@@ -31,6 +32,7 @@ npm run lint
 npm run test
 ```
 
+- Story를 추가하거나 변경했다면 프로젝트에 정의된 Storybook 정적 Build 명령도 실행합니다. 실제 Script 이름은 `package.json`을 기준으로 확인하며 존재하지 않는 명령을 추측하지 않습니다.
 - 병합 또는 통합 영향이 있는 변경에서는 `npm run build`도 실행합니다.
 - API, Query, 비동기 UI, 이미지, 폰트 또는 초기 전송에 영향을 주는 변경은 `performance.md`에서 저속 네트워크, 연결 중단과 성능 회귀 검증 기준을 추가로 확인합니다.
 - E2E와 커버리지 기준은 실제 필요가 생길 때 추가합니다.

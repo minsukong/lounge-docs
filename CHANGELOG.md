@@ -11,6 +11,43 @@
 - 변경한 파일 목록만 나열하지 않고 변경 목적, 주요 내용, 미확정 항목과 검증 결과를 함께 기록합니다.
 - 같은 작업에서 Markdown과 HTML을 함께 수정했다면 하나의 변경 항목으로 기록합니다.
 
+## 2026-08-28
+
+### Figma 기반 UI 구현과 Storybook 반자동 운영 연결
+
+- Figma 디자인을 Cline의 로컬 LLM, Codex, Claude Code 등 AI 코딩 도구로 React와 Tailwind CSS 4 코드에 옮기되, 생성 결과를 완성 코드가 아닌 구현 초안으로 검수하는 흐름을 정리했습니다.
+- Code Connect를 도입하기 전에는 Figma Main Component의 Description과 Dev resource에 실제 코드 컴포넌트 이름, import 경로, 주요 Props, variant와 사용 설명을 기록해 AI의 추측 범위를 줄이도록 했습니다.
+- AI는 Figma 설명을 참고한 뒤 실제 프로젝트 파일에서 named export, Props, variant와 사용처를 다시 확인하고 기존 shadcn/ui 및 프로젝트 컴포넌트를 우선 사용하도록 기준을 보강했습니다.
+- Storybook을 공통·재사용 UI 컴포넌트의 독립 개발, 공개 API 확인, 주요 상태 검수와 문서화를 위한 기본 운영 도구로 도입했습니다.
+- Button처럼 공통 컴포넌트임이 확실하면 실제 컴포넌트와 Story를 함께 작성해 Storybook에서 먼저 검수한 뒤 화면에 사용하고, 재사용 여부가 불확실하면 기능 가까이에서 구현한 후 실제 반복이 확인될 때 Story를 추가하도록 두 가지 개발 경로를 구분했습니다.
+- 모든 `.tsx` 파일에 Story를 생성하지 않고 공통 UI, 실제 공유 UI와 독립 검증 가치가 있는 feature 컴포넌트만 대상으로 삼으며, 페이지·단순 레이아웃·도우미 파일과 과도한 Mock이 필요한 내부 구현은 기본 대상에서 제외했습니다.
+- Story 작성과 갱신, 누락·불일치 조사 및 정적 Build는 AI가 우선 수행할 수 있고, 프론트엔드 개발자가 등록 대상, 실제 상태, Figma 일치 여부, 접근성과 결과를 검수하는 반자동 운영 기준을 마련했습니다.
+- 최초 구축, 일상적인 컴포넌트 변경과 정기 누락 점검에 사용할 수 있는 도구 독립적인 AI 요청 예시를 추가했습니다.
+- 기존 Front-End 가이드의 “Storybook은 기본 도구에 포함하지 않는다”는 정책을 제거하고 React Code Exports, Storybook, 프로젝트 구조, UI, Figma와 품질 문서의 흐름을 같은 기준으로 연결했습니다.
+
+#### 실제 프로젝트용 참고 구조
+
+- 실제 업무용 [`AGENTS.md`](./reference/front-end/AGENTS.md)에 Figma 구현 전 확인, 기존 컴포넌트 재사용과 Storybook 반자동 운영 규칙을 추가했습니다.
+- AI가 Storybook 작업 전에 읽는 [`storybook.md`](./reference/front-end/docs/ai/storybook.md)와 실제 `.storybook`, `*.stories.tsx`, Autodocs 및 정적 Build 적용 절차를 설명하는 [`common-source/storybook.md`](./reference/front-end/docs/common-source/storybook.md)를 추가했습니다.
+- `reference/front-end`의 README, AI 문서 선택 흐름, 프로젝트 구조, UI·Figma·품질 요약과 공통 소스 목록에 Storybook 진입점을 연결했습니다.
+- 실제 애플리케이션이 생성되면 `apps/app-webview/.storybook`에 실행 설정을 두고 Story는 실제 컴포넌트 가까이에 배치합니다. Framework, Addon, package와 Script 이름은 실제 `package.json`과 Lock File을 확인한 뒤 확정합니다.
+- 여러 애플리케이션에서 의미와 변경 이유가 같은 재사용이 확인되기 전에는 별도 Storybook 애플리케이션이나 `packages/ui` 구성을 미리 만들지 않습니다.
+
+#### 주요 문서
+
+- [`Storybook 운영 가이드`](./storybook_guide/index.html) · [`초안`](./storybook_guide/draft.md)
+- [`React Code Exports 가이드`](./ui_guide/react_code_exports.html)
+- [`Front-End 개발 가이드`](./frontend_guide/index.html)
+- [`Storybook AI 요약`](./reference/front-end/docs/ai/storybook.md) · [`HTML`](./reference/front-end/docs/ai/storybook.html)
+- [`Storybook 적용 가이드`](./reference/front-end/docs/common-source/storybook.md) · [`HTML`](./reference/front-end/docs/common-source/storybook.html)
+
+#### 검증
+
+- 기존 Storybook 미도입 정책이 관련 Markdown과 HTML에 남아 있지 않은지 확인했습니다.
+- `reference/front-end/docs/ai`와 `docs/common-source`의 Markdown·HTML 파일 쌍, 새 내부 링크와 Storybook 문서 진입점을 확인했습니다.
+- 수정한 주요 HTML의 문법과 Section, Code Block 및 닫는 태그 구조를 확인했습니다.
+- 실제 package와 애플리케이션이 아직 생성되지 않아 Storybook 설치, 정적 Build와 브라우저 시각 검증은 수행하지 않았습니다.
+
 ## 2026-08-26
 
 ### 네트워크 지연·Offline 검증과 API Mock 기준 정리

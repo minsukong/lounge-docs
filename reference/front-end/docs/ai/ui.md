@@ -1,6 +1,6 @@
 # UI 구현 핵심 규칙
 
-> 기준 원본: `lounge-docs/frontend_guide/index.html`, `lounge-docs/ui_guide/react_code_exports.html`, `lounge-docs/ui_guide/design_tokens.html`
+> 기준 원본: `lounge-docs/frontend_guide/index.html`, `lounge-docs/ui_guide/react_code_exports.html`, `lounge-docs/ui_guide/design_tokens.html`, `lounge-docs/storybook_guide/index.html`
 >
 > 이 문서는 AI 코딩용 요약입니다. 충돌하거나 세부 판단이 필요하면 기준 원본을 확인합니다.
 
@@ -20,6 +20,7 @@
 - Tailwind 임의 값은 프로젝트 토큰으로 표현하기 어려운 실제 요구가 있을 때만 사용합니다.
 - shadcn/ui는 수정 가능한 프로젝트 소유 코드로 취급하되 모든 기능 UI를 불필요한 공통 wrapper로 감싸지 않습니다.
 - 반복과 변경 가능성이 확인되기 전에 variant 계층을 미리 만들지 않습니다.
+- 공통·재사용 컴포넌트를 만들거나 공개 Props와 variant를 변경하면 `storybook.md`를 확인해 Story를 같은 변경에서 작성하거나 갱신합니다.
 
 ## 구조와 접근성
 

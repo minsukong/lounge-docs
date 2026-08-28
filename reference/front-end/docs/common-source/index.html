@@ -69,6 +69,11 @@
 <td>Vitest 설정, setup, <code>renderWithProviders</code></td>
 </tr>
 <tr>
+<td>공통 컴포넌트를 독립적으로 개발·검수하기</td>
+<td><a href="./storybook.html">Storybook 적용 가이드</a></td>
+<td><code>.storybook</code>, <code>*.stories.tsx</code>, Autodocs와 정적 Build</td>
+</tr>
+<tr>
 <td>계약 확정 후 API Mock 필요성 판단하기</td>
 <td><a href="./api-mocking.html">API Mock 도입 판단 기준</a></td>
 <td>Backend 환경 우선, Front-end 범위·책임과 선택 도구 기준</td>
@@ -103,6 +108,7 @@
 <li><strong>완성 코드</strong>를 기존 구현과 비교해 새 파일 생성 또는 병합을 선택합니다.</li>
 <li><strong>사용 예시</strong>까지 연결해 import만 되고 실제로는 쓰이지 않는 공통 코드를 남기지 않습니다.</li>
 <li><strong>프로젝트에서 바꿀 부분</strong>만 실제 계약과 디자인 값으로 교체합니다.</li>
+<li>공통·재사용 컴포넌트를 만들거나 공개 API를 변경했다면 Story를 작성 또는 갱신하고 Storybook 정적 Build를 확인합니다.</li>
 <li>예제 테스트와 <code>typecheck</code>, <code>lint</code>, <code>test</code>를 통과시킵니다.</li>
 </ol>
 </section>
@@ -112,6 +118,9 @@
 <section>
 <h2 class="bx-active">4. 권장 파일 구조</h2>
 <pre class="hljs"><code data-language="text">apps/app-webview/
+├── .storybook/
+│   ├── main.ts
+│   └── preview.ts
 ├── components.json
 ├── postcss.config.mjs
 ├── vitest.config.ts
@@ -126,6 +135,7 @@
     │   │   └── submit-button.tsx
     │   └── ui/
     │       ├── button.tsx
+    │       ├── button.stories.tsx
     │       ├── input.tsx
     │       ├── label.tsx
     │       └── spinner.tsx
@@ -200,6 +210,11 @@
 <td>기존 실행 도구, alias, 전역 mock 정책</td>
 </tr>
 <tr>
+<td>Storybook</td>
+<td>컴포넌트 가까이 Story를 두고 실제 공개 API를 확인하는 원칙</td>
+<td>실제 Framework, Addon, Script, Provider와 Story 검색 범위</td>
+</tr>
+<tr>
 <td>API Mock</td>
 <td>승인된 계약 이후 Front-end 테스트 범위에서 선택적으로 적용</td>
 <td>실제 환경으로 재현하기 어려운 상태와 관리 책임</td>
@@ -236,7 +251,8 @@
 [ ] 외부 입력은 unknown에서 검증한 뒤 애플리케이션 데이터 타입으로 변환한다.
 [ ] loading, disabled, invalid, empty, error 중 해당 상태를 확인했다.
 [ ] 프로젝트가 추가한 동작을 사용자 관점의 테스트로 검증했다.
-[ ] npm run typecheck, npm run lint, npm run test가 통과한다.</code></pre>
+[ ] npm run typecheck, npm run lint, npm run test가 통과한다.
+[ ] 공통·재사용 컴포넌트 변경 시 관련 Story와 Storybook 정적 Build를 확인했다.</code></pre>
 <p>빌드 경계나 Server/Client Component 구성이 바뀌는 적용이라면 <code>npm run build</code>까지 확인합니다.</p>
 </section>
     </main>

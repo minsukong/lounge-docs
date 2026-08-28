@@ -27,6 +27,20 @@ apps/app-webview/src/
 └── test/         # 테스트 공통 설정
 ```
 
+Storybook을 도입하면 애플리케이션 설정은 `apps/app-webview/.storybook`에 두고, Story 파일은 실제 컴포넌트 가까이에 둡니다.
+
+```text
+apps/app-webview/
+├── .storybook/           # Storybook 실행과 전역 렌더링 설정
+└── src/
+    ├── components/ui/
+    │   ├── button.tsx
+    │   └── button.stories.tsx
+    └── features/         # 독립 검증 가치가 있는 기능 컴포넌트만 Story 작성
+```
+
+Storybook 설정과 Story는 실제 package와 애플리케이션이 생성된 뒤 추가합니다. 여러 애플리케이션에서 실제 공유되는 UI가 확인되기 전에는 별도 Storybook 앱이나 `packages/ui` 구성을 미리 만들지 않습니다.
+
 ## 구현 원칙
 
 - 단순한 컴포넌트는 한 파일로 시작합니다.
