@@ -13,6 +13,33 @@
 
 ## 2026-08-28
 
+### 반응형 웹 브라우저 지원 기준과 가이드 검색 추가
+
+- Tailwind CSS v4의 공식 핵심 호환 조건을 기준으로 Chrome·Edge 111 이상, Safari 16.4 이상, Firefox 128 이상과 Samsung Internet 23 이상을 최소 지원 버전으로 정리했습니다.
+- PC, 태블릿과 모바일의 브라우저 지원 표를 분리하고 Whale, 360 Safe, UC와 QQ처럼 제품 버전과 Chromium 엔진 버전의 대응이 일정하지 않은 브라우저는 Chromium 111 이상 엔진을 탑재한 최신 안정 버전에서 호환성을 확인하도록 구분했습니다.
+- 한국·중국·일본·미국과 전 세계의 2026년 7월 StatCounter 브라우저 제품군 점유율을 브라우저 선정의 보조 근거로 추가하고, 제품군 점유율을 특정 최소 버전 이상의 정확한 사용자 비율로 해석하지 않도록 제한을 명시했습니다.
+- 현대 브라우저의 자동 업데이트가 최소 버전 기준의 현실성을 높이지만, 기업 관리 정책, 장기 미재시작과 구형 OS에서는 업데이트가 지연될 수 있으므로 실제 운영 사용자 버전을 확인하도록 했습니다.
+- 반응형 화면을 물리 해상도가 아닌 CSS viewport 기준으로 Mobile 320~767px, Tablet 768~1023px, PC 1024px 이상으로 구분하고 Tailwind CSS의 `md` 768px, `lg` 1024px 경계와 대표 검증 너비를 추가했습니다.
+- 화면 구간은 기존 가이드와 같은 Mermaid 구조로 시각화하고 767·768px 및 1023·1024px 경계값, 세로·가로 전환, 확대와 넓은 화면 검증 항목을 정리했습니다.
+- [`반응형 웹 브라우저 지원 가이드`](./browser_support_guide/index.html)와 초안 [`draft.md`](./browser_support_guide/draft.md)를 추가하고 Root README에서 연결했습니다.
+
+#### 전체 가이드 검색
+
+- 기존 가이드에 검색 UI를 반복 삽입하지 않고 중앙 [`가이드 검색`](./search/index.html) 페이지 한 곳에서 주요 가이드의 문서명, 목차와 본문을 검색하도록 구성했습니다.
+- 검색 대상은 업무 가이드로 한정하고 교육용 `ai_frontend_growth_guide`, `reference` 복제 문서, 작성용 `init`, README, 변경 로그와 검색 페이지 자체를 제외했습니다.
+- 검색 결과는 관련 문서의 `h2` 목차로 직접 이동하며 Tailwind, Storybook, Figma, 브라우저, WebView, TypeScript, 테스트, 보안, 다국어와 성능 추천 검색어를 제공합니다.
+- 의존성이나 검색 서버 없이 파일을 직접 열어도 동작하도록 [`build-search-index.mjs`](./search/build-search-index.mjs)가 전체 HTML에서 정적 색인을 생성하게 했습니다.
+- 가이드 변경 후 `node .\search\build-search-index.mjs`를 실행하면 [`search-data.js`](./assets/js/search-data.js)가 갱신되며, 생성 파일을 직접 수정하지 않도록 검색 페이지에 운영 방법을 기록했습니다.
+- 검색 전용 스타일과 브라우저 실행 코드는 각각 [`search.css`](./assets/style/search.css), [`search.js`](./assets/js/search.js)로 공통 자산 폴더에서 관리하고 색인 생성 스크립트만 검색 페이지 가까이에 유지했습니다.
+
+#### 검증
+
+- 브라우저 지원 가이드 HTML의 Section, 표, Mermaid 접근성 설명과 공통 자산 경로를 확인했습니다.
+- 검색 색인에서 16개 가이드 HTML의 177개 목차가 생성되는 것을 확인했습니다.
+- 모든 추천 검색어에 결과가 존재하고 교육용 커리큘럼, `reference`와 검색 페이지 자체가 색인에서 제외되는 것을 확인했습니다.
+- 검색 HTML과 JavaScript 문법, CSS·검색 코드·검색 데이터 경로를 확인했습니다.
+- 로컬 파일 URL은 브라우저 자동 검수 환경의 보안 정책으로 열 수 없어 최종 시각 검증은 수행하지 않았습니다.
+
 ### Figma 기반 UI 구현과 Storybook 반자동 운영 연결
 
 - Figma 디자인을 Cline의 로컬 LLM, Codex, Claude Code 등 AI 코딩 도구로 React와 Tailwind CSS 4 코드에 옮기되, 생성 결과를 완성 코드가 아닌 구현 초안으로 검수하는 흐름을 정리했습니다.
