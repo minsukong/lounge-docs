@@ -302,6 +302,125 @@
           Utility와 Web API를 최소 지원 Android System WebView와 iOS WKWebView에서
           실제로 검증합니다.
         </p>
+        <p>
+          <code>field-sizing: content</code>, <code>@starting-style</code>,
+          <code>text-wrap: balance</code>처럼 기본 호환 범위보다 최신인 기능은 서비스에
+          필수적이지 않으면 사용하지 않습니다. 필요한 경우 주요 서비스 국가의 최소
+          WebView에서 검증하고, 지원하지 않는 환경에서도 핵심 정보와 기능을 사용할 수
+          있는 대체 표현을 제공합니다. 이러한 선택 기능을 사용하기 위해 최소 OS를
+          자동으로 높이지 않습니다.
+        </p>
+        <p>
+          다만 선택 Utility를 제외해도 Tailwind CSS v4 핵심 기능의 최소 요구사항인
+          Chrome·Chromium 111 이상과 Safari·WKWebView 16.4 이상은 유지합니다. 이보다
+          낮은 엔진을 반드시 지원해야 하면 Tailwind CSS v3.4 유지 또는 기술 스택
+          변경을 별도로 검토합니다.
+        </p>
+
+        <h3>주요 서비스 국가와 공개 점유율</h3>
+        <p>
+          주요 서비스 국가는 한국·중국·일본·미국이며 그 밖의 국가는 글로벌 통계로
+          보완합니다. 아래 수치는 2026년 7월 StatCounter 모바일 트래픽 기준입니다.
+          실제 설치 사용자 수가 아니므로 출시 전 판단의 보조 근거로만 사용합니다.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">지역</th>
+              <th scope="col">Android</th>
+              <th scope="col">iOS</th>
+              <th scope="col">근거</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>한국</td>
+              <td>65.39%</td>
+              <td>34.60%</td>
+              <td><a href="https://gs.statcounter.com/os-market-share/mobile/south-korea">StatCounter 한국</a></td>
+            </tr>
+            <tr>
+              <td>중국</td>
+              <td>70.37%</td>
+              <td>29.51%</td>
+              <td><a href="https://gs.statcounter.com/os-market-share/mobile/china">StatCounter 중국</a></td>
+            </tr>
+            <tr>
+              <td>일본</td>
+              <td>36.41%</td>
+              <td>63.59%</td>
+              <td><a href="https://gs.statcounter.com/os-market-share/mobile/japan">StatCounter 일본</a></td>
+            </tr>
+            <tr>
+              <td>미국</td>
+              <td>40.39%</td>
+              <td>59.58%</td>
+              <td><a href="https://gs.statcounter.com/os-market-share/mobile/united-states-of-america">StatCounter 미국</a></td>
+            </tr>
+            <tr>
+              <td>전 세계</td>
+              <td>68.36%</td>
+              <td>31.60%</td>
+              <td><a href="https://gs.statcounter.com/os-market-share/mobile/worldwide">StatCounter 전 세계</a></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>최소 OS 기준의 도달 범위</h3>
+        <p>
+          2025년 12월 갱신된 Google Android 배포 원본 데이터에서 API 21은 0.1%,
+          API 22는 0.3%, API 23은 0.4%입니다. 따라서 API 24 이상은 약 99.2%입니다.
+          이 수치는 Google의 Android 활성 기기 기준이며
+          <a href="https://dl.google.com/android/studio/metadata/distributions.json"
+            >Google Android 버전 배포 원본 데이터</a
+          >를 근거로 계산합니다. 국가별 고객 비율이나 Android System WebView 111
+          이상의 비율을 의미하지 않습니다.
+        </p>
+        <p>
+          2026년 6월 7일 Apple 공식 집계에서 전체 iPhone의 79%가 iOS 26을
+          사용합니다. 따라서 최소한 79%는 iOS 16.4보다 높은 버전을 사용하지만,
+          이 값만으로 iOS 16.4 이상 전체 비율을 계산하지 않습니다. 집계 대상과
+          기준일은
+          <a href="https://developer.apple.com/support/app-store/"
+            >Apple App Store 지원 페이지</a
+          >에서 확인합니다.
+        </p>
+        <p>
+          국가별 버전 분포는
+          <a href="https://gs.statcounter.com/os-version-market-share/android/mobile-tablet/south-korea">한국 Android</a>,
+          <a href="https://gs.statcounter.com/os-version-market-share/android/mobile-tablet/china">중국 Android</a>,
+          <a href="https://gs.statcounter.com/os-version-market-share/android/mobile-tablet/japan">일본 Android</a>,
+          <a href="https://gs.statcounter.com/os-version-market-share/android/mobile-tablet/united-states-of-america">미국 Android</a>와
+          <a href="https://gs.statcounter.com/os-version-market-share/ios/mobile-tablet/south-korea">한국 iOS</a>,
+          <a href="https://gs.statcounter.com/os-version-market-share/ios/mobile-tablet/china">중국 iOS</a>,
+          <a href="https://gs.statcounter.com/os-version-market-share/ios/mobile-tablet/japan">일본 iOS</a>,
+          <a href="https://gs.statcounter.com/os-version-market-share/ios/mobile-tablet/united-states-of-america">미국 iOS</a>에서 확인합니다.
+          공개 페이지에 표시된 일부 상위 버전만 합산해 전체 지원률처럼 사용하지
+          않습니다.
+        </p>
+
+        <h3>중국 Android 검증</h3>
+        <p>
+          중국은 Android 비중이 70.37%이지만 Google Play 기반 WebView 업데이트를
+          모든 기기의 공통 조건으로 가정하지 않습니다. 제조사·OS·WebView 제공
+          패키지 조합에 따라 엔진과 업데이트 경로가 다를 수 있으므로 중국 대상 주요
+          제조사의 실제 기기에서 WebView 패키지와 버전, Tailwind CSS v4 핵심 화면을
+          검증합니다.
+        </p>
+        <p>
+          버전 문자열만으로 판단하기 어려운 환경에서는 프로젝트가 실제 사용하는
+          CSS 기능을 기능 단위로 확인합니다. 기능 검사에 통과하지 못한 기기는
+          업데이트 또는 지원 환경 안내 대상이며, 구체적인 진입 제한 정책은 App·기획·QA
+          담당자가 합의합니다.
+        </p>
+
+        <h3>근거 갱신과 승인</h3>
+        <ul>
+          <li>출시 전에는 공개 통계와 주요 국가의 실제 기기 검증 결과를 함께 사용합니다.</li>
+          <li>출시 후에는 국가·OS·WebView 엔진별 활성 사용자와 오류율을 우선 근거로 사용합니다.</li>
+          <li>핵심 국가별 허용할 미지원 사용자 비율과 재검토 주기는 프로젝트 담당자가 확정합니다.</li>
+          <li>점유율 수치에는 출처와 기준 월을 남기고 검토 시 최신 자료로 갱신합니다.</li>
+        </ul>
 
         <h3>공식 문서</h3>
         <ul>
@@ -554,8 +673,8 @@
       <tbody>
       <tr>
         <td>Android</td>
-        <td>Android SDK 24 이상에서 System WebView 111·최신 버전</td>
-        <td>화면 복귀, 키보드, 권한, 파일 선택과 엔진 업데이트 차이</td>
+        <td>주요 국가의 Android SDK 24 이상에서 System WebView 111·최신 버전</td>
+        <td>화면 복귀, 키보드, 권한, 파일 선택, Tailwind 렌더링과 엔진 업데이트 차이</td>
       </tr>
       <tr>
         <td>iOS</td>
@@ -574,6 +693,8 @@
       <li>HTTP·SSL 오류와 사용자 안내</li>
       <li>Safe Area, 화면 회전, 접근성 글자 크기와 다크 모드</li>
       <li>메모리 사용량과 화면 종료 후 리소스 해제</li>
+      <li>한국·중국·일본·미국의 주요 단말과 중국 제조사별 WebView 차이</li>
+      <li>선택한 최신 Tailwind Utility의 기능 저하와 대체 표현</li>
     </ul>
   </section>
 
@@ -613,6 +734,10 @@
       <tr>
         <td>사용자 경험</td>
         <td>로딩, 오류, 재시도, 세션 만료와 종료 화면</td>
+      </tr>
+      <tr>
+        <td>지원 범위</td>
+        <td>핵심 국가별 허용할 미지원 사용자 비율과 기준 재검토 주기</td>
       </tr>
       </tbody>
     </table>
