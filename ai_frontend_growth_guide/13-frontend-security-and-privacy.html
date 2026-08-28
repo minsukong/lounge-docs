@@ -27,6 +27,8 @@
       <hr />
       <section>
         <h2 class="bx-active">2. 반드시 이해할 보안 경계</h2>
+        <p>보안 경계는 값이나 실행 책임이 한 영역에서 다른 영역으로 넘어가는 지점입니다. API 응답이 Front-end로 들어올 때, URL 값을 화면 상태로 사용할 때, Browser 저장값을 다시 읽을 때와 WebView가 Native App 기능을 호출할 때가 대표적인 예입니다.</p>
+        <p>“Client를 신뢰하지 않는다”는 Browser와 WebView의 값을 사용하지 말라는 뜻이 아닙니다. 사용자가 값을 확인·변경할 수 있고 이전 Version의 값이 남을 수도 있으므로, 그 값만으로 권한이나 중요한 업무 결과를 확정하지 않는다는 뜻입니다.</p>
         <table>
           <thead><tr><th scope="col">경계</th><th scope="col">개발자가 판단할 내용</th></tr></thead>
           <tbody>
@@ -39,10 +41,34 @@
             <tr><td>공급망</td><td>새 package가 필요한가? Lock File, 실제 설치·배포 Version, 공식 보안 공지와 업데이트 책임을 확인했는가?</td></tr>
           </tbody>
         </table>
+
+        <h3>TypeScript 타입과 Runtime 검증</h3>
+        <p>TypeScript 타입은 개발 중 코드의 실수를 줄여주지만 실행 중 들어온 API·Storage·Bridge 응답을 자동으로 검사하지 않습니다. 아래처럼 응답을 바로 단정하면 서버 변경, 오래된 저장값 또는 잘못된 외부 응답이 타입 검사 없이 화면으로 들어옵니다.</p>
+        <pre class="hljs"><code data-language="typescript"><span class="hljs-keyword">type</span> <span class="hljs-title class_">User</span> = { id: <span class="hljs-built_in">string</span>; name: <span class="hljs-built_in">string</span> }
+
+<span class="hljs-comment">// 타입 선언만으로 실제 응답 형태가 보장되지는 않습니다.</span>
+<span class="hljs-keyword">const</span> user = (<span class="hljs-keyword">await</span> response.<span class="hljs-title function_">json</span>()) <span class="hljs-keyword">as</span> <span class="hljs-title class_">User</span></code></pre>
+        <p>승인된 API 계약이 전달된 뒤 Front-end 요청 경계에서 실제 값의 형태와 필수 항목을 확인하고, 검증 실패를 정상적인 오류 상태로 처리합니다. 사용할 Schema 도구와 Parser 구현은 API 계약이 확정되기 전에 만들지 않습니다.</p>
+
+        <h3>React 기본 출력과 XSS</h3>
+        <p>React는 JSX 표현식의 일반 문자열을 Escape(HTML 코드를 실행하지 않고 글자로 표시하는 처리)합니다. 따라서 <code>{userInput}</code>처럼 출력하는 기본 경로는 유지합니다. 반면 <code>dangerouslySetInnerHTML</code>, 문자열로 만든 HTML, 검증하지 않은 외부 URL처럼 기본 보호를 우회하는 지점은 별도로 검토해야 합니다.</p>
+        <p>XSS(Cross-Site Scripting)는 외부에서 들어온 문자열이 화면에서 Script처럼 실행되는 공격입니다. CSP(Content Security Policy)는 실행 가능한 리소스를 제한하는 추가 방어 수단이지만, 위험한 HTML 출력 자체를 안전하게 바꾸지는 않습니다.</p>
+
+        <h3>화면 제한과 실제 권한</h3>
+        <p>Menu나 Button을 숨기는 것은 사용할 수 없는 기능을 보여주지 않는 사용자 경험 처리입니다. 사용자는 Client 코드와 요청값을 변경할 수 있으므로, 숨긴 Button의 API를 직접 호출하는 것까지 막지는 못합니다. Front-end는 화면 상태를 올바르게 표현하고, 데이터 접근·소유권·업무 규칙의 최종 판단은 승인된 Backend 계약에서 처리되는지 확인합니다.</p>
+
+        <h3>Storage와 공개되는 Client 값</h3>
+        <p><code>localStorage</code>, <code>sessionStorage</code>, IndexedDB와 Persist 상태는 사용자가 열람·수정할 수 있고 로그아웃 뒤에도 남을 수 있습니다. Theme나 접힘 상태처럼 영향이 작은 값은 허용값과 기본값을 확인하여 사용할 수 있지만, <code>role: "admin"</code> 같은 저장값만으로 권한을 부여해서는 안 됩니다.</p>
+        <p><code>NEXT_PUBLIC_</code> 환경변수와 Client Component에 포함된 값은 최종적으로 Browser에 전달됩니다. 이름에 <code>SECRET</code>이나 <code>KEY</code>가 들어가도 보호되지 않으므로 서버 자격 증명과 Private Key를 넣지 않습니다.</p>
+
+        <h3>의존성과 공급망</h3>
+        <p>package를 하나 설치하면 직접 선택한 코드뿐 아니라 하위 의존성과 설치 Script도 함께 실행될 수 있습니다. 유명 package와 공식 Registry도 계정이나 배포 권한이 침해되면 악성 Version이 게시될 수 있으므로, 필요성·Lock File 변경·공식 보안 공지와 실제 설치 Version을 함께 확인합니다.</p>
+        <p>최신 Version을 무조건 설치하는 것과 오래된 Version을 계속 유지하는 것 모두 기준이 아닙니다. 초기 도입은 공식 지원·보안 공지·호환성을 검토한 안정 Version을 고정하고, 고위험 취약점이 확인되면 현재 사용 계열의 공식 수정 Version을 우선 적용합니다.</p>
       </section>
       <hr />
       <section>
         <h2 class="bx-active">3. 흔한 잘못된 판단</h2>
+        <p>아래 항목은 도구나 기능 자체가 잘못됐다는 뜻이 아닙니다. 한 가지 보호 장치가 다른 보안 책임까지 해결한다고 확대 해석하는 것이 문제입니다.</p>
         <ul>
           <li>TypeScript 타입이 있으므로 API와 Bridge 응답도 안전하다고 판단합니다.</li>
           <li>React가 기본 Escape하므로 <code>dangerouslySetInnerHTML</code>과 동적 URL도 자동으로 안전하다고 생각합니다.</li>
@@ -59,6 +85,7 @@
       <hr />
       <section>
         <h2 class="bx-active">4. 기능 단위 보안 리뷰</h2>
+        <p>모든 보안 항목을 기능마다 기계적으로 적용하지 않습니다. 먼저 해당 기능에 실제로 존재하는 입력·출력·저장·전달 경계를 찾고, 영향이 있는 항목만 다음 순서로 확인합니다.</p>
         <ol>
           <li>기능이 받는 값을 API, 사용자 입력, URL, Storage, SDK와 Bridge로 나눕니다.</li>
           <li>각 값이 검증되고 변환되는 파일과 최종 출력·저장·전달 위치를 연결합니다.</li>
@@ -81,6 +108,7 @@
       <section>
         <h2 class="bx-active">5. 통합 실습</h2>
         <p>12단계에서 완성한 기능을 그대로 사용해 보안 리뷰를 수행합니다. 새 기능을 만들기보다 이미 구현한 세션·회원 조회·수정 또는 Bridge 기능의 데이터 흐름을 추적합니다.</p>
+        <p>실습 결과는 <strong>Front-end에서 바로 수정할 항목</strong>, <strong>Backend·App·배포 담당과 확인할 항목</strong>, <strong>현재 계약이 없어 판단할 수 없는 TBD</strong>로 나눕니다. 확인되지 않은 인증·Cookie·CSP·API 방식을 실습 과정에서 임의로 확정하지 않습니다.</p>
         <ul>
           <li>외부 응답 Parser와 잘못된 응답 테스트</li>
           <li>권한 없는 사용자와 다른 사용자 식별자 처리</li>
