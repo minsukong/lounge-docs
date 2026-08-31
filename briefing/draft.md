@@ -43,10 +43,10 @@ packages/
 5. 기존 Layout, 디자인 토큰, shadcn/ui와 프로젝트 Component로 표현할 수 있는 범위를 판단합니다.
 6. 서버 데이터, Form, 화면 내부 상태와 공유 Client 상태의 소유 도구를 구분합니다.
 7. 정상 결과뿐 아니라 Loading, Empty, Error, 느린 응답과 연결 끊김 상태를 함께 설계합니다.
-8. 공통 Component라면 실제 Component와 Story를 같은 변경에서 작성합니다.
+8. 독립적으로 재현·검토할 가치가 있는 Component, 기능 조합이나 화면 상태라면 실제 구현과 Story를 같은 변경에서 작성합니다.
 9. 화면에 적용하고 접근성, 반응형, 상태 전환과 주요 사용자 동작을 검증합니다.
 10. TypeScript 검사, Lint, Test, Storybook 정적 Build와 Application Build 중 프로젝트에 실제로 구성된 검사를 실행합니다.
-11. 재사용한 Component, 새로 만든 Component, Story, 검증 결과와 확인하지 못한 항목을 완료 보고에 남깁니다.
+11. 재사용한 Component, 새로 만든 Component, 추가·변경한 Story와 재현 상태, 검증 결과와 확인하지 못한 항목을 완료 보고에 남깁니다.
 
 위 순서는 다음 다섯 단계로 이해할 수 있습니다.
 
@@ -99,38 +99,51 @@ Code Connect를 사용하지 않더라도 이 정보를 통해 개발자와 AI�
 
 Figma 구현 흐름은 [React Code Exports 가이드](../ui_guide/react_code_exports.html), Semantic Token은 [디자인 토큰 가이드](../ui_guide/design_tokens.html)에서 확인합니다.
 
-## 5. Component와 Storybook 작업 방식
+## 5. Storybook을 이용한 UI 개발과 검증
 
-### 공통 Component가 분명한 경우
+Storybook은 공통 Component만 만들거나 전시하는 공간이 아닙니다. Application 전체를 실행하지 않고도 Component, 기능 조합과 의미 있는 화면 상태를 격리해 재현하고, 구현·디자인 Review, 접근성, Interaction과 시각 회귀 검증에 사용하는 UI 개발 환경입니다.
 
-Button, Input처럼 독립적으로 사용할 공통 UI가 분명하다면 임의의 페이지에서 먼저 만든 뒤 옮길 필요가 없습니다.
+### Story 작성 대상을 선택합니다
 
-1. 실제 Component Source를 작성합니다.
-2. 같은 변경에서 Story를 작성합니다.
-3. Storybook에서 지원 Props와 Variant를 확인합니다.
-4. Default, Disabled, Loading, Error, 긴 문구와 필요한 크기 상태를 확인합니다.
-5. Keyboard Focus, 접근 가능한 이름, Contrast와 주요 Interaction을 확인합니다.
-6. 검증된 Component를 실제 화면에서 사용합니다.
+Story는 파일 종류가 아니라 독립 재현과 검토 가치로 판단합니다. 다음 대상은 Story 작성을 우선 검토합니다.
 
-### 재사용 여부가 불확실한 경우
+- 여러 화면에서 사용하는 공통 Component와 주요 Variant
+- Form, 검색 조건, Dialog와 단계형 흐름처럼 상태 전환이 중요한 기능 조합
+- Loading, Empty, Error, 권한 거부, Offline과 긴 응답처럼 실제 환경에서 반복 재현하기 어려운 화면 상태
+- 긴 문구, 다국어, 좁은 Viewport, Theme과 접근성 검토가 필요한 Layout 또는 화면 구간
+- 과거 장애나 회귀 위험이 있어 고정된 재현 조건이 필요한 UI
 
-한 화면에서만 사용하는 Layout이나 업무 조합은 기능 가까이에서 작게 구현합니다. 두 곳 이상에서 같은 의미와 변경 이유로 반복되거나 독립 검증 가치가 확인되면 공통 Component와 Story로 분리합니다.
+단순 Page Wrapper, Router만 연결하는 진입점, Story 안에서 실제 서비스와 동일하게 만들 수 없는 Backend 통합은 대상에서 제외할 수 있습니다. 화면 전체를 Story로 만들기 위해 업무 로직을 복제하지 않습니다.
+
+### Component와 기능 상태를 구현하는 경우
+
+1. 실제 Component, 기능 조합 또는 화면 구간을 Application Source에 구현합니다.
+2. 같은 변경에서 검토할 상태를 Story로 구성합니다.
+3. Args, Decorator와 승인된 Mock 경계를 사용해 입력, Context, Viewport와 서버 상태를 제어합니다.
+4. Default, Disabled, Loading, Empty, Error, 긴 문구, 다국어와 필요한 화면 크기를 확인합니다.
+5. Play 또는 합의된 Test로 Keyboard Focus, 접근 가능한 이름과 주요 사용자 Interaction을 확인합니다.
+6. 디자인 검토와 시각 회귀 기준이 필요한 상태는 고정된 데이터와 결정적인 결과를 유지합니다.
+7. Storybook에서 검증한 구현을 실제 화면에 적용하고 Application 통합 검증을 별도로 수행합니다.
+
+### Storybook이 대신하지 않는 검증
+
+Storybook은 실제 Routing, Backend 권한과 업무 규칙, WebView Bridge, 배포 환경, 실제 Browser Network와 전체 사용자 여정을 보장하지 않습니다. Story의 Mock은 승인된 계약을 재현하는 검증 도구이며 API 계약을 새로 정의하는 근거가 아닙니다. 이 항목은 Application Test, 통합 Test, E2E와 실제 기기 검증으로 확인합니다.
 
 ### Storybook 반자동 운영
 
-Storybook은 Component 전시장이나 별도의 문서 작성 업무가 아니라 공통 UI의 구현·검증 공간입니다.
+Storybook은 Component 전시장이나 별도의 문서 작성 업무가 아니라 Component, 기능 조합과 화면 상태를 재현하는 UI 구현·검증 환경입니다.
 
 AI는 다음 반복 작업을 우선 수행할 수 있습니다.
 
-- 공통 UI 경로와 Story 파일을 비교하여 누락 후보 찾기
+- 공통 UI, 기능 조합과 중요 화면 상태를 비교하여 Story 누락 후보 찾기
 - 기존 Story 형식에 맞는 Story 초안 작성
-- Props와 Variant 변경에 따른 Story 갱신 후보 찾기
-- Storybook 정적 Build와 합의된 검사 실행
-- 추가한 Story, 표현한 상태와 실패 항목 정리
+- Props, Context, Mock 계약과 상태 변경에 따른 Story 갱신 후보 찾기
+- Storybook 정적 Build, Story 렌더링, Interaction, 접근성과 시각 회귀 중 합의된 검사 실행
+- 추가한 Story, 재현한 상태, 사용한 Mock 경계와 실패 항목 정리
 
-개발자는 Story 작성 대상인지, 실제로 지원하는 상태인지, Figma와 결과가 맞는지, 접근성과 Interaction이 충분한지 검토합니다. AI가 만든 Story도 사람이 작성한 코드와 같은 Review와 검증을 거칩니다.
+개발자는 Story 작성 대상인지, 실제 지원 상태와 계약이 맞는지, Figma와 결과가 일치하는지, 접근성, Interaction과 Application 통합 결과가 충분한지 검토합니다. AI가 만든 Story도 사람이 작성한 코드와 같은 Review와 검증을 거칩니다.
 
-초기에는 Storybook 정적 Build를 필수 검사로 사용합니다. Storybook 운영이 안정된 뒤 Story 렌더링, Interaction과 접근성 검사를 CI 필수 항목으로 승격할 수 있습니다. 정확한 명령과 CI 구성은 실제 `package.json`과 Workflow가 생성된 뒤 확정합니다.
+초기에는 Storybook 정적 Build를 필수 검사로 사용합니다. Storybook 운영이 안정된 뒤 Story 렌더링, Interaction, 접근성과 시각 회귀 검사를 CI 필수 항목으로 승격할 수 있습니다. 정확한 명령과 CI 구성은 실제 `package.json`과 Workflow가 생성된 뒤 확정합니다.
 
 Story 대상, AI 요청 예시, 누락 점검과 완료 기준은 [Storybook 운영 가이드](../storybook_guide/index.html)에서 확인합니다.
 
@@ -516,7 +529,7 @@ AI 요약이나 공통 Source에서 새로운 정책을 독립적으로 확정�
 | 저장소와 Package 경계 | Front-End Monorepo 공통 기준 | `apps/*`, `packages/*`, 공통화와 배포 단위 |
 | 일반 화면과 상태 관리 | Front-End 개발 가이드 | Component 배치, 상태 소유, Bridge와 품질 기준 |
 | Figma 기반 UI 구현 | React Code Exports·디자인 토큰 가이드 | Figma 설명, 기존 UI 탐색, Token과 완료 기준 |
-| 공통 Component와 Story | Storybook 운영 가이드 | Story 대상, 작성 상태, 반자동 점검과 정적 Build |
+| UI 개발과 상태 검증 | Storybook 운영 가이드 | Component·기능·화면 상태의 재현, Interaction, 접근성, 시각 검토와 반자동 점검 |
 | TypeScript, Lint와 Test | TypeScript·Lint·테스트 가이드 | Type 경계, 정적 검사, Test 대상과 제외 기준 |
 | 느린 네트워크와 성능 | 성능 검증 가이드 | Loading, Timeout, Retry, Offline과 측정 기준 |
 | 외부 입력과 개인정보 | 보안과 개인정보 가이드 | XSS, 인증, 저장소, 로그, Bridge와 공급망 |
@@ -590,7 +603,7 @@ Front-end가 독립적으로 결정할 수 없는 계약은 임의로 확정하�
 - 공개 Props와 Variant 변경 → 사용처, Story와 Figma 상태 확인
 - 디자인 토큰 변경 → 실제 화면, Storybook과 지원 Theme 확인
 - Browser 또는 최소 OS 변경 → Tailwind 요구사항, 점유율 근거와 실제 기기 검증 갱신
-- 공통 Component 추가 → Story 등록과 AI 누락 점검 대상 포함
+- 공통 Component 또는 중요 기능·화면 상태 추가 → Story 등록과 AI 누락 점검 대상 포함
 - 가이드 추가 또는 제목·본문 변경 → 중앙 검색 Index 재생성
 - API 또는 Bridge 계약 변경 → Adapter, 상태 처리, Test와 담당 문서 동기화
 - 인증·개인정보·외부 SDK 변경 → 저장 위치, 로그, Network Payload와 보안 가이드 재검토

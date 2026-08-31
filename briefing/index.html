@@ -75,10 +75,10 @@ packages/
           <li>기존 Layout, Semantic Token, shadcn/ui와 프로젝트 Component로 표현할 범위를 판단합니다.</li>
           <li>서버 데이터, Form, 화면 내부 상태와 공유 Client 상태의 소유 도구를 구분합니다.</li>
           <li>Loading, Empty, Error, 느린 응답과 연결 끊김 상태를 함께 설계합니다.</li>
-          <li>공통 Component라면 실제 Component와 Story를 같은 변경에서 작성합니다.</li>
+          <li>독립적으로 재현·검토할 가치가 있는 Component, 기능 조합이나 화면 상태라면 실제 구현과 Story를 같은 변경에서 작성합니다.</li>
           <li>화면에 적용하고 접근성, 반응형, 상태 전환과 주요 사용자 동작을 확인합니다.</li>
           <li>프로젝트에 실제로 구성된 TypeScript, Lint, Test, Storybook Build와 Application Build를 실행합니다.</li>
-          <li>재사용·신규 Component, Story, 검증 결과와 확인하지 못한 항목을 완료 보고에 남깁니다.</li>
+          <li>재사용·신규 Component, 추가·변경한 Story와 재현 상태, 검증 결과와 확인하지 못한 항목을 완료 보고에 남깁니다.</li>
         </ol>
         <p>위 순서는 준비, 탐색과 설계, 구현, 적용과 검증, 완료 보고의 다섯 단계로 이해할 수 있습니다.</p>
         <figure class="diagram-frame">
@@ -86,9 +86,9 @@ packages/
           <div class="mermaid">
 flowchart TD
   accTitle: Front-end 기능 하나를 구현하는 다섯 단계
-  accDescr: 기획과 Figma 확인 및 기존 소스 탐색으로 준비한 뒤 상태와 예외를 설계하고, 컴포넌트와 Story를 구현해 화면에 적용하며, 품질 검사와 완료 보고로 작업을 마칩니다.
+  accDescr: 기획과 Figma 확인 및 기존 소스 탐색으로 준비한 뒤 상태와 예외를 설계하고, 컴포넌트와 기능 코드 및 필요한 Story를 구현해 화면에 적용하며, 품질 검사와 완료 보고로 작업을 마칩니다.
   A["1. 준비<br/>기획 · Figma · AGENTS.md 확인"] --> B["2. 탐색과 설계<br/>기존 Component · Token · 상태 책임 · 예외 상태"]
-  B --> C["3. 구현<br/>Component · Story · 기능 코드"]
+  B --> C["3. 구현<br/>Component · 기능 코드 · 재현할 Story"]
   C --> D["4. 적용과 검증<br/>화면 · 접근성 · 다국어 · 보안 · 반응형 · Test · Build"]
   D --> E["5. 완료 보고<br/>재사용 · 신규 구현 · 검사 결과 · 미확정 항목"]
           </div>
@@ -129,27 +129,39 @@ flowchart TD
       <hr />
 
       <section>
-        <h2 class="bx-active">5. Component와 Storybook 작업 방식</h2>
-        <h3>공통 Component가 분명한 경우</h3>
+        <h2 class="bx-active">5. Storybook을 이용한 UI 개발과 검증</h2>
+        <p>Storybook은 공통 Component만 만들거나 전시하는 공간이 아닙니다. Application 전체를 실행하지 않고도 Component, 기능 조합과 의미 있는 화면 상태를 격리해 재현하고, 구현·디자인 Review, 접근성, Interaction과 시각 회귀 검증에 사용하는 UI 개발 환경입니다.</p>
+        <h3>Story 작성 대상을 선택합니다</h3>
+        <p>Story는 파일 종류가 아니라 독립 재현과 검토 가치로 판단합니다. 다음 대상은 Story 작성을 우선 검토합니다.</p>
+        <ul>
+          <li>여러 화면에서 사용하는 공통 Component와 주요 Variant</li>
+          <li>Form, 검색 조건, Dialog와 단계형 흐름처럼 상태 전환이 중요한 기능 조합</li>
+          <li>Loading, Empty, Error, 권한 거부, Offline과 긴 응답처럼 실제 환경에서 반복 재현하기 어려운 화면 상태</li>
+          <li>긴 문구, 다국어, 좁은 Viewport, Theme과 접근성 검토가 필요한 Layout 또는 화면 구간</li>
+          <li>과거 장애나 회귀 위험이 있어 고정된 재현 조건이 필요한 UI</li>
+        </ul>
+        <p>단순 Page Wrapper, Router만 연결하는 진입점, Story 안에서 실제 서비스와 동일하게 만들 수 없는 Backend 통합은 대상에서 제외할 수 있습니다. 화면 전체를 Story로 만들기 위해 업무 로직을 복제하지 않습니다.</p>
+        <h3>Component와 기능 상태를 구현하는 경우</h3>
         <ol>
-          <li>실제 Component Source를 작성합니다.</li>
-          <li>같은 변경에서 Story를 작성합니다.</li>
-          <li>Storybook에서 Props와 Variant를 확인합니다.</li>
-          <li>Default, Disabled, Loading, Error, 긴 문구와 크기 상태를 확인합니다.</li>
-          <li>Keyboard Focus, 접근 가능한 이름, Contrast와 주요 Interaction을 확인합니다.</li>
-          <li>검증된 Component를 실제 화면에서 사용합니다.</li>
+          <li>실제 Component, 기능 조합 또는 화면 구간을 Application Source에 구현합니다.</li>
+          <li>같은 변경에서 검토할 상태를 Story로 구성합니다.</li>
+          <li>Args, Decorator와 승인된 Mock 경계를 사용해 입력, Context, Viewport와 서버 상태를 제어합니다.</li>
+          <li>Default, Disabled, Loading, Empty, Error, 긴 문구, 다국어와 필요한 화면 크기를 확인합니다.</li>
+          <li>Play 또는 합의된 Test로 Keyboard Focus, 접근 가능한 이름과 주요 사용자 Interaction을 확인합니다.</li>
+          <li>디자인 검토와 시각 회귀 기준이 필요한 상태는 고정된 데이터와 결정적인 결과를 유지합니다.</li>
+          <li>Storybook에서 검증한 구현을 실제 화면에 적용하고 Application 통합 검증을 별도로 수행합니다.</li>
         </ol>
-        <h3>재사용 여부가 불확실한 경우</h3>
-        <p>한 화면에서만 사용하는 Layout이나 업무 조합은 기능 가까이에서 작게 구현합니다. 같은 의미와 변경 이유로 반복되거나 독립 검증 가치가 확인되면 공통 Component와 Story로 분리합니다.</p>
+        <h3>Storybook이 대신하지 않는 검증</h3>
+        <p>Storybook은 실제 Routing, Backend 권한과 업무 규칙, WebView Bridge, 배포 환경, 실제 Browser Network와 전체 사용자 여정을 보장하지 않습니다. Story의 Mock은 승인된 계약을 재현하는 검증 도구이며 API 계약을 새로 정의하는 근거가 아닙니다. 이 항목은 Application Test, 통합 Test, E2E와 실제 기기 검증으로 확인합니다.</p>
         <h3>AI를 이용한 반자동 운영</h3>
         <ul>
-          <li>공통 UI 경로와 Story를 비교하여 누락 후보를 찾습니다.</li>
+          <li>공통 UI, 기능 조합과 중요 화면 상태를 비교하여 Story 누락 후보를 찾습니다.</li>
           <li>기존 형식에 맞춰 Story 초안을 작성합니다.</li>
-          <li>Props와 Variant 변경에 따른 갱신 후보를 찾습니다.</li>
-          <li>Storybook 정적 Build와 합의된 검사를 실행합니다.</li>
-          <li>추가한 Story, 표현한 상태와 실패 항목을 정리합니다.</li>
+          <li>Props, Context, Mock 계약과 상태 변경에 따른 갱신 후보를 찾습니다.</li>
+          <li>Storybook 정적 Build, Story 렌더링, Interaction, 접근성과 시각 회귀 중 합의된 검사를 실행합니다.</li>
+          <li>추가한 Story, 재현한 상태, 사용한 Mock 경계와 실패 항목을 정리합니다.</li>
         </ul>
-        <p>개발자는 Story 대상, 실제 지원 상태, Figma 일치 여부, 접근성과 Interaction을 검토합니다. 초기에는 Storybook 정적 Build를 필수 검사로 사용하고 운영이 안정된 뒤 Interaction과 접근성 검사의 CI 승격을 검토합니다.</p>
+        <p>개발자는 Story 대상, 실제 지원 상태와 계약, Figma 일치 여부, 접근성, Interaction과 Application 통합 결과를 검토합니다. 초기에는 Storybook 정적 Build를 필수 검사로 사용하고 운영이 안정된 뒤 Story 렌더링, Interaction, 접근성과 시각 회귀 검사의 CI 승격을 검토합니다.</p>
         <p><strong>상세 기준:</strong> Story 작성 대상, AI 요청 예시, 누락 점검과 완료 조건은 <a href="./../storybook_guide/index.html">Storybook 운영 가이드</a>에서 확인합니다.</p>
       </section>
 
@@ -323,7 +335,7 @@ flowchart TD
         <ul>
           <li>정상·예외 상태를 구현했는가?</li>
           <li>기존 Component와 Token을 우선 사용했는가?</li>
-          <li>새 공통 Component에 Story가 있는가?</li>
+          <li>새 공통 Component와 독립 재현 가치가 있는 기능·화면 상태에 Story가 있는가?</li>
           <li>Keyboard, Focus와 접근 가능한 이름을 확인했는가?</li>
           <li>지원 Browser와 필요한 Viewport에서 확인했는가?</li>
           <li>실제로 구성된 검사가 통과했는가?</li>
@@ -424,7 +436,7 @@ flowchart TD
             <tr><td>저장소와 Package 경계</td><td>Monorepo 공통 기준</td><td>Application, Package와 공통화</td></tr>
             <tr><td>일반 화면과 상태</td><td>Front-End 개발 가이드</td><td>배치, 상태 소유, Bridge와 품질</td></tr>
             <tr><td>Figma UI</td><td>React Code Exports·디자인 토큰</td><td>기존 UI, Token과 완료 기준</td></tr>
-            <tr><td>공통 Component</td><td>Storybook 운영 가이드</td><td>Story 대상, 상태와 반자동 점검</td></tr>
+            <tr><td>UI 개발과 상태 검증</td><td>Storybook 운영 가이드</td><td>Component·기능·화면 상태의 재현, Interaction, 접근성, 시각 검토와 반자동 점검</td></tr>
             <tr><td>품질</td><td>TypeScript·Lint·Test 가이드</td><td>Type 경계, 정적 검사와 Test 범위</td></tr>
             <tr><td>성능</td><td>성능 검증 가이드</td><td>Loading, Timeout, Retry와 측정</td></tr>
             <tr><td>보안</td><td>보안과 개인정보 가이드</td><td>입력, 인증, 저장소, 로그와 공급망</td></tr>
@@ -484,7 +496,7 @@ flowchart TD
           <li>Props·Variant 변경 → 사용처, Story와 Figma 상태</li>
           <li>Token 변경 → 실제 화면, Storybook과 Theme</li>
           <li>Browser·OS 변경 → Tailwind 요구사항, 점유율과 실제 기기</li>
-          <li>공통 Component 추가 → Story 등록과 AI 누락 점검</li>
+          <li>공통 Component 또는 중요 기능·화면 상태 추가 → Story 등록과 AI 누락 점검</li>
           <li>가이드 변경 → 중앙 검색 Index 재생성</li>
           <li>API·Bridge 계약 변경 → Adapter, 상태, Test와 담당 문서</li>
           <li>인증·개인정보·SDK 변경 → 저장 위치, Log, Network와 보안 가이드</li>
