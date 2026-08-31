@@ -61,14 +61,14 @@ AGENTS.md            # 전체 원칙 + 작업별 문서 선택
 | UI, 컴포넌트, 스타일 구현      | `ui.md`            | React·TypeScript 출력, Tailwind CSS, 재사용과 접근성 기준 |
 | 디자인 토큰, 스타일 값 연결    | `design-tokens.md` | 의미 기반 토큰, shadcn/ui, Figma Variables, Tokens Studio |
 | Figma 화면을 앱 코드로 구현    | `figma.md`         | 구현 전 조사, 기존 코드 매핑, React 구현과 품질 확인      |
-| 공통 컴포넌트 Story 작성·점검  | `storybook.md`     | 작성 대상, 실제 상태, 반자동 운영과 완료 기준             |
+| Component·Feature·Screen Story 작성·점검 | `storybook.md` | 작성 대상, 실제 상태·Viewport, Figma Embed, 반자동 운영과 완료 기준 |
 | TypeScript, Lint, Test, Build  | `quality.md`       | 검사 도구 역할, 테스트 범위와 기본 검증 명령              |
 | 네트워크 지연, 비동기 UI, 성능 | `performance.md`   | Loading·Timeout·Offline, 요청 안전성과 저속 환경 검증     |
 | 인증·권한, 개인정보와 보안 검토 | `security.md`      | XSS, URL, 저장소, Cookie·CSRF, Secret, Bridge와 의존성 기준 |
 | 공통 설정·컴포넌트·유틸리티    | `common-source.md` | 공통 소스 상세 가이드 진입점과 적용 기준                  |
 | Ollama, Continue, 로컬 LLM     | `local-llm.md`     | 로컬 모델에 맡길 범위, 검토 방식, 외부 모델 전환 기준     |
 
-> UI 작업은 `ui.md` + `design-tokens.md`, Figma 구현은 `figma.md` + `ui.md` + `design-tokens.md`를 함께 읽습니다. 공통·재사용 컴포넌트를 생성하거나 공개 API를 변경하면 `storybook.md`도 확인합니다. API·Query·비동기 UI와 성능 작업은 `performance.md`를, 인증·권한·외부 입력·개인정보·저장소·Bridge가 포함된 작업은 `security.md`를 추가로 확인합니다.
+> UI 작업은 `ui.md` + `design-tokens.md`, Figma 구현은 `figma.md` + `ui.md` + `design-tokens.md`를 함께 읽습니다. 공통 컴포넌트, 독립 검수 가치가 있는 Feature 또는 사용자 노출 Screen을 생성하거나 공개 API, 주요 상태와 화면 구조를 변경하면 `storybook.md`도 확인합니다. API·Query·비동기 UI와 성능 작업은 `performance.md`를, 인증·권한·외부 입력·개인정보·저장소·Bridge가 포함된 작업은 `security.md`를 추가로 확인합니다.
 
 ### docs/common-source/ — 파일 단위 구현 예시
 

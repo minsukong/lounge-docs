@@ -57,13 +57,13 @@
 
 ### Storybook 반자동 운영
 
-- Storybook이 도입된 이후 공통 UI 컴포넌트를 새로 만들면 같은 변경에서 Story를 작성합니다.
-- 기존 컴포넌트의 공개 Props 또는 variant를 변경하면 실제 코드와 사용처를 확인하고 Story도 함께 갱신합니다.
-- Story는 실제 export와 TypeScript Props를 기준으로 작성하며 존재하지 않는 상태를 추측하지 않습니다.
-- 기본 상태와 실제로 지원하는 주요 variant, size, disabled, loading, error 및 empty 상태만 작성합니다.
-- 타입, utility, helper, export 전용 파일, 내부 구현과 한 화면에서만 사용하는 단순 UI에는 Story를 강제하지 않습니다.
+- Storybook이 도입된 이후 공통 UI 컴포넌트, 독립 검수 가치가 있는 Feature 또는 사용자에게 노출되는 Screen을 새로 만들면 같은 변경에서 Story를 작성하거나 대표 Story 대상을 확인합니다.
+- 공개 Props, variant, Feature 상태, Screen 구조 또는 사용자가 보는 결과를 변경하면 실제 코드와 사용처를 확인하고 관련 Story도 함께 갱신합니다.
+- Story는 실제 export, TypeScript Props, 화면 입력과 승인된 계약을 기준으로 작성하며 존재하지 않는 상태를 추측하지 않습니다.
+- Component는 실제 variant와 소유 상태를, Feature와 Screen은 기본 상태와 실제로 지원하는 loading, empty, error, 권한 상태 및 Viewport를 필요한 만큼 작성합니다.
+- 타입, utility, helper, export 전용 파일, 단순 Page Wrapper, 동일 Screen Story로 대표할 수 있는 Route와 과도한 Mock이 필요한 내부 구현에는 Story를 강제하지 않습니다. 제외 대상과 사유를 남깁니다.
 - Storybook을 위해 사용하지 않는 제품 Props, variant, Wrapper 또는 Mock을 추가하지 않습니다.
-- 공통 UI의 Story 누락과 실제 코드 불일치를 점검할 때 먼저 대상, 근거와 제외 사유를 보고하고 승인된 항목만 수정합니다.
+- Story 누락과 실제 코드 불일치를 점검할 때 공통 UI와 사용자 노출 Route·Page·Screen을 함께 조사하고 대상, 근거와 제외 사유를 먼저 보고한 뒤 승인된 항목만 수정합니다.
 - 완료 전에 Storybook 정적 Build와 프로젝트에 합의된 Story 검사를 실행합니다.
 - 완료 보고에 추가하거나 수정한 Story, 표현한 주요 상태, 검증 결과와 재현하지 못한 환경 의존성을 포함합니다.
 
@@ -157,7 +157,7 @@ flowchart TD
 | API 요청과 기능별 응답 검증 연결 | [Markdown](./docs/common-source/network.md) · [HTML](./docs/common-source/network.html) | HTTP 오류, 공통 요청 함수와 기능별 parser 연결 예시 |
 | 로그인 상태와 회원 데이터 경계 | [Markdown](./docs/common-source/session.md) · [HTML](./docs/common-source/session.html) | 세션 model·parser·Query와 로그아웃 cache 초기화 기준 |
 | Client Component와 Query 테스트 환경 구성 | [Markdown](./docs/common-source/test.md) · [HTML](./docs/common-source/test.html) | Vitest, Testing Library, 공통 렌더링 함수와 사용자 동작 테스트 예시 |
-| 공통 컴포넌트 Storybook 구성과 검수 | [Markdown](./docs/common-source/storybook.md) · [HTML](./docs/common-source/storybook.html) | `.storybook`, Story 배치, Autodocs와 정적 Build 적용 기준 |
+| Component·Feature·Screen Storybook 구성과 검수 | [Markdown](./docs/common-source/storybook.md) · [HTML](./docs/common-source/storybook.html) | `.storybook`, Story 배치, 상태·Viewport, Figma Embed와 정적 Build 적용 기준 |
 | 계약 확정 후 API Mock 필요성 판단 | [Markdown](./docs/common-source/api-mocking.md) · [HTML](./docs/common-source/api-mocking.html) | Backend 환경 우선, Front-end 범위·책임과 선택 도구 기준 |
 | 공통 소스를 한 기능에 연결 | [Markdown](./docs/common-source/recipes.md) · [HTML](./docs/common-source/recipes.html) | 프로필 조회·검증·수정·상태 처리와 테스트를 연결한 통합 예시 |
 | 적용 조건, package와 미확정 항목 확인 | [Markdown](./docs/common-source/catalog.md) · [HTML](./docs/common-source/catalog.html) | 파일별 도입 조건, 함께 적용할 코드, 필요한 package, TBD와 검증 목록 |
@@ -195,7 +195,7 @@ docs/
 
 - UI 작업에서는 `docs/ai/ui.md`와 `docs/ai/design-tokens.md`를 함께 읽습니다.
 - Figma 구현 작업에서는 `docs/ai/figma.md`, `docs/ai/ui.md`, `docs/ai/design-tokens.md`를 함께 읽습니다.
-- 공통·재사용 컴포넌트를 생성하거나 공개 Props와 variant를 변경하는 작업에서는 `docs/ai/storybook.md`를 함께 읽습니다.
+- 공통 컴포넌트, 독립 검수 가치가 있는 Feature 또는 사용자 노출 Screen을 생성하거나 공개 Props, 주요 상태와 화면 구조를 변경하는 작업에서는 `docs/ai/storybook.md`를 함께 읽습니다.
 - API, Query, Loading, Timeout, Offline, 이미지·폰트 로딩 또는 성능에 영향을 주는 작업에서는 `docs/ai/performance.md`를 함께 읽습니다.
 - 인증·권한, 외부 HTML·URL, 개인정보, Client 저장소, Bridge, 파일 또는 새 의존성이 포함된 작업에서는 `docs/ai/security.md`를 함께 읽습니다.
 - 공통 소스 작업에서는 `docs/ai/common-source.md`를 먼저 읽고 작업 영역에 해당하는 `docs/common-source/` 상세 가이드와 카탈로그를 확인합니다.

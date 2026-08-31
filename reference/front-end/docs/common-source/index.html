@@ -69,9 +69,9 @@
 <td>Vitest 설정, setup, <code>renderWithProviders</code></td>
 </tr>
 <tr>
-<td>공통 컴포넌트를 독립적으로 개발·검수하기</td>
+<td>Component·Feature·Screen UI를 독립적으로 개발·검수하기</td>
 <td><a href="./storybook.html">Storybook 적용 가이드</a></td>
-<td><code>.storybook</code>, <code>*.stories.tsx</code>, Autodocs와 정적 Build</td>
+<td><code>.storybook</code>, <code>*.stories.tsx</code>, 상태·Viewport, Figma Embed와 정적 Build</td>
 </tr>
 <tr>
 <td>계약 확정 후 API Mock 필요성 판단하기</td>
@@ -108,7 +108,7 @@
 <li><strong>완성 코드</strong>를 기존 구현과 비교해 새 파일 생성 또는 병합을 선택합니다.</li>
 <li><strong>사용 예시</strong>까지 연결해 import만 되고 실제로는 쓰이지 않는 공통 코드를 남기지 않습니다.</li>
 <li><strong>프로젝트에서 바꿀 부분</strong>만 실제 계약과 디자인 값으로 교체합니다.</li>
-<li>공통·재사용 컴포넌트를 만들거나 공개 API를 변경했다면 Story를 작성 또는 갱신하고 Storybook 정적 Build를 확인합니다.</li>
+<li>공통 컴포넌트, 독립 검수 가치가 있는 Feature 또는 사용자 노출 Screen을 만들거나 공개 API, 주요 상태와 화면 구조를 변경했다면 Story를 작성 또는 갱신하고 Storybook 정적 Build를 확인합니다.</li>
 <li>예제 테스트와 <code>typecheck</code>, <code>lint</code>, <code>test</code>를 통과시킵니다.</li>
 </ol>
 </section>
@@ -211,7 +211,7 @@
 </tr>
 <tr>
 <td>Storybook</td>
-<td>컴포넌트 가까이 Story를 두고 실제 공개 API를 확인하는 원칙</td>
+<td>Component·Feature·Screen 구현 가까이 Story를 두고 실제 공개 API, 상태와 Viewport를 확인하는 원칙</td>
 <td>실제 Framework, Addon, Script, Provider와 Story 검색 범위</td>
 </tr>
 <tr>
@@ -252,7 +252,7 @@
 [ ] loading, disabled, invalid, empty, error 중 해당 상태를 확인했다.
 [ ] 프로젝트가 추가한 동작을 사용자 관점의 테스트로 검증했다.
 [ ] npm run typecheck, npm run lint, npm run test가 통과한다.
-[ ] 공통·재사용 컴포넌트 변경 시 관련 Story와 Storybook 정적 Build를 확인했다.</code></pre>
+[ ] Component·Feature·Screen UI 변경 시 관련 Story와 Storybook 정적 Build를 확인했다.</code></pre>
 <p>빌드 경계나 Server/Client Component 구성이 바뀌는 적용이라면 <code>npm run build</code>까지 확인합니다.</p>
 </section>
     </main>
