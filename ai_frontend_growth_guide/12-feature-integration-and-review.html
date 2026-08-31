@@ -97,6 +97,27 @@ API·Bridge 계약 질문, 재사용 코드와 작은 구현 단계를 먼저 �
         </blockquote>
         <p><a href="./11-testing-and-debugging.html">이전 단계</a> · <a href="./13-frontend-security-and-privacy.html">13단계 Front-End 보안과 개인정보로</a> · <a href="./index.html">AI 협업 성장 가이드</a></p>
       </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">6. 종합 기능 실습</h2>
+        <p>조회·편집·권한·오류가 있는 하나의 기능을 선택합니다. 사용자 흐름, 상태 전이, 미확정 계약 질문을 먼저 작성하고 승인된 범위만 구현합니다. 정적 UI, 입력, 검증, API 또는 Bridge, 실패 상태, 테스트 순으로 작은 Diff를 쌓습니다.</p>
+        <h3>필수 제출물</h3>
+        <ol>
+          <li>정상·로딩·빈 값·오류·취소·중복 실행 상태표</li>
+          <li>상태 소유권, 컴포넌트 책임과 Server·Client 경계 기록</li>
+          <li>승인된 계약과 코드 필드의 추적표, 남은 <code>TBD</code></li>
+          <li>타입·Parser·요청 또는 Bridge Adapter와 실패 테스트</li>
+          <li>키보드·반응형·실제 환경 수동 검수 결과</li>
+          <li>AI에게 맡긴 작업, 거절한 제안과 개발자가 직접 결정한 내용</li>
+        </ol>
+        <h3>리뷰 우선순위</h3>
+        <p>Blocker는 데이터 노출, 권한 우회, 계약 추측, 사용자 흐름 손상과 복구 불가능한 변경입니다. 그 다음 정확성, 회귀, 접근성, 성능, 유지보수 비용 순으로 봅니다. 취향 차이와 출시를 막아야 하는 문제를 구분합니다.</p>
+      </section>
+      <section>
+        <h2 class="bx-active">7. 마스터 통과 심사</h2>
+        <p>학습자는 30분 동안 설계를 설명하고, 리뷰어가 넣은 새로운 요구와 실패 조건 하나를 작은 변경으로 반영합니다. 이어서 알 수 없는 오류 하나를 증거로 진단하고 Rollback 또는 안전한 배포 범위를 제안합니다.</p>
+        <p><strong>통과 기준:</strong> 기능 동작뿐 아니라 결정 이유, 위험, 미확정 사항, 검증 한계를 설명하고 AI가 만든 잘못된 가정과 과도한 구조를 스스로 수정해야 합니다.</p>
+      </section>
     </main>
     <footer><p>12. 기능 통합과 리뷰</p></footer>
     <script src="./../assets/js/common.js"></script>

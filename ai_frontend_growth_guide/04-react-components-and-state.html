@@ -76,6 +76,21 @@ Figma 레이어 수가 아니라 책임으로 컴포넌트를 나눠줘.</code><
         </ul>
         <p><a href="./03-typescript-boundaries.html">이전 단계</a> · <a href="./05-react-effects-and-forms.html">5단계 React Effect와 폼으로</a></p>
       </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">6. 상태와 책임을 설계하기</h2>
+        <h3>상태 인벤토리</h3>
+        <p>구현 전에 모든 값을 원본 상태, 파생 값, 서버 상태, URL 상태, 폼 초안과 일시적 UI 상태로 분류합니다. 다른 값에서 계산할 수 있다면 State에 저장하지 않습니다. URL로 공유하거나 새로고침 뒤 복원해야 하는 선택값은 지역 State보다 URL이 적합할 수 있습니다.</p>
+        <h3>상태 보존은 위치와 Key로 결정된다</h3>
+        <p>조건문 모양이 아니라 렌더 트리의 같은 위치와 같은 Key인지가 State 보존을 결정합니다. 사용자나 편집 대상이 바뀔 때 State가 유지되어야 하는지 초기화되어야 하는지 먼저 정하고 Key를 그 정책에 맞게 사용합니다.</p>
+        <h3>컴포넌트 분리의 판단 기준</h3>
+        <p>줄 수가 아니라 변경 이유, 상태 소유권, 재사용되는 행동과 독립 검증 가능성으로 분리합니다. 실제 반복이 없는 범용 Wrapper와 지나치게 많은 Boolean Props는 책임이 불분명하다는 신호입니다.</p>
+      </section>
+      <section>
+        <h2 class="bx-active">7. 마스터 실습과 증거</h2>
+        <p>검색·필터·선택·인라인 편집이 있는 목록을 구현합니다. 먼저 값별 소유자와 수명을 표로 작성하고, Props 복사·Index Key·중복 파생 State가 있는 결함 버전을 리뷰합니다. React DevTools로 불필요한 렌더를 관찰하되 측정 없이 Memoization을 추가하지 않습니다.</p>
+        <p><strong>통과 기준:</strong> 각 State가 왜 그 컴포넌트에 있으며 언제 보존·초기화되는지 설명하고, Context나 전역 Store가 필요한 실제 공유 범위를 증명할 수 있어야 합니다.</p>
+      </section>
     </main>
     <footer><p>4. React 컴포넌트와 상태</p></footer>
     <script src="./../assets/js/common.js"></script>

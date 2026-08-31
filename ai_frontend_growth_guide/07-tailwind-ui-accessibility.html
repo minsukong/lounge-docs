@@ -76,6 +76,21 @@
         </ul>
         <p><a href="./06-nextjs-app-router.html">이전 단계</a> · <a href="./08-api-contracts-and-errors.html">8단계 API 계약과 오류로</a></p>
       </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">6. 제약 기반 UI와 접근성 심화</h2>
+        <h3>반응형은 Breakpoint 목록이 아니다</h3>
+        <p>320px 너비, 긴 한국어·영어 문구, 200% 확대, 모바일 키보드, Safe Area와 가로·세로 전환을 입력 조건으로 봅니다. 고정 높이와 무분별한 <code>overflow-hidden</code>으로 문제를 감추지 않습니다.</p>
+        <h3>접근 가능한 이름과 관계</h3>
+        <p>Label, 설명, 오류와 입력의 관계를 의미 있는 HTML과 <code>aria-describedby</code>로 연결합니다. ARIA는 올바른 기본 요소가 없을 때 보완하며, Button을 Div로 다시 만들기 위한 도구가 아닙니다. <a href="https://www.w3.org/WAI/standards-guidelines/wcag/">Web Content Accessibility Guidelines (WCAG)</a>를 추가 기준으로 사용합니다.</p>
+        <h3>Focus는 사용자 흐름이다</h3>
+        <p>Dialog가 열리면 적절한 시작점으로 이동하고, 닫히면 호출한 요소로 돌아와야 합니다. 오류 발생 시 첫 오류로 무조건 이동시키기보다 현재 작업과 오류 요약 방식에 맞는 정책을 정합니다. 동적 완료·오류는 필요한 경우 Live Region으로 전달합니다.</p>
+      </section>
+      <section>
+        <h2 class="bx-active">7. 마스터 실습과 증거</h2>
+        <p>복합 폼과 Dialog를 마우스 없이 완료합니다. 320px·200% 확대·긴 문구·고대비 모드에서 검수하고 자동 검사와 수동 키보드 결과를 별도로 기록합니다. 색상만 제거해도 상태가 구분되는지 확인합니다.</p>
+        <p><strong>통과 기준:</strong> 특정 Figma 좌표를 복사하지 않고 Layout 제약을 설명하며, 키보드·Focus·이름·오류 관계를 실제 동작으로 증명해야 합니다.</p>
+      </section>
     </main>
     <footer><p>7. Tailwind UI와 접근성</p></footer>
     <script src="./../assets/js/common.js"></script>

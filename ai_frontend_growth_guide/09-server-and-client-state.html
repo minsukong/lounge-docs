@@ -85,6 +85,21 @@
         </ul>
         <p><a href="./08-api-contracts-and-errors.html">이전 단계</a> · <a href="./10-webview-bridge-and-security.html">10단계 WebView Bridge와 보안으로</a></p>
       </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">6. 캐시 일관성과 사용자 격리</h2>
+        <h3>Query Key는 데이터의 주소</h3>
+        <p>응답을 바꾸는 사용자, 필터, 정렬, 페이지와 권한 범위가 Query Key에 포함되어야 합니다. 화면 이름만 넣으면 서로 다른 데이터가 같은 캐시를 공유할 수 있습니다. Key를 문자열 조각으로 흩뿌리지 말고 Factory로 중앙화해 무효화 범위를 검토합니다.</p>
+        <h3>Mutation 이후 전략</h3>
+        <p>무조건 전체 무효화하지 않습니다. 서버 응답으로 정확히 갱신, 관련 Query 무효화, 낙관적 갱신과 Rollback 중 제품 요구와 실패 비용에 맞게 선택합니다. 동시에 실행된 Mutation의 완료 순서가 UI 일관성에 미치는 영향도 확인합니다.</p>
+        <h3>세션 전환은 보안 경계</h3>
+        <p>로그아웃, 계정 전환과 권한 변경 때 메모리 캐시, Persist Store, 폼 초안과 진행 중 요청 중 무엇을 취소·삭제·재조회할지 표로 만듭니다. 이전 사용자 데이터가 잠깐 보이는 것도 개인정보 노출입니다.</p>
+      </section>
+      <section>
+        <h2 class="bx-active">7. 마스터 실습과 증거</h2>
+        <p>두 사용자와 두 필터가 있는 조회·수정 흐름을 구현합니다. Query Key 충돌, 낙관적 갱신 실패, 사용자 전환 중 늦은 응답을 의도적으로 재현하고 수정합니다. 캐시 Inspector와 테스트로 이전 사용자 데이터가 남지 않음을 확인합니다.</p>
+        <p><strong>통과 기준:</strong> 지역·폼·URL·서버·세션 상태를 구분하고, 데이터별 소유자·신선도·정리 시점을 설명하며 서버 데이터를 전역 Store에 불필요하게 복제하지 않아야 합니다.</p>
+      </section>
     </main>
     <footer><p>9. 서버·클라이언트 상태</p></footer>
     <script src="./../assets/js/common.js"></script>

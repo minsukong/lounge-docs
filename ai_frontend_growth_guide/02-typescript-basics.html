@@ -78,6 +78,34 @@ Union과 Narrowing으로 더 단순하게 만들 수 있는지 먼저 설명해�
         </ul>
         <p><a href="./01-javascript-foundations.html">이전 단계</a> · <a href="./03-typescript-boundaries.html">3단계 TypeScript 경계로</a></p>
       </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">6. 타입을 설계 도구로 사용하기</h2>
+        <h3>불가능한 상태를 표현하지 않기</h3>
+        <p><code>isLoading</code>, <code>error</code>, <code>data</code>를 독립 속성으로 두면 로딩 중인데 데이터와 오류가 동시에 존재하는 조합이 생깁니다. <code>status</code>를 판별자로 갖는 Union으로 상태별 필수 값을 묶고, UI가 허용된 상태만 받게 합니다.</p>
+        <h3>누락 없는 분기</h3>
+        <pre class="hljs"><code data-language="typescript">function assertNever(value: never): never {
+  throw new Error(`처리하지 않은 상태: ${JSON.stringify(value)}`);
+}
+
+function getLabel(state: ViewState) {
+  switch (state.status) {
+    case "idle": return "대기";
+    case "loading": return "불러오는 중";
+    case "success": return `${state.items.length}개`;
+    case "error": return state.message;
+    default: return assertNever(state);
+  }
+}</code></pre>
+        <p>새 상태가 추가되면 <code>default</code>의 값이 더 이상 <code>never</code>가 아니므로 컴파일 오류가 발생해야 합니다. 아무 값이나 반환하는 기본 분기는 누락을 숨깁니다.</p>
+        <h3><code>satisfies</code>와 Generic의 경계</h3>
+        <p><code>satisfies</code>는 값의 구체적인 Literal 정보를 보존하면서 목표 형태를 검사할 때 사용합니다. Generic은 입력과 출력 사이의 실제 관계를 표현할 때만 도입합니다. 타입 매개변수가 한 번만 등장하거나 호출자가 의미 있는 제약을 얻지 못한다면 평범한 타입이 더 명확합니다.</p>
+      </section>
+      <section>
+        <h2 class="bx-active">7. 마스터 실습과 증거</h2>
+        <p>결제 또는 예약 상태를 최소 여섯 상태의 판별 가능한 Union으로 모델링합니다. 새 상태 하나를 추가해 누락된 UI, Analytics와 버튼 정책이 모두 컴파일 단계에서 발견되는지 확인합니다. 잘못된 <code>as</code>, <code>!</code>, 선택 속성 남용이 숨기는 버그도 한 개씩 재현합니다.</p>
+        <p><strong>통과 기준:</strong> 타입 오류를 없애는 것이 아니라 도메인의 가능한 값과 전이를 정확히 표현하고, 타입 검사와 실행 중 검증의 책임 차이를 자신의 말로 설명할 수 있어야 합니다.</p>
+      </section>
     </main>
     <footer><p>2. TypeScript 기본</p></footer>
     <script src="./../assets/js/common.js"></script>

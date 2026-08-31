@@ -81,6 +81,21 @@ TypeScript 타입만 있으면 충분한 값과 Runtime 검증이 필요한 값�
         </ul>
         <p><a href="./02-typescript-basics.html">이전 단계</a> · <a href="./04-react-components-and-state.html">4단계 React 컴포넌트와 상태로</a></p>
       </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">6. 신뢰 경계 설계</h2>
+        <h3>형태, 의미와 정규화의 순서</h3>
+        <p>외부 값은 먼저 객체인지, 필요한 필드가 있는지, 필드 타입이 맞는지 확인합니다. 그 다음 날짜 범위, 허용 상태, 필드 사이의 관계 같은 도메인 의미를 검증합니다. 마지막으로 화면이 사용할 내부 모델로 정규화합니다. 검증과 변환이 여러 컴포넌트에 흩어지면 서로 다른 규칙이 생깁니다.</p>
+        <h3>오류도 계약의 일부</h3>
+        <p>Parser는 단순히 <code>true</code>나 <code>false</code>만 반환하지 않고 필요한 경우 어느 경계에서 어떤 입력이 거부되었는지 구조화된 오류를 제공합니다. 단, 원본 개인정보나 전체 응답을 사용자 메시지와 로그에 그대로 노출하지 않습니다.</p>
+        <h3>생성 타입이 보장하지 않는 것</h3>
+        <p>OpenAPI 같은 명세에서 생성한 타입은 명세와 코드의 정적 연결을 돕지만 실제 서버가 명세를 지킨다는 사실, 오래된 앱의 Bridge 응답, Local Storage 값과 URL 입력을 보장하지 않습니다. 경계별 실제 신뢰 수준을 표로 작성합니다.</p>
+      </section>
+      <section>
+        <h2 class="bx-active">7. 마스터 실습과 증거</h2>
+        <p>승인된 정상 응답, 필드 누락, 알 수 없는 Enum, 잘못된 날짜, 빈 본문, JSON이 아닌 본문을 Fixture로 만들고 Parser를 검증합니다. API 계약이 승인되지 않았다면 Parser를 만들지 말고 요청·응답·오류 질문서와 <code>TBD</code>만 제출합니다.</p>
+        <p><strong>통과 기준:</strong> 외부 <code>unknown</code>이 안전한 내부 모델이 되는 단일 경계를 찾을 수 있고, 형태 검증·의미 검증·정규화·오류 표시의 책임을 분리할 수 있어야 합니다.</p>
+      </section>
     </main>
     <footer><p>3. TypeScript 경계</p></footer>
     <script src="./../assets/js/common.js"></script>

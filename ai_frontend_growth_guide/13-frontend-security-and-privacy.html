@@ -133,6 +133,28 @@
         </ul>
         <p><a href="./12-feature-integration-and-review.html">이전 단계</a> · <a href="./curriculum.html">교육 과정 다시 보기</a> · <a href="../security_guide/index.html">Front-End 보안 기준 확인</a></p>
       </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">7. 위협 모델과 방어 심화</h2>
+        <h3>데이터 흐름과 신뢰 경계</h3>
+        <p>사용자 입력, URL, API, Storage, 외부 Software Development Kit (SDK), Analytics와 Bridge 사이에서 데이터가 어디로 이동하고 저장되는지 그립니다. 각 경계에서 공격자 능력, 보호 대상, 검증 책임과 로그 노출을 기록합니다.</p>
+        <h3>브라우저 보안 약어 이해</h3>
+        <ul>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS">Cross-Origin Resource Sharing (CORS)</a>: 서버가 허용한 다른 Origin의 응답을 브라우저가 읽도록 제어합니다. 인증·권한 기능은 아닙니다.</li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP">Content Security Policy (CSP)</a>: 브라우저가 로드·실행할 리소스를 제한해 공격 영향을 줄입니다.</li>
+          <li><a href="https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html">Cross-Site Request Forgery (CSRF)</a>: 로그인된 브라우저가 원치 않는 상태 변경 요청을 보내게 하는 공격입니다.</li>
+          <li><a href="https://developer.mozilla.org/en-US/docs/Web/Security/Attacks/XSS">Cross-Site Scripting (XSS)</a>: 신뢰할 수 없는 Script가 페이지에서 실행되는 공격입니다.</li>
+        </ul>
+        <p>CORS를 느슨하게 하는 것으로 CSRF를 해결하거나, CSP 하나로 XSS가 완전히 사라진다고 설명하면 통과하지 않습니다. Cookie 인증의 SameSite·CSRF 방어와 Backend 권한 검증은 실제 배포 계약으로 확인합니다.</p>
+        <h3>개인정보 최소화와 공급망</h3>
+        <p>필요한 데이터만 요청·표시·저장하고 URL, Client Log, 오류 추적과 Analytics에 식별자가 남지 않는지 확인합니다. 새 Dependency는 필요성, 유지보수 상태, License, Lock File 변화, 알려진 취약점과 제거 비용을 검토합니다.</p>
+      </section>
+      <section>
+        <h2 class="bx-active">8. 보안 마스터 실습과 Fail Gate</h2>
+        <p>12단계에서 완성한 기능의 데이터 흐름도를 만들고 XSS, CSRF, 권한, 사용자 간 캐시 격리, Storage, Bridge, 로그와 Dependency 위험을 검토합니다. Front-end에서 해결할 항목과 Backend·App·배포 담당자에게 확인할 항목을 분리합니다.</p>
+        <p><strong>즉시 미통과:</strong> 사용자 간 데이터 노출, Client만의 권한 검증, 인증정보의 URL·로그 저장, 신뢰하지 않은 HTML 실행, 계약이 없는 보안 정책의 임의 확정이 하나라도 남으면 다른 점수와 관계없이 과정을 완료할 수 없습니다.</p>
+        <p><strong>최종 통과 기준:</strong> 위협을 과장하거나 축소하지 않고 실제 데이터 흐름과 공격 조건을 근거로 우선순위를 정하며, 방어의 한계와 담당자별 책임을 설명할 수 있어야 합니다.</p>
+      </section>
     </main>
     <footer><p>13. Front-End 보안과 개인정보</p></footer>
     <script src="./../assets/js/common.js"></script>

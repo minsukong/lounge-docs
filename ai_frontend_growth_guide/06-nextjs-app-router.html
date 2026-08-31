@@ -79,6 +79,21 @@
         </ul>
         <p><a href="./05-react-effects-and-forms.html">이전 단계</a> · <a href="./07-tailwind-ui-accessibility.html">7단계 Tailwind UI와 접근성으로</a></p>
       </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">6. 렌더링과 실행 경계 심화</h2>
+        <h3>요구에서 경계를 선택하기</h3>
+        <p>상태와 Event Handler, Browser API가 필요한 가장 작은 부분만 Client Component로 둡니다. 데이터 접근, 비밀값, 권한에 따른 서버 결정은 Server 경계에 남깁니다. Server Component와 Client Component는 반드시 별도 파일 예시로 작성하고 <code>use client</code>가 파일 최상단 경계라는 점을 확인합니다.</p>
+        <h3>렌더링 전략</h3>
+        <p><a href="https://nextjs.org/docs/pages/building-your-application/rendering/server-side-rendering">Server-Side Rendering (SSR)</a>은 요청마다 HTML을 만들고, <a href="https://nextjs.org/docs/pages/building-your-application/rendering/static-site-generation">Static Site Generation (SSG)</a>은 빌드 시 미리 만들며, <a href="https://nextjs.org/docs/app/guides/incremental-static-regeneration">Incremental Static Regeneration (ISR)</a>은 정적 결과를 재검증합니다. 이름을 외우기보다 개인화 여부, 신선도, 캐시 격리, 배포 환경을 기준으로 선택합니다.</p>
+        <h3>Hydration 실패 분석</h3>
+        <p>시간, 난수, Browser 전용 값과 서버·클라이언트의 다른 데이터가 첫 렌더에 들어가면 Hydration이 불일치할 수 있습니다. 경고를 숨기지 말고 서버 HTML과 첫 Client 결과가 달라진 최초 지점을 찾습니다.</p>
+      </section>
+      <section>
+        <h2 class="bx-active">7. 마스터 실습과 증거</h2>
+        <p>공개 콘텐츠, 로그인 사용자 정보, 상호작용 폼이 함께 있는 Route를 설계합니다. 파일별 실행 위치, 직렬화 경계, 캐시·신선도 정책을 표로 제출하고 서버 전용 모듈이 Client Bundle에 들어가지 않는지 확인합니다.</p>
+        <p><strong>통과 기준:</strong> 습관적으로 전체 화면에 <code>use client</code>를 붙이지 않고, 로딩·오류·Not Found 책임과 사용자별 데이터 격리를 포함한 경계 선택을 설명할 수 있어야 합니다.</p>
+      </section>
     </main>
     <footer><p>6. Next.js App Router</p></footer>
     <script src="./../assets/js/common.js"></script>

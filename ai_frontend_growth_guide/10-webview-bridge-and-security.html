@@ -80,6 +80,21 @@
         </ul>
         <p><a href="./09-server-and-client-state.html">이전 단계</a> · <a href="./11-testing-and-debugging.html">11단계 테스트와 디버깅으로</a></p>
       </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">6. Bridge 프로토콜 심화</h2>
+        <h3>Capability별 타입 연결</h3>
+        <p>하나의 <code>request(method: string, payload: unknown)</code>를 화면에 노출하지 않습니다. Capability Map으로 Method마다 입력, 성공 결과와 오류를 연결하고 Adapter 내부에서 Runtime 검증합니다. 화면은 Android·iOS 전역 객체와 Payload 형식을 알지 않습니다.</p>
+        <h3>Version과 수명</h3>
+        <p>App Version, 지원 Capability, 요청 식별자, Timeout, 중복 응답, 화면 이탈과 App Background 전환을 계약에 포함합니다. 응답이 늦게 도착했을 때 이미 제거된 화면이나 다른 사용자 상태를 변경하지 않게 합니다.</p>
+        <h3>최소 노출과 Origin</h3>
+        <p>WebView에 필요한 기능만 노출하고 호출 가능한 Origin과 Navigation 정책을 App 담당자와 합의합니다. 문자열 실행, 범용 파일 접근, 토큰 전체 반환처럼 권한이 큰 기능을 편의를 위해 공개하지 않습니다.</p>
+      </section>
+      <section>
+        <h2 class="bx-active">7. 마스터 실습과 증거</h2>
+        <p>카메라 또는 파일 선택 Capability를 타입 안전 Adapter로 구현합니다. Bridge 없음, 지원하지 않는 Version, 잘못된 Payload, Timeout, 중복 응답과 사용자 취소를 주입합니다. Web fallback과 App 담당자에게 확인할 계약 질문을 함께 제출합니다.</p>
+        <p><strong>통과 기준:</strong> 화면과 Native 구현의 결합을 Adapter에서 차단하고, 입력·응답·오류·Version·요청 수명을 계약으로 설명할 수 있어야 합니다.</p>
+      </section>
     </main>
     <footer><p>10. WebView Bridge와 보안</p></footer>
     <script src="./../assets/js/common.js"></script>
