@@ -230,9 +230,9 @@ flowchart TD
         <h2>9. Browser, OS와 반응형 기준</h2>
         <table>
           <thead><tr><th scope="col">Browser</th><th scope="col">기본 검토 기준</th></tr></thead>
-          <tbody><tr><td>Chrome·Edge</td><td>111 이상</td></tr><tr><td>Safari</td><td>16.4 이상</td></tr><tr><td>Firefox</td><td>128 이상</td></tr><tr><td>Samsung Internet</td><td>23 이상</td></tr></tbody>
+          <tbody><tr><td>Chrome·Edge</td><td>지원 대상 구형 버전</td></tr><tr><td>Safari</td><td>15 이상</td></tr><tr><td>Firefox</td><td>지원 대상 구형 버전</td></tr><tr><td>Samsung Internet</td><td>지원 대상 구형 버전</td></tr></tbody>
         </table>
-        <p>지역 Browser는 Chromium 111 이상 Engine 사용 여부와 현재 안정 버전의 실제 동작을 확인합니다. 국가별 점유율은 보조 근거이며 제품군 점유율을 특정 최소 버전 이상의 정확한 사용자 비율로 해석하지 않습니다.</p>
+        <p>Tailwind CSS v4를 유지하고 공통 CSS 하한은 Safari 15에서 지원되는 기능 범위로 정합니다. Android와 다른 Browser는 특정 제품 버전을 기계적으로 대응시키지 않고 주요 구형·최신 버전에서 실제 사용하는 Utility와 핵심 기능을 확인합니다. 지원되지 않는 최신 CSS 기능은 사용하지 않거나 대체합니다.</p>
         <table>
           <thead><tr><th scope="col">구간</th><th scope="col">CSS Viewport</th><th scope="col">주요 확인</th></tr></thead>
           <tbody><tr><td>Mobile</td><td>320~767px</td><td>입력, 터치, 긴 문구와 Overflow</td></tr><tr><td>Tablet</td><td>768~1023px</td><td>열 전환, 방향과 밀도</td></tr><tr><td>PC</td><td>1024px 이상</td><td>최대 너비와 다단 Layout</td></tr></tbody>

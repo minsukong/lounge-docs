@@ -10,23 +10,25 @@
 
 ## 2. 기본 지원 원칙
 
-- Tailwind CSS v4를 사용하므로 공식 핵심 호환 기준보다 낮은 브라우저는 지원하지 않습니다.
-- Chromium 계열의 기술 하한은 Chromium 111입니다.
-- Safari와 iOS·iPadOS WebKit의 기술 하한은 Safari 16.4입니다.
-- Firefox의 기술 하한은 Firefox 128입니다.
+- Tailwind CSS v4를 유지하면서 Safari 15와 같은 구형 브라우저도 지원합니다.
+- Tailwind CSS v4의 공식 완전 호환 버전을 프로젝트의 일괄적인 최소 버전으로 사용하지 않습니다.
+- 프로젝트에서 사용하는 CSS와 Utility가 정상 동작하는지를 지원 판단 기준으로 사용합니다.
+- Safari 15 또는 지원 대상 구형 브라우저에서 동작하지 않는 최신 CSS 기능은 사용하지 않거나 대체합니다.
 - 같은 Chromium 계열이어도 브라우저별 수정과 엔진 반영 시점이 다를 수 있으므로 주요 브라우저는 각각 확인합니다.
 - 최소 버전에서 레이아웃과 핵심 기능을 검증하고, 최신 안정 버전에서도 회귀를 확인합니다.
 - Internet Explorer는 지원하지 않습니다.
+
+공통 CSS 하한은 Safari 15에서 지원되는 기능 범위로 정합니다. Android와 다른 Chromium·Firefox 계열 브라우저는 Safari 버전과 특정 제품 버전을 기계적으로 대응시키지 않고, 이 공통 CSS 범위와 프로젝트가 실제 사용하는 Tailwind Utility 및 핵심 기능이 지원 대상 구형 버전에서 동작하는지 확인합니다.
 
 ### 자동 업데이트를 고려한 기준
 
 Chrome, Edge와 Firefox 같은 현대 브라우저는 기본적으로 백그라운드에서 새 버전을 확인하고 자동 업데이트합니다. 모바일의 Chrome, Samsung Internet 등도 일반적으로 앱 스토어의 자동 업데이트 설정을 따릅니다. Safari는 브라우저만 독립적으로 갱신하기보다 macOS, iOS와 iPadOS의 시스템 업데이트를 통해 함께 갱신됩니다.
 
-따라서 2023년에 출시된 Chrome 111과 Safari 16.4를 기술 하한으로 두는 것은 일반 사용자 환경에서 과도하게 높은 기준이 아닙니다. 다만 자동 업데이트가 모든 사용자의 최신 버전을 보장하지는 않습니다. 브라우저를 오랫동안 재시작하지 않은 경우, 기기의 저장 공간이나 네트워크가 부족한 경우, 구형 OS가 최신 브라우저를 지원하지 않는 경우와 회사·학교 관리 정책으로 버전이 고정된 경우에는 업데이트가 지연되거나 중단될 수 있습니다.
+자동 업데이트가 모든 사용자의 최신 버전을 보장하지는 않습니다. 브라우저를 오랫동안 재시작하지 않은 경우, 기기의 저장 공간이나 네트워크가 부족한 경우, 구형 OS가 최신 브라우저를 지원하지 않는 경우와 회사·학교 관리 정책으로 버전이 고정된 경우에는 업데이트가 지연되거나 중단될 수 있습니다. 따라서 최신 버전 사용을 전제로 지원 범위를 정하지 않고 Safari 15와 같은 최소 지원 환경을 직접 검증합니다.
 
 자동 업데이트는 최소 버전을 선택하는 현실성의 근거로 사용하되, 최소 버전 검증과 운영 사용자 버전 확인을 생략하는 근거로 사용하지 않습니다. Chrome의 기본 자동 업데이트와 재실행 후 적용 방식은 [Google Chrome 업데이트 안내](https://support.google.com/chrome/answer/95414)에서, 기업 관리 환경의 업데이트 중지·버전 고정 가능성은 [Chrome Enterprise 업데이트 관리](https://support.google.com/chrome/a/answer/6350036)에서 확인합니다. Edge의 자동 업데이트와 기업용 장기 주기는 [Microsoft Edge 채널 안내](https://learn.microsoft.com/en-us/deployedge/microsoft-edge-channels), Safari 갱신 방식은 [Apple Safari 업데이트 안내](https://support.apple.com/102665)를 참고합니다.
 
-Tailwind CSS v4는 핵심 기능에 `@property`, `color-mix()` 등 최신 CSS 기능을 사용합니다. 선택적인 최신 Utility를 사용하지 않는 것만으로 핵심 최소 버전을 낮출 수 없습니다. 더 낮은 브라우저 지원이 필요하면 Tailwind CSS 3.4 유지 또는 기술 구성 변경을 별도로 검토합니다.
+Tailwind CSS v4는 유지하되 검증된 v4.1 이상의 버전을 잠금 파일에 고정합니다. 프로젝트는 기본 레이아웃, 간격, 크기, 색상, 타이포그래피와 반응형 Utility를 중심으로 사용합니다. Safari 15와 지원 대상 구형 브라우저에서 동작하지 않는 선택적 최신 Utility 및 CSS 기능은 사용하지 않으며, 필요한 경우 동등한 대체 표현을 제공합니다. 프레임워크의 공식 완전 호환 범위와 별개로 핵심 정보, 입력, 이동과 업무 기능이 최소 지원 환경에서 정상 동작해야 합니다.
 
 근거: [Tailwind CSS 공식 호환성 문서](https://tailwindcss.com/docs/compatibility), [Tailwind CSS v4 업그레이드 가이드](https://tailwindcss.com/docs/upgrade-guide)
 
@@ -36,39 +38,39 @@ Tailwind CSS v4는 핵심 기능에 `@property`, `color-mix()` 등 최신 CSS �
 
 | 운영체제 | 브라우저 | 최소 버전 | 적용 기준 |
 | --- | --- | ---: | --- |
-| Windows | Chrome | 111 이상 | Tailwind CSS v4의 Chromium 하한 |
-| Windows | Edge | 111 이상 | Chromium 111 계열 이상 |
-| Windows | Firefox | 128 이상 | Tailwind CSS v4의 Firefox 하한 |
-| macOS | Safari | 16.4 이상 | Tailwind CSS v4의 WebKit 하한 |
-| macOS | Chrome | 111 이상 | Tailwind CSS v4의 Chromium 하한 |
-| macOS | Edge | 111 이상 | Chromium 111 계열 이상 |
-| macOS | Firefox | 128 이상 | Tailwind CSS v4의 Firefox 하한 |
+| Windows | Chrome | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
+| Windows | Edge | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
+| Windows | Firefox | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
+| macOS | Safari | 15 이상 | 프로젝트의 WebKit 최소 지원 기준 |
+| macOS | Chrome | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
+| macOS | Edge | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
+| macOS | Firefox | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
 
-한국에서 비중이 있는 Whale과 중국의 360 Safe, UC, QQ 등 Chromium 계열 브라우저는 제품 버전 숫자 대신 **Chromium 111 이상 엔진을 탑재한 최신 안정 버전**을 호환 대상으로 둡니다. 제품 버전과 Chromium 엔진 버전의 대응이 일정하지 않으므로 이 브라우저들을 Chrome과 동일하다고 간주하지 않습니다.
+한국에서 비중이 있는 Whale과 중국의 360 Safe, UC, QQ 등 Chromium 계열 브라우저는 제품 버전과 Chromium 엔진 버전의 대응이 일정하지 않으므로 특정 엔진 버전만으로 차단하지 않습니다. 국가별 주요 구형 버전과 최신 안정 버전에서 핵심 흐름을 각각 확인합니다.
 
 ### 태블릿
 
 | 운영체제 | 브라우저 | 최소 버전 | 적용 기준 |
 | --- | --- | ---: | --- |
-| iPadOS | Safari | 16.4 이상 | Safari 16.4와 iPadOS 16.4가 함께 제공됨 |
-| Android | Chrome | 111 이상 | Tailwind CSS v4의 Chromium 하한 |
-| Android | Samsung Internet | 23 이상 | Chromium 115 기반으로 Chromium 111 하한 충족 |
-| Android | Edge | 111 이상 | Chromium 111 계열 이상 |
-| Android | Firefox | 128 이상 | Tailwind CSS v4의 Firefox 하한 |
+| iPadOS | Safari | 15 이상 | 프로젝트의 WebKit 최소 지원 기준 |
+| Android | Chrome | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
+| Android | Samsung Internet | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
+| Android | Edge | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
+| Android | Firefox | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
 
 ### 모바일
 
 | 운영체제 | 브라우저 | 최소 버전 | 적용 기준 |
 | --- | --- | ---: | --- |
-| iOS | Safari | 16.4 이상 | Tailwind CSS v4의 WebKit 하한 |
-| Android | Chrome | 111 이상 | Tailwind CSS v4의 Chromium 하한 |
-| Android | Samsung Internet | 23 이상 | Chromium 115 기반으로 Chromium 111 하한 충족 |
-| Android | Edge | 111 이상 | Chromium 111 계열 이상 |
-| Android | Firefox | 128 이상 | Tailwind CSS v4의 Firefox 하한 |
+| iOS | Safari | 15 이상 | 프로젝트의 WebKit 최소 지원 기준 |
+| Android | Chrome | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
+| Android | Samsung Internet | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
+| Android | Edge | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
+| Android | Firefox | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
 
-iOS와 iPadOS의 Chrome, Edge, Firefox 등 Safari 이외의 브라우저는 브라우저 이름과 별개로 해당 OS의 WebKit 영향을 받습니다. 따라서 iOS·iPadOS 16.4 이상에서 각 브라우저의 최신 안정 버전을 확인합니다.
+iOS와 iPadOS의 Chrome, Edge, Firefox 등 Safari 이외의 브라우저는 브라우저 이름과 별개로 해당 OS의 WebKit 영향을 받습니다. 따라서 iOS·iPadOS 15와 최신 버전에서 각 주요 브라우저를 확인합니다.
 
-Samsung Internet 23의 Chromium 115 기반 정보는 [Samsung Internet 개발팀 안내](https://medium.com/samsung-internet-dev/samsung-internet-v23-0-stable-coming-with-enhanced-security-and-convenience-1839a1af5dd3)와 [Samsung Developer User-Agent 안내](https://developer.samsung.com/internet/user-agent-string-format.html)를 근거로 합니다. Safari 16.4와 iOS·iPadOS 16.4의 관계는 [Apple Safari 16.4 릴리스 노트](https://developer.apple.com/documentation/safari-release-notes/safari-16_4-release-notes)에서 확인합니다.
+브라우저 제품 버전과 엔진 버전은 [Samsung Developer User-Agent 안내](https://developer.samsung.com/internet/user-agent-string-format.html) 등 각 제품의 공식 자료에서 확인합니다. 버전 정보만으로 지원 여부를 확정하지 않고 실제 사용 기능을 함께 검증합니다.
 
 ## 4. 반응형 화면 너비 기준
 
@@ -106,7 +108,7 @@ Tailwind CSS v4의 기본 breakpoint는 [Tailwind CSS 반응형 디자인 문서
 | 미국 | Chrome 51.55%, Safari 29.83%, Edge 7.14%, Firefox 6.78%, Samsung Internet 1.69%, Brave 1.10% | 98.09% | [StatCounter 미국](https://gs.statcounter.com/browser-market-share/desktop-mobile-tablet/united-states-of-america/) |
 | 전 세계 | Chrome 68.25%, Safari 16.48%, Edge 5.34%, Firefox 3.34%, Samsung Internet 2.06%, Opera 1.88% | 97.35% | [StatCounter 전 세계](https://gs.statcounter.com/browser-market-share/desktop-mobile-tablet/worldwide) |
 
-이 점유율은 Chrome, Safari, Edge 등 **브라우저 제품군의 비중**입니다. Chrome 111 이상 또는 Safari 16.4 이상 사용자의 정확한 비율을 뜻하지 않습니다. 공개된 상위 버전 목록 일부만 합산해 최소 버전 지원률로 표현하지 않습니다.
+이 점유율은 Chrome, Safari, Edge 등 **브라우저 제품군의 비중**입니다. 프로젝트 최소 버전 이상 사용자의 정확한 비율을 뜻하지 않습니다. 공개된 상위 버전 목록 일부만 합산해 최소 버전 지원률로 표현하지 않습니다.
 
 한국은 Chromium 계열뿐 아니라 Safari, Samsung Internet과 Whale을 포함해야 주요 사용 환경을 대부분 확인할 수 있습니다. 일본과 미국은 Safari 비중이 높아 macOS, iPhone, iPad의 Safari 검증을 Chromium 검증으로 대체할 수 없습니다. 중국은 360 Safe, UC, QQ의 비중을 고려해 최신 안정 버전의 별도 호환 확인이 필요합니다.
 
@@ -114,16 +116,16 @@ Tailwind CSS v4의 기본 breakpoint는 [Tailwind CSS 반응형 디자인 문서
 
 | 구분 | 최소 버전 검증 | 최신 버전 검증 | 국가별 추가 검증 |
 | --- | --- | --- | --- |
-| PC | Chrome 111, Edge 111, Firefox 128, Safari 16.4 | 각 브라우저 최신 안정 버전 | 한국 Whale, 중국 360 Safe·UC·QQ 최신 안정 버전 |
-| 태블릿 | iPadOS Safari 16.4, Android Chrome 111, Samsung Internet 23 | iPadOS·Android 주요 브라우저 최신 안정 버전 | 주요 서비스 국가에서 비중이 높은 실제 태블릿 1종 이상 |
-| 모바일 | iOS Safari 16.4, Android Chrome 111, Samsung Internet 23 | iOS·Android 주요 브라우저 최신 안정 버전 | 한국·중국·일본·미국의 주요 실제 단말 |
+| PC | Safari 15, Chrome·Edge·Firefox 지원 대상 구형 버전 | 각 브라우저 최신 안정 버전 | 한국 Whale, 중국 360 Safe·UC·QQ의 구형·최신 버전 |
+| 태블릿 | iPadOS Safari 15, Android 주요 브라우저 지원 대상 구형 버전 | iPadOS·Android 주요 브라우저 최신 안정 버전 | 주요 서비스 국가에서 비중이 높은 실제 태블릿 1종 이상 |
+| 모바일 | iOS Safari 15, Android 주요 브라우저 지원 대상 구형 버전 | iOS·Android 주요 브라우저 최신 안정 버전 | 한국·중국·일본·미국의 주요 실제 단말 |
 
 반응형 검증은 브라우저 최소 버전 검증과 별개로 수행합니다. 프로젝트가 확정한 breakpoint의 경계값 전후, 세로·가로 화면, 확대와 글자 크기 변화에서 레이아웃을 확인합니다. 기기 이름만으로 Desktop, Tablet, Mobile 레이아웃을 고정하지 않습니다.
 
 ## 7. 지원과 호환 확인의 구분
 
 - **정식 지원:** 위 최소 버전 이상이며 출시 전 필수 검증 환경에 포함합니다. 문제 발생 시 수정 대상입니다.
-- **호환 확인:** 점유율은 있으나 엔진 버전 대응이 불명확한 Whale, 360 Safe, UC, QQ 등의 최신 안정 버전입니다. 주요 흐름을 확인하되 제품별 모든 버전을 보장하지 않습니다.
+- **호환 확인:** 점유율은 있으나 엔진 버전 대응이 불명확한 Whale, 360 Safe, UC, QQ 등의 주요 구형·최신 버전입니다. 주요 흐름을 확인하되 제품별 모든 버전을 보장하지 않습니다.
 - **미지원:** 최소 버전보다 낮은 브라우저와 Internet Explorer입니다. 정상 동작을 보장하지 않으며 심각한 오류가 발생하지 않도록 업데이트 안내를 제공합니다.
 
 ## 8. 근거 갱신

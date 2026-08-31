@@ -210,14 +210,14 @@ Native·WebView 책임은 [APP 개발 표준](../app/app.html), Bridge 계약과
 
 ## 9. Browser, OS와 반응형 기준
 
-반응형 웹은 Tailwind CSS v4의 핵심 Browser 요구사항을 고려하여 다음 버전을 기본 검토 기준으로 사용합니다.
+반응형 웹은 Tailwind CSS v4를 유지하면서 Safari 15와 같은 구형 Browser를 지원합니다. 공식 완전 호환 버전이 아니라 프로젝트가 사용하는 CSS와 Utility의 실제 동작을 기준으로 다음 버전을 검토합니다.
 
-- Chrome·Edge 111 이상
-- Safari 16.4 이상
-- Firefox 128 이상
-- Samsung Internet 23 이상
+- Chrome·Edge 지원 대상 구형 버전
+- Safari 15 이상
+- Firefox 지원 대상 구형 버전
+- Samsung Internet 지원 대상 구형 버전
 
-Whale, 360 Safe, UC와 QQ처럼 제품 버전과 Chromium Engine 버전의 대응이 일정하지 않은 Browser는 Chromium 111 이상 Engine 사용 여부와 현재 안정 버전의 실제 동작을 확인합니다.
+공통 CSS 하한은 Safari 15에서 지원되는 기능 범위로 정합니다. Android와 다른 Browser는 Safari 버전에 특정 제품 버전을 기계적으로 대응시키지 않고, 주요 구형 버전과 최신 안정 버전에서 실제 사용하는 Tailwind Utility와 핵심 기능을 확인합니다. 지원 환경에서 동작하지 않는 최신 CSS 기능은 사용하지 않거나 대체합니다.
 
 주요 서비스 국가인 한국, 중국, 일본과 미국 및 전 세계 Browser 점유율은 지원 범위를 설명하는 보조 근거로 사용합니다. 제품군 점유율을 특정 최소 버전 이상의 정확한 사용자 비율로 해석하지 않습니다.
 

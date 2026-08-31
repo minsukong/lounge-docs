@@ -808,6 +808,12 @@ ollama run qwen3.8:27b-mtp-q4_K_M</code></pre>
             방식을 확인합니다.
           </li>
           <li>
+            공통 CSS 하한은 Safari 15로 적용합니다. Figma 표현에 최신 CSS가
+            필요해 보이더라도 Safari 15에서 지원되지 않는 Tailwind Utility는
+            사용하지 않고 호환 가능한 기본 Utility나 기존 프로젝트 패턴으로
+            대체합니다.
+          </li>
+          <li>
             기존 요소를 우선 재사용하고 불명확한 동작이나 데이터는 담당자에게
             확인합니다.
           </li>
@@ -836,6 +842,14 @@ ollama run qwen3.8:27b-mtp-q4_K_M</code></pre>
           </li>
           <li>
             작업 범위를 벗어난 파일, 의존성 또는 설정을 변경하지 않았는가?
+          </li>
+          <li>
+            Safari 15에서 지원되지 않는 최신 CSS 기반 Utility에 핵심 UI를
+            의존시키지 않았는가?
+          </li>
+          <li>
+            Android와 다른 브라우저에 임의의 대응 버전을 지정하지 않고 프로젝트가
+            정한 구형 검증 환경에서 실제 사용 Utility와 핵심 기능을 확인했는가?
           </li>
           <li>
             확인되지 않은 API, 상태 관리 구조 또는 공통화를 추가하지 않았는가?
@@ -1050,6 +1064,15 @@ ollama run qwen3.8:27b-mtp-q4_K_M</code></pre>
           <li>화면의 주요 구조와 상태가 Figma 의도와 일치하는가?</li>
           <li>의미 있는 HTML과 키보드·포커스 기본 동작을 유지하는가?</li>
           <li>모바일 및 필요한 반응형 범위를 확인했는가?</li>
+          <li>
+            Safari 15와 지원 대상 구형 브라우저에서 핵심 정보, 입력, 이동과 상태
+            표현이 정상 동작하는가?
+          </li>
+          <li>
+            <code>field-sizing</code>, <code>@starting-style</code>,
+            <code>text-wrap: balance/pretty</code>, 최신 <code>:has()</code>,
+            container query와 mask 등에 핵심 UI가 의존하지 않는가?
+          </li>
           <li>불필요한 공통화와 파일 분리가 없는가?</li>
           <li>
             공통·재사용 컴포넌트를 새로 만들거나 공개 API를 변경했다면 Story를

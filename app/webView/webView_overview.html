@@ -207,20 +207,25 @@
           <tbody>
             <tr>
               <td>Android</td>
-              <td>Android SDK 24 이상, System WebView 111 이상</td>
-              <td>Android 버전과 Chromium 기반 WebView 버전</td>
+              <td>Android SDK 24 이상</td>
+              <td>지원 대상 System WebView에서 프로젝트 사용 CSS와 핵심 기능</td>
             </tr>
             <tr>
               <td>iOS</td>
-              <td>iOS 16.4 이상</td>
-              <td>iOS 버전에서 제공되는 WKWebView</td>
+              <td>iOS 15 이상</td>
+              <td>iOS 15 이상에서 제공되는 WKWebView</td>
             </tr>
           </tbody>
         </table>
         <p>
-          특정 Chrome 또는 Safari 버전을 WebView 지원 기준으로 사용하지
-          않습니다. 실제 지원 기기와 운영체제에서 서비스의 주요 기능이 정상
-          동작하는지 확인합니다.
+          Tailwind CSS v4의 공식 최소 브라우저 버전을 WebView의 일괄 차단 기준으로
+          사용하지 않습니다. Safari 15와 지원 대상 구형 WebView에서 프로젝트가
+          실제 사용하는 CSS와 주요 기능이 정상 동작하는지 확인합니다.
+        </p>
+        <p>
+          공통 CSS 하한은 Safari 15에서 지원되는 기능 범위로 정합니다. Android는
+          Safari 15에 특정 Chromium 버전을 대응시키지 않고 지원 대상 System
+          WebView에서 실제 사용하는 Tailwind Utility와 핵심 기능을 검증합니다.
         </p>
 
         <h3>최소 기준을 정한 근거</h3>
@@ -270,8 +275,8 @@
         </p>
         <p>
           Apple이 2026년 6월 7일 App Store에서 거래한 기기를 집계한 결과 전체
-          iPhone의 79%가 iOS 26을 사용합니다. 이는 iOS 16.4 이상 비율의 전체값은
-          아니지만 최소한 79%가 현재 기준보다 높은 버전을 사용한다는 공식 근거입니다.
+          iPhone의 79%가 iOS 26을 사용합니다. 이 값만으로 iOS 15 이상 전체 비율이나
+          실제 서비스의 지원 도달률을 계산하지 않습니다.
           자세한 내용은
           <a href="https://developer.apple.com/support/app-store/"
             >Apple iOS 사용 현황</a

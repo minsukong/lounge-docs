@@ -19,6 +19,8 @@ apps/app-webview/
 
 ## 1단계: Tailwind CSS 4 연결
 
+검증된 Tailwind CSS v4.1 이상의 버전을 사용하고 잠금 파일에 고정합니다. 공통 CSS 하한은 Safari 15이며, 이 환경에서 지원되지 않는 최신 CSS 기능이나 Utility를 기본 구현에 사용하지 않습니다. Android와 다른 브라우저는 Safari 15에 특정 제품 버전을 대응시키지 않고 프로젝트가 정한 구형 검증 환경에서 실제 사용 기능을 확인합니다.
+
 ### `apps/app-webview/postcss.config.mjs`
 
 ```js
@@ -130,45 +132,45 @@ shadcn은 컴포넌트 코드를 프로젝트에 복사하는 방식입니다. �
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --background: #ffffff;
+  --foreground: #171717;
+  --card: #ffffff;
+  --card-foreground: #171717;
+  --popover: #ffffff;
+  --popover-foreground: #171717;
+  --primary: #262626;
+  --primary-foreground: #fafafa;
+  --secondary: #f5f5f5;
+  --secondary-foreground: #262626;
+  --muted: #f5f5f5;
+  --muted-foreground: #737373;
+  --accent: #f5f5f5;
+  --accent-foreground: #262626;
+  --destructive: #dc2626;
+  --border: #e5e5e5;
+  --input: #e5e5e5;
+  --ring: #a3a3a3;
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  --background: #171717;
+  --foreground: #fafafa;
+  --card: #262626;
+  --card-foreground: #fafafa;
+  --popover: #262626;
+  --popover-foreground: #fafafa;
+  --primary: #e5e5e5;
+  --primary-foreground: #262626;
+  --secondary: #404040;
+  --secondary-foreground: #fafafa;
+  --muted: #404040;
+  --muted-foreground: #a3a3a3;
+  --accent: #404040;
+  --accent-foreground: #fafafa;
+  --destructive: #ef4444;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.15);
+  --ring: #737373;
 }
 
 @layer base {
@@ -258,7 +260,7 @@ export function ProfilePanel() {
 
 ## WebView viewport 기본 확인
 
-모바일 WebView에서 화면 높이는 주소창과 시스템 UI 변화가 반영되는 `dvh`를 우선 사용합니다. 상태바와 홈 표시 영역까지 콘텐츠를 확장하는 구성이면 Next.js viewport에 `viewportFit: "cover"`를 지정하고 실제로 가려지는 화면 경계에만 safe area를 적용합니다.
+모바일 WebView의 기본 화면 높이는 Safari 15에서 동작하는 `vh` 기반 `min-h-screen`을 사용합니다. `dvh`처럼 Safari 15 전체 범위에서 보장되지 않는 단위를 핵심 레이아웃에 사용하지 않습니다. 상태바와 홈 표시 영역까지 콘텐츠를 확장하는 구성이면 Next.js viewport에 `viewportFit: "cover"`를 지정하고 실제로 가려지는 화면 경계에만 safe area를 적용합니다.
 
 ### `apps/app-webview/src/app/layout.tsx`
 
@@ -277,7 +279,7 @@ import type { ReactNode } from "react"
 
 export function ScreenLayout({ children }: { children: ReactNode }) {
   return (
-    <main className="min-h-dvh pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]">
+    <main className="min-h-screen pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]">
       {children}
     </main>
   )
@@ -292,15 +294,15 @@ Native container가 이미 inset을 적용한다면 WebView에서 같은 padding
 
 ```css
 :root {
-  --primary: oklch(0.55 0.19 255);
-  --primary-foreground: oklch(0.985 0 0);
-  --ring: oklch(0.62 0.16 255);
+  --primary: #2563eb;
+  --primary-foreground: #fafafa;
+  --ring: #3b82f6;
 }
 
 .dark {
-  --primary: oklch(0.72 0.14 255);
-  --primary-foreground: oklch(0.16 0.03 255);
-  --ring: oklch(0.72 0.14 255);
+  --primary: #60a5fa;
+  --primary-foreground: #172554;
+  --ring: #60a5fa;
 }
 ```
 

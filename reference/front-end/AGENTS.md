@@ -11,6 +11,7 @@
 - 현재는 애플리케이션 저장소 생성 전에 구현 가이드와 참고 소스를 선행 작성하는 단계입니다.
 - 화면 코드는 React 19와 TypeScript로 작성합니다.
 - 스타일은 Tailwind CSS 4와 `src/app/globals.css`의 의미 기반 토큰을 사용합니다.
+- Tailwind CSS는 검증된 v4.1 이상의 버전을 잠금 파일에 고정하고 공통 CSS 하한은 Safari 15에서 지원되는 기능 범위로 둡니다.
 - 실제 저장소가 생성된 이후 Next.js 16 App Router 규칙은 `apps/app-webview/AGENTS.md`와 설치된 Next.js 문서를 따릅니다.
 - 기존 `src/components/ui`의 shadcn/ui와 프로젝트 컴포넌트를 새 코드보다 우선합니다.
 - 요청하지 않은 기능, 상태, 공통화 또는 패키지를 미리 추가하지 않습니다.
@@ -23,6 +24,8 @@
 
 - Figma나 화면 설명에서 코드를 만들 때 React 함수 컴포넌트와 TSX로 구현합니다.
 - 일반적인 UI 스타일은 Tailwind CSS 4 유틸리티로 작성합니다.
+- Safari 15 또는 지원 대상 구형 브라우저에서 동작하지 않는 최신 CSS 기반 Utility는 사용하지 않습니다. 필요한 표현은 Safari 15 호환 Utility나 기존 프로젝트 패턴으로 대체합니다.
+- Android와 Chromium·Firefox 계열은 Safari 15에 특정 제품 버전을 기계적으로 대응시키지 않고, 지원 대상 구형 버전에서 실제 사용하는 Utility와 핵심 기능을 검증합니다.
 - 별도 CSS 파일, CSS Module, CSS-in-JS 또는 인라인 `style`은 기존 코드나 명확한 요구가 있을 때만 사용합니다.
 - 원시 색상값보다 `bg-background`, `text-foreground`, `border-border` 같은 프로젝트 토큰을 사용합니다.
 - 단순 정적 HTML 결과로 끝내지 말고 현재 Next.js 애플리케이션에 동작하는 컴포넌트로 구현합니다.
@@ -53,6 +56,8 @@
 
 - 변경 후 프로젝트에 정의된 TypeScript 검사와 lint를 실행합니다.
 - 필요한 경우 production build를 실행합니다.
+- UI 변경은 Safari 15와 프로젝트가 정한 Android·Chromium·Firefox 구형 검증 환경에서 핵심 정보, 입력, 이동과 상호작용이 동작하는지 확인합니다.
+- 완료 보고에는 사용한 최신 CSS 기능이 없음을 확인한 결과 또는 불가피하게 사용한 기능의 호환 대체와 검증 결과를 포함합니다.
 - 완료 보고에 재사용한 기존 컴포넌트, 새로 만든 컴포넌트, 사용한 Semantic Token과 검증 결과를 포함합니다.
 
 ### Storybook 반자동 운영

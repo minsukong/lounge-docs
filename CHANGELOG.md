@@ -11,6 +11,18 @@
 - 변경한 파일 목록만 나열하지 않고 변경 목적, 주요 내용, 미확정 항목과 검증 결과를 함께 기록합니다.
 - 같은 작업에서 Markdown과 HTML을 함께 수정했다면 하나의 변경 항목으로 기록합니다.
 
+## 2026-08-31
+
+### Tailwind CSS v4 유지 및 구형 브라우저 지원 기준 변경
+
+- Tailwind CSS v4의 공식 완전 호환 버전을 프로젝트의 일괄 최소 버전으로 사용하던 기준을 제거하고, Safari 15와 주요 구형 브라우저에서 실제 사용 CSS와 Utility를 검증하는 정책으로 변경했습니다.
+- 공통 CSS 하한을 Safari 15에서 지원되는 기능 범위로 정하고 iOS·iPadOS 및 WebView 최소 기준을 15 이상으로 통일했습니다.
+- Chrome·Edge·Firefox·Samsung Internet은 Safari 15에 특정 제품 버전을 기계적으로 대응시키지 않고, 지원 대상 구형 버전에서 실제 사용하는 Tailwind Utility와 핵심 기능을 검증하도록 변경했습니다.
+- 지원 환경에서 동작하지 않는 최신 CSS 기능은 사용하지 않거나 대체하며, Tailwind CSS v4.1 이상의 검증 버전을 잠금 파일에 고정하도록 정리했습니다.
+- WebView 개요·개발 가이드, 브라우저 지원 가이드, 구축 브리핑과 발표 페이지를 함께 수정하고 문서 검색 인덱스를 다시 생성했습니다.
+- 실제 AI 작업 진입점인 `reference/front-end/AGENTS.md`, UI·Figma 작업 요약과 React Code Exports 검수 기준에도 Safari 15 공통 CSS 하한과 구형 브라우저 검증 규칙을 추가했습니다.
+- AI가 복사하는 Tailwind 공통 소스 예시의 토큰 색상과 WebView 높이도 Safari 15 호환 값으로 변경했습니다.
+
 ## 2026-08-28
 
 ### Front-end 구축 브리핑 문서와 PC 발표 페이지 추가

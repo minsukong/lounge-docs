@@ -9,6 +9,8 @@
 - UI는 React 함수 컴포넌트와 TypeScript TSX로 작성합니다.
 - Next.js App Router의 Server Component를 기본으로 두고, 상태·이벤트·브라우저 API가 필요할 때만 Client Component로 전환합니다.
 - 스타일은 Tailwind CSS 4 유틸리티를 기본으로 작성합니다.
+- 공통 CSS 하한은 Safari 15입니다. Safari 15에서 지원되지 않는 최신 CSS 기반 Utility는 사용하지 않고 호환 가능한 기본 Utility나 기존 프로젝트 패턴으로 대체합니다.
+- Android와 다른 브라우저는 Safari 15에 특정 제품 버전을 대응시키지 않고 지원 대상 구형 버전에서 실제 사용하는 Utility와 핵심 기능을 확인합니다.
 - 조건부 클래스는 기존 `@/lib/utils`의 `cn`을 사용합니다.
 
 ## 토큰과 컴포넌트
@@ -29,6 +31,7 @@
 - 입력에는 label, 이미지에는 필요한 대체 텍스트, 아이콘 버튼에는 접근 가능한 이름을 제공합니다.
 - shadcn/ui가 제공하는 키보드, 포커스와 ARIA 구조를 깨뜨리지 않습니다.
 - Figma에 정의되지 않은 반응형 동작이나 상호작용을 추측해서 확대하지 않습니다.
+- `field-sizing`, `@starting-style`, `text-wrap: balance/pretty`, 최신 `:has()`·container query·mask 등에 핵심 UI를 의존시키지 않습니다.
 
 ## 비동기 UI
 
