@@ -991,8 +991,11 @@ flowchart TD
             적용합니다.
           </li>
           <li>
-            Storybook은 공통·재사용 UI 컴포넌트의 독립 렌더링, 공개 API와 주요
-            상태 확인에 사용합니다. Story 작성 대상과 반자동 운영 기준은
+            Storybook은 공통 컴포넌트뿐 아니라 기능 조합과 사용자에게 노출되는 화면
+            UI를 탐색하고 독립적으로 렌더링하여 주요 상태, Viewport, 접근성과
+            Interaction을 확인하는 UI 개발·검수 환경으로 사용합니다. 실제 Routing,
+            Backend 연동, Native 기능과 전체 E2E 검증은 애플리케이션 환경에서 별도로
+            수행합니다. Story 작성 대상과 반자동 운영 기준은
             <a href="./../storybook_guide/index.html">Storybook 운영 가이드</a>를
             따릅니다.
           </li>

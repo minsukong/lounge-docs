@@ -19,8 +19,10 @@
 - Figma 이름을 그대로 파일 구조로 복사하지 않고 기능과 책임에 맞게 배치합니다.
 - Figma에 없는 기능, 데이터 흐름 또는 상태를 임의로 만들지 않습니다.
 - 불명확한 값은 숨겨서 확정한 것처럼 작성하지 않고 확인이 필요한 항목으로 남깁니다.
-- 공통·재사용 컴포넌트가 확실하면 실제 컴포넌트와 Story를 함께 작성하고 Storybook에서 먼저 독립 상태를 확인한 뒤 화면에 사용합니다.
-- 재사용 여부가 불확실한 UI는 기능 가까이에서 먼저 구현하고 실제 반복이 확인될 때 공통 컴포넌트와 Story로 분리합니다.
+- 공통 컴포넌트뿐 아니라 독립적으로 검수할 가치가 있는 Feature와 사용자에게 노출되는 Screen도 실제 구현과 Story를 함께 작성하거나 갱신합니다.
+- Figma의 주요 화면과 상태를 Storybook의 `Components`, `Features`, `Screens` 분류에 연결하고 라우터 주소를 몰라도 UI를 찾을 수 있게 합니다.
+- Loading, Empty, Error, 권한, 긴 문구, 다국어와 Viewport처럼 반복 확인할 상태는 승인된 계약과 최소 Fixture를 기준으로 재현합니다.
+- Storybook은 Figma와 실제 코드의 UI 결과를 검수하는 환경이며 실제 Routing, Backend, Native 기능과 전체 E2E를 대신하지 않습니다.
 
 ## 완료 확인
 
@@ -28,5 +30,6 @@
 - 필요한 화면 너비에서 레이아웃을 확인합니다.
 - 접근 가능한 이름, 키보드 동작과 의미 구조를 확인합니다.
 - TypeScript 검사, Lint와 관련 Test를 실행합니다.
-- Story를 추가하거나 변경했다면 Storybook 정적 Build와 프로젝트에 합의된 Story 검사를 실행합니다.
+- Story를 추가하거나 변경했다면 Storybook 정적 Build와 프로젝트에 합의된 렌더링, Interaction, 접근성 또는 시각 회귀 검사를 실행합니다.
+- Storybook에서 확인한 Feature와 Screen도 실제 Application에서 Routing, 데이터 연결과 전체 사용자 흐름을 별도로 검증합니다.
 - 자동 검사로 판단할 수 없는 시각 차이와 미확정 사항을 별도로 알립니다.

@@ -992,36 +992,46 @@ ollama run qwen3.8:27b-mtp-q4_K_M</code></pre>
 
         <h3>8.1 Storybook 등록 기준</h3>
         <p>
-          Storybook은 구현된 컴포넌트의 목록, 사용법과 주요 상태를 확인하는 개발
-          문서로 운영합니다. AI 도구는 Story 초안 작성, 누락 점검과 빌드 확인을
-          지원할 수 있지만, 등록 대상과 실제 상태의 정확성은 프론트엔드 개발자가
-          검수합니다.
+          Storybook은 공통 컴포넌트의 목록만 관리하는 문서가 아니라 실제 코드로
+          구현된 Component, Feature와 Screen을 한곳에서 탐색하고, Application 전체를
+          실행하지 않아도 주요 UI 상태를 반복 재현·검수하는 개발 환경으로
+          운영합니다. AI 도구는 Story 초안 작성, UI 전체의 누락 점검과 검사 실행을
+          지원할 수 있지만 등록 대상, 상태, Mock 계약과 실제 결과의 정확성은
+          프론트엔드 개발자가 검수합니다.
         </p>
         <ul>
           <li>
             <code>apps/app-webview/src/components/ui</code>,
-            <code>packages/ui</code>와 독립적으로 재사용되는 기능 컴포넌트를 우선
-            등록합니다.
+            <code>packages/ui</code>, 독립적으로 검수할 가치가 있는 Feature와
+            사용자에게 노출되는 주요 Screen을 등록 대상으로 검토합니다.
           </li>
           <li>
             실제 export와 Props를 기준으로 기본 상태, variant, size, disabled,
             loading, error와 empty 중 구현된 상태만 Story로 작성합니다.
           </li>
           <li>
-            공개 Props, variant 또는 시각적 상태를 변경한 작업에서는 관련 Story도
-            같은 변경에 포함합니다.
+            Screen Story는 Loading, Empty, Error, 권한, 긴 문구, 다국어와 지원
+            Viewport처럼 실제 환경에서 반복 재현하기 어려운 상태를 최소 Fixture와
+            승인된 Mock 경계로 고정합니다.
           </li>
           <li>
-            페이지 전체, 한 번만 쓰는 단순 레이아웃, 타입·상수·도우미 파일과 과도한
-            Mock이 필요한 내부 컴포넌트는 기본 등록 대상에서 제외합니다.
+            공개 Props, Feature 상태, Screen 구조 또는 사용자가 보는 시각적 결과를
+            변경한 작업에서는 관련 Story도 같은 변경에 포함합니다.
+          </li>
+          <li>
+            단순 Page Wrapper, 타입·상수·도우미 파일, 동일 Screen으로 대표할 수 있는
+            Route와 과도한 Mock이 필요한 내부 구현은 제외할 수 있으며 대상과 사유를
+            남깁니다.
           </li>
           <li>
             Storybook을 위해 제품 코드에 사용하지 않는 Props, variant, wrapper나
-            Mock 전용 구조를 추가하지 않습니다.
+            Mock 전용 구조를 추가하지 않습니다. Mock은 승인된 계약을 재현할 뿐 실제
+            Backend 계약과 통합 검증을 대신하지 않습니다.
           </li>
           <li>
-            Story가 없는 컴포넌트를 AI로 점검할 때는 파일 수만 비교하지 않고 대상,
-            근거와 제외 사유를 먼저 확인한 뒤 필요한 Story만 추가합니다.
+            AI 누락 점검은 컴포넌트 파일 수만 비교하지 않고 공통 UI, 사용자 노출
+            Route·Page·Screen, 주요 상태와 Viewport를 함께 조사하여 대상, 근거와 제외
+            사유를 먼저 확인한 뒤 필요한 Story만 추가합니다.
           </li>
         </ul>
       </section>
