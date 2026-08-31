@@ -30,12 +30,15 @@ Storybook은 실제 Routing, Backend 연동과 권한, Native App 기능, 배포
 ## 작성 원칙
 
 - 사이드바에서 `Components`, `Features`, `Screens`를 구분하고 라우터 주소를 몰라도 UI의 목적과 상태를 찾을 수 있게 이름을 작성합니다.
+- 각 Story에는 필요에 따라 Figma 파일, Frame 또는 Prototype URL을 연결합니다. 특정 Frame을 표시할 때는 선택한 Frame의 링크를 사용합니다.
+- Figma에는 연결되는 Story 이름 또는 접근 가능한 Storybook URL을 기록할 수 있습니다.
 - 실제 export, Props, 기능 상태와 화면 구조를 기준으로 작성하며 존재하지 않는 상태를 추측하지 않습니다.
 - Component는 실제 variant와 소유 상태를, Feature와 Screen은 기본 상태, 주요 예외 상태와 지원 Viewport를 표현합니다.
 - Args, Decorator, Fixture와 Mock은 같은 상태를 반복 재현하는 최소 범위로 사용합니다.
 - API Fixture와 Mock은 승인된 계약 이후에만 작성하며 실제 Backend, 인증, Cookie, CORS와 데이터 정합성 검증을 대신하지 않습니다.
 - Storybook만을 위한 제품 Props, variant, Wrapper와 Mock 전용 구조를 추가하지 않습니다.
 - 중요한 사용자 동작은 재현 가능한 경우 Play 또는 프로젝트에서 합의한 Story Test로 확인합니다.
+- Storybook의 `Design` 탭에서 연결된 Figma Embed를 확인합니다.
 - Autodocs는 실제 타입과 Story에서 생성하고 Props 목록을 별도 문서에 중복 작성하지 않습니다.
 - Story 파일은 실제 Component, Feature 또는 Screen UI 구현 가까이에 둡니다.
 

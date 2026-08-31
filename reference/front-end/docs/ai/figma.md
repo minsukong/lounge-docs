@@ -21,8 +21,11 @@
 - 불명확한 값은 숨겨서 확정한 것처럼 작성하지 않고 확인이 필요한 항목으로 남깁니다.
 - 공통 컴포넌트뿐 아니라 독립적으로 검수할 가치가 있는 Feature와 사용자에게 노출되는 Screen도 실제 구현과 Story를 함께 작성하거나 갱신합니다.
 - Figma의 주요 화면과 상태를 Storybook의 `Components`, `Features`, `Screens` 분류에 연결하고 라우터 주소를 몰라도 UI를 찾을 수 있게 합니다.
+- 필요하면 Figma Description 또는 Dev resource에 연결되는 Story 이름이나 접근 가능한 Storybook URL을 기록합니다.
+- Story에는 Figma 파일, Frame 또는 Prototype URL을 연결할 수 있습니다. 특정 Frame을 표시할 때는 선택한 Frame의 링크를 사용합니다.
 - Loading, Empty, Error, 권한, 긴 문구, 다국어와 Viewport처럼 반복 확인할 상태는 승인된 계약과 최소 Fixture를 기준으로 재현합니다.
 - Storybook은 Figma와 실제 코드의 UI 결과를 검수하는 환경이며 실제 Routing, Backend, Native 기능과 전체 E2E를 대신하지 않습니다.
+- Storybook의 `Design` 탭에서 연결된 Figma Embed를 확인합니다.
 
 ## 완료 확인
 

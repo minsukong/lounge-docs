@@ -103,6 +103,10 @@ Figma 구현 흐름은 [React Code Exports 가이드](../ui_guide/react_code_exp
 
 Storybook은 공통 Component만 만들거나 전시하는 공간이 아닙니다. Application 전체를 실행하지 않고도 Component, 기능 조합과 의미 있는 화면 상태를 격리해 재현하고, 구현·디자인 Review, 접근성, Interaction과 시각 회귀 검증에 사용하는 UI 개발 환경입니다.
 
+![@storybook/addon-designs 공식 데모에서 Embed Frame Story와 Design 패널의 Figma Embed를 표시한 실제 화면](../assets/design/storybook-figma-ui-review-demo.png)
+
+> [`@storybook/addon-designs` 공식 Embed Frame 데모](https://storybookjs.github.io/addon-designs/?path=/story/docs-figma-examples--embed-frame)를 직접 캡처한 화면입니다. 각 Story에는 Figma 파일, Frame 또는 Prototype URL을 연결할 수 있으며 Storybook의 `Design` 탭에서 Embed 결과를 확인합니다. 특정 Frame 링크에는 해당 Frame의 `node-id`가 포함됩니다.
+
 ### Story 작성 대상을 선택합니다
 
 Story는 파일 종류가 아니라 독립 재현과 검토 가치로 판단합니다. 다음 대상은 Story 작성을 우선 검토합니다.

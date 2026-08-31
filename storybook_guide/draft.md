@@ -134,11 +134,31 @@ Autodocs 설정은 [Storybook Autodocs 문서](https://storybook.js.org/docs/wri
 
 Figma는 컴포넌트와 화면의 시각적 기준 및 디자인 의도를 제공하고 Storybook은 실제 코드로 구현된 컴포넌트와 화면의 렌더링 상태를 제공합니다.
 
+![@storybook/addon-designs 공식 데모에서 Embed Frame Story의 구현 Button과 아래 Design 패널의 Figma Frame을 표시한 실제 화면](../assets/design/storybook-figma-ui-review-demo.png)
+
+> [`@storybook/addon-designs` 공식 Embed Frame 데모](https://storybookjs.github.io/addon-designs/?path=/story/docs-figma-examples--embed-frame)의 Story와 Design 패널을 직접 캡처한 화면입니다. 검수자는 라우터 주소나 개발용 진입 조건을 알지 못해도 Storybook 사이드바에서 UI를 찾을 수 있습니다.
+
 - Figma Main Component의 Description에는 코드 컴포넌트 이름, import 경로와 주요 Props를 기록합니다.
 - 실제 코드 또는 Storybook에 접근할 수 있는 URL이 있으면 Main Component의 Dev resource로 연결합니다.
 - 외부 Storybook URL이 없으면 컴포넌트 이름과 Story title을 기록하고 실제 소스 링크를 우선 연결합니다.
 - Figma Description, Story와 실제 코드가 다르면 실제 코드와 변경 의도를 확인한 뒤 함께 갱신합니다.
 - Figma의 주요 Screen에는 연결되는 Story 이름을 기록하고, 접근 가능한 Storybook URL이 있으면 Dev resource로 연결합니다.
+- Story에는 Figma 파일, Frame 또는 Prototype URL을 연결할 수 있습니다.
+- 특정 Frame을 표시하려면 Figma에서 선택한 Frame의 링크를 복사해 사용합니다. 이 URL에는 해당 Frame의 `node-id`가 포함됩니다.
+- Storybook의 `Design` 탭에서 연결된 Figma Embed를 확인합니다.
+
+```ts
+export const PaymentFailed = {
+  parameters: {
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/design/FILE_KEY/...?node-id=120-480',
+    },
+  },
+};
+```
+
+실제 표시 결과는 Storybook과 Addon 버전, 패널 크기, Figma 파일 권한에 따라 달라질 수 있습니다.
 
 Storybook은 Code Connect를 대체하지 않지만 AI 코딩 도구, 개발자와 UI 검수자가 기존 컴포넌트의 API와 전체 화면 상태를 찾는 실행 가능한 UI 기준으로 사용합니다.
 
