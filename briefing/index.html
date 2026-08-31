@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lounge Front-end 구축 가이드 브리핑</title>
+    <link rel="stylesheet" href="./../assets/style/presentation-theme.css" />
+  </head>
+  <body>
+    <header>
+      <div class="type">FRONT-END BRIEFING</div>
+      <h1>Lounge Front-end 구축 가이드 브리핑</h1>
+      <p>실무자가 같은 구조와 검증 기준으로 Front-end를 구축하고 운영하기 위한 기준을 공유합니다.</p>
+    </header>
+
+    <main>
+      <section>
+        <h2 class="bx-active">1. 브리핑 목적</h2>
+        <p>이 문서는 Lounge Front-end를 실제로 구축하고 운영할 개발자에게 현재 정리된 기술 기준, 작업 순서와 완료 판단 기준을 설명합니다.</p>
+        <p>특정 화면의 상세 기획이나 API 계약을 확정하는 문서가 아닙니다. 프로젝트가 시작됐을 때 코드를 어디에 배치하고, 기존 Component를 어떻게 찾으며, 서버 상태와 Client 상태를 어떻게 구분하고, 어떤 검증을 거쳐 작업을 완료할 것인지 공유합니다.</p>
+        <p>개발자나 AI 도구가 바뀌어도 같은 기준으로 구현하고 검토하는 것이 목표입니다. 실제 Application이 생성된 뒤에는 설치된 Package, 기존 Source와 승인된 프로젝트 계약을 가이드의 일반 예시보다 우선합니다.</p>
+
+        <h3>한눈에 보는 전체 가이드 지도</h3>
+        <p>전체 가이드는 코드를 만드는 기준, 실제 서비스 환경을 만족하는 기준, 그 기준을 사람과 AI가 계속 유지하는 방법의 세 영역으로 구성됩니다.</p>
+        <figure class="diagram-frame">
+          <!-- prettier-ignore -->
+          <div class="mermaid">
+flowchart TD
+  accTitle: Lounge Front-end 가이드의 세 가지 영역
+  accDescr: 전체 가이드는 코드를 어떻게 만들지 설명하는 구축 구조, 어디에서 안전하게 동작해야 하는지 설명하는 사용 환경, 사람과 AI가 기준을 유지하는 방법을 설명하는 가이드 운영으로 나뉩니다.
+  ROOT["Lounge Front-end 구축 가이드"]
+  ROOT --> A["1. 구축 구조<br/>프로젝트 · Component · 상태 · API · WebView<br/>Storybook · Test · Build"]
+  A -->|"구현한 결과를 검증"| B["2. 사용 환경<br/>OS · Browser · 반응형<br/>다국어 · 접근성 · 보안 · 개인정보"]
+  B -->|"검증 기준을 계속 유지"| C["3. 가이드 운영<br/>사람용 원본 · AI용 요약 · Common Source<br/>실제 프로젝트 적용 · 변경 동기화"]
+          </div>
+          <figcaption>구현 방법, 서비스 환경 검증과 가이드 운영으로 구분한 전체 문서 구조</figcaption>
+        </figure>
+        <p><strong>구축 구조</strong>는 개발자가 코드를 어디에 두고 어떤 순서로 구현·검증할지 설명합니다.</p>
+        <p><strong>사용 환경</strong>은 구현 결과가 지원 기기, 언어와 보안 조건에서 실제로 서비스 가능한지 확인합니다.</p>
+        <p><strong>가이드 운영</strong>은 확정된 기준을 사람용 원본, AI 요약과 실제 프로젝트 사이에서 계속 일치시키는 방법을 설명합니다.</p>
+        <blockquote><p>코드를 만드는 것에서 끝나지 않고, 실제 환경에서 검증한 뒤 그 기준을 사람과 AI가 계속 유지하도록 연결한 구조입니다.</p></blockquote>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">2. 구축 대상과 저장소 구조</h2>
+        <p>WebView 서비스 화면은 <code>apps/app-webview</code>에 구현할 예정입니다. 웹사이트, 제휴사별 In-app 화면과 Backoffice처럼 실행과 배포 목적이 다른 Application은 각각의 <code>apps/*</code> 영역으로 분리합니다.</p>
+        <pre class="hljs"><code data-language="text">apps/
+├── website/                 # 회사 웹사이트
+├── mobile/                  # Flutter Native App
+├── app-webview/             # App에서 사용하는 WebView 서비스 화면
+├── card-inapp/              # 제휴사별 In-app 화면
+└── backoffice/              # 운영자 화면
+
+packages/
+└── ui/                      # 둘 이상의 Web Application에서 검증된 공통 UI</code></pre>
+        <h3>Application 가까이에서 시작합니다</h3>
+        <p><code>apps/app-webview</code> 안에서는 Routing과 화면 진입점, 기능 코드와 WebView 전용 UI를 가까운 위치에서 관리합니다. App-WebView 한 곳에서만 사용하는 shadcn/ui 원형과 Wrapper는 <code>apps/app-webview/src/components/ui</code>에 둡니다.</p>
+        <h3><code>packages/ui</code>는 검증된 공통 구현만 관리합니다</h3>
+        <p>둘 이상의 Web Application에서 실제로 재사용되고 의미와 변경 이유가 같은 UI만 이동합니다. 한 화면에서만 사용하는 Wrapper, 공통화 가능성을 예상한 Type과 Adapter는 미리 만들지 않습니다.</p>
+        <p>폴더 구조는 현재 구축 기준이며 실제 저장소가 생성된 뒤 Package 경계와 Build 구성이 확인되면 조정할 수 있습니다.</p>
+        <p><strong>상세 기준:</strong> Application과 Package 경계, 공통화와 Release 단위는 <a href="./../monorepo/index.html">Front-End Monorepo 공통 기준</a>에서 확인합니다.</p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">3. 기능 하나를 구현하는 기본 순서</h2>
+        <ol>
+          <li>기획과 Figma에서 화면 목적, 상태, 입력과 사용자 동작을 확인합니다.</li>
+          <li>실제 프로젝트의 <code>AGENTS.md</code>와 작업 종류에 해당하는 AI 요약을 확인합니다.</li>
+          <li>Figma Component Description에 연결된 파일 이름과 경로를 확인합니다.</li>
+          <li>실제 Source에서 Export, Props, Variant와 사용처를 다시 확인합니다.</li>
+          <li>기존 Layout, Semantic Token, shadcn/ui와 프로젝트 Component로 표현할 범위를 판단합니다.</li>
+          <li>서버 데이터, Form, 화면 내부 상태와 공유 Client 상태의 소유 도구를 구분합니다.</li>
+          <li>Loading, Empty, Error, 느린 응답과 연결 끊김 상태를 함께 설계합니다.</li>
+          <li>공통 Component라면 실제 Component와 Story를 같은 변경에서 작성합니다.</li>
+          <li>화면에 적용하고 접근성, 반응형, 상태 전환과 주요 사용자 동작을 확인합니다.</li>
+          <li>프로젝트에 실제로 구성된 TypeScript, Lint, Test, Storybook Build와 Application Build를 실행합니다.</li>
+          <li>재사용·신규 Component, Story, 검증 결과와 확인하지 못한 항목을 완료 보고에 남깁니다.</li>
+        </ol>
+        <p>위 순서는 준비, 탐색과 설계, 구현, 적용과 검증, 완료 보고의 다섯 단계로 이해할 수 있습니다.</p>
+        <figure class="diagram-frame">
+          <!-- prettier-ignore -->
+          <div class="mermaid">
+flowchart TD
+  accTitle: Front-end 기능 하나를 구현하는 다섯 단계
+  accDescr: 기획과 Figma 확인 및 기존 소스 탐색으로 준비한 뒤 상태와 예외를 설계하고, 컴포넌트와 Story를 구현해 화면에 적용하며, 품질 검사와 완료 보고로 작업을 마칩니다.
+  A["1. 준비<br/>기획 · Figma · AGENTS.md 확인"] --> B["2. 탐색과 설계<br/>기존 Component · Token · 상태 책임 · 예외 상태"]
+  B --> C["3. 구현<br/>Component · Story · 기능 코드"]
+  C --> D["4. 적용과 검증<br/>화면 · 접근성 · 다국어 · 보안 · 반응형 · Test · Build"]
+  D --> E["5. 완료 보고<br/>재사용 · 신규 구현 · 검사 결과 · 미확정 항목"]
+          </div>
+          <figcaption>기능 확인부터 구현, 품질 검증과 완료 보고까지의 실무 흐름</figcaption>
+        </figure>
+        <p>준비 단계에서는 요구사항과 기존 구현을 찾고, 탐색과 설계 단계에서는 새로 만들 범위와 상태 소유를 결정합니다. 구현 후 실제 화면에 적용하여 품질 기준을 확인하고, 검증하지 못한 환경과 남은 계약까지 완료 보고에 포함합니다.</p>
+        <blockquote><p>API 계약이 아직 승인되지 않았다면 임의의 Endpoint, Parser, Fixture와 Mock Handler를 먼저 만들지 않습니다. 필요한 계약을 <code class="badge-tbd">TBD</code>로 남기고 승인된 형식을 받은 뒤 연결합니다.</p></blockquote>
+        <p><strong>상세 기준:</strong> 파일 배치, 기술 스택, 상태와 검증의 전체 기준은 <a href="./../frontend_guide/index.html">Front-End 개발 가이드</a>에서 확인합니다.</p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2>4. UI 구현과 Figma 연결</h2>
+        <h3>디자인 토큰과 기존 Component를 우선합니다</h3>
+        <p>색상, 글자, 간격, Radius와 상태 표현은 Figma 값이나 임의의 Tailwind Utility를 화면마다 복사하지 않고 프로젝트의 Semantic Token을 우선 사용합니다.</p>
+        <p>Button, Input과 Dialog가 이미 존재하면 새 JSX를 작성하지 않고 기존 공개 API로 구현합니다. shadcn/ui는 외부 Package의 완성품이 아니라 프로젝트가 소유하고 수정하는 Component Source로 취급합니다.</p>
+        <ol>
+          <li>기존 Props와 Variant로 표현 가능한지 확인합니다.</li>
+          <li>기존 Component의 의미를 해치지 않는 확장인지 검토합니다.</li>
+          <li>한 기능에만 필요한 조합이면 기능 가까이에 둡니다.</li>
+          <li>여러 화면에서 의미와 변경 이유가 같을 때 공통 Component로 승격합니다.</li>
+          <li>Storybook만을 위한 Props, Variant와 Wrapper를 추가하지 않습니다.</li>
+        </ol>
+        <h3>Figma Main Component에 구현 정보를 남깁니다</h3>
+        <ul>
+          <li>실제 Component 이름과 파일 또는 Import 경로</li>
+          <li>주요 Props와 Variant</li>
+          <li>지원 상태와 사용 제한</li>
+          <li>대체하거나 우선 사용해야 하는 기존 Component</li>
+          <li>접근 가능한 Source 또는 Storybook Dev resource</li>
+        </ul>
+        <p>구축 기간에는 디자인 편집 권한이 있는 담당자가 정보를 작성합니다. 운영 단계에는 Front-end 개발자가 경로, Props나 지원 상태를 변경했을 때 Figma 설명도 함께 갱신합니다.</p>
+        <p>Code Connect 없이도 이 정보로 개발자와 AI의 탐색을 도울 수 있지만, Figma 설명만으로 실제 API를 보장하지 않으므로 Source를 반드시 다시 확인합니다.</p>
+        <p><strong>상세 기준:</strong> Figma에서 React 코드로 옮기는 순서와 기존 Component 탐색은 <a href="./../ui_guide/react_code_exports.html">React Code Exports 가이드</a>, Semantic Token 구성은 <a href="./../ui_guide/design_tokens.html">디자인 토큰 가이드</a>에서 확인합니다.</p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">5. Component와 Storybook 작업 방식</h2>
+        <h3>공통 Component가 분명한 경우</h3>
+        <ol>
+          <li>실제 Component Source를 작성합니다.</li>
+          <li>같은 변경에서 Story를 작성합니다.</li>
+          <li>Storybook에서 Props와 Variant를 확인합니다.</li>
+          <li>Default, Disabled, Loading, Error, 긴 문구와 크기 상태를 확인합니다.</li>
+          <li>Keyboard Focus, 접근 가능한 이름, Contrast와 주요 Interaction을 확인합니다.</li>
+          <li>검증된 Component를 실제 화면에서 사용합니다.</li>
+        </ol>
+        <h3>재사용 여부가 불확실한 경우</h3>
+        <p>한 화면에서만 사용하는 Layout이나 업무 조합은 기능 가까이에서 작게 구현합니다. 같은 의미와 변경 이유로 반복되거나 독립 검증 가치가 확인되면 공통 Component와 Story로 분리합니다.</p>
+        <h3>AI를 이용한 반자동 운영</h3>
+        <ul>
+          <li>공통 UI 경로와 Story를 비교하여 누락 후보를 찾습니다.</li>
+          <li>기존 형식에 맞춰 Story 초안을 작성합니다.</li>
+          <li>Props와 Variant 변경에 따른 갱신 후보를 찾습니다.</li>
+          <li>Storybook 정적 Build와 합의된 검사를 실행합니다.</li>
+          <li>추가한 Story, 표현한 상태와 실패 항목을 정리합니다.</li>
+        </ul>
+        <p>개발자는 Story 대상, 실제 지원 상태, Figma 일치 여부, 접근성과 Interaction을 검토합니다. 초기에는 Storybook 정적 Build를 필수 검사로 사용하고 운영이 안정된 뒤 Interaction과 접근성 검사의 CI 승격을 검토합니다.</p>
+        <p><strong>상세 기준:</strong> Story 작성 대상, AI 요청 예시, 누락 점검과 완료 조건은 <a href="./../storybook_guide/index.html">Storybook 운영 가이드</a>에서 확인합니다.</p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2>6. 상태와 데이터의 책임</h2>
+        <table>
+          <thead><tr><th scope="col">상태 종류</th><th scope="col">기본 도구</th><th scope="col">적용 기준</th></tr></thead>
+          <tbody>
+            <tr><td>한 Component 내부 UI 상태</td><td>React 지역 상태</td><td>열림, 선택처럼 가까운 UI에서만 사용</td></tr>
+            <tr><td>공유·복원할 화면 상태</td><td>URL Search Params 또는 Route</td><td>검색 조건, Tab과 Page</td></tr>
+            <tr><td>입력, 검증과 제출</td><td>React Hook Form</td><td>하나의 Form 단위 상태와 오류</td></tr>
+            <tr><td>서버에서 조회·변경</td><td>TanStack Query</td><td>Cache, 갱신, 실패와 재시도</td></tr>
+            <tr><td>여러 화면의 Client 상태</td><td>Zustand</td><td>서버 원본이 아닌 공유 UI 상태</td></tr>
+          </tbody>
+        </table>
+        <p>서버에서 받은 데이터를 Zustand에 복제하지 않습니다. 서버 상태는 TanStack Query Cache와 무효화 정책으로 관리합니다. Zustand는 여러 화면이 공유하는 Client 상태가 실제로 확인됐을 때 사용합니다.</p>
+        <p>React Hook Form은 Form 상태 도구이며 업무 규칙과 Backend 검증을 대신하지 않습니다. Schema 검증 도구와 서버 오류 매핑은 실제 계약이 정해진 뒤 확정합니다.</p>
+        <p><strong>상세 기준:</strong> 전체 상태 소유 기준은 <a href="./../frontend_guide/index.html#section-7">Front-End 개발 가이드의 상태 및 데이터 관리</a>, Zustand의 Store 분리와 Persist 기준은 <a href="./../ui_guide/zustand.html">Zustand UI 상태 관리 가이드</a>에서 확인합니다.</p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2>7. 서버 통신과 비동기 화면</h2>
+        <p>승인된 API 계약을 받은 뒤 공통 요청 함수와 기능별 응답 검증 경계를 연결합니다. Front-end는 API 응답을 화면에 사용하기 전에 필요한 형태를 방어적으로 확인합니다. 요청 검증, 권한과 업무 규칙은 Backend가 다시 검증하며 Front-end Type과 검증 결과를 신뢰 근거로 사용하지 않습니다.</p>
+        <ul>
+          <li>최초 조회 Loading과 기존 데이터를 유지한 갱신 상태</li>
+          <li>결과가 없는 Empty 상태</li>
+          <li>사용자 재시도가 가능한 Error 상태</li>
+          <li>느린 응답 중 중복 제출 방지와 진행 안내</li>
+          <li>연결 끊김과 복구 후 갱신</li>
+        </ul>
+        <p>모든 요청에 같은 Timeout과 Retry를 적용하지 않습니다. 조회와 변경 요청, 멱등성과 업무 위험도를 기준으로 결정합니다. 결제·예약처럼 중복 실행 위험이 있는 작업은 Front-end 재시도만으로 안전하다고 판단하지 않습니다.</p>
+        <p>승인된 계약이 있고 실제 환경에서 오류 상태를 반복 재현하기 어렵다면 MSW를 선택적으로 검토합니다. MSW는 API 계약을 임의로 만드는 도구가 아닙니다.</p>
+        <p><strong>상세 기준:</strong> 느린 Network, Loading, Timeout, Retry, Offline과 측정 방법은 <a href="./../performance_guide/index.html">네트워크 지연 대응 및 성능 검증 가이드</a>에서 확인합니다.</p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2>8. WebView와 Native App 경계</h2>
+        <p>서비스 업무 화면은 WebView에서 제공하고 Camera, 위치, Push와 Device 권한처럼 Native 기능이 필요한 경우에만 승인된 JavaScript Bridge를 호출합니다.</p>
+        <p>화면 Component가 Flutter 객체와 OS별 메시지를 직접 다루지 않도록 Bridge Adapter를 둡니다. Adapter는 요청 ID, Method, Parameter와 결과를 일관되게 처리하고 화면에는 Promise 기반의 최소 API를 제공합니다.</p>
+        <h3>Bridge 구현 전에 필요한 계약</h3>
+        <ul>
+          <li>Flutter Native App이 검증할 허용 Origin과 호출 가능한 Method</li>
+          <li>Request와 Response 메시지 형식</li>
+          <li>성공, 취소, 권한 거부, Timeout과 오류 구분</li>
+          <li>중복 요청과 화면 종료 시 처리</li>
+          <li>iOS와 Android 지원 범위</li>
+        </ul>
+        <p>Bridge는 인증 Token 전달이나 Backend 권한 검증 우회 수단으로 사용하지 않습니다.</p>
+        <p><strong>상세 기준:</strong> Native와 WebView의 전체 책임은 <a href="./../app/app.html">APP 개발 표준</a>, Bridge 계약과 구현 흐름은 <a href="./../app/webView/webView_guide.html">WebView 개발 가이드</a>에서 확인합니다.</p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2>9. Browser, OS와 반응형 기준</h2>
+        <table>
+          <thead><tr><th scope="col">Browser</th><th scope="col">기본 검토 기준</th></tr></thead>
+          <tbody><tr><td>Chrome·Edge</td><td>111 이상</td></tr><tr><td>Safari</td><td>16.4 이상</td></tr><tr><td>Firefox</td><td>128 이상</td></tr><tr><td>Samsung Internet</td><td>23 이상</td></tr></tbody>
+        </table>
+        <p>지역 Browser는 Chromium 111 이상 Engine 사용 여부와 현재 안정 버전의 실제 동작을 확인합니다. 국가별 점유율은 보조 근거이며 제품군 점유율을 특정 최소 버전 이상의 정확한 사용자 비율로 해석하지 않습니다.</p>
+        <table>
+          <thead><tr><th scope="col">구간</th><th scope="col">CSS Viewport</th><th scope="col">주요 확인</th></tr></thead>
+          <tbody><tr><td>Mobile</td><td>320~767px</td><td>입력, 터치, 긴 문구와 Overflow</td></tr><tr><td>Tablet</td><td>768~1023px</td><td>열 전환, 방향과 밀도</td></tr><tr><td>PC</td><td>1024px 이상</td><td>최대 너비와 다단 Layout</td></tr></tbody>
+        </table>
+        <p>767·768px, 1023·1024px 경계값을 함께 검증합니다. 지원 Browser에서 사용할 수 없는 CSS는 피하거나 동등한 Fallback을 제공합니다.</p>
+        <p><strong>상세 기준:</strong> 국가별 점유율 근거, 자동 업데이트 예외와 대표 검증 너비는 <a href="./../browser_support_guide/index.html">반응형 웹 Browser 지원 가이드</a>, App WebView 최소 OS 근거는 <a href="./../app/webView/webView_overview.html">WebView 지원 환경 개요</a>에서 확인합니다.</p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">10. 다국어와 번역 운영</h2>
+        <p>서비스가 의미를 책임지는 UI 문구는 한국어 원문으로 작성하고 Build 전에 번역 카탈로그로 추출·검수합니다. 기본 지원 언어는 한국어 <code>ko</code>, 중국어 간체 <code>zh-CN</code>, 일본어 <code>ja</code>와 영어 <code>en</code>입니다.</p>
+        <h3>UI 메시지 작성과 추출</h3>
+        <ul>
+          <li>번역 Key를 먼저 만들지 않고 추출 가능한 정적 한국어 메시지를 작성합니다.</li>
+          <li>같은 문구의 의미가 다르면 메시지 가까이에 Context를 기록합니다.</li>
+          <li>문자열 조각을 이어 붙이지 않고 변수, ICU 문법과 React 자리표시자를 보존합니다.</li>
+          <li>사용자명, 브랜드명, 모델 번호와 Code는 번역 대상에서 분리합니다.</li>
+          <li>사용자 콘텐츠와 API 오류 문구를 자동으로 UI 카탈로그에 넣지 않습니다.</li>
+        </ul>
+        <h3>로컬 LLM 번역</h3>
+        <p>로컬 LLM은 개발 과정에서 카탈로그의 비어 있거나 원문이 변경된 항목만 번역합니다. 실행 중인 사용자 화면에서는 LLM을 호출하지 않습니다.</p>
+        <ul>
+          <li>메시지 ID와 결과 ID가 일치하는지 확인합니다.</li>
+          <li>변수, ICU 문법과 React 자리표시자를 검증합니다.</li>
+          <li>제품명과 번역 금지 용어를 용어집과 비교합니다.</li>
+          <li>JSON Schema와 카탈로그 Compile 검사를 통과한 결과만 병합합니다.</li>
+          <li>결제, 환불, 개인정보, 약관과 이용 제한 문구는 담당자가 직접 검수합니다.</li>
+        </ul>
+        <h3>실행 언어와 Fallback</h3>
+        <p>Flutter App은 App 언어와 Device Locale을 관리하고 Next.js WebView는 지원 Locale 검증, 카탈로그 Load와 UI 표시를 담당합니다. 중국어·일본어 번역이 없으면 영어를 사용하고 영어도 없으면 한국어 원문을 표시합니다.</p>
+        <p>날짜, 시간, 숫자와 통화는 문자열을 직접 조합하지 않고 Locale과 통화 Code를 기준으로 Formatting합니다. 기준 시간대, 통화 반올림과 가격 표시 규칙은 업무 계약이 정해진 뒤 적용합니다.</p>
+        <h3>Layout과 접근성</h3>
+        <p>번역 문구가 한국어보다 길어질 수 있으므로 Button, Tab, Form Label, 오류 메시지, Dialog와 Table에서 긴 영어·중국어·일본어 문구를 확인합니다. 고정 너비와 한 줄 표시를 기본으로 가정하지 않습니다.</p>
+        <p>줄바꿈, 말줄임, 화면 확대, 최소 터치 영역과 가로 Overflow를 지원 Viewport에서 확인합니다. 접근 가능한 이름과 Screen Reader 안내도 같은 번역 카탈로그에서 관리합니다.</p>
+        <h3>동적 콘텐츠와 기기 번역</h3>
+        <p>사용자 게시물과 후기 같은 동적 콘텐츠는 원문을 기본 표시하고 사용자가 요청했을 때만 Flutter의 번역 Capability를 확인해 기기 번역을 사용할 수 있습니다.</p>
+        <ul>
+          <li>미지원 또는 실패 시 번역 기능만 비활성화하고 원문을 표시합니다.</li>
+          <li>번역 결과임을 표시하고 원문 보기 기능을 제공합니다.</li>
+          <li>현재 화면에 필요한 콘텐츠만 작은 단위로 요청합니다.</li>
+          <li>번역 결과도 외부 입력으로 취급하며 HTML로 직접 삽입하지 않습니다.</li>
+          <li>법률, 결제와 정책 문구에는 기기 번역을 확정 문구로 사용하지 않습니다.</li>
+        </ul>
+        <h3>다국어 완료 Checklist</h3>
+        <ul>
+          <li>새 문구가 추출 가능한 정적 형태인가?</li>
+          <li>지원 Locale 카탈로그와 Fallback이 갱신됐는가?</li>
+          <li>변수, ICU, 자리표시자와 Compile 검사를 통과했는가?</li>
+          <li>중요 업무 문구를 담당자가 검수했는가?</li>
+          <li>긴 문구, 접근성 이름과 주요 Viewport를 확인했는가?</li>
+          <li>실행 중 LLM 호출이나 승인되지 않은 외부 전송이 없는가?</li>
+        </ul>
+        <p><strong>상세 기준:</strong> Lingui 메시지 작성, 카탈로그, 로컬 LLM 번역, Flutter 기기 번역과 검증 코드는 <a href="./../i18n_guide/index.html">Front-End 다국어 및 로컬 LLM 번역 가이드</a>에서 확인합니다.</p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">11. 보안과 개인정보 기준</h2>
+        <h3>외부 입력과 출력</h3>
+        <p>API 응답, 사용자 입력, URL, Storage, HTML·Markdown, 외부 SDK와 Bridge 응답을 신뢰하지 않는 값으로 취급합니다. Front-end는 화면 출력과 Client 동작에 필요한 형태를 방어적으로 확인하고 출력 위치에 맞는 XSS 방어를 적용합니다. Backend의 요청 검증, 권한과 업무 규칙 검증은 별도로 수행합니다.</p>
+        <p>외부 URL과 Redirect는 Protocol과 Host를 확인하며 사용자 값을 그대로 <code>href</code>, <code>src</code>와 Redirect에 연결하지 않습니다.</p>
+        <h3>인증, 권한과 사용자 전환</h3>
+        <p>Front-end의 UI 제한을 권한 검증으로 간주하지 않습니다. 인증 Token을 Web Storage, URL이나 일반 Zustand Persist에 저장하는 예시를 만들지 않습니다. 로그아웃과 사용자 전환 시 이전 사용자의 Query Cache, Persist 상태와 Form 입력을 정리합니다.</p>
+        <h3>저장소, 로그와 Secret</h3>
+        <ul>
+          <li>비밀번호, 인증번호, 카드정보, 인증 Token과 불필요한 개인정보를 Client 저장소에 보관하지 않습니다.</li>
+          <li>Token, Cookie, Form 전체 값, API 전체 응답과 Bridge Payload 전체를 Log나 분석 도구로 보내지 않습니다.</li>
+          <li>API Secret, Signing Key와 서버 자격 증명을 Client Bundle, Source Map, 정적 파일과 Build Log에 포함하지 않습니다.</li>
+        </ul>
+        <h3>Bridge, 외부 리소스와 의존성</h3>
+        <p>Flutter Native App은 WebView Origin과 Bridge Method를 허용 목록으로 제한합니다. Front-end Adapter는 승인된 Method만 노출하고 임의 JavaScript 실행 기능을 제공하지 않습니다. CSP, 보안 Header와 허용 Origin은 Backend·배포·보안 담당자가 확정하고 Server·CDN·Hosting에 적용하며 Front-end는 필요한 Resource와 Browser 적용 결과를 확인합니다.</p>
+        <p>새 Package는 필요성, Owner, License, Version, 하위 의존성, 설치 Script와 취약점을 확인하고 Lock File 변경도 Review합니다.</p>
+        <h3>보안 완료 보고</h3>
+        <ul>
+          <li>새 데이터 흐름과 신뢰 경계</li>
+          <li>Runtime 검증과 허용 목록 위치</li>
+          <li>저장소, Cache와 사용자 전환 시 정리 방식</li>
+          <li>로그와 분석 도구에 전달되는 정보</li>
+          <li>새 의존성과 Lock File 변경</li>
+          <li>확인한 Browser·WebView Network Payload와 남은 계약</li>
+        </ul>
+        <p><strong>상세 기준:</strong> XSS, 인증·권한, Client 저장소, 개인정보, CSP, Bridge와 공급망 대응은 <a href="./../security_guide/index.html">Front-End 보안과 개인정보 가이드</a>에서 확인합니다.</p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2>12. 접근성, 테스트와 품질 Gate</h2>
+        <h3>구현 중 함께 확인할 접근성</h3>
+        <ul>
+          <li>Semantic HTML과 Heading 구조</li>
+          <li>Keyboard 사용과 식별 가능한 Focus</li>
+          <li>Input Label, 오류 메시지와 접근 가능한 이름</li>
+          <li>Dialog와 동적 UI의 Focus 이동</li>
+          <li>색상에만 의존하지 않는 상태 표현</li>
+          <li>긴 문구, 확대와 다국어에서 유지되는 Layout</li>
+        </ul>
+        <p>기본 검증 순서는 <code>TypeScript 검사 → Lint → Test</code>입니다. Story 변경에는 Storybook 정적 Build를 추가하고 실제 구성에 Build가 있으면 Application Build도 확인합니다.</p>
+        <h3>우선 Test 대상</h3>
+        <ul><li>중요한 Form 검증과 제출</li><li>서버 성공·실패와 재시도 상태</li><li>권한 거부와 Bridge 오류</li><li>중요한 업무 분기와 회귀 위험 Interaction</li></ul>
+        <h3>작업 완료 Checklist</h3>
+        <ul>
+          <li>정상·예외 상태를 구현했는가?</li>
+          <li>기존 Component와 Token을 우선 사용했는가?</li>
+          <li>새 공통 Component에 Story가 있는가?</li>
+          <li>Keyboard, Focus와 접근 가능한 이름을 확인했는가?</li>
+          <li>지원 Browser와 필요한 Viewport에서 확인했는가?</li>
+          <li>실제로 구성된 검사가 통과했는가?</li>
+          <li>확인하지 못한 환경과 미확정 계약을 보고했는가?</li>
+        </ul>
+        <p><strong>상세 기준:</strong> Type 경계는 <a href="./../typescript_guide/index.html">TypeScript 가이드</a>, 정적 검사는 <a href="./../lint_guide/index.html">Lint 가이드</a>, Test 대상과 제외 기준은 <a href="./../test_guide/index.html">테스트 가이드</a>에서 확인합니다.</p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">13. 가이드 저장소 구조와 문서 계층</h2>
+        <pre class="hljs"><code data-language="text">lounge-docs/
+├── AGENTS.md                         # 가이드 저장소 작성·수정 규칙
+├── README.md                         # 전체 문서 진입점
+├── search/                           # 사람용 가이드 중앙 검색
+├── monorepo/                         # 저장소와 Package 경계 원본
+├── frontend_guide/                   # Front-end 구현 기준 원본
+├── app/                              # Native App·WebView 기준 원본
+├── ui_guide/                         # Figma, Token과 UI 구현 원본
+├── storybook_guide/                  # Storybook 운영 기준 원본
+├── security_guide/                   # 보안과 개인정보 기준 원본
+├── *_guide/                          # 주제별 사람용 원본
+├── briefing/                         # 브리핑과 발표 자료
+└── reference/front-end/              # 실제 프로젝트에 가져갈 문서 묶음
+    ├── AGENTS.md                     # 실제 업무용 AI 공통 규칙
+    └── docs/
+        ├── ai/                       # 작업별 짧은 AI 요약
+        └── common-source/            # 조건부 참고 구현</code></pre>
+        <h3>최상위 가이드 원본</h3>
+        <p>주제별 가이드는 사람이 기술 기준, 적용 조건, 예외, 미확정 항목과 Review 근거를 확인하는 원본입니다. <code>draft.md</code>는 검토 초안이고 사용자가 HTML 반영을 요청한 뒤 갱신한 HTML이 사람이 보는 배포 문서입니다.</p>
+        <p>최상위 <code>AGENTS.md</code>는 가이드 문서를 작성하고 검증하는 규칙이며 실제 서비스 개발용 규칙이 아닙니다.</p>
+        <h3>실제 프로젝트용 <code>reference/front-end</code></h3>
+        <p><code>reference/front-end/AGENTS.md</code>는 실제 업무에서 AI가 먼저 읽는 공통 규칙입니다. <code>docs/ai</code>는 작업별 요약이고 <code>docs/common-source</code>는 사용처와 계약을 확인한 뒤 선택적으로 적용하는 참고 구현입니다.</p>
+        <p>Common Source는 기존 Application Source를 덮어쓰는 Boilerplate가 아닙니다. 실제 Source와 설치 Package를 비교해 필요한 부분만 병합합니다.</p>
+        <h3>실제 서비스 저장소가 생성된 이후</h3>
+        <p><code>reference/front-end</code>는 실제 서비스 저장소가 만들어지기 전까지 준비하는 초기 문서 묶음입니다. 프로젝트가 생성되면 실제 저장소의 Root <code>AGENTS.md</code>와 <code>docs</code> 영역으로 가져가고 Source, 설치 Package와 승인된 계약에 맞춰 수정합니다.</p>
+        <pre class="hljs"><code data-language="text">lounge-project/
+├── AGENTS.md                       # 저장소 전체 공통 AI 작업 규칙
+├── docs/
+│   ├── ai/                         # 작업별 AI 요약
+│   ├── common-source/              # 적용 조건과 사용법을 확인할 참고 구현 문서
+│   ├── architecture/               # 후보: 확정된 구조와 기술 결정
+│   └── operations/                 # 후보: Build, 배포, Monitoring과 장애 대응
+├── apps/
+│   ├── website/
+│   ├── mobile/
+│   ├── app-webview/
+│   │   ├── AGENTS.md               # 후보: App-WebView 추가 규칙
+│   │   └── src/
+│   ├── card-inapp/
+│   └── backoffice/
+└── packages/
+    └── ui/</code></pre>
+        <p>초기 프로젝트에서 바로 가져갈 대상은 Root <code>AGENTS.md</code>, <code>docs/ai</code>와 <code>docs/common-source</code>입니다. Common Source는 실제 코드와 비교해 필요한 부분만 적용합니다.</p>
+        <p><code>docs/architecture</code>, <code>docs/operations</code>와 <code>apps/app-webview/AGENTS.md</code>의 상세 구성은 아직 확정하지 않습니다. Architecture, CI/CD, 배포, Monitoring, 장애 대응과 App별 규칙이 생겼을 때 담당자와 관리 책임을 정한 뒤 추가합니다.</p>
+        <figure class="diagram-frame">
+          <!-- prettier-ignore -->
+          <div class="mermaid">
+flowchart TD
+  accTitle: 가이드 저장소에서 실제 프로젝트 문서로 이동하는 흐름
+  accDescr: 현재 가이드 원본에서 실제 프로젝트용 reference 문서를 준비하고, 프로젝트가 생성되면 Root AGENTS와 docs로 옮겨 실제 소스와 패키지에 맞게 수정하며, 운영 조건이 확정된 뒤 Architecture와 Operations 문서를 추가하고 공통 개선점을 원본 가이드로 되돌립니다.
+  A["lounge-docs<br/>사람용 원본 가이드"] --> B["reference/front-end<br/>초기 프로젝트용 문서 묶음"]
+  B --> C["실제 저장소<br/>Root AGENTS.md · docs/ai · docs/common-source"]
+  C --> D["실제 Source · Package · 승인 계약에 맞게 적용"]
+  D --> E["운영 조건 확정 후<br/>Architecture · Operations 문서 추가 검토"]
+  E -.->|"공통 기준으로 환류할 근거"| A
+          </div>
+          <figcaption>현재 원본 가이드에서 실제 프로젝트 문서와 운영 문서로 이어지는 과정</figcaption>
+        </figure>
+        <p>프로젝트가 생성된 뒤에는 실제 저장소의 문서가 해당 프로젝트 작업의 기준입니다. <code>reference/front-end</code>를 별도의 두 번째 운영 원본으로 유지하지 않습니다. 여러 프로젝트에 공통으로 적용할 개선점은 근거를 원본 가이드에 반영합니다.</p>
+        <h3>문서 확인 우선순위</h3>
+        <figure class="diagram-frame">
+          <!-- prettier-ignore -->
+          <div class="mermaid">
+flowchart TD
+  accTitle: 실제 업무에서 문서를 확인하는 우선순위
+  accDescr: 작업자는 실제 프로젝트 AGENTS 문서에서 시작해 작업별 AI 요약과 기존 소스를 확인하고, 세부 판단에는 사람용 원본 가이드와 승인된 담당자 계약을 사용합니다.
+  A["실제 프로젝트 AGENTS.md"] --> B["작업별 docs/ai 요약"]
+  B --> C["package.json · 설정 · 기존 Source"]
+  C --> D["사람용 원본 가이드"]
+  D --> E["승인된 기획 · Backend · Native · 배포 계약"]
+          </div>
+          <figcaption>실제 프로젝트 규칙에서 원본 가이드와 승인된 계약까지 확인하는 흐름</figcaption>
+        </figure>
+        <h3>검색과 동기화</h3>
+        <p>중앙 검색은 업무용 사람 원본을 대상으로 하며 교육용 Curriculum과 중복 문서인 <code>reference/front-end</code>는 제외합니다. 기준은 사람용 원본에서 먼저 확정하고 관련 <code>AGENTS.md</code>, AI 요약, Common Source와 실제 프로젝트에 동기화합니다.</p>
+        <p><strong>문서 진입점:</strong> 필요한 원본 문서는 <a href="./../search/index.html">가이드 검색</a>에서 찾고, 실제 프로젝트에 적용할 AI 문서 계층은 <a href="./../reference/front-end/docs/ai/project.html">프로젝트 구조 AI 요약</a>에서 확인합니다.</p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2>14. 사람이 보는 가이드 사용 방식</h2>
+        <table>
+          <thead><tr><th scope="col">작업</th><th scope="col">사람용 원본</th><th scope="col">확인 내용</th></tr></thead>
+          <tbody>
+            <tr><td>저장소와 Package 경계</td><td>Monorepo 공통 기준</td><td>Application, Package와 공통화</td></tr>
+            <tr><td>일반 화면과 상태</td><td>Front-End 개발 가이드</td><td>배치, 상태 소유, Bridge와 품질</td></tr>
+            <tr><td>Figma UI</td><td>React Code Exports·디자인 토큰</td><td>기존 UI, Token과 완료 기준</td></tr>
+            <tr><td>공통 Component</td><td>Storybook 운영 가이드</td><td>Story 대상, 상태와 반자동 점검</td></tr>
+            <tr><td>품질</td><td>TypeScript·Lint·Test 가이드</td><td>Type 경계, 정적 검사와 Test 범위</td></tr>
+            <tr><td>성능</td><td>성능 검증 가이드</td><td>Loading, Timeout, Retry와 측정</td></tr>
+            <tr><td>보안</td><td>보안과 개인정보 가이드</td><td>입력, 인증, 저장소, 로그와 공급망</td></tr>
+            <tr><td>App 연동</td><td>APP 개발 표준·WebView 가이드</td><td>OS, Bridge 계약과 실제 기기</td></tr>
+            <tr><td>다국어</td><td>다국어·번역 가이드</td><td>Key, Layout, Locale과 검수</td></tr>
+            <tr><td>호환성</td><td>Browser 지원 가이드</td><td>최소 Version, Viewport와 경계값</td></tr>
+          </tbody>
+        </table>
+        <ol>
+          <li>중앙 검색에서 기능이나 위험 Keyword를 검색합니다.</li>
+          <li>원본 가이드의 적용 범위와 미확정 항목을 확인합니다.</li>
+          <li>실제 Source와 설치 Package가 예시와 같은지 비교합니다.</li>
+          <li>다른 담당자 계약은 구현 전에 질문과 <code class="badge-tbd">TBD</code>로 분리합니다.</li>
+          <li>구현과 Review에서 완료 기준을 Checklist로 사용합니다.</li>
+          <li>반복되는 문제와 실제 차이를 근거로 가이드를 갱신합니다.</li>
+        </ol>
+        <p><strong>가이드 목록:</strong> 전체 사람용 문서의 진입점은 <a href="./../README.md">Lounge DOCS README</a>, Keyword 검색은 <a href="./../search/index.html">가이드 검색</a>을 사용합니다.</p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2>15. AI 코딩 도구 사용 방식</h2>
+        <p>Cline, Claude Code, Codex와 로컬 LLM의 공통 규칙은 실제 프로젝트 <code>AGENTS.md</code>에서 관리합니다. 도구 전용 설정에는 그 도구에서만 필요한 동작만 둡니다.</p>
+        <ol><li>저장소의 <code>AGENTS.md</code></li><li>작업별 <code>docs/ai/*</code></li><li>설치 Package와 기존 Source</li><li>필요할 때 사람용 원본</li><li>Figma 설명과 실제 API의 일치 여부</li></ol>
+        <p>AI에 전체 가이드를 한꺼번에 제공하지 않고 작업에 필요한 요약과 Source만 읽게 합니다. 생성 결과는 구현 초안이며 불필요한 추상화와 Props, 누락된 상태와 기존 구조 충돌을 개발자가 검토합니다.</p>
+        <h3>AI 작업 완료 보고</h3>
+        <ul><li>수정한 기능과 파일</li><li>재사용한 기존 Component</li><li>신규 Component와 생성 이유</li><li>사용한 Semantic Token</li><li>추가·변경한 Story와 상태</li><li>실행한 검사와 결과</li><li>재현하지 못한 환경</li><li>남은 <code>TBD</code>와 담당자 결정</li></ul>
+        <p><strong>실제 프로젝트 기준:</strong> AI가 처음 읽을 공통 규칙은 <a href="./../reference/front-end/AGENTS.md">reference/front-end/AGENTS.md</a>, 품질 작업별 요약은 <a href="./../reference/front-end/docs/ai/quality.html">AI 품질 가이드</a>에서 확인합니다.</p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2>16. 개발자와 관련 담당자의 책임</h2>
+        <table>
+          <thead><tr><th scope="col">담당</th><th scope="col">현재 책임</th></tr></thead>
+          <tbody>
+            <tr><td>Front-end 개발자</td><td>사람용 가이드, 화면·상태·Component, 접근성, 반응형, 안전한 출력, Client 저장소와 민감정보 노출 방지, Test와 Storybook</td></tr>
+            <tr><td>Designer 또는 편집 권한 보유자</td><td>Figma 시각 기준과 구현 설명 입력·갱신</td></tr>
+            <tr><td>Backend 담당자</td><td>API 요청 검증, 인증, 권한, Session, 업무 데이터와 오류 계약의 강제 적용</td></tr>
+            <tr><td>Flutter 담당자</td><td>Bridge Method, 메시지, OS 권한과 Native 동작 계약 승인</td></tr>
+            <tr><td>Backend·배포·보안 담당</td><td>CSRF, CORS, CSP, 보안 Header, Server Secret과 허용 Origin 정책의 확정 및 적용</td></tr>
+            <tr><td>AI 코딩 도구</td><td>기존 구현 탐색, 코드·Story 초안, 반복 검사와 결과 정리</td></tr>
+            <tr><td>Reviewer</td><td>요구사항, 구조, 공개 API, 예외 상태, 보안 영향과 검증 결과</td></tr>
+          </tbody>
+        </table>
+        <p>Front-end가 독립적으로 결정할 수 없는 계약은 임의로 확정하지 않습니다. 담당자가 승인한 계약을 실제 코드와 관련 가이드에 함께 반영합니다.</p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2>17. 운영 시 유지할 연결 관계</h2>
+        <ul>
+          <li>Component 경로·이름 변경 → Import, Figma Description과 관련 문서</li>
+          <li>Props·Variant 변경 → 사용처, Story와 Figma 상태</li>
+          <li>Token 변경 → 실제 화면, Storybook과 Theme</li>
+          <li>Browser·OS 변경 → Tailwind 요구사항, 점유율과 실제 기기</li>
+          <li>공통 Component 추가 → Story 등록과 AI 누락 점검</li>
+          <li>가이드 변경 → 중앙 검색 Index 재생성</li>
+          <li>API·Bridge 계약 변경 → Adapter, 상태, Test와 담당 문서</li>
+          <li>인증·개인정보·SDK 변경 → 저장 위치, Log, Network와 보안 가이드</li>
+          <li>Package 변경 → Lock File, 하위 의존성, 보안 공지와 Owner</li>
+          <li>UI 문구·Locale 변경 → 메시지 추출, 카탈로그, Fallback과 긴 문구</li>
+        </ul>
+        <p>AI가 불일치 후보를 찾을 수 있지만 최종 변경 여부와 영향 범위는 개발자가 판단합니다.</p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2>18. 현재 확정하지 않은 내용</h2>
+        <ul>
+          <li>화면별 업무 규칙과 사용자 문구</li><li>API Endpoint, Method, Field와 오류 계약</li><li>인증, Cookie, Token과 Session</li><li>Backend 개발·테스트 환경</li><li>Flutter Bridge Method와 메시지</li><li>배포, 모니터링, 장애 대응과 Release 승인</li><li>CSP, CORS, Origin과 개인정보 보존</li><li>기능별 Timeout, Retry와 Offline</li><li>Storybook Version, Framework, Addon과 CI 명령</li><li>Schema 검증과 서버 오류 매핑</li><li>Zustand Store와 Persist 범위</li><li>Locale별 중요 문구의 검수 담당자와 승인 절차</li><li>시간대, 통화, 반올림과 가격 표시 규칙</li><li>동적 콘텐츠 기기 번역 범위와 기본 설정</li>
+        </ul>
+        <p>미확정 항목의 예시를 실제 계약처럼 구현하지 않습니다. 필요한 담당자와 입력 자료를 확인한 뒤 확정합니다.</p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">19. 이 가이드로 구축할 때의 최종 원칙</h2>
+        <p>이 Section은 앞의 구현 단계를 다시 설명하는 곳이 아닙니다. 실무자가 여러 상세 가이드를 적용할 때 마지막까지 유지해야 할 판단 원칙을 정리합니다.</p>
+        <h3>기존 구현을 먼저 찾습니다</h3>
+        <p>새 Component와 구조를 만들기 전에 Figma 설명, 실제 Source, Storybook과 디자인 토큰을 확인합니다. 기존 구현으로 표현할 수 없는 경우에만 새 코드를 만들고 그 이유를 남깁니다.</p>
+        <h3>구현과 검증을 같은 작업으로 봅니다</h3>
+        <p>정상 화면만 보이면 완료된 것이 아닙니다. 예외 상태, 다국어, 접근성, Front-end 보안, 반응형, Browser, Test와 Build 중 해당 기능에 필요한 검증까지 같은 변경에서 확인합니다. Backend·Native App·배포 정책은 Front-end가 대신 구현하지 않고 해당 담당자의 계약과 적용 결과를 확인합니다.</p>
+        <h3>운영 중에도 기준을 연결합니다</h3>
+        <p>코드가 바뀌면 Story, Figma 설명과 관련 가이드도 함께 확인합니다. AI는 탐색, 초안과 반복 검사를 돕지만 공개 API, 계약, 위험과 최종 품질은 개발자와 담당자가 판단합니다.</p>
+        <p>처음부터 복잡한 공통 구조를 만드는 것이 목표가 아닙니다. 기존 구현을 우선 사용하고 기능 가까이에서 작게 시작하며 실제 반복과 검증 근거가 생겼을 때 공통화합니다.</p>
+        <blockquote><p>AI가 구현과 반복 검사를 돕고, 가이드와 개발자가 범위·계약·품질을 통제합니다.</p></blockquote>
+      </section>
+    </main>
+
+    <footer><p>Lounge Front-end 구축 가이드 브리핑</p></footer>
+    <script src="./../assets/js/common.js"></script>
+    <script src="./../assets/js/mermaid.js"></script>
+  </body>
+</html>

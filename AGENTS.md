@@ -65,6 +65,7 @@
 - `blockquote`의 시각적 강조가 없어도 의미와 중요도가 유지되는 내용은 `blockquote`로 감싸지 않습니다.
 - 표를 사용할 때는 Header와 `scope`를 제공하고, 단순 목록으로 충분한 내용은 표로 만들지 않습니다.
 - 다이어그램은 관계나 흐름을 설명하는 데 실제 도움이 될 때만 사용합니다.
+- 순차 단계가 5개 이상인 선형 프로세스는 Mermaid `flowchart TB`를 기본으로 사용합니다. 가로 배치가 비교나 병렬 관계를 더 명확하게 보여줄 때만 `LR`을 사용합니다.
 - Mermaid를 사용할 때는 `accTitle`, `accDescr`과 `figcaption`을 작성합니다.
 - 공통 스타일은 `assets/style/presentation-theme.css`, 공통 동작은 `assets/js/common.js`를 사용합니다.
 

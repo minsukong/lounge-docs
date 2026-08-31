@@ -11,6 +11,7 @@
 - API·인증·CSP·Cookie·Origin과 개인정보 정책이 없으면 임의로 확정하지 않고 `TBD`로 분리합니다.
 - Front-end 보안 작업을 Backend, App과 인프라 전체 구현 계획으로 확대하지 않습니다.
 - 이 문서의 Backend·Native App·배포 책임은 Front-end가 확인해야 할 외부 보안 조건입니다. 실제 구현 여부, 담당 주체와 제공 범위는 승인되기 전까지 `TBD`이며 완료된 것으로 표현하지 않습니다.
+- Backend의 인증·권한·업무 규칙·요청 검증, 배포·보안 담당의 CORS·CSP·보안 Header·Secret 정책, Native App의 WebView Origin·Bridge Method 통제를 Front-end 코드로 대신 구현하거나 임의로 확정하지 않습니다.
 
 ## 필수 원칙
 
@@ -26,8 +27,8 @@
 - 로그아웃과 사용자 전환 뒤 이전 사용자의 Query Cache와 Persist 상태를 정리합니다.
 - Cookie 인증이면 CSRF, SameSite, Secure, HttpOnly, Domain, CORS와 Origin 검증 계약을 확인합니다.
 - Client의 파일 형식·크기 검사는 UX이며 Backend 검증을 대신하지 않습니다.
-- Bridge는 승인된 Method만 Adapter로 노출하고 입력·응답·Version·요청 ID를 검증합니다.
-- CSP는 추가 방어 계층이며 XSS 방어를 대신하지 않습니다. 실제 값은 배포 구조 확정 뒤 결정합니다.
+- Front-end Bridge Adapter는 승인된 Method만 노출하고 입력·응답·Version·요청 ID를 방어적으로 확인합니다. WebView Origin과 실제 호출 가능 Method의 허용 통제는 Native App이 집행합니다.
+- CSP는 추가 방어 계층이며 XSS 방어를 대신하지 않습니다. Front-end는 필요한 Resource·Connect 대상을 제공하고 브라우저 동작을 검증하며, 실제 값과 Header 적용은 Backend·배포·보안 담당이 확정합니다.
 
 ## React와 Next.js 보안 업데이트
 
@@ -57,7 +58,7 @@
 
 ## 변경 후 보고
 
-- 확인한 보안 경계와 근거가 된 파일
+- 확인한 Front-end 보안 경계와 근거가 된 파일
 - 변경된 데이터 흐름과 저장 위치
 - Backend·App·배포 담당자에게 확인할 계약
 - 실행한 Typecheck, Lint, Test, Build와 실제 Browser·WebView 확인

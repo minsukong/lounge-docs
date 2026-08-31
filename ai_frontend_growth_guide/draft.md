@@ -8,7 +8,7 @@
 
 구체적인 기술과 구현 기준은 [Front-End 개발 가이드](../frontend_guide/index.html)를 따릅니다. TypeScript 작성 기준과 테스트 범위는 각각 [TypeScript 가이드](../typescript_guide/index.html)와 [테스트 가이드](../test_guide/index.html)를 함께 확인합니다.
 
-외부 입력, 인증·권한, 개인정보, Client 저장소, CSP, Bridge와 의존성 보안의 상세 기준은 [Front-End 보안과 개인정보 가이드](../security_guide/index.html)를 따릅니다.
+Front-end의 외부 입력 처리, 개인정보 노출 방지, Client 저장소, Bridge Adapter와 의존성 보안 및 인증·권한·CSP 연동 시 책임 구분은 [Front-End 보안과 개인정보 가이드](../security_guide/index.html)를 따릅니다. Backend·Native App·배포·보안 정책을 Front-end가 대신 구현한다는 의미가 아닙니다.
 
 API 요청 계층과 세션·회원 경계는 기획 흐름과 Backend API 계약이 확정된 뒤 각각 [API 요청 계층](../reference/front-end/docs/common-source/network.html), [세션과 회원 경계](../reference/front-end/docs/common-source/session.html)를 기준으로 학습합니다. 계약 확정 전에는 Backend 확인 질문과 `TBD`만 정리합니다. [API Mock](../reference/front-end/docs/common-source/api-mocking.html)은 승인된 계약 이후 실제 환경에서 필요한 상태를 반복 재현하기 어려울 때 Front-end 테스트 범위와 관리 책임을 정해 선택적으로 검토합니다.
 

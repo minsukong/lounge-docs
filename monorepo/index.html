@@ -267,8 +267,9 @@
             애플리케이션별로 분리합니다.
           </li>
           <li>
-            API Endpoint, 인증 Client, Host, Cookie 범위, CORS·CSP, Redirect URI와
-            Origin Allowlist는 서비스·제휴사·환경별 승인 값으로 관리합니다.
+            API Endpoint와 공개 Client 설정은 승인된 환경값으로 연결합니다. Cookie 범위,
+            CORS·CSP, Redirect URI와 Origin Allowlist는 Backend·배포·보안 담당이
+            서비스·제휴사·환경별로 승인하고 Server·CDN·Hosting에 적용합니다.
           </li>
           <li>
             브라우저에 노출 가능한 공개 설정과 서버·CI에서만 사용하는 Secret을
@@ -279,7 +280,7 @@
             Build Log에 포함하지 않습니다. <code>MUST</code>
           </li>
         </ul>
-        <p>Client 공개 설정, 자격 증명, CSP·CORS와 공급망의 상세 검토 기준은 <a href="./../security_guide/index.html">Front-End 보안과 개인정보 가이드</a>를 함께 확인합니다.</p>
+        <p>Client 공개 설정, 자격 증명 노출 방지, 공급망과 CSP·CORS 연동 검증은 <a href="./../security_guide/index.html">Front-End 보안과 개인정보 가이드</a>의 책임 구분을 함께 확인합니다. CSP·CORS 정책과 Header의 결정·적용은 Backend·배포·보안 담당이 수행합니다.</p>
       </section>
 
       <hr />

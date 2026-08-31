@@ -13,6 +13,15 @@
 
 ## 2026-08-28
 
+### Front-end 구축 브리핑 문서와 PC 발표 페이지 추가
+
+- 오늘 정리한 Figma 구현 설명, AI의 기존 Component 탐색, Storybook 우선 개발과 반자동 운영, Tailwind CSS v4 기반 Browser 지원, 반응형 구간과 중앙 검색 운영을 하나의 브리핑으로 연결했습니다.
+- 일반 [`브리핑 문서`](./briefing/index.html)는 공통 가이드 템플릿을 사용하고, Figma → AI → Storybook → 프로젝트 → 운영의 순환을 접근성 설명이 포함된 Mermaid로 정리했습니다.
+- 별도 [`PC 발표 페이지`](./briefing/presentation.html)는 1440~1600px 콘텐츠 폭과 전면 장면을 사용하며, 대형 타이포그래피, 개발 도구 Panel, Storybook 상태 Canvas, Browser·Viewport 시각화와 운영 순환도를 추가했습니다.
+- 발표 페이지는 외부 CDN이나 Animation Library 없이 독립 실행되며 Scroll Snap, 장면 노출 효과, 진행률, 우측 장면 Navigation과 방향키·Page Up/Down 이동을 제공합니다.
+- Archify는 핵심 Workflow를 별도 검증 산출물로 확장할 수 있도록 후보로 남기고, 현재 발표 페이지에서는 동일한 내용을 가벼운 자체 Workflow로 표현했습니다.
+- HTML 구조, JavaScript 문법과 자산 경로를 확인했으며, 1440×900 화면에서 표지와 핵심 Workflow를 시각 검증하고 일반 문서의 Mermaid 렌더링과 Console 오류가 없음을 확인했습니다.
+
 ### 반응형 웹 브라우저 지원 기준과 가이드 검색 추가
 
 - Tailwind CSS v4의 공식 핵심 호환 조건을 기준으로 Chrome·Edge 111 이상, Safari 16.4 이상, Firefox 128 이상과 Samsung Internet 23 이상을 최소 지원 버전으로 정리했습니다.

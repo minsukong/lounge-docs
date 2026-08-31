@@ -17,6 +17,7 @@
 - 기획 흐름과 Backend API 계약이 확정되기 전에는 endpoint, method, status, 요청·응답 필드, API 함수, parser, fixture, handler와 Mock을 구현하지 않습니다. Backend 확인 질문과 `TBD`만 남깁니다.
 - Swagger 또는 OpenAPI 제공을 미리 가정하지 않고 Backend 담당자가 실제로 전달하고 승인한 계약을 기준으로 구현합니다.
 - MSW는 기본 도구가 아닙니다. 승인된 API 계약을 기준으로 실제 Backend 환경에서 필요한 지연·오류 상태를 반복 재현하기 어렵다면 Front-end 테스트 범위에서 선택적으로 검토합니다. Backend의 별도 재현 환경 제공을 전제로 두지 않으며, 도입 범위와 관리 책임은 Front-end 책임자 또는 프로젝트 담당자와 정하고 Backend에 공유합니다.
+- AI는 Backend의 인증·권한·업무 규칙·요청 검증, 배포·보안 담당의 CORS·CSP·보안 Header·Secret 정책, Native App의 WebView Origin·Bridge Method 통제를 Front-end 코드로 대신 구현하거나 임의로 확정하지 않습니다. Front-end에는 방어적 입력·응답 처리와 승인된 계약의 연동·검증만 구현하고 나머지는 담당자 확인 사항 또는 `TBD`로 남깁니다.
 
 ## AI 생성 코드 기준
 

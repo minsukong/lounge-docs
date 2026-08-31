@@ -2,7 +2,7 @@
 
 ## 1. 문서 목적과 적용 범위
 
-이 문서는 Lounge Front-end와 WebView 화면을 구현하고 검토할 때 적용할 보안·개인정보 기준 원본입니다. UI에서 값을 숨기는 수준이 아니라 외부 입력이 들어와 화면, 네트워크, 저장소, 로그와 Native Bridge를 통과하는 전체 흐름을 확인합니다.
+이 문서는 Lounge Front-end와 WebView 화면을 구현하고 검토할 때 적용할 보안·개인정보 기준 원본입니다. Front-end가 직접 구현할 방어적 처리뿐 아니라 Backend·Native App·배포·보안 담당자에게 받아야 할 계약과 Front-end의 연동 검증 범위도 함께 구분합니다. UI에서 값을 숨기는 수준이 아니라 외부 입력이 들어와 화면, 네트워크, 저장소, 로그와 Native Bridge를 통과하는 전체 흐름을 확인합니다.
 
 구체적인 인증 제공자, Cookie 또는 token 방식, CSP 값, 허용 Origin, Redirect URI, 개인정보 분류와 보존 기간은 아직 확정하지 않습니다. 해당 결정은 Backend·App·배포·보안 담당 기준과 함께 확정합니다.
 
@@ -26,14 +26,20 @@
 - 외부 값을 신뢰하지 않고 API·Storage·URL·Bridge 경계에서 검증합니다.
 - React의 기본 Escape를 유지하고 위험한 DOM·HTML 실행 경계를 제한합니다.
 - 자격 증명과 개인정보를 URL, Client 저장소, Bridge와 로그에 불필요하게 복제하지 않습니다.
-- 권한 없는 행동을 UI에서 제한하되 서버 권한 검증이 존재한다고 가정하지 않습니다.
+- 권한 없는 행동을 UI에서 제한하되 이를 권한 통제로 간주하지 않습니다. 실제 접근은 Backend가 인증·권한·소유권을 다시 검증해야 합니다.
 - 오류를 사용자 행동으로 변환하면서 서버 원문과 내부 정보를 노출하지 않습니다.
 
 ### Backend
 
 - 인증, 권한, 소유권, 업무 규칙과 데이터 접근을 최종 검증합니다.
-- Cookie·token, CSRF, CORS, 보안 Header와 세션 폐기 정책을 확정합니다.
+- 인증 수단, 세션 발급·만료·폐기와 CSRF 방어 방식을 확정하고 서버에서 집행합니다.
 - 업로드 파일의 실제 형식, 크기와 저장 위치를 다시 검증합니다.
+
+### 배포·보안
+
+- Backend와 협의하여 CORS, CSP, 보안 Header, Cookie 범위와 허용 Origin 정책을 확정합니다.
+- Server·CDN·Hosting과 CI/CD에서 해당 정책과 Secret·배포 권한을 적용하고 운영합니다.
+- Front-end가 전달한 필요한 Resource·Connect 대상과 브라우저 검증 결과를 검토합니다.
 
 ### Native App
 
@@ -108,7 +114,7 @@ export function parseExternalUrl(value: unknown): URL | null {
 
 CSRF(Cross-Site Request Forgery)는 로그인된 사용자의 브라우저를 이용해 사용자가 원하지 않은 요청을 보내게 하는 공격입니다. CORS(Cross-Origin Resource Sharing)는 다른 Origin(Protocol·Host·Port로 구분되는 출처)의 응답을 브라우저가 읽도록 허용할 범위를 정하는 정책입니다.
 
-Front-end에서 임의의 CORS Header를 추가한다고 문제가 해결되지는 않습니다. Front-end는 요청 Origin과 Cookie 포함 여부를 확인하고, 실제 허용 Origin과 CSRF 방어 방식은 Backend·배포 계약이 전달된 뒤 적용합니다.
+Front-end에서 임의의 CORS Header를 추가한다고 문제가 해결되지는 않습니다. Front-end는 요청 Origin과 Cookie 포함 여부를 확인하고 승인된 계약에 맞춰 요청 설정과 오류 처리를 연결합니다. 실제 허용 Origin과 CSRF 방어는 Backend·배포·보안 담당이 서버 환경에 적용합니다.
 
 - Cookie가 자동으로 포함되는 인증 방식에서는 상태 변경 요청의 CSRF 방어가 필요합니다.
 - `SameSite`만으로 충분하다고 가정하지 않고 CSRF Token, Origin·Referer 검증 또는 채택한 방식을 Backend와 확정합니다.

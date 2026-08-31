@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lounge Front-end 구축 가이드 · Presentation</title>
+  <link rel="stylesheet" href="./../assets/style/briefing-presentation.css" />
+</head>
+<body>
+  <div class="progress" aria-hidden="true"><span></span></div>
+  <nav class="rail" aria-label="발표 장면">
+    <a href="#intro" aria-label="표지"><span>01</span></a><a href="#why" aria-label="목적"><span>02</span></a><a href="#flow" aria-label="구축 흐름"><span>03</span></a><a href="#figma" aria-label="Figma와 AI"><span>04</span></a><a href="#storybook" aria-label="Storybook"><span>05</span></a><a href="#browser" aria-label="지원 기준"><span>06</span></a><a href="#operation" aria-label="운영"><span>07</span></a><a href="#closing" aria-label="마무리"><span>08</span></a>
+  </nav>
+  <main>
+    <section class="scene hero" id="intro">
+      <div class="orb orb-a"></div><div class="orb orb-b"></div>
+      <div class="scene-inner reveal">
+        <p class="eyebrow">LOUNGE · FRONT-END BRIEFING</p>
+        <h1>구현을 빠르게.<br /><em>운영은 흔들리지 않게.</em></h1>
+        <p class="lead">Figma, AI, Storybook과 프로젝트를 하나의 기준으로 연결합니다.</p>
+        <div class="hero-meta"><span>React · Next.js · TypeScript</span><span>Tailwind CSS v4</span><span>AI-assisted workflow</span></div>
+      </div>
+      <p class="scroll-cue">SCROLL TO EXPLORE <i></i></p>
+    </section>
+
+    <section class="scene" id="why">
+      <div class="scene-inner split reveal">
+        <div><p class="eyebrow">WHY A GUIDE</p><h2>사람과 도구가 달라도<br />판단 기준은 같습니다.</h2><p class="lead muted">가이드는 코드를 대신하지 않습니다. 구현의 근거와 검증 방법을 맞춥니다.</p></div>
+        <div class="problem-grid">
+          <article><b>01</b><h3>구현 편차</h3><p>개발자와 AI마다 달라지는 구조</p></article>
+          <article><b>02</b><h3>중복 Component</h3><p>기존 구현을 찾지 못해 반복되는 UI</p></article>
+          <article><b>03</b><h3>운영 단절</h3><p>설계·Story·실제 코드의 불일치</p></article>
+          <article class="accent"><b>GOAL</b><h3>하나의 기준</h3><p>근거를 남기고 검증 가능한 구축</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene" id="flow">
+      <div class="scene-inner reveal">
+        <p class="eyebrow">CORE WORKFLOW</p><h2>설계에서 운영까지,<br />하나의 순환으로 연결합니다.</h2>
+        <div class="workflow" role="img" aria-label="Figma, AI, Storybook, 프로젝트, 운영으로 이어지는 구축 흐름">
+          <article><span>01</span><strong>Figma</strong><small>설계 · 토큰 · 구현 설명</small></article><i></i>
+          <article><span>02</span><strong>AI</strong><small>탐색 · 재사용 · 구현</small></article><i></i>
+          <article><span>03</span><strong>Storybook</strong><small>상태 · 접근성 · 동작</small></article><i></i>
+          <article><span>04</span><strong>Project</strong><small>화면 적용 · 통합 검증</small></article><i></i>
+          <article><span>05</span><strong>Operation</strong><small>변경 근거 · 가이드 갱신</small></article>
+        </div>
+        <div class="loop-note"><span>↻</span> 경로·API·상태가 바뀌면 Figma 설명과 Story를 함께 갱신</div>
+      </div>
+    </section>
+
+    <section class="scene" id="figma">
+      <div class="scene-inner split tools reveal">
+        <div><p class="eyebrow">FIGMA × AI</p><h2>AI가 추측하지 않도록<br />구현 정보를 남깁니다.</h2><ul class="check-list"><li>실제 파일 이름과 경로</li><li>용도와 주요 속성</li><li>지원 상태와 사용 제한</li><li>프로젝트의 기존 Component 우선</li></ul></div>
+        <div class="window-stack">
+          <div class="app-window figma-window"><header><span class="lights"></span><b>Figma · Button</b></header><div class="app-body"><div class="component-preview">Continue</div><dl><dt>CODE</dt><dd>components/ui/Button.tsx</dd><dt>PROPS</dt><dd>variant · size · loading</dd><dt>RULE</dt><dd>기존 Button을 우선 사용</dd></dl></div></div>
+          <div class="app-window code-window"><header><span class="lights"></span><b>AI · implementation</b></header><pre><code><span>import</span> { Button } <span>from</span>
+  <i>'@/components/ui/Button'</i>
+
+&lt;Button loading={isPending}&gt;
+  Continue
+&lt;/Button&gt;</code></pre></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="scene" id="storybook">
+      <div class="scene-inner reveal">
+        <div class="section-head"><div><p class="eyebrow">STORYBOOK</p><h2>전시장이 아니라<br />Component 작업 공간입니다.</h2></div><p>명확한 공통 UI는 Storybook에서 먼저 만들고 검증한 뒤 화면에 적용합니다.</p></div>
+        <div class="story-browser"><aside><strong>Components</strong><span class="selected">Button</span><span>Input</span><span>Dialog</span><span>Toast</span></aside><div class="story-canvas"><header><b>Button / States</b><span>Canvas　Docs</span></header><div class="state-row"><button>Default</button><button class="secondary">Secondary</button><button disabled>Disabled</button><button class="loading">● Loading</button></div><div class="story-footer"><span>✓ Keyboard</span><span>✓ Contrast</span><span>✓ Interaction</span><span>✓ Long text</span></div></div></div>
+        <div class="automation"><b>AI 반자동 운영</b><span>Component 비교</span><i>→</i><span>누락 Story 후보</span><i>→</i><span>초안 작성</span><i>→</i><span class="human">개발자 검증</span></div>
+      </div>
+    </section>
+
+    <section class="scene" id="browser">
+      <div class="scene-inner reveal">
+        <div class="section-head"><div><p class="eyebrow">SUPPORT BASELINE</p><h2>지원 기준은 감이 아니라<br />근거로 결정합니다.</h2></div><p>Tailwind CSS v4 요구사항, 대상 국가 점유율과 실제 동작을 함께 확인합니다.</p></div>
+        <div class="browser-grid"><article><span>Chrome / Edge</span><strong>111+</strong></article><article><span>Safari</span><strong>16.4+</strong></article><article><span>Firefox</span><strong>128+</strong></article><article><span>Samsung Internet</span><strong>23+</strong></article></div>
+        <div class="viewport-stage"><div class="device mobile"><span>Mobile</span><b>320–767</b></div><div class="device tablet"><span>Tablet</span><b>768–1023</b></div><div class="device desktop"><span>PC</span><b>1024+</b></div></div>
+        <p class="footnote">자동 업데이트가 일반적이어도 OS 제한, 기업 관리 기기와 WebView는 별도로 검증합니다.</p>
+      </div>
+    </section>
+
+    <section class="scene" id="operation">
+      <div class="scene-inner split reveal">
+        <div><p class="eyebrow">OPERATION</p><h2>자동화는 반복을 줄이고,<br />사람은 판단을 맡습니다.</h2><p class="lead muted">AI가 구현과 누락 탐색을 돕지만 공개 API, 접근성, 동작과 최종 범위는 개발자가 확인합니다.</p></div>
+        <div class="orbit" role="img" aria-label="Figma, 코드, Storybook, 가이드가 개발자 검증을 중심으로 순환하는 구조"><div class="orbit-core"><b>Developer</b><small>review &amp; decision</small></div><span class="o1">Figma</span><span class="o2">Code</span><span class="o3">Story</span><span class="o4">Guide</span></div>
+      </div>
+    </section>
+
+    <section class="scene closing" id="closing">
+      <div class="scene-inner reveal"><p class="eyebrow">THE PRINCIPLE</p><h2>AI가 구현을 돕고,<br /><em>가이드와 개발자가 품질을 통제합니다.</em></h2><div class="closing-grid"><span>작게 시작합니다</span><span>기존 것을 먼저 찾습니다</span><span>검증 후 확장합니다</span></div><a href="./index.html">전체 브리핑 문서 보기 <b>↗</b></a></div>
+    </section>
+  </main>
+  <div class="key-help">↑ ↓ · PAGE UP / DOWN</div>
+  <script src="./../assets/js/briefing-presentation.js"></script>
+</body>
+</html>
