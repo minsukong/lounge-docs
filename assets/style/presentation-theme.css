@@ -61,7 +61,7 @@ html {
 body {
   max-width: var(--krds-content-width);
   margin: 0 auto;
-  padding: 64px 48px 80px;
+  padding: 64px 40px 80px;
   color: var(--krds-gray-90);
   background: var(--krds-gray-0);
   font-family:
