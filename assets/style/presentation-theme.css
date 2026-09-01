@@ -235,7 +235,7 @@ td {
   border-right: 1px solid var(--krds-gray-20);
   border-bottom: 1px solid var(--krds-gray-20);
   text-align: left;
-  vertical-align: top;
+  vertical-align: middle;
 }
 
 th {
