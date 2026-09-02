@@ -15,10 +15,13 @@
 
 ### 실제 Front-end 프로젝트 폴더 구조로 통합
 
-- `codex/actual-project-structure` 브랜치에서 애플리케이션과 가이드를 함께 운영하는 실제 저장소 구조로 전환했습니다.
+- `actual-project-structure` 브랜치에서 애플리케이션과 가이드를 함께 운영하는 실제 저장소 구조로 전환했습니다.
 - 모든 상세 HTML 가이드, AI 요약, 공통 소스 기준, 검색, 템플릿과 문서 자산을 `docs/` 아래로 이동하고 내부 상대 경로를 새 위치에 맞게 갱신했습니다.
 - 저장소 Root `AGENTS.md`는 구현 지침, `docs/AGENTS.md`는 문서 작성 지침, `apps/app-webview/AGENTS.md`는 WebView 앱 전용 지침을 담당하도록 분리했습니다.
-- `apps/app-webview`에는 실제 초기화 전 빈 골격만 만들었으며 package, API·인증·Bridge 계약과 업무 소스를 선행 구현하지 않았습니다.
+- 애플리케이션 source와 설정은 `apps/app-webview`, 모든 구현·검토 문서는 `docs`에서 관리하도록 기준을 통일했습니다.
+- 저장소 생성 전·앱 초기화 후·빈 골격 같은 과도기 설명과 현재 존재하지 않는 복수 앱·공통 package 목표 구조를 제거하고, 실제 파일과 승인된 계약만 판단 근거로 사용하도록 문서를 정리했습니다.
+- 애플리케이션 Build와 배포 범위를 `apps/app-webview`로 한정하고 `docs/`의 가이드, 검색과 문서 자산은 제품 Bundle·정적 자산·배포 Artifact에서 제외하도록 기준을 추가했습니다.
+- GitLab Pages의 문서 전용 CI Job, 게시 범위, Access Control과 Confluence iframe 검증 기준을 저장소 구조 가이드의 운영 원칙으로 추가했습니다.
 - `docs/guides` 전체 35개 HTML에서 351개 검색 Section을 다시 생성하고, HTML·Markdown 99개의 로컬 링크와 문서 JavaScript 문법을 확인했습니다.
 
 ### Front-end 및 Flutter APP 구축 일정 산정 보고서 연결

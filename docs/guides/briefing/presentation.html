@@ -26,17 +26,15 @@
   <main>
     <section class="scene hero" id="intro"><div class="orb orb-a"></div><div class="orb orb-b"></div><div class="scene-inner reveal"><p class="eyebrow">LOUNGE · FRONT-END BRIEFING</p><h1>구현을 빠르게.<br /><em>운영은 흔들리지 않게.</em></h1><p class="lead">프로젝트 구조부터 상태, WebView, 품질과 문서 운영까지 하나의 기준으로 연결합니다.</p><div class="hero-meta"><span>React · Next.js · TypeScript</span><span>Figma · Storybook</span><span>AI-assisted workflow</span></div></div><p class="scroll-cue">SCROLL TO EXPLORE <i></i></p></section>
 
-    <section class="scene" id="purpose"><div class="scene-inner reveal"><p class="eyebrow">01 · PURPOSE</p><h2>사람과 AI가 바뀌어도<br />같은 기준으로 구축합니다.</h2><div class="cards"><article class="card"><b>BUILD</b><h3>구축 구조</h3><p>프로젝트 · Component · 상태 · API · WebView · Storybook · Test · Build</p></article><article class="card"><b>VERIFY</b><h3>사용 환경</h3><p>OS · Browser · 반응형 · 다국어 · 접근성 · 보안 · 개인정보</p></article><article class="card accent"><b>OPERATE</b><h3>가이드 운영</h3><p>사람용 원본 · AI용 요약 · 실제 프로젝트 · 변경 동기화</p></article></div><div class="callout">실제 Application이 생성된 뒤에는 설치 Package, 기존 Source와 승인된 프로젝트 계약을 일반 예시보다 우선합니다.</div></div></section>
+    <section class="scene" id="purpose"><div class="scene-inner reveal"><p class="eyebrow">01 · PURPOSE</p><h2>사람과 AI가 바뀌어도<br />같은 기준으로 구축합니다.</h2><div class="cards"><article class="card"><b>BUILD</b><h3>구축 구조</h3><p>프로젝트 · Component · 상태 · API · WebView · Storybook · Test · Build</p></article><article class="card"><b>VERIFY</b><h3>사용 환경</h3><p>OS · Browser · 반응형 · 다국어 · 접근성 · 보안 · 개인정보</p></article><article class="card accent"><b>OPERATE</b><h3>가이드 운영</h3><p>사람용 원본 · AI용 요약 · 실제 프로젝트 · 변경 동기화</p></article></div><div class="callout">설치 Package, 기존 Source와 승인된 프로젝트 계약을 일반 예시보다 우선합니다.</div></div></section>
 
-    <section class="scene" id="structure"><div class="scene-inner split reveal"><div><p class="eyebrow">02 · REPOSITORY</p><h2>Application 가까이에서<br />작게 시작합니다.</h2><p class="lead muted">실행과 배포 목적이 다른 Application은 분리하고, 공통 UI는 실제 재사용이 검증된 뒤 이동합니다.</p></div><div><pre class="code-tree"><i>apps/</i>
-├─ website/       회사 웹사이트
-├─ mobile/        Flutter Native App
-├─ app-webview/   WebView 서비스 화면
-├─ card-inapp/    제휴사별 In-app
-└─ backoffice/    운영자 화면
-
-<i>packages/</i>
-└─ ui/            검증된 공통 UI</pre><div class="callout"><code>packages/ui</code>에는 둘 이상의 Web Application에서 의미와 변경 이유가 같은 구현만 둡니다.</div></div></div></section>
+    <section class="scene" id="structure"><div class="scene-inner split reveal"><div><p class="eyebrow">02 · REPOSITORY</p><h2>Application 가까이에서<br />작게 시작합니다.</h2><p class="lead muted">WebView Source와 공통 UI는 실제 사용처 가까이에서 관리합니다.</p></div><div><pre class="code-tree"><i>apps/</i>
+└─ app-webview/   WebView 서비스 화면
+   └─ src/
+      ├─ app/         Route와 Layout
+      ├─ components/  공통 UI
+      ├─ features/    업무 기능
+      └─ lib/         기반 코드</pre><div class="callout">공통화는 실제 반복과 동일한 변경 이유가 확인된 코드에만 적용합니다.</div></div></div></section>
 
     <section class="scene compact" id="workflow"><div class="scene-inner reveal"><p class="eyebrow">03 · CORE WORKFLOW</p><h2>기능 하나도 준비부터<br />완료 보고까지 연결합니다.</h2><div class="steps"><article class="step"><span>01</span><strong>준비</strong><small>기획 · Figma · AGENTS.md 확인</small></article><article class="step"><span>02</span><strong>탐색과 설계</strong><small>기존 UI · Token · 상태 책임 · 예외</small></article><article class="step"><span>03</span><strong>구현</strong><small>Component · Story · 기능 코드</small></article><article class="step"><span>04</span><strong>적용과 검증</strong><small>화면 · 접근성 · 다국어 · 보안 · Test · Build</small></article><article class="step"><span>05</span><strong>완료 보고</strong><small>재사용 · 신규 구현 · 검사 결과 · 미확정</small></article></div><div class="callout">승인된 API 계약이 없다면 Endpoint, Parser, Fixture와 Mock Handler를 임의로 만들지 않고 <span class="tbd">TBD</span>로 남깁니다.</div></div></section>
 

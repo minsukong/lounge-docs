@@ -3,12 +3,13 @@
 ## 1. 기준 문서와 우선순위
 
 - 모든 가이드는 `docs/`에서 관리합니다. 상세 HTML 가이드는 `docs/guides/`, 공통 자산은 `docs/assets/`, AI 요약은 `docs/ai/`, 공통 소스 구현 기준은 `docs/common-source/`에 둡니다. 실제 코드는 `apps/app-webview/`에 두며 `docs/` 안에 애플리케이션 소스를 넣지 않습니다.
+- `docs/`는 애플리케이션 Build와 배포 대상이 아닙니다. 문서 검색 데이터 생성, 링크·HTML·JavaScript 검사는 문서 변경 검증으로만 실행하며 제품 Bundle이나 배포 Artifact에 문서를 포함하지 않습니다.
 - 가이드를 작성하기 전에 `docs/README.md`, `docs/templates/index.html`, `docs/guides/architecture/index.html`, `docs/guides/frontend/index.html`과 대상 가이드의 기존 파일을 확인합니다.
 - shadcn/ui, Tailwind CSS 4, 디자인 토큰, UI 컴포넌트 재사용 또는 AI 생성 화면 구현에 관한 질문이나 작업은 먼저 `docs/guides/ui/react_code_exports.html`을 확인합니다. 특히 Safari 15 CSS 하한, 사용할 수 없는 최신 CSS 기반 Utility의 대체, `globals.css`의 Semantic Token, 기존 shadcn/ui 컴포넌트 우선 사용 기준을 따릅니다.
 - iOS·Android 최소 지원 버전, Safari·WKWebView·System WebView 호환성, Tailwind CSS 4의 브라우저 지원 범위 또는 실제 기기 검증에 관한 질문이나 작업은 먼저 `docs/guides/platform/webview/webView_guide.html`의 「Chrome과 Safari 호환성 기준」, 「Tailwind CSS v4 호환성」과 「디버깅과 호환성 검증」을 확인합니다.
 - 이 프로젝트의 공통 CSS 하한은 Safari 15입니다. Tailwind CSS 4의 공식 완전 호환 최소 브라우저 버전을 앱의 최소 지원 버전으로 그대로 적용하지 않고, 프로젝트가 실제 사용하는 CSS와 Utility를 iOS 15 WKWebView 및 지원 대상 구형 WebView에서 검증한 결과로 판단합니다.
 - 두 문서의 역할이 겹치면 UI 코드 작성·토큰·컴포넌트 선택은 `docs/guides/ui/react_code_exports.html`, OS·WebView·브라우저 지원 및 검증 범위는 `docs/guides/platform/webview/webView_guide.html`을 우선합니다. 기준이 충돌하거나 실제 코드에서 확인되지 않으면 임의로 결론 내리지 않고 충돌 지점 또는 확인 필요 사항을 알립니다.
-- 애플리케이션 저장소 구조, 공통 패키지, 계약, 의존성, CI/CD와 배포 단위는 `docs/guides/architecture/index.html`을 현재 기준으로 사용합니다.
+- 애플리케이션과 문서의 저장소 구조, 계약, 의존성, CI/CD와 배포 단위는 `docs/guides/architecture/index.html`을 현재 기준으로 사용합니다.
 - `docs/` 통합 구조는 확정 기준입니다. `docs/guides/architecture/index.html`에 제시된 애플리케이션 내부 폴더와 공통 package 구조는 실제 사용처가 확인될 때까지 확정안으로 간주하지 않습니다.
 - `docs/guides/app/app.html`과 `docs/guides/frontend/index.html`은 영역별 상세 문서입니다. 내용이 충돌하면 `docs/guides/architecture/index.html`을 우선합니다.
 - 기존 기준과 다른 내용이 필요하면 상세 가이드에서 조용히 변경하지 않고 충돌 지점과 변경 필요성을 먼저 알립니다.
@@ -23,7 +24,7 @@
 
 ## 3. 내용 작성 원칙
 
-- 이 저장소는 Front-end 구현과 검토를 위한 가이드입니다. Front-end가 독립적으로 결정할 수 있는 UI, 상태 처리, 접근성, 브라우저 검증과 Front-end 테스트 원칙만 현재 기준으로 확정합니다.
+- 이 `docs/` 폴더는 실제 Front-end 프로젝트의 구현과 검토 기준을 관리합니다. Front-end가 독립적으로 결정할 수 있는 UI, 상태 처리, 접근성, 브라우저 검증과 Front-end 테스트 원칙만 현재 기준으로 확정합니다.
 - 기획, 업무 규칙, API·인증·데이터 계약, Backend 제공 환경, Native App 책임, 배포·운영처럼 다른 담당자 또는 전체 프로젝트 협의가 필요한 내용은 승인되기 전까지 모두 미확정으로 취급합니다.
 - Front-end 기술이라도 실제 애플리케이션의 package, 구성과 사용처가 확인되어야 하는 선택은 후보 또는 `TBD`로 남깁니다.
 - 가이드는 백과사전식 설명보다 개발과 리뷰에 필요한 판단 기준을 제공합니다.

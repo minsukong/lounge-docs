@@ -45,8 +45,8 @@
         <p>
           정확한 Storybook 버전, Framework와 Addon 구성은 실제
           애플리케이션의 <code>package.json</code>과 Lock File을 기준으로
-          결정합니다. 애플리케이션 저장소가 생성되기 전에는 설치 또는 CI
-          적용이 완료된 것으로 간주하지 않습니다.
+          결정합니다. 실제 설정과 CI에서 확인되지 않은 구성을 설치 또는 적용된
+          것으로 간주하지 않습니다.
         </p>
       </section>
 
@@ -87,8 +87,8 @@
         </table>
         <p>
           Cline, Claude Code와 Codex 중 어떤 도구를 사용하더라도 동일한 기준을
-          적용합니다. 도구 공통 규칙은 실제 애플리케이션 저장소의
-          <code>AGENTS.md</code>를 기준으로 관리하고 특정 도구 전용 설정에는
+          적용합니다. 도구 공통 규칙은 저장소 루트 <code>AGENTS.md</code>를
+          기준으로 관리하고 특정 도구 전용 설정에는
           공통 규칙을 복제하지 않습니다.
         </p>
       </section>
@@ -101,9 +101,6 @@
         <ul>
           <li>
             <code>apps/app-webview/src/components/ui</code>의 공통 UI
-          </li>
-          <li>
-            <code>packages/ui</code>의 여러 Web 애플리케이션 공통 UI
           </li>
           <li>
             여러 화면에서 반복되며 독립적으로 상태를 확인할 가치가 있는 feature

@@ -19,7 +19,7 @@ Storybook은 실제 Routing, Backend 연동과 권한, Native App 기능, 배포
 
 ## 작성 대상
 
-- `apps/app-webview/src/components/ui`와 실제 공유되는 `packages/ui`의 공통 UI
+- `apps/app-webview/src/components/ui`의 공통 UI
 - 상태 전환과 사용자 Interaction을 독립적으로 검수할 가치가 있는 Feature
 - 라우터를 통해 사용자에게 제공되는 Page와 Screen UI
 - Desktop, Tablet과 Mobile에서 배치가 달라지는 주요 화면

@@ -8,7 +8,7 @@ Storybook을 별도의 문서 작성 업무로 운영하지 않습니다. 컴포
 
 Storybook은 UI 카탈로그와 독립 렌더링 환경입니다. 실제 라우팅, Backend 연동, Native App 연결과 전체 업무 흐름의 최종 검증은 실제 애플리케이션 환경에서 수행합니다.
 
-정확한 Storybook 버전, Framework와 Addon 구성은 실제 애플리케이션의 `package.json`과 Lock File을 기준으로 결정합니다. 애플리케이션 저장소가 생성되기 전에는 설치 또는 CI 적용이 완료된 것으로 간주하지 않습니다.
+정확한 Storybook 버전, Framework와 Addon 구성은 실제 애플리케이션의 `package.json`과 Lock File을 기준으로 결정합니다. 실제 설정과 CI에서 확인되지 않은 구성을 설치 또는 적용된 것으로 간주하지 않습니다.
 
 ## 2. 역할
 
@@ -18,14 +18,13 @@ Storybook은 UI 카탈로그와 독립 렌더링 환경입니다. 실제 라우�
 | 프론트엔드 개발자 | Story 작성 대상 승인, 화면 분류와 제품에 필요한 상태 판단, Figma 비교, 반응형·접근성·상호작용 검수 |
 | CI | 합의된 컴포넌트와 화면의 Story 누락 검사, Storybook 정적 Build와 합의된 테스트 실행 |
 
-Cline, Claude Code와 Codex 중 어떤 도구를 사용하더라도 동일한 기준을 적용합니다. 도구 공통 규칙은 실제 애플리케이션 저장소의 `AGENTS.md`를 기준으로 관리하고, 특정 도구 전용 설정에는 공통 규칙을 복제하지 않습니다.
+Cline, Claude Code와 Codex 중 어떤 도구를 사용하더라도 동일한 기준을 적용합니다. 도구 공통 규칙은 저장소 루트 `AGENTS.md`를 기준으로 관리하고, 특정 도구 전용 설정에는 공통 규칙을 복제하지 않습니다.
 
 ## 3. Story 작성 대상과 분류
 
 다음 UI를 Story 작성 대상으로 합니다.
 
 - `apps/app-webview/src/components/ui`의 공통 UI
-- `packages/ui`의 여러 Web 애플리케이션 공통 UI
 - 여러 화면에서 반복되며 독립적으로 상태를 확인할 가치가 있는 feature 컴포넌트
 - 공개 Props, variant 또는 상호작용 상태를 가진 컴포넌트
 - 라우터를 통해 사용자에게 제공되는 페이지와 화면 UI

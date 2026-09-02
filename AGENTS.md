@@ -4,17 +4,17 @@
 
 ## 프로젝트 기준
 
-- 이 저장소는 Front-end 구현과 검토를 위한 가이드입니다. Front-end가 독립적으로 결정할 수 있는 UI, 상태 처리, 접근성, 브라우저 검증과 Front-end 테스트 원칙만 현재 기준으로 확정합니다.
+- 이 저장소는 WebView Front-end 애플리케이션과 구현·검토 문서를 함께 관리하는 실제 프로젝트입니다. Front-end가 독립적으로 결정할 수 있는 UI, 상태 처리, 접근성, 브라우저 검증과 Front-end 테스트 원칙만 현재 기준으로 확정합니다.
 - 기획, 업무 규칙, API·인증·데이터 계약, Backend 제공 환경, Native App 책임, 배포·운영처럼 다른 담당자 또는 전체 프로젝트 협의가 필요한 내용은 승인되기 전까지 모두 미확정으로 취급합니다.
 - Front-end 기술이라도 실제 애플리케이션의 package, 구성과 사용처가 확인되어야 하는 선택은 후보 또는 `TBD`로 남깁니다.
-- 실제 애플리케이션 위치는 `apps/app-webview`입니다. 현재는 디렉터리 골격과 앱 전용 지침만 있으며 package와 source가 초기화되기 전입니다.
+- 실제 애플리케이션 위치는 `apps/app-webview`입니다. package, 설정과 source는 해당 폴더의 실제 파일을 기준으로 판단합니다.
 - 화면 코드는 React 19와 TypeScript로 작성합니다.
 - 스타일은 Tailwind CSS 4와 `src/app/globals.css`의 의미 기반 토큰을 사용합니다.
 - Tailwind CSS는 검증된 v4.1 이상의 버전을 잠금 파일에 고정하고 공통 CSS 하한은 Safari 15에서 지원되는 기능 범위로 둡니다.
 - Safari 15 지원은 일반적인 신규 프로젝트의 기본값이 아니라 10년 이상 운영된 기존 앱의 장기 이용자와 구형 기기 사용자를 신규 앱에서 배제하지 않기 위한 이전 정책입니다. AI는 최신 기술 스택이나 공식 브라우저 지원 범위만을 근거로 최소 버전을 임의로 올리지 않습니다.
 - Safari 15에서는 최신 환경과 픽셀 단위로 동일한 시각 효과보다 로그인, 예약, 결제, 이용권, 안내, 입력과 이동 같은 핵심 정보와 업무 흐름의 완료를 우선합니다. 지원되지 않는 시각 효과는 핵심 기능을 방해하지 않는 범위에서 호환 표현으로 대체하거나 점진적으로 저하합니다.
 - Safari 15 지원 종료나 최소 OS 상향은 AI가 결정하지 않습니다. 출시 후 실제 OS별 활성 사용자, 오류율과 고객지원 영향을 근거로 App·기획·QA 담당자가 승인한 경우에만 관련 기준과 설정을 함께 변경합니다.
-- 앱을 초기화한 이후 Next.js 16 App Router 규칙은 `apps/app-webview/AGENTS.md`, 실제 package와 설치된 Next.js 문서를 따릅니다.
+- Next.js 16 App Router 규칙은 `apps/app-webview/AGENTS.md`, 실제 package와 설치된 Next.js 문서를 따릅니다.
 - 기존 `src/components/ui`의 shadcn/ui와 프로젝트 컴포넌트를 새 코드보다 우선합니다.
 - 요청하지 않은 기능, 상태, 공통화 또는 패키지를 미리 추가하지 않습니다.
 - 기획 흐름과 Backend API 계약이 확정되기 전에는 endpoint, method, status, 요청·응답 필드, API 함수, parser, fixture, handler와 Mock을 구현하지 않습니다. Backend 확인 질문과 `TBD`만 남깁니다.
@@ -27,7 +27,7 @@
 애플리케이션 소스는 `apps/`, 모든 가이드는 `docs/`에서 관리합니다. 이 배치는 실제 프로젝트의 기준 구조이며 별도 문서 저장소나 `reference/front-end`, `common_docs` 중간 계층을 사용하지 않습니다.
 
 ```text
-front-end-repository/
+<repository-root>/
 ├── AGENTS.md
 ├── AGENTS.html
 ├── README.md
@@ -90,10 +90,12 @@ front-end-repository/
 
 - 저장소 루트 `AGENTS.md`는 실제 구현 전체 규칙과 작업별 문서 선택을 담당합니다.
 - `docs/AGENTS.md`는 HTML 템플릿, Markdown·HTML 동기화, 링크와 공통 자산 검증 등 문서 작성 규칙을 담당합니다.
-- `docs/guides/`는 Front-end, Monorepo, UI, WebView, Storybook, Test, Lint, Security, Performance 등 사람이 읽는 상세 가이드와 필요한 원본을 주제별로 관리합니다.
+- `docs/guides/`는 Front-end, 저장소 구조, UI, WebView, Storybook, Test, Lint, Security, Performance 등 사람이 읽는 상세 가이드와 필요한 원본을 주제별로 관리합니다.
 - `docs/assets/`는 상세 HTML 가이드가 사용하는 공통 스타일, JavaScript, 이미지와 디자인 자산을 관리합니다.
 - 실제 `.ts`, `.tsx`, CSS와 package 설정은 `apps/app-webview/`에 두며 `docs/`에는 넣지 않습니다.
-- 앱 package, 내부 source와 Storybook 설정은 실제 초기화 작업에서 생성하며 존재하지 않는 설정이나 의존성을 문서만 보고 추측하지 않습니다.
+- 앱 package, 내부 source와 Storybook 설정은 `apps/app-webview`의 실제 파일을 기준으로 확인하며 존재하지 않는 설정이나 의존성을 문서만 보고 추측하지 않습니다.
+- 애플리케이션 Build와 배포 범위는 `apps/app-webview/`로 한정합니다. `docs/`는 제품 Bundle, 정적 자산, Build 입력과 배포 Artifact에 포함하거나 애플리케이션의 `public` 경로로 복사하지 않습니다.
+- 문서 검색 데이터 생성, 링크와 HTML 검사는 문서 변경 검증이며 애플리케이션 Build Pipeline과 분리합니다.
 
 <figure class="diagram-frame">
   <!-- prettier-ignore -->
@@ -164,7 +166,6 @@ flowchart TB
 - 다음 순서로 같은 역할의 기존 구현과 사용 예시를 검색합니다.
   1. 현재 feature 내부 컴포넌트
   2. 현재 application의 `src/components/ui`
-  3. `packages/ui`
 - `globals.css`의 Semantic Token과 기존 Tailwind 사용 방식을 확인합니다.
 
 ### 기존 UI 컴포넌트 사용
@@ -173,7 +174,7 @@ flowchart TB
 - import 경로, export, Props, variant와 디자인 토큰을 추측하지 않습니다.
 - Figma Description과 실제 코드가 다르면 어느 한쪽을 임의로 정답으로 간주하지 않고 차이를 사용자에게 알립니다.
 - app-webview에서만 사용하는 shadcn/ui 원형과 Wrapper는 `apps/app-webview/src/components/ui`에 둡니다.
-- 둘 이상의 Web application에서 실제로 재사용되고 의미와 변경 이유가 같은 UI 원형만 `packages/ui`에 둡니다.
+- 여러 기능에서 실제로 재사용되고 의미와 변경 이유가 같은 UI 원형만 `apps/app-webview/src/components/ui`에서 공통으로 관리합니다.
 - 예약, 이용권, 라운지처럼 업무 의미가 있는 컴포넌트는 해당 feature 가까이에 둡니다.
 - 기존 컴포넌트로 표현할 수 없는 부분만 새로 작성하고 완료 보고에 그 이유를 남깁니다.
 
@@ -187,7 +188,7 @@ flowchart TB
 
 ### Storybook 반자동 운영
 
-- Storybook이 도입된 이후 공통 UI 컴포넌트, 독립 검수 가치가 있는 Feature 또는 사용자에게 노출되는 Screen을 새로 만들면 같은 변경에서 Story를 작성하거나 대표 Story 대상을 확인합니다.
+- 공통 UI 컴포넌트, 독립 검수 가치가 있는 Feature 또는 사용자에게 노출되는 Screen을 새로 만들면 같은 변경에서 Story를 작성하거나 대표 Story 대상을 확인합니다.
 - 공개 Props, variant, Feature 상태, Screen 구조 또는 사용자가 보는 결과를 변경하면 실제 코드와 사용처를 확인하고 관련 Story도 함께 갱신합니다.
 - Story는 실제 export, TypeScript Props, 화면 입력과 승인된 계약을 기준으로 작성하며 존재하지 않는 상태를 추측하지 않습니다.
 - Component는 실제 variant와 소유 상태를, Feature와 Screen은 기본 상태와 실제로 지원하는 loading, empty, error, 권한 상태 및 Viewport를 필요한 만큼 작성합니다.
@@ -226,10 +227,10 @@ AGENTS.md
          └─ docs/common-source/*.md
             └─ 실제 파일에 가까운 구현 예시와 적용 절차
                └─ apps/app-webview/*
-                  └─ 앱 초기화 후 확인된 실제 소스와 설정
+                   └─ 확인된 실제 소스와 설정
 ```
 
-이 계층은 문서를 확인하는 흐름입니다. 실제 애플리케이션 저장소가 생성된 뒤에는 설치된 package, 기존 source와 app 내부 `AGENTS.md`를 먼저 확인하고, `docs/common-source/`의 코드를 그대로 덮어쓰지 않고 비교·병합합니다. 예시의 API, 브랜드 값, 업무 문구와 상태 정책은 확정된 제품 계약으로 교체합니다.
+이 계층은 문서를 확인하는 흐름입니다. 설치된 package, 기존 source와 app 내부 `AGENTS.md`를 먼저 확인하고, `docs/common-source/`의 코드를 그대로 덮어쓰지 않고 비교·병합합니다. 예시의 API, 브랜드 값, 업무 문구와 상태 정책은 확정된 제품 계약으로 교체합니다.
 
 <figure class="diagram-frame">
   <!-- prettier-ignore -->
@@ -255,10 +256,8 @@ flowchart TD
   Q -->|"세부 기준이 필요할 때"| QH["docs/guides/lint + testing"]
   N -->|"세부 기준이 필요할 때"| NH["docs/guides/performance + 승인된 API 계약"]
   S -->|"세부 기준이 필요할 때"| SH["docs/guides/security + 실제 인증·배포 설정"]
-  CS --> CSR{"apps/app-webview가 존재하는가?"}
-  CSR -->|"예"| CSS["기존 소스와 설치 package 확인"]
-  CSR -->|"아니오"| CSH["docs/common-source 실전 가이드 확인"]
-  CSS -->|"구현 기준 확인"| CSH
+  CS --> CSS["apps/app-webview의 기존 소스와 설치 package 확인"]
+  CSS -->|"구현 기준 확인"| CSH["docs/common-source 실전 가이드 확인"]
   L -->|"세부 기준이 필요할 때"| LH["react_code_exports.html"]
   </div>
   <figcaption>AGENTS.md에서 작업별 요약과 상세 가이드로 이동하는 흐름</figcaption>
@@ -266,7 +265,7 @@ flowchart TD
 
 처음부터 모든 문서를 컨텍스트에 넣지 않습니다. 현재 작업과 직접 관련된 요약 문서만 읽고, 구현 판단의 배경이나 구체적인 예시가 필요한 경우에만 다음 상세 가이드를 확인합니다.
 
-- 프로젝트 구조와 공통 기준: [Front-End 개발 가이드](./docs/guides/frontend/index.html), [Front-End Monorepo 공통 기준](./docs/guides/architecture/index.html)
+- 프로젝트 구조와 공통 기준: [Front-End 개발 가이드](./docs/guides/frontend/index.html), [Front-End 저장소 구조 기준](./docs/guides/architecture/index.html)
 - UI와 Figma 구현: [React Code Exports 가이드](./docs/guides/ui/react_code_exports.html), [디자인 토큰 가이드](./docs/guides/ui/design_tokens.html)
 - Storybook 운영: [Storybook 운영 가이드](./docs/guides/storybook/index.html), [Storybook 적용 가이드](./docs/common-source/storybook.md)
 - 품질 확인: [Lint 가이드](./docs/guides/lint/index.html), [Test 가이드](./docs/guides/testing/index.html)
@@ -291,7 +290,7 @@ flowchart TD
 | 계약 확정 후 API Mock 필요성 판단 | [Markdown](./docs/common-source/api-mocking.md) · [HTML](./docs/common-source/api-mocking.html) | Backend 환경 우선, Front-end 범위·책임과 선택 도구 기준 |
 | 공통 소스를 한 기능에 연결 | [Markdown](./docs/common-source/recipes.md) · [HTML](./docs/common-source/recipes.html) | 프로필 조회·검증·수정·상태 처리와 테스트를 연결한 통합 예시 |
 | 적용 조건, package와 미확정 항목 확인 | [Markdown](./docs/common-source/catalog.md) · [HTML](./docs/common-source/catalog.html) | 파일별 도입 조건, 함께 적용할 코드, 필요한 package, TBD와 검증 목록 |
-| 현재 준비 수준과 앱 초기화 후 순서 확인 | [Markdown](./docs/common-source/briefing.md) · [HTML](./docs/common-source/briefing.html) | 가이드의 활용 범위, 한계, 실제 적용 순서와 다음 검토 시점 |
+| 공통 소스 적용 범위와 순서 확인 | [Markdown](./docs/common-source/briefing.md) · [HTML](./docs/common-source/briefing.html) | 가이드의 활용 범위, 한계, 실제 적용 순서와 검증 기준 |
 
 ## 작업별 필수 문서
 
@@ -320,7 +319,7 @@ docs/
    ├─ api-mocking.md    # 계약 확정 후 API Mock 도입 판단 기준
    ├─ recipes.md        # 공통 소스를 연결한 기능 단위 통합 예시
    ├─ catalog.md        # 구현 항목과 도입 조건 체크리스트
-   └─ briefing.md       # 준비 수준과 앱 초기화 후 적용 순서
+   └─ briefing.md       # 적용 범위와 검증 순서
 ```
 
 - UI 작업에서는 `docs/ai/ui.md`와 `docs/ai/design-tokens.md`를 함께 읽습니다.
@@ -329,7 +328,7 @@ docs/
 - API, Query, Loading, Timeout, Offline, 이미지·폰트 로딩 또는 성능에 영향을 주는 작업에서는 `docs/ai/performance.md`를 함께 읽습니다.
 - 인증·권한, 외부 HTML·URL, 개인정보, Client 저장소, Bridge, 파일 또는 새 의존성이 포함된 작업에서는 `docs/ai/security.md`를 함께 읽습니다.
 - 공통 소스 작업에서는 `docs/ai/common-source.md`를 먼저 읽고 작업 영역에 해당하는 `docs/common-source/` 상세 가이드와 카탈로그를 확인합니다.
-- `apps/app-webview`가 존재하면 기존 소스와 설치 package를 먼저 조사합니다. 아직 존재하지 않으면 문서의 참고 구현과 교체 지점을 기준으로 가이드를 작성하며, 실제 적용이나 검증이 끝난 것처럼 표현하지 않습니다.
+- `apps/app-webview`의 기존 소스와 설치 package를 먼저 조사합니다. 실제 파일에서 확인되지 않은 구성은 문서의 예시만으로 구현되었거나 검증된 것처럼 표현하지 않습니다.
 
 현재 작업과 관련 없는 문서는 읽지 않습니다. 문서에 없는 요구는 기존 소스와 사용자 요청을 우선 확인하고 임의로 확대하지 않습니다.
 
@@ -337,7 +336,7 @@ docs/
 
 - 상세 가이드의 기준 원본은 이 저장소의 `docs/guides/`입니다. `docs/ai/`는 코딩에 필요한 핵심 결정만 담은 요약이며, 충돌하면 상세 가이드와 실제 소스를 함께 확인합니다.
 - 상세 가이드 변경이 구현 규칙에 영향을 주면 관련 `docs/ai/` 문서를 함께 갱신합니다. 배경 설명, 설치 과정과 긴 검증 결과를 `docs/ai/`에 중복 복사하지 않습니다.
-- 현재 `apps/app-webview`는 빈 골격이며, `docs/common-source/*.md`는 앱 초기화 후 선별 적용하기 위한 구현 기준과 참고 코드입니다. 같은 이름의 HTML은 사람이 읽기 위한 보기입니다.
+- `docs/common-source/*.md`는 실제 사용처와 설치 package를 확인해 선별 적용하는 구현 기준과 참고 코드입니다. 같은 이름의 HTML은 사람이 읽기 위한 보기입니다.
 - `docs/`에는 실제 애플리케이션 `.ts`, `.tsx`, CSS 또는 package 설정 파일을 추가하지 않습니다.
 - 실제 앱 저장소의 경로와 공개 API가 확정되거나 바뀌면 `docs/common-source/catalog.md`와 관련 가이드를 실제 상태에 맞게 갱신합니다.
 
@@ -353,4 +352,4 @@ npm run test
 
 Story를 추가하거나 변경한 작업에서는 실제 `package.json`에 정의된 Storybook 정적 Build 명령도 실행합니다. Script가 아직 없으면 존재하는 것처럼 추측하지 않고 미구성 상태를 보고합니다.
 
-병합 또는 통합 영향이 있는 변경에서는 `npm run build`도 확인합니다.
+병합 또는 통합 영향이 있는 변경에서는 `apps/app-webview`의 실제 package에 정의된 `npm run build`도 확인합니다. 이 Build에는 `docs/`를 포함하지 않습니다.

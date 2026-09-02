@@ -7,7 +7,7 @@
 - [가이드 검색](./search/index.html)
 - [Front-end 구축 가이드 브리핑](./guides/briefing/index.html) · [PC 발표용](./guides/briefing/presentation.html)
 - [html template](./templates/index.html)
-- [Front-End Monorepo 공통 기준](./guides/architecture/index.html)
+- [Front-End 저장소 구조 기준](./guides/architecture/index.html) · [GitLab Pages와 Confluence 운영](./guides/architecture/index.html#document-pages)
 - [APP 개발 표준](./guides/app/app.html)
 - [Front-End 개발 가이드](./guides/frontend/index.html)
 - [Front-end 구축 일정 산정 보고서](./guides/planning/web.html)
@@ -29,7 +29,7 @@
 ## 문서 구조
 
 ```text
-front-end-repository/
+<repository-root>/
 ├── AGENTS.md                   # 실제 구현 작업용 AI 최상위 지침
 ├── README.md
 ├── apps/

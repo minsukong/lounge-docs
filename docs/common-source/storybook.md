@@ -89,4 +89,4 @@ export const PaymentFailed = {
 [ ] 실제 Application에서 Routing, Backend, Native 연결과 전체 흐름을 별도로 확인했다.
 ```
 
-정확한 설치 명령과 Script 이름은 앱 package 초기화 후 확정합니다. 존재하지 않는 Package나 명령을 문서 예시만 보고 추가하지 않습니다.
+정확한 설치 명령과 Script 이름은 실제 app package와 설정에서 확인합니다. 존재하지 않는 Package나 명령을 문서 예시만 보고 추가하지 않습니다.

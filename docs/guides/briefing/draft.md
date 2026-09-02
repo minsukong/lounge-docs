@@ -4,33 +4,26 @@
 
 이 문서는 Lounge Front-end를 실제로 구축하고 운영할 개발자에게 현재 정리된 기술 기준, 작업 순서와 완료 판단 기준을 설명합니다.
 
-이번 브리핑은 특정 화면의 상세 기획이나 API 계약을 확정하는 문서가 아닙니다. 프로젝트가 시작됐을 때 개발자가 코드를 어디에 배치하고, 기존 Component를 어떻게 찾으며, 서버 상태와 Client 상태를 어떻게 구분하고, 어떤 검증을 거쳐 작업을 완료할 것인지 공유하는 문서입니다.
+이번 브리핑은 특정 화면의 상세 기획이나 API 계약을 확정하는 문서가 아닙니다. 개발자가 코드를 어디에 배치하고, 기존 Component를 어떻게 찾으며, 서버 상태와 Client 상태를 어떻게 구분하고, 어떤 검증을 거쳐 작업을 완료할 것인지 공유하는 문서입니다.
 
-목표는 개발자나 AI 도구가 바뀌어도 같은 기준으로 구현하고 검토할 수 있게 만드는 것입니다. 실제 애플리케이션이 생성된 뒤에는 설치된 Package, 기존 Source와 확정된 프로젝트 계약을 가이드보다 우선하여 확인합니다.
+목표는 개발자나 AI 도구가 바뀌어도 같은 기준으로 구현하고 검토할 수 있게 만드는 것입니다. 설치된 Package, 기존 Source와 확정된 프로젝트 계약을 가이드보다 우선하여 확인합니다.
 
 ## 2. 구축 대상과 저장소 구조
 
-현재 기준에서 WebView 서비스 화면은 `apps/app-webview`에 구현할 예정입니다. 웹사이트, 제휴사별 In-app 화면, Backoffice처럼 실행과 배포 목적이 다른 Application은 각각의 `apps/*` 영역으로 분리합니다.
+WebView 서비스 화면과 업무 흐름은 `apps/app-webview`에 구현합니다.
 
 ```text
 apps/
-├── website/                 # 회사 웹사이트
-├── mobile/                  # Flutter Native App
-├── app-webview/             # App에서 사용하는 WebView 서비스 화면
-├── card-inapp/              # 제휴사별 In-app 화면
-└── backoffice/              # 운영자 화면
-
-packages/
-└── ui/                      # 둘 이상의 Web Application에서 검증된 공통 UI
+└── app-webview/             # App에서 사용하는 WebView 서비스 화면
 ```
 
 `apps/app-webview` 안에서는 Routing과 화면 진입점, 기능 코드와 WebView 전용 UI를 가까운 위치에서 관리합니다. App-WebView 한 곳에서만 사용하는 shadcn/ui 원형과 Wrapper는 `apps/app-webview/src/components/ui`에 둡니다.
 
-`packages/ui`는 처음부터 모든 Component를 모으는 폴더가 아닙니다. 둘 이상의 Web Application에서 실제로 재사용되고 의미와 변경 이유가 같은 UI만 이동합니다. 한 화면에서만 사용하는 Wrapper, 공통화 가능성을 예상한 Type과 Adapter는 미리 만들지 않습니다.
+여러 기능에서 실제로 재사용되고 의미와 변경 이유가 같은 UI만 `src/components/ui`에서 공통으로 관리합니다. 한 화면에서만 사용하는 Wrapper, 공통화 가능성을 예상한 Type과 Adapter는 미리 만들지 않습니다.
 
-`apps/`와 `docs/`의 최상위 분리는 실제 프로젝트 기준입니다. 앱 내부 Package 경계와 Build 구성은 앱 초기화 후 실제 사용처를 확인하며 조정할 수 있습니다. 구조를 바꿀 때는 한 기능의 변경이 여러 Application과 Package에 불필요하게 퍼지지 않는지 확인합니다.
+`apps/`와 `docs/`의 최상위 분리는 실제 프로젝트 기준입니다. 앱 내부 Package 경계와 Build 구성은 실제 사용처와 현재 설정을 기준으로 판단합니다. 구조를 바꿀 때는 한 기능의 변경이 여러 Application과 Package에 불필요하게 퍼지지 않는지 확인합니다.
 
-상세한 Application·Package 경계와 공통화 기준은 [Front-End Monorepo 공통 기준](../architecture/index.html)에서 확인합니다.
+상세한 저장소 경계와 공통화 기준은 [Front-End 저장소 구조 기준](../architecture/index.html)에서 확인합니다.
 
 ## 3. 기능 하나를 구현하는 기본 순서
 
@@ -147,7 +140,7 @@ AI는 다음 반복 작업을 우선 수행할 수 있습니다.
 
 개발자는 Story 작성 대상인지, 실제 지원 상태와 계약이 맞는지, Figma와 결과가 일치하는지, 접근성, Interaction과 Application 통합 결과가 충분한지 검토합니다. AI가 만든 Story도 사람이 작성한 코드와 같은 Review와 검증을 거칩니다.
 
-초기에는 Storybook 정적 Build를 필수 검사로 사용합니다. Storybook 운영이 안정된 뒤 Story 렌더링, Interaction, 접근성과 시각 회귀 검사를 CI 필수 항목으로 승격할 수 있습니다. 정확한 명령과 CI 구성은 실제 `package.json`과 Workflow가 생성된 뒤 확정합니다.
+Storybook 정적 Build를 필수 검사로 사용합니다. Story 렌더링, Interaction, 접근성과 시각 회귀 검사는 실제 `package.json`과 Workflow에 구성된 범위에서 실행하며, 존재하지 않는 명령이나 CI 구성을 추측하지 않습니다.
 
 Story 대상, AI 요청 예시, 누락 점검과 완료 기준은 [Storybook 운영 가이드](../storybook/index.html)에서 확인합니다.
 
@@ -239,7 +232,7 @@ Browser 점유율과 대표 너비는 [반응형 웹 Browser 지원 가이드](.
 
 서비스가 의미를 책임지는 UI 문구는 한국어 원문으로 작성하고 Build 전에 번역 카탈로그로 추출·검수합니다. 사용자가 작성한 게시물과 후기 같은 동적 콘텐츠는 같은 방식으로 처리하지 않고 원문을 기본 표시합니다.
 
-기본 지원 언어는 한국어 `ko`, 중국어 간체 `zh-CN`, 일본어 `ja`와 영어 `en`입니다. 실제 Locale 목록과 우선순위는 Application 설정이 생성된 뒤 확인하며 임의 Locale 문자열을 동적 Import 경로에 연결하지 않습니다.
+기본 지원 언어는 한국어 `ko`, 중국어 간체 `zh-CN`, 일본어 `ja`와 영어 `en`입니다. Locale 목록과 우선순위는 실제 Application 설정을 기준으로 확인하며 임의 Locale 문자열을 동적 Import 경로에 연결하지 않습니다.
 
 ### UI 메시지 작성과 추출
 
@@ -405,13 +398,13 @@ Type 경계는 [TypeScript 가이드](../typescript/index.html), 정적 검사�
 이 저장소는 WebView 애플리케이션과 구현 가이드를 함께 관리합니다. 실제 Source는 `apps/app-webview`, 모든 가이드는 `docs`에 두며 별도 가이드 저장소나 복제된 `reference` 문서를 운영하지 않습니다.
 
 ```text
-lounge-project/
+<repository-root>/
 ├── AGENTS.md                       # 저장소 전체 AI 구현 규칙
 ├── README.md                       # 프로젝트 진입점
 ├── apps/
 │   └── app-webview/
 │       ├── AGENTS.md               # WebView 앱 전용 규칙
-│       ├── .storybook/             # 앱 초기화 후 Storybook 설정
+│       ├── .storybook/             # Storybook 설정
 │       └── src/                    # 실제 Application Source
 └── docs/
     ├── AGENTS.md                   # 문서 작성과 검증 규칙
@@ -427,15 +420,11 @@ lounge-project/
 
 ### 문서별 역할
 
-저장소 루트 `AGENTS.md`는 실제 Application 구현 규칙과 작업별 문서 선택을 담당합니다. `apps/app-webview/AGENTS.md`는 앱 초기화 상태와 WebView 앱에만 필요한 추가 규칙을 관리합니다.
+저장소 루트 `AGENTS.md`는 실제 Application 구현 규칙과 작업별 문서 선택을 담당합니다. `apps/app-webview/AGENTS.md`는 실제 package·source 기준과 WebView 앱에만 필요한 추가 규칙을 관리합니다.
 
 `docs/guides`는 사람이 기술 기준, 적용 조건, 예외와 Review 근거를 확인하는 원본입니다. `draft.md`는 검토 초안이고 사용자가 HTML 반영을 요청한 뒤 갱신한 HTML이 사람이 보는 배포 문서입니다.
 
 `docs/ai`는 AI가 매 작업마다 긴 원본 전체를 읽지 않도록 만든 작업별 요약입니다. `docs/common-source`는 Boilerplate가 아니며 실제 사용처, 설치 Package와 승인된 계약을 확인한 뒤 필요한 부분만 비교·병합하는 참고 구현입니다.
-
-### 현재 앱 상태
-
-`apps/app-webview`는 package와 Source를 초기화하기 전의 빈 골격입니다. Next.js, Tailwind CSS, shadcn/ui, Storybook과 Test 설정은 실제 설치 결과를 확인하며 생성하고, 기획·Backend·Native 계약이 없는 기능은 미리 만들지 않습니다.
 
 문서와 구현의 운영 흐름은 다음과 같습니다.
 
@@ -464,7 +453,7 @@ flowchart TD
 
 실제 프로젝트 Source와 승인된 계약은 일반 예시보다 우선합니다. 반면 실제 코드에 기준이 없거나 구조 변경의 판단 근거가 필요한 경우에는 사람용 원본 가이드를 확인합니다.
 
-문서 사이에 충돌이 있으면 조용히 하나를 선택하지 않습니다. Monorepo 기준과 실제 프로젝트 규칙을 먼저 확인하고, 충돌 지점과 영향 범위를 Front-end 책임자에게 알린 뒤 원본, AI 요약과 실제 프로젝트 문서를 함께 갱신합니다.
+문서 사이에 충돌이 있으면 조용히 하나를 선택하지 않습니다. 저장소 구조 기준과 실제 프로젝트 규칙을 먼저 확인하고, 충돌 지점과 영향 범위를 Front-end 책임자에게 알린 뒤 원본, AI 요약과 실제 프로젝트 문서를 함께 갱신합니다.
 
 ### 검색과 교육 자료의 범위
 
@@ -494,7 +483,7 @@ AI 요약이나 공통 Source에서 새로운 정책을 독립적으로 확정�
 
 | 작업 종류 | 먼저 확인할 사람용 가이드 | 확인할 내용 |
 | --- | --- | --- |
-| 저장소와 Package 경계 | Front-End Monorepo 공통 기준 | `apps/*`, `packages/*`, 공통화와 배포 단위 |
+| 저장소와 앱 경계 | Front-End 저장소 구조 기준 | `apps/app-webview`, `docs`, 공통화와 배포 단위 |
 | 일반 화면과 상태 관리 | Front-End 개발 가이드 | Component 배치, 상태 소유, Bridge와 품질 기준 |
 | Figma 기반 UI 구현 | React Code Exports·디자인 토큰 가이드 | Figma 설명, 기존 UI 탐색, Token과 완료 기준 |
 | UI 개발과 상태 검증 | Storybook 운영 가이드 | Component·기능·화면 상태의 재현, Interaction, 접근성, 시각 검토와 반자동 점검 |
@@ -505,7 +494,7 @@ AI 요약이나 공통 Source에서 새로운 정책을 독립적으로 확정�
 | 다국어와 번역 | 다국어 및 로컬 LLM 번역 가이드 | 번역 Key, Layout, Locale과 검수 책임 |
 | Browser와 반응형 | 반응형 웹 Browser 지원 가이드 | 최소 Version, 점유율 근거, Viewport와 경계값 |
 
-가이드는 처음부터 끝까지 모두 읽고 작업을 시작하라는 의미가 아닙니다. 담당 기능과 변경 위험에 해당하는 문서를 선택해서 확인합니다. 여러 가이드가 충돌하면 Monorepo 기준, 실제 프로젝트의 `AGENTS.md`, 설치 Package와 승인된 계약의 우선순위를 확인하고 조용히 한쪽 기준을 바꾸지 않습니다.
+가이드는 처음부터 끝까지 모두 읽고 작업을 시작하라는 의미가 아닙니다. 담당 기능과 변경 위험에 해당하는 문서를 선택해서 확인합니다. 여러 가이드가 충돌하면 저장소 구조 기준, 실제 프로젝트의 `AGENTS.md`, 설치 Package와 승인된 계약의 우선순위를 확인하고 조용히 한쪽 기준을 바꾸지 않습니다.
 
 사람이 가이드를 사용하는 기본 흐름은 다음과 같습니다.
 

@@ -325,7 +325,7 @@ Source: Dev resource 참고</code></pre>
             안내된 경로의 실제 파일을 읽어 export, Props와 variant를 검증합니다.
           </li>
           <li>
-            현재 기능, 애플리케이션 공통 UI와 <code>packages/ui</code>에서 기존
+            현재 기능과 <code>apps/app-webview/src/components/ui</code>에서 기존
             사용 예시를 검색합니다.
           </li>
           <li>
@@ -794,9 +794,8 @@ ollama run qwen3.8:27b-mtp-q4_K_M</code></pre>
             요청합니다.
           </li>
           <li>
-            코드를 작성하기 전에 현재 기능, 애플리케이션의 공통 UI와
-            <code>packages/ui</code> 순서로 같은 역할의 기존 컴포넌트를
-            검색합니다.
+            코드를 작성하기 전에 현재 기능과 애플리케이션의 공통 UI에서 같은
+            역할의 기존 컴포넌트를 검색합니다.
           </li>
           <li>
             사용할 컴포넌트의 실제 파일, export, Props, variant와 기존 사용
@@ -936,10 +935,6 @@ ollama run qwen3.8:27b-mtp-q4_K_M</code></pre>
             <code>apps/app-webview/src/components/ui</code>에서 관리합니다.
           </li>
           <li>
-            둘 이상의 Web 애플리케이션에서 실제로 재사용되고 의미와 변경 이유가
-            같은 UI 원형만 <code>packages/ui</code>에서 관리합니다.
-          </li>
-          <li>
             기존 컴포넌트를 사용할 때 파일명만으로 판단하지 않고 실제 named
             export, Props, variant와 import alias를 확인합니다.
           </li>
@@ -1020,8 +1015,7 @@ ollama run qwen3.8:27b-mtp-q4_K_M</code></pre>
         <p>Story에는 Figma 파일, Frame 또는 Prototype URL을 연결할 수 있습니다. 특정 Frame을 표시할 때는 선택한 Frame의 링크를 복사해 사용하며, Storybook의 <code>Design</code> 탭에서 Embed 결과를 확인합니다.</p>
         <ul>
           <li>
-            <code>apps/app-webview/src/components/ui</code>,
-            <code>packages/ui</code>, 독립적으로 검수할 가치가 있는 Feature와
+            <code>apps/app-webview/src/components/ui</code>, 독립적으로 검수할 가치가 있는 Feature와
             사용자에게 노출되는 주요 Screen을 등록 대상으로 검토합니다.
           </li>
           <li>

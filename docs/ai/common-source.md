@@ -2,11 +2,11 @@
 
 > 상세 가이드: `docs/common-source/`
 
-`apps/app-webview`는 현재 package와 source가 초기화되기 전의 빈 골격입니다. 모든 가이드는 `docs/`에서 관리하며, 실제 공통 소스는 사용처와 설치 package가 확인된 뒤 `apps/app-webview`에 구현합니다.
+모든 가이드는 `docs/`에서 관리하며, 실제 공통 소스는 `apps/app-webview`의 사용처, 기존 source와 설치 package를 확인해 구현합니다.
 
 ## 작업 전 확인
 
-- `apps/app-webview`의 실제 파일과 설치 package를 먼저 확인합니다. 현재처럼 빈 골격이면 참고 구현을 적용하지 않고 초기화 후 확인할 교체 지점을 명확히 작성합니다.
+- `apps/app-webview`의 실제 파일과 설치 package를 먼저 확인합니다. 확인되지 않은 구성은 추측하지 않고 참고 구현의 적용 조건과 교체 지점을 명확히 작성합니다.
 - Tailwind와 shadcn 작업은 `docs/common-source/tailwind.md`를 읽습니다.
 - React component와 Provider 작업은 `docs/common-source/react.md`를 읽습니다.
 - TypeScript 설정과 runtime guard 작업은 `docs/common-source/typescript.md`를 읽습니다.
@@ -24,14 +24,14 @@
 
 - 코드 블록은 언어를 표시하고 현재 프로젝트 stack에 맞는 완성된 참고 구현을 제공합니다.
 - 참고 코드를 실제 저장소에 적용한 것처럼 표현하지 않습니다.
-- 실제 파일 경로, export와 사용처는 앱이 초기화되고 확인된 뒤에만 적용 완료 상태로 단정합니다.
+- 실제 파일 경로, export와 사용처가 앱 source에서 확인된 경우에만 적용 완료 상태로 단정합니다.
 - 기존 source가 있으면 새 파일 생성보다 비교·병합 기준을 설명합니다.
 - 브랜드 값, API/Bridge 계약, Query 정책과 Zustand persist를 추측해 확정하지 않습니다.
 - shadcn 또는 설치 library가 제공하는 책임을 다시 구현하도록 안내하지 않습니다.
 
 ## 가이드와 실제 소스의 관계
 
-1. 앱 초기화 전에는 이 가이드를 선행 구현 기준으로 사용하되 참고 코드를 적용 완료 상태로 간주하지 않습니다.
+1. 참고 코드는 실제 앱에 적용하고 검증하기 전까지 적용 완료 상태로 간주하지 않습니다.
 2. 가이드 예시는 권장 구현안이며 앱에 적용할 때 설치 버전, 기존 구조와 제품 계약의 차이를 검토합니다.
 3. 실제 source가 생성된 이후에는 실제 source가 기준이며, 구조와 API가 확정되거나 바뀌면 가이드를 함께 갱신합니다.
 4. `docs/` 아래에는 `.ts`, `.tsx`, `globals.css`, package 설정 같은 앱 source를 추가하지 않습니다.

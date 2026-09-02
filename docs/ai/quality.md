@@ -33,7 +33,7 @@ npm run test
 ```
 
 - Story를 추가하거나 변경했다면 프로젝트에 정의된 Storybook 정적 Build 명령도 실행합니다. 실제 Script 이름은 `package.json`을 기준으로 확인하며 존재하지 않는 명령을 추측하지 않습니다.
-- 병합 또는 통합 영향이 있는 변경에서는 `npm run build`도 실행합니다.
+- 병합 또는 통합 영향이 있는 변경에서는 `apps/app-webview`의 실제 package에 정의된 `npm run build`도 실행합니다. 애플리케이션 Build와 배포 Artifact에는 `docs/`를 포함하지 않습니다.
 - API, Query, 비동기 UI, 이미지, 폰트 또는 초기 전송에 영향을 주는 변경은 `performance.md`에서 저속 네트워크, 연결 중단과 성능 회귀 검증 기준을 추가로 확인합니다.
 - E2E와 커버리지 기준은 실제 필요가 생길 때 추가합니다.
 - 기획과 Backend API 계약이 확정되기 전에는 API Mock, fixture와 handler를 만들지 않습니다. 계약 확정 후 사용할 수 있는 Backend 환경에서 필요한 상태를 재현하기 어렵다면 Front-end 책임자 또는 프로젝트 담당자와 테스트 범위·관리 책임을 정한 뒤 [API Mock 도입 판단 기준](../common-source/api-mocking.md)에 따라 선택합니다.

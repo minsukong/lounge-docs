@@ -1,6 +1,6 @@
 # 프로젝트 핵심 정보
 
-> 기준 원본: [Front-End 개발 가이드](../guides/frontend/index.html), [Front-End Monorepo 공통 기준](../guides/architecture/index.html)
+> 기준 원본: [Front-End 개발 가이드](../guides/frontend/index.html), [Front-End 저장소 구조 기준](../guides/architecture/index.html)
 >
 > 이 문서는 AI 코딩용 요약입니다. 충돌하거나 세부 판단이 필요하면 기준 원본을 확인합니다.
 
@@ -22,7 +22,7 @@
 현재 저장소는 애플리케이션과 모든 가이드를 다음처럼 함께 관리합니다.
 
 ```text
-front-end-repository/
+<repository-root>/
 ├── AGENTS.md
 ├── apps/app-webview/
 └── docs/
@@ -43,7 +43,7 @@ apps/app-webview/src/
 └── test/         # 테스트 공통 설정
 ```
 
-Storybook을 도입하면 애플리케이션 설정은 `apps/app-webview/.storybook`에 두고, Story 파일은 실제 컴포넌트 가까이에 둡니다.
+Storybook 애플리케이션 설정은 `apps/app-webview/.storybook`에 두고, Story 파일은 실제 컴포넌트 가까이에 둡니다.
 
 ```text
 apps/app-webview/
@@ -55,7 +55,7 @@ apps/app-webview/
     └── features/         # 독립 검증 가치가 있는 기능 컴포넌트만 Story 작성
 ```
 
-Storybook 설정과 Story는 앱 package를 초기화한 뒤 추가합니다. 여러 애플리케이션에서 실제 공유되는 UI가 확인되기 전에는 별도 Storybook 앱이나 `packages/ui` 구성을 미리 만들지 않습니다.
+Storybook 설정은 `apps/app-webview/.storybook`, Story는 실제 컴포넌트 가까이에서 관리합니다. 실제 파일에서 확인되지 않는 별도 Storybook 앱이나 공통 package 구성을 추측하지 않습니다.
 
 ## 구현 원칙
 
