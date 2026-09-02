@@ -16,13 +16,13 @@
 ### main 최신 변경의 실무 구조 반영
 
 - 구축 브리핑 발표 자료의 확장된 장면과 설명을 `docs/guides/briefing/presentation.html`에 반영하고 문서 자산·README·검색 링크를 현재 `docs/` 구조에 맞게 조정했습니다.
-- 통합 전 `reference/front-end`를 설명하던 발표 문구는 실제 프로젝트의 `apps/app-webview`와 `docs` 책임 구조를 설명하도록 갱신했습니다.
+- 통합 전 별도 Front-end 참고 구조를 설명하던 발표 문구는 현재 프로젝트의 `apps/app-webview`와 `docs` 책임 구조를 설명하도록 갱신했습니다.
 - Cline이 일반 구현 작업에서 브리핑·초안·변경 이력·생성 검색 데이터 등을 불필요하게 읽지 않도록 현재 폴더 구조에 맞춘 `.clineignore`와 최소 문서 확인 규칙을 추가했습니다.
 - 문서 작업 시 README, 템플릿, 구조 가이드와 Front-end 가이드를 매번 모두 읽지 않고 변경 범위에 직접 필요한 기준만 선택하도록 `docs/AGENTS.md`를 갱신했습니다.
 
-### 실제 Front-end 프로젝트 폴더 구조로 통합
+### project 브랜치 폴더 구조로 통합
 
-- `actual-project-structure` 브랜치에서 애플리케이션과 가이드를 함께 운영하는 실제 저장소 구조로 전환했습니다.
+- `project` 브랜치에서 애플리케이션과 가이드를 함께 운영하는 현재 저장소 구조로 전환했습니다.
 - 모든 상세 HTML 가이드, AI 요약, 공통 소스 기준, 검색, 템플릿과 문서 자산을 `docs/` 아래로 이동하고 내부 상대 경로를 새 위치에 맞게 갱신했습니다.
 - 저장소 Root `AGENTS.md`는 구현 지침, `docs/AGENTS.md`는 문서 작성 지침, `apps/app-webview/AGENTS.md`는 WebView 앱 전용 지침을 담당하도록 분리했습니다.
 - 애플리케이션 source와 설정은 `apps/app-webview`, 모든 구현·검토 문서는 `docs`에서 관리하도록 기준을 통일했습니다.
@@ -49,7 +49,7 @@
 - Chrome·Edge·Firefox·Samsung Internet은 Safari 15에 특정 제품 버전을 기계적으로 대응시키지 않고, 지원 대상 구형 버전에서 실제 사용하는 Tailwind Utility와 핵심 기능을 검증하도록 변경했습니다.
 - 지원 환경에서 동작하지 않는 최신 CSS 기능은 사용하지 않거나 대체하며, Tailwind CSS v4.1 이상의 검증 버전을 잠금 파일에 고정하도록 정리했습니다.
 - WebView 개요·개발 가이드, 브라우저 지원 가이드, 구축 브리핑과 발표 페이지를 함께 수정하고 문서 검색 인덱스를 다시 생성했습니다.
-- 실제 AI 작업 진입점인 `reference/front-end/AGENTS.md`, UI·Figma 작업 요약과 React Code Exports 검수 기준에도 Safari 15 공통 CSS 하한과 구형 브라우저 검증 규칙을 추가했습니다.
+- 실제 AI 작업 진입점인 Root `AGENTS.md`, UI·Figma 작업 요약과 React Code Exports 검수 기준에도 Safari 15 공통 CSS 하한과 구형 브라우저 검증 규칙을 추가했습니다.
 - AI가 복사하는 Tailwind 공통 소스 예시의 토큰 색상과 WebView 높이도 Safari 15 호환 값으로 변경했습니다.
 
 ## 2026-08-28
@@ -76,7 +76,7 @@
 #### 전체 가이드 검색
 
 - 기존 가이드에 검색 UI를 반복 삽입하지 않고 중앙 [`가이드 검색`](./search/index.html) 페이지 한 곳에서 주요 가이드의 문서명, 목차와 본문을 검색하도록 구성했습니다.
-- 검색 대상은 업무 가이드로 한정하고 교육용 `ai_frontend_growth_guide`, `reference` 복제 문서, 작성용 `init`, README, 변경 로그와 검색 페이지 자체를 제외했습니다.
+- 검색 대상은 `docs/guides/` 아래의 HTML 가이드로 한정하고 README, 변경 로그, AI 요약, 공통 소스 문서와 검색 페이지 자체는 제외했습니다.
 - 검색 결과는 관련 문서의 `h2` 목차로 직접 이동하며 Tailwind, Storybook, Figma, 브라우저, WebView, TypeScript, 테스트, 보안, 다국어와 성능 추천 검색어를 제공합니다.
 - 의존성이나 검색 서버 없이 파일을 직접 열어도 동작하도록 [`build-search-index.mjs`](./search/build-search-index.mjs)가 전체 HTML에서 정적 색인을 생성하게 했습니다.
 - 가이드 변경 후 `node .\search\build-search-index.mjs`를 실행하면 [`search-data.js`](./assets/js/search-data.js)가 갱신되며, 생성 파일을 직접 수정하지 않도록 검색 페이지에 운영 방법을 기록했습니다.
@@ -94,7 +94,7 @@
 
 - Figma 디자인을 Cline의 로컬 LLM, Codex, Claude Code 등 AI 코딩 도구로 React와 Tailwind CSS 4 코드에 옮기되, 생성 결과를 완성 코드가 아닌 구현 초안으로 검수하는 흐름을 정리했습니다.
 - Code Connect를 도입하기 전에는 Figma Main Component의 Description과 Dev resource에 실제 코드 컴포넌트 이름, import 경로, 주요 Props, variant와 사용 설명을 기록해 AI의 추측 범위를 줄이도록 했습니다.
-- AI는 Figma 설명을 참고한 뒤 실제 프로젝트 파일에서 named export, Props, variant와 사용처를 다시 확인하고 기존 shadcn/ui 및 프로젝트 컴포넌트를 우선 사용하도록 기준을 보강했습니다.
+- AI는 Figma 설명을 참고한 뒤 프로젝트 파일에서 named export, Props, variant와 사용처를 다시 확인하고 기존 shadcn/ui 및 프로젝트 컴포넌트를 우선 사용하도록 기준을 보강했습니다.
 - Storybook을 공통·재사용 UI 컴포넌트의 독립 개발, 공개 API 확인, 주요 상태 검수와 문서화를 위한 기본 운영 도구로 도입했습니다.
 - Button처럼 공통 컴포넌트임이 확실하면 실제 컴포넌트와 Story를 함께 작성해 Storybook에서 먼저 검수한 뒤 화면에 사용하고, 재사용 여부가 불확실하면 기능 가까이에서 구현한 후 실제 반복이 확인될 때 Story를 추가하도록 두 가지 개발 경로를 구분했습니다.
 - 모든 `.tsx` 파일에 Story를 생성하지 않고 공통 UI, 실제 공유 UI와 독립 검증 가치가 있는 feature 컴포넌트만 대상으로 삼으며, 페이지·단순 레이아웃·도우미 파일과 과도한 Mock이 필요한 내부 구현은 기본 대상에서 제외했습니다.
@@ -102,11 +102,11 @@
 - 최초 구축, 일상적인 컴포넌트 변경과 정기 누락 점검에 사용할 수 있는 도구 독립적인 AI 요청 예시를 추가했습니다.
 - 기존 Front-End 가이드의 “Storybook은 기본 도구에 포함하지 않는다”는 정책을 제거하고 React Code Exports, Storybook, 프로젝트 구조, UI, Figma와 품질 문서의 흐름을 같은 기준으로 연결했습니다.
 
-#### 실제 프로젝트용 참고 구조
+#### project 브랜치 적용 구조
 
 - 실제 업무용 [`AGENTS.md`](../AGENTS.md)에 Figma 구현 전 확인, 기존 컴포넌트 재사용과 Storybook 반자동 운영 규칙을 추가했습니다.
 - AI가 Storybook 작업 전에 읽는 [`storybook.md`](./ai/storybook.md)와 실제 `.storybook`, `*.stories.tsx`, Autodocs 및 정적 Build 적용 절차를 설명하는 [`common-source/storybook.md`](./common-source/storybook.md)를 추가했습니다.
-- `reference/front-end`의 README, AI 문서 선택 흐름, 프로젝트 구조, UI·Figma·품질 요약과 공통 소스 목록에 Storybook 진입점을 연결했습니다.
+- Root README, AI 문서 선택 흐름, 프로젝트 구조, UI·Figma·품질 요약과 공통 소스 목록에 Storybook 진입점을 연결했습니다.
 - 실제 애플리케이션이 생성되면 `apps/app-webview/.storybook`에 실행 설정을 두고 Story는 실제 컴포넌트 가까이에 배치합니다. Framework, Addon, package와 Script 이름은 실제 `package.json`과 Lock File을 확인한 뒤 확정합니다.
 - 여러 애플리케이션에서 의미와 변경 이유가 같은 재사용이 확인되기 전에는 별도 Storybook 애플리케이션이나 `packages/ui` 구성을 미리 만들지 않습니다.
 
@@ -121,7 +121,7 @@
 #### 검증
 
 - 기존 Storybook 미도입 정책이 관련 Markdown과 HTML에 남아 있지 않은지 확인했습니다.
-- `reference/front-end/docs/ai`와 `docs/common-source`의 Markdown·HTML 파일 쌍, 새 내부 링크와 Storybook 문서 진입점을 확인했습니다.
+- `docs/ai`와 `docs/common-source`의 Markdown·HTML 파일 쌍, 새 내부 링크와 Storybook 문서 진입점을 확인했습니다.
 - 수정한 주요 HTML의 문법과 Section, Code Block 및 닫는 태그 구조를 확인했습니다.
 - 실제 package와 애플리케이션이 아직 생성되지 않아 Storybook 설치, 정적 Build와 브라우저 시각 검증은 수행하지 않았습니다.
 
@@ -134,7 +134,7 @@
 - Core Web Vitals, LCP·CLS·INP, Bundle·Chunk·Main Thread, Lighthouse, 성능 회귀와 성능 Budget의 의미와 측정 목적을 보강했습니다.
 - 이 저장소는 Front-end 가이드이며 Front-end가 독립적으로 결정할 수 있는 구현·검증 원칙만 현재 기준으로 확정합니다. 기획, 업무 규칙, API·인증·데이터 계약, Backend 제공 환경, Native App 책임과 배포·운영처럼 다른 담당 영역이 필요한 내용은 승인 전까지 미확정으로 유지합니다.
 - 보안 문서에 적힌 Backend·Native App·배포 책임은 Front-end가 확인해야 할 외부 조건이며, 현재 프로젝트에서 구현이나 제공이 확정됐다는 의미가 아님을 명시했습니다.
-- [`performance_guide/draft.md`](./guides/performance/draft.md)와 [`performance_guide/index.html`](./guides/performance/index.html)에 느린 네트워크, API 응답 지연, Timeout, Offline과 연결 복구 시 Front-end 처리 기준을 추가했습니다.
+- [`성능 가이드 초안`](./guides/performance/draft.md)과 [`성능 가이드`](./guides/performance/index.html)에 느린 네트워크, API 응답 지연, Timeout, Offline과 연결 복구 시 Front-end 처리 기준을 추가했습니다.
 - 최초 로딩과 기존 데이터 갱신을 구분하고 Skeleton, Spinner, Progress와 Toast는 설치된 shadcn/ui 및 프로젝트 컴포넌트를 우선 사용하도록 했습니다.
 - Chrome 개발자 도구의 `Network`, `Disable cache`, 저속 Profile과 `Offline` 전환을 이용한 단계별 검증 절차를 추가했습니다.
 - Chrome Network Throttling은 Bundle·이미지·폰트·API를 포함한 저속 전송 환경 확인에 사용합니다.
@@ -155,7 +155,7 @@
 
 #### 주요 문서
 
-- [`performance_guide/draft.md`](./guides/performance/draft.md) · [`performance_guide/index.html`](./guides/performance/index.html)
+- [`성능 가이드 초안`](./guides/performance/draft.md) · [`성능 가이드`](./guides/performance/index.html)
 - [`performance.md`](./ai/performance.md)
 - [`api-mocking.md`](./common-source/api-mocking.md) · [`api-mocking.html`](./common-source/api-mocking.html)
 - [`network.md`](./common-source/network.md) · [`network.html`](./common-source/network.html)
@@ -187,7 +187,7 @@
 - “신뢰하지 않는다”는 값의 사용 금지가 아니라 저장·전달 당시의 상태를 단정하지 않고 위험도에 맞게 확인한다는 뜻으로 정의했으며, Storage는 UI 설정과 권한·사용자 데이터의 검증 수준을 구분했습니다.
 - 보안 용어를 삭제하거나 지나치게 단순화하지 않고, XSS, Sanitizer, Tag·Attribute, URL Scheme, CSRF, CORS, Origin, CSP, Client Bundle, Source Map과 공급망 보안이 처음 나오는 위치에 한글 의미와 원어 설명을 추가했습니다.
 - 아직 정하지 않은 Sanitizer 도구와 HTML 허용 범위는 승인된 것처럼 표현하지 않고 미정 상태로 바로잡았습니다.
-- [`security_guide/index.html`](./guides/security/index.html)과 [`security_guide/draft.md`](./guides/security/draft.md)를 추가했습니다.
+- [`보안 가이드`](./guides/security/index.html)와 [`보안 가이드 초안`](./guides/security/draft.md)을 추가했습니다.
 - Client 신뢰 경계, XSS, URL·Redirect, 인증·권한, Cookie·CSRF·CORS, Secret, 저장소, 개인정보·로그, CSP, WebView Bridge와 공급망 기준을 정리했습니다.
 - AI용 요약인 [`security.md`](./ai/security.md)와 [`security.html`](./ai/security.html)을 추가했습니다.
 - 성장 과정에 [`13-frontend-security-and-privacy.html`](./guides/learning/ai-frontend-growth/13-frontend-security-and-privacy.html)을 연결했습니다.
