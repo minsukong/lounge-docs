@@ -279,6 +279,15 @@ flowchart LR
             충돌하면 공통 기준을 우선합니다.
           </p>
         </blockquote>
+        <p>
+          실제 프로젝트 저장소로 통합한 뒤에는 Application Source는
+          <code>apps</code>, 개발·운영 가이드와 공통 문서 자산은
+          <code>docs</code>에서 관리합니다. 저장소 Root의
+          <code>AGENTS.md</code>는 구현 작업 규칙, <code>docs/AGENTS.md</code>는
+          문서 작성과 HTML 검증 규칙을 담당합니다. 현재 가이드 저장소에
+          분리되어 있는 상세 가이드, 공통 자산과 AI 참고 문서는 통합 시 모두
+          <code>docs</code> 아래에서 관리합니다.
+        </p>
         <h3>4.1 배치 원칙</h3>
         <ul>
           <li>
@@ -309,6 +318,7 @@ flowchart LR
           및 배포 환경을 확인한 뒤 확정합니다. <code class="badge-tbd">TBD</code>
         </p>
         <pre class="hljs"><code data-language="text">&lt;repository-root&gt;/
+├── AGENTS.md                    # 실제 구현 작업용 최상위 지침
 ├── apps/
 │   ├── website/                 # 대외 웹사이트
 │   ├── mobile/                  # Flutter Native 앱
@@ -330,6 +340,7 @@ flowchart LR
 ├── contracts/
 │   ├── api/                     # API Schema와 생성 기준
 │   └── webview-bridge/          # 플랫폼 중립 Bridge 계약
+├── docs/                         # 가이드와 문서 자료
 ├── tooling/                     # 저장소 운영 및 자동화 도구
 └── README.md</code></pre>
         <p>

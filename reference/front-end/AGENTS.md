@@ -41,62 +41,11 @@ front-end-repository/
 │       ├── postcss.config.mjs
 │       ├── vitest.config.ts
 │       └── src/
-└── docs/
-    ├── AGENTS.md
-    ├── README.md
-    ├── CHANGELOG.md
-    ├── index.html
-    ├── search/                     # 전체 가이드 검색
-    ├── templates/                  # HTML 가이드 작성 템플릿
-    ├── assets/                     # HTML 공통 스타일·스크립트·이미지
-    ├── guides/                     # 상세 HTML 가이드와 필요한 원본
-    │   ├── briefing/
-    │   ├── frontend/
-    │   ├── architecture/
-    │   ├── app/
-    │   ├── platform/webview/
-    │   ├── ui/
-    │   ├── storybook/
-    │   ├── testing/
-    │   ├── lint/
-    │   ├── security/
-    │   ├── performance/
-    │   ├── browser-support/
-    │   ├── typescript/
-    │   ├── i18n/
-    │   ├── planning/
-    │   └── learning/ai-frontend-growth/
-    ├── ai/                         # 작업별 AI 요약
-    │   ├── project.md
-    │   ├── ui.md
-    │   ├── design-tokens.md
-    │   ├── figma.md
-    │   ├── storybook.md
-    │   ├── quality.md
-    │   ├── performance.md
-    │   ├── security.md
-    │   ├── common-source.md
-    │   └── local-llm.md
-    └── common-source/              # 파일 단위 구현 기준
-        ├── index.md
-        ├── briefing.md
-        ├── catalog.md
-        ├── tailwind.md
-        ├── react.md
-        ├── typescript.md
-        ├── test.md
-        ├── storybook.md
-        ├── network.md
-        ├── session.md
-        ├── api-mocking.md
-        └── recipes.md
+└── docs/                            # 가이드와 문서 자료
 ```
 
 - 저장소 루트 `AGENTS.md`는 실제 구현 전체 규칙과 작업별 문서 선택을 담당합니다.
-- `docs/AGENTS.md`는 HTML 템플릿, Markdown·HTML 동기화, 링크와 공통 자산 검증 등 문서 작성 규칙을 담당합니다.
-- `docs/guides/`는 Front-end, Monorepo, UI, WebView, Storybook, Test, Lint, Security, Performance 등 사람이 읽는 상세 가이드와 필요한 원본을 주제별로 관리합니다.
-- `docs/assets/`는 상세 HTML 가이드가 사용하는 공통 스타일, JavaScript, 이미지와 디자인 자산을 관리합니다.
-- 현재 `reference/front-end/docs/ai`와 `reference/front-end/docs/common-source`는 통합 시 각각 `docs/ai`와 `docs/common-source`로 이동합니다.
+- `docs`는 사람이 읽는 상세 가이드, AI 참고 문서, 공통 Source 적용 기준과 문서 자산을 함께 관리합니다.
 - 실제 `.ts`, `.tsx`, CSS와 package 설정은 `apps/app-webview/`에 두며 `docs/`에는 넣지 않습니다.
 - 실제 이동 전에는 현재 링크를 유지합니다. 이동할 때 문서, 자산, 내부 링크와 기준 원본 경로를 한 변경에서 함께 갱신하고 `reference/front-end` 또는 별도 `common_docs` 중간 구조를 남기지 않습니다.
 

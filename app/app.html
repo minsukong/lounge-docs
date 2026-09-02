@@ -2200,9 +2200,16 @@ flowchart TD
           공통 UI와 개발 설정은 <code>packages</code>, 언어에 종속되지 않는
           API·Bridge 규격은 <code>contracts</code>에서 관리합니다.
         </p>
+        <p>
+          실제 프로젝트 저장소로 통합한 뒤에는 가이드와 문서 자료를 Root
+          <code>docs</code>에서 관리합니다. 실제
+          Application Source는 <code>docs</code>에 넣지 않고 각
+          <code>apps/*</code> 영역에 둡니다.
+        </p>
 
         <h3>Monorepo 전체 구조</h3>
         <pre class="hljs"><code data-language="text">&lt;repository-root&gt;/
+├── AGENTS.md                    # 실제 구현 작업용 최상위 지침
 ├── apps/
 │   ├── website/                 # 대외 웹사이트
 │   ├── mobile/                  # Flutter Native 앱
@@ -2219,6 +2226,7 @@ flowchart TD
 ├── contracts/
 │   ├── api/                     # API Schema와 생성 기준
 │   └── webview-bridge/          # 플랫폼 중립 Bridge 요청·응답 규격
+├── docs/                         # 가이드와 문서 자료
 ├── tooling/                     # 저장소 운영 및 자동화 도구
 └── README.md</code></pre>
         <p>

@@ -69,7 +69,15 @@
 
       <section>
         <h2 class="bx-active">2. 저장소 구조</h2>
+        <p>
+          실제 프로젝트 저장소로 통합한 뒤에는 구현 Source와 문서를 분리합니다.
+          애플리케이션 코드는 <code>apps</code>, 가이드와 문서 자료는
+          <code>docs</code>에서 관리합니다. 저장소 Root의
+          <code>AGENTS.md</code>는 구현 규칙, <code>docs/AGENTS.md</code>는 문서
+          작성과 HTML 검증 규칙을 담당합니다.
+        </p>
         <pre class="hljs"><code data-language="text">&lt;repository-root&gt;/
+├── AGENTS.md                    # 실제 구현 작업용 최상위 지침
 ├── apps/
 │   ├── website/                 # 대외 웹사이트
 │   ├── mobile/                  # Flutter Native 앱
@@ -86,6 +94,7 @@
 ├── contracts/
 │   ├── api/                     # API Schema와 생성 기준
 │   └── webview-bridge/          # 플랫폼 중립 Bridge 요청·응답 규격
+├── docs/                         # 가이드와 문서 자료
 ├── tooling/                     # 저장소 운영 및 자동화 도구
 └── README.md</code></pre>
 
@@ -161,6 +170,11 @@
               <td><code>contracts</code></td>
               <td>언어에 종속되지 않는 API·Bridge Schema와 Version 계약</td>
               <td>특정 앱의 화면 상태나 구현 세부사항을 포함하지 않음</td>
+            </tr>
+            <tr>
+              <td><code>docs</code></td>
+              <td>가이드와 문서 자료</td>
+              <td>애플리케이션 Source와 실행 설정을 포함하지 않음</td>
             </tr>
             <tr>
               <td><code>tooling</code></td>
