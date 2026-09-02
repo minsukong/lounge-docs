@@ -398,23 +398,19 @@
             <p class="eyebrow">02 · REPOSITORY</p>
             <h2>Application 가까이에서<br />작게 시작합니다.</h2>
             <p class="lead muted">
-              실행과 배포 목적이 다른 Application은 분리하고, 공통 UI는 실제
-              재사용이 검증된 뒤 이동합니다.
+              Flutter Native 앱과 WebView Front-end는 같은 저장소에서 관리하되
+              각 Toolchain과 구현 책임은 분리합니다.
             </p>
           </div>
           <div>
             <pre class="code-tree"><i>apps/</i>
-├─ website/       회사 웹사이트
 ├─ mobile/        Flutter Native App
-├─ app-webview/   WebView 서비스 화면
-├─ card-inapp/    제휴사별 In-app
-└─ backoffice/    운영자 화면
+└─ app-webview/   WebView 서비스 화면
 
-<i>packages/</i>
-└─ ui/            검증된 공통 UI</pre>
+<i>docs/</i>            구현·검토 가이드</pre>
           <div class="callout">
-            <code>packages/ui</code>에는 둘 이상의 Web Application에서 의미와
-            변경 이유가 같은 구현만 둡니다.
+            Native와 WebView는 승인된 Bridge 계약으로 연결하고 서로의 내부
+            Source를 직접 참조하지 않습니다.
           </div>
           <p class="source-link">
             상세 기준 · <a href="../architecture/index.html">Front-End 저장소 구조 기준</a>

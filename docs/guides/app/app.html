@@ -1759,9 +1759,9 @@ window.<span class="hljs-property">AppBridgeResponse</span> = (<span class="hljs
         <h3>목적</h3>
         <p>
           Flutter 앱은 <code>Codemagic</code>을 활용하여 빌드, 테스트 및 배포
-          과정을 자동화합니다. 웹사이트, WebView, 카드사 인앱과 백오피스는 각
-          애플리케이션의 독립 Pipeline으로 배포하며, 배포 플랫폼과 도구는 인프라
-          환경을 확인한 뒤 확정합니다. <code class="badge-tbd">TBD</code>
+          과정을 자동화합니다. WebView Front-end는 별도 Pipeline으로 배포하며,
+          배포 플랫폼과 도구는 인프라 환경을 확인한 뒤 확정합니다.
+          <code class="badge-tbd">TBD</code>
         </p>
         <figure class="diagram-frame diagram-frame--cicd">
           <!-- prettier-ignore -->
@@ -2169,16 +2169,15 @@ flowchart TD
           </li>
         </ul>
 
-        <h3>웹 애플리케이션 환경</h3>
+        <h3>WebView Front-end 환경</h3>
         <ul>
           <li>
-            웹사이트, WebView, 카드사 인앱과 백오피스는 애플리케이션별로
-            <code>dev</code>·<code>qa</code>·<code>prod</code> 환경과 배포
-            권한을 분리합니다.
+            WebView Front-end는 <code>dev</code>·<code>qa</code>·<code>prod</code>
+            환경과 배포 권한을 분리합니다.
           </li>
           <li>
             Host, Cookie 범위, CORS·CSP, 인증 Redirect URI와 Origin Allowlist는
-            서비스·제휴사·환경별 승인 값으로 관리합니다.
+            서비스·환경별 승인 값으로 관리합니다.
           </li>
           <li>
             브라우저에 노출되는 공개 설정과 서버·CI에서만 사용하는 Secret을
@@ -2202,6 +2201,7 @@ flowchart TD
         <pre class="hljs"><code data-language="text">&lt;repository-root&gt;/
 ├── AGENTS.md                    # 저장소 전체 구현 지침
 ├── apps/
+│   ├── mobile/                  # Flutter Native 앱
 │   └── app-webview/             # 앱 내 Next.js WebView
 │       ├── AGENTS.md            # 앱 전용 구현 지침
 │       ├── .storybook/          # Storybook 설정
@@ -2295,26 +2295,21 @@ flowchart TD
         <h3>저장소 운영 및 배포 기준</h3>
         <ul>
           <li>
-            각 애플리케이션은 배포 Pipeline, 환경 변수, Version과 Rollback
-            단위를 분리하며 관계없는 영역을 항상 함께 배포하지 않습니다.
+            Flutter Native 앱과 WebView Front-end는 Toolchain, 배포 Pipeline,
+            환경 변수, Version과 Rollback 단위를 각각 관리합니다.
           </li>
           <li>
-            변경된 애플리케이션과 해당 애플리케이션이 사용하는 공통 패키지만
-            빌드·테스트하되, 공통 패키지 변경 시 모든 영향 범위의 회귀 테스트를
-            수행합니다.
+            변경된 영역을 빌드·테스트하고 Bridge 계약을 변경하면 Native 앱과
+            WebView Front-end의 호환성을 함께 검증합니다.
           </li>
           <li>
             API Endpoint, 인증 Client, WebView Origin Allowlist와 배포 Secret은
-            서비스·제휴사·환경별로 분리하고 저장소에 포함하지 않습니다.
+            애플리케이션과 환경별로 분리하고 저장소에 포함하지 않습니다.
           </li>
           <li>
             배포 시점이 다른 Native 앱과 WebView가 함께 동작할 수 있도록
             Bridge와 API 계약은 하위 호환성을 유지하고, Breaking Change는
             Version을 올려 단계적으로 전환합니다.
-          </li>
-          <li>
-            카드사 인앱과 백오피스의 인증·권한·보안 정책은 각 채널에서 구현하며,
-            공통화가 검증된 UI·Type·Utility만 공유 패키지로 이동합니다.
           </li>
         </ul>
       </section>

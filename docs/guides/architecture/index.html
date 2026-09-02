@@ -72,6 +72,7 @@
 ├── AGENTS.md                    # 저장소 전체 구현 지침
 ├── README.md                    # 프로젝트 진입점
 ├── apps/
+│   ├── mobile/                  # Flutter Native 앱
 │   └── app-webview/             # 앱 내 Next.js WebView Front-end
 │       ├── AGENTS.md            # 앱 전용 구현 지침
 │       ├── .storybook/          # Storybook 설정
@@ -92,6 +93,11 @@
             </tr>
           </thead>
           <tbody>
+            <tr>
+              <td><code>apps/mobile</code></td>
+              <td>Flutter Native 앱과 기기 기능</td>
+              <td>Flutter·Dart</td>
+            </tr>
             <tr>
               <td><code>apps/app-webview</code></td>
               <td>앱 내 Front-end 서비스 화면과 업무 흐름</td>
@@ -350,10 +356,6 @@ flowchart TB
           <li>
             새 애플리케이션을 추가할 때 Owner, 배포 단위, 환경, 권한과 Rollback
             책임을 함께 정의합니다.
-          </li>
-          <li>
-            새 공통 패키지를 추가할 때 실제 사용처, 공개 API, 의존 방향과 변경
-            책임을 확인합니다.
           </li>
           <li>
             계약을 변경할 때 영향을 받는 TypeScript·Dart 생성 결과, Adapter와 출시된

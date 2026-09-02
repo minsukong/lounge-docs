@@ -23,6 +23,7 @@ WebView 기반 Front-end 애플리케이션과 구현 가이드를 한 저장소
 ├── AGENTS.md
 ├── README.md
 ├── apps/
+│   ├── mobile/                  # Flutter Native 앱
 │   └── app-webview/
 │       ├── AGENTS.md
 │       ├── README.md

@@ -32,6 +32,7 @@
 ├── AGENTS.html
 ├── README.md
 ├── apps/
+│   ├── mobile/                  # Flutter Native 앱
 │   └── app-webview/
 │       ├── AGENTS.md
 │       ├── README.md
@@ -108,6 +109,7 @@ flowchart TB
   R --> APPS["apps/"]
   R --> DOCS["docs/"]
   APPS --> APP["app-webview/"]
+  APPS --> MOBILE["mobile/<br/>Flutter Native 앱"]
   APP --> AA["AGENTS.md<br/>앱 전용 지침"]
   APP --> SB[".storybook/"]
   APP --> SRC["src/<br/>실제 애플리케이션 소스"]

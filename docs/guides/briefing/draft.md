@@ -402,6 +402,7 @@ Type 경계는 [TypeScript 가이드](../typescript/index.html), 정적 검사�
 ├── AGENTS.md                       # 저장소 전체 AI 구현 규칙
 ├── README.md                       # 프로젝트 진입점
 ├── apps/
+│   ├── mobile/                      # Flutter Native 앱
 │   └── app-webview/
 │       ├── AGENTS.md               # WebView 앱 전용 규칙
 │       ├── .storybook/             # Storybook 설정

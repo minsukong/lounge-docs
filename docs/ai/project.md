@@ -24,7 +24,9 @@
 ```text
 <repository-root>/
 ├── AGENTS.md
-├── apps/app-webview/
+├── apps/
+│   ├── mobile/          # Flutter Native 앱
+│   └── app-webview/     # WebView Front-end
 └── docs/
     ├── AGENTS.md
     ├── assets/
