@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API 요청 기반 구현 예시</title>
+    <link rel="stylesheet" href="../assets/style/presentation-theme.css" />
+  </head>
+  <body>
+    <header>
+      <div class="type">FRONT-END · NETWORK</div>
+      <h1>API 요청 기반 구현 예시</h1>
+      <p>API 계약 전에도 재사용할 수 있는 HTTP 요청 경계, 오류와 응답 검증의 구현 기준을 설명합니다.</p>
+    </header>
+
+    <main>
+<section>
+<h2 class="bx-active">1. 적용 목적</h2>
+<p>Backend 담당자가 승인한 API 계약이 전달된 뒤 화면과 기능 코드를 같은 요청 경계 위에서 작성할 수 있도록 최소 HTTP 기반을 제공합니다. 이 문서의 코드는 서버 응답 형식을 임의로 통일하지 않고, 승인된 계약의 기능별 응답 검증 함수를 요청 코드에 연결합니다.</p>
+<p>기획 흐름과 API 계약이 확정되기 전에는 이 예시를 실제 코드로 옮기지 않습니다. endpoint, method, status, 요청·응답 필드와 인증 방식은 확인 질문과 <code class="badge-tbd">TBD</code>로만 남기며 Swagger 또는 OpenAPI 제공도 미리 가정하지 않습니다.</p>
+<p>다음 조건에서 적용합니다.</p>
+<ul>
+<li>둘 이상의 기능이 <code>fetch</code>의 상태 확인, JSON 읽기와 오류 변환을 반복합니다.</li>
+<li>Backend가 승인한 계약과 실제 호출 환경이 확인되었습니다.</li>
+<li>기능별 계약을 유지하면서 반복되는 HTTP 전송 책임만 분리해야 합니다.</li>
+</ul>
+<p>다음 내용은 확정하지 않습니다.</p>
+<ul>
+<li>API 기본 URL과 version 경로</li>
+<li>Cookie, access token 또는 WebView Bridge를 사용하는 인증 방식</li>
+<li>서버의 공통 성공·오류 응답 형식</li>
+<li>공통 timeout 값과 재시도 정책</li>
+</ul>
+</section>
+
+<hr />
+
+<section>
+<h2 class="bx-active">2. 적용할 파일</h2>
+<pre class="hljs"><code data-language="text">src/
+├─ lib/http/
+│  ├─ http-error.ts
+│  └─ request.ts
+└─ features/
+   └─ profile/api/
+      ├─ parse-profile.ts
+      └─ profile-api.ts</code></pre>
+<p><code>request</code>는 HTTP 전송 책임만 가집니다. API별 path, method, 입력 type과 응답 검증은 기능 폴더에 둡니다.</p>
+</section>
+
+<hr />
+
+<section>
+<h2 class="bx-active">3. HTTP 오류</h2>
+<h3><code>src/lib/http/http-error.ts</code></h3>
+<pre class="hljs"><code data-language="ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">HttpError</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Error</span> {
+  <span class="hljs-keyword">readonly</span> status: number
+  <span class="hljs-keyword">readonly</span> body: unknown
+
+  <span class="hljs-title function_">constructor</span>(status: number, body: unknown) {
+    <span class="hljs-title function_">super</span>(<span class="hljs-string">`HTTP request failed with status ${status}`</span>)
+    this.name = <span class="hljs-string">&quot;HttpError&quot;</span>
+    this.status = status
+    this.body = body
+  }
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">isHttpError</span>(error: unknown): error is <span class="hljs-title class_">HttpError</span> {
+  <span class="hljs-keyword">return</span> error <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">HttpError</span>
+}</code></pre>
+<p><code>HttpError</code>는 상태 코드와 읽을 수 있었던 응답 본문만 보존합니다. 서버의 <code>code</code>, <code>message</code>, <code>details</code> 구조가 확정되기 전에는 선택 속성이 많은 공통 오류 type을 만들지 않습니다.</p>
+</section>
+
+<hr />
+
+<section>
+<h2 class="bx-active">4. 공통 요청 함수</h2>
+<h3><code>src/lib/http/request.ts</code></h3>
+<pre class="hljs"><code data-language="ts"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">HttpError</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/lib/http/http-error&quot;</span>
+
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">ResponseParser</span>&lt;<span class="hljs-title class_">T</span>&gt; = (value: unknown) =&gt; <span class="hljs-title class_">T</span>
+
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">RequestOptions</span>&lt;<span class="hljs-title class_">T</span>&gt; = <span class="hljs-title class_">Omit</span>&lt;<span class="hljs-title class_">RequestInit</span>, <span class="hljs-string">&quot;body&quot;</span>&gt; &amp; {
+  body?: unknown
+  parse?: <span class="hljs-title class_">ResponseParser</span>&lt;<span class="hljs-title class_">T</span>&gt;
+}
+
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">readResponseBody</span>(response: <span class="hljs-title class_">Response</span>): <span class="hljs-title class_">Promise</span>&lt;unknown&gt; {
+  <span class="hljs-keyword">if</span> (response.status === <span class="hljs-number">204</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span>
+
+  <span class="hljs-keyword">const</span> text = <span class="hljs-keyword">await</span> response.<span class="hljs-title function_">text</span>()
+  <span class="hljs-keyword">if</span> (!text) <span class="hljs-keyword">return</span> <span class="hljs-literal">undefined</span>
+
+  <span class="hljs-keyword">const</span> contentType = response.headers.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;content-type&quot;</span>) ?? <span class="hljs-string">&quot;&quot;</span>
+  <span class="hljs-keyword">if</span> (!contentType.<span class="hljs-title function_">includes</span>(<span class="hljs-string">&quot;application/json&quot;</span>)) <span class="hljs-keyword">return</span> text
+
+  <span class="hljs-keyword">try</span> {
+    <span class="hljs-keyword">return</span> <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(text) <span class="hljs-keyword">as</span> unknown
+  } <span class="hljs-keyword">catch</span> {
+    <span class="hljs-keyword">return</span> text
+  }
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> request&lt;<span class="hljs-title class_">T</span>&gt;(
+  path: string,
+  options: <span class="hljs-title class_">RequestOptions</span>&lt;<span class="hljs-title class_">T</span>&gt; = {},
+): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-title class_">T</span>&gt; {
+  <span class="hljs-keyword">const</span> { body: input, headers: inputHeaders, parse, ...init } = options
+  <span class="hljs-keyword">const</span> headers = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Headers</span>(inputHeaders)
+
+  <span class="hljs-keyword">const</span> body = input === <span class="hljs-literal">undefined</span> ? <span class="hljs-literal">undefined</span> : <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(input)
+  <span class="hljs-keyword">if</span> (body !== <span class="hljs-literal">undefined</span> &amp;&amp; !headers.<span class="hljs-title function_">has</span>(<span class="hljs-string">&quot;Content-Type&quot;</span>)) {
+    headers.<span class="hljs-title function_">set</span>(<span class="hljs-string">&quot;Content-Type&quot;</span>, <span class="hljs-string">&quot;application/json&quot;</span>)
+  }
+
+  <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(path, {
+    ...init,
+    headers,
+    body,
+  })
+  <span class="hljs-keyword">const</span> value = <span class="hljs-keyword">await</span> <span class="hljs-title function_">readResponseBody</span>(response)
+
+  <span class="hljs-keyword">if</span> (!response.ok) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">HttpError</span>(response.status, value)
+  }
+
+  <span class="hljs-keyword">return</span> parse ? <span class="hljs-title function_">parse</span>(value) : (value <span class="hljs-keyword">as</span> <span class="hljs-title class_">T</span>)
+}</code></pre>
+<p>본문을 한 번만 읽은 뒤 성공과 오류에서 같은 값을 사용합니다. <code>204 No Content</code>와 빈 본문도 JSON으로 강제 변환하지 않습니다. 기능별 parser가 있으면 성공 본문을 <code>unknown</code>에서 검증하고, parser가 없는 요청은 응답 형식이 없는 logout 같은 호출에만 제한합니다.</p>
+</section>
+
+<hr />
+
+<section>
+<h2 class="bx-active">5. 기능 API에서 사용</h2>
+<h3><code>src/features/profile/api/profile-api.ts</code></h3>
+<pre class="hljs"><code data-language="ts"><span class="hljs-keyword">import</span> { parseProfile } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/features/profile/api/parse-profile&quot;</span>
+<span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> {
+  <span class="hljs-title class_">Profile</span>,
+  <span class="hljs-title class_">UpdateProfileInput</span>,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/features/profile/model/profile&quot;</span>
+<span class="hljs-keyword">import</span> { request } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/lib/http/request&quot;</span>
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">getProfile</span>(signal?: <span class="hljs-title class_">AbortSignal</span>): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-title class_">Profile</span>&gt; {
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">request</span>(<span class="hljs-string">&quot;/api/members/me&quot;</span>, {
+    signal,
+    parse: parseProfile,
+  })
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">updateProfile</span>(input: <span class="hljs-title class_">UpdateProfileInput</span>): <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-title class_">Profile</span>&gt; {
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">request</span>(<span class="hljs-string">&quot;/api/members/me&quot;</span>, {
+    method: <span class="hljs-string">&quot;PATCH&quot;</span>,
+    body: input,
+    parse: parseProfile,
+  })
+}</code></pre>
+<p>Query가 전달한 <code>AbortSignal</code>을 그대로 <code>fetch</code>까지 연결합니다. 예시의 path, method와 요청 본문을 먼저 구현해 나중에 교체하지 않고, 승인된 API 계약을 확인한 뒤 기능 API를 작성합니다.</p>
+</section>
+
+<hr />
+
+<section>
+<h2 class="bx-active">6. 인증과 기본 URL 연결 기준</h2>
+<p>인증 방식이 확정되기 전에는 localStorage token, 임의의 Authorization header 또는 Cookie 이름을 예제에 넣지 않습니다.</p>
+<p>Cookie·CSRF·CORS, Client Secret과 민감정보 전달은 <a href="../guides/security/index.html">Front-End 보안과 개인정보 가이드</a>의 책임 구분을 함께 확인합니다. Front-end는 승인된 계약을 연결하고 브라우저 동작을 검증하며, 서버 방어와 정책 적용은 Backend·배포·보안 담당이 수행합니다.</p>
+<ul>
+<li>같은 origin의 Cookie 인증이면 브라우저 기본 동작을 우선하고 필요한 경우에만 <code>credentials</code>를 명시합니다.</li>
+<li>다른 origin을 호출하면 CORS와 Cookie 정책을 backend 계약과 함께 확인합니다.</li>
+<li>token header가 필요하면 token을 직접 읽는 코드를 <code>request</code>에 넣지 않고, 인증 상태의 소유 위치가 확정된 뒤 header를 만드는 경계를 연결합니다.</li>
+<li>Server Component와 Client Component의 기본 URL이 다르면 runtime 환경별 URL 결정 함수를 별도로 둡니다.</li>
+</ul>
+<p><code class="badge-tbd">TBD</code>: API origin, 인증 전달 방식과 환경변수 이름은 backend·배포 구성이 확정된 뒤 결정합니다.</p>
+</section>
+
+<hr />
+
+<section>
+<h2 class="bx-active">7. Timeout과 오류 문구</h2>
+<p>timeout 값은 API 특성과 UX 정책 없이 공통 숫자로 고정하지 않습니다. timeout이 필요한 API가 확인되면 호출자가 전달한 <code>AbortSignal</code>과 timeout signal을 결합하는 방식을 적용하고 지원 runtime을 확인합니다.</p>
+<p><code>HttpError</code>는 사용자 문구를 결정하지 않습니다. 화면에서는 상태 코드와 업무 흐름에 맞는 문구를 선택하고, 로깅과 관측 도구 연결도 별도 정책이 확정된 뒤 추가합니다.</p>
+</section>
+
+<hr />
+
+<section>
+<h2 class="bx-active">8. 적용 확인</h2>
+<ul>
+<li>기능 API가 직접 <code>response.ok</code>와 <code>response.json()</code> 처리를 반복하지 않습니다.</li>
+<li>성공 응답은 기능별 parser로 검증합니다.</li>
+<li>오류 응답의 상태 코드와 본문을 잃지 않습니다.</li>
+<li><code>204</code>와 빈 응답을 정상 처리합니다.</li>
+<li>Query의 취소 signal이 <code>fetch</code>까지 전달됩니다.</li>
+<li>기획과 API 계약 확정 전에 요청 함수와 기능 API를 선행 구현하지 않았습니다.</li>
+<li>인증, URL과 timeout의 미확정 값이 확정된 기준처럼 들어가지 않습니다.</li>
+</ul>
+</section>
+    </main>
+
+    <footer>
+      <p>API 요청 기반 구현 예시</p>
+    </footer>
+    <script src="../assets/js/common.js"></script>
+  </body>
+</html>

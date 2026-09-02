@@ -1,0 +1,1099 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Figma 디자인을 프로젝트 기준에 맞는 React와 Tailwind CSS 코드로 변환하기 위한 최소 원칙을 정리합니다."
+    />
+    <title>React Code Exports 가이드</title>
+    <link rel="stylesheet" href="../../assets/style/presentation-theme.css" />
+  </head>
+  <body>
+    <header>
+      <div class="type">FRONT-END · UI GUIDE · REACT CODE EXPORTS</div>
+      <h1>React Code Exports 가이드</h1>
+      <p>
+        Figma 디자인을 프로젝트 구조와 품질 기준에 맞는 React 코드로 변환하기
+        위한 최소 원칙을 정리합니다.
+      </p>
+    </header>
+
+    <main>
+      <section>
+        <h2 class="bx-active">1. 문서 목적</h2>
+        <p>
+          Figma 디자인을 React와 Tailwind CSS 코드로 변환할 때 필요한 역할, 작업
+          흐름과 검수 기준을 공유합니다. 자동 생성 결과는 구현 초안으로
+          사용하며, 최종 구조와 품질은 프론트엔드 개발자가 검수합니다.
+        </p>
+        <p>
+          이 문서는 디자이너, 프론트엔드 개발자와 AI 코드 작업자를 대상으로
+          하며, 프론트엔드 개발자가 운영합니다.
+        </p>
+
+        <h3>1.1 핵심 원칙</h3>
+        <ul>
+          <li>기존 컴포넌트와 디자인 토큰을 새 코드보다 우선합니다.</li>
+          <li>Figma 또는 AI export 결과를 완성 코드로 간주하지 않습니다.</li>
+          <li>
+            파일과 컴포넌트는 시각적 레이어가 아니라 책임과 재사용 범위를
+            기준으로 나눕니다.
+          </li>
+          <li>불명확한 동작이나 데이터 의미를 임의로 확정하지 않습니다.</li>
+        </ul>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">2. 적용 기술과 기준 문서</h2>
+        <p>
+          정확한 패키지 버전은 프로젝트의 Lock File을 기준으로 하며, 기술별
+          책임과 상세 구현 원칙은
+          <a href="../frontend/index.html">Front-End 개발 가이드</a>를
+          따릅니다.
+        </p>
+        <p>
+          생성된 컴포넌트의 Props와 UI 타입 작성은
+          <a href="../typescript/index.html">TypeScript 가이드</a>를
+          따릅니다.
+        </p>
+        <p>
+          Tokens Studio, Figma Variables, shadcn/ui와 Tailwind CSS 4 사이의 토큰
+          이름과 연결 방식은
+          <a href="./design_tokens.html">디자인 토큰 가이드</a>를 따릅니다.
+        </p>
+        <p>
+          구현한 공통 컴포넌트의 사용법, 상태와 변경 사항을 관리하는 방법은
+          <a href="../storybook/index.html">Storybook 운영 가이드</a>를
+          따릅니다. Storybook은 Code Connect를 대체하지 않지만, 개발자와 AI가
+          실제 컴포넌트의 공개 API와 사용 예시를 확인하는 기준 문서로 사용합니다.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">영역</th>
+              <th scope="col">기술</th>
+              <th scope="col">이 문서에서의 역할</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Application</td>
+              <td>Next.js, React, TypeScript</td>
+              <td>화면 구성, 컴포넌트와 타입 안전성</td>
+            </tr>
+            <tr>
+              <td>Styling</td>
+              <td>Tailwind CSS</td>
+              <td>디자인 토큰과 기본 스타일 적용</td>
+            </tr>
+            <tr>
+              <td>UI Component</td>
+              <td>shadcn/ui</td>
+              <td>프로젝트가 소유하는 UI 원형</td>
+            </tr>
+            <tr>
+              <td>Design</td>
+              <td>Figma Dev Mode, Tokens Studio</td>
+              <td>디자인 구조와 토큰 전달</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">3. 역할과 책임</h2>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">담당</th>
+              <th scope="col">주요 책임</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>디자이너</td>
+              <td>
+                공통 컴포넌트, Auto Layout, Variables와 Styles를 우선
+                사용합니다. 코드 구조를 고려해 모든 레이어 이름을 정리할 책임은
+                지지 않습니다.
+              </td>
+            </tr>
+            <tr>
+              <td>AI 코드 작업자</td>
+              <td>
+                Figma와 프로젝트 소스를 함께 분석하고, 기존 컴포넌트와 토큰을
+                우선한 구현 초안을 제공합니다.
+              </td>
+            </tr>
+            <tr>
+              <td>프론트엔드 개발자</td>
+              <td>
+                변환 범위를 정하고 구조, 접근성, 반응형 동작과 중복을 검수하며
+                예외와 최종 결과를 승인합니다.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">4. 기본 변환 흐름</h2>
+        <figure class="diagram-frame">
+          <!-- prettier-ignore -->
+          <div class="mermaid">
+flowchart LR
+  accTitle: Figma 디자인을 React 코드로 변환하는 기본 흐름
+  accDescr: 구현 범위를 지정하고 Figma 구조와 프로젝트 소스를 함께 확인한 뒤 기존 컴포넌트와 토큰을 우선 적용하여 코드를 생성하고 프론트엔드 개발자가 검수합니다.
+  A["구현 범위 지정"] --> B["Figma 구조와 화면 의도 확인"]
+  B --> C["기존 컴포넌트와 토큰 매핑"]
+  C --> D["React와 Tailwind CSS 초안 생성"]
+  D --> E["화면 비교와 품질 검수"]
+  E --> F["공통 컴포넌트 Story 작성 또는 갱신"]
+  F --> G["프론트엔드 승인"]
+          </div>
+          <figcaption>React Code Exports 기본 흐름</figcaption>
+        </figure>
+        <ol>
+          <li>구현할 Figma 화면 또는 영역을 지정합니다.</li>
+          <li>
+            Figma의 컴포넌트, Auto Layout, Variables와 화면 의도를 확인합니다.
+          </li>
+          <li>기존 shadcn/ui 및 프로젝트 컴포넌트와 토큰을 우선 적용합니다.</li>
+          <li>기존 요소로 표현할 수 없는 부분만 새로 작성합니다.</li>
+          <li>
+            생성 화면을 Figma와 비교하고 프로젝트 품질 기준으로 검수합니다.
+          </li>
+          <li>
+            새로 만들거나 공개 API를 변경한 공통·재사용 컴포넌트는 Story를 함께
+            작성하거나 갱신하고 정적 Storybook 빌드로 확인합니다.
+          </li>
+        </ol>
+
+        <h3>4.1 Code Connect 도입 시 장점</h3>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">영역</th>
+              <th scope="col">장점</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>기존 컴포넌트 재사용</td>
+              <td>
+                Figma 컴포넌트를 실제 코드의 컴포넌트 이름과 경로에 연결하여
+                AI의 임의 구현과 중복 생성을 줄일 수 있습니다.
+              </td>
+            </tr>
+            <tr>
+              <td>속성과 variant 매핑</td>
+              <td>
+                Figma의 variant, 상태와 텍스트 속성을 React props에 연결하여
+                디자인 의도가 코드에 더 일관되게 반영됩니다.
+              </td>
+            </tr>
+            <tr>
+              <td>AI 컨텍스트 보강</td>
+              <td>
+                컴포넌트 사용법과 프로젝트 지침을 Figma MCP에 함께 제공하여 코드
+                생성 시 추측해야 하는 범위를 줄입니다.
+              </td>
+            </tr>
+            <tr>
+              <td>화면 간 일관성</td>
+              <td>
+                같은 Figma 컴포넌트가 여러 화면에서 동일한 코드 컴포넌트로
+                해석되도록 도와줍니다.
+              </td>
+            </tr>
+            <tr>
+              <td>검수 비용 절감</td>
+              <td>
+                잘못된 import, 불필요한 새 컴포넌트와 속성 누락을 줄여
+                프론트엔드 개발자의 반복 정리 작업을 줄일 수 있습니다.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          <code class="badge-tbd">TBD</code> Code Connect는 Figma Organization
+          또는 Enterprise 플랜 비용, 좌석과 권한, 저장소 연결 정책을 검토한 후
+          도입 여부를 결정합니다. 도입 전에도 위 흐름이 동작하도록 운영합니다.
+        </p>
+
+        <h3>4.2 Code Connect 미도입 시 기존 컴포넌트 연결</h3>
+        <p>
+          Code Connect를 도입하기 전에는 Figma의 공통 컴포넌트에 실제 코드
+          컴포넌트 정보를 기록하고, Cline이 구현 전에 프로젝트 소스를 검색하도록
+          하여 기존 컴포넌트를 우선 사용합니다. 이 방식은 Code Connect의 자동
+          매핑을 대체하지 않지만, 컴포넌트 이름과 import 경로를 추측하는 범위를
+          줄이기 위한 기본 운영 방식입니다.
+        </p>
+
+        <h4>작성 대상과 내용</h4>
+        <p>
+          모든 Frame과 내부 레이어에 정보를 작성하지 않습니다. Button, Input,
+          Dialog, Card와 같이 실제 React 컴포넌트에 대응하는 Figma Main
+          Component 또는 Component Set을 대상으로 합니다.
+        </p>
+        <ul>
+          <li>코드의 컴포넌트 이름과 named export</li>
+          <li>프로젝트에서 사용하는 import 경로</li>
+          <li>주요 Props와 variant</li>
+          <li>컴포넌트의 사용 목적과 중요한 제약</li>
+          <li>가능한 경우 실제 코드 또는 컴포넌트 문서의 Dev resource 링크</li>
+        </ul>
+        <pre class="hljs"><code data-language="text">Code component: Button
+Import: @/components/ui/button
+Props: variant, size, disabled
+Usage: 일반적인 사용자 action에 사용
+Source: Dev resource 참고</code></pre>
+        <p>
+          로컬 절대 경로는 다른 작업자가 사용할 수 없으므로 기록하지 않습니다.
+          import alias, 저장소 상대 경로 또는 팀이 접근할 수 있는 소스 링크를
+          사용합니다. Figma와 코드의 variant 이름이 다르면 대응 관계를 설명에
+          함께 기록합니다. 아직 구현이나 경로가 확정되지 않은 항목은 추측하지
+          않고 <code>Code mapping: TBD</code>로 표시합니다.
+        </p>
+
+        <h4>Figma 작성 방법</h4>
+        <ol>
+          <li>컴포넌트 라이브러리의 원본 Figma 파일을 엽니다.</li>
+          <li>
+            Instance가 아니라 Main Component, Component Set 또는 설명이 필요한
+            개별 Variant를 선택합니다.
+          </li>
+          <li>
+            Design Mode의 Component configuration에서 Description을 열고 코드
+            컴포넌트 정보를 입력합니다.
+          </li>
+          <li>
+            실제 코드나 문서 URL이 있으면 Documentation link 또는 Dev Mode의
+            Dev resource로 연결합니다.
+          </li>
+          <li>
+            공통 링크는 개별 Instance가 아니라 Main Component에 연결하여 모든
+            Instance에서 같은 정보를 확인할 수 있게 합니다.
+          </li>
+          <li>라이브러리로 운영하는 경우 변경 내용을 검토한 뒤 Publish합니다.</li>
+        </ol>
+        <p>
+          Description을 수정하려면 원본 Figma Design 파일의 편집 권한이
+          필요합니다. Dev Mode에서는 Description과 연결된 리소스를 확인하고,
+          권한이 허용된 경우 실제 코드나 문서의 Dev resource를 추가합니다.
+        </p>
+
+        <h4>구축과 운영 책임</h4>
+        <ul>
+          <li>
+            구축 기간에는 Figma Design 편집 권한이 있는 담당자가 구현된 공통
+            컴포넌트의 이름, import 경로와 사용 설명을 원본 컴포넌트에
+            작성합니다.
+          </li>
+          <li>
+            프론트엔드 개발자는 실제 코드의 export, Props, variant와 소스 링크가
+            정확한지 확인합니다.
+          </li>
+          <li>
+            운영 이후 프론트엔드 개발자는 Dev Mode를 기본으로 사용합니다.
+            Description 변경이 필요한 경우 회사의 좌석 관리 정책에 따라 해당
+            개발자에게 일시적으로 Figma Design 편집 권한을 부여합니다.
+          </li>
+          <li>
+            Figma 계정과 로그인 정보는 공유하지 않으며, 관리자 기능으로 개인
+            계정의 좌석과 권한을 변경합니다.
+          </li>
+          <li>
+            컴포넌트 이름, 경로 또는 공개 API가 변경되면 코드와 Figma 설명을
+            함께 갱신합니다.
+          </li>
+        </ul>
+
+        <h4>Cline 구현 기준</h4>
+        <ol>
+          <li>선택된 Figma 요소가 공통 컴포넌트 Instance인지 확인합니다.</li>
+          <li>Description과 Dev resource에서 코드 컴포넌트 정보를 확인합니다.</li>
+          <li>
+            안내된 경로의 실제 파일을 읽어 export, Props와 variant를 검증합니다.
+          </li>
+          <li>
+            현재 기능, 애플리케이션 공통 UI와 <code>packages/ui</code>에서 기존
+            사용 예시를 검색합니다.
+          </li>
+          <li>
+            확인된 컴포넌트를 import하여 사용하고, 존재하지 않는 경로나 API는
+            추측하지 않습니다.
+          </li>
+          <li>
+            기존 컴포넌트로 표현할 수 없는 부분만 새로 작성하고 그 이유를 변경
+            설명에 남깁니다.
+          </li>
+        </ol>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">5. VS Code, Cline 및 로컬 LLM을 이용한 구현</h2>
+        <p>
+          VS Code에서 Cline과 Ollama 기반 로컬 LLM을 사용해 React와 Tailwind CSS
+          구현 초안을 작성할 수 있습니다. 이 가이드의 기본 로컬 모델은
+          <code>qwen3.8:27b-mtp-q4_K_M</code>입니다. 생성된 코드의 구조와 품질을
+          최종 판단하는 주체는 프론트엔드 개발자입니다.
+        </p>
+        <p>
+          사람과 LLM이 작성한 코드의 공통 품질 기준은
+          <a href="../lint/index.html">Front-End Lint 가이드</a>를
+          따릅니다.
+        </p>
+
+        <h3>5.1 도구와 책임</h3>
+        <ul>
+          <li>VS Code는 소스 편집, Diff 확인과 검증 명령 실행에 사용합니다.</li>
+          <li>
+            Cline은 프로젝트 컨텍스트와 Figma 정보를 바탕으로 코드를 생성하고
+            수정합니다.
+          </li>
+          <li>
+            Ollama는 <code>qwen3.8:27b-mtp-q4_K_M</code> 모델을 로컬에서
+            실행합니다.
+          </li>
+          <li>파일 변경과 명령 실행 전후에 범위와 결과를 사람이 확인합니다.</li>
+        </ul>
+
+        <h3>5.2 Ollama와 Qwen 설치</h3>
+        <p>
+          Ollama를 설치한 뒤 Ollama 표시 기준 약 18GB인 MTP Q4_K_M 기본 모델을
+          다음 명령으로 내려받고 실행 여부를 확인합니다.
+        </p>
+        <pre
+          class="hljs"
+        ><code data-language="bash">ollama pull qwen3.8:27b-mtp-q4_K_M
+ollama list
+ollama run qwen3.8:27b-mtp-q4_K_M</code></pre>
+
+        <h3>5.3 Cline 설정</h3>
+        <p>
+          VS Code에 Cline 확장을 설치한 뒤 Cline의 API 설정으로 이동합니다.
+          <strong>API Provider</strong>에서 <code>Ollama</code>를 선택하고,
+          Ollama의 기본 주소와 사용할 모델을 지정합니다.
+        </p>
+        <ol>
+          <li>Cline 설정에서 <strong>API Configuration</strong>을 엽니다.</li>
+          <li>
+            <strong>API Provider</strong>에서 <code>Ollama</code>를 선택합니다.
+          </li>
+          <li>Base URL은 <code>http://localhost:11434</code>로 설정합니다.</li>
+          <li>Model에서 <code>qwen3.8:27b-mtp-q4_K_M</code>를 선택합니다.</li>
+          <li>
+            <strong>Model Context Window</strong>는 속도와 프로젝트 문맥의
+            균형을 고려해 <strong>64K</strong>로 설정합니다. 숫자를 직접
+            입력하는 화면에서는 <code>65536</code>을 입력합니다.
+          </li>
+        </ol>
+        <p>
+          Context Window를 변경한 뒤 설정을 저장하고 새 작업에서 선택한 모델과
+          컨텍스트 크기가 적용되었는지 확인합니다. 128K는 대규모 저장소나 매우
+          긴 대화를 한 번에 유지해야 할 때만 선택적으로 사용합니다. 이 경우
+          Cline 화면에서는 <strong>130K(128K 토큰)</strong>로 설정하고, 숫자를
+          직접 입력하는 화면에서는 <code>131072</code>를 입력합니다.
+        </p>
+
+        <h4>초기 컨텍스트 사용량</h4>
+        <p>
+          동일하거나 유사한 Cline 및 MCP 구성에서 Figma Desktop MCP와 Tavily
+          MCP를 활성화하고, 새 채팅에 <code>안녕</code>처럼 짧은 메시지를
+          입력했을 때 다음과 같은 초기 컨텍스트 사용량이 관찰되었습니다.
+        </p>
+        <ul>
+          <li>
+            일반 <code>qwen3.8:27b</code>: 약 <strong>18.2K</strong> — 기존
+            테스트 관찰값
+          </li>
+          <li>
+            <code>qwen3.8:27b-mtp-q4_K_M</code>: 약 <strong>7~8K</strong> —
+            사용자 실측값
+          </li>
+        </ul>
+        <p>
+          이는 사용자 메시지 자체의 크기뿐 아니라 Cline이 Agent 작업을 시작하기
+          위해 미리 전달하는 기본 컨텍스트가 함께 계산된 결과입니다.
+        </p>
+        <p>초기 컨텍스트에는 일반적으로 다음 정보가 포함됩니다.</p>
+        <ul>
+          <li>Cline의 시스템 지침과 도구 사용 규칙</li>
+          <li>파일 읽기, 수정, 명령 실행과 브라우저 등 기본 도구 정의</li>
+          <li>Figma와 Tavily MCP가 제공하는 도구 이름, 설명 및 입력 구조</li>
+          <li>Cline Rules, 작업 환경과 모델에 전달되는 기타 기본 정보</li>
+        </ul>
+        <p>
+          따라서 MCP 서버와 도구를 많이 활성화할수록 실제 대화를 시작하기 전의
+          컨텍스트 사용량도 커질 수 있습니다. 위의 18.2K와 7~8K는 각 테스트
+          환경에서 관찰된 값입니다. MTP의 주된 목적은 출력 생성 가속이며, MTP
+          자체가 Cline의 시스템 및 MCP 컨텍스트 토큰을 원리적으로 줄인다고
+          단정할 수 없습니다. 모델과 토크나이저, 도구 스키마 처리 방식, Cline
+          버전, 활성 도구, MCP 서버 및 프로젝트 설정 차이에 따라 값이 달라질 수
+          있습니다. 64K 설정에서는 이 초기 사용량을 제외한 나머지 공간에 대화,
+          파일 내용과 도구 실행 결과가 누적되므로 한 채팅에는 하나의 작업 목표만
+          유지하고 필요하면 새 채팅으로 분리합니다. 자세한 컨텍스트 구성은
+          <a href="https://docs.cline.bot/core-workflows/task-management"
+            >Cline Task Management</a
+          >를 참고합니다.
+        </p>
+
+        <h4><code>/newtask</code>로 작업 이어가기</h4>
+        <p>
+          <code>/newtask</code>는 현재 채팅을 단순히 종료하는 명령이 아니라,
+          지금까지의 핵심 내용을 정리해 깨끗한 컨텍스트의 새 Task로 전달하는
+          작업 인계 기능입니다. 컨텍스트가 많이 찼지만 동일한 목표를 계속
+          진행해야 하거나, 조사와 계획을 마치고 구현 단계로 전환할 때
+          사용합니다.
+        </p>
+        <ol>
+          <li>채팅 입력창에 <code>/newtask</code>를 입력합니다.</li>
+          <li>Cline이 현재 대화에서 인계할 내용을 요약해 제안합니다.</li>
+          <li>목표, 완료 작업, 관련 파일과 다음 단계가 정확한지 확인합니다.</li>
+          <li>
+            누락되거나 잘못 요약된 내용을 직접 보완한 뒤 새 Task 생성을
+            승인합니다.
+          </li>
+          <li>새 Task에서 요약된 컨텍스트를 기준으로 작업을 계속합니다.</li>
+        </ol>
+        <p>
+          새 Task를 시작하기 전에 인계 요약에 다음 항목이 포함되었는지
+          확인합니다.
+        </p>
+        <ul>
+          <li>최종 목표와 현재 작업 범위</li>
+          <li>이미 결정한 구현 방향과 변경하면 안 되는 제약 조건</li>
+          <li>완료한 작업, 수정한 파일과 현재 검증 결과</li>
+          <li>해결되지 않은 문제, 확인이 필요한 항목과 다음 작업 순서</li>
+        </ul>
+        <p>
+          새 Task에는 전체 대화와 모든 도구 출력이 그대로 복사되지 않습니다.
+          Figma와 Tavily MCP 연결 설정은 계속 사용할 수 있지만, 이전 검색 결과나
+          Figma 분석 내용은 인계 요약에 포함되어야 새 Task가 알 수 있습니다.
+          따라서 중요한 결정과 근거가 빠지지 않았는지 확인한 뒤 전환합니다.
+        </p>
+
+        <h4>주요 슬래시 명령</h4>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">명령</th>
+              <th scope="col">기능</th>
+              <th scope="col">권장 사용 시점</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>/newtask</code></td>
+              <td>현재 작업의 핵심 내용을 요약해 새 Task로 인계</td>
+              <td>컨텍스트가 많이 찼거나 작업 단계를 전환할 때</td>
+            </tr>
+            <tr>
+              <td><code>/smol</code></td>
+              <td>핵심 내용을 유지하면서 현재 대화 기록을 압축</td>
+              <td>같은 Task를 유지하면서 컨텍스트 공간만 확보할 때</td>
+            </tr>
+            <tr>
+              <td><code>/newrule</code></td>
+              <td>반복해서 적용할 프로젝트 또는 개인 규칙 생성</td>
+              <td>같은 코딩 기준이나 금지사항을 매번 설명하고 있을 때</td>
+            </tr>
+            <tr>
+              <td><code>/deep-planning</code></td>
+              <td>코드베이스를 조사하고 상세 구현 계획과 후속 Task 생성</td>
+              <td>여러 영역에 영향을 주는 복잡한 기능이나 구조 변경 전</td>
+            </tr>
+            <tr>
+              <td><code>/explain-changes</code></td>
+              <td>Git Diff의 변경 내용을 설명하며 VS Code에서만 사용 가능</td>
+              <td>미커밋 변경, 커밋 또는 브랜치 차이를 검토할 때</td>
+            </tr>
+            <tr>
+              <td><code>/reportbug</code></td>
+              <td>Cline 진단 정보를 포함해 문제 보고 준비</td>
+              <td>
+                Cline 자체 오류, 비정상 종료 또는 반복되는 오동작을 보고할 때
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          현재 설치 버전에서 지원되는 명령은 채팅 입력창에 <code>/</code>를
+          입력해 확인합니다. 명령 상세와 변경 사항은
+          <a href="https://docs.cline.bot/core-workflows/using-commands"
+            >Cline Using Commands</a
+          >를 참고합니다.
+        </p>
+
+        <h3>5.4 로컬 LLM 테스트 및 권장 사양</h3>
+        <p>
+          아래 기준은 Ollama 표시 기준 약 18GB인
+          <code>qwen3.8:27b-mtp-q4_K_M</code> 모델을 Ollama와 Cline에서 사용하는
+          환경을 전제로 합니다.
+        </p>
+
+        <h4>모델 선택 원칙과 실사용 평가</h4>
+        <p>
+          로컬 LLM은 파라미터 수나 출시 시점만으로 우열을 판단하지 않습니다.
+          프로젝트 가이드 리뷰, 실제 코드 구현, 리팩터링과 범용 Agent 작업처럼
+          실제로 맡길 업무의 동일한 프롬프트를 각 모델에 적용하고 결과 품질, 응답
+          속도, 지시 준수, 커뮤니케이션과 출력 안정성을 함께 비교합니다.
+        </p>
+        <ul>
+          <li>
+            <strong>Gemma4</strong>: 커뮤니케이션과 Soul 준수가 뛰어나고,
+            문서 리뷰뿐 아니라 프로젝트 전체 맥락과 의도를 파악하는 능력이
+            우수했습니다. 범용 Agent 작업을 안정적으로 맡길 수 있는 모델로
+            평가합니다.
+          </li>
+          <li>
+            <strong>Qwen 계열</strong>: 응답이 느리고 커뮤니케이션은 상대적으로
+            약하지만 Cline 코딩 작업에서는 강점이 있었습니다. Hermes에서는
+            과도한 Reasoning과 출력 불안정이 관찰되었으므로, 범용 Agent나 문서
+            리뷰에는 사용하지 않고 Cline 기반 코드 구현·수정·리팩터링 용도로만
+            사용합니다.
+          </li>
+        </ul>
+        <p>
+          위 평가는 현재 테스트 환경에서 관찰한 업무별 특성이며 고정된 종합
+          순위가 아닙니다. 모델이나 실행 도구가 변경되면 같은 실제 업무 테스트를
+          다시 수행한 뒤 용도별 기본 모델을 결정합니다.
+        </p>
+
+        <h4>테스트 환경</h4>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">구분</th>
+              <th scope="col">테스트 사양</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CPU</td>
+              <td>AMD Ryzen 9 7950X3D</td>
+            </tr>
+            <tr>
+              <td>GPU</td>
+              <td>NVIDIA GeForce RTX 4090 24GB</td>
+            </tr>
+            <tr>
+              <td>메모리</td>
+              <td>DDR5 96GB</td>
+            </tr>
+            <tr>
+              <td>저장 장치</td>
+              <td>NVMe Gen4 SSD 1TB</td>
+            </tr>
+            <tr>
+              <td>모델</td>
+              <td><code>qwen3.8:27b-mtp-q4_K_M</code>, 약 18GB</td>
+            </tr>
+          </tbody>
+        </table>
+        <blockquote>
+          <p>
+            <strong>테스트 결과</strong>: 약 18GB MTP Q4_K_M 모델과 128K 토큰
+            컨텍스트를 사용한 고사양 환경에서는 응답 속도와 추론 품질이 모두
+            실사용 가능한 수준이었습니다. 다만 64K보다 응답이 느려질 수 있으므로
+            일반 개발 PC와 반복 작업에서는 64K를 기본값으로 권장합니다.
+          </p>
+        </blockquote>
+        <p>
+          위 장비는 검증 결과가 좋은 고사양 테스트 환경이며 모든 개발 PC의 필수
+          사양은 아닙니다. 로컬 LLM에서는 GPU 연산 성능뿐 아니라 모델과
+          컨텍스트를 처리할 수 있는 VRAM 용량이 중요합니다.
+        </p>
+
+        <h4>개발 PC 권장 기준</h4>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">사용 범위</th>
+              <th scope="col">GPU</th>
+              <th scope="col">시스템 메모리</th>
+              <th scope="col">CPU</th>
+              <th scope="col">운영 기준</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>64K 기본 권장</td>
+              <td>VRAM 24GB</td>
+              <td>64GB</td>
+              <td>최신 8코어 이상</td>
+              <td>Cline을 이용한 일반적인 코딩 작업의 기본 권장선</td>
+            </tr>
+            <tr>
+              <td>64K 여유 구성</td>
+              <td>VRAM 24GB</td>
+              <td>64~96GB</td>
+              <td>최신 12코어급 권장</td>
+              <td>개발 서버와 다른 작업 도구를 함께 사용할 때 여유 확보</td>
+            </tr>
+            <tr>
+              <td>실행 가능한 최소</td>
+              <td>VRAM 16GB</td>
+              <td>64GB</td>
+              <td>최신 12코어급</td>
+              <td>
+                모델 일부가 CPU로 이동하여 응답 속도가 크게 느려질 수 있음
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          비용과 성능의 균형을 고려하면 RTX 3090 24GB, 시스템 메모리 64GB, 최신
+          8~12코어 CPU와 NVMe SSD 1TB 구성을 권장합니다. RTX 3090은 RTX 4090보다
+          연산 속도는 낮지만 VRAM이 동일하게 24GB이므로 약 18GB 모델의 64K
+          컨텍스트를 사용하는 개발 PC에 적합합니다.
+        </p>
+        <p>
+          64K는 일반적인 코드 조사, Figma 화면 구현과 웹검색 결과 정리에 필요한
+          문맥을 확보하면서 128K보다 빠르게 작업하기 위한 기본값입니다. 다른 GPU
+          사용 프로그램을 최소화하고 <code>ollama ps</code>에서 모델이 가능한 한
+          <code>100% GPU</code>로 적재되었는지 확인합니다. 세부 내용은
+          <a href="https://docs.ollama.com/context-length"
+            >Ollama Context length</a
+          >와 <a href="https://docs.ollama.com/faq">Ollama FAQ</a>를 참고합니다.
+        </p>
+
+        <h3>5.5 Figma Desktop MCP 설정</h3>
+        <p>
+          Figma Desktop에서 선택한 레이어 또는 프레임 정보를 Cline에 전달하려면
+          Cline의 MCP 설정에 다음 서버를 등록합니다.
+        </p>
+        <pre class="hljs"><code data-language="json">{
+  "mcpServers": {
+    "figma-desktop": {
+      "type": "streamableHttp",
+      "url": "http://127.0.0.1:3845/mcp",
+      "disabled": false,
+      "autoApprove": []
+    }
+  }
+}</code></pre>
+        <p>
+          Figma Desktop에서 코드로 변환할 레이어 또는 프레임을 선택한 뒤 Cline에
+          다음과 같이 명령합니다.
+        </p>
+        <pre
+          class="hljs"
+        ><code data-language="text">현재 figma에서 선택된 레이어(프레임) 정보/코딩</code></pre>
+        <p>
+          이 명령을 사용하면 현재 Figma에서 선택된 부분의 정보를 읽어 해당
+          영역의 소스 코드를 생성할 수 있습니다. 선택 대상과 프로젝트의 기존
+          컴포넌트, 디자인 토큰 및 구현 규칙을 함께 확인한 뒤 결과를 적용합니다.
+        </p>
+
+        <h3>5.6 Cline 웹검색과 Tavily MCP</h3>
+        <h4>Cline 기본 브라우저 도구</h4>
+        <p>
+          Cline은 기본 브라우저 도구를 사용해 웹페이지를 열고, 화면을 탐색하고,
+          검색 사이트의 결과와 문서 내용을 확인할 수 있습니다. 별도의 검색 API
+          가입 없이 사용할 수 있지만 웹사이트 화면을 직접 조작하는 방식이므로
+          검색 결과 수집과 여러 출처 비교에는 시간이 더 걸릴 수 있습니다.
+          브라우저 사용은 Cline의 승인 설정에서 허용해야 합니다.
+        </p>
+        <p>
+          특정 URL의 공식 문서를 읽거나 구현 화면을 확인하는 작업에는 기본
+          브라우저를 사용하고, 최신 자료를 여러 출처에서 검색하고 정리하는
+          작업에는 Tavily MCP를 사용합니다.
+        </p>
+
+        <h4>Tavily MCP 설정</h4>
+        <p>
+          Tavily는 AI Agent용 웹검색 서비스로, 검색 결과와 관련 페이지 내용을
+          Cline이 처리하기 쉬운 형태로 제공합니다. 기존 MCP 설정의
+          <code>mcpServers</code>에 다음 항목을 추가합니다.
+        </p>
+        <pre class="hljs"><code data-language="json">"tavily": {
+  "type": "streamableHttp",
+  "url": "https://mcp.tavily.com/mcp/",
+  "headers": {
+    "Authorization": "Bearer YOUR_TAVILY_API_KEY"
+  },
+  "disabled": false,
+  "autoApprove": []
+}</code></pre>
+        <p>
+          <code>YOUR_TAVILY_API_KEY</code>는 Tavily에서 발급받은 키로
+          교체합니다. API 키가 포함된 설정 파일은 저장소에 커밋하지 않습니다.
+          처음에는 <code>autoApprove</code>를 비워 두고 검색 도구 호출 내용을
+          확인한 뒤 승인합니다.
+        </p>
+
+        <h4>무료 및 유료 사용 구분</h4>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">구분</th>
+              <th scope="col">제공량 또는 비용</th>
+              <th scope="col">사용 기준</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Researcher 무료</td>
+              <td>매월 1,000 API 크레딧, 카드 등록 불필요</td>
+              <td>개인 개발과 필요한 공식 문서 검색에 기본 사용</td>
+            </tr>
+            <tr>
+              <td>기본 검색</td>
+              <td>요청 1회당 1크레딧</td>
+              <td>무료 범위에서 우선 사용</td>
+            </tr>
+            <tr>
+              <td>고급 검색</td>
+              <td>요청 1회당 2크레딧</td>
+              <td>기본 검색 결과가 부족할 때만 사용</td>
+            </tr>
+            <tr>
+              <td>Pay As You Go</td>
+              <td>크레딧당 미화 0.008달러</td>
+              <td>무료 제공량을 초과하고 사용량이 일정하지 않을 때 선택</td>
+            </tr>
+            <tr>
+              <td>월간 유료 플랜</td>
+              <td>월 30달러·4,000크레딧부터 사용량별 단계 제공</td>
+              <td>팀에서 반복적으로 많은 검색을 수행할 때 검토</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          이 가이드에서는 무료 Researcher 플랜을 기준으로 기본 검색을 우선
+          사용합니다. 사이트 전체 탐색이나 대규모 Research 요청은 크레딧을
+          빠르게 소비할 수 있으므로 필요한 공식 문서와 최신 정보 확인 범위로
+          제한합니다. 가격과 크레딧 정책은 변경될 수 있으므로
+          <a href="https://docs.tavily.com/documentation/api-credits"
+            >Tavily Credits &amp; Pricing</a
+          >에서 현재 기준을 확인합니다.
+        </p>
+        <pre
+          class="hljs"
+        ><code data-language="text">Tavily를 사용해 관련 기술의 최신 공식 문서를 검색하고,
+핵심 내용과 출처 URL을 함께 정리해줘.</code></pre>
+
+        <h3>5.7 React Code Exports 작업 흐름</h3>
+        <ol>
+          <li>Figma에서 구현할 레이어 또는 프레임을 선택합니다.</li>
+          <li>
+            Cline에
+            <code>현재 figma에서 선택된 레이어(프레임) 정보/코딩</code>이라고
+            요청합니다.
+          </li>
+          <li>
+            코드를 작성하기 전에 현재 기능, 애플리케이션의 공통 UI와
+            <code>packages/ui</code> 순서로 같은 역할의 기존 컴포넌트를
+            검색합니다.
+          </li>
+          <li>
+            사용할 컴포넌트의 실제 파일, export, Props, variant와 기존 사용
+            예시를 확인합니다. 존재하지 않는 import 경로, Props, variant 또는
+            토큰은 추측하지 않습니다.
+          </li>
+          <li>
+            <code>globals.css</code>의 Semantic Token과 기존 Tailwind 사용
+            방식을 확인합니다.
+          </li>
+          <li>
+            공통 CSS 하한은 Safari 15로 적용합니다. Figma 표현에 최신 CSS가
+            필요해 보이더라도 Safari 15에서 지원되지 않는 Tailwind Utility는
+            사용하지 않고 호환 가능한 기본 Utility나 기존 프로젝트 패턴으로
+            대체합니다.
+          </li>
+          <li>
+            기존 요소를 우선 재사용하고 불명확한 동작이나 데이터는 담당자에게
+            확인합니다.
+          </li>
+          <li>생성된 Diff를 검토하고 승인한 범위만 반영합니다.</li>
+          <li>
+            <code>typecheck</code>, <code>lint</code>와 필요한 production
+            build를 실행합니다.
+          </li>
+          <li>구현 화면을 Figma와 비교하고 차이를 수정합니다.</li>
+        </ol>
+
+        <h3>5.8 검수 기준</h3>
+        <ul>
+          <li>Figma에서 의도한 레이어 또는 프레임을 정확히 선택했는가?</li>
+          <li>기존 컴포넌트와 디자인 토큰을 우선 사용했는가?</li>
+          <li>
+            기존 컴포넌트의 실제 파일, export, Props와 variant를 확인했는가?
+          </li>
+          <li>
+            기존 컴포넌트로 표현할 수 있는 요소를 native JSX와 Tailwind로
+            중복 구현하지 않았는가?
+          </li>
+          <li>
+            생성된 import가 실제 경로와 export를 가리키는지 TypeScript 검사로
+            확인했는가?
+          </li>
+          <li>
+            작업 범위를 벗어난 파일, 의존성 또는 설정을 변경하지 않았는가?
+          </li>
+          <li>
+            Safari 15에서 지원되지 않는 최신 CSS 기반 Utility에 핵심 UI를
+            의존시키지 않았는가?
+          </li>
+          <li>
+            Android와 다른 브라우저에 임의의 대응 버전을 지정하지 않고 프로젝트가
+            정한 구형 검증 환경에서 실제 사용 Utility와 핵심 기능을 확인했는가?
+          </li>
+          <li>
+            확인되지 않은 API, 상태 관리 구조 또는 공통화를 추가하지 않았는가?
+          </li>
+          <li>최종 Diff를 사람이 검토했는가?</li>
+          <li>
+            <code>typecheck</code>, <code>lint</code>와 필요한 build를
+            통과했는가?
+          </li>
+        </ul>
+        <blockquote>
+          <p>
+            LLM과 Agent는 구현 속도를 높이는 작업 도구이며 승인 주체가 아닙니다.
+            생성된 코드는 사람이 작성한 코드와 같은 리뷰 및 검증 기준을
+            적용합니다.
+          </p>
+        </blockquote>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">6. Figma 해석 기준</h2>
+        <p>
+          의미 있는 레이어 이름은 코드 생성 정확도를 높이기 위한 권장사항이며
+          필수 조건은 아닙니다. 기본 이름이 남아 있더라도 시각적 구조, 텍스트,
+          컴포넌트 정보와 프로젝트 소스를 함께 분석해 구현합니다.
+        </p>
+        <ul>
+          <li>
+            디자이너에게 개발 구조에 맞춘 전체 레이어 정리를 요구하지 않습니다.
+          </li>
+          <li>
+            색상, 간격과 크기는 레이어 이름보다 Variables와 Auto Layout을 우선
+            기준으로 사용합니다.
+          </li>
+          <li>
+            공통 컴포넌트 인스턴스는 가능한 한 유지하고 같은 요소를 새로 만들지
+            않습니다.
+          </li>
+          <li>
+            동작, 데이터 의미 또는 반응형 규칙이 불명확하면 프론트엔드 개발자가
+            설명을 추가하거나 담당자에게 확인합니다.
+          </li>
+        </ul>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">7. 토큰과 컴포넌트 사용</h2>
+        <p>
+          Tokens Studio와 Figma Variables의 디자인 결정을 프로젝트의 Tailwind
+          토큰에 연결하고, shadcn/ui를 수정 가능한 UI 원형으로 사용합니다. 토큰
+          분류, 이름과 설정의 상세 기준은
+          <a href="./design_tokens.html">디자인 토큰 가이드</a>를 따릅니다.
+        </p>
+        <h3>7.1 토큰 적용 순서</h3>
+        <ul>
+          <li>
+            먼저 <code>globals.css</code>의 Semantic Token과 기존 Tailwind
+            유틸리티를 확인합니다.
+          </li>
+          <li>
+            <code>background</code>, <code>foreground</code>,
+            <code>primary</code>, <code>muted</code>, <code>border</code>처럼
+            사용 목적이 드러나는 토큰을 원시 색상보다 우선합니다.
+          </li>
+          <li>
+            성공, 경고와 안내 색상이 확정되지 않은 상태에서
+            <code>green</code>, <code>yellow</code>, <code>blue</code> 계열을
+            임의로 추가하지 않습니다.
+          </li>
+          <li>
+            Tailwind 기본 간격으로 표현되는 값을 화면별 CSS Variable로 다시
+            만들지 않습니다.
+          </li>
+        </ul>
+        <h3>7.2 shadcn/ui와 기능 컴포넌트</h3>
+        <ul>
+          <li>기존 컴포넌트가 있으면 동일한 요소를 새로 생성하지 않습니다.</li>
+          <li>
+            app-webview에서만 사용하는 shadcn/ui 원형과 Wrapper는
+            <code>apps/app-webview/src/components/ui</code>에서 관리합니다.
+          </li>
+          <li>
+            둘 이상의 Web 애플리케이션에서 실제로 재사용되고 의미와 변경 이유가
+            같은 UI 원형만 <code>packages/ui</code>에서 관리합니다.
+          </li>
+          <li>
+            기존 컴포넌트를 사용할 때 파일명만으로 판단하지 않고 실제 named
+            export, Props, variant와 import alias를 확인합니다.
+          </li>
+          <li>
+            디자인과 코드의 이름 또는 값이 다르면 한쪽을 임의로 정답으로
+            간주하지 않고 차이를 확인합니다.
+          </li>
+          <li>
+            예약, 이용권, 라운지와 같이 업무 의미를 포함한 컴포넌트는 해당 기능
+            가까이에 둡니다.
+          </li>
+          <li>
+            공통 UI를 수정할 때 기존 사용처와 키보드, 포커스 및 ARIA 동작을 함께
+            확인합니다.
+          </li>
+        </ul>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">8. 컴포넌트와 파일 분리</h2>
+        <p>
+          파일은 Figma의 Frame이나 Group 수, JSX 길이 또는 Tailwind 클래스 수가
+          아니라 역할, 상태 소유권, 재사용 범위와 변경 이유를 기준으로 나눕니다.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">사용 범위</th>
+              <th scope="col">기본 배치</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>한 부모에서만 사용하는 단순 UI</td>
+              <td>부모 컴포넌트 파일</td>
+            </tr>
+            <tr>
+              <td>특정 기능에서 사용하는 UI</td>
+              <td>해당 feature 내부</td>
+            </tr>
+            <tr>
+              <td>하나의 애플리케이션에서 반복되는 UI</td>
+              <td>애플리케이션 공통 컴포넌트 영역</td>
+            </tr>
+            <tr>
+              <td>여러 애플리케이션에서 의미와 변경 이유가 같은 UI</td>
+              <td>공통 UI 패키지</td>
+            </tr>
+          </tbody>
+        </table>
+        <ul>
+          <li>단순한 화면은 적은 파일로 시작합니다.</li>
+          <li>
+            독립적인 동작, 상태, 주요 조건 분기 또는 실제 재사용이 확인될 때
+            컴포넌트를 분리합니다.
+          </li>
+          <li>
+            필요가 확인되지 않은 wrapper, hook, store, variant 또는 별도 타입
+            파일을 미리 만들지 않습니다.
+          </li>
+        </ul>
+
+        <h3>8.1 Storybook 등록 기준</h3>
+        <p>
+          Storybook은 공통 컴포넌트의 목록만 관리하는 문서가 아니라 실제 코드로
+          구현된 Component, Feature와 Screen을 한곳에서 탐색하고, Application 전체를
+          실행하지 않아도 주요 UI 상태를 반복 재현·검수하는 개발 환경으로
+          운영합니다. AI 도구는 Story 초안 작성, UI 전체의 누락 점검과 검사 실행을
+          지원할 수 있지만 등록 대상, 상태, Mock 계약과 실제 결과의 정확성은
+          프론트엔드 개발자가 검수합니다.
+        </p>
+        <figure class="diagram-frame">
+          <img src="../../assets/design/storybook-figma-ui-review-demo.png" alt="Storybook addon-designs 공식 데모에서 Embed Frame Story와 Design 패널의 Figma Embed를 표시한 실제 화면" loading="lazy" style="display:block;width:100%;height:auto;border-radius:16px" />
+          <figcaption><a href="https://storybookjs.github.io/addon-designs/?path=/story/docs-figma-examples--embed-frame"><code>@storybook/addon-designs</code> 공식 Embed Frame 데모</a>의 실제 화면</figcaption>
+        </figure>
+        <p>Story에는 Figma 파일, Frame 또는 Prototype URL을 연결할 수 있습니다. 특정 Frame을 표시할 때는 선택한 Frame의 링크를 복사해 사용하며, Storybook의 <code>Design</code> 탭에서 Embed 결과를 확인합니다.</p>
+        <ul>
+          <li>
+            <code>apps/app-webview/src/components/ui</code>,
+            <code>packages/ui</code>, 독립적으로 검수할 가치가 있는 Feature와
+            사용자에게 노출되는 주요 Screen을 등록 대상으로 검토합니다.
+          </li>
+          <li>
+            실제 export와 Props를 기준으로 기본 상태, variant, size, disabled,
+            loading, error와 empty 중 구현된 상태만 Story로 작성합니다.
+          </li>
+          <li>
+            Screen Story는 Loading, Empty, Error, 권한, 긴 문구, 다국어와 지원
+            Viewport처럼 실제 환경에서 반복 재현하기 어려운 상태를 최소 Fixture와
+            승인된 Mock 경계로 고정합니다.
+          </li>
+          <li>
+            공개 Props, Feature 상태, Screen 구조 또는 사용자가 보는 시각적 결과를
+            변경한 작업에서는 관련 Story도 같은 변경에 포함합니다.
+          </li>
+          <li>
+            단순 Page Wrapper, 타입·상수·도우미 파일, 동일 Screen으로 대표할 수 있는
+            Route와 과도한 Mock이 필요한 내부 구현은 제외할 수 있으며 대상과 사유를
+            남깁니다.
+          </li>
+          <li>
+            Storybook을 위해 제품 코드에 사용하지 않는 Props, variant, wrapper나
+            Mock 전용 구조를 추가하지 않습니다. Mock은 승인된 계약을 재현할 뿐 실제
+            Backend 계약과 통합 검증을 대신하지 않습니다.
+          </li>
+          <li>
+            AI 누락 점검은 컴포넌트 파일 수만 비교하지 않고 공통 UI, 사용자 노출
+            Route·Page·Screen, 주요 상태와 Viewport를 함께 조사하여 대상, 근거와 제외
+            사유를 먼저 확인한 뒤 필요한 Story만 추가합니다.
+          </li>
+        </ul>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">9. 완료 기준</h2>
+        <ul>
+          <li>기존 컴포넌트와 디자인 토큰을 우선 사용했는가?</li>
+          <li>화면의 주요 구조와 상태가 Figma 의도와 일치하는가?</li>
+          <li>의미 있는 HTML과 키보드·포커스 기본 동작을 유지하는가?</li>
+          <li>모바일 및 필요한 반응형 범위를 확인했는가?</li>
+          <li>
+            Safari 15와 지원 대상 구형 브라우저에서 핵심 정보, 입력, 이동과 상태
+            표현이 정상 동작하는가?
+          </li>
+          <li>
+            <code>field-sizing</code>, <code>@starting-style</code>,
+            <code>text-wrap: balance/pretty</code>, 최신 <code>:has()</code>,
+            container query와 mask 등에 핵심 UI가 의존하지 않는가?
+          </li>
+          <li>불필요한 공통화와 파일 분리가 없는가?</li>
+          <li>
+            공통·재사용 컴포넌트를 새로 만들거나 공개 API를 변경했다면 Story를
+            작성 또는 갱신했는가?
+          </li>
+          <li>해당되는 경우 정적 Storybook 빌드를 통과하는가?</li>
+          <li>TypeScript 검사, lint와 production build를 통과하는가?</li>
+        </ul>
+        <blockquote>
+          <p>
+            AI 또는 Figma에서 생성한 코드는 사람이 작성한 코드와 같은 리뷰와
+            검증 기준을 적용합니다.
+          </p>
+        </blockquote>
+      </section>
+    </main>
+
+    <footer>
+      <p>React Code Exports 가이드</p>
+    </footer>
+    <script src="../../assets/js/common.js"></script>
+    <script src="../../assets/js/mermaid.js"></script>
+  </body>
+</html>

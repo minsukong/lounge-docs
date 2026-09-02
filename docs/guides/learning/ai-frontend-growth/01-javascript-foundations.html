@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="React와 TypeScript에 필요한 JavaScript 값, 함수, 배열과 비동기 처리의 핵심을 익힙니다." />
+    <title>1. JavaScript 기초</title>
+    <link rel="stylesheet" href="../../../assets/style/presentation-theme.css" />
+  </head>
+  <body>
+    <header>
+      <div class="type">FRONT-END EDUCATION · STEP 01</div>
+      <h1>1. JavaScript 기초</h1>
+      <p>React와 TypeScript 코드를 읽고 수정하는 데 필요한 JavaScript 흐름을 익힙니다.</p>
+    </header>
+    <main>
+      <section>
+        <h2 class="bx-active">1. 학습 목표</h2>
+        <p><a href="./curriculum.html">교육 과정</a> · <a href="./02-typescript-basics.html">다음: TypeScript 기본</a></p>
+        <ul>
+          <li><code>const</code>와 <code>let</code>의 값 변경 범위를 구분합니다.</li>
+          <li>객체와 배열을 직접 변경하지 않고 새 값으로 변환합니다.</li>
+          <li>함수의 입력, 출력과 비동기 실패 경로를 설명합니다.</li>
+        </ul>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">2. 꼭 알아야 할 내용</h2>
+        <h3>값과 참조</h3>
+        <p>문자열·숫자·불리언은 값으로 다루고, 객체와 배열은 같은 참조를 공유할 수 있습니다. React 상태에서는 기존 객체를 직접 수정하지 않고 새 객체나 배열을 만듭니다.</p>
+        <h3>배열 변환</h3>
+        <p><code>map</code>은 각 값을 변환하고, <code>filter</code>는 조건에 맞는 값만 남기며, <code>find</code>는 첫 번째 값을 찾습니다. 화면에 표시할 파생 목록은 원본과 조건에서 계산합니다.</p>
+        <h3>비동기 처리</h3>
+        <p><code>async</code> 함수는 Promise를 반환합니다. <code>await</code> 성공 결과뿐 아니라 HTTP 실패, 네트워크 오류와 취소도 고려합니다.</p>
+        <h3>실행 순서와 오래된 값</h3>
+        <p>동기 코드, Microtask와 Timer의 실행 순서를 구분하고 비동기 Callback이 생성될 때 주변 값을 기억하는 Closure를 이해합니다. 요청이 끝났을 때 화면이나 선택한 사용자가 이미 바뀌었을 수 있으므로, 응답 도착 순서가 실행 시작 순서와 같다고 가정하지 않습니다.</p>
+        <h3>얕은 복사와 변경 영향</h3>
+        <p>Spread는 한 단계만 복사합니다. 중첩 객체를 복사한 뒤 내부 값을 직접 변경하면 이전 값과 참조를 공유할 수 있습니다. AI가 불변성을 지킨다고 설명하더라도 실제로 변경된 깊이와 참조를 확인합니다.</p>
+        <h3>요청 수명과 정리</h3>
+        <p><code>AbortController</code>와 <code>AbortSignal</code>은 더 이상 필요하지 않은 요청을 취소하는 경계입니다. 취소를 일반 장애와 같은 사용자 오류로 표시하지 않으며, Timer·Event Listener·구독은 생성한 위치와 대응되는 정리 경로를 가집니다.</p>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">3. 코드 읽기</h2>
+        <pre class="hljs"><code data-language="javascript"><span class="hljs-keyword">const</span> availableTickets = tickets.<span class="hljs-title function_">filter</span>(
+  (<span class="hljs-params">ticket</span>) =&gt; ticket.status === <span class="hljs-string">&quot;available&quot;</span>,
+);
+
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">loadTickets</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">&quot;/api/tickets&quot;</span>);
+  <span class="hljs-keyword">if</span> (!response.ok) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&quot;이용권을 불러오지 못했습니다.&quot;</span>);
+  <span class="hljs-keyword">return</span> response.<span class="hljs-title function_">json</span>();
+}</code></pre>
+        <p><code>availableTickets</code>는 별도 상태가 아니라 원본 배열에서 계산한 값입니다. 요청 함수는 실패를 숨기지 않고 호출자가 처리할 수 있게 전달합니다.</p>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">4. AI와 함께 연습</h2>
+        <ol>
+          <li>AI에게 배열 변환과 비동기 요청이 포함된 짧은 예제를 만들게 합니다.</li>
+          <li>각 함수의 입력, 반환값과 실패 가능성을 먼저 설명해 달라고 요청합니다.</li>
+          <li>원본 객체를 직접 변경하는 부분과 처리되지 않은 Promise를 찾아 달라고 요청합니다.</li>
+          <li>직접 요구를 하나 바꾸고 AI가 수정한 Diff를 확인합니다.</li>
+        </ol>
+        <pre class="hljs"><code data-language="text">이 JavaScript 코드에서 값의 입력과 출력, 배열 변환,
+비동기 실패 경로를 설명해줘. 바로 수정하지 말고
+원본 값을 직접 변경하는 부분과 처리되지 않은 Promise부터 찾아줘.</code></pre>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">5. 완료 확인</h2>
+        <ul>
+          <li><code>map</code>, <code>filter</code>와 <code>find</code>의 차이를 설명할 수 있습니다.</li>
+          <li>기존 객체를 직접 수정한 코드를 찾을 수 있습니다.</li>
+          <li><code>async</code> 함수의 성공과 실패 경로를 구분할 수 있습니다.</li>
+          <li>비동기 응답 순서가 달라질 때 오래된 결과가 화면을 덮는 문제를 발견할 수 있습니다.</li>
+          <li>Closure, 얕은 복사와 정리되지 않은 외부 작업이 만드는 버그를 설명할 수 있습니다.</li>
+        </ul>
+        <p><a href="./curriculum.html">교육 과정으로</a> · <a href="./02-typescript-basics.html">2단계 TypeScript 기본으로</a></p>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">6. 실행 원리까지 이해하기</h2>
+        <h3>Call Stack, Task와 Microtask</h3>
+        <p>JavaScript는 현재 Call Stack의 동기 코드를 먼저 끝낸 뒤 Promise 반응인 Microtask를 처리하고, 그 다음 Timer 같은 Task를 처리합니다. 따라서 코드의 줄 순서와 완료 순서는 같지 않을 수 있습니다. 직접 실행 순서를 종이에 예측한 뒤 Console 결과와 비교하고, 예측이 틀렸다면 어떤 Queue를 놓쳤는지 설명합니다.</p>
+        <pre class="hljs"><code data-language="javascript">console.log("A");
+setTimeout(() =&gt; console.log("B"), 0);
+Promise.resolve().then(() =&gt; console.log("C"));
+console.log("D"); // A, D, C, B</code></pre>
+        <h3>경쟁 상태를 재현하고 해결하기</h3>
+        <p>검색어 A 요청 뒤 B 요청을 보냈는데 A가 늦게 도착하면 오래된 결과가 최신 화면을 덮을 수 있습니다. 지연 시간을 의도적으로 바꿔 버그를 재현한 뒤, <code>AbortController</code>로 이전 요청을 취소하는 방법과 요청 식별자로 최신 응답만 반영하는 방법을 각각 구현합니다. 취소는 사용자에게 장애 메시지로 표시하지 않습니다.</p>
+        <h3>참조 공유를 눈으로 확인하기</h3>
+        <p>Spread는 한 단계만 복사합니다. 중첩 객체를 수정하기 전후에 <code>Object.is</code>로 각 깊이의 참조를 비교합니다. 어떤 객체가 새로 만들어졌고 무엇이 공유되는지 설명하지 못하면 불변성을 이해한 것으로 보지 않습니다.</p>
+      </section>
+      <section>
+        <h2 class="bx-active">7. 마스터 실습과 증거</h2>
+        <ol>
+          <li>검색 자동완성에 Debounce, 취소, 최신 응답 판별과 Cleanup을 적용합니다.</li>
+          <li>빠른 입력, 느린 응답, 화면 이탈, 네트워크 오류를 각각 재현합니다.</li>
+          <li>실행 순서 타임라인, 실패 원인, 선택한 해결 방식과 대안의 차이를 기록합니다.</li>
+          <li>Timer, Listener와 요청이 남지 않는지 테스트합니다.</li>
+        </ol>
+        <p><strong>통과 기준:</strong> 정상 결과만 보여주는 것으로 부족합니다. 오래된 결과가 화면을 덮는 정확한 순서를 설명하고, 취소와 실패를 구분하며, 중첩 참조 공유와 자원 누수를 코드에서 찾아낼 수 있어야 합니다.</p>
+      </section>
+    </main>
+    <footer><p>1. JavaScript 기초</p></footer>
+    <script src="../../../assets/js/common.js"></script>
+  </body>
+</html>

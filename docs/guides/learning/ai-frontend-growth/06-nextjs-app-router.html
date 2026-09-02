@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Next.js App Router의 Route, Layout과 Server·Client Component 경계를 익힙니다." />
+    <title>6. Next.js App Router</title>
+    <link rel="stylesheet" href="../../../assets/style/presentation-theme.css" />
+  </head>
+  <body>
+    <header>
+      <div class="type">FRONT-END EDUCATION · STEP 06</div>
+      <h1>6. Next.js App Router</h1>
+      <p>라우팅과 렌더링 책임을 이해하고 필요한 컴포넌트만 Client로 전환합니다.</p>
+    </header>
+    <main>
+      <section>
+        <h2 class="bx-active">1. 학습 목표</h2>
+        <p><a href="./05-react-effects-and-forms.html">이전: React Effect와 폼</a> · <a href="./curriculum.html">교육 과정</a> · <a href="./07-tailwind-ui-accessibility.html">다음: Tailwind UI와 접근성</a></p>
+        <ul>
+          <li><code>page</code>, <code>layout</code>, Loading과 Error 경계의 역할을 구분합니다.</li>
+          <li>Server Component를 기본으로 두고 Client 전환 이유를 설명합니다.</li>
+          <li>브라우저 API와 Client State가 필요한 작은 경계만 분리합니다.</li>
+        </ul>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">2. 꼭 알아야 할 내용</h2>
+        <h3>App Router 파일</h3>
+        <p><code>page</code>는 Route의 화면, <code>layout</code>은 하위 Route가 공유하는 UI를 담당합니다. 예약 파일과 실제 배치는 앱이 생성된 뒤 설치된 Next.js 문서와 내부 기준을 확인합니다.</p>
+        <h3>Server 기본</h3>
+        <p>상태, Event, Effect와 브라우저 API가 필요하지 않은 컴포넌트는 Server Component로 유지합니다. <code>&quot;use client&quot;</code>는 필요한 Client 경계의 시작을 의미합니다.</p>
+        <h3>미확정 정책</h3>
+        <p>SSR·SSG·ISR, 캐싱, Route Handler와 Server Action의 세부 정책은 화면과 API 구조가 확정되기 전까지 AI가 임의로 정하지 않습니다.</p>
+        <h3>Server·Client 경계의 데이터 제약</h3>
+        <p>Server Component에서 Client Component로 전달하는 Props는 직렬화 가능한 값이어야 합니다. Browser API, Client Hook과 Event Handler는 Server에서 실행할 수 없고, 서버 전용 비밀값과 모듈이 Client Bundle로 넘어가지 않도록 Import 경계를 확인합니다.</p>
+        <h3>Hydration과 첫 화면 일치</h3>
+        <p>서버가 만든 HTML과 브라우저의 첫 렌더링 결과가 달라지면 Hydration 문제가 생깁니다. 렌더링 중 <code>window</code>, 현재 시각, 무작위 값과 Client Storage를 직접 읽어 첫 결과를 바꾸지 않습니다. Client에서만 알 수 있는 값은 명시적인 대기 상태와 동기화 경계를 둡니다.</p>
+        <h3>Route 상태와 오류 경계</h3>
+        <p>공유·복원해야 하는 검색과 필터는 URL 상태를 우선 검토합니다. Route의 Loading·Error·Not Found와 컴포넌트 내부의 Query 상태가 각각 어떤 실패를 담당하는지 정하고, 같은 오류를 여러 경계에서 중복 처리하지 않습니다.</p>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">3. 코드 읽기</h2>
+        <pre class="hljs"><code data-language="tsx"><span class="hljs-comment">// page.tsx · Server Component</span>
+<span class="hljs-keyword">export default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">TicketPage</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">TicketFilter</span> /&gt;</span></span>;
+}
+
+<span class="hljs-comment">// TicketFilter.tsx · 상태와 Event가 필요한 Client 경계</span>
+<span class="hljs-string">&quot;use client&quot;</span>;
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">TicketFilter</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> [filter, setFilter] = <span class="hljs-title function_">useState</span>(<span class="hljs-string">&quot;all&quot;</span>);
+  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">FilterButtons</span> <span class="hljs-attr">value</span>=<span class="hljs-string">{filter}</span> <span class="hljs-attr">onValueChange</span>=<span class="hljs-string">{setFilter}</span> /&gt;</span></span>;
+}</code></pre>
+        <p>Route 전체를 Client로 바꾸지 않고 상호작용이 시작되는 작은 컴포넌트를 경계로 둡니다.</p>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">4. AI와 함께 연습</h2>
+        <ol>
+          <li>화면의 각 컴포넌트가 상태, Event 또는 브라우저 API를 사용하는지 표시하게 합니다.</li>
+          <li>Client 전환이 필요한 가장 작은 경계를 제안하게 합니다.</li>
+          <li>현재 프로젝트에서 확정되지 않은 캐싱과 데이터 패칭 가정을 따로 적게 합니다.</li>
+        </ol>
+        <pre class="hljs"><code data-language="text">이 화면에서 Server Component를 기본으로 유지하고,
+상태·Event·브라우저 API가 필요한 가장 작은 Client 경계를 찾아줘.
+캐싱과 데이터 패칭 정책은 추측하지 말고 확인 항목으로 분리해줘.</code></pre>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">5. 완료 확인</h2>
+        <ul>
+          <li>Route와 Layout의 책임을 설명할 수 있습니다.</li>
+          <li>Client Component가 필요한 이유를 구체적으로 말할 수 있습니다.</li>
+          <li>확정된 App Router 규칙과 미확정 렌더링 정책을 구분할 수 있습니다.</li>
+          <li>Hydration 불일치와 Client Bundle로 서버 전용 코드가 유입되는 위험을 찾을 수 있습니다.</li>
+          <li>URL, Route 경계와 컴포넌트 상태의 책임을 구분할 수 있습니다.</li>
+        </ul>
+        <p><a href="./05-react-effects-and-forms.html">이전 단계</a> · <a href="./07-tailwind-ui-accessibility.html">7단계 Tailwind UI와 접근성으로</a></p>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">6. 렌더링과 실행 경계 심화</h2>
+        <h3>요구에서 경계를 선택하기</h3>
+        <p>상태와 Event Handler, Browser API가 필요한 가장 작은 부분만 Client Component로 둡니다. 데이터 접근, 비밀값, 권한에 따른 서버 결정은 Server 경계에 남깁니다. Server Component와 Client Component는 반드시 별도 파일 예시로 작성하고 <code>use client</code>가 파일 최상단 경계라는 점을 확인합니다.</p>
+        <h3>렌더링 전략</h3>
+        <p><a href="https://nextjs.org/docs/pages/building-your-application/rendering/server-side-rendering">Server-Side Rendering (SSR)</a>은 요청마다 HTML을 만들고, <a href="https://nextjs.org/docs/pages/building-your-application/rendering/static-site-generation">Static Site Generation (SSG)</a>은 빌드 시 미리 만들며, <a href="https://nextjs.org/docs/app/guides/incremental-static-regeneration">Incremental Static Regeneration (ISR)</a>은 정적 결과를 재검증합니다. 이름을 외우기보다 개인화 여부, 신선도, 캐시 격리, 배포 환경을 기준으로 선택합니다.</p>
+        <h3>Hydration 실패 분석</h3>
+        <p>시간, 난수, Browser 전용 값과 서버·클라이언트의 다른 데이터가 첫 렌더에 들어가면 Hydration이 불일치할 수 있습니다. 경고를 숨기지 말고 서버 HTML과 첫 Client 결과가 달라진 최초 지점을 찾습니다.</p>
+      </section>
+      <section>
+        <h2 class="bx-active">7. 마스터 실습과 증거</h2>
+        <p>공개 콘텐츠, 로그인 사용자 정보, 상호작용 폼이 함께 있는 Route를 설계합니다. 파일별 실행 위치, 직렬화 경계, 캐시·신선도 정책을 표로 제출하고 서버 전용 모듈이 Client Bundle에 들어가지 않는지 확인합니다.</p>
+        <p><strong>통과 기준:</strong> 습관적으로 전체 화면에 <code>use client</code>를 붙이지 않고, 로딩·오류·Not Found 책임과 사용자별 데이터 격리를 포함한 경계 선택을 설명할 수 있어야 합니다.</p>
+      </section>
+    </main>
+    <footer><p>6. Next.js App Router</p></footer>
+    <script src="../../../assets/js/common.js"></script>
+  </body>
+</html>

@@ -3,21 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./docs/assets/style/presentation-theme.css" />
+    <link rel="stylesheet" href="../assets/style/presentation-theme.css" />
   </head>
   <body>
     <main id="content">Loading...</main>
 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
-      fetch("./AGENTS.md")
+      fetch("./common-source.md")
         .then((res) => res.text())
         .then((markdown) => {
           document.querySelector("#content").innerHTML = marked.parse(markdown);
-
-          const mermaidScript = document.createElement("script");
-          mermaidScript.src = "./docs/assets/js/mermaid.js";
-          document.body.append(mermaidScript);
         });
     </script>
   </body>

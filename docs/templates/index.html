@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML 콘텐츠 작성 가이드</title>
+    <link rel="stylesheet" href="../assets/style/presentation-theme.css" />
+  </head>
+  <body>
+    <header>
+      <div class="type">이 문서의 종류 간략하게 예시: "FRONT-END &amp; APP"</div>
+      <h1>HTML 콘텐츠 작성 가이드</h1>
+      <p>문서 전체를 소개하는 간단한 설명이 들어갑니다.</p>
+    </header>
+
+    <main>
+      <section>
+        <h2 class="bx">1. h2 주요 영역의 제목이 들어갑니다.</h2>
+        <p>
+          해당 영역의 내용을 설명하는 본문이 들어갑니다. 하나의 문단에는 하나의
+          주제를 중심으로 작성합니다.
+        </p>
+
+        <h2 class="bx-active">2. h2 주요 영역의 제목 색상 박스</h2>
+
+        <h3>h3 주요 영역 안의 세부 제목이 들어갑니다.</h3>
+        <p>
+          세부 주제에 대한 설명이 들어갑니다. 필요한 경우 여러 개의 문단으로
+          내용을 나눌 수 있습니다.
+        </p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2>3. 목록 영역의 제목이 들어갑니다.</h2>
+
+        <h3>순서가 없는 목록의 제목이 들어갑니다.</h3>
+        <ul>
+          <li>첫 번째 항목의 내용이 들어갑니다.</li>
+          <li>두 번째 항목의 내용이 들어갑니다.</li>
+          <li>세 번째 항목의 내용이 들어갑니다.</li>
+        </ul>
+
+        <h3>순서가 있는 목록의 제목이 들어갑니다.</h3>
+        <ol>
+          <li>첫 번째 단계의 내용이 들어갑니다.</li>
+          <li>두 번째 단계의 내용이 들어갑니다.</li>
+          <li>세 번째 단계의 내용이 들어갑니다.</li>
+        </ol>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2>4. 표 영역의 제목이 들어갑니다.</h2>
+        <p>표에서 비교하거나 정리할 내용을 소개하는 설명이 들어갑니다.</p>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">첫 번째 열의 제목이 들어갑니다.</th>
+              <th scope="col">두 번째 열의 제목이 들어갑니다.</th>
+              <th scope="col">세 번째 열의 제목이 들어갑니다.</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>첫 번째 행의 내용이 들어갑니다.</td>
+              <td>첫 번째 행의 내용이 들어갑니다.</td>
+              <td>첫 번째 행의 내용이 들어갑니다.</td>
+            </tr>
+            <tr>
+              <td>두 번째 행의 내용이 들어갑니다.</td>
+              <td>두 번째 행의 내용이 들어갑니다.</td>
+              <td>두 번째 행의 내용이 들어갑니다.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2>5. 코드 예시 영역의 제목이 들어갑니다.</h2>
+        <p>아래 코드의 목적과 사용 방법을 설명하는 내용이 들어갑니다.</p>
+        <pre class="hljs"><code data-language="text">실제 코드 또는 명령어 예시가 들어갑니다.</code></pre>
+
+        <pre
+          class="hljs"
+        ><code data-language="typescript"><span class="hljs-string">'use client'</span>;
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">requestLocation</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> bridgeWindow = <span class="hljs-variable language_">window</span> <span class="hljs-keyword">as</span> <span class="hljs-built_in">any</span>;
+  <span class="hljs-keyword">const</span> message = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>({
+    <span class="hljs-attr">requestId</span>: crypto.<span class="hljs-title function_">randomUUID</span>(),
+    <span class="hljs-attr">method</span>: <span class="hljs-string">'location.getCurrentPosition'</span>,
+    <span class="hljs-attr">params</span>: {},
+  });
+
+  <span class="hljs-comment">// Android WebView</span>
+  <span class="hljs-keyword">if</span> (bridgeWindow.<span class="hljs-property">AppBridge</span>) {
+    bridgeWindow.<span class="hljs-property">AppBridge</span>.<span class="hljs-title function_">postMessage</span>(message);
+    <span class="hljs-keyword">return</span>;
+  }
+
+  <span class="hljs-comment">// iOS WebView</span>
+  bridgeWindow.<span class="hljs-property">webkit</span>?.<span class="hljs-property">messageHandlers</span>?.<span class="hljs-property">AppBridge</span>?.<span class="hljs-title function_">postMessage</span>(message);
+}
+</code></pre>
+        <!-- // 코드 색상 예시 -->
+      </section>
+
+      <hr />
+
+      <section>
+        <h2>6. 중요 안내 또는 인용 영역의 제목이 들어갑니다.</h2>
+        <blockquote>
+          <p>
+            반드시 강조해야 하는 핵심 원칙, 경고, 문서 우선순위 또는 다른
+            자료에서 인용한 내용이 들어갑니다.
+          </p>
+        </blockquote>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">7. 다이어그램 예시</h2>
+
+        <figure class="diagram-frame">
+          <!-- prettier-ignore -->
+          <div class="mermaid">
+flowchart TD
+  accTitle: 온라인 및 오프라인 화면 처리 흐름
+  accDescr: 네트워크 상태와 승인된 캐시의 존재 여부에 따라 최신 데이터 또는 저장 데이터를 표시하고, 서버 통신이 필요한 작업을 제한한 뒤 연결 복구 시 갱신합니다.
+  A([화면 진입]) --> B{네트워크 연결 확인}
+  B -->|"예"| C["서버에서 최신 데이터 조회"]
+  C --> D["Query Cache 갱신"]
+  D --> E["최신 화면 표시"]
+  B -->|"아니요"| F{승인된 저장 데이터 확인}
+  F -->|"예"| G["저장 데이터 표시 + 오프라인 안내"]
+  F -->|"아니요"| H["오프라인 사용 불가 안내"]
+  G --> I{서버 확인이 필요한 작업 확인}
+  I -->|"예"| J["기능 제한 + 연결 필요 안내"]
+  I -->|"아니요"| K["허용된 로컬 기능 계속 사용"]
+  J -.->|"연결 복구"| C
+  K -.->|"연결 복구"| C
+          </div>
+          <figcaption>네트워크 상태에 따른 화면과 기능 처리</figcaption>
+        </figure>
+
+        <figure class="diagram-frame">
+          <!-- prettier-ignore -->
+          <div class="mermaid">
+sequenceDiagram
+  accTitle: WebView Bridge 요청과 응답 처리 흐름
+  accDescr: WebView가 고유 요청 ID를 포함한 메시지를 보내고 Flutter가 검증 및 Native 기능 실행 후 같은 ID로 응답하여 Promise를 완료하는 과정입니다.
+  participant UI as WebView UI
+  participant AB as AppBridge
+  participant F as Flutter
+  participant OS as OS / Device
+  UI->>AB: 사용자 동작으로 기능 요청
+  AB->>F: JSON Request · requestId
+  F->>F: Origin, Method, Params, 권한 검증
+  F->>OS: 승인된 Native 기능 실행
+  OS-->>F: 처리 결과
+  F-->>AB: Base64 JSON Response · 동일 requestId
+  AB-->>UI: Promise 성공 / 취소 / 오류 완료
+          </div>
+          <figcaption>WebView–Flutter Bridge 요청·응답 과정</figcaption>
+        </figure>
+      </section>
+    </main>
+
+    <footer>
+      <p>HTML 콘텐츠 작성 가이드</p>
+    </footer>
+    <script src="../assets/js/common.js"></script>
+    <script src="../assets/js/mermaid.js"></script>
+  </body>
+</html>

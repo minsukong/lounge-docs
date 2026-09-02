@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="React 컴포넌트 책임, Props, State와 상태 소유자를 판단하는 방법을 익힙니다." />
+    <title>4. React 컴포넌트와 상태</title>
+    <link rel="stylesheet" href="../../../assets/style/presentation-theme.css" />
+  </head>
+  <body>
+    <header>
+      <div class="type">FRONT-END EDUCATION · STEP 04</div>
+      <h1>4. React 컴포넌트와 상태</h1>
+      <p>화면을 Figma 레이어가 아니라 책임, 데이터와 사용자 동작으로 나눕니다.</p>
+    </header>
+    <main>
+      <section>
+        <h2 class="bx-active">1. 학습 목표</h2>
+        <p><a href="./03-typescript-boundaries.html">이전: TypeScript 경계</a> · <a href="./curriculum.html">교육 과정</a> · <a href="./05-react-effects-and-forms.html">다음: React Effect와 폼</a></p>
+        <ul>
+          <li>Props와 State의 책임을 구분합니다.</li>
+          <li>최소한의 State만 저장하고 파생 값은 계산합니다.</li>
+          <li>상태를 사용하는 가장 가까운 공통 부모를 소유자로 선택합니다.</li>
+        </ul>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">2. 꼭 알아야 할 내용</h2>
+        <h3>컴포넌트 분리</h3>
+        <p>파일 길이나 Figma Frame 수가 아니라 독립적인 책임, 상태 소유권, 재사용 범위와 변경 이유로 나눕니다. 단순한 컴포넌트는 한 파일로 시작합니다.</p>
+        <h3>최소 State</h3>
+        <p>시간에 따라 바뀌고 다른 값에서 계산할 수 없는 값만 State로 저장합니다. 목록 개수, 필터 결과와 표시 문구처럼 Props와 State에서 계산할 수 있는 값은 중복 저장하지 않습니다.</p>
+        <h3>상태 끌어올리기</h3>
+        <p>여러 자식이 같은 상태를 사용하면 가장 가까운 공통 부모가 상태를 소유하고 필요한 값과 동작을 Props로 전달합니다.</p>
+        <h3>렌더링과 상태 보존</h3>
+        <p>React는 컴포넌트가 트리의 같은 위치에 있는 동안 상태를 보존합니다. 조건부 렌더링으로 위치가 바뀌거나 <code>key</code>가 달라지면 상태가 초기화될 수 있습니다. 목록의 배열 순서를 <code>key</code>로 사용하면 삽입·정렬 때 다른 항목의 입력 상태가 재사용될 수 있습니다.</p>
+        <h3>제어 주체를 하나로 유지</h3>
+        <p>같은 값을 부모 Props와 자식 State에 동시에 두면 어느 쪽이 기준인지 불명확해집니다. 외부에서 제어할 값인지 컴포넌트 내부에서만 유지할 값인지 결정하고, Props를 State로 복사하는 코드는 명시적인 초기화 요구가 있을 때만 사용합니다.</p>
+        <h3>공유 범위와 Context</h3>
+        <p>Props 전달이 있다는 이유만으로 Context나 전역 Store를 만들지 않습니다. 변경 빈도, 구독 범위와 테스트 영향을 확인하고, 실제로 멀리 떨어진 여러 소비자가 같은 클라이언트 상태를 사용할 때만 공유 경계를 검토합니다.</p>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">3. 코드 읽기</h2>
+        <pre class="hljs"><code data-language="tsx"><span class="hljs-keyword">function</span> <span class="hljs-title function_">TicketList</span>(<span class="hljs-params">{ tickets }: TicketListProps</span>) {
+  <span class="hljs-keyword">const</span> [filter, setFilter] = <span class="hljs-title function_">useState</span>&lt;<span class="hljs-title class_">TicketFilter</span>&gt;(<span class="hljs-string">&quot;all&quot;</span>);
+  <span class="hljs-keyword">const</span> visibleTickets = tickets.<span class="hljs-title function_">filter</span>(
+    (<span class="hljs-params">ticket</span>) =&gt; filter === <span class="hljs-string">&quot;all&quot;</span> || ticket.status === filter,
+  );
+
+  <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">TicketResults</span> <span class="hljs-attr">tickets</span>=<span class="hljs-string">{visibleTickets}</span> /&gt;</span></span>;
+}</code></pre>
+        <p><code>visibleTickets</code>는 기존 데이터와 필터에서 계산되므로 State가 아닙니다. 필터를 바꾸면 렌더링 중 다시 계산됩니다.</p>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">4. AI와 함께 연습</h2>
+        <ol>
+          <li>Figma 화면 하나에서 사용자 행동과 바뀌는 값만 먼저 나열하게 합니다.</li>
+          <li>각 State의 소유자와 파생 값을 AI에게 표로 정리하게 합니다.</li>
+          <li>컴포넌트 분리가 Figma 계층을 그대로 옮긴 것인지 검토하게 합니다.</li>
+        </ol>
+        <pre class="hljs"><code data-language="text">이 화면의 값을 Props, State와 파생 값으로 나눠줘.
+각 State를 누가 사용하고 변경하는지 확인해 가장 가까운 소유자를 제안하고,
+Figma 레이어 수가 아니라 책임으로 컴포넌트를 나눠줘.</code></pre>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">5. 완료 확인</h2>
+        <ul>
+          <li>State가 아닌 계산 가능한 값을 찾을 수 있습니다.</li>
+          <li>상태 소유자를 선택한 이유를 설명할 수 있습니다.</li>
+          <li>컴포넌트를 합치거나 나눌 근거를 책임으로 설명할 수 있습니다.</li>
+          <li><code>key</code>와 트리 위치가 상태 보존에 미치는 영향을 설명할 수 있습니다.</li>
+          <li>Props, 지역 State, Context와 전역 Store 중 상태의 제어 주체를 선택할 수 있습니다.</li>
+        </ul>
+        <p><a href="./03-typescript-boundaries.html">이전 단계</a> · <a href="./05-react-effects-and-forms.html">5단계 React Effect와 폼으로</a></p>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">6. 상태와 책임을 설계하기</h2>
+        <h3>상태 인벤토리</h3>
+        <p>구현 전에 모든 값을 원본 상태, 파생 값, 서버 상태, URL 상태, 폼 초안과 일시적 UI 상태로 분류합니다. 다른 값에서 계산할 수 있다면 State에 저장하지 않습니다. URL로 공유하거나 새로고침 뒤 복원해야 하는 선택값은 지역 State보다 URL이 적합할 수 있습니다.</p>
+        <h3>상태 보존은 위치와 Key로 결정된다</h3>
+        <p>조건문 모양이 아니라 렌더 트리의 같은 위치와 같은 Key인지가 State 보존을 결정합니다. 사용자나 편집 대상이 바뀔 때 State가 유지되어야 하는지 초기화되어야 하는지 먼저 정하고 Key를 그 정책에 맞게 사용합니다.</p>
+        <h3>컴포넌트 분리의 판단 기준</h3>
+        <p>줄 수가 아니라 변경 이유, 상태 소유권, 재사용되는 행동과 독립 검증 가능성으로 분리합니다. 실제 반복이 없는 범용 Wrapper와 지나치게 많은 Boolean Props는 책임이 불분명하다는 신호입니다.</p>
+      </section>
+      <section>
+        <h2 class="bx-active">7. 마스터 실습과 증거</h2>
+        <p>검색·필터·선택·인라인 편집이 있는 목록을 구현합니다. 먼저 값별 소유자와 수명을 표로 작성하고, Props 복사·Index Key·중복 파생 State가 있는 결함 버전을 리뷰합니다. React DevTools로 불필요한 렌더를 관찰하되 측정 없이 Memoization을 추가하지 않습니다.</p>
+        <p><strong>통과 기준:</strong> 각 State가 왜 그 컴포넌트에 있으며 언제 보존·초기화되는지 설명하고, Context나 전역 Store가 필요한 실제 공유 범위를 증명할 수 있어야 합니다.</p>
+      </section>
+    </main>
+    <footer><p>4. React 컴포넌트와 상태</p></footer>
+    <script src="../../../assets/js/common.js"></script>
+  </body>
+</html>
