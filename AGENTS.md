@@ -3,6 +3,10 @@
 ## 1. 기준 문서와 우선순위
 
 - 가이드를 작성하기 전에 `README.md`, `init/index.html`, `monorepo/index.html`, `frontend_guide/index.html`과 대상 가이드의 기존 파일을 확인합니다.
+- shadcn/ui, Tailwind CSS 4, 디자인 토큰, UI 컴포넌트 재사용 또는 AI 생성 화면 구현에 관한 질문이나 작업은 먼저 `ui_guide/react_code_exports.html`을 확인합니다. 특히 Safari 15 CSS 하한, 사용할 수 없는 최신 CSS 기반 Utility의 대체, `globals.css`의 Semantic Token, 기존 shadcn/ui 컴포넌트 우선 사용 기준을 따릅니다.
+- iOS·Android 최소 지원 버전, Safari·WKWebView·System WebView 호환성, Tailwind CSS 4의 브라우저 지원 범위 또는 실제 기기 검증에 관한 질문이나 작업은 먼저 `app/webView/webView_guide.html`의 「Chrome과 Safari 호환성 기준」, 「Tailwind CSS v4 호환성」과 「디버깅과 호환성 검증」을 확인합니다.
+- 이 프로젝트의 공통 CSS 하한은 Safari 15입니다. Tailwind CSS 4의 공식 완전 호환 최소 브라우저 버전을 앱의 최소 지원 버전으로 그대로 적용하지 않고, 프로젝트가 실제 사용하는 CSS와 Utility를 iOS 15 WKWebView 및 지원 대상 구형 WebView에서 검증한 결과로 판단합니다.
+- 두 문서의 역할이 겹치면 UI 코드 작성·토큰·컴포넌트 선택은 `ui_guide/react_code_exports.html`, OS·WebView·브라우저 지원 및 검증 범위는 `app/webView/webView_guide.html`을 우선합니다. 기준이 충돌하거나 실제 코드에서 확인되지 않으면 임의로 결론 내리지 않고 충돌 지점 또는 확인 필요 사항을 알립니다.
 - 애플리케이션 저장소 구조, 공통 패키지, 계약, 의존성, CI/CD와 배포 단위는 `monorepo/index.html`을 현재 기준으로 사용합니다.
 - `monorepo/index.html`의 폴더 구조는 확정안이 아니므로 새 가이드에서 임의로 폴더나 패키지를 확정하지 않습니다.
 - `app/app.html`과 `frontend_guide/index.html`은 영역별 상세 문서입니다. 내용이 충돌하면 `monorepo/index.html`을 우선합니다.

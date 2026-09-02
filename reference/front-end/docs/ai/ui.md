@@ -1,6 +1,6 @@
 # UI 구현 핵심 규칙
 
-> 기준 원본: `lounge-docs/frontend_guide/index.html`, `lounge-docs/ui_guide/react_code_exports.html`, `lounge-docs/ui_guide/design_tokens.html`, `lounge-docs/storybook_guide/index.html`
+> 기준 원본: `lounge-docs/frontend_guide/index.html`, `lounge-docs/ui_guide/react_code_exports.html`, `lounge-docs/ui_guide/design_tokens.html`, `lounge-docs/app/webView/webView_guide.html`, `lounge-docs/storybook_guide/index.html`
 >
 > 이 문서는 AI 코딩용 요약입니다. 충돌하거나 세부 판단이 필요하면 기준 원본을 확인합니다.
 
@@ -12,6 +12,15 @@
 - 공통 CSS 하한은 Safari 15입니다. Safari 15에서 지원되지 않는 최신 CSS 기반 Utility는 사용하지 않고 호환 가능한 기본 Utility나 기존 프로젝트 패턴으로 대체합니다.
 - Android와 다른 브라우저는 Safari 15에 특정 제품 버전을 대응시키지 않고 지원 대상 구형 버전에서 실제 사용하는 Utility와 핵심 기능을 확인합니다.
 - 조건부 클래스는 기존 `@/lib/utils`의 `cn`을 사용합니다.
+
+## Safari 15 지원 목적과 범위
+
+- Safari 15 지원은 10년 이상 운영된 기존 앱의 장기 이용자와 구형 기기 사용자를 신규 앱으로 안전하게 이전하기 위한 프로젝트 정책입니다. 일반적인 신규 프로젝트의 권장 최소 버전이나 Tailwind CSS 4의 공식 완전 호환 범위로 해석하지 않습니다.
+- AI는 shadcn/ui, Base UI 또는 Tailwind CSS의 최신 공식 요구사항만을 근거로 iOS 최소 버전을 올리거나 Safari 15 대응을 제거하지 않습니다.
+- Safari 15에서는 최신 환경과 픽셀 단위로 같은 시각 효과보다 로그인, 예약, 결제, 이용권, 안내, 입력과 이동 같은 핵심 정보와 업무 흐름을 완료할 수 있는지를 우선합니다.
+- 지원되지 않는 시각 효과는 호환 가능한 기본 Utility와 기존 프로젝트 패턴으로 대체합니다. 대체가 어려우면 핵심 정보와 상호작용을 유지하는 점진적 저하를 적용하고 차이를 완료 보고에 남깁니다.
+- Dialog, Select, Popover, Drawer처럼 Portal, 포커스, 스크롤, 터치와 모바일 키보드가 결합되는 shadcn/ui 컴포넌트는 iOS 15 WKWebView의 실제 사용자 흐름에서 확인합니다. 라이브러리 이름이나 단위 테스트 통과만으로 호환된다고 판단하지 않습니다.
+- Safari 15 지원 종료와 최소 OS 상향은 실제 OS별 활성 사용자, 오류율과 고객지원 영향을 근거로 App·기획·QA 담당자가 승인한 뒤 적용합니다. AI는 재검토 시점이나 종료 비율을 임의로 확정하지 않습니다.
 
 ## 토큰과 컴포넌트
 

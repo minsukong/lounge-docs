@@ -32,6 +32,8 @@
 <section>
 <h2 class="bx-active">2. 1단계: Tailwind CSS 4 연결</h2>
 <p>검증된 Tailwind CSS v4.1 이상의 버전을 잠금 파일에 고정합니다. 공통 CSS 하한은 Safari 15이며, 이 환경에서 지원되지 않는 최신 CSS 기능이나 Utility를 기본 구현에 사용하지 않습니다. Android와 다른 브라우저는 Safari 15에 특정 제품 버전을 대응시키지 않고 지원 대상 구형 환경에서 실제 사용 기능을 확인합니다.</p>
+<p>Safari 15 지원은 10년 이상 운영된 기존 앱의 장기 이용자와 구형 기기 사용자를 신규 앱으로 이전하기 위한 프로젝트 정책입니다. 최신 환경과 픽셀 단위로 동일한 효과를 만드는 것보다 핵심 정보, 입력, 이동과 업무 흐름의 완료를 우선하며, 지원되지 않는 시각 효과는 호환 표현이나 점진적 저하로 처리합니다. Tailwind CSS 4의 공식 완전 호환 최소 버전만을 근거로 앱의 최소 OS를 올리지 않습니다. 최소 OS 상향은 출시 후 실제 OS별 활성 사용자, 오류율과 고객지원 영향을 근거로 담당자가 승인한 경우에만 적용합니다.</p>
+<p>shadcn/ui 컴포넌트도 이름이나 생성 여부만으로 Safari 15 호환을 보장하지 않습니다. Dialog, Select, Popover와 Drawer처럼 Portal, 포커스, 스크롤, 터치와 모바일 키보드가 결합되는 컴포넌트는 iOS 15 WKWebView에서 실제 사용자 흐름을 검증하고, 필요한 경우 프로젝트가 소유한 생성 코드를 호환 가능한 방식으로 조정합니다.</p>
 <h3><code>apps/app-webview/postcss.config.mjs</code></h3>
 <pre class="hljs"><code data-language="js"><span class="hljs-keyword">const</span> config = {
   plugins: {
