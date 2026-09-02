@@ -1,0 +1,26 @@
+# 기본 작업에서 읽지 않아도 되는 개요·내부 자료
+/docs/guides/briefing/
+/docs/guides/planning/
+/docs/guides/learning/ai-frontend-growth/
+
+# 초안과 변경 이력
+**/draft.md
+/docs/CHANGELOG.md
+/docs/CHANGELOG.html
+
+# Markdown 원본이 따로 있는 사람용 HTML 보기
+/AGENTS.html
+/docs/AGENTS.html
+/docs/ai/*.html
+/docs/common-source/*.html
+
+# 공통 Source 적용 범위 검토에서만 필요한 문서
+/docs/common-source/briefing.md
+/docs/common-source/catalog.md
+
+# 검색 작업에서만 필요한 생성·화면 파일
+/docs/search/index.html
+/docs/assets/js/search-data.js
+
+# KRDS 조사나 디자인 기준 작업에서만 필요한 대용량 참고 자료
+/docs/assets/design/DESIGN(KRDS).md

@@ -13,6 +13,13 @@
 
 ## 2026-09-02
 
+### main 최신 변경의 실무 구조 반영
+
+- 구축 브리핑 발표 자료의 확장된 장면과 설명을 `docs/guides/briefing/presentation.html`에 반영하고 문서 자산·README·검색 링크를 현재 `docs/` 구조에 맞게 조정했습니다.
+- 통합 전 `reference/front-end`를 설명하던 발표 문구는 실제 프로젝트의 `apps/app-webview`와 `docs` 책임 구조를 설명하도록 갱신했습니다.
+- Cline이 일반 구현 작업에서 브리핑·초안·변경 이력·생성 검색 데이터 등을 불필요하게 읽지 않도록 현재 폴더 구조에 맞춘 `.clineignore`와 최소 문서 확인 규칙을 추가했습니다.
+- 문서 작업 시 README, 템플릿, 구조 가이드와 Front-end 가이드를 매번 모두 읽지 않고 변경 범위에 직접 필요한 기준만 선택하도록 `docs/AGENTS.md`를 갱신했습니다.
+
 ### 실제 Front-end 프로젝트 폴더 구조로 통합
 
 - `actual-project-structure` 브랜치에서 애플리케이션과 가이드를 함께 운영하는 실제 저장소 구조로 전환했습니다.
