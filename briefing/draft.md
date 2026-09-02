@@ -433,58 +433,56 @@ lounge-docs/
 
 저장소 최상위 `AGENTS.md`는 이 가이드 저장소에서 문서를 작성하고 검증하는 규칙입니다. 실제 서비스 개발자가 Application 코드를 구현할 때 사용하는 프로젝트 규칙이 아닙니다.
 
-### 실제 프로젝트용 `reference/front-end`
+### 통합 전 준비 영역인 `reference/front-end`
 
-향후 실제 Front-end 프로젝트에는 `reference/front-end`의 내용을 기준으로 필요한 문서를 가져갑니다.
+현재 `reference/front-end`는 실제 Front-end 저장소로 통합하기 전까지 AI 요약과 공통 Source 적용 기준을 준비하는 임시 영역입니다. 최종 저장소에 이 중간 경로를 그대로 남기지 않습니다.
 
-`reference/front-end/AGENTS.md`는 Cline, Claude Code, Codex와 같은 AI 코딩 도구가 실제 업무에서 가장 먼저 읽는 공통 규칙입니다. 작업 종류에 따라 어떤 AI 요약과 사람용 상세 가이드를 확인할지 안내하고, 기존 Source와 설치 Package를 먼저 조사하도록 통제합니다.
+`reference/front-end/AGENTS.md`는 최종 Root `AGENTS.md`의 준비 원본입니다. Cline, Claude Code, Codex와 같은 AI 코딩 도구가 작업 종류에 따라 필요한 요약과 실제 Source를 먼저 확인하도록 통제합니다.
 
-`reference/front-end/docs/ai`는 AI가 매 작업마다 긴 원본 전체를 읽지 않도록 만든 작업별 요약입니다. Figma 구현, UI, Storybook, 품질, 보안, 성능과 프로젝트 구조처럼 현재 작업에 필요한 기준만 빠르게 제공합니다.
+`reference/front-end/docs/ai`는 최종 `docs/ai`로 이동할 작업별 요약입니다. Figma 구현, UI, Storybook, 품질, 보안, 성능과 프로젝트 구조처럼 현재 작업에 필요한 기준만 빠르게 제공합니다.
 
-`reference/front-end/docs/common-source`는 즉시 복사하는 Boilerplate가 아닙니다. 실제 사용처, 승인된 API 계약, 설치 Package와 교체 지점을 확인한 뒤 선택적으로 적용하는 참고 구현입니다. 실제 Application Source가 존재하면 기존 코드와 비교·병합하며 문서의 예시로 덮어쓰지 않습니다.
+`reference/front-end/docs/common-source`는 최종 `docs/common-source`로 이동할 적용 기준입니다. 즉시 복사하는 Boilerplate가 아니며 실제 사용처, 승인된 API 계약, 설치 Package와 교체 지점을 확인한 뒤 선택적으로 적용합니다. 실제 Application Source가 존재하면 기존 코드와 비교·병합하며 문서의 예시로 덮어쓰지 않습니다.
 
 ### 실제 서비스 저장소가 생성된 이후
 
-`reference/front-end`는 실제 서비스 저장소가 만들어지기 전까지 준비하는 초기 문서 묶음입니다. 프로젝트가 생성되면 이 내용을 실제 저장소의 Root `AGENTS.md`와 `docs` 영역으로 가져가고, 실제 Source, 설치 Package와 확정된 계약에 맞춰 수정합니다.
+실제 Front-end 저장소를 만드는 브랜치에서는 문서, 공통 자산과 내부 링크를 한 변경에서 함께 이동합니다. 구현 규칙과 가이드 작성 규칙을 분리하고, 상세 가이드·AI 요약·공통 Source 기준을 모두 Root `docs` 아래에서 관리합니다.
 
 ```text
-lounge-project/
-├── AGENTS.md                       # 저장소 전체의 공통 AI 작업 규칙
-├── docs/
-│   ├── ai/                         # Figma, Storybook, 품질, 보안 등 작업별 AI 요약
-│   ├── common-source/              # 실제 적용 조건과 사용법을 확인할 참고 구현 문서
-│   ├── architecture/               # 후보: 확정된 구조와 기술 결정 기록
-│   └── operations/                 # 후보: Build, 배포, 모니터링과 장애 대응
+front-end-repository/
+├── AGENTS.md                   # 실제 구현 작업용 AI 최상위 지침
+├── README.md
 ├── apps/
-│   ├── website/
-│   ├── mobile/
-│   ├── app-webview/
-│   │   ├── AGENTS.md               # 후보: App-WebView에만 필요한 추가 규칙
-│   │   └── src/
-│   ├── card-inapp/
-│   └── backoffice/
-└── packages/
-    └── ui/
+│   └── app-webview/
+│       ├── AGENTS.md           # WebView Application 전용 추가 지침
+│       ├── .storybook/
+│       └── src/
+└── docs/
+    ├── AGENTS.md               # 가이드 작성과 HTML 검증 규칙
+    ├── index.html              # 전체 가이드 진입점
+    ├── assets/                 # HTML 공통 스타일·Script·Image
+    ├── guides/                 # 사람이 읽는 상세 HTML 가이드와 원본
+    ├── ai/                     # AI 작업별 핵심 요약
+    └── common-source/          # 실제 코드 적용 조건과 파일 단위 구현 기준
 ```
 
-초기 프로젝트에서 바로 가져갈 대상은 Root `AGENTS.md`, `docs/ai`와 `docs/common-source`입니다. 단, `docs/common-source`의 구현 예시는 실제 프로젝트 코드와 비교하여 필요한 부분만 적용합니다.
+루트의 상세 가이드는 `docs/guides`의 주제별 폴더로, 공통 스타일·Script·Image는 `docs/assets`로 옮깁니다. `reference/front-end/docs/ai`와 `reference/front-end/docs/common-source`는 각각 `docs/ai`와 `docs/common-source`로 올립니다. 실제 Application Source는 `docs`가 아니라 `apps/app-webview`에 둡니다.
 
-`docs/architecture`, `docs/operations`와 `apps/app-webview/AGENTS.md`의 상세 구성은 아직 확정하지 않습니다. 실제 Architecture 결정, CI/CD, 배포, Monitoring, 장애 대응과 App별 규칙이 생겼을 때 담당자와 관리 책임을 정한 뒤 추가합니다.
+Root `AGENTS.md`는 구현 작업 규칙, `docs/AGENTS.md`는 문서 작성과 HTML 검증 규칙, `apps/app-webview/AGENTS.md`는 WebView Application에만 필요한 추가 규칙을 담당합니다. `docs/common-source`의 예시는 실제 Source와 비교하여 필요한 부분만 적용합니다.
 
 문서 이동과 운영 흐름은 다음과 같습니다.
 
 ```mermaid
 flowchart TD
   accTitle: 가이드 저장소에서 실제 프로젝트 문서로 이동하는 흐름
-  accDescr: 현재 가이드 원본에서 실제 프로젝트용 reference 문서를 준비하고, 프로젝트가 생성되면 Root AGENTS와 docs로 옮겨 실제 소스와 패키지에 맞게 수정하며, 운영 조건이 확정된 뒤 Architecture와 Operations 문서를 추가하고 공통 개선점을 원본 가이드로 되돌립니다.
-  A["lounge-docs<br/>사람용 원본 가이드"] --> B["reference/front-end<br/>초기 프로젝트용 문서 묶음"]
-  B --> C["실제 저장소<br/>Root AGENTS.md · docs/ai · docs/common-source"]
+  accDescr: 현재 가이드 원본과 reference 준비 문서를 새 Front-end 저장소의 Root AGENTS, docs와 app-webview로 한 번에 통합하고, 실제 소스와 패키지 및 승인 계약에 맞게 적용한 뒤 공통 개선 근거를 가이드 원본으로 되돌립니다.
+  A["lounge-docs<br/>가이드 원본 · 공통 자산"] --> B["새 통합 브랜치<br/>경로 · 자산 · 내부 링크 함께 이동"]
+  R["reference/front-end<br/>AI 요약 · 공통 Source 준비본"] --> B
+  B --> C["실제 저장소<br/>Root AGENTS · docs · apps/app-webview"]
   C --> D["실제 Source · Package · 승인 계약에 맞게 적용"]
-  D --> E["운영 조건 확정 후<br/>Architecture · Operations 문서 추가 검토"]
-  E -.->|"공통 기준으로 환류할 근거"| A
+  D -.->|"공통 기준으로 환류할 근거"| A
 ```
 
-프로젝트가 생성된 뒤에는 실제 저장소의 문서가 해당 프로젝트 작업의 기준입니다. `reference/front-end`를 별도의 두 번째 운영 원본으로 유지하지 않습니다. 여러 프로젝트에 공통으로 적용할 개선점이 확인되면 변경 근거를 `lounge-docs`의 사람용 원본에 반영하고, 필요한 AI 요약과 참고 구현을 다시 동기화합니다.
+통합이 끝난 뒤에는 실제 저장소의 Root `AGENTS.md`, `docs`와 Application Source가 해당 프로젝트 작업의 기준입니다. 기존 루트 가이드 경로, `reference/front-end` 또는 별도 `common_docs`를 두 번째 운영 원본이나 중간 구조로 남기지 않습니다. 여러 프로젝트에 공통으로 적용할 개선점이 확인되면 변경 근거를 사람용 원본, 관련 AI 요약과 공통 Source 기준에 함께 반영합니다.
 
 ### 문서를 확인하는 우선순위
 
@@ -504,7 +502,7 @@ flowchart TD
 
 ### 검색과 교육 자료의 범위
 
-중앙 검색은 사람이 업무 중 사용하는 원본 가이드를 대상으로 합니다. 교육용 Curriculum은 학습 자료이므로 업무 기준 검색에서 제외합니다. `reference/front-end`는 원본을 프로젝트용으로 요약·복제한 영역이므로 같은 내용의 중복 검색 결과를 막기 위해 중앙 검색 대상에서 제외합니다.
+중앙 검색은 사람이 업무 중 사용하는 상세 가이드를 대상으로 합니다. 교육용 Curriculum은 학습 자료이므로 업무 기준 검색에서 제외합니다. 통합 전 `reference/front-end`는 원본을 프로젝트용으로 요약·복제한 영역이므로 같은 내용의 중복 검색 결과를 막기 위해 중앙 검색 대상에서 제외합니다.
 
 브리핑은 전체 구조를 소개하는 진입 자료입니다. 브리핑만으로 세부 구현을 결정하지 않고, 실제 작업에서는 해당 주제의 원본 가이드와 프로젝트 Source로 이동합니다.
 
@@ -515,11 +513,11 @@ flowchart TD
 가이드 변경은 다음 방향으로 관리합니다.
 
 ```text
-사람용 원본 가이드에서 기준 확정
-→ reference/front-end/AGENTS.md의 공통 규칙 확인
+사람용 상세 가이드에서 기준 확정
+→ Root AGENTS.md와 docs/AGENTS.md의 적용 범위 확인
 → 관련 docs/ai 요약 갱신
-→ 필요한 common-source의 적용 조건과 교체 지점 확인
-→ 실제 프로젝트에서 기존 Source와 비교해 적용
+→ docs/common-source의 적용 조건과 교체 지점 확인
+→ 실제 apps/app-webview Source와 비교해 적용
 ```
 
 AI 요약이나 공통 Source에서 새로운 정책을 독립적으로 확정하지 않습니다. 기준이 바뀌면 사람용 원본을 먼저 수정하고 실제 프로젝트에 필요한 요약과 참고 구현을 동기화합니다. 반대로 실제 프로젝트에서 반복되는 문제나 더 나은 기준이 확인되면 근거를 원본 가이드에 되돌려 반영합니다.
@@ -583,7 +581,7 @@ AI 작업 완료 보고에는 다음 내용을 포함합니다.
 - 재현하지 못한 환경 의존성
 - 남은 `TBD`와 필요한 담당자 결정
 
-실제 프로젝트의 AI 공통 규칙은 [reference/front-end/AGENTS.md](../reference/front-end/AGENTS.md), 품질 작업별 요약은 [AI 품질 가이드](../reference/front-end/docs/ai/quality.html)에서 확인합니다.
+통합 전 실제 프로젝트용 AI 공통 규칙 준비본은 [reference/front-end/AGENTS.md](../reference/front-end/AGENTS.md), 품질 작업별 요약은 [AI 품질 가이드](../reference/front-end/docs/ai/quality.html)에서 확인합니다. 통합 후에는 실제 저장소의 Root `AGENTS.md`와 `docs/ai` 경로를 사용합니다.
 
 ## 16. 개발자와 관련 담당자의 책임
 

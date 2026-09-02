@@ -88,7 +88,6 @@ front-end-repository/
 | `browser_support_guide/` | `docs/guides/browser-support/` |
 | `typescript_guide/` | `docs/guides/typescript/` |
 | `i18n_guide/` | `docs/guides/i18n/` |
-| `schedule/` | `docs/guides/planning/` |
 | `ai_frontend_growth_guide/` | `docs/guides/learning/ai-frontend-growth/` |
 | `search/` | `docs/search/` |
 | `init/` | `docs/templates/` |

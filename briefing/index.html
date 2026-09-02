@@ -373,45 +373,43 @@ flowchart TD
         <h3>최상위 가이드 원본</h3>
         <p>주제별 가이드는 사람이 기술 기준, 적용 조건, 예외, 미확정 항목과 Review 근거를 확인하는 원본입니다. <code>draft.md</code>는 검토 초안이고 사용자가 HTML 반영을 요청한 뒤 갱신한 HTML이 사람이 보는 배포 문서입니다.</p>
         <p>최상위 <code>AGENTS.md</code>는 가이드 문서를 작성하고 검증하는 규칙이며 실제 서비스 개발용 규칙이 아닙니다.</p>
-        <h3>실제 프로젝트용 <code>reference/front-end</code></h3>
-        <p><code>reference/front-end/AGENTS.md</code>는 실제 업무에서 AI가 먼저 읽는 공통 규칙입니다. <code>docs/ai</code>는 작업별 요약이고 <code>docs/common-source</code>는 사용처와 계약을 확인한 뒤 선택적으로 적용하는 참고 구현입니다.</p>
-        <p>Common Source는 기존 Application Source를 덮어쓰는 Boilerplate가 아닙니다. 실제 Source와 설치 Package를 비교해 필요한 부분만 병합합니다.</p>
+        <h3>통합 전 준비 영역인 <code>reference/front-end</code></h3>
+        <p><code>reference/front-end</code>는 실제 Front-end 저장소로 통합하기 전까지 AI 요약과 Common Source 적용 기준을 준비하는 임시 영역입니다. 최종 저장소에 이 중간 경로를 그대로 남기지 않습니다.</p>
+        <p><code>reference/front-end/AGENTS.md</code>는 최종 Root <code>AGENTS.md</code>의 준비 원본이고, <code>docs/ai</code>와 <code>docs/common-source</code>는 각각 최종 <code>docs/ai</code>와 <code>docs/common-source</code>로 이동합니다. Common Source는 기존 Application Source를 덮어쓰는 Boilerplate가 아닙니다.</p>
         <h3>실제 서비스 저장소가 생성된 이후</h3>
-        <p><code>reference/front-end</code>는 실제 서비스 저장소가 만들어지기 전까지 준비하는 초기 문서 묶음입니다. 프로젝트가 생성되면 실제 저장소의 Root <code>AGENTS.md</code>와 <code>docs</code> 영역으로 가져가고 Source, 설치 Package와 승인된 계약에 맞춰 수정합니다.</p>
-        <pre class="hljs"><code data-language="text">lounge-project/
-├── AGENTS.md                       # 저장소 전체 공통 AI 작업 규칙
-├── docs/
-│   ├── ai/                         # 작업별 AI 요약
-│   ├── common-source/              # 적용 조건과 사용법을 확인할 참고 구현 문서
-│   ├── architecture/               # 후보: 확정된 구조와 기술 결정
-│   └── operations/                 # 후보: Build, 배포, Monitoring과 장애 대응
+        <p>실제 Front-end 저장소를 만드는 브랜치에서는 문서, 공통 자산과 내부 링크를 한 변경에서 함께 이동합니다. 구현 규칙과 가이드 작성 규칙을 분리하고 상세 가이드·AI 요약·Common Source 기준을 모두 Root <code>docs</code> 아래에서 관리합니다.</p>
+        <pre class="hljs"><code data-language="text">front-end-repository/
+├── AGENTS.md                   # 실제 구현 작업용 AI 최상위 지침
+├── README.md
 ├── apps/
-│   ├── website/
-│   ├── mobile/
-│   ├── app-webview/
-│   │   ├── AGENTS.md               # 후보: App-WebView 추가 규칙
-│   │   └── src/
-│   ├── card-inapp/
-│   └── backoffice/
-└── packages/
-    └── ui/</code></pre>
-        <p>초기 프로젝트에서 바로 가져갈 대상은 Root <code>AGENTS.md</code>, <code>docs/ai</code>와 <code>docs/common-source</code>입니다. Common Source는 실제 코드와 비교해 필요한 부분만 적용합니다.</p>
-        <p><code>docs/architecture</code>, <code>docs/operations</code>와 <code>apps/app-webview/AGENTS.md</code>의 상세 구성은 아직 확정하지 않습니다. Architecture, CI/CD, 배포, Monitoring, 장애 대응과 App별 규칙이 생겼을 때 담당자와 관리 책임을 정한 뒤 추가합니다.</p>
+│   └── app-webview/
+│       ├── AGENTS.md           # WebView Application 전용 추가 지침
+│       ├── .storybook/
+│       └── src/
+└── docs/
+    ├── AGENTS.md               # 가이드 작성과 HTML 검증 규칙
+    ├── index.html              # 전체 가이드 진입점
+    ├── assets/                 # HTML 공통 스타일·Script·Image
+    ├── guides/                 # 사람이 읽는 상세 HTML 가이드와 원본
+    ├── ai/                     # AI 작업별 핵심 요약
+    └── common-source/          # 코드 적용 조건과 파일 단위 구현 기준</code></pre>
+        <p>루트의 상세 가이드는 <code>docs/guides</code>로, 공통 자산은 <code>docs/assets</code>로 옮깁니다. 실제 Application Source는 <code>docs</code>가 아니라 <code>apps/app-webview</code>에 둡니다.</p>
+        <p>Root <code>AGENTS.md</code>는 구현 규칙, <code>docs/AGENTS.md</code>는 문서 작성과 HTML 검증 규칙, <code>apps/app-webview/AGENTS.md</code>는 WebView Application 전용 추가 규칙을 담당합니다.</p>
         <figure class="diagram-frame">
           <!-- prettier-ignore -->
           <div class="mermaid">
 flowchart TD
   accTitle: 가이드 저장소에서 실제 프로젝트 문서로 이동하는 흐름
-  accDescr: 현재 가이드 원본에서 실제 프로젝트용 reference 문서를 준비하고, 프로젝트가 생성되면 Root AGENTS와 docs로 옮겨 실제 소스와 패키지에 맞게 수정하며, 운영 조건이 확정된 뒤 Architecture와 Operations 문서를 추가하고 공통 개선점을 원본 가이드로 되돌립니다.
-  A["lounge-docs<br/>사람용 원본 가이드"] --> B["reference/front-end<br/>초기 프로젝트용 문서 묶음"]
-  B --> C["실제 저장소<br/>Root AGENTS.md · docs/ai · docs/common-source"]
+  accDescr: 현재 가이드 원본과 reference 준비 문서를 새 Front-end 저장소의 Root AGENTS, docs와 app-webview로 한 번에 통합하고, 실제 소스와 패키지 및 승인 계약에 맞게 적용한 뒤 공통 개선 근거를 가이드 원본으로 되돌립니다.
+  A["lounge-docs<br/>가이드 원본 · 공통 자산"] --> B["새 통합 브랜치<br/>경로 · 자산 · 내부 링크 함께 이동"]
+  R["reference/front-end<br/>AI 요약 · Common Source 준비본"] --> B
+  B --> C["실제 저장소<br/>Root AGENTS · docs · apps/app-webview"]
   C --> D["실제 Source · Package · 승인 계약에 맞게 적용"]
-  D --> E["운영 조건 확정 후<br/>Architecture · Operations 문서 추가 검토"]
-  E -.->|"공통 기준으로 환류할 근거"| A
+  D -.->|"공통 기준으로 환류할 근거"| A
           </div>
-          <figcaption>현재 원본 가이드에서 실제 프로젝트 문서와 운영 문서로 이어지는 과정</figcaption>
+          <figcaption>현재 원본과 준비 문서를 실제 Front-end 저장소의 최종 경로로 함께 통합하는 과정</figcaption>
         </figure>
-        <p>프로젝트가 생성된 뒤에는 실제 저장소의 문서가 해당 프로젝트 작업의 기준입니다. <code>reference/front-end</code>를 별도의 두 번째 운영 원본으로 유지하지 않습니다. 여러 프로젝트에 공통으로 적용할 개선점은 근거를 원본 가이드에 반영합니다.</p>
+        <p>통합이 끝난 뒤에는 실제 저장소의 Root <code>AGENTS.md</code>, <code>docs</code>와 Application Source가 해당 프로젝트 작업의 기준입니다. 기존 루트 가이드 경로, <code>reference/front-end</code> 또는 별도 <code>common_docs</code>를 두 번째 운영 원본이나 중간 구조로 남기지 않습니다.</p>
         <h3>문서 확인 우선순위</h3>
         <figure class="diagram-frame">
           <!-- prettier-ignore -->
@@ -427,7 +425,7 @@ flowchart TD
           <figcaption>실제 프로젝트 규칙에서 원본 가이드와 승인된 계약까지 확인하는 흐름</figcaption>
         </figure>
         <h3>검색과 동기화</h3>
-        <p>중앙 검색은 업무용 사람 원본을 대상으로 하며 교육용 Curriculum과 중복 문서인 <code>reference/front-end</code>는 제외합니다. 기준은 사람용 원본에서 먼저 확정하고 관련 <code>AGENTS.md</code>, AI 요약, Common Source와 실제 프로젝트에 동기화합니다.</p>
+        <p>중앙 검색은 업무용 상세 가이드를 대상으로 하며 교육용 Curriculum과 통합 전 중복 문서인 <code>reference/front-end</code>는 제외합니다. 기준은 사람용 상세 가이드에서 먼저 확정하고 Root <code>AGENTS.md</code>, <code>docs/AGENTS.md</code>, AI 요약, Common Source와 실제 Application Source에 동기화합니다.</p>
         <p><strong>문서 진입점:</strong> 필요한 원본 문서는 <a href="./../search/index.html">가이드 검색</a>에서 찾고, 실제 프로젝트에 적용할 AI 문서 계층은 <a href="./../reference/front-end/docs/ai/project.html">프로젝트 구조 AI 요약</a>에서 확인합니다.</p>
       </section>
 
@@ -470,7 +468,7 @@ flowchart TD
         <p>AI에 전체 가이드를 한꺼번에 제공하지 않고 작업에 필요한 요약과 Source만 읽게 합니다. 생성 결과는 구현 초안이며 불필요한 추상화와 Props, 누락된 상태와 기존 구조 충돌을 개발자가 검토합니다.</p>
         <h3>AI 작업 완료 보고</h3>
         <ul><li>수정한 기능과 파일</li><li>재사용한 기존 Component</li><li>신규 Component와 생성 이유</li><li>사용한 Semantic Token</li><li>추가·변경한 Story와 상태</li><li>실행한 검사와 결과</li><li>재현하지 못한 환경</li><li>남은 <code>TBD</code>와 담당자 결정</li></ul>
-        <p><strong>실제 프로젝트 기준:</strong> AI가 처음 읽을 공통 규칙은 <a href="./../reference/front-end/AGENTS.md">reference/front-end/AGENTS.md</a>, 품질 작업별 요약은 <a href="./../reference/front-end/docs/ai/quality.html">AI 품질 가이드</a>에서 확인합니다.</p>
+        <p><strong>통합 전 준비본:</strong> AI 공통 규칙은 <a href="./../reference/front-end/AGENTS.md">reference/front-end/AGENTS.md</a>, 품질 작업별 요약은 <a href="./../reference/front-end/docs/ai/quality.html">AI 품질 가이드</a>에서 확인합니다. 통합 후에는 실제 저장소의 Root <code>AGENTS.md</code>와 <code>docs/ai</code>를 사용합니다.</p>
       </section>
 
       <hr />
