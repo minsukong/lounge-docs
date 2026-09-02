@@ -2,7 +2,7 @@
 
 > 상세 가이드: `docs/common-source/`
 
-현재 실제 Front-end 애플리케이션 저장소는 생성 전입니다. 이 문서 저장소에는 실제 애플리케이션 공통 소스를 만들지 않고, 추후 `apps/app-webview`를 생성한 뒤 빠르게 적용할 수 있는 구현 기준과 참고 코드만 작성합니다.
+현재 실제 Front-end 애플리케이션 저장소는 생성 전입니다. 현재 `reference/front-end/docs`는 문서 선행 작성용 임시 위치이며, 실제 저장소를 만드는 새 브랜치에서는 모든 가이드를 저장소 루트의 `docs/`로 통합하고 애플리케이션 공통 소스는 `apps/app-webview`에 구현합니다.
 
 ## 작업 전 확인
 
@@ -34,7 +34,8 @@
 1. 실제 저장소 생성 전에는 이 가이드가 선행 구현 기준입니다.
 2. 가이드 예시는 권장 구현안이며 실제 저장소에 적용할 때 설치 버전, 기존 구조와 제품 계약의 차이를 검토합니다.
 3. 실제 source가 생성된 이후에는 실제 source가 기준이며, 구조와 API가 확정되거나 바뀌면 가이드를 함께 갱신합니다.
-4. `lounge-docs` 아래에는 `.ts`, `.tsx`, `globals.css`, package 설정 같은 앱 source를 추가하지 않습니다.
+4. 통합 전 `lounge-docs`, 통합 후 `docs/` 아래에는 `.ts`, `.tsx`, `globals.css`, package 설정 같은 앱 source를 추가하지 않습니다.
+5. 통합 후 상세 HTML은 `docs/guides/`, AI 요약은 `docs/ai/`, 공통 소스 구현 기준은 `docs/common-source/`, 공통 문서 자산은 `docs/assets/`에서 관리합니다.
 
 ## 완료 확인
 

@@ -19,6 +19,22 @@
 - shadcn/ui, Base UI, Lucide
 - TanStack Query, Zustand, React Hook Form은 각 책임이 실제로 필요할 때 사용
 
+현재 이 문서는 `reference/front-end/docs/ai`에 임시로 배치되어 있습니다. 실제 Front-end 저장소를 만드는 새 브랜치에서는 상세 가이드와 구현 문서를 다음처럼 한 저장소에서 관리합니다.
+
+```text
+front-end-repository/
+├── AGENTS.md
+├── apps/app-webview/
+└── docs/
+    ├── AGENTS.md
+    ├── assets/
+    ├── guides/
+    ├── ai/
+    └── common-source/
+```
+
+통합 후 이 문서의 위치는 `docs/ai/project.md`이며, 상세 HTML 가이드는 `docs/guides/`, 실제 애플리케이션 소스는 `apps/app-webview/`에서 관리합니다.
+
 ```text
 apps/app-webview/src/
 ├── app/          # 라우트, 레이아웃, Provider

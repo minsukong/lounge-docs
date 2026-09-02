@@ -2,6 +2,9 @@
 
 ## 1. 기준 문서와 우선순위
 
+- 현재 `lounge-docs` 루트에 나뉘어 있는 HTML 가이드와 `reference/front-end`의 AI·공통 소스 문서는 실제 Front-end 저장소를 만들기 전의 작성용 임시 배치입니다.
+- 실제 Front-end 저장소로 통합할 때는 루트에 구현용 `AGENTS.md`를 두고, 문서 작성 규칙은 `docs/AGENTS.md`, 상세 HTML 가이드는 `docs/guides/`, 공통 자산은 `docs/assets/`, AI 요약은 `docs/ai/`, 공통 소스 구현 문서는 `docs/common-source/`에서 관리합니다. 실제 코드는 `apps/app-webview/`에 두며 `docs/` 안에 애플리케이션 소스를 넣지 않습니다.
+- 통합 전에는 현재 경로와 링크를 유지합니다. 새 브랜치에서 실제 이동할 때 문서, 공통 자산, 내부 링크와 AI 기준 원본 경로를 한 변경에서 함께 갱신하며 `reference/front-end`와 별도 `common_docs` 중간 구조를 최종 경로로 남기지 않습니다.
 - 가이드를 작성하기 전에 `README.md`, `init/index.html`, `monorepo/index.html`, `frontend_guide/index.html`과 대상 가이드의 기존 파일을 확인합니다.
 - shadcn/ui, Tailwind CSS 4, 디자인 토큰, UI 컴포넌트 재사용 또는 AI 생성 화면 구현에 관한 질문이나 작업은 먼저 `ui_guide/react_code_exports.html`을 확인합니다. 특히 Safari 15 CSS 하한, 사용할 수 없는 최신 CSS 기반 Utility의 대체, `globals.css`의 Semantic Token, 기존 shadcn/ui 컴포넌트 우선 사용 기준을 따릅니다.
 - iOS·Android 최소 지원 버전, Safari·WKWebView·System WebView 호환성, Tailwind CSS 4의 브라우저 지원 범위 또는 실제 기기 검증에 관한 질문이나 작업은 먼저 `app/webView/webView_guide.html`의 「Chrome과 Safari 호환성 기준」, 「Tailwind CSS v4 호환성」과 「디버깅과 호환성 검증」을 확인합니다.

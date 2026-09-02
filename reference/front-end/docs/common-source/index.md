@@ -8,6 +8,8 @@
 
 기획 흐름과 Backend API 계약이 확정되기 전에는 API·세션 구현 예시와 Mock을 실제 코드로 옮기지 않습니다. Backend 확인 질문과 `TBD`만 정리하고, 승인된 계약과 개발 환경이 전달된 뒤 필요한 문서만 적용합니다.
 
+현재 경로인 `reference/front-end/docs/common-source`는 가이드 선행 작성용 임시 위치입니다. 실제 Front-end 저장소로 통합할 때는 이 문서 묶음을 저장소 루트의 `docs/common-source/`로 옮기고, 상세 HTML 가이드는 `docs/guides/`, AI 요약은 `docs/ai/`, 문서 공통 자산은 `docs/assets/`에서 관리합니다. 실제 애플리케이션 코드는 계속 `apps/app-webview/`에 두며 `docs/` 안에 복사하지 않습니다.
+
 ## 작업별 문서
 
 | 필요한 작업 | 열어 볼 문서 | 확인할 파일과 코드 |

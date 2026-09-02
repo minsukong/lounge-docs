@@ -1,14 +1,14 @@
 # Lounge Front-end AI 지침
 
-이 문서는 저장소 전체에 적용되는 AI 작업 진입점입니다. 긴 가이드를 모두 읽지 말고 현재 작업에 해당하는 `docs/ai/` 문서만 추가로 읽습니다.
+이 문서는 추후 실제 Front-end 저장소 루트의 `AGENTS.md`가 될 AI 작업 진입점입니다. 현재는 `reference/front-end`에 임시로 배치되어 있으며, 긴 가이드를 모두 읽지 말고 현재 작업에 해당하는 `docs/ai/` 문서만 추가로 읽습니다.
 
 ## 프로젝트 기준
 
 - 이 저장소는 Front-end 구현과 검토를 위한 가이드입니다. Front-end가 독립적으로 결정할 수 있는 UI, 상태 처리, 접근성, 브라우저 검증과 Front-end 테스트 원칙만 현재 기준으로 확정합니다.
 - 기획, 업무 규칙, API·인증·데이터 계약, Backend 제공 환경, Native App 책임, 배포·운영처럼 다른 담당자 또는 전체 프로젝트 협의가 필요한 내용은 승인되기 전까지 모두 미확정으로 취급합니다.
 - Front-end 기술이라도 실제 애플리케이션의 package, 구성과 사용처가 확인되어야 하는 선택은 후보 또는 `TBD`로 남깁니다.
-- 실제 애플리케이션은 추후 `apps/app-webview`에 생성할 예정입니다.
-- 현재는 애플리케이션 저장소 생성 전에 구현 가이드와 참고 소스를 선행 작성하는 단계입니다.
+- 실제 애플리케이션은 추후 통합 Front-end 저장소의 `apps/app-webview`에 생성할 예정입니다.
+- 현재는 애플리케이션 저장소 생성 전에 구현 가이드와 참고 소스를 선행 작성하는 단계입니다. 현재 폴더 위치는 최종 저장소 구조가 아닙니다.
 - 화면 코드는 React 19와 TypeScript로 작성합니다.
 - 스타일은 Tailwind CSS 4와 `src/app/globals.css`의 의미 기반 토큰을 사용합니다.
 - Tailwind CSS는 검증된 v4.1 이상의 버전을 잠금 파일에 고정하고 공통 CSS 하한은 Safari 15에서 지원되는 기능 범위로 둡니다.
@@ -22,6 +22,133 @@
 - Swagger 또는 OpenAPI 제공을 미리 가정하지 않고 Backend 담당자가 실제로 전달하고 승인한 계약을 기준으로 구현합니다.
 - MSW는 기본 도구가 아닙니다. 승인된 API 계약을 기준으로 실제 Backend 환경에서 필요한 지연·오류 상태를 반복 재현하기 어렵다면 Front-end 테스트 범위에서 선택적으로 검토합니다. Backend의 별도 재현 환경 제공을 전제로 두지 않으며, 도입 범위와 관리 책임은 Front-end 책임자 또는 프로젝트 담당자와 정하고 Backend에 공유합니다.
 - AI는 Backend의 인증·권한·업무 규칙·요청 검증, 배포·보안 담당의 CORS·CSP·보안 Header·Secret 정책, Native App의 WebView Origin·Bridge Method 통제를 Front-end 코드로 대신 구현하거나 임의로 확정하지 않습니다. Front-end에는 방어적 입력·응답 처리와 승인된 계약의 연동·검증만 구현하고 나머지는 담당자 확인 사항 또는 `TBD`로 남깁니다.
+
+## 현재 배치와 통합 후 목표 구조
+
+현재 상세 HTML 가이드는 `lounge-docs` 루트의 주제별 폴더에 있고, AI 요약과 공통 소스 문서는 `reference/front-end/docs`에 있습니다. 이는 가이드 선행 작성 단계의 임시 배치입니다.
+
+공통 소스 구현을 시작하는 새 브랜치에서는 다음 구조로 통합합니다.
+
+```text
+front-end-repository/
+├── AGENTS.md
+├── README.md
+├── apps/
+│   └── app-webview/
+│       ├── AGENTS.md
+│       ├── .storybook/
+│       ├── components.json
+│       ├── postcss.config.mjs
+│       ├── vitest.config.ts
+│       └── src/
+└── docs/
+    ├── AGENTS.md
+    ├── README.md
+    ├── CHANGELOG.md
+    ├── index.html
+    ├── search/                     # 전체 가이드 검색
+    ├── templates/                  # HTML 가이드 작성 템플릿
+    ├── assets/                     # HTML 공통 스타일·스크립트·이미지
+    ├── guides/                     # 상세 HTML 가이드와 필요한 원본
+    │   ├── briefing/
+    │   ├── frontend/
+    │   ├── architecture/
+    │   ├── app/
+    │   ├── platform/webview/
+    │   ├── ui/
+    │   ├── storybook/
+    │   ├── testing/
+    │   ├── lint/
+    │   ├── security/
+    │   ├── performance/
+    │   ├── browser-support/
+    │   ├── typescript/
+    │   ├── i18n/
+    │   ├── planning/
+    │   └── learning/ai-frontend-growth/
+    ├── ai/                         # 작업별 AI 요약
+    │   ├── project.md
+    │   ├── ui.md
+    │   ├── design-tokens.md
+    │   ├── figma.md
+    │   ├── storybook.md
+    │   ├── quality.md
+    │   ├── performance.md
+    │   ├── security.md
+    │   ├── common-source.md
+    │   └── local-llm.md
+    └── common-source/              # 파일 단위 구현 기준
+        ├── index.md
+        ├── briefing.md
+        ├── catalog.md
+        ├── tailwind.md
+        ├── react.md
+        ├── typescript.md
+        ├── test.md
+        ├── storybook.md
+        ├── network.md
+        ├── session.md
+        ├── api-mocking.md
+        └── recipes.md
+```
+
+- 저장소 루트 `AGENTS.md`는 실제 구현 전체 규칙과 작업별 문서 선택을 담당합니다.
+- `docs/AGENTS.md`는 HTML 템플릿, Markdown·HTML 동기화, 링크와 공통 자산 검증 등 문서 작성 규칙을 담당합니다.
+- `docs/guides/`는 Front-end, Monorepo, UI, WebView, Storybook, Test, Lint, Security, Performance 등 사람이 읽는 상세 가이드와 필요한 원본을 주제별로 관리합니다.
+- `docs/assets/`는 상세 HTML 가이드가 사용하는 공통 스타일, JavaScript, 이미지와 디자인 자산을 관리합니다.
+- 현재 `reference/front-end/docs/ai`와 `reference/front-end/docs/common-source`는 통합 시 각각 `docs/ai`와 `docs/common-source`로 이동합니다.
+- 실제 `.ts`, `.tsx`, CSS와 package 설정은 `apps/app-webview/`에 두며 `docs/`에는 넣지 않습니다.
+- 실제 이동 전에는 현재 링크를 유지합니다. 이동할 때 문서, 자산, 내부 링크와 기준 원본 경로를 한 변경에서 함께 갱신하고 `reference/front-end` 또는 별도 `common_docs` 중간 구조를 남기지 않습니다.
+
+<figure class="diagram-frame">
+  <!-- prettier-ignore -->
+  <div class="mermaid">
+flowchart TB
+  accTitle: 실제 Front-end 저장소의 문서와 소스 구조
+  accDescr: 저장소 루트에는 전체 구현 지침이 있고, apps에는 WebView 애플리케이션 소스와 Storybook이 있으며, docs에는 문서 작성 규칙, 상세 HTML 가이드, AI 요약, 공통 소스 구현 기준과 문서 자산이 배치됩니다.
+  R["Front-end 저장소"] --> RA["AGENTS.md<br/>전체 구현 지침"]
+  R --> RM["README.md"]
+  R --> APPS["apps/"]
+  R --> DOCS["docs/"]
+  APPS --> APP["app-webview/"]
+  APP --> AA["AGENTS.md<br/>앱 전용 지침"]
+  APP --> SB[".storybook/"]
+  APP --> SRC["src/<br/>실제 애플리케이션 소스"]
+  DOCS --> DA["AGENTS.md<br/>문서 작성 규칙"]
+  DOCS --> DI["index.html<br/>가이드 진입점"]
+  DOCS --> AS["assets/<br/>스타일·스크립트·이미지"]
+  DOCS --> GD["guides/<br/>상세 HTML 가이드"]
+  DOCS --> AI["ai/<br/>AI 작업별 요약"]
+  DOCS --> CS["common-source/<br/>파일 단위 구현 기준"]
+  </div>
+  <figcaption>실제 프로젝트에서는 애플리케이션 소스와 모든 가이드를 한 저장소에 두되, 소스는 apps에, 문서는 docs에 분리합니다.</figcaption>
+</figure>
+
+### 통합 후 문서 운영 흐름
+
+<figure class="diagram-frame">
+  <!-- prettier-ignore -->
+  <div class="mermaid">
+flowchart TB
+  accTitle: 실제 프로젝트에서 가이드와 소스를 확인하고 갱신하는 흐름
+  accDescr: 작업 요청을 받으면 루트 지침과 실제 앱 설정을 먼저 확인하고 작업별 AI 요약, 공통 소스 기준 또는 상세 가이드를 필요한 만큼 읽은 뒤 앱 소스를 구현하고 Storybook과 품질 검사를 수행하며 필요하면 관련 문서를 함께 갱신합니다.
+  A([작업 요청]) --> B["루트 AGENTS.md"]
+  B --> C["apps/app-webview의 AGENTS.md<br/>package와 기존 source 확인"]
+  C --> D["docs/ai의 작업별 요약 선택"]
+  D --> E{"세부 구현 또는 배경이 필요한가?"}
+  E -->|"파일 단위 적용 기준"| F["docs/common-source"]
+  E -->|"정책·배경·상세 기준"| G["docs/guides의 HTML 가이드"]
+  E -->|"요약으로 충분"| H["apps/app-webview에 구현"]
+  F --> H
+  G --> H
+  H --> I["Storybook · typecheck · lint · test · build"]
+  I --> J{"구조·규칙·공개 API가 바뀌었는가?"}
+  J -->|"예"| K["관련 docs와 실제 source 함께 갱신"]
+  J -->|"아니오"| L([작업 완료])
+  K --> L
+  </div>
+  <figcaption>상세 가이드를 매번 모두 읽지 않고 실제 소스와 작업별 요약에서 시작해 필요한 문서만 단계적으로 확인합니다.</figcaption>
+</figure>
 
 ## AI 생성 코드 기준
 
@@ -213,13 +340,11 @@ docs/
 
 ## 가이드 원본과 동기화
 
-- **_기존 프로젝트 상세 가이드의 기준 원본은 형제 폴더 `lounge-docs`입니다._**
-- `docs/ai/`는 코딩에 필요한 핵심 결정만 담은 요약입니다.
-- 두 내용이 충돌하면 `lounge-docs`를 따릅니다.
-- 원본 가이드 변경이 구현 규칙에 영향을 주면 관련 `docs/ai/` 문서도 함께 갱신합니다.
-- 배경 설명, 설치 과정과 긴 검증 결과를 `docs/ai/`에 중복 복사하지 않습니다.
+- 통합 전 상세 가이드의 기준 원본은 현재 `lounge-docs` 루트의 주제별 HTML 가이드입니다. 현재 `docs/ai/`는 코딩에 필요한 핵심 결정만 담은 요약이며, 충돌하면 상세 가이드를 따릅니다.
+- 통합 후에는 저장소 안의 `docs/guides/`가 상세 가이드 위치가 되고 `docs/ai/`와 `docs/common-source/`도 같은 `docs/` 계층에서 함께 관리합니다. 형제 `lounge-docs` 저장소를 기준 원본으로 참조하지 않습니다.
+- 상세 가이드 변경이 구현 규칙에 영향을 주면 관련 `docs/ai/` 문서를 함께 갱신합니다. 배경 설명, 설치 과정과 긴 검증 결과를 `docs/ai/`에 중복 복사하지 않습니다.
 - 현재 실제 애플리케이션 저장소는 생성 전이며, `docs/common-source/*.md`는 저장소 생성 후 빠르게 적용하기 위한 구현 기준과 참고 코드입니다. 같은 이름의 HTML은 사람이 읽기 위한 보기입니다.
-- `lounge-docs`에는 실제 애플리케이션 `.ts`, `.tsx`, CSS 또는 package 설정 파일을 추가하지 않습니다.
+- 통합 전 `lounge-docs`, 통합 후 `docs/`에는 실제 애플리케이션 `.ts`, `.tsx`, CSS 또는 package 설정 파일을 추가하지 않습니다.
 - 실제 앱 저장소의 경로와 공개 API가 확정되거나 바뀌면 `docs/common-source/catalog.md`와 관련 가이드를 실제 상태에 맞게 갱신합니다.
 
 ## 기본 확인
