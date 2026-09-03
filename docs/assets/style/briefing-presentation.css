@@ -442,6 +442,12 @@ em {
   align-items: end;
   gap: 60px;
 }
+.section-head .tree-folder.app {
+  color: #7bdcb4;
+}
+.section-head .tree-folder.docs {
+  color: #65d9f3;
+}
 .section-head > p {
   max-width: 480px;
   margin: 0 0 8px;
@@ -984,7 +990,7 @@ p,
   border-radius: 10px;
   color: #d6dae6;
   background: rgba(255, 255, 255, 0.04);
-  font-size: 18px;
+  font-size: 16px;
 }
 .merge {
   display: grid;
@@ -1077,12 +1083,11 @@ p,
   font-size: 20px;
 }
 .return-line {
-  margin-top: 12px;
-  padding: 12px 15px;
+  margin-top: 18px;
+  padding: 16px;
   border: 1px dashed rgba(117, 230, 181, 0.4);
   border-radius: 10px;
   color: var(--source);
-  font-size: 13px;
   text-align: center;
 }
 #repository .diagram {
@@ -1177,7 +1182,7 @@ p,
   padding: 12px 14px;
   border-radius: 11px;
   color: var(--muted);
-  background: rgba(255, 255, 255, 0.025);
+  background: rgba(255, 255, 255, 0.2);
   text-align: center;
 }
 .support-strip code {
@@ -1201,9 +1206,8 @@ p,
   font-size: 17px;
 }
 .cluster-purpose {
-  margin: -5px 0 14px;
+  margin: 0 0 14px;
   color: #d7dbea;
-  font-size: 13px;
 }
 .guide-cluster ul {
   display: grid;
