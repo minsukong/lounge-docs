@@ -1,32 +1,65 @@
 (() => {
-  const scenes = [...document.querySelectorAll('.scene')];
-  const links = [...document.querySelectorAll('.rail a')];
-  const progress = document.querySelector('.progress span');
-  const activate = (id) => links.forEach((link) => link.classList.toggle('active', link.hash === `#${id}`));
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        activate(entry.target.id);
-      }
+  const sections = [
+    ...document.querySelectorAll(".presentation-section"),
+  ];
+  const navigationLinks = [...document.querySelectorAll(".section-navigation a")];
+  const progressBar = document.querySelector(".scroll-progress span");
+
+  const activateNavigation = (sectionId) => {
+    navigationLinks.forEach((link) => {
+      link.classList.toggle("active", link.hash === `#${sectionId}`);
     });
-  }, { threshold: 0.45 });
-  scenes.forEach((scene) => observer.observe(scene));
+  };
+
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        entry.target.classList.add("is-visible");
+        activateNavigation(entry.target.id);
+      });
+    },
+    { threshold: 0.45 },
+  );
+
+  sections.forEach((section) => sectionObserver.observe(section));
+
   const updateProgress = () => {
-    const max = document.documentElement.scrollHeight - innerHeight;
-    progress.style.width = `${max > 0 ? (scrollY / max) * 100 : 0}%`;
+    const scrollRange = document.documentElement.scrollHeight - innerHeight;
+    const progress = scrollRange > 0 ? (scrollY / scrollRange) * 100 : 0;
+    progressBar.style.width = `${progress}%`;
   };
-  const currentIndex = () => {
-    const middle = scrollY + innerHeight / 2;
-    return scenes.reduce((closest, scene, index) => Math.abs(scene.offsetTop - middle) < Math.abs(scenes[closest].offsetTop - middle) ? index : closest, 0);
+
+  const getCurrentSectionIndex = () => {
+    const viewportMiddle = scrollY + innerHeight / 2;
+
+    return sections.reduce((closestIndex, section, index) => {
+      const currentDistance = Math.abs(section.offsetTop - viewportMiddle);
+      const closestDistance = Math.abs(
+        sections[closestIndex].offsetTop - viewportMiddle,
+      );
+
+      return currentDistance < closestDistance ? index : closestIndex;
+    }, 0);
   };
-  addEventListener('scroll', updateProgress, { passive: true });
-  addEventListener('keydown', (event) => {
-    if (!['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp'].includes(event.key)) return;
+
+  addEventListener("scroll", updateProgress, { passive: true });
+  addEventListener("keydown", (event) => {
+    const navigationKeys = ["ArrowDown", "ArrowUp", "PageDown", "PageUp"];
+    if (!navigationKeys.includes(event.key)) return;
+
     event.preventDefault();
-    const direction = ['ArrowDown', 'PageDown'].includes(event.key) ? 1 : -1;
-    scenes[Math.max(0, Math.min(scenes.length - 1, currentIndex() + direction))].scrollIntoView({ behavior: 'smooth' });
+    const direction = ["ArrowDown", "PageDown"].includes(event.key) ? 1 : -1;
+    const targetIndex = Math.max(
+      0,
+      Math.min(sections.length - 1, getCurrentSectionIndex() + direction),
+    );
+
+    sections[targetIndex].scrollIntoView({ behavior: "smooth" });
   });
+
   updateProgress();
-  scenes[0]?.classList.add('is-visible');
+  sections[0]?.classList.add("is-visible");
 })();
+

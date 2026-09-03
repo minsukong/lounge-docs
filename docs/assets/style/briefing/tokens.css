@@ -1,0 +1,28 @@
+:root {
+  color-scheme: dark;
+
+  --color-background: #07080d;
+  --color-panel: #11131b;
+  --color-border: rgba(255, 255, 255, 0.12);
+  --color-text: #f7f8fc;
+  --color-text-muted: #9197aa;
+  --color-blue: #5c7cff;
+  --color-cyan: #45dcff;
+  --color-violet: #a875ff;
+  --color-green: #75e6b5;
+  --color-amber: #ffd27a;
+  --color-human: #a875ff;
+  --color-guide: #6f8cff;
+  --color-ai: #45dcff;
+  --color-frontend: #4f9cff;
+  --color-source: #75e6b5;
+
+  --font-sans: Inter, Pretendard, "Noto Sans KR", system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Consolas, monospace;
+
+  --content-width: 1600px;
+  --text-small: 14px;
+  --text-body: 16px;
+  --text-description: 18px;
+  --text-card-title: 24px;
+}

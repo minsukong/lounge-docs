@@ -1,0 +1,235 @@
+@media (max-width: 1100px) {
+  .presentation-content {
+    width: min(calc(100% - 90px), var(--content-width));
+  }
+  .presentation-section {
+    min-height: 110vh;
+  }
+  .section-navigation {
+    right: 8px;
+  }
+  .system-flow,
+  .responsibility-flow,
+  .repository-layout,
+  .guide-groups,
+  .operations-layout,
+  .operating-model {
+    grid-template-columns: 1fr;
+  }
+  .system-flow .flow-arrow,
+  .responsibility-flow .responsibility-connector,
+  .operating-model .flow-arrow {
+    min-height: 50px;
+  }
+  .system-flow .flow-arrow::after,
+  .operating-model .flow-arrow::after {
+    content: "↓";
+  }
+  .document-step {
+    grid-template-columns: 160px 1fr;
+  }
+  .document-step .step-description {
+    grid-column: 1 / -1;
+    padding: 10px 0 0;
+    border: 0;
+    border-top: 1px solid var(--color-border);
+  }
+  .build-roadmap {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .presentation-content {
+    width: min(calc(100% - 50px), var(--content-width));
+  }
+  .intro-section h1 {
+    font-size: clamp(47px, 13vw, 62px);
+  }
+  .presentation-section h2,
+  .presentation-section.compact-section h2 {
+    font-size: clamp(36px, 9.5vw, 48px);
+  }
+  .section-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+  }
+  .reveal-on-scroll {
+    opacity: 1;
+    transform: none;
+  }
+  .diagram-panel {
+    padding: 16px;
+  }
+  .responsibility-column ul,
+  .responsibility-result,
+  .supporting-tools,
+  .ai-process,
+  .decision-branches,
+  .build-roadmap,
+  .ownership-tasks {
+    grid-template-columns: 1fr;
+  }
+  .document-step {
+    grid-template-columns: 1fr;
+  }
+  .document-step .step-description {
+    grid-column: auto;
+  }
+  .guide-group li {
+    grid-template-columns: 1fr;
+  }
+  .ai-process .flow-card:not(:last-child)::after {
+    display: none;
+  }
+  .ownership-row {
+    grid-template-columns: 1fr;
+  }
+  .operations-cycle {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 8px;
+  }
+  .operations-cycle .loop-arrow {
+    min-height: 34px;
+  }
+  .operations-cycle .loop-arrow::after {
+    content: "↓";
+  }
+  .audience-item {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Keep every presentation scene readable in a 1280×720 meeting viewport. */
+@media (min-width: 721px) and (max-height: 820px) {
+  .presentation-section.compact-section .presentation-content {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  .presentation-section.compact-section h2 {
+    font-size: clamp(40px, 3.15vw, 54px);
+  }
+  .section-head > p {
+    font-size: 15px;
+  }
+  .diagram-panel {
+    margin-top: 20px;
+    padding: 18px;
+  }
+  #repository .diagram-panel {
+    padding: 14px;
+  }
+  .repo-tree {
+    gap: 3px;
+  }
+  .repo-tree li {
+    padding: 6px 9px;
+    font-size: 14px;
+  }
+  .repository-flow {
+    gap: 8px;
+  }
+  .repository-flow .flow-card {
+    padding: 13px;
+  }
+  .repository-flow .flow-card strong {
+    margin-top: 8px;
+    font-size: 20px;
+  }
+  .repository-flow .flow-card small {
+    margin-top: 7px;
+    font-size: 14px;
+  }
+  #repository .diagram-panel .vertical-flow-arrow {
+    padding: 8px;
+    font-size: 14px;
+  }
+  .repository-sync-note {
+    margin-top: 7px;
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+  #layers .diagram-panel {
+    padding: 13px;
+  }
+  #layers .document-step {
+    padding: 8px 13px;
+  }
+  #layers .document-arrow {
+    padding: 7px;
+  }
+  #layers .supporting-tools {
+    margin-top: 8px;
+  }
+  #layers .supporting-tools div {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+  .guide-group {
+    padding: 14px;
+  }
+  .guide-group ul {
+    gap: 8px;
+    padding-left: 20px;
+  }
+  .guide-group code {
+    font-size: 15px;
+  }
+  .guide-group span,
+  .cluster-purpose {
+    font-size: 14px;
+  }
+  .roadmap-step {
+    min-height: 132px;
+    padding: 13px;
+  }
+  .roadmap-step h3 {
+    margin: 8px 0 6px;
+    font-size: 20px;
+  }
+  .roadmap-step p,
+  .roadmap-step output {
+    font-size: 14px;
+  }
+  .roadmap-step output {
+    margin-top: 8px;
+    padding-top: 7px;
+  }
+  .roadmap-note {
+    margin-top: 12px;
+    font-size: 14px;
+  }
+  .ownership-legend {
+    margin-top: 12px;
+  }
+  #ownership .diagram-panel,
+  #operations .diagram-panel {
+    margin-top: 14px;
+  }
+  .ownership-tasks span {
+    min-height: 55px;
+    font-size: 14px;
+  }
+  .ownership-summary {
+    padding: 10px 14px;
+  }
+  .ownership-summary strong {
+    font-size: 16px;
+  }
+  .operations-cycle .flow-card {
+    min-height: 104px;
+    padding: 13px;
+  }
+  .operations-cycle .flow-card strong {
+    font-size: 18px;
+  }
+  .operations-cycle .flow-card small {
+    font-size: 14px;
+  }
+}
+
+
+
+

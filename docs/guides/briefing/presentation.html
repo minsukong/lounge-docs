@@ -6,12 +6,12 @@
     <title>Lounge Front-end 구축 가이드 · Presentation</title>
     <link
       rel="stylesheet"
-      href="../../assets/style/briefing-presentation.css?v=20260903-7"
+      href="../../assets/style/briefing-presentation.css?v=20260903-8"
     />
   </head>
   <body>
-    <div class="progress" aria-hidden="true"><span></span></div>
-    <nav class="rail" aria-label="발표 장면">
+    <div class="scroll-progress" aria-hidden="true"><span></span></div>
+    <nav class="section-navigation" aria-label="발표 장면">
       <a href="#intro" aria-label="표지"><span>01</span></a>
       <a href="#strategy" aria-label="구축 전략"><span>02</span></a>
       <a href="#repository" aria-label="전체 저장소"><span>03</span></a>
@@ -25,78 +25,80 @@
     </nav>
 
     <main>
-      <section class="scene hero" id="intro">
+      <section class="presentation-section intro-section" id="intro">
         <div class="orb orb-a" aria-hidden="true"></div>
         <div class="orb orb-b" aria-hidden="true"></div>
-        <div class="scene-inner reveal">
+        <div class="presentation-content reveal-on-scroll">
           <p class="eyebrow">LOUNGE · FRONT-END BUILD SYSTEM</p>
-          <h1>front-end <em>가이드 구조</em></h1>
+          <h1>Front-end <br /><em>구축을 위한 가이드 체계</em></h1>
           <p class="lead muted">
-            가이드는 공통 기준을 유지하고, AI는 실제 Source를 바탕으로<br />탐색·구현·검증을
-            지원합니다.
+            사람이 정한 기준을 가이드로 관리하고, AI는 가이드와 실제 Source를<br />확인하며
+            구축과 검증을 지원합니다.
           </p>
-          <div class="legend system-key" aria-label="발표 색상 기준">
-            <span class="human">사람의 판단</span>
-            <span class="guide">가이드 기준</span>
-            <span class="ai">AI 실행</span>
-            <span class="source">구축·운영 결과</span>
+          <div class="role-legend" aria-label="발표 색상 기준">
+            <span class="human-role">사람의 판단</span>
+            <span class="guide-role">가이드 기준</span>
+            <span class="ai-role">AI 실행</span>
+            <span class="source-role">구축·운영 결과</span>
           </div>
-          <div class="diagram origin-flow">
-            <article class="node human">
-              <b>HUMAN</b><strong>방향과 품질을 결정</strong>
+          <div class="diagram-panel system-flow">
+            <article class="flow-card human-role">
+              <b>HUMAN</b><strong>구축 기준을 결정</strong>
               <small
-                >서비스 방향·업무 규칙·우선순위와 최종 품질을 사람이
-                판단합니다.</small
+                >서비스 방향, 업무 규칙, 우선순위와 최종 품질은 사람이
+                결정합니다.</small
               >
             </article>
-            <div class="arrow">공통 기준으로 구조화</div>
-            <article class="node guide">
-              <b>✨ GUIDE</b><strong>판단 기준을 연결</strong>
+            <div class="flow-arrow">결정을 문서화</div>
+            <article class="flow-card guide-role">
+              <b>✨ GUIDE</b><strong>공통 기준으로 관리</strong>
               <small
-                >구조·UI·상태·품질과 역할을 가이드 체계로 유지합니다.</small
+                >구조, UI, 상태, 품질과 역할 기준을 한 체계로 관리합니다.</small
               >
             </article>
-            <div class="arrow">작업 Context 제공</div>
-            <article class="node ai">
-              <b>AI</b><strong>탐색·구현·검증 지원</strong>
+            <div class="flow-arrow">작업 기준 제공</div>
+            <article class="flow-card ai-role">
+              <b>AI</b><strong>구축 작업을 지원</strong>
               <small
-                >AI가 기준과 실제 Source를 확인해 구현·Story·검사를
+                >AI가 가이드와 실제 Source를 확인해 구현, Story 작성과 검사를
                 돕습니다.</small
               >
             </article>
-            <div class="arrow">검토 가능한 결과</div>
-            <article class="node source">
-              <b>SOURCE</b><strong>구축 결과와 운영</strong>
+            <div class="flow-arrow">구현하고 검증</div>
+            <article class="flow-card source-role">
+              <b>SOURCE</b><strong>구축 결과를 운영에 연결</strong>
               <small
-                >Source·검증 근거·가이드를 연결한 상태로 실무자에게
-                인계합니다.</small
+                >Source, Story, Test와 가이드를 함께 남겨 운영과 다음 변경에
+                사용합니다.</small
               >
             </article>
           </div>
         </div>
       </section>
 
-      <section class="scene compact" id="strategy">
-        <div class="scene-inner reveal">
+      <section class="presentation-section compact-section" id="strategy">
+        <div class="presentation-content reveal-on-scroll">
           <div class="section-head">
             <div>
               <p class="eyebrow">01 · BUILD STRATEGY</p>
               <h2>
-                사람은 결정하고<br /><em>AI는 기준 안에서 실행합니다.</em>
+                사람은 구축 기준을 정하고<br /><em
+                  >AI는 그 기준에 따라 작업합니다.</em
+                >
               </h2>
             </div>
             <p>
-              가이드는 사람이 정한 방향을 AI가 실행 가능한 기준으로 바꾸고, AI의
-              결과를 다시 사람이 검토할 수 있게 연결합니다.
+              사람의 결정, 가이드의 역할, AI가 지원하는 작업을 구분해 구축
+              과정의 책임을 분명히 합니다.
             </p>
           </div>
-          <div class="diagram">
-            <div class="decision-grid">
+          <div class="diagram-panel">
+            <div class="responsibility-flow">
               <div>
-                <section class="decision-lane human-lane">
+                <section class="responsibility-column human-lane">
                   <h3><span>HUMAN</span> · 방향과 판단</h3>
                   <ul>
-                    <li>제품 방향과 사용자 흐름</li>
+                    <li>서비스 방향과 사용자 흐름</li>
                     <li>업무 규칙과 우선순위</li>
                     <li>API·인증·Bridge 연동 방식</li>
                     <li>보안·운영 정책</li>
@@ -105,32 +107,34 @@
                   </ul>
                 </section>
 
-                <div class="decision-result guide-result">
+                <div class="responsibility-result guide-output">
                   <div>
-                    <strong>가이드 체계</strong> · 반복되는 판단을 공통 기준으로
-                    유지
+                    <strong>가이드 체계</strong> · 사람이 정한 내용을 반복해서
+                    사용할 수 있는 기준으로 관리
                   </div>
                 </div>
               </div>
 
-              <div class="merge"><span>가이드로 연결</span><b>⇢</b></div>
+              <div class="responsibility-connector">
+                <span>가이드로 연결</span><b>⇢</b>
+              </div>
 
               <div>
-                <section class="decision-lane ai-lane">
+                <section class="responsibility-column ai-lane">
                   <h3><span>AI</span> · 탐색과 실행</h3>
                   <ul>
                     <li>기존 Source 탐색</li>
-                    <li>Component·Token 확인</li>
+                    <li>컴포넌트·토큰 확인</li>
                     <li>코드와 Story 초안</li>
                     <li>상태·예외 누락 확인</li>
                     <li>검사와 Build 실행</li>
                     <li>변경 결과 정리</li>
                   </ul>
                 </section>
-                <div class="decision-result source-result">
+                <div class="responsibility-result source-output">
                   <div>
-                    <strong>구축 결과</strong> · Source, Story와 Test로 검토
-                    가능하게 제공
+                    <strong>구축 결과</strong> · Source, Story, Test와 검사
+                    결과를 사람이 검토
                   </div>
                 </div>
               </div>
@@ -139,25 +143,22 @@
         </div>
       </section>
 
-      <section class="scene compact" id="repository">
-        <div class="scene-inner reveal">
+      <section class="presentation-section compact-section" id="repository">
+        <div class="presentation-content reveal-on-scroll">
           <div class="section-head">
             <div>
               <p class="eyebrow">02 · REPOSITORY</p>
               <h2>
-                가이드와 Source를<br /><em
-                  >한 저장소의 두 축으로 연결합니다.</em
-                >
+                가이드와 Source를<br /><em>한 저장소에서 함께 관리합니다.</em>
               </h2>
             </div>
             <p>
-              <code class="tree-folder docs">docs/</code>는 구축 기준과 작업
-              맥락을 제공하고, <br />
-              <code class="tree-folder app">apps/app-webview/</code>에는 검증된
-              구현 결과가 쌓입니다.
+              <code class="tree-folder docs">docs/</code>에는 구축 기준을,
+              <code class="tree-folder app">apps/app-webview/</code>에는 실제
+              구현과 검증 결과를 둡니다.
             </p>
           </div>
-          <div class="diagram repo-map">
+          <div class="diagram-panel repository-layout">
             <figure class="repo-tree-card">
               <figcaption>
                 <b>PROJECT STRUCTURE</b>
@@ -171,37 +172,31 @@
 │  ├─ <span class="tree-folder app">mobile/</span>                        <span class="tree-comment"># Native</span>
 │  └─ <span class="tree-folder app">app-webview/</span>                   <span class="tree-comment"># Front-end</span>
 │     ├─ <span class="tree-file">AGENTS.md</span>                   <span class="tree-comment"># 앱 구현 지침</span>
-│     ├─ <span class="tree-folder app">.storybook/</span>                 <span class="tree-comment"># UI 독립 검수</span>
+│     ├─ <span class="tree-folder app">.storybook/</span>                 <span class="tree-comment"># 앱과 분리해 UI 확인</span>
 │     └─ <span class="tree-folder app">src/</span>                        <span class="tree-comment"># Source · Story · Test</span>
 └─ <span class="tree-folder docs">docs/</span>                             <span class="tree-comment"># 가이드</span>
    ├─ <span class="tree-file">AGENTS.md</span>                      <span class="tree-comment"># 가이드 작성 기준</span>
-   ├─ <span class="tree-file">README.md · index.html</span>         <span class="tree-comment"># README</span>
-   ├─ <span class="tree-file">CHANGELOG</span>                      <span class="tree-comment"># 가이드 변경 이력</span>
-   ├─ <span class="tree-folder docs">guides/</span>                        <span class="tree-comment"># 가이드 상세</span>
+   ├─ <span class="tree-file">README.md</span>                      <span class="tree-comment"># 문서 안내</span>
+   ├─ <span class="tree-file">index.html</span>                     <span class="tree-comment"># 가이드 진입점</span>
+   ├─ <span class="tree-file">CHANGELOG.md</span>                   <span class="tree-comment"># 가이드 변경 이력</span>
+   ├─ <span class="tree-folder docs">guides/</span>                        <span class="tree-comment"># 사람과 AI가 확인하는 상세 HTML 가이드</span>
    ├─ <span class="tree-folder docs">ai/</span>                            <span class="tree-comment"># AI 작업별 요약</span>
    ├─ <span class="tree-folder docs">common-source/</span>                 <span class="tree-comment"># 파일 단위 적용 예시</span>
    └─ <span class="tree-folder docs">assets/ · search/ · templates/</span> <span class="tree-comment"># 가이드 운영 도구</span></pre>
             </figure>
             <div>
-              <div class="repo-cycle">
-                <article class="node guide">
-                  <b>GUIDE SIDE</b><strong>docs/</strong>
-                  <small
-                    >판단 기준, 배경, AI Context와 적용 조건을
-                    제공합니다.</small
-                  >
+              <div class="repository-flow">
+                <article class="flow-card guide-role">
+                  <b>GUIDE</b><strong>docs/</strong>
+                  <small>구축 기준과 배경 가이드</small>
                 </article>
-                <div class="vertical-arrow">작업 맥락과 적용 기준</div>
-                <article class="node source">
-                  <b>SOURCE SIDE</b><strong>apps/app-webview/</strong>
-                  <small
-                    >설치 Package, 설정, 실제 Source, Story와 Test가 최종
-                    사실입니다.</small
-                  >
+                <article class="flow-card source-role">
+                  <b>SOURCE</b><strong>apps/app-webview/</strong>
+                  <small>Package, 설정, 실제 Source, Story와 Test</small>
                 </article>
               </div>
-              <div class="return-line">
-                구조·공개 API·연동 기준 변경 → 관련 가이드와 AI 요약에 다시 반영
+              <div class="repository-sync-note">
+                구조·외부에서 사용하는 API·연동 기준이 바뀌면 → 관련 가이드와 AI 요약도 갱신
                 ↺
               </div>
             </div>
@@ -209,78 +204,84 @@
         </div>
       </section>
 
-      <section class="scene compact" id="layers">
-        <div class="scene-inner reveal">
+      <section class="presentation-section compact-section" id="layers">
+        <div class="presentation-content reveal-on-scroll">
           <p class="eyebrow">03 · DOCS LAYERS</p>
-          <h2>같은 기준을<br /><em>사용 목적에 맞는 깊이로 제공합니다.</em></h2>
-          <div class="diagram">
-            <div class="layer-stack">
-              <div class="layer guide-layer">
-                <code>docs/guides/</code><strong>사람용 상세 기준 원본</strong>
-                <div class="why">
-                  관계자와 실무자가 결정의 이유·배경·검토 방법까지 이해
+          <h2>
+            AI는 작업별 요약에서 시작해<br />
+            <em>필요한 구현 예시와 상세 가이드를 확인해 구현합니다.</em>
+          </h2>
+          <div class="diagram-panel">
+            <div class="document-flow">
+              <div class="document-step project-context-step">
+                <code>AGENTS.md, apps/app-webview/</code
+                ><strong>작업 규칙과 현재 구현 확인</strong>
+                <div class="step-description">
+                  루트와 앱의 AGENTS.md를 읽고 Package, 설정과 기존 Source를
+                  확인
                 </div>
               </div>
-              <div class="layer-arrow">
-                <span>핵심 결정만 작업별로 압축 ↓</span>
+              <div class="document-arrow">
+                <span>↓ 작업 종류에 맞는 요약 문서를 선택</span>
               </div>
-              <div class="layer ai-layer">
-                <code>docs/ai/</code><strong>AI Context Router</strong>
-                <div class="why">
-                  긴 문서 전체 대신 현재 작업에 필요한 제한과 판단만 제공
+              <div class="document-step ai-summary-step">
+                <code>docs/ai/</code><strong>AI가 먼저 읽는 작업별 요약</strong>
+                <div class="step-description">
+                  현재 작업에 적용할 핵심 기준과 추가로 확인할 문서를 안내
                 </div>
               </div>
-              <div class="layer-arrow">
-                <span>파일에 옮길 구체성이 필요할 때 ↓</span>
+              <div class="document-arrow">
+                <span>↓ 구현에 필요한 정보의 깊이를 판단</span>
               </div>
-              <div class="layer example-layer">
-                <code>docs/common-source/</code
-                ><strong>적용 조건과 파일 단위 구현 예시</strong>
-                <div class="why">
-                  정책 설명과 코드 예시를 분리하고 기존 Source와 비교·병합
+              <div class="document-step implementation-reference-step">
+                <code>docs/common-source/*.md</code
+                ><strong>공통 설정과 코드의 파일 단위 구현 예시</strong>
+                <div class="step-description">
+                  더 자세한 기준이 필요하면 <code>docs/guides/*.html</code>에서
+                  배경과 적용 범위를 확인
                 </div>
               </div>
-              <div class="layer-arrow">
-                <span>실제 Package와 사용처를 확인해 선별 적용 ↓</span>
+              <div class="document-arrow">
+                <span>↓ 확인한 기준을 기존 구현에 맞춰 적용</span>
               </div>
-              <div class="layer source">
+              <div class="document-step source-role">
                 <code>apps/app-webview/</code
                 ><strong>실제 Source · Story · Test</strong>
-                <div class="why">
-                  문서 예시가 아니라 설치 상태와 기존 구현을 최종 사실로 사용
+                <div class="step-description">
+                  구현 결과를 Story, Typecheck, Lint, Test와 Build로 검증
                 </div>
               </div>
             </div>
-            <div class="support-strip">
+            <!-- <div class="supporting-tools">
               <div><code>assets/</code> · 공통 스타일과 이미지</div>
               <div><code>templates/</code> · 가이드 형식</div>
               <div><code>search/</code> · 가이드 검색</div>
-            </div>
+            </div> -->
           </div>
         </div>
       </section>
 
-      <section class="scene compact" id="guides">
-        <div class="scene-inner reveal">
+      <section class="presentation-section compact-section" id="guides">
+        <div class="presentation-content reveal-on-scroll">
           <div class="section-head">
             <div>
               <p class="eyebrow">04 · GUIDE MAP</p>
               <h2>
-                가이드 하나는 구축의<br /><em
-                  >하나의 결정 영역을 책임집니다.</em
-                >
+                구축에 필요한 가이드를<br /><em>판단 영역별로 나누었습니다.</em>
               </h2>
             </div>
             <p>
-              백과사전식 분류가 아닙니다. 결정권자와 검증 시점이 다른 영역을
-              분리해 필요한 가이드만 선택할 수 있게 했습니다.
+              구조와 경계, UI와 상태, 품질과 운영으로 나누어 작업마다 필요한
+              기준과 담당자를 빠르게 찾을 수 있습니다.
             </p>
           </div>
-          <div class="diagram">
-            <div class="guide-map">
-              <section class="guide-cluster">
+          <div class="diagram-panel">
+            <div class="guide-groups">
+              <section class="guide-group">
                 <h3>① 기반과 경계</h3>
-                <p class="cluster-purpose">어디에 무엇을 구축할지 결정</p>
+                <p class="cluster-purpose">
+                  구축 범위와 시스템 경계를 정하는 기준
+                </p>
                 <ul>
                   <li>
                     <code>architecture</code
@@ -296,17 +297,18 @@
                   </li>
                   <li>
                     <code>browser-support</code
-                    ><span>지원 Browser·Viewport 하한</span>
+                    ><span>지원 브라우저·화면 크기 기준</span>
                   </li>
                   <li>
                     <code>planning</code><span>구축 범위·순서·일정 판단</span>
-                    <small>(TBD)</small>
                   </li>
                 </ul>
               </section>
-              <section class="guide-cluster">
+              <section class="guide-group">
                 <h3>② UI와 상태</h3>
-                <p class="cluster-purpose">화면과 상태를 같은 방식으로 구현</p>
+                <p class="cluster-purpose">
+                  화면과 상태를 일관되게 구현하는 기준
+                </p>
                 <ul>
                   <li>
                     <code>ui/react_code_exports</code
@@ -318,7 +320,7 @@
                   </li>
                   <li>
                     <code>ui/zustand</code
-                    ><span>공유 Client 상태의 사용 조건</span>
+                    ><span>공유 클라이언트 상태의 사용 조건</span>
                   </li>
                   <li>
                     <code>typescript</code
@@ -326,20 +328,22 @@
                   </li>
                   <li>
                     <code>storybook</code
-                    ><span>Component·Feature·Screen 독립 검수</span>
+                    ><span>컴포넌트·기능·화면 단위 검수</span>
                   </li>
                 </ul>
               </section>
-              <section class="guide-cluster quality">
+              <section class="guide-group quality-group">
                 <h3>③ 품질과 운영</h3>
-                <p class="cluster-purpose">완료와 운영 가능 여부를 검증</p>
+                <p class="cluster-purpose">
+                  구축 결과와 운영 가능 여부를 검증하는 기준
+                </p>
                 <ul>
                   <li>
                     <code>testing · lint</code
-                    ><span>동작과 정적 품질의 완료 근거</span>
+                    ><span>기능 테스트와 코드 검사 기준</span>
                   </li>
                   <li>
-                    <code>security</code><span>신뢰 경계·개인정보·의존성</span>
+                    <code>security</code><span>외부 입력·개인정보·패키지 보안</span>
                   </li>
                   <li>
                     <code>performance</code
@@ -351,63 +355,62 @@
                 </ul>
               </section>
             </div>
-            <p class="guide-caption">
-              학습 보조 · <code>learning/ai-frontend-growth</code> — AI 결과를
-              검토할 수 있는 Front-end 역량을 단계적으로 확보
+            <p class="learning-guide-note">
+              학습 가이드 · <code>learning/ai-frontend-growth</code> — AI 결과를
+              검토하는 데 필요한 Front-end 지식을 단계별로 정리
             </p>
           </div>
         </div>
       </section>
 
-      <section class="scene compact" id="ai-flow">
-        <div class="scene-inner reveal">
+      <section class="presentation-section compact-section" id="ai-flow">
+        <div class="presentation-content reveal-on-scroll">
           <p class="eyebrow">05 · AI BUILD FLOW</p>
           <h2>
-            가이드는 AI의 입력이고<br /><em
-              >Source와 검증 근거가 출력입니다.</em
+            AI는 가이드와 Source를 확인하고<br /><em
+              >구현과 검증 결과를 남깁니다.</em
             >
           </h2>
-          <div class="diagram">
-            <div class="ai-flow">
-              <article class="node human">
+          <div class="diagram-panel">
+            <div class="ai-process">
+              <article class="flow-card human-role">
                 <b>INPUT</b><strong>작업 요청·Figma</strong
-                ><small>화면 목적, 사용자 동작과 확정 범위</small>
+                ><small>화면 목적, 사용자 동작과 작업 범위</small>
               </article>
-              <article class="node guide">
+              <article class="flow-card guide-role">
                 <b>1 · ROUTE</b><strong>AGENTS 확인</strong
-                ><small>저장소 원칙과 앱 지침으로 작업 경계 설정</small>
+                ><small>저장소 원칙과 앱 지침에서 작업 범위를 확인</small>
               </article>
-              <article class="node source">
+              <article class="flow-card source-role">
                 <b>2 · CHECK</b><strong>Package·기존 Source</strong
-                ><small
-                  >설치 상태, export와 기존 사용처를 최종 사실로 확인</small
-                >
+                ><small>설치 상태, export와 기존 사용처를 먼저 확인</small>
               </article>
-              <article class="node ai">
-                <b>3 · LOAD</b><strong>관련 Context 선택</strong
+              <article class="flow-card ai-role">
+                <b>3 · LOAD</b><strong>필요한 가이드 선택</strong
                 ><small
-                  >docs/ai에서 작업별 요약을 읽고 필요한 상세 기준만 추가</small
+                  >docs/ai의 작업별 요약에서 출발해 필요한 구현 예시와 상세
+                  가이드를 확인</small
                 >
               </article>
             </div>
-            <p class="branch-title">작업 중 판단이 필요한 지점</p>
-            <div class="branch-flow">
-              <article class="node guide">
-                <b>구현 기준이 더 필요함</b
+            <p class="decision-branch-title">작업 중 추가 확인이 필요한 경우</p>
+            <div class="decision-branches">
+              <article class="flow-card guide-role">
+                <b>구현 방법을 더 확인해야 함</b
                 ><strong>상세 가이드·적용 예시 확인</strong
                 ><small
-                  >guides에서 판단 배경을, common-source에서 파일 단위 예시를
-                  확인</small
+                  >common-source에서 파일 단위 예시를 확인하고, 더 자세한 기준은
+                  guides에서 확인</small
                 >
               </article>
-              <article class="node human">
-                <b>제품·업무 판단이 필요함</b><strong>담당자가 결정</strong
+              <article class="flow-card human-role">
+                <b>서비스·업무 결정이 필요함</b><strong>담당자에게 확인</strong
                 ><small
                   >범위·업무 규칙·연동 방식을 결정하고 작업 기준에 반영</small
                 >
               </article>
             </div>
-            <div class="quality-gate">
+            <div class="validation-result">
               <b>OUTPUT →</b>
               <span>apps/app-webview 구현</span><span>· Storybook</span
               ><span>· Typecheck</span><span>· Lint</span><span>· Test</span
@@ -417,227 +420,232 @@
         </div>
       </section>
 
-      <section class="scene compact" id="roadmap">
-        <div class="scene-inner reveal">
+      <section class="presentation-section compact-section" id="roadmap">
+        <div class="presentation-content reveal-on-scroll">
           <div class="section-head">
             <div>
-              <p class="eyebrow">06 · BUILD ROADMAP</p>
+              <p class="eyebrow">06 · BUILD PROCESS</p>
               <h2>
-                가이드를 다 만든 뒤가 아니라<br /><em
-                  >단계별로 Source에 적용합니다.</em
+                구축은 프로젝트 구조부터<br /><em
+                  >운영 인계까지 여섯 단계로 진행합니다.</em
                 >
               </h2>
             </div>
             <p>
-              각 단계의 기준을 실제 사용처에 적용하고, 공통 코드는 반복 필요가
-              확인될 때 선별 적용합니다.
+              프로젝트 구조와 책임을 먼저 정하고 UI 구성, 공통 기능, 서비스 기능,
+              통합 검증, 운영 인계 순으로 진행합니다.
             </p>
           </div>
-          <div class="diagram">
-            <div class="roadmap">
-              <article class="phase">
-                <b>01 · FOUNDATION</b>
-                <h3>기반과 경계</h3>
+          <div class="diagram-panel">
+            <div class="build-roadmap">
+              <article class="roadmap-step">
+                <b>01 · STRUCTURE</b>
+                <h3>프로젝트 구조와 책임</h3>
                 <p>
-                  <span class="input-label">GUIDE</span> architecture · frontend
+                  <span class="input-label">적용 가이드</span> architecture · frontend
                   · app · webview
                 </p>
                 <output
-                  ><span class="output-label">RESULT</span> app-webview 골격 ·
-                  AGENTS · 책임 경계</output
+                  ><span class="output-label">단계 결과</span> app-webview 구조 ·
+                  AGENTS 작업 지침 · 앱별 담당 범위</output
                 >
               </article>
-              <article class="phase">
+              <article class="roadmap-step">
                 <b>02 · UI SYSTEM</b>
-                <h3>UI 개발 기반</h3>
+                <h3>UI 구성</h3>
                 <p>
-                  <span class="input-label">GUIDE</span> design-tokens ·
+                  <span class="input-label">적용 가이드</span> design-tokens ·
                   react_code_exports · storybook
                 </p>
                 <output
-                  ><span class="output-label">RESULT</span> Token ·
+                  ><span class="output-label">단계 결과</span> Token ·
                   components/ui · Storybook</output
                 >
               </article>
-              <article class="phase">
+              <article class="roadmap-step">
                 <b>03 · RUNTIME</b>
-                <h3>공통 실행 기반</h3>
+                <h3>공통 기능</h3>
                 <p>
-                  <span class="input-label">GUIDE</span> common-source ·
+                  <span class="input-label">적용 가이드</span> common-source ·
                   typescript · testing
                 </p>
                 <output
-                  ><span class="output-label">RESULT</span> Provider · 공통 경계
-                  · Test 환경</output
+                  ><span class="output-label">단계 결과</span> 공통 Provider · 타입
+                  검사 · 테스트 환경</output
                 >
               </article>
-              <article class="phase">
+              <article class="roadmap-step">
                 <b>04 · FEATURES</b>
-                <h3>기능 단위 구축</h3>
+                <h3>서비스 기능 구현</h3>
                 <p>
-                  <span class="input-label">INPUT</span> 기획·Figma · API·Bridge
+                  <span class="input-label">구현 자료</span> 기획·Figma · API·Bridge
                   정의
                 </p>
                 <output
-                  ><span class="output-label">RESULT</span> features/* ·
+                  ><span class="output-label">단계 결과</span> features/* ·
                   상태·예외 · Story · Test</output
                 >
               </article>
-              <article class="phase">
+              <article class="roadmap-step">
                 <b>05 · INTEGRATE</b>
-                <h3>품질과 통합</h3>
+                <h3>통합·품질 검증</h3>
                 <p>
-                  <span class="input-label">GUIDE</span> testing · security ·
+                  <span class="input-label">적용 가이드</span> testing · security ·
                   performance · browser · i18n
                 </p>
                 <output
-                  ><span class="output-label">RESULT</span> 지원 환경 검사 ·
+                  ><span class="output-label">단계 결과</span> 지원 환경 검사 ·
                   Build · 검증 결과</output
                 >
               </article>
-              <article class="phase">
+              <article class="roadmap-step">
                 <b>06 · HANDOFF</b>
                 <h3>운영 인계</h3>
                 <p>
-                  <span class="input-label">CONNECT</span> Source · Story ·
+                  <span class="input-label">인계 자료</span> Source · Story ·
                   가이드 · 결정 사항
                 </p>
                 <output
-                  ><span class="output-label">RESULT</span> 운영 Context · 검증
-                  근거 · 변경 시작점</output
+                  ><span class="output-label">단계 결과</span> 운영 인계 자료 · 검사
+                  결과 · 다음 변경에 필요한 기록</output
                 >
               </article>
             </div>
             <p class="roadmap-note">
-              공통 폴더를 한 번에 채우지 않습니다 · 실제 기능과 반복 사용처가
-              확인될 때 필요한 기준만 적용합니다.
+              공통 코드는 실제 기능에서 반복해서 필요한 경우에만 적용합니다.
             </p>
           </div>
         </div>
       </section>
 
-      <section class="scene compact" id="ownership">
-        <div class="scene-inner reveal">
+      <section class="presentation-section compact-section" id="ownership">
+        <div class="presentation-content reveal-on-scroll">
           <p class="eyebrow">07 · OWNERSHIP</p>
-          <h2>AI가 만들 수 있어도<br /><em>AI가 결정하지 않습니다.</em></h2>
-          <div class="legend ownership-legend" aria-label="역할 색상 기준">
-            <span class="human">사람이 결정</span>
-            <span class="frontend">Front-end가 설계·검토</span>
-            <span class="ai">AI가 지원</span>
-            <span class="source">산출물로 남김</span>
+          <h2>구축 과정의 업무별<br /><em>담당과 책임을 구분합니다.</em></h2>
+          <div class="role-legend ownership-legend" aria-label="역할 색상 기준">
+            <span class="human-role">사람이 결정</span>
+            <span class="frontend-role">Front-end가 설계·검토</span>
+            <span class="ai-role">AI가 지원</span>
+            <span class="source-role">산출물로 남김</span>
           </div>
-          <div class="diagram swimlane">
-            <div class="lane human-lane">
-              <div class="lane-label">
-                <b>DOMAIN OWNERS</b
+          <div class="diagram-panel ownership-matrix">
+            <div class="ownership-row human-lane">
+              <div class="ownership-summary">
+                <b>업무 담당자</b
                 ><strong>기획·Backend·Flutter·보안·운영</strong>
-                <small>결정</small>
+                <small>업무 기준 결정</small>
               </div>
-              <div class="lane-track">
-                <span>제품 방향·업무 규칙</span><span>API·인증·Bridge 정의</span
-                ><span>보안·운영 정책</span><span>변경 범위 승인</span>
+              <div class="ownership-tasks">
+                <span>서비스 방향·업무 규칙</span
+                ><span>API·인증·Bridge 정의</span><span>보안·운영 정책</span
+                ><span>변경 범위 승인</span>
               </div>
             </div>
-            <div class="lane frontend-lane">
-              <div class="lane-label">
+            <div class="ownership-row frontend-lane">
+              <div class="ownership-summary">
                 <b>FRONT-END</b><strong>개발자·Reviewer</strong>
-                <small>설계·검토</small>
+                <small>기술 설계·품질 책임</small>
               </div>
-              <div class="lane-track">
+              <div class="ownership-tasks">
                 <span>구조·상태 설계</span><span>UI·접근성 구현</span
-                ><span>AI 결과 Review</span><span>최종 품질·인계</span>
+                ><span>AI 작업 결과 검토</span><span>최종 품질·인계</span>
               </div>
             </div>
-            <div class="lane ai-lane">
-              <div class="lane-label">
+            <div class="ownership-row ai-lane">
+              <div class="ownership-summary">
                 <b>AI</b><strong>탐색·초안·반복 검사</strong>
-                <small>지원</small>
+                <small>탐색·구현·검사 지원</small>
               </div>
-              <div class="lane-track">
+              <div class="ownership-tasks">
                 <span>기존 구현 탐색</span><span>코드·Story 초안</span
-                ><span>누락 후보·검사 실행</span
+                ><span>누락 항목 확인·품질 검사</span
                 ><span>변경·검증 결과 정리</span>
               </div>
             </div>
-            <div class="lane artifact-lane">
-              <div class="lane-label">
-                <b>ARTIFACT</b><strong>검토 가능한 산출물</strong>
-                <small>기록</small>
+            <div class="ownership-row artifact-lane">
+              <div class="ownership-summary">
+                <b>검토·인계 자료</b><strong>확인 가능한 작업 결과</strong>
+                <small>검토·인계 자료</small>
               </div>
-              <div class="lane-track">
+              <div class="ownership-tasks">
                 <span>작업 범위·결정 사항</span><span>Source·Story</span
-                ><span>Test·Build 결과</span><span>운영 Context</span>
+                ><span>Test·Build 결과</span><span>운영에 필요한 기록</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section class="scene compact" id="operations">
-        <div class="scene-inner reveal">
+      <section class="presentation-section compact-section" id="operations">
+        <div class="presentation-content reveal-on-scroll">
           <div class="section-head">
             <div>
               <p class="eyebrow">08 · AFTER BUILD</p>
               <h2>
-                구축이 끝나면 가이드는<br /><em
-                  >운영과 다음 변경의 출발점이 됩니다.</em
-                >
+                구축 후에도 Source와 가이드를<br /><em>함께 갱신합니다.</em>
               </h2>
             </div>
             <p>
-              문서를 보존하는 것이 목적이 아닙니다. 다음 변경에서 다시 사용할
-              정확한 Context를 유지하는 것이 운영의 핵심입니다.
+              기능이 바뀌면 Source, Story, Test와 관련 가이드를 함께 갱신해 다음
+              작업에서도 같은 기준을 사용합니다.
             </p>
           </div>
-          <div class="diagram ops-grid">
-            <section class="ops-column">
+          <div class="diagram-panel operations-layout">
+            <section class="operations-column">
               <h3>① 운영 변경 흐름</h3>
-              <div class="ops-loop">
-                <article class="node">
-                  <b>TRIGGER</b><strong>신규 기능·변경·장애</strong
+              <div class="operations-cycle">
+                <article class="flow-card">
+                  <b>작업 발생</b><strong>신규 기능·변경·장애</strong
                   ><small>운영 중 새로운 작업이 발생</small>
                 </article>
-                <div class="arr">→</div>
-                <article class="node guide">
-                  <b>DISCOVER</b><strong>가이드·Source 탐색</strong
-                  ><small>영향 범위와 담당 경계 확인</small>
+                <div class="loop-arrow">→</div>
+                <article class="flow-card guide-role">
+                  <b>영향 범위 확인</b><strong>가이드·Source 탐색</strong
+                  ><small>수정할 영역과 담당 범위 확인</small>
                 </article>
-                <div class="arr">↑</div>
+                <div class="loop-arrow">↑</div>
                 <div></div>
-                <div class="arr">↓</div>
-                <article class="node source">
-                  <b>NEXT CONTEXT</b><strong>다음 작업의 정확한 입력</strong
-                  ><small>갱신된 기준을 AI와 실무자가 재사용</small>
+                <div class="loop-arrow">↓</div>
+                <article class="flow-card source-role">
+                  <b>다음 작업</b><strong>갱신한 기준을 다시 사용</strong
+                  ><small>실무자와 AI가 갱신된 기준을 다시 사용</small>
                 </article>
-                <div class="arr">←</div>
-                <article class="node">
-                  <b>SYNC</b><strong>Source와 기준 함께 갱신</strong
-                  ><small>guides · ai · common-source · Story · Test</small>
+                <div class="loop-arrow">←</div>
+                <article class="flow-card">
+                  <b>함께 갱신</b><strong>Source와 기준 함께 갱신</strong
+                  ><small
+                    >docs/guides · docs/ai · docs/common-source와 구현·검증 자료</small
+                  >
                 </article>
               </div>
             </section>
-            <section class="ops-column">
+            <section class="operations-column">
               <h3>② 역할별 시작점</h3>
-              <div class="entry-list">
-                <div class="entry">
+              <div class="audience-list">
+                <div class="audience-item">
                   <b>운영 실무자</b
                   ><span
-                    >docs/index와 검색 → 관련 상세 가이드 → 변경·검토 위치</span
+                    >docs/index.html과 가이드 검색 → 관련 상세 가이드 → 수정할
+                    Source와 확인할 기준</span
                   >
                 </div>
-                <div class="entry">
+                <div class="audience-item">
                   <b>Front-end</b
                   ><span
                     >AGENTS와 실제 Source → 재사용 대상·구현·검증 기준</span
                   >
                 </div>
-                <div class="entry">
+                <div class="audience-item">
                   <b>AI</b
-                  ><span>AGENTS → 작업별 docs/ai → 필요한 상세 기준</span>
+                  ><span
+                    >AGENTS → 작업에 맞는 docs/ai/*.md → 필요한 상세 가이드</span
+                  >
                 </div>
-                <div class="entry">
+                <div class="audience-item">
                   <b>관계자</b
-                  ><span>브리핑 → 관련 guides → 구축 방식·책임·승인 항목</span>
+                  ><span
+                    >브리핑 → 관련 상세 가이드 → 구축 방식·책임·승인 항목</span
+                  >
                 </div>
               </div>
             </section>
@@ -645,36 +653,38 @@
         </div>
       </section>
 
-      <section class="scene closing" id="closing">
-        <div class="scene-inner reveal">
+      <section class="presentation-section closing" id="closing">
+        <div class="presentation-content reveal-on-scroll">
           <p class="eyebrow">09 · THE SYSTEM</p>
-          <h2>가이드로 경계를 세우고<br /><em>AI로 구축을 가속합니다.</em></h2>
-          <div class="system-loop">
-            <article class="node human">
+          <h2>
+            가이드는 Front-end 구축과 운영에 쓰는<br /><em>공통 기준입니다.</em>
+          </h2>
+          <div class="operating-model">
+            <article class="flow-card human-role">
               <b>DECIDE</b><strong>사람의 결정과 승인</strong
-              ><small>범위·기획·품질 책임</small>
+              ><small>방향·업무 규칙·품질 책임</small>
             </article>
-            <div class="arrow">기준화</div>
-            <article class="node">
+            <div class="flow-arrow">기준화</div>
+            <article class="flow-card">
               <b>EXECUTE</b><strong>가이드 + AI</strong
-              ><small>Context에 맞춘 탐색·구현·검증</small>
+              ><small>기준에 따른 탐색·구현·검증</small>
             </article>
-            <div class="arrow">산출물</div>
-            <article class="node source">
+            <div class="flow-arrow">산출물</div>
+            <article class="flow-card source-role">
               <b>OPERATE</b><strong>Source · Story · Test</strong
-              ><small>운영과 다음 변경의 출발점</small>
+              ><small>운영과 다음 변경에 다시 사용</small>
             </article>
           </div>
           <p class="closing-note">
-            변경과 학습은 다시 가이드에 반영되어 다음 AI 작업의 Context가 됩니다
-            ↺
+            변경된 Source와 새로 확인한 기준은 가이드에 반영해 다음 작업에
+            사용합니다 ↺
           </p>
           <a href="./index.html">전체 상세 가이드 열기 <b>↗</b></a>
         </div>
       </section>
     </main>
 
-    <div class="key-help">↑ ↓</div>
-    <script src="../../assets/js/briefing-presentation.js"></script>
+    <div class="keyboard-hint">↑ ↓</div>
+    <script src="../../assets/js/briefing-presentation.js?v=20260903-8"></script>
   </body>
 </html>
