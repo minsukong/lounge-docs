@@ -72,6 +72,7 @@
     │   ├── quality.md
     │   ├── performance.md
     │   ├── security.md
+    │   ├── accessibility.md
     │   ├── common-source.md
     │   └── local-llm.md
     └── common-source/              # 파일 단위 구현 기준
@@ -211,6 +212,7 @@ AI는 작업을 시작할 때 이 `AGENTS.md`를 먼저 읽습니다. 이후 작
 | 프로젝트 구조, 기능과 상태 관리 기준 확인 | [Markdown](./docs/ai/project.md) · [HTML](./docs/ai/project.html) | 앱 범위, 기술 스택, 디렉터리 구조와 상태 배치 원칙 |
 | UI, 컴포넌트와 스타일 구현 | [Markdown](./docs/ai/ui.md) · [HTML](./docs/ai/ui.html) | React·TypeScript 출력, Tailwind CSS, 컴포넌트 재사용과 접근성 기준 |
 | 디자인 토큰과 스타일 값 연결 | [Markdown](./docs/ai/design-tokens.md) · [HTML](./docs/ai/design-tokens.html) | 의미 기반 토큰, shadcn/ui 설정, Figma Variables와 Tokens Studio 기준 |
+| UI 접근성, WCAG, ARIA, 키보드, 스크린 리더 | [Markdown](./docs/ai/accessibility.md) · [HTML](./docs/ai/accessibility.html) | 색상 대비, 키보드, ARIA, 폼, Dialog, 모션, 터치와 반응형 기준 |
 | Figma 화면을 애플리케이션 코드로 구현 | [Markdown](./docs/ai/figma.md) · [HTML](./docs/ai/figma.html) | 구현 전 조사, 기존 코드 매핑, React 구현과 시각·품질 확인 흐름 |
 | Storybook Story 작성과 누락 점검 | [Markdown](./docs/ai/storybook.md) · [HTML](./docs/ai/storybook.html) | 작성 시점과 대상, 실제 상태, 반자동 운영과 완료 기준 |
 | TypeScript, Lint, Test와 Build 품질 확인 | [Markdown](./docs/ai/quality.md) · [HTML](./docs/ai/quality.html) | 검사 도구의 역할, 테스트 범위와 기본 검증 명령 |
@@ -302,6 +304,7 @@ docs/
 │  ├─ project.md        # 프로젝트 구조, 기능 및 상태 작업
 │  ├─ ui.md             # UI, 컴포넌트 및 스타일 작업
 │  ├─ design-tokens.md  # 디자인 토큰 및 스타일 기준
+│  ├─ accessibility.md  # 접근성, WCAG, ARIA, 키보드, 스크린 리더
 │  ├─ figma.md          # Figma URL 및 디자인 구현 작업
 │  ├─ storybook.md      # Story 작성, 갱신과 누락 점검
 │  ├─ quality.md        # Lint, Test 및 품질 확인
@@ -325,6 +328,7 @@ docs/
 ```
 
 - UI 작업에서는 `docs/ai/ui.md`와 `docs/ai/design-tokens.md`를 함께 읽습니다.
+- 접근성(대비, 포커스, ARIA, 폼, 모션, 터치)이 포함된 UI 작업에서는 `docs/ai/accessibility.md`를 함께 읽습니다.
 - Figma 구현 작업에서는 `docs/ai/figma.md`, `docs/ai/ui.md`, `docs/ai/design-tokens.md`를 함께 읽습니다.
 - 공통 컴포넌트, 독립 검수 가치가 있는 Feature 또는 사용자 노출 Screen을 생성하거나 공개 Props, 주요 상태와 화면 구조를 변경하는 작업에서는 `docs/ai/storybook.md`를 함께 읽습니다.
 - API, Query, Loading, Timeout, Offline, 이미지·폰트 로딩 또는 성능에 영향을 주는 작업에서는 `docs/ai/performance.md`를 함께 읽습니다.

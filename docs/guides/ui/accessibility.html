@@ -1,0 +1,918 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Lounge WebView 앱의 UI 접근성 준수 기준을 WCAG 2.1 AA 수준으로 정의합니다." />
+    <title>UI 접근성 준수 가이드</title>
+    <link rel="stylesheet" href="../../assets/style/presentation-theme.css" />
+  </head>
+  <body>
+    <header>
+      <div class="type">FRONT-END · UI GUIDE · ACCESSIBILITY</div>
+      <h1>UI 접근성 준수 가이드</h1>
+      <p>
+        Lounge WebView 앱의 UI가 시각·청각·운동 제약을 포함한 다양한 사용자
+        환경에서 핵심 업무를 완료할 수 있도록 준수해야 하는 접근성 기준을
+        정의합니다.
+      </p>
+    </header>
+    <main>
+      <section>
+        <h2 class="bx-active">1. 문서 목적과 범위</h2>
+        <p>
+          이 문서는 <code>apps/app-webview</code>의 UI가 준수해야 하는
+          접근성(Accessibility) 기준을 정의합니다. 접근성이란 시각, 청각,
+          운동, 인지 능력에 제약이 있는 사용자에게도 동일한 정보와 업무
+          흐름을 제공할 수 있도록 화면을 설계하고 구현하는 활동을
+          의미합니다.
+        </p>
+        <p>
+          준수 기준은 W3C가 발표한 WCAG 2.1의 AA 수준을 목표로 합니다.
+          AA 수준은 A 수준보다 엄격한 실질적 기준을 요구하는 레벨입니다.
+        </p>
+        <p>
+          적용 환경은 iOS 15 이상 WKWebView와 지원 대상 Android System
+          WebView입니다. Safari 15 CSS 하한 기준과 동일한 호환성 범위를
+          따릅니다.
+        </p>
+        <p>
+          이 문서는 현재 준수해야 하는 "기본 준수" 기준과, 향후
+          Accessibility Mark 취득 시 추가로 검토할 "확장 검토" 항목을
+          구분합니다. 확장 검토 항목은 아직 확정된 의무가 아닙니다.
+        </p>
+        <p>
+          컴포넌트 스타일과 토큰은
+          <a href="./design_tokens.html">디자인 토큰 가이드</a>
+          , UI 구현 절차는
+          <a href="./react_code_exports.html">React Code Exports 가이드</a>
+          를 따릅니다. Lint와 자동화 검사 경계는
+          <a href="../lint/index.html">Lint 가이드</a>를 따릅니다.
+        </p>
+      </section>
+      <section>
+        <h2 class="bx-active">2. 용어와 기준</h2>
+        <p>
+          이 문서에서 사용하는 주요 용어의 의미를 정리합니다. 이후
+          섹션에서는 이 용어들을 그대로 사용합니다.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">용어</th>
+              <th scope="col">정의</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>WCAG</td>
+              <td>W3C가 발표한 웹 콘텐츠 접근성 가이드라인. 이 프로젝트는 2.1을 기준으로 사용합니다.</td>
+            </tr>
+            <tr>
+              <td>AA 수준</td>
+              <td>WCAG의 준수 등급 중 A보다 엄격하고 AAA보다 완화된 수준.</td>
+            </tr>
+            <tr>
+              <td>Screen Reader</td>
+              <td>화면 내용을 음성으로 낭독하는 보조 기술. iOS는 VoiceOver, Android는 TalkBack.</td>
+            </tr>
+            <tr>
+              <td>ARIA</td>
+              <td>HTML 원소에는 접근성 정보가 부족할 때 역할을 보완하는 속성 세트.</td>
+            </tr>
+            <tr>
+              <td>Focus</td>
+              <td>키보드나 보조 기술이 현재 상호작용 가능한 원소를 표시하는 상태.</td>
+            </tr>
+            <tr>
+              <td>Focus Trap</td>
+              <td>Dialog 안에서 포커스가 배경 문서로 나가지 않도록 포커스 순서를 제한하는 기법.</td>
+            </tr>
+            <tr>
+              <td>Landmark</td>
+              <td>화면을 큰 영역으로 나누는 HTML 구조(
+                <code>header</code>,
+                <code>nav</code>,
+                <code>main</code>,
+                <code>footer</code>).</td>
+            </tr>
+            <tr>
+              <td>Live Region</td>
+              <td>내용이 동적으로 바뀌면 스크린 리더가 변경을 자동으로 낭독하는 영역.</td>
+            </tr>
+            <tr>
+              <td>Touch Target</td>
+              <td>사용자가 터치로 선택하는 최소 영역. iOS HIG 기준 44×44pt.</td>
+            </tr>
+            <tr>
+              <td>Motion</td>
+              <td>화면 요소의 위치, 크기, 투명도 변화. 애니메이션과 트랜지션을 포함.</td>
+            </tr>
+            <tr>
+              <td>Accessibility Mark</td>
+              <td>국가 또는 지자체가 발행하는 접근성 인증 마크. 한국은 KACA.</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">3. 색상과 대비</h2>
+        <p>
+          텍스트와 배경의 명도 차이를 수치로 보장합니다. 대비
+          비율(Contrast Ratio)은 WCAG에서 상대 밝기 기준으로
+          정의하며,
+          <code>foreground</code>와
+          <code>background</code> 토큰이 이 값을
+          충족해야 합니다.
+        </p>
+        <h3>최소 대비 비율</h3>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">대상</th>
+              <th scope="col">최소 대비</th>
+              <th scope="col">예시</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>일반 본문 텍스트 (16px 미만)</td>
+              <td>4.5 : 1</td>
+              <td>예약 안내 문구, 이용권 상세 설명, 폼 라벨</td>
+            </tr>
+            <tr>
+              <td>대형 텍스트 (18px 이상 또는 14px 이상 bold)</td>
+              <td>3 : 1</td>
+              <td>화면 제목, 큰 가격 표시</td>
+            </tr>
+            <tr>
+              <td>UI 컴포넌트 경계 (버튼 테두리, 입력框)</td>
+              <td>3 : 1</td>
+              <td>
+                <code>border-border</code>, 입력框
+                테두리
+              </td>
+            </tr>
+            <tr>
+              <td>아이콘과 시각적 표시</td>
+              <td>3 : 1</td>
+              <td>상태 아이콘, 체크박스, 라디오 버튼</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>색상 단독 의존 금지</h3>
+        <p>
+          정보를 전달할 때 색상에만 의존하지 않습니다. 오류
+          상태를 표시할 때 빨간색뿐 아니라
+          <code>aria-invalid</code> 속성과 텍스트
+          메시지로 중복 전달합니다.
+        </p>
+        <ul>
+          <li>오류: 빨간색 테두리 +
+            <code>aria-invalid="true"</code> + 텍스트
+            메시지</li>
+          <li>완료: 초록색 + 체크 아이콘 + "완료"
+            텍스트</li>
+          <li>
+            비활성: 흐린색 +
+            <code>disabled</code> +
+            <code>aria-disabled="true"</code>
+          </li>
+        </ul>
+        <h3>토큰 기반 관리</h3>
+        <p>
+          개별 컴포넌트에서 원시 색상값으로 대비를 조정하지
+          않습니다.
+          <code>globals.css</code>의 Semantic Token
+          (
+          <code>--background</code>,
+          <code>--foreground</code>,
+          <code>--primary</code>,
+          <code>--muted-foreground</code> 등)이
+          대비 비율을 충족하도록 정의하고, 컴포넌트는 이 토큰만
+          사용합니다.
+        </p>
+        <h3>확장 검토</h3>
+        <ul>
+          <li>모든 텍스트 조합의 대비 비율을 자동화 도구로 검증</li>
+          <li>고대비 모드에서 포커스 링과 상태 표시가 유지되는지 확인</li>
+          <li>시스템 색 반전 모드에서 UI 상태가 구분되는지 확인</li>
+        </ul>
+      </section>
+      <section>
+        <h2 class="bx-active">4. 키보드 접근성</h2>
+        <p>
+          모든 상호작용 기능을 키보드만으로 수행할 수 있어야 합니다.
+          이는 스크린 리더 사용자가 VoiceOver의 두 손가락 탭,
+          TalkBack의 두 손가락 탭으로 상호작용하는 것과 동일한 경로를
+          보장합니다.
+        </p>
+        <h3>핵심 규칙</h3>
+        <ol>
+          <li>모든 Button, Link, Input, Select, Tab을
+            <code>Tab</code> 키로 순차적으로 도달할 수
+            있습니다.</li>
+          <li>
+            포커스 순서가 화면의 시각적 읽기 순서(위에서 아래,
+            왼쪽에서 오른쪽)와 일치합니다.
+          </li>
+          <li>
+            포커스 있는 원소에 포커스 링이 표시됩니다.
+            <code>outline: none</code>으로 제거하지
+            않습니다.
+          </li>
+          <li>
+            <code>Tab</code>과 <code>Shift+Tab</code>으로
+            모든 상호작용 원소를 순환할 수 있으며, 포커스가
+            문서 밖으로 빠져나가지 않습니다.
+          </li>
+          <li>
+            <code>Escape</code> 키로 Dialog, Dropdown,
+            Popover를 닫을 수 있습니다.
+          </li>
+          <li>
+            <code>Enter</code> 또는 <code>Space</code>로
+            Button과 Link를 활성화할 수 있습니다.
+          </li>
+        </ol>
+        <h3>포커스 표시</h3>
+        <p>
+          포커스 링은
+          <code>outline</code> 또는
+          <code>box-shadow</code>로 표시합니다.
+          <code>globals.css</code>의
+          <code>--ring</code> 토큰을 사용합니다. 포커스
+          링과 배경의 대비는 3:1 이상입니다.
+        </p>
+        <pre class="hljs"><code data-language="css"><span class="hljs-selector-class">.focus-visible</span> {
+  outline: <span class="hljs-number">2</span>px solid <span class="hljs-variable">var</span>(<span class="hljs-variable">--ring</span>);
+  outline-offset: <span class="hljs-number">2</span>px;
+}</code></pre>
+        <h3>확장 검토</h3>
+        <ul>
+          <li>
+            키보드 전용 시나리오(마우스 없이 전체 업무 흐름
+            완료)를 VoiceOver와 함께 검증
+          </li>
+          <li>
+            <code>prefers-reduced-motion</code> 활성화 시 포커스
+            이동 애니메이션이 제거되는지 확인
+          </li>
+        </ul>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">5. 스크린 리더와 ARIA</h2>
+        <p>
+          HTML 원어의 의미를 우선 사용합니다.
+          <code>&lt;button&gt;</code>,
+          <code>&lt;nav&gt;</code>,
+          <code>&lt;label&gt;</code> 같은 의미 있는
+          원소는 ARIA 없이도 스크린 리더에 올바르게
+          전달됩니다.
+        </p>
+        <h3>ARIA 사용 원칙</h3>
+        <ol>
+          <li>
+            <strong>첫 번째 규칙:</strong> ARIA가
+            필요하지 않은 상황에서는 ARIA를
+            사용하지 않습니다.
+          </li>
+          <li>
+            <strong>두 번째 규칙:</strong> 사용해야
+            한다면 표준 ARIA 속성만 사용합니다.
+          </li>
+          <li>
+            <strong>세 번째 규칙:</strong> 사용해야
+            한다면, 기능적으로 올바른 ARIA를
+            사용합니다.
+          </li>
+        </ol>
+        <h3>자주 사용하는 ARIA 속성</h3>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">속성</th>
+              <th scope="col">목적</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>aria-label</code></td>
+              <td>텍스트가 없는 원소(아이콘 버튼)에 이름을 부여</td>
+            </tr>
+            <tr>
+              <td><code>aria-describedby</code></td>
+              <td>오류 메시지나 추가 설명을 연결</td>
+            </tr>
+            <tr>
+              <td><code>aria-invalid</code></td>
+              <td>입력 오류 상태를 표시</td>
+            </tr>
+            <tr>
+              <td><code>aria-live</code></td>
+              <td>동적 변경을 스크린 리더에 전달</td>
+            </tr>
+            <tr>
+              <td><code>aria-hidden</code></td>
+              <td>장식적 아이콘을 스크린 리더에서 제외</td>
+            </tr>
+            <tr>
+              <td><code>role</code></td>
+              <td>HTML 원어가 표현할 수 없는 역할을 부여</td>
+            </tr>
+            <tr>
+              <td><code>aria-modal</code></td>
+              <td>Dialog가 배경을 차단함을 표시</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>Landmark 구조</h3>
+        <p>
+          WebView 화면은
+          <code>&lt;main&gt;</code>,
+          <code>&lt;nav&gt;</code>,
+          <code>&lt;header&gt;</code>,
+          <code>&lt;footer&gt;</code> 같은 Landmark
+          원소로 큰 영역을 나눕니다. Next.js
+          <code>layout.tsx</code>에서
+          <code>&lt;main&gt;</code>이 이미
+          제공되는 경우 화면 컴포넌트에서 중복으로
+          추가하지 않습니다.
+        </p>
+        <h3>Live Region</h3>
+        <p>
+          서버 응답, 오류, 진행 상태처럼 화면이
+          동적으로 바뀌는 영역에는
+          <code>aria-live="polite"</code>를
+          적용합니다. 오류 메시지는
+          <code>assertive</code> 또는
+          <code>role="alert"</code>를
+          사용합니다.
+        </p>
+        <h3>확장 검토</h3>
+        <ul>
+          <li>
+            VoiceOver와 TalkBack에서 모든 Landmark를
+            순회하며 구조 검증
+          </li>
+          <li>
+            <code>prefers-reduced-motion</code>과
+            <code>prefers-contrast</code> 설정에 대한
+            동작 검증
+          </li>
+        </ul>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">6. 포커스 관리</h2>
+        <p>
+          포커스는 사용자가 현재 어디에 있는지 알려주는 핵심 신호입니다.
+          Dialog, Sheet, Modal이 열리고 닫힐 때 포커스 위치를 명시적으로
+          관리합니다.
+        </p>
+        <h3>Dialog 포커스 순서</h3>
+        <ol>
+          <li>Dialog가 열리면 포커스는 Dialog의 첫 번째
+            상호작용 원소로 이동합니다.</li>
+          <li>
+            Dialog 안의 포커스는
+            <code>Tab</code>/<code>Shift+Tab</code>으로
+            순환하며 배경 문서로 빠져나가지 않습니다.
+            (Focus Trap)
+          </li>
+          <li>
+            <code>Escape</code> 또는 닫기 버튼으로
+            Dialog가 닫히면 포커스는 Dialog를 연 원소로
+            복귀합니다.
+          </li>
+          <li>
+            Dialog가 닫힌 뒤 배경 문서의
+            <code>aria-hidden</code>이
+            제거됩니다.
+          </li>
+        </ol>
+        <h3>화면 전환 시 포커스</h3>
+        <p>
+          라우트 전환 이후 포커스는
+          <code>&lt;main&gt;</code>의 첫 번째
+          <code>&lt;h1&gt;</code> 또는
+          <code>tabindex="-1"</code>이 부여된
+          컨테이너로 이동합니다. Next.js
+          <code>usePathname</code>과
+          <code>useEffect</code>로 포커스를
+          관리합니다.
+        </p>
+        <h3>확장 검토</h3>
+        <ul>
+          <li>
+            포커스 이동 시
+            <code>prefers-reduced-motion</code> 설정에 따라
+            scroll 애니메이션 비활성화
+          </li>
+          <li>
+            VoiceOver의
+            <code>AXSelected</code> 상태와 HTML
+            <code>focus</code>가 일치하는지 검증
+          </li>
+        </ul>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">7. 폼 접근성</h2>
+        <p>
+          폼은 사용자가 정보를 입력하는 핵심 흐름입니다.
+          예약, 결제, 회원 정보 수정처럼 업무가 완료되지
+          않으면 안 되는 화면에서 특히 중요합니다.
+        </p>
+        <h3>필드 라벨</h3>
+        <ul>
+          <li>모든
+            <code>&lt;input&gt;</code>,
+            <code>&lt;select&gt;</code>,
+            <code>&lt;textarea&gt;</code>에
+            <code>&lt;label htmlFor&gt;</code>를
+            연결합니다.</li>
+          <li>
+            라벨 텍스트는 필드의 목적을 명확히
+            표현합니다. "이곳에 입력"이 아니라
+            "이름", "연락처", "예약 날짜"처럼
+            구체적인 내용이 들어갑니다.
+          </li>
+          <li>
+            <code>placeholder</code>는 힌트만
+            사용하며 라벨의 대체로
+            사용하지 않습니다.
+          </li>
+        </ul>
+        <h3>필수 필드 표시</h3>
+        <p>
+          필수 필드는 <code>required</code> 속성과
+          <code>aria-required="true"</code>를
+          함께 사용합니다. 시각적으로는
+          <code>*</code> 표시와 "필수" 텍스트를
+          함께 제공합니다.
+        </p>
+        <h3>오류 표시</h3>
+        <ul>
+          <li>
+            오류는 <code>aria-invalid="true"</code>와
+            <code>aria-describedby</code>로
+            연결합니다.
+          </li>
+          <li>
+            오류 메시지는
+            <code>&lt;span&gt;</code>에 id를 부여하고
+            필드의 <code>aria-describedby</code>로
+            연결합니다.
+          </li>
+          <li>오류 색상은 대비 4.5:1을 충족합니다.</li>
+          <li>
+            오류 메시지는 텍스트로 제공하며 색상만으로
+            구분하지 않습니다.
+          </li>
+        </ul>
+        <h3>입력框 유형</h3>
+        <p>
+          올바른 <code>type</code> 속성을
+          사용합니다.
+          <code>type="email"</code>,
+          <code>type="tel"</code>,
+          <code>type="number"</code> 등은
+          모바일 키보드를 적절히 표시하고 스크린
+          리더에서 입력 유형을
+          알려줍니다.
+        </p>
+        <h3>확장 검토</h3>
+        <ul>
+          <li>VoiceOver의 필드 낭독 순서와 오류 안내를 검증</li>
+          <li>
+            폼 제출 후 포커스가 첫 번째 오류 필드로
+            이동하는지 확인
+          </li>
+        </ul>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">8. 대화상자와 오버레이</h2>
+        <p>
+          Dialog, Sheet, Popover, Toast처럼
+          배경 위에 겹쳐지는 오버레이는 포커스
+          관리와 배경 차단을 명시적으로
+          처리합니다.
+        </p>
+        <h3>필수 구현</h3>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">항목</th>
+              <th scope="col">구현 기준</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>역할</td>
+              <td>
+                <code>role="dialog"</code> 또는
+                <code>role="alertdialog"</code>
+              </td>
+            </tr>
+            <tr>
+              <td>모달 표시</td>
+              <td>
+                <code>aria-modal="true"</code>
+              </td>
+            </tr>
+            <tr>
+              <td>이름</td>
+              <td>
+                <code>aria-labelledby</code>로 제목
+                연결 또는
+                <code>aria-label</code>
+              </td>
+            </tr>
+            <tr>
+              <td>포커스 트랩</td>
+              <td>
+                열림 시 포커스 내부 이동,
+                <code>Tab</code>/<code>Shift+Tab</code>
+                순환
+              </td>
+            </tr>
+            <tr>
+              <td>포커스 복귀</td>
+              <td>닫힘 시 이전 원소로 복귀</td>
+            </tr>
+            <tr>
+              <td>닫기</td>
+              <td>
+                <code>Escape</code> 키 + 닫기
+                버튼
+              </td>
+            </tr>
+            <tr>
+              <td>배경 차단</td>
+              <td>
+                배경 원소에
+                <code>aria-hidden="true"</code>와
+                <code>inert</code> 속성 적용
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>shadcn/ui Dialog</h3>
+        <p>
+          shadcn/ui의
+          <code>&lt;Dialog&gt;</code> 컴포넌트는
+          Radix UI 기반으로 위 요구사항을
+          기본적으로 제공합니다. 커스텀
+          Dialog를 만들 때만 수동으로
+          구현합니다.
+        </p>
+        <h3>확장 검토</h3>
+        <ul>
+          <li>
+            VoiceOver에서 Dialog가
+            <code>AXDialog</code>로 인식되는지 확인
+          </li>
+          <li>
+            <code>inert</code> 속성의 Safari 15 지원
+            여부 확인 (미지원 시
+            <code>aria-hidden</code> + 포커스
+            차단만으로 대체)
+          </li>
+        </ul>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">9. 애니메이션과 운동감</h2>
+        <p>
+          화면 이동, Dialog 등장, 로딩 표시처럼
+          요소가 위치·크기·투명도를 바꾸는 모든
+          Motion은
+          <code>prefers-reduced-motion</code>
+          설정을 존중합니다. 이 설정은
+          전정운동질환 사용자에게
+          중요합니다.
+        </p>
+        <h3>핵심 규칙</h3>
+        <ul>
+          <li>
+            <code>@media
+            (prefers-reduced-motion: reduce)</code>
+            안에서 모든 장식적
+            애니메이션을
+            <code>animation: none</code>과
+            <code>transition: none</code>으로
+            제거합니다.
+          </li>
+          <li>
+            기능적 애니메이션(로딩 표시자, 오류
+            강조)은 유지하되 강도를 낮춥니다.
+          </li>
+          <li>
+            3초 이상 지속되는 반복
+            애니메이션은
+            <code>prefers-reduced-motion</code>
+            에서 중단합니다.
+          </li>
+          <li>
+            3초 이내에 3회 이상 깜빡이는
+            콘텐츠는 사용하지 않습니다. (WCAG
+            2.3.1)
+          </li>
+        </ul>
+        <h3>Tailwind CSS 적용</h3>
+        <pre class="hljs"><code data-language="tsx"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>
+  <span class="hljs-attr">className</span>=<span class="hljs-string">"animate-spin motion-reduce:animate-none"</span>
+<span class="hljs-tag">&gt;</span></span>
+  로딩 중...
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
+        <h3>확장 검토</h3>
+        <ul>
+          <li>
+            <code>prefers-reduced-motion</code>
+            활성화 시 모든 라우트 전환, Dialog,
+            Toast 동작을 검증
+          </li>
+        </ul>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">10. 터치와 반응형</h2>
+        <p>
+          WebView는 터치 입력이 기본입니다. 손가락
+          움직임이 제한된 사용자도 핵심 업무를
+          완료할 수 있도록 터치 영역과
+          반응형을 관리합니다.
+        </p>
+        <h3>터치 영역</h3>
+        <ul>
+          <li>모든 터치 가능한 원소의 최소 크기는
+            44×44pt입니다. (Apple HIG 기준)</li>
+          <li>인접한 터치 원소 사이 간격은 최소
+            8pt 이상입니다.</li>
+          <li>
+            작은 아이콘 버튼은
+            <code>padding</code>이나
+            <code>min-w-11
+            min-h-11</code>로 터치 영역을
+            확보합니다.
+          </li>
+        </ul>
+        <h3>텍스트 확대</h3>
+        <p>
+          사용자가 브라우저나 OS에서 텍스트를
+          200%까지 확대해도 내용이 잘리지 않고
+          모든 기능을 사용할 수 있어야 합니다.
+        </p>
+        <ul>
+          <li>
+            <code>px</code> 단위로 고정하지
+            않고 <code>rem</code> 또는
+            <code>em</code>을
+            사용합니다.
+          </li>
+          <li>
+            <code>max-height</code>,
+            <code>line-clamp</code>로
+            텍스트를 자르는 경우
+            <code>overflow</code>와
+            스크롤로 대체할 수 있습니다.
+          </li>
+        </ul>
+        <h3>확장 검토</h3>
+        <ul>
+          <li>
+            손가락 움직임이 제한된 사용자를 위한
+            Switch Control 시나리오
+            검증
+          </li>
+          <li>
+            <code>prefers-contrast: high</code>
+            에서 UI 상태 구분 확인
+          </li>
+        </ul>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">11. 검증과 코드 리뷰
+        체크리스트</h2>
+        <h3>자동화 검사</h3>
+        <p>
+          Lint와 정적 분석으로 자동화 가능한
+          항목은
+          <a href="../lint/index.html">Lint
+          가이드</a>의
+          <code>eslint-plugin-jsx-a11y</code>
+          규칙으로 검사합니다. Lint가
+          발견하지 못하는 항목은 아래
+          수작업으로
+          검증합니다.
+        </p>
+        <h3>수작업 검증</h3>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">검증 항목</th>
+              <th scope="col">방법</th>
+              <th scope="col">통과 기준</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>키보드 이동</td>
+              <td>
+                <code>Tab</code>/<code>Shift+Tab</code>
+                으로 전체 화면 순회
+              </td>
+              <td>모든 원소 도달, 포커스 링
+                가시성</td>
+            </tr>
+            <tr>
+              <td>VoiceOver</td>
+              <td>
+                iOS 15+ 기기에
+                VoiceOver 활성화 후
+                핵심 업무 시나리오
+                수행
+              </td>
+              <td>올바른 이름과 역할로
+                낭독</td>
+            </tr>
+            <tr>
+              <td>TalkBack</td>
+              <td>
+                Android 기기에 TalkBack
+                활성화 후 핵심 업무
+                시나리오 수행
+              </td>
+              <td>VoiceOver와 동일한
+                기준</td>
+            </tr>
+            <tr>
+              <td>대비</td>
+              <td>
+                Lighthouse 또는 WebAIM
+                Contrast Checker로
+                확인
+              </td>
+              <td>본문 4.5:1, UI
+                3:1 이상</td>
+            </tr>
+            <tr>
+              <td>모션</td>
+              <td>
+                OS 설정에서 "모션 최소화"
+                활성화 후 확인
+              </td>
+              <td>장식적 애니메이션
+                제거</td>
+            </tr>
+            <tr>
+              <td>텍스트 확대</td>
+              <td>
+                iOS 200% 확대 또는
+                DevTools 200% Zoom
+              </td>
+              <td>텍스트 잘림
+                없음</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>코드 리뷰 체크리스트</h3>
+        <ul>
+          <li>모든 Button, Link, Input이
+            <code>Tab</code> 키로 도달 가능한
+            가?</li>
+          <li>
+            포커스 링이
+            <code>outline: none</code>으로
+            제거되지 않았는가?
+          </li>
+          <li>
+            모든 <code>&lt;input&gt;</code>,
+            <code>&lt;select&gt;</code>에
+            <code>&lt;label htmlFor&gt;</code>가
+            연결되어 있는가?
+          </li>
+          <li>
+            오류 메시지가
+            <code>aria-invalid</code>와
+            <code>aria-describedby</code>로
+            전달되는가?
+          </li>
+          <li>
+            Dialog에
+            <code>role="dialog"</code>,
+            <code>aria-modal="true"</code>,
+            <code>aria-labelledby</code>가
+            있는가?
+          </li>
+          <li>
+            Dialog 열림/닫힘 시 포커스
+            이동과 복귀가 구현되어
+            있는가?
+          </li>
+          <li>
+            <code>Escape</code> 키로
+            Dialog를 닫을 수 있는가?
+          </li>
+          <li>
+            장식적 아이콘에
+            <code>aria-hidden="true"</code>가
+            있는가?
+          </li>
+          <li>
+            동적 변경 영역에
+            <code>aria-live</code> 또는
+            <code>role="alert"</code>가
+            있는가?
+          </li>
+          <li>
+            <code>prefers-reduced-motion</code>
+            에서 애니메이션이
+            제거되는가?
+          </li>
+          <li>
+            색상만으로 정보를
+            전달하지 않는가?
+          </li>
+          <li>
+            터치 가능한 원소가 최소
+            44×44pt인가?
+          </li>
+          <li>
+            Landmark 구조(
+            <code>&lt;main&gt;</code>,
+            <code>&lt;nav&gt;</code>)가
+            올바른가?
+          </li>
+        </ul>
+        <h3>확장 검토</h3>
+        <ul>
+          <li>
+            Accessibility Mark(KACA) 취득 시 모든
+            화면에 대한 시나리오 기반 수작업 검증
+            보고서
+          </li>
+          <li>
+            <code>axe-core</code> 자동화 검사를
+            CI/CD에 통합
+          </li>
+        </ul>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">12. 참고 문서</h2>
+        <ul>
+          <li>
+            <a
+              href="https://www.w3.org/WAI/WCAG21/quickref/"
+              >WCAG 2.1 Quick Reference</a
+            >
+          </li>
+          <li>
+            <a href="https://www.w3.org/WAI/ARIA/apg/"
+              >WAI-ARIA Authoring Practices Guide</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA"
+              >MDN ARIA</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://developer.apple.com/design/human-interface-guidelines/accessibility"
+              >Apple HIG Accessibility</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://web.dev/articles/learn/accessibility"
+              >web.dev Learn Accessibility</a
+            >
+          </li>
+          <li>
+            <a href="../lint/index.html">Lint 가이드</a>
+          </li>
+          <li><a href="./design_tokens.html">디자인 토큰 가이드</a></li>
+          <li>
+            <a
+              href="./react_code_exports.html"
+              >React Code Exports 가이드</a
+            >
+          </li>
+        </ul>
+      </section>
+    </main>
+    <footer>
+      <p>UI 접근성 준수 가이드</p>
+    </footer>
+    <script src="../../assets/js/common.js"></script>
+    <script src="../../assets/js/mermaid.js"></script>
+  </body>
+</html>

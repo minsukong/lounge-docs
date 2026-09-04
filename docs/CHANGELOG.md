@@ -11,6 +11,15 @@
 - 변경한 파일 목록만 나열하지 않고 변경 목적, 주요 내용, 미확정 항목과 검증 결과를 함께 기록합니다.
 - 같은 작업에서 Markdown과 HTML을 함께 수정했다면 하나의 변경 항목으로 기록합니다.
 
+## 2026-09-04
+
+### 접근성 AI 요약 문서 완성
+
+- UI 접근성 준수 가이드의 핵심 판단 기준을 AI 코딩용 요약으로 정리해 [`docs/ai/accessibility.md`](./ai/accessibility.md)를 완성했습니다. 기본 원칙(WCAG 2.1 AA, HTML 원어 우선, ARIA 4개 규칙), 색상 대비, 키보드 접근성, 스크린 리더·ARIA, 폼, Dialog·오버레이, 모션, 터치·반응형과 자동화 검사를 다룹니다.
+- 같은 폴더의 `accessibility.html`은 Markdown 본문을 렌더링하는 기존 재사용 뷰이며, 저장소 루트 `AGENTS.md`의 작업별 요약 표와 필수 문서 목록에 이미 연결되어 있어 이번 작업에서 참조 파일 수정은 필요하지 않았습니다.
+- 미확정 항목: Accessibility Mark(KACA) 취득, `axe-core`의 CI/CD 통합과 `prefers-contrast` 검증은 승인 단계가 된 뒤에 진행하는 확장 검토 항목으로 문서에 남겼습니다.
+- 검증: 기준 원본(UI 접근성 준수 가이드, 디자인 토큰 가이드, Lint 가이드) 존재와 `docs/ai/accessibility.html` → `accessibility.md` 렌더링 경로, 루트 `AGENTS.md`·`docs/README.md`의 접근성 문서 링크가 실제 파일 경로와 일치하는지 확인했습니다.
+
 ## 2026-09-02
 
 ### main 최신 변경의 실무 구조 반영

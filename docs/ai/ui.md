@@ -41,6 +41,7 @@
 - shadcn/ui가 제공하는 키보드, 포커스와 ARIA 구조를 깨뜨리지 않습니다.
 - Figma에 정의되지 않은 반응형 동작이나 상호작용을 추측해서 확대하지 않습니다.
 - `field-sizing`, `@starting-style`, `text-wrap: balance/pretty`, 최신 `:has()`·container query·mask 등에 핵심 UI를 의존시키지 않습니다.
+- 접근성 세부 기준(색상 대비, 키보드, 스크린 리더, 폼, Dialog, 모션, 터치)은 `docs/ai/accessibility.md`와 [UI 접근성 준수 가이드](../guides/ui/accessibility.html)를 확인합니다.
 
 ## 비동기 UI
 
