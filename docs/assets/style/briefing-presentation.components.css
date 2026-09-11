@@ -1,0 +1,387 @@
+.role-legend {
+  --accent: var(--color-cyan);
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-block: 24px;
+  color: var(--color-text-muted);
+
+  span {
+    display: flex;
+    align-items: center;
+
+    &::before {
+      content: "";
+      inline-size: 20px;
+      block-size: 3px;
+      margin-inline-end: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+  }
+}
+
+.diagram-panel {
+  margin-block-start: 34px;
+  padding: 26px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-panel);
+  background: rgb(255 255 255 / 2%);
+}
+
+/* Shared card surface: section styles only control layout and spacing. */
+.card-surface {
+  --accent: var(--color-cyan);
+
+  position: relative;
+  border: 1px solid color-mix(in srgb, var(--accent) 42%, transparent);
+  border-radius: var(--radius-card);
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--accent) 9%, transparent),
+    rgb(255 255 255 / 1.8%)
+  );
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 3.5%);
+}
+
+.tone-human {
+  --accent: var(--color-human);
+}
+
+.tone-guide {
+  --accent: var(--color-guide);
+}
+
+.tone-ai {
+  --accent: var(--color-ai);
+}
+
+.tone-source,
+.tone-success,
+.tone-complete {
+  --accent: var(--color-source);
+}
+
+.tone-warning {
+  --accent: var(--color-amber);
+}
+
+.tone-code {
+  --accent: var(--color-code);
+}
+
+/* Ordered card groups follow the cover palette; completion always wins. */
+.sequence-palette
+  > .card-surface:not(.completion-card):nth-child(1 of .card-surface) {
+  --accent: var(--color-human);
+}
+
+.sequence-palette
+  > .card-surface:not(.completion-card):nth-child(2 of .card-surface) {
+  --accent: var(--color-guide);
+}
+
+.sequence-palette
+  > .card-surface:not(.completion-card):nth-child(3 of .card-surface) {
+  --accent: var(--color-ai);
+}
+
+.sequence-palette
+  > .card-surface:not(.completion-card):nth-child(4 of .card-surface) {
+  --accent: var(--color-source);
+}
+
+.flow-card {
+  padding: 18px 20px;
+
+  > b {
+    display: block;
+    color: var(--accent);
+  }
+
+  > strong {
+    display: block;
+    margin-block-start: 12px;
+    font-size: var(--text-card-title);
+  }
+
+  > small {
+    display: block;
+    margin-block-start: 12px;
+    color: var(--color-text-muted);
+    font-size: 16px;
+    line-height: 1.45;
+  }
+}
+
+.flow-arrow {
+  --connector-color: color-mix(in srgb, var(--color-cyan) 68%, transparent);
+  --connector-length: calc(100% - 4px);
+  --connector-height: 12px;
+  --connector-inline-end: 0px;
+
+  position: relative;
+  display: grid;
+  min-inline-size: 70px;
+  padding: 4px;
+  place-items: center;
+  text-align: center;
+
+  > span {
+    position: relative;
+    z-index: 1;
+    max-inline-size: calc(100% + 20px);
+    padding: 8px;
+    border: 1px solid color-mix(in srgb, var(--color-cyan) 30%, transparent);
+    border-radius: 999px;
+    color: color-mix(in srgb, var(--color-cyan) 72%, white);
+    background: color-mix(
+      in srgb,
+      var(--color-panel) 92%,
+      var(--color-background)
+    );
+    box-shadow:
+      0 0 0 4px color-mix(in srgb, var(--color-panel) 75%, transparent),
+      0 4px 14px rgb(0 0 0 / 20%);
+    font-size: 15px;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+  }
+}
+
+.step-flow,
+.step-list {
+  --step-gap: 14px;
+  --connector-color: color-mix(in srgb, var(--color-cyan) 68%, transparent);
+
+  display: grid;
+  gap: var(--step-gap);
+}
+
+.step-flow > .step-card:not(:last-child) {
+  --connector-length: var(--step-gap);
+  --connector-height: 10px;
+  --connector-inline-end: calc(var(--step-gap) * -1);
+}
+
+:is(.flow-arrow, .step-flow > .step-card:not(:last-child))::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-end: var(--connector-inline-end);
+  inline-size: var(--connector-length);
+  block-size: var(--connector-height);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--connector-color) 18%,
+    var(--connector-color)
+  );
+  clip-path: polygon(
+    0 43%,
+    calc(100% - 7px) 43%,
+    calc(100% - 7px) 0,
+    100% 50%,
+    calc(100% - 7px) 100%,
+    calc(100% - 7px) 57%,
+    0 57%
+  );
+  filter: drop-shadow(
+    0 0 5px color-mix(in srgb, var(--color-cyan) 28%, transparent)
+  );
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.completion-card {
+  --accent: var(--color-green);
+
+  overflow: hidden;
+  border-color: color-mix(in srgb, var(--accent) 72%, transparent);
+  background:
+    radial-gradient(
+      circle at 100% 0%,
+      color-mix(in srgb, var(--accent) 20%, transparent),
+      transparent 52%
+    ),
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--accent) 12%, transparent),
+      rgb(17 19 27 / 96%)
+    );
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--accent) 12%, transparent),
+    0 12px 30px rgb(21 87 62 / 22%);
+
+  &::before {
+    content: "✓";
+    position: absolute;
+    inset-block-start: 14px;
+    inset-inline-end: 16px;
+    display: grid;
+    inline-size: 30px;
+    block-size: 30px;
+    place-items: center;
+    border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+    border-radius: 50%;
+    color: #07120d;
+    background: var(--accent);
+    font-size: 18px;
+    font-weight: 900;
+    box-shadow: 0 0 22px color-mix(in srgb, var(--accent) 28%, transparent);
+  }
+
+  .completion-kicker,
+  .completion-title {
+    color: var(--accent);
+  }
+}
+
+.diagram-frame {
+  margin: 20px 0 0;
+  padding: 20px;
+  overflow-x: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-panel);
+
+  .mermaid {
+    display: flex;
+    justify-content: center;
+  }
+
+  svg {
+    max-inline-size: 100%;
+    block-size: auto;
+  }
+
+  figcaption {
+    margin-block-start: 14px;
+    color: var(--color-text-muted);
+    font-size: var(--text-small);
+    text-align: center;
+  }
+
+  :is(.node rect, .node polygon) {
+    fill: #161e38 !important;
+    stroke: rgb(120 140 255 / 35%) !important;
+  }
+
+  :is(.nodeLabel, .node .label) {
+    fill: var(--color-text) !important;
+    color: var(--color-text) !important;
+  }
+
+  :is(.edgePath path, .flowchart-link) {
+    stroke: var(--color-cyan) !important;
+  }
+
+  :is(.edgeLabel, .edgeLabel p, .edgeLabel span) {
+    font-size: 18px !important;
+    font-weight: 600 !important;
+  }
+
+  .edgeLabel {
+    rect {
+      fill: rgb(10 14 32 / 90%) !important;
+      stroke-width: 1px !important;
+      rx: 4 !important;
+      transform: scale(1.4) !important;
+      transform-box: fill-box !important;
+      transform-origin: center !important;
+    }
+
+    &:nth-of-type(odd) {
+      tspan {
+        fill: #4ade80 !important;
+        color: #4ade80 !important;
+      }
+
+      rect {
+        fill: rgb(74 222 128 / 12%) !important;
+        stroke: #4ade80 !important;
+      }
+    }
+
+    &:nth-of-type(even) {
+      tspan {
+        fill: #f87171 !important;
+        color: #f87171 !important;
+      }
+
+      rect {
+        fill: rgb(248 113 113 / 12%) !important;
+        stroke: #f87171 !important;
+      }
+    }
+  }
+
+  :is(.decision rect, .decision polygon) {
+    fill: #1a1530 !important;
+    stroke: rgb(69 220 255 / 55%) !important;
+  }
+}
+
+.diagram-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-block-start: 14px;
+  padding: 16px 22px;
+
+  > b {
+    flex: 0 0 auto;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+  }
+
+  > span {
+    color: var(--color-text);
+    font-size: 18px;
+    font-weight: 650;
+  }
+}
+
+.tree-root {
+  color: #f2f4f8;
+  font-weight: 800;
+}
+
+.tree-folder {
+  color: #8fb6ff;
+  font-weight: 700;
+
+  &.app {
+    color: #7bdcb4;
+  }
+
+  &.docs {
+    color: #65d9f3;
+  }
+
+  &.human {
+    color: var(--color-human);
+  }
+
+  &.amber {
+    color: var(--color-amber);
+  }
+}
+
+.tree-file {
+  color: #c9cfdd;
+
+  &.file1 {
+    color: var(--color-code);
+  }
+}
+
+.tree-comment {
+  color: #fcfcfc;
+  font-weight: 400;
+}

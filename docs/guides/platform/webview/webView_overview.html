@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="기획자, 관리자와 신규 참여자를 위한 모바일 앱 WebView 개념 및 도입 안내"
+    />
+    <title>모바일 앱 WebView 개요</title>
+    <link rel="stylesheet" href="../../../assets/style/presentation-theme.css" />
+  </head>
+  <body>
+    <header>
+      <div class="type">APP · WEBVIEW · OVERVIEW</div>
+      <h1>모바일 앱 WebView 개요</h1>
+      <p>
+        기획자, 관리자와 신규 참여자가 WebView의 역할과 도입 시 결정할 사항을
+        이해할 수 있도록 설명합니다.
+      </p>
+    </header>
+
+    <main>
+      <section>
+        <h2 class="bx-active">1. 이 문서에서 알 수 있는 것</h2>
+        <p>
+          WebView가 무엇인지, 일반 브라우저와 어떤 차이가 있는지, 모바일 앱에서
+          어떤 역할을 담당하는지 설명합니다. 구현과 설정 방법은
+          <a href="./webView_guide.html">Flutter WebView 설정 가이드</a>에서
+          확인합니다.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">이 문서의 대상</th>
+              <th scope="col">주요 확인 내용</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>기획자·운영 담당자</td>
+              <td>WebView의 역할, 제약, 업데이트와 장애 대응 범위</td>
+            </tr>
+            <tr>
+              <td>프로젝트 관리자</td>
+              <td>App·Web·Backend의 책임과 사전 결정 항목</td>
+            </tr>
+            <tr>
+              <td>신규 참여자</td>
+              <td>서비스가 모바일 앱 안에서 동작하는 전체 구조</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">2. WebView란 무엇인가</h2>
+        <p>
+          WebView는 모바일 앱 화면 안에서 웹 페이지를 보여주는 기능입니다.
+          사용자는 별도의 브라우저 앱으로 이동하지 않고 웹으로 만든 서비스
+          화면을 이용할 수 있습니다.
+        </p>
+        <blockquote>
+          <p>
+            WebView는 Chrome이나 Safari 앱을 그대로 넣은 것이 아닙니다. Android와
+            iOS가 앱에 제공하는 전용 웹 표시 기능을 사용합니다.
+          </p>
+        </blockquote>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">환경</th>
+              <th scope="col">사용하는 기능</th>
+              <th scope="col">쉬운 설명</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Android</td>
+              <td>Android System WebView</td>
+              <td>Android가 앱 내부 웹 화면을 위해 제공하는 기능</td>
+            </tr>
+            <tr>
+              <td>iOS</td>
+              <td>WKWebView</td>
+              <td>iOS가 앱 내부 웹 화면을 위해 제공하는 기능</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">3. 일반 브라우저와의 차이</h2>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">구분</th>
+              <th scope="col">일반 브라우저</th>
+              <th scope="col">앱 내부 WebView</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>실행 위치</td>
+              <td>Chrome·Safari 같은 별도 앱</td>
+              <td>모바일 앱 화면 내부</td>
+            </tr>
+            <tr>
+              <td>주소 이동</td>
+              <td>사용자가 자유롭게 주소 입력</td>
+              <td>앱이 허용한 주소와 이동 정책 적용</td>
+            </tr>
+            <tr>
+              <td>기기 기능</td>
+              <td>브라우저가 제공하는 범위에서 사용</td>
+              <td>App과 연결해 카메라·위치 등 사용 가능</td>
+            </tr>
+            <tr>
+              <td>업데이트</td>
+              <td>브라우저와 웹 서비스가 각각 업데이트</td>
+              <td>웹 화면과 App 기능의 변경 범위에 따라 달라짐</td>
+            </tr>
+            <tr>
+              <td>문제 확인</td>
+              <td>웹 서비스와 브라우저 중심으로 확인</td>
+              <td>App·Web·Backend·운영체제를 함께 확인</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">4. WebView를 사용하는 이유</h2>
+        <ul>
+          <li>Android와 iOS에서 동일한 서비스 화면과 업무 흐름을 제공할 수 있습니다.</li>
+          <li>웹 화면만 변경할 때 App 전체를 다시 배포하지 않아도 될 수 있습니다.</li>
+          <li>기존 웹 기술과 개발 인력을 활용할 수 있습니다.</li>
+          <li>필요한 경우 App의 카메라·위치·파일 기능과 연결할 수 있습니다.</li>
+        </ul>
+        <p>
+          모든 화면을 WebView로 만드는 것이 항상 유리한 것은 아닙니다. 앱 시작,
+          Push, 생체인증, 보안 저장소와 운영체제 권한처럼 App이 직접 처리해야 하는
+          기능은 Flutter Native 영역에 둡니다.
+        </p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">5. App·WebView·서버의 역할</h2>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">영역</th>
+              <th scope="col">주요 역할</th>
+              <th scope="col">대표 사례</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Flutter App</td>
+              <td>앱 실행, 운영체제 권한과 기기 기능 처리</td>
+              <td>Push, 카메라, 위치, 파일, 생체인증</td>
+            </tr>
+            <tr>
+              <td>WebView 화면</td>
+              <td>서비스 화면과 사용자 업무 흐름 제공</td>
+              <td>라운지 안내, 이용권, 예약, 결제 화면</td>
+            </tr>
+            <tr>
+              <td>Bridge</td>
+              <td>WebView와 App 사이의 승인된 요청 전달</td>
+              <td>QR 스캔 요청과 결과 전달</td>
+            </tr>
+            <tr>
+              <td>Backend</td>
+              <td>인증, 권한과 업무 데이터의 최종 판단</td>
+              <td>사용자 권한, 예약 상태, 결제 결과</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          WebView 화면에 표시된 값만으로 사용자의 권한이나 결제 성공 여부를
+          확정하지 않습니다. 중요한 판단은 Backend가 수행합니다.
+        </p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">6. 지원 환경</h2>
+        <p>신규 모바일 프로젝트는 다음 환경을 기준으로 검토합니다.</p>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">플랫폼</th>
+              <th scope="col">최소 환경</th>
+              <th scope="col">확인 기준</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Android</td>
+              <td>Android SDK 24 이상</td>
+              <td>지원 대상 System WebView에서 프로젝트 사용 CSS와 핵심 기능</td>
+            </tr>
+            <tr>
+              <td>iOS</td>
+              <td>iOS 15 이상</td>
+              <td>iOS 15 이상에서 제공되는 WKWebView</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          Tailwind CSS v4의 공식 최소 브라우저 버전을 WebView의 일괄 차단 기준으로
+          사용하지 않습니다. Safari 15와 지원 대상 구형 WebView에서 프로젝트가
+          실제 사용하는 CSS와 주요 기능이 정상 동작하는지 확인합니다.
+        </p>
+        <p>
+          공통 CSS 하한은 Safari 15에서 지원되는 기능 범위로 정합니다. Android는
+          Safari 15에 특정 Chromium 버전을 대응시키지 않고 지원 대상 System
+          WebView에서 실제 사용하는 Tailwind Utility와 핵심 기능을 검증합니다.
+        </p>
+
+        <h3>최소 기준을 정한 근거</h3>
+        <p>
+          주요 서비스 국가는 한국·중국·일본·미국이며 그 밖의 국가는 글로벌
+          기준으로 검토합니다. 2026년 7월 StatCounter 모바일 트래픽에서 Android와
+          iOS의 비중은 한국 65.39%·34.60%, 중국 70.37%·29.51%, 일본
+          36.41%·63.59%, 미국 40.39%·59.58%, 전 세계 68.36%·31.60%입니다.
+          따라서 Android 중심 국가와 iOS 중심 국가를 모두 지원해야 하며, 한 국가의
+          통계만으로 전체 지원 범위를 판단하지 않습니다.
+        </p>
+        <ul>
+          <li>
+            <a href="https://gs.statcounter.com/os-market-share/mobile/south-korea"
+              >한국 모바일 OS 점유율</a
+            >
+          </li>
+          <li>
+            <a href="https://gs.statcounter.com/os-market-share/mobile/china"
+              >중국 모바일 OS 점유율</a
+            >
+          </li>
+          <li>
+            <a href="https://gs.statcounter.com/os-market-share/mobile/japan"
+              >일본 모바일 OS 점유율</a
+            >
+          </li>
+          <li>
+            <a href="https://gs.statcounter.com/os-market-share/mobile/united-states-of-america"
+              >미국 모바일 OS 점유율</a
+            >
+          </li>
+          <li>
+            <a href="https://gs.statcounter.com/os-market-share/mobile/worldwide"
+              >전 세계 모바일 OS 점유율</a
+            >
+          </li>
+        </ul>
+        <p>
+          Google이 2025년 12월 공개한 Android 배포 데이터에서 API 21~23의 합계는
+          0.8%이므로 API 24 이상은 약 99.2%입니다. 이 수치는 Google의 Android
+          활성 기기 분포이며 중국 시장 또는 이 서비스의 실제 고객 분포와 같다고
+          보지 않습니다.
+          <a href="https://dl.google.com/android/studio/metadata/distributions.json"
+            >Google Android 버전 배포 원본 데이터</a
+          >에서 조사일과 API별 비율을 확인합니다.
+        </p>
+        <p>
+          Apple이 2026년 6월 7일 App Store에서 거래한 기기를 집계한 결과 전체
+          iPhone의 79%가 iOS 26을 사용합니다. 이 값만으로 iOS 15 이상 전체 비율이나
+          실제 서비스의 지원 도달률을 계산하지 않습니다.
+          자세한 내용은
+          <a href="https://developer.apple.com/support/app-store/"
+            >Apple iOS 사용 현황</a
+          >에서 확인합니다.
+        </p>
+        <blockquote>
+          <p>
+            공개 점유율은 기준 선정의 참고 자료입니다. 출시 후에는 국가·OS·Android
+            WebView 엔진별 실제 활성 사용자 분포와 오류율을 우선 근거로 사용합니다.
+          </p>
+        </blockquote>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">7. 할 수 있는 것과 별도 검토가 필요한 것</h2>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">구분</th>
+              <th scope="col">내용</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>기본 제공 가능</td>
+              <td>웹 페이지 표시, 화면 이동, 로그인 화면과 서비스 정보 표시</td>
+            </tr>
+            <tr>
+              <td>App 연동 필요</td>
+              <td>카메라, QR, 위치, Push, 생체인증과 기기 파일 사용</td>
+            </tr>
+            <tr>
+              <td>정책 결정 필요</td>
+              <td>로그인 유지, 외부 앱 이동, 다운로드와 새 창 처리</td>
+            </tr>
+            <tr>
+              <td>보안 검토 필요</td>
+              <td>결제, 개인정보, 인증정보, 알 수 없는 외부 사이트 표시</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          App 연동이 필요한 기능은 웹 화면만 수정해서 추가할 수 없습니다. App과
+          Web 사이의 통신 규격을 정하고 Android·iOS 앱을 함께 개발·배포해야 할 수
+          있습니다.
+        </p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">8. 업데이트와 배포</h2>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">변경 내용</th>
+              <th scope="col">일반적인 배포 범위</th>
+              <th scope="col">확인 사항</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>웹 화면의 문구·디자인·업무 흐름</td>
+              <td>웹 서비스 배포</td>
+              <td>기존 App과의 호환성</td>
+            </tr>
+            <tr>
+              <td>새로운 App 기능 호출</td>
+              <td>웹과 App 동시 검토</td>
+              <td>구버전 App의 처리 방법</td>
+            </tr>
+            <tr>
+              <td>Bridge 통신 규격 변경</td>
+              <td>웹과 App 배포</td>
+              <td>버전 호환성과 배포 순서</td>
+            </tr>
+            <tr>
+              <td>운영체제 권한·Native 기능 변경</td>
+              <td>App 심사와 배포</td>
+              <td>Android·iOS 정책과 사용자 안내</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">9. 장애가 발생했을 때 확인할 영역</h2>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">현상</th>
+              <th scope="col">우선 확인 영역</th>
+              <th scope="col">주요 확인 내용</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>웹 화면이 열리지 않음</td>
+              <td>Web·네트워크·App</td>
+              <td>서비스 URL, 서버 상태, 인터넷 권한과 인증서</td>
+            </tr>
+            <tr>
+              <td>로그인이 유지되지 않음</td>
+              <td>인증·Web·App</td>
+              <td>쿠키, 세션 만료와 로그아웃 처리</td>
+            </tr>
+            <tr>
+              <td>카메라·위치가 동작하지 않음</td>
+              <td>App·운영체제</td>
+              <td>사용자 권한, App 설정과 Bridge 요청</td>
+            </tr>
+            <tr>
+              <td>일부 기기에서만 화면이 다름</td>
+              <td>Web·운영체제</td>
+              <td>Android System WebView 또는 iOS 버전 차이</td>
+            </tr>
+            <tr>
+              <td>결제·예약 결과가 다름</td>
+              <td>Backend·Web</td>
+              <td>서버의 최종 처리 결과와 화면 갱신</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">10. 프로젝트 시작 전에 결정할 항목</h2>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">항목</th>
+              <th scope="col">결정할 내용</th>
+              <th scope="col">주요 참여자</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>지원 환경</td>
+              <td>최소 Android·iOS 버전과 검증 기기</td>
+              <td>기획·App·QA</td>
+            </tr>
+            <tr>
+              <td>접속 범위</td>
+              <td>시작 주소, 허용 사이트와 외부 앱 이동</td>
+              <td>기획·Web·App·보안</td>
+            </tr>
+            <tr>
+              <td>로그인</td>
+              <td>로그인 방식, 유지 시간과 로그아웃 처리</td>
+              <td>기획·Backend·Web·App</td>
+            </tr>
+            <tr>
+              <td>기기 기능</td>
+              <td>카메라, 위치, 파일과 알림 사용 범위</td>
+              <td>기획·Web·App</td>
+            </tr>
+            <tr>
+              <td>오류 처리</td>
+              <td>로딩, 실패, 재시도와 사용자 안내 방식</td>
+              <td>기획·디자인·Web·App</td>
+            </tr>
+            <tr>
+              <td>배포</td>
+              <td>웹과 App의 배포 순서 및 구버전 호환 정책</td>
+              <td>PM·Web·App·운영</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">11. 자주 묻는 질문</h2>
+        <h3>WebView는 일반 모바일 웹과 같은가요?</h3>
+        <p>
+          같은 웹 기술을 사용하지만 앱 내부에서 실행되므로 주소 이동, 로그인,
+          파일, 권한과 새 창 처리 방식이 일반 브라우저와 다를 수 있습니다.
+        </p>
+
+        <h3>웹 화면을 수정하면 App을 다시 배포해야 하나요?</h3>
+        <p>
+          웹 화면과 업무 흐름만 변경하고 기존 App 기능을 그대로 사용한다면 웹
+          배포만으로 반영할 수 있습니다. 새로운 Native 기능이나 Bridge 계약을
+          추가하면 App 업데이트가 필요할 수 있습니다.
+        </p>
+
+        <h3>Chrome에서 동작하면 Android WebView에서도 동작하나요?</h3>
+        <p>
+          항상 같지는 않습니다. 같은 Chromium 계열이어도 설치된 System WebView
+          버전과 앱 실행 환경이 다르므로 실제 지원 기기에서 확인해야 합니다.
+        </p>
+
+        <h3>Safari에서 동작하면 iOS WebView에서도 동작하나요?</h3>
+        <p>
+          Safari와 WKWebView는 WebKit을 공유하지만 제공 기능과 실행 조건에 차이가
+          있을 수 있으므로 실제 앱에서 검증해야 합니다.
+        </p>
+
+        <h3>WebView에서 결제와 로그인을 처리해도 되나요?</h3>
+        <p>
+          가능하지만 인증정보 보호, 쿠키, 외부 앱 이동, 결제 결과 검증과 오류
+          복구 정책을 먼저 정해야 합니다. 권한과 거래 결과의 최종 판단은 서버가
+          수행해야 합니다.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p>모바일 앱 WebView 개요</p>
+    </footer>
+    <script src="../../../assets/js/common.js"></script>
+  </body>
+</html>

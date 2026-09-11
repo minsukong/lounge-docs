@@ -1,0 +1,6 @@
+/* Public entry point for the briefing presentation styles. */
+@layer foundation, components, sections;
+
+@import url("./briefing-presentation.foundation.css") layer(foundation);
+@import url("./briefing-presentation.components.css") layer(components);
+@import url("./briefing-presentation.sections.css") layer(sections);

@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React 공통 코드 구현 예시</title>
+    <link rel="stylesheet" href="../assets/style/presentation-theme.css" />
+  </head>
+  <body>
+    <header>
+      <div class="type">FRONT-END · REACT</div>
+      <h1>React 공통 코드 구현 예시</h1>
+      <p>SubmitButton, QueryClient와 Provider의 구현 예시와 사용 위치를 설명합니다.</p>
+    </header>
+
+    <main>
+<section>
+<h2 class="bx-active">1. 적용할 파일</h2>
+<p>이 문서는 앱 전체에 필요한 QueryClient·Provider와 폼에서 반복되는 접근성·제출 처리 중 동작을 완성된 파일 단위로 제공합니다.</p>
+<pre class="hljs"><code data-language="text">apps/app-webview/src/
+├── app/
+│   ├── layout.tsx
+│   └── providers.tsx
+├── components/common/
+│   ├── form-field.tsx
+│   └── submit-button.tsx
+└── lib/query/get-query-client.ts</code></pre>
+<p>Provider는 TanStack Query를 실제로 쓰는 시점에 적용합니다. <code>SubmitButton</code>과 <code>FormField</code>는 같은 동작이 둘 이상의 폼에서 반복되기 전까지 기능 폴더에 두어도 됩니다.</p>
+</section>
+
+<hr />
+
+<section>
+<h2 class="bx-active">2. 구현 예시 1: QueryClient 생명주기</h2>
+<h3>사용 조건</h3>
+<ul>
+<li>Server Component가 있는 Next.js App Router 애플리케이션입니다.</li>
+<li>Client Component에서 TanStack Query를 사용합니다.</li>
+<li>서버 요청 사이에는 캐시가 섞이지 않고 브라우저에서는 같은 QueryClient를 재사용해야 합니다.</li>
+</ul>
+<p>필요 패키지는 <code>@tanstack/react-query</code>입니다.</p>
+<h3><code>src/lib/query/get-query-client.ts</code></h3>
+<pre class="hljs"><code data-language="ts"><span class="hljs-keyword">import</span> { isServer, <span class="hljs-title class_">QueryClient</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@tanstack/react-query&quot;</span>
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">createQueryClient</span>() {
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">QueryClient</span>()
+}
+
+<span class="hljs-keyword">let</span> browserQueryClient: <span class="hljs-title class_">QueryClient</span> | <span class="hljs-literal">undefined</span>
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">getQueryClient</span>() {
+  <span class="hljs-keyword">if</span> (isServer) {
+    <span class="hljs-keyword">return</span> <span class="hljs-title function_">createQueryClient</span>()
+  }
+
+  <span class="hljs-keyword">if</span> (!browserQueryClient) {
+    browserQueryClient = <span class="hljs-title function_">createQueryClient</span>()
+  }
+
+  <span class="hljs-keyword">return</span> browserQueryClient
+}</code></pre>
+<p>서버에서는 요청마다 새 QueryClient를 만들고 브라우저에서는 모듈 범위의 QueryClient를 재사용합니다. 서버와 브라우저에서 무조건 하나의 <code>new QueryClient()</code>를 공유하면 SSR 요청 사이에 캐시가 섞일 수 있습니다.</p>
+<h3><code>src/app/providers.tsx</code></h3>
+<pre class="hljs"><code data-language="tsx"><span class="hljs-string">&quot;use client&quot;</span>
+
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">QueryClientProvider</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@tanstack/react-query&quot;</span>
+<span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> { <span class="hljs-title class_">PropsWithChildren</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>
+<span class="hljs-keyword">import</span> { getQueryClient } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/lib/query/get-query-client&quot;</span>
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title class_">AppProviders</span>({ children }: <span class="hljs-title class_">PropsWithChildren</span>) {
+  <span class="hljs-keyword">return</span> (
+    &lt;<span class="hljs-title class_">QueryClientProvider</span> client={<span class="hljs-title function_">getQueryClient</span>()}&gt;
+      {children}
+    &lt;/<span class="hljs-title class_">QueryClientProvider</span>&gt;
+  )
+}</code></pre>
+<h3><code>src/app/layout.tsx</code> 연결</h3>
+<pre class="hljs"><code data-language="tsx"><span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> { <span class="hljs-title class_">ReactNode</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">AppProviders</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/app/providers&quot;</span>
+<span class="hljs-keyword">import</span> <span class="hljs-string">&quot;@/app/globals.css&quot;</span>
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title class_">RootLayout</span>({ children }: { children: <span class="hljs-title class_">ReactNode</span> }) {
+  <span class="hljs-keyword">return</span> (
+    &lt;html lang=<span class="hljs-string">&quot;ko&quot;</span>&gt;
+      &lt;body&gt;
+        &lt;<span class="hljs-title class_">AppProviders</span>&gt;{children}&lt;/<span class="hljs-title class_">AppProviders</span>&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;
+  )
+}</code></pre>
+<p>최상위 layout은 Server Component로 유지하고 Provider만 Client Component로 둡니다. Query Devtools처럼 개발에서만 필요한 도구와 특정 화면 경로만 쓰는 Context는 이 Provider에 무조건 넣지 않습니다.</p>
+<p><a href="./session.html">세션과 회원 경계 구현 예시</a>의 세션 Query도 같은 <code>AppProviders</code> 아래에서 실행합니다. 세션을 사용한다는 이유로 별도의 QueryClient나 전역 회원 Context를 추가하지 않고, 로그아웃 뒤 cache 초기화 범위만 실제 공개 데이터와 사용자 데이터 구성에 맞춰 결정합니다.</p>
+<h3>미확정 항목</h3>
+<p><code>staleTime</code>은 조회 결과를 다시 확인하지 않고 최신으로 보는 시간이고, <code>gcTime</code>은 화면에서 더 이상 쓰지 않는 캐시를 메모리에 남겨 두는 시간입니다. 두 값과 <code>retry</code>, <code>refetchOnWindowFocus</code>, 전역 오류 처리는 API 특성과 UX 정책에 맞춰 결정합니다. 정책이 확정되면 <code>createQueryClient</code>의 <code>defaultOptions</code>에 명시하고, 확정 전에는 임의의 숫자나 전역 toast를 넣지 않습니다.</p>
+</section>
+
+<hr />
+
+<section>
+<h2 class="bx-active">3. 구현 예시 2: 중복 제출을 막는 <code>SubmitButton</code></h2>
+<h3>사용 조건</h3>
+<p>여러 폼에서 submit type, 처리 중 중복 제출 방지와 진행 상태 문구를 같은 방식으로 제공할 때 사용합니다. API 호출, 성공 알림, 화면 이동과 오류 문구는 이 컴포넌트에 넣지 않습니다.</p>
+<p>먼저 필요한 코드는 shadcn <code>Button</code>과 <code>Spinner</code>입니다. <code>Spinner</code>가 없다면 registry에서 추가하거나 프로젝트의 기존 진행 표시 컴포넌트로 import만 교체합니다.</p>
+<h3><code>src/components/common/submit-button.tsx</code></h3>
+<pre class="hljs"><code data-language="tsx"><span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> { <span class="hljs-title class_">ComponentProps</span>, <span class="hljs-title class_">ReactNode</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Button</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/components/ui/button&quot;</span>
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Spinner</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/components/ui/spinner&quot;</span>
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">type</span> <span class="hljs-title class_">SubmitButtonProps</span> = <span class="hljs-title class_">Omit</span>&lt;
+  <span class="hljs-title class_">ComponentProps</span>&lt;<span class="hljs-keyword">typeof</span> <span class="hljs-title class_">Button</span>&gt;,
+  <span class="hljs-string">&quot;type&quot;</span>
+&gt; &amp; {
+  pending?: boolean
+  pendingContent?: <span class="hljs-title class_">ReactNode</span>
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title class_">SubmitButton</span>({
+  children,
+  disabled,
+  pending = <span class="hljs-literal">false</span>,
+  pendingContent,
+  ...props
+}: <span class="hljs-title class_">SubmitButtonProps</span>) {
+  <span class="hljs-keyword">return</span> (
+    &lt;<span class="hljs-title class_">Button</span>
+      {...props}
+      <span class="hljs-keyword">type</span>=<span class="hljs-string">&quot;submit&quot;</span>
+      aria-busy={pending || <span class="hljs-literal">undefined</span>}
+      disabled={disabled || pending}
+    &gt;
+      {pending ? (
+        &lt;&gt;
+          &lt;<span class="hljs-title class_">Spinner</span> data-icon=<span class="hljs-string">&quot;inline-start&quot;</span> aria-hidden=<span class="hljs-string">&quot;true&quot;</span> /&gt;
+          {pendingContent ?? children}
+        &lt;/&gt;
+      ) : (
+        children
+      )}
+    &lt;/<span class="hljs-title class_">Button</span>&gt;
+  )
+}</code></pre>
+<p><code>type</code>은 이 컴포넌트가 정한 동작이므로 호출자가 바꿀 수 없습니다. 일반 클릭, 링크, 취소 동작에는 원래 <code>Button</code>을 사용합니다. <code>pendingContent</code>에는 <code>저장 중</code>처럼 사용자가 상태를 알 수 있는 문구를 전달합니다.</p>
+<h3><code>src/features/profile/profile-name-form.tsx</code></h3>
+<pre class="hljs"><code data-language="tsx"><span class="hljs-string">&quot;use client&quot;</span>
+
+<span class="hljs-keyword">import</span> { <span class="hljs-keyword">type</span> <span class="hljs-title class_">FormEvent</span>, useState } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">SubmitButton</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/components/common/submit-button&quot;</span>
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Input</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/components/ui/input&quot;</span>
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Label</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/components/ui/label&quot;</span>
+
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">ProfileNameFormProps</span> = {
+  initialName: string
+  onSave: (name: string) =&gt; <span class="hljs-title class_">Promise</span>&lt;<span class="hljs-keyword">void</span>&gt;
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title class_">ProfileNameForm</span>({
+  initialName,
+  onSave,
+}: <span class="hljs-title class_">ProfileNameFormProps</span>) {
+  <span class="hljs-keyword">const</span> [pending, setPending] = <span class="hljs-title function_">useState</span>(<span class="hljs-literal">false</span>)
+
+  <span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">handleSubmit</span>(event: <span class="hljs-title class_">FormEvent</span>&lt;<span class="hljs-title class_">HTMLFormElement</span>&gt;) {
+    event.<span class="hljs-title function_">preventDefault</span>()
+    <span class="hljs-keyword">const</span> formData = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FormData</span>(event.currentTarget)
+    <span class="hljs-keyword">const</span> name = <span class="hljs-title class_">String</span>(formData.<span class="hljs-title function_">get</span>(<span class="hljs-string">&quot;name&quot;</span>) ?? <span class="hljs-string">&quot;&quot;</span>).<span class="hljs-title function_">trim</span>()
+
+    <span class="hljs-keyword">if</span> (!name || pending) <span class="hljs-keyword">return</span>
+
+    <span class="hljs-title function_">setPending</span>(<span class="hljs-literal">true</span>)
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-keyword">await</span> <span class="hljs-title function_">onSave</span>(name)
+    } <span class="hljs-keyword">finally</span> {
+      <span class="hljs-title function_">setPending</span>(<span class="hljs-literal">false</span>)
+    }
+  }
+
+  <span class="hljs-keyword">return</span> (
+    &lt;form onSubmit={handleSubmit} className=<span class="hljs-string">&quot;grid gap-4&quot;</span>&gt;
+      &lt;div className=<span class="hljs-string">&quot;grid gap-1.5&quot;</span>&gt;
+        &lt;<span class="hljs-title class_">Label</span> htmlFor=<span class="hljs-string">&quot;profile-name&quot;</span>&gt;이름&lt;/<span class="hljs-title class_">Label</span>&gt;
+        &lt;<span class="hljs-title class_">Input</span>
+          id=<span class="hljs-string">&quot;profile-name&quot;</span>
+          name=<span class="hljs-string">&quot;name&quot;</span>
+          defaultValue={initialName}
+          autoComplete=<span class="hljs-string">&quot;name&quot;</span>
+          required
+        /&gt;
+      &lt;/div&gt;
+
+      &lt;<span class="hljs-title class_">SubmitButton</span> pending={pending} pendingContent=<span class="hljs-string">&quot;저장 중&quot;</span>&gt;
+        저장
+      &lt;/<span class="hljs-title class_">SubmitButton</span>&gt;
+    &lt;/form&gt;
+  )
+}</code></pre>
+<p><code>onSave</code>를 prop으로 받으므로 이 폼은 fetch, mutation 라이브러리, API 경로에 묶이지 않습니다. 실제 기능에서는 TanStack Mutation 함수를 전달할 수 있습니다.</p>
+</section>
+
+<hr />
+
+<section>
+<h2 class="bx-active">4. 구현 예시 3: label·도움말·오류를 연결하는 <code>FormField</code></h2>
+<h3>사용 조건</h3>
+<p>Input, Select, Textarea 종류와 관계없이 label, 설명, 오류 ID를 같은 규칙으로 연결해야 할 때 사용합니다. 컴포넌트가 입력 요소를 직접 만들지 않고 렌더링 함수로 필요한 접근성 속성만 전달합니다.</p>
+<h3><code>src/components/common/form-field.tsx</code></h3>
+<pre class="hljs"><code data-language="tsx"><span class="hljs-keyword">import</span> <span class="hljs-keyword">type</span> { <span class="hljs-title class_">ComponentProps</span>, <span class="hljs-title class_">ReactNode</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;react&quot;</span>
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Label</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/components/ui/label&quot;</span>
+<span class="hljs-keyword">import</span> { cn } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/lib/utils&quot;</span>
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">type</span> <span class="hljs-title class_">FieldControlProps</span> = {
+  id: string
+  <span class="hljs-string">&quot;aria-describedby&quot;</span>?: string
+  <span class="hljs-string">&quot;aria-invalid&quot;</span>?: <span class="hljs-literal">true</span>
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">type</span> <span class="hljs-title class_">FormFieldProps</span> = <span class="hljs-title class_">Omit</span>&lt;<span class="hljs-title class_">ComponentProps</span>&lt;<span class="hljs-string">&quot;div&quot;</span>&gt;, <span class="hljs-string">&quot;children&quot;</span>&gt; &amp; {
+  id: string
+  label: <span class="hljs-title class_">ReactNode</span>
+  hint?: <span class="hljs-title class_">ReactNode</span>
+  error?: <span class="hljs-title class_">ReactNode</span>
+  required?: boolean
+  children: (props: <span class="hljs-title class_">FieldControlProps</span>) =&gt; <span class="hljs-title class_">ReactNode</span>
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title class_">FormField</span>({
+  id,
+  label,
+  hint,
+  error,
+  required = <span class="hljs-literal">false</span>,
+  children,
+  className,
+  ...props
+}: <span class="hljs-title class_">FormFieldProps</span>) {
+  <span class="hljs-keyword">const</span> hintId = hint ? <span class="hljs-string">`${id}-hint`</span> : <span class="hljs-literal">undefined</span>
+  <span class="hljs-keyword">const</span> errorId = error ? <span class="hljs-string">`${id}-error`</span> : <span class="hljs-literal">undefined</span>
+  <span class="hljs-keyword">const</span> describedBy = [hintId, errorId].<span class="hljs-title function_">filter</span>(<span class="hljs-title class_">Boolean</span>).<span class="hljs-title function_">join</span>(<span class="hljs-string">&quot; &quot;</span>) || <span class="hljs-literal">undefined</span>
+
+  <span class="hljs-keyword">return</span> (
+    &lt;div className={<span class="hljs-title function_">cn</span>(<span class="hljs-string">&quot;grid gap-1.5&quot;</span>, className)} {...props}&gt;
+      &lt;<span class="hljs-title class_">Label</span> htmlFor={id}&gt;
+        {label}
+        {required ? &lt;span aria-hidden=<span class="hljs-string">&quot;true&quot;</span>&gt; *&lt;/span&gt; : <span class="hljs-literal">null</span>}
+      &lt;/<span class="hljs-title class_">Label</span>&gt;
+
+      {<span class="hljs-title function_">children</span>({
+        id,
+        <span class="hljs-string">&quot;aria-describedby&quot;</span>: describedBy,
+        <span class="hljs-string">&quot;aria-invalid&quot;</span>: error ? <span class="hljs-literal">true</span> : <span class="hljs-literal">undefined</span>,
+      })}
+
+      {hint ? (
+        &lt;p id={hintId} className=<span class="hljs-string">&quot;text-sm text-muted-foreground&quot;</span>&gt;
+          {hint}
+        &lt;/p&gt;
+      ) : <span class="hljs-literal">null</span>}
+
+      {error ? (
+        &lt;p id={errorId} className=<span class="hljs-string">&quot;text-sm text-destructive&quot;</span> role=<span class="hljs-string">&quot;alert&quot;</span>&gt;
+          {error}
+        &lt;/p&gt;
+      ) : <span class="hljs-literal">null</span>}
+    &lt;/div&gt;
+  )
+}</code></pre>
+<h3>Input과 Textarea에서 사용</h3>
+<pre class="hljs"><code data-language="tsx"><span class="hljs-keyword">import</span> { <span class="hljs-title class_">FormField</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/components/common/form-field&quot;</span>
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">Input</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/components/ui/input&quot;</span>
+
+&lt;<span class="hljs-title class_">FormField</span>
+  id=<span class="hljs-string">&quot;display-name&quot;</span>
+  label=<span class="hljs-string">&quot;표시 이름&quot;</span>
+  hint=<span class="hljs-string">&quot;2자 이상 입력하세요.&quot;</span>
+  error={errors.displayName}
+  required
+&gt;
+  {(controlProps) =&gt; (
+    &lt;<span class="hljs-title class_">Input</span>
+      {...controlProps}
+      name=<span class="hljs-string">&quot;displayName&quot;</span>
+      autoComplete=<span class="hljs-string">&quot;name&quot;</span>
+      required
+    /&gt;
+  )}
+&lt;/<span class="hljs-title class_">FormField</span>&gt;</code></pre>
+<pre class="hljs"><code data-language="tsx">&lt;<span class="hljs-title class_">FormField</span> id=<span class="hljs-string">&quot;introduction&quot;</span> label=<span class="hljs-string">&quot;소개&quot;</span> hint=<span class="hljs-string">&quot;최대 200자&quot;</span>&gt;
+  {(controlProps) =&gt; (
+    &lt;textarea
+      {...controlProps}
+      name=<span class="hljs-string">&quot;introduction&quot;</span>
+      maxLength={<span class="hljs-number">200</span>}
+      className=<span class="hljs-string">&quot;min-h-24 rounded-md border border-input bg-background px-3 py-2&quot;</span>
+    /&gt;
+  )}
+&lt;/<span class="hljs-title class_">FormField</span>&gt;</code></pre>
+<p>required 표시는 시각적 보조일 뿐이므로 실제 입력 요소에도 <code>required</code> 또는 <code>aria-required</code>를 전달합니다. 오류 문구를 만드는 입력값 검증은 각 기능에서 처리합니다.</p>
+</section>
+
+<hr />
+
+<section>
+<h2 class="bx-active">5. 공통 컴포넌트 동작 테스트</h2>
+<h3><code>src/components/common/submit-button.test.tsx</code></h3>
+<pre class="hljs"><code data-language="tsx"><span class="hljs-keyword">import</span> { render, screen } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@testing-library/react&quot;</span>
+<span class="hljs-keyword">import</span> { describe, expect, it } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vitest&quot;</span>
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">SubmitButton</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/components/common/submit-button&quot;</span>
+
+<span class="hljs-title function_">describe</span>(<span class="hljs-string">&quot;SubmitButton&quot;</span>, () =&gt; {
+  <span class="hljs-title function_">it</span>(<span class="hljs-string">&quot;pending 동안 중복 제출을 막고 진행 상태를 알린다&quot;</span>, () =&gt; {
+    <span class="hljs-title function_">render</span>(
+      &lt;<span class="hljs-title class_">SubmitButton</span> pending pendingContent=<span class="hljs-string">&quot;저장 중&quot;</span>&gt;
+        저장
+      &lt;/<span class="hljs-title class_">SubmitButton</span>&gt;,
+    )
+
+    <span class="hljs-keyword">const</span> button = screen.<span class="hljs-title function_">getByRole</span>(<span class="hljs-string">&quot;button&quot;</span>, { name: <span class="hljs-string">&quot;저장 중&quot;</span> })
+
+    <span class="hljs-title function_">expect</span>(button).<span class="hljs-title function_">toBeDisabled</span>()
+    <span class="hljs-title function_">expect</span>(button).<span class="hljs-title function_">toHaveAttribute</span>(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;submit&quot;</span>)
+    <span class="hljs-title function_">expect</span>(button).<span class="hljs-title function_">toHaveAttribute</span>(<span class="hljs-string">&quot;aria-busy&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>)
+  })
+})</code></pre>
+<h3><code>src/components/common/form-field.test.tsx</code></h3>
+<pre class="hljs"><code data-language="tsx"><span class="hljs-keyword">import</span> { render, screen } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@testing-library/react&quot;</span>
+<span class="hljs-keyword">import</span> { describe, expect, it } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;vitest&quot;</span>
+<span class="hljs-keyword">import</span> { <span class="hljs-title class_">FormField</span> } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@/components/common/form-field&quot;</span>
+
+<span class="hljs-title function_">describe</span>(<span class="hljs-string">&quot;FormField&quot;</span>, () =&gt; {
+  <span class="hljs-title function_">it</span>(<span class="hljs-string">&quot;label, 도움말과 오류를 control에 연결한다&quot;</span>, () =&gt; {
+    <span class="hljs-title function_">render</span>(
+      &lt;<span class="hljs-title class_">FormField</span>
+        id=<span class="hljs-string">&quot;name&quot;</span>
+        label=<span class="hljs-string">&quot;이름&quot;</span>
+        hint=<span class="hljs-string">&quot;2자 이상 입력하세요.&quot;</span>
+        error=<span class="hljs-string">&quot;이름을 확인하세요.&quot;</span>
+      &gt;
+        {(props) =&gt; &lt;input {...props} /&gt;}
+      &lt;/<span class="hljs-title class_">FormField</span>&gt;,
+    )
+
+    <span class="hljs-keyword">const</span> input = screen.<span class="hljs-title function_">getByRole</span>(<span class="hljs-string">&quot;textbox&quot;</span>, { name: <span class="hljs-string">&quot;이름&quot;</span> })
+
+    <span class="hljs-title function_">expect</span>(input).<span class="hljs-title function_">toHaveAccessibleDescription</span>(
+      <span class="hljs-string">&quot;2자 이상 입력하세요. 이름을 확인하세요.&quot;</span>,
+    )
+    <span class="hljs-title function_">expect</span>(input).<span class="hljs-title function_">toHaveAttribute</span>(<span class="hljs-string">&quot;aria-invalid&quot;</span>, <span class="hljs-string">&quot;true&quot;</span>)
+    <span class="hljs-title function_">expect</span>(screen.<span class="hljs-title function_">getByRole</span>(<span class="hljs-string">&quot;alert&quot;</span>)).<span class="hljs-title function_">toHaveTextContent</span>(<span class="hljs-string">&quot;이름을 확인하세요.&quot;</span>)
+  })
+})</code></pre>
+<p>클래스 문자열, shadcn 내부 DOM, 아이콘 path는 테스트하지 않습니다. 이 프로젝트가 추가한 제출 동작과 접근성 연결만 확인합니다.</p>
+</section>
+
+<hr />
+
+<section>
+<h2 class="bx-active">6. 공통 폴더로 옮기지 않는 경우</h2>
+<ul>
+<li>컴포넌트 안에서 API 요청, router 이동, 알림 문구를 결정합니다.</li>
+<li><code>compact</code>, <code>profile</code>, <code>ticket</code>, <code>darkCard</code>처럼 화면마다 다른 참·거짓 prop이 늘어납니다.</li>
+<li>한 사용처를 맞추기 위해 다른 사용처가 쓰지 않는 함수가 필수가 됩니다.</li>
+<li>Next.js의 <code>loading.tsx</code>, <code>error.tsx</code> 또는 shadcn 기본 UI 컴포넌트와 같은 기능을 다시 만듭니다.</li>
+</ul>
+<p>이 경우 컴포넌트를 더 일반화하지 말고 해당 기능 폴더에 둡니다.</p>
+</section>
+    </main>
+
+    <footer>
+      <p>React 공통 코드 구현 예시</p>
+    </footer>
+    <script src="../assets/js/common.js"></script>
+  </body>
+</html>

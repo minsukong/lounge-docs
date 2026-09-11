@@ -1,0 +1,816 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator-skill" content="html-presentation-design-system" />
+    <title>Lounge Front-end 작업 가이드 · Presentation</title>
+    <link
+      rel="stylesheet"
+      href="../../assets/style/briefing-presentation.css"
+    />
+  </head>
+  <body>
+    <div class="scroll-progress" aria-hidden="true"><span></span></div>
+    <nav class="section-navigation" aria-label="발표 장면">
+      <a href="#intro" aria-label="표지"><span>00</span></a>
+      <a href="#strategy" aria-label="사람과 AI의 역할"><span>01</span></a>
+      <a href="#repository" aria-label="저장소 구조"><span>02</span></a>
+      <a href="#layers" aria-label="문서 계층"><span>03</span></a>
+      <a href="#guides" aria-label="가이드 구성"><span>04</span></a>
+      <a href="#storybook-purpose" aria-label="Storybook UI 확인 환경"
+        ><span>05</span></a
+      >
+      <a href="#storybook-review" aria-label="Storybook UI 확인 절차"
+        ><span>06</span></a
+      >
+      <a href="#ai-flow" aria-label="AI 작업 흐름"><span>07</span></a>
+      <a href="#roadmap" aria-label="작업 4단계"><span>08</span></a>
+      <a href="#operations" aria-label="작업 기준 갱신"><span>09</span></a>
+      <a href="#closing" aria-label="결론"><span>10</span></a>
+    </nav>
+
+    <main>
+      <section class="presentation-section intro-section" id="intro">
+        <div class="orb orb-a" aria-hidden="true"></div>
+        <div class="orb orb-b" aria-hidden="true"></div>
+        <div class="presentation-content reveal-on-scroll">
+          <p class="eyebrow">LOUNGE · FRONT-END BUILD SYSTEM</p>
+          <h1>Front-end <br /><em>작업 가이드</em></h1>
+          <p class="lead muted">
+            <code class="tree-folder human">사람</code>이 방향을 정해 가이드에
+            남기면,<br />
+            <code class="tree-folder docs">AI</code>가 그 기준대로 만들고 사람이
+            결과를 확인합니다.
+          </p>
+          <div class="diagram-panel system-flow sequence-palette">
+            <article class="flow-card card-surface">
+              <b>01 · DECIDE</b>
+              <strong>
+                무엇을<br />
+                만들지 정합니다
+              </strong>
+              <small>
+                화면 목적·업무 규칙·우선순위와<br />
+                품질 기준은 사람이 결정합니다.
+              </small>
+            </article>
+            <div class="flow-arrow"><span>가이드</span></div>
+            <article class="flow-card card-surface">
+              <b>02 · GUIDE</b>
+              <strong>
+                결정한<br />
+                내용을 가이드에 남깁니다
+              </strong>
+              <small>
+                구조·UI·상태·역할과 확인할 항목을<br />누구나 찾을 수 있게
+                정리합니다.
+              </small>
+            </article>
+            <div class="flow-arrow"><span>작업</span></div>
+            <article class="flow-card card-surface">
+              <b>03 · BUILD</b>
+              <strong>
+                AI가<br />
+                만들고 확인합니다
+              </strong>
+              <small>
+                가이드와 기존 코드를 살펴본 뒤 화면과 Story를 만들고 필요한
+                검사를 돌립니다.
+              </small>
+            </article>
+            <div class="flow-arrow"><span>확인</span></div>
+            <article class="flow-card card-surface">
+              <b>04 · REVIEW</b>
+              <strong>
+                사람이<br />
+                결과를 확인합니다
+              </strong>
+              <small>
+                바뀐 소스·Story·Test와 검사 결과,<br />
+                코드를 보고 최종 판단합니다.
+              </small>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="presentation-section compact-section" id="strategy">
+        <div class="presentation-content reveal-on-scroll">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">01 · BUILD STRATEGY</p>
+              <h2>사람이 결정하고<br /><em>AI가 구현을 돕습니다</em></h2>
+            </div>
+            <p>
+              <code class="tree-folder human">사람</code>이 직접 결정하고
+              검토하여 가이드를 작성합니다. <br />
+              <code class="tree-folder docs">AI</code>는 서포터로써 존재 합니다.
+            </p>
+          </div>
+          <div class="diagram-panel">
+            <div class="responsibility-flow sequence-palette">
+              <section class="responsibility-column card-surface">
+                <b class="role-kicker">DECIDE · 사람과 담당자</b>
+                <h3>방향과 기준을 결정</h3>
+                <p>무엇을 왜 만들지 정하고 결과가 기준에 맞는지 판단합니다.</p>
+                <ul>
+                  <li>화면 목적·사용자 흐름</li>
+                  <li>업무 규칙·우선순위</li>
+                  <li>서버·앱 연동 방식</li>
+                  <li>구조·최종 품질</li>
+                </ul>
+              </section>
+
+              <div class="flow-arrow">
+                <span>결정을 정리</span>
+              </div>
+
+              <section class="responsibility-column card-surface">
+                <b class="role-kicker">GUIDE · 기준</b>
+                <h3>작업 기준으로 정리</h3>
+                <p>사람과 AI가 가이드대로 작업, 검토하도록 정리합니다.</p>
+                <ul>
+                  <li>저장소·담당 범위</li>
+                  <li>UI·상태 구현 기준</li>
+                  <li>연동·지원 환경</li>
+                  <li>검증·완료 조건</li>
+                </ul>
+              </section>
+
+              <div class="flow-arrow">
+                <span>기준을 전달</span>
+              </div>
+
+              <section class="responsibility-column card-surface">
+                <b class="role-kicker">SUPPORT · AI</b>
+                <h3>기준을 확인하고 구현</h3>
+                <p>
+                  가이드와 현재 코드를 확인해 구현한 뒤 검사 결과를 정리합니다.
+                </p>
+                <ul>
+                  <li>가이드·코드 확인</li>
+                  <li>기존 UI 재사용</li>
+                  <li>화면·상태·Story 구현</li>
+                  <li>검사·빌드·결과 보고</li>
+                </ul>
+              </section>
+            </div>
+            <div
+              class="strategy-result card-surface completion-card tone-complete"
+            >
+              <div class="strategy-result-copy">
+                <b class="completion-kicker">FINAL CHECK · FRONT-END</b>
+                <h3 class="completion-title">사람이 최종 확인</h3>
+                <span>
+                  AI가 만든 결과가 구조·업무 의도·품질 기준에 맞는지 확인
+                  합니다.
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="presentation-section compact-section" id="repository">
+        <div class="presentation-content reveal-on-scroll">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">02 · REPOSITORY</p>
+              <h2>코드와 가이드를<br /><em>같은 저장소에</em></h2>
+            </div>
+            <p>
+              <code class="tree-folder app">apps/</code>에는 실제 앱 코드,
+              <code class="tree-folder docs">docs/</code>에는 구현·검토 기준을
+              둡니다.<br />
+              앱을 빌드할 때 문서는 포함하지 않습니다.
+            </p>
+          </div>
+          <div class="diagram-panel repository-layout">
+            <figure class="repo-tree-card">
+              <figcaption>
+                <b>PROJECT STRUCTURE</b>
+              </figcaption>
+              <pre
+                class="repo-tree"
+                aria-label="저장소 구조"
+              ><span class="tree-root">Root/</span>
+├─ <span class="tree-file file1">AGENTS.md</span>                         <span class="tree-comment"># AI 최상위 작업 원칙</span>
+├─ <span class="tree-folder app">apps/</span>                             <span class="tree-comment"># 앱 소스</span>
+│  ├─ <span class="tree-folder app">mobile/</span>                        <span class="tree-comment"># Flutter Native</span>
+│  └─ <span class="tree-folder app">app-webview/</span>                   <span class="tree-comment"># WebView Front-end</span>
+│     ├─ <span class="tree-folder app">.storybook/</span>                 <span class="tree-comment"># UI 확인</span>
+│     └─ <span class="tree-folder app">src/</span>                        <span class="tree-comment"># Source · Story · Test</span>
+└─ <span class="tree-folder docs">docs/</span>                             <span class="tree-comment"># 가이드</span>
+   ├─ <span class="tree-file file1">AGENTS.md</span>                      <span class="tree-comment"># AI 가이드 작성 기준</span>
+   ├─ <span class="tree-folder docs">guides/</span>                        <span class="tree-comment"># 사람과 AI가 확인하는 상세 HTML 가이드</span>
+   ├─ <span class="tree-folder docs">ai/</span>                            <span class="tree-comment"># AI 작업별 요약</span>
+   ├─ <span class="tree-folder docs">common-source/</span>                 <span class="tree-comment"># 파일 단위 적용 예시</span>
+   └─ <span class="tree-folder docs">assets/ · search/ · templates/</span> <span class="tree-comment"># 가이드 공통 자산</span></pre>
+            </figure>
+            <div class="repository-summary">
+              <article class="card-surface tone-code">
+                <b>ROOT RULES</b>
+                <h3>AGENTS.md</h3>
+                <p>저장소 전체에서 AI가 따라야 할 작업·편집·검증 원칙</p>
+              </article>
+              <article class="card-surface tone-source">
+                <b>APP SOURCE</b>
+                <h3>apps/</h3>
+                <p>
+                  <strong>app-webview/</strong>은 Front-end,
+                  <strong>mobile/</strong>은 별도 앱 개발자가 담당
+                </p>
+              </article>
+              <article class="card-surface tone-ai">
+                <b>GUIDES</b>
+                <h3>docs/</h3>
+                <p>구현·검토 기준과 예시를 제공하며 앱에는 포함하지 않음</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="presentation-section compact-section" id="layers">
+        <div class="presentation-content reveal-on-scroll">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">03 · DOCS LAYERS</p>
+              <h2>
+                AI가 지침 및 가이드를<br />
+                <em>찾는 프로세스</em>
+              </h2>
+            </div>
+            <p>
+              <code class="tree-file file1">AGENTS.md</code>에서 시작해
+              <code class="tree-folder docs">docs/ai/</code>의 작업별 기준을
+              확인합니다.<br />
+              구현 예시나 상세 설명이 필요할 때만 다음 문서로 이동합니다.
+            </p>
+          </div>
+          <div class="diagram-panel">
+            <figure class="diagram-frame document-layer-flow">
+              <!-- prettier-ignore -->
+              <div class="mermaid">
+flowchart TB
+  A["1 · 작업 위치의 규칙 확인<br/>AGENTS.md (AI 지침)"] --> B["2 · 작업별 핵심 기준 확인<br/>docs/ai/*.md"]
+  B --> C{"파일에 적용할<br/>구현 예시가 필요한가?"}
+  C -->|"YES"| D["3 · 파일 단위 예시 확인<br/>docs/common-source/*.md"]
+  C -->|"NO"| G["4 · 실제 코드에 적용<br/>apps/"]
+  D --> E{"작업 배경·전체 범위도<br/>확인해야 하는가?"}
+  E -->|"YES"| F["상세 가이드 확인<br/>docs/guides/ 아래 *.html"]
+  E -->|"NO"| G
+  F --> G
+  class C,E decision
+  class G source
+              </div>
+            </figure>
+            <aside
+              class="diagram-note card-surface tone-warning"
+              aria-label="문서 확인 원칙"
+            >
+              <b>READING RULE</b>
+              <span>
+                모든 문서를 처음부터 읽지 않고 현재 작업에 필요한 문서까지만
+                따라갑니다.
+              </span>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="presentation-section compact-section" id="guides">
+        <div class="presentation-content reveal-on-scroll">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">04 · GUIDE MAP</p>
+              <h2>
+                Front-end <br />
+                <em>가이드 지도</em>
+              </h2>
+            </div>
+            <p>
+              <code class="tree-folder docs">docs/guides/</code> 경로의 상세
+              가이드 내용 입니다.
+            </p>
+          </div>
+          <div class="diagram-panel">
+            <div class="guide-groups sequence-palette">
+              <section class="guide-group card-surface">
+                <b>GUIDE 01 · PROJECT &amp; PLATFORM</b>
+                <h3>프로젝트와 실행 환경</h3>
+                <p class="cluster-purpose">
+                  작업공간, 담당 및 협의점, 계획을 찾을 때
+                </p>
+                <ul>
+                  <li>
+                    <code>architecture/</code
+                    ><span>저장소 구조·담당 범위·빌드·배포</span>
+                  </li>
+                  <li>
+                    <code>frontend/</code
+                    ><span>Front-end 공통 기술과 구현 흐름</span>
+                  </li>
+                  <li>
+                    <code>app/</code
+                    ><span>앱 개발 담당 범위와 Front-end 협업 기준</span>
+                  </li>
+                  <li>
+                    <code>platform/webview/</code
+                    ><span>WebView·Bridge와 OS별 연결 기준</span>
+                  </li>
+                  <li>
+                    <code>browser-support/</code
+                    ><span>지원 브라우저·화면 크기 기준</span>
+                  </li>
+                  <li>
+                    <code>planning/</code><span> 범위 · 순서 · 일정</span>
+                  </li>
+                </ul>
+              </section>
+              <section class="guide-group card-surface">
+                <b>GUIDE 02 · UI &amp; STATE</b>
+                <h3>UI와 상태 구현</h3>
+                <p class="cluster-purpose">
+                  Figma를 실제 화면과 상태로 구현하고 확인할 때
+                </p>
+                <ul>
+                  <li>
+                    <code>ui/react_code_exports.html</code
+                    ><span>Figma 화면 구현과 기존 UI 재사용</span>
+                  </li>
+                  <li>
+                    <code>ui/design_tokens.html</code
+                    ><span>디자인 값과 프로젝트 토큰 연결</span>
+                  </li>
+                  <li>
+                    <code>ui/zustand.html</code
+                    ><span>공유 상태가 필요한 시점과 사용 기준</span>
+                  </li>
+                  <li>
+                    <code>ui/accessibility.html</code
+                    ><span>접근성·키보드·ARIA 구현 기준</span>
+                  </li>
+                  <li>
+                    <code>storybook/</code
+                    ><span>UI 상태를 독립적으로 구현·검토</span>
+                  </li>
+                  <li>
+                    <code>typescript/</code
+                    ><span>TypeScript 설정과 외부 입력 검증</span>
+                  </li>
+                </ul>
+              </section>
+              <section class="guide-group card-surface">
+                <b>GUIDE 03 · VERIFY &amp; PROTECT</b>
+                <h3>검증과 품질 유지</h3>
+                <p class="cluster-purpose">
+                  구현 결과를 검사하고 운영 중 품질을 지킬 때
+                </p>
+                <ul>
+                  <li>
+                    <code>testing/ · lint/</code
+                    ><span>테스트 작성과 코드 품질 검사</span>
+                  </li>
+                  <li>
+                    <code>security/</code
+                    ><span>외부 입력·개인정보·패키지 보안 기준</span>
+                  </li>
+                  <li>
+                    <code>performance/</code
+                    ><span>지연·오류·오프라인 대응과 성능 검증</span>
+                  </li>
+                  <li>
+                    <code>i18n/</code
+                    ><span>번역·언어 설정과 긴 문구 레이아웃 확인</span>
+                  </li>
+                </ul>
+              </section>
+            </div>
+            <aside class="learning-guide-note card-surface tone-guide">
+              <div>
+                <b>LEARNING PATH</b>
+                <strong>AI 결과를 직접 검토하기 위한 학습 가이드</strong>
+              </div>
+              <code class="tree-folder docs">learning/ai-frontend-growth/</code>
+              <span
+                >필요한 Front-end 지식과 검토 순서를 단계별로 확인합니다.</span
+              >
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="presentation-section compact-section"
+        id="storybook-purpose"
+      >
+        <div class="presentation-content reveal-on-scroll">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">05 · STORYBOOK</p>
+              <h2>Storybook<br /><em>앱을 켜지 않고 UI를 확인하는 곳</em></h2>
+            </div>
+            <p>
+              앱 전체를 실행하지 않아도 필요한 UI만 따로 열어봅니다.<br />
+              화면 상태와 사용자 동작도 같은 조건으로 다시 확인합니다.
+            </p>
+          </div>
+          <div class="diagram-panel">
+            <div class="storybook-showcase">
+              <figure class="storybook-preview">
+                <img
+                  src="../../assets/design/storybook-figma-ui-review-demo.png"
+                  alt="Storybook에서 실제 구현과 Figma 디자인을 함께 비교하는 예시"
+                />
+                <figcaption>
+                  Storybook 안에서 구현된 UI와 Figma 시안을 나란히 비교하는 예시
+                </figcaption>
+              </figure>
+              <div class="storybook-purpose sequence-palette">
+                <article class="flow-card card-surface">
+                  <b>01 · RENDER</b>
+                  <strong>필요한 UI만 바로 열기</strong>
+                  <small
+                    >라우팅이나 전체 화면 흐름을 거치지 않고
+                    컴포넌트·기능·화면을 따로 엽니다.</small
+                  >
+                </article>
+                <article class="flow-card card-surface">
+                  <b>02 · REPRODUCE</b>
+                  <strong>같은 상태를 언제든 재현</strong>
+                  <small
+                    >Default·Loading·Empty·Error 상태를 Story에 미리
+                    준비합니다.</small
+                  >
+                </article>
+                <article class="flow-card card-surface">
+                  <b>03 · REVIEW</b>
+                  <strong>디자인과 동작을 함께 검토</strong>
+                  <small
+                    >Figma와 실제 구현을 비교하고 사용자 동작·화면 크기·키보드
+                    접근성을 확인합니다.</small
+                  >
+                </article>
+              </div>
+            </div>
+            <div class="storybook-boundary">
+              <section class="storybook-scope card-surface tone-ai">
+                <b>STORYBOOK에서 확인</b>
+                <strong>UI 자체의 품질</strong>
+                <p>모양·상태·사용자 동작·화면 크기·접근성과 Figma 비교</p>
+              </section>
+              <section class="storybook-scope card-surface tone-warning">
+                <b>실제 앱에서 확인</b>
+                <strong>연결된 전체 사용자 흐름</strong>
+                <p>라우팅·서버·인증·앱 연동과 실제 화면 간 이동</p>
+              </section>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="presentation-section compact-section"
+        id="storybook-review"
+      >
+        <div class="presentation-content reveal-on-scroll">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">06 · STORYBOOK UI REVIEW</p>
+              <h2>Storybook에서<br /><em>구현된 UI를 검수</em></h2>
+            </div>
+            <p>
+              이미 구현된 UI를 상태별로 재현해 디자인·동작·접근성을
+              확인합니다.<br />문제가 있으면 수정 후 다시 검수하고 이상이 없으면
+              완료합니다.
+            </p>
+          </div>
+          <div class="diagram-panel">
+            <div class="story-review-flow step-flow sequence-palette">
+              <article class="flow-card card-surface step-card">
+                <b>1 · SELECT</b>
+                <strong>검수할 UI와 상태 선택</strong>
+                <small
+                  >검수할 화면과 Default·Loading·Error 등 필요한 상태를
+                  정합니다.</small
+                >
+              </article>
+              <article class="flow-card card-surface step-card">
+                <b>2 · REPRODUCE</b>
+                <strong>Story에서 상태 재현</strong>
+                <small
+                  >실제 Props와 테스트용 가상 데이터(Mock Data)를 넣어 같은
+                  화면을 다시 띄웁니다.</small
+                >
+              </article>
+              <article class="flow-card card-surface step-card">
+                <b>3 · REVIEW</b>
+                <strong>디자인과 동작 검수</strong>
+                <small
+                  >Figma와 비교하고 화면 크기·사용자 동작·키보드 접근성을
+                  확인합니다.</small
+                >
+              </article>
+              <article
+                class="flow-card card-surface step-card completion-card tone-complete"
+              >
+                <b class="completion-kicker">4 · COMPLETE</b>
+                <strong class="completion-title">Storybook 검수 완료</strong>
+                <small
+                  >발견한 문제를 수정한 뒤 같은 Story로 다시 확인합니다. 남은
+                  문제가 없으면 검수를 마칩니다.</small
+                >
+              </article>
+            </div>
+            <section class="story-state-guide card-surface tone-guide">
+              <div class="story-state-guide-copy">
+                <b>RECOMMENDED</b>
+                <h3>기본으로 준비하면 좋은 대표 상태</h3>
+                <p>
+                  자주 쓰는 화면 상태를 Story로 만들어 두면 같은 조건에서 다시
+                  검토하기 쉽습니다.
+                </p>
+              </div>
+              <div class="story-state-list">
+                <span>기본·성공</span><span>Loading</span><span>Empty</span
+                ><span>Error</span><span>권한 거부</span><span>Offline</span
+                ><span>긴 문구·다국어</span><span>Mobile·Tablet·Desktop</span>
+              </div>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <section class="presentation-section compact-section" id="ai-flow">
+        <div class="presentation-content reveal-on-scroll">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">07 · AI BUILD FLOW</p>
+              <h2>사람이 방향을 정하고<br /><em>AI가 구현하는 순서</em></h2>
+            </div>
+            <p>
+              <code class="tree-folder human">사람</code>은 작업을 요청하고
+              결과를 검토합니다. <br />
+              <code class="tree-folder docs">AI</code>는 기존 코드와 가이드를
+              확인한 뒤 구현하고 검사합니다. <br />
+              <code class="tree-folder amber">서비스</code> 결정이 필요하면
+              담당자에게 묻습니다.
+            </p>
+          </div>
+          <div class="diagram-panel">
+            <div
+              class="role-legend ai-flow-legend"
+              aria-label="AI 작업 흐름 역할 구분"
+            >
+              <span class="tone-human">사람 · 요청과 최종 검토</span>
+              <span class="tone-ai">AI · 코드 확인·구현·검사</span>
+              <span class="tone-warning">담당자 · 서비스와 업무 결정</span>
+            </div>
+            <figure class="diagram-frame">
+              <!-- prettier-ignore -->
+              <div class="mermaid">
+flowchart TB
+  A["사람 · 작업 요청<br/>만들 화면과 Figma 전달"] --> B["AI · 1. 작업 범위 확인<br/>AGENTS.md에서 담당 범위와 주의사항 확인"]
+  B --> C["AI · 2. 현재 코드 확인<br/>설치된 기능 · 기존 UI · 재사용 방법 확인"]
+  C --> D["AI · 3. 필요한 문서 확인<br/>이번 작업에 필요한 가이드만 선택"]
+  D --> E{"AI · 바로 구현할 수<br/>있는가?"}
+  E -->|"YES"| I["AI · 4. 화면 구현<br/>apps/app-webview에 코드 작성"]
+  E -->|"NO"| F{"AI · 서비스·업무 결정이<br/>필요한가?"}
+  F -->|"YES"| G["담당자 · 기준 결정<br/>업무 규칙 · 서버 연결 · 앱 연동 방식 답변"]
+  F -->|"NO"| H["AI · 구현 방법 확인<br/>구현 예시와 상세 가이드 확인"]
+  G --> I
+  H --> I
+  I --> J["AI · 5. 구현 결과 검사<br/>Storybook에서 화면 확인<br/>코드 검사 · 테스트 · 빌드 실행"]
+  J --> K["AI · 작업 결과 보고<br/>바뀐 내용과 확인하지 못한 항목 정리"]
+  K --> L["사람 · 최종 검토와 완료<br/>결과 확인과 품질 판단"]
+  class A,L human
+  class B,C,D,E,F,H,I,J,K ai
+  class G owner
+  class E,F decision
+  class L complete
+              </div>
+            </figure>
+            <aside
+              class="diagram-note card-surface tone-warning"
+              aria-label="역할 판단 원칙"
+            >
+              <b>DECISION RULE</b>
+              <span>
+                AI가 정할 수 없는 서비스·업무 기준은 담당자가 결정합니다. 구현
+                결과는 사람이 마지막으로 확인합니다.
+              </span>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="presentation-section compact-section" id="roadmap">
+        <div class="presentation-content reveal-on-scroll">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">08 · UNIT WORK EXAMPLE</p>
+              <h2>
+                UI·기능 단위 작업<br />
+                <em>연결과 검사</em>
+              </h2>
+            </div>
+            <p>
+              API로 목록을 불러오는 화면을 만든다고 가정합니다.<br />
+              UI 구현과 응답별 동작 확인, API 연결과 검사까지 <br />
+              완료해야 작업이 완료됩니다.
+            </p>
+          </div>
+          <div class="diagram-panel">
+            <div class="build-roadmap step-list sequence-palette">
+              <article class="roadmap-step card-surface step-card">
+                <div class="roadmap-stage"><b>01</b><span>CHECK</span></div>
+                <div class="roadmap-copy">
+                  <h3>UI와 API 기준 확인</h3>
+                  <p>
+                    Figma와 기존 코드를 살펴보고 API 요청·응답 형식과
+                    Loading·Empty·Error 상태를 확인합니다.
+                  </p>
+                </div>
+                <output
+                  ><span class="output-label">단계 결과</span
+                  ><strong>Figma · API 명세 · 완료 조건</strong>이
+                  정리됩니다.</output
+                >
+              </article>
+              <article class="roadmap-step card-surface step-card">
+                <div class="roadmap-stage"><b>02</b><span>BUILD</span></div>
+                <div class="roadmap-copy">
+                  <h3>UI와 주요 상태 구현</h3>
+                  <p>
+                    기존 UI를 재사용해 화면을 만들고 테스트용 데이터로
+                    기본·로딩·빈 결과·오류 상태를 Story에 준비합니다.
+                  </p>
+                </div>
+                <output
+                  ><span class="output-label">단계 결과</span
+                  ><strong>화면 · 주요 상태 · Story</strong>를 확인할 수
+                  있습니다.</output
+                >
+              </article>
+              <article class="roadmap-step card-surface step-card">
+                <div class="roadmap-stage"><b>03</b><span>CONNECT</span></div>
+                <div class="roadmap-copy">
+                  <h3>API 연결과 응답별 동작 확인</h3>
+                  <p>
+                    API 호출 코드를 연결하고 Storybook에서는 테스트용 응답을
+                    바꿔 가며 상태 전환과 사용자 동작을 확인합니다.
+                  </p>
+                </div>
+                <output
+                  ><span class="output-label">단계 결과</span
+                  ><strong>API 요청 처리 · 응답별 화면 · 사용자 동작</strong>을
+                  확인할 수 있습니다.</output
+                >
+              </article>
+              <article
+                class="roadmap-step card-surface step-card completion-card tone-complete"
+              >
+                <div class="roadmap-stage">
+                  <b>04</b><span class="completion-kicker">COMPLETE</span>
+                </div>
+                <div class="roadmap-copy">
+                  <h3 class="completion-title">실제 앱·연결 환경에서 확인</h3>
+                  <p>
+                    실제 앱 또는 API가 연결된 개발 환경에서 서버 응답·인증·오류
+                    흐름을 확인합니다. 테스트·코드 검사·빌드를 통과하고 사람이
+                    최종 검토하면 단위 작업이 완료됩니다.
+                  </p>
+                </div>
+                <output
+                  ><span class="output-label">완료 결과</span
+                  ><strong>실제 API 연결 · Test · Build · 검토 결과</strong>가
+                  남습니다.</output
+                >
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="presentation-section compact-section" id="operations">
+        <div class="presentation-content reveal-on-scroll">
+          <div class="section-head">
+            <div>
+              <p class="eyebrow">09 · GUIDE UPDATE</p>
+              <h2>모든 변경이 아니라<br /><em>기준이 바뀔 때 갱신</em></h2>
+            </div>
+            <p>
+              다음 작업에도 적용할 구조·규칙·연동 기준이 바뀌었을 때만 관련
+              가이드를 함께 고칩니다.
+            </p>
+          </div>
+          <div class="diagram-panel">
+            <figure class="diagram-frame guide-update-flow">
+              <!-- prettier-ignore -->
+              <div class="mermaid">
+flowchart TB
+  A["구현 또는 수정 발생<br/>Source · Story · Test"] --> B{"다음 작업에도 영향을 주는<br/>기준이 바뀌었는가?"}
+  B -->|"YES"| C["관련 상세 가이드 수정<br/>docs/guides"]
+  B -->|"NO"| D["현재 구현만 수정<br/>Source · Story · Test"]
+  C --> E{"AI 요약이나 구현 예시도<br/>함께 바뀌는가?"}
+  E -->|"YES"| F["AI 요약 · 구현 예시 갱신<br/>docs/ai · common-source"]
+  E -->|"NO"| G["상세 가이드만 갱신"]
+  F --> H{"가이드 전체의 구조·정책을<br/>크게 바꾼 작업인가?"}
+  G --> H
+  H -->|"YES"| I["CHANGELOG 기록<br/>변경 목적 · 주요 내용 · 검증 결과"]
+  H -->|"NO"| J["변경 기록 생략"]
+  D --> K["관련 검사 후 완료"]
+  I --> K
+  J --> K
+  class B,E,H decision
+  class K complete
+              </div>
+            </figure>
+            <aside
+              class="diagram-note card-surface tone-warning"
+              aria-label="가이드 갱신 원칙"
+            >
+              <b>UPDATE RULE</b>
+              <span>
+                변경 범위에 필요한 문서만 함께 고칩니다. 작은 수정은 변경 기록을
+                남기지 않습니다.
+              </span>
+            </aside>
+            <div class="guide-update-examples">
+              <article class="guide-update-example card-surface tone-guide">
+                <b>가이드 갱신 ✅</b>
+                <h3>다음 작업의 기준이 달라지는 변경</h3>
+                <div>
+                  <span>저장소 구조·담당 범위</span
+                  ><span>공개 API·인증·앱 연동</span
+                  ><span>공통 UI·검증 원칙</span
+                  ><span>지원 환경·보안 정책</span>
+                </div>
+              </article>
+              <article class="guide-update-example card-surface tone-source">
+                <b>가이드 갱신 ❌</b>
+                <h3>기준이 바꾸지 않는 작은 변경</h3>
+                <div>
+                  <span>한 화면의 문구·스타일</span><span>일부 오류 수정</span
+                  ><span>브리핑 문구·배치 조정</span
+                  ><span>검사를 위한 임시 편집</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="presentation-section closing" id="closing">
+        <div class="presentation-content reveal-on-scroll">
+          <p class="eyebrow">10 · SUMMARY</p>
+          <h2>
+            AI와 함께 구현하고
+            <em>
+              최종 확인은 <br />
+              사람이 합니다.
+            </em>
+          </h2>
+          <div class="operating-model">
+            <article class="flow-card card-surface tone-human">
+              <b>01 · DECIDE</b><strong>사람이 방향과 기준을 결정</strong
+              ><small>화면 목적·업무 규칙·연동 방식·최종 품질</small>
+            </article>
+            <div class="flow-arrow"><span>가이드</span></div>
+            <article class="flow-card card-surface tone-ai">
+              <b>02 · BUILD</b><strong>AI와 사람이 같이 구현</strong
+              ><small
+                >가이드와 기존 코드를 확인해 UI·상태·Story·Test 작성</small
+              >
+            </article>
+            <div class="flow-arrow"><span>검토</span></div>
+            <article
+              class="flow-card card-surface completion-card tone-complete"
+            >
+              <b class="completion-kicker">03 · COMPLETE</b
+              ><strong class="completion-title"
+                >사람의 최종 확인으로 완료</strong
+              ><small>Source·Story·검사·빌드 최종 결과 확인</small>
+            </article>
+          </div>
+          <aside
+            class="diagram-note card-surface tone-warning"
+            aria-label="가이드 갱신 원칙"
+          >
+            <b>UPDATE RULE</b>
+            <span>
+              정책 및 기준이 업데이트 되면, 가이드도 함께 업데이트 됩니다.
+            </span>
+          </aside>
+          <a href="./index.html"> 기존 템플릿으로 브리핑 살펴보기<b>⧉</b> </a>
+        </div>
+      </section>
+    </main>
+
+    <div class="keyboard-hint">↑ ↓</div>
+    <script src="../../assets/js/mermaid.js"></script>
+    <script src="../../assets/js/briefing-presentation.js"></script>
+  </body>
+</html>

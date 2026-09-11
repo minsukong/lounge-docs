@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Lounge의 주요 가이드를 문서명, 목차와 본문 내용으로 검색하는 페이지"
+    />
+    <title>가이드 검색</title>
+    <link rel="stylesheet" href="../assets/style/presentation-theme.css" />
+    <link rel="stylesheet" href="../assets/style/search.css" />
+  </head>
+  <body>
+    <header>
+      <div class="type">GUIDE · SEARCH</div>
+      <h1>가이드 검색</h1>
+      <p>
+        Lounge의 주요 가이드를 문서명, 목차와 본문 내용으로 검색합니다.
+      </p>
+    </header>
+
+    <main>
+      <section>
+        <h2 class="bx-active">1. 검색</h2>
+        <p>
+          작성용 템플릿과 복제 문서를 제외한 Lounge의 전체 주요 가이드를
+          문서명, 목차와 본문 내용으로 검색합니다.
+        </p>
+        <form class="guide-search" role="search" id="guide-search-form">
+          <label for="guide-search-input">가이드 내용 검색</label>
+          <div class="guide-search__controls">
+            <input
+              id="guide-search-input"
+              name="query"
+              type="search"
+              inputmode="search"
+              autocomplete="off"
+              placeholder="예: Tailwind, Storybook, Figma, 브라우저"
+              aria-describedby="guide-search-help"
+            />
+            <button type="submit">검색</button>
+          </div>
+          <p id="guide-search-help" class="guide-search__help">
+            두 글자 이상 입력하면 문서명, 목차, 설명과 키워드를 검색합니다.
+          </p>
+        </form>
+
+        <div class="search-suggestions" aria-label="추천 검색어">
+          <span>추천 검색어</span>
+          <button type="button" data-search-query="Tailwind">Tailwind</button>
+          <button type="button" data-search-query="Storybook">Storybook</button>
+          <button type="button" data-search-query="Figma">Figma</button>
+          <button type="button" data-search-query="브라우저">브라우저</button>
+          <button type="button" data-search-query="WebView">WebView</button>
+          <button type="button" data-search-query="TypeScript">TypeScript</button>
+          <button type="button" data-search-query="테스트">테스트</button>
+          <button type="button" data-search-query="보안">보안</button>
+          <button type="button" data-search-query="다국어">다국어</button>
+          <button type="button" data-search-query="성능">성능</button>
+        </div>
+
+        <p id="search-status" class="search-status" aria-live="polite">
+          검색어를 입력하거나 추천 검색어를 선택하세요.
+        </p>
+        <div id="search-results" class="search-results"></div>
+        <noscript>
+          <p>검색을 사용하려면 브라우저에서 JavaScript를 활성화해야 합니다.</p>
+        </noscript>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">2. 검색 색인 갱신</h2>
+        <p>
+          가이드 HTML을 추가·수정·삭제한 뒤에는
+          저장소 루트에서 다음 명령을 실행합니다.
+        </p>
+        <pre
+          class="hljs"
+        ><code data-language="powershell"><span class="hljs-built_in">node</span> .\docs\search\build-search-index.mjs</code></pre>
+        <p>
+          생성기는 검색 대상 폴더의 HTML을 읽어 문서명, 목차와 본문을 다시
+          수집하고 <code>assets/js/search-data.js</code>를 갱신합니다.
+          완료 메시지의 HTML 파일 수와 목차 수를 확인한 뒤 검색 페이지에서
+          변경한 용어가 검색되는지 확인합니다.
+        </p>
+        <blockquote>
+          <p>
+            <code>search-data.js</code>를 직접 수정하지 않습니다. 검색 대상
+            범위를 바꾸려면 <code>build-search-index.mjs</code>의
+            <code>guidesRoot</code>를 검토한 뒤 색인을 다시 생성합니다.
+          </p>
+        </blockquote>
+      </section>
+    </main>
+
+    <footer>
+      <p>가이드 검색</p>
+    </footer>
+    <script src="../assets/js/search-data.js"></script>
+    <script src="../assets/js/search.js"></script>
+    <script src="../assets/js/common.js"></script>
+  </body>
+</html>
