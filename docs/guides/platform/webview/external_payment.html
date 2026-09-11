@@ -18,7 +18,7 @@
       <section>
         <h2 class="bx-active">1. 목적과 적용 범위</h2>
         <p>이 문서는 Flutter WebView에서 구성한 외부 결제가 결제 앱, 인증 앱 또는 시스템 브라우저로 이동할 때 발생하는 플랫폼별 문제를 줄이기 위한 구현·검토 기준입니다.</p>
-        <p>결제사 연동, 결제 요청과 Return URL은 Web에서 구성합니다. WebView가 받은 Intent·Scheme을 Flutter에 전달하면 Android Kotlin과 iOS Swift는 허용된 외부 앱을 여는 OS 연동만 담당합니다. 서비스 앱 복귀 Scheme은 Native 설정에 등록하고, 복귀 이후 화면과 결과 조회는 Web이 처리합니다.</p>
+        <p>외부 결제 화면, 결제사 연동, 결제 요청, Return URL과 결과 처리는 WebView에서 구성합니다. Web 콘텐츠가 외부 앱 URL로 이동할 때 Flutter WebView Navigation Delegate가 이를 감지해 Native에 전달하고, Android Kotlin과 iOS Swift는 허용된 외부 앱을 여는 OS 연동만 담당합니다. 서비스 앱 복귀 Scheme은 Native 설정에 등록하고, 복귀 이후에는 WebView 결제 화면을 재개하거나 승인된 Web 복구 Route로 진입합니다.</p>
         <ul>
           <li>Flutter와 Android·iOS Native 사이의 호출 경계</li>
           <li>외부 결제 앱 또는 브라우저 실행과 앱 복귀</li>
@@ -26,7 +26,7 @@
           <li>서버 조회를 통한 최종 결제 상태 확인</li>
           <li>보안, 로그, 테스트와 배포 전 점검 기준</li>
         </ul>
-        <p>결제 상품 정책, 금액 계산, 승인·취소·환불 업무 규칙, Backend API 규격, 결제사 선정과 SDK별 설치 방법은 이 문서에서 확정하지 않습니다.</p>
+        <p>결제 상품 정책, 금액 계산, 승인·취소·환불 업무 규칙, Backend API 규격과 결제사 선정은 이 문서에서 확정하지 않습니다. 현재 외부 결제에는 결제사 Native SDK를 사용하지 않습니다.</p>
         <p>판매 대상과 출시 국가에 따라 앱 마켓의 외부 결제 허용 범위가 달라질 수 있으므로 구현 전에 법무·사업·배포 담당자가 스토어별 현재 정책을 확인하고 승인해야 합니다.</p>
       </section>
 
@@ -64,13 +64,13 @@
 
       <section>
         <h2 class="bx-active">3. 적용 결정과 역할</h2>
-        <p>외부 결제 설정과 흐름은 Web이 소유합니다. Native는 WebView가 가로채 전달한 Intent·Scheme을 검증해 OS에 전달하고 서비스 앱 복귀 Scheme을 등록합니다.</p>
+        <p>외부 결제 설정과 흐름은 Web이 소유합니다. Flutter WebView Navigation Delegate는 Web 콘텐츠의 외부 앱 URL 이동을 감지해 Native에 중계하고, Native는 Intent·Scheme을 검증해 OS에 전달하며 서비스 앱 복귀 Scheme을 등록합니다.</p>
         <table>
           <thead><tr><th scope="col">영역</th><th scope="col">담당</th><th scope="col">책임</th></tr></thead>
           <tbody>
-            <tr><td>WebView Front-end</td><td>WebView</td><td>승인된 웹 결제 설정의 적용, 결제 요청, 외부 이동 URL 감지, Intent·Scheme 전달, Return URL과 결과 화면 처리</td></tr>
+            <tr><td>WebView Front-end</td><td>WebView</td><td>승인된 웹 결제 설정의 적용, 결제 요청, 외부 앱 이동 URL 발생, Return URL과 결과 화면 처리</td></tr>
             <tr><td>결제·운영 담당</td><td>결제·운영</td><td>결제사 관리자 설정, Merchant 정보, 허용 Return URL과 출시 환경별 결제수단 관리</td></tr>
-            <tr><td>앱 조정 계층</td><td>Flutter</td><td>WebView의 외부 이동 요청을 Native에 중계하고, 앱 복귀 시 기존 WebView 재개 또는 승인된 복구 Route 진입 조정</td></tr>
+            <tr><td>앱 조정 계층</td><td>Flutter</td><td>WebView Navigation Delegate에서 외부 앱 URL을 감지해 Native에 중계하고, 앱 복귀 시 WebView 재개 또는 승인된 Web 복구 Route 진입 조정</td></tr>
             <tr><td>Android OS 연동</td><td>Kotlin</td><td>허용된 Intent·Custom Scheme 분석과 외부 앱 실행, 서비스 앱 복귀 Scheme 등록</td></tr>
             <tr><td>iOS OS 연동</td><td>Swift</td><td>허용된 Custom Scheme·HTTPS URL로 외부 앱 실행, 서비스 앱 복귀 Scheme 등록</td></tr>
             <tr><td>결제 Backend</td><td>Backend</td><td>결제 요청 생성, 금액·주문 검증, 멱등성 보장, 결제사 Callback 처리, 최종 상태 제공</td></tr>
@@ -78,7 +78,7 @@
           </tbody>
         </table>
         <blockquote><p>외부 결제 설정과 결과 처리는 Web이 담당합니다. Native는 WebView에서 전달받은 Intent·Scheme으로 외부 앱을 열고 서비스 앱의 복귀 Scheme을 등록하는 OS 연동만 담당하며, 결제 성공 여부를 판단하거나 결제 상태를 관리하지 않습니다.</p></blockquote>
-        <p>이 역할 분리는 <a href="../../app/app.html">APP 개발 표준</a>의 “일반 웹 결제를 우선 적용하고 필요한 Native 연동만 Flutter에서 처리” 기준을 구체화합니다. 이 문서는 Web 결제의 Intent·Scheme 연동을 다루며, 결제사가 Native SDK를 필수로 요구하는 경우에만 APP 개발 표준의 <code>payment.open</code> 흐름을 별도 적용합니다.</p>
+        <p>이 역할 분리는 <a href="../../app/app.html">APP 개발 표준</a>의 “일반 웹 결제를 우선 적용하고 필요한 Native 연동만 Flutter에서 처리” 기준을 구체화합니다. 현재 외부 결제는 WebView 방식으로 확정하며 APP 개발 표준의 Native SDK용 <code>payment.open</code> 흐름은 적용하지 않습니다.</p>
       </section>
 
       <hr />
@@ -92,22 +92,22 @@ sequenceDiagram
   accTitle: WebView 외부 결제 Intent 실행과 복귀 흐름
   accDescr: WebView가 결제를 구성하고 Intent 또는 Scheme을 Native에 전달하면 Native가 외부 앱을 열며, 서비스 앱 복귀 뒤 WebView가 결제 상태를 확인합니다.
   actor U as 사용자
-  participant W as WebView
+  participant W as Web 콘텐츠
   participant B as Backend
-  participant F as Flutter
+  participant F as Flutter WebView Host
   participant N as Android·iOS Native
   participant P as 결제 사업자
   U->>W: 결제 선택
   W->>B: 결제 준비 요청
   B-->>W: 결제 시도 식별자
   W->>P: 결제사 Web 연동 실행
-  P-->>W: intent URL·Custom Scheme 이동
-  W->>F: 외부 이동 URL 전달
+  P-->>W: intent URL·Custom Scheme Navigation
+  W->>F: 외부 URL 이동 시도
   F->>N: 외부 앱 열기 요청
   N->>P: 허용된 Intent·Scheme을 OS에 전달
-  P-->>N: 서비스 앱 Scheme으로 복귀
-  N-->>F: 서비스 앱 진입 정보 전달
-  F-->>W: 기존 화면 재개 또는 복구 Route 진입
+  P-->>N: 결제사 규격에 따른 앱 복귀
+  N-->>F: 서비스 앱 진입 또는 재활성화
+  F-->>W: WebView 결제 화면 재개 또는 Web 복구 Route 진입
   W->>B: 동일 결제 시도 상태 조회
   B-->>W: 검증된 최종 상태
           </div>
@@ -120,16 +120,16 @@ sequenceDiagram
 
       <section>
         <h2 class="bx-active">5. 결제사·Web·Native 복귀 계약</h2>
-        <p>외부 결제와 복귀 흐름은 Web이 결제사 규격에 맞춰 구성합니다. Native와 Web이 함께 맞출 항목은 Web이 전달할 외부 앱 Scheme 허용 범위와 서비스 앱을 다시 열 복귀 Scheme입니다.</p>
+        <p>외부 결제와 최종 결과 화면은 WebView가 결제사 규격에 맞춰 구성합니다. Native와 Web이 함께 맞출 항목은 Web 결제에서 발생하는 외부 앱 Scheme 허용 범위, 서비스 앱 복귀 Scheme과 복귀 후 열 Web Route입니다.</p>
         <table>
           <thead><tr><th scope="col">담당</th><th scope="col">확정·구현할 항목</th></tr></thead>
           <tbody>
             <tr><td>결제 담당·결제사</td><td>지원하는 외부 앱 Scheme과 Return·Redirect 방식, 성공·실패·취소 복귀 조건, 허용 URL 등록 위치</td></tr>
-            <tr><td>Web Front-end</td><td>결제사 연동 설정, 결제 요청, Return URL, Intent·Custom Scheme 감지와 App 전달, 복귀 화면과 결제 상태 조회</td></tr>
+            <tr><td>Web Front-end</td><td>결제사 연동 설정 적용, 결제 요청, Return URL, 외부 앱 URL 발생, 복귀 화면과 결제 상태 조회</td></tr>
             <tr><td>Backend</td><td>결제 시도 식별자 발급, Return URL 허용 목록, 결제사 서버 Callback 검증, Web이 조회할 결제 상태 API와 멱등성 보장</td></tr>
             <tr><td>Android Native</td><td>전달받은 Intent·Scheme의 허용 여부 확인과 외부 앱 실행, 서비스 앱 복귀 Scheme 등록</td></tr>
             <tr><td>iOS Native</td><td>전달받은 Scheme·URL의 허용 여부 확인과 외부 앱 실행, 서비스 앱 복귀 Scheme 등록</td></tr>
-            <tr><td>App·Web 공통</td><td>외부 앱 Scheme 허용 목록, 서비스 앱 복귀 Scheme, 앱 미설치 오류, 기존 WebView 재개와 Cold Start 복구 Route</td></tr>
+            <tr><td>App·Web 공통</td><td>외부 앱 Scheme 허용 목록, 서비스 앱 복귀 Scheme, 앱 미설치 오류, WebView 재개와 Cold Start Web 복구 Route</td></tr>
           </tbody>
         </table>
         <p>결제사에 전달할 Return·Redirect URL과 결과 Parameter는 Web에서 관리합니다. 서비스 앱 Scheme이 필요한 경우 Web은 Native에 등록된 확정 Scheme을 사용해야 합니다.</p>
@@ -145,7 +145,7 @@ sequenceDiagram
           <li>Callback 유실, 중복 Callback과 앱 재실행 시 Backend 상태 조회 조건</li>
           <li>구버전 앱이 새 Return URL 또는 계약 버전을 처리하지 못할 때의 호환 정책</li>
         </ul>
-        <blockquote><p>Return URL, 결과 Parameter와 Backend 상태 조회는 Web이 처리합니다. Native는 외부 앱 실행과 서비스 앱 Scheme 수신을 담당하고, Flutter는 실행 중인 WebView를 재개하거나 Cold Start에서는 승인된 복구 Route를 엽니다. Native와 Flutter는 결제 결과 값을 해석하지 않습니다.</p></blockquote>
+        <blockquote><p>Return URL, 결과 Parameter와 Backend 상태 조회는 WebView가 처리합니다. Native는 외부 앱 실행과 서비스 앱 Scheme 수신을 담당하고, Flutter는 실행 중인 WebView를 재개하거나 Cold Start에서는 승인된 Web 복구 Route를 엽니다. Native와 Flutter는 결제 결과 값을 해석하지 않습니다.</p></blockquote>
       </section>
 
       <hr />
@@ -265,7 +265,7 @@ sequenceDiagram
           <li>카드정보와 인증정보는 결제사 SDK 또는 승인된 결제 화면에서만 취급합니다.</li>
           <li>Bridge와 Platform Channel에는 필요한 최소 식별값만 전달합니다.</li>
           <li>운영 로그에 URL Query, 결제 Token, 사용자 식별정보와 결제사 원문 오류를 남기지 않습니다.</li>
-          <li>결제사 SDK의 공식 배포 경로, 무결성, 라이선스, 개인정보와 업데이트 영향을 검토합니다.</li>
+          <li>Web 결제 라이브러리와 결제사 스크립트의 공식 배포 경로, 무결성, 라이선스, 개인정보와 업데이트 영향을 검토합니다.</li>
         </ul>
       </section>
 
