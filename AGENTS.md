@@ -222,7 +222,7 @@ AI는 작업을 시작할 때 이 `AGENTS.md`를 먼저 읽습니다. 이후 작
 | 네트워크 지연, 비동기 UI와 성능 검증 | [Markdown](./docs/ai/performance.md) · [HTML](./docs/ai/performance.html) | Loading·Timeout·Offline 처리, 요청 안전성과 저속 네트워크 검증 |
 | 인증·권한, 외부 입력, 개인정보와 보안 검토 | [Markdown](./docs/ai/security.md) · [HTML](./docs/ai/security.html) | XSS, URL, Client 저장소, Cookie·CSRF, Secret, Bridge, 파일과 의존성 기준 |
 | 공통 설정, 컴포넌트와 유틸리티 가이드 작성 | [Markdown](./docs/ai/common-source.md) · [HTML](./docs/ai/common-source.html) | 공통 소스 상세 가이드 진입점, 작성 원칙과 실제 저장소 적용 기준 |
-| Ollama, Continue와 로컬 LLM 활용 | [Markdown](./docs/ai/local-llm.md) · [HTML](./docs/ai/local-llm.html) | 로컬 모델에 맡길 범위, 검토 방식과 외부 모델 전환 기준 |
+| Ollama, NInfer와 로컬 LLM 활용 | [Markdown](./docs/ai/local-llm.md) · [HTML](./docs/ai/local-llm.html) | 로컬 모델에 맡길 범위, 검토 방식과 외부 모델 전환 기준 |
 
 ### 문서 계층과 적용 기준
 
@@ -255,7 +255,7 @@ flowchart TD
   C -->|"네트워크 지연·비동기 UI·성능"| N["docs/ai/performance.md"]
   C -->|"인증·권한·외부 입력·보안"| S["docs/ai/security.md"]
   C -->|"공통 소스·설정·유틸리티"| CS["docs/ai/common-source.md"]
-  C -->|"Ollama·Continue·로컬 LLM"| L["docs/ai/local-llm.md"]
+  C -->|"Ollama·NInfer·로컬 LLM"| L["docs/ai/local-llm.md"]
   P -->|"세부 기준이 필요할 때"| PH["docs/guides/frontend + architecture"]
   U -->|"세부 기준이 필요할 때"| UH["docs/guides/frontend + ui"]
   F -->|"세부 기준이 필요할 때"| FH["react_code_exports.html + design_tokens.html"]
@@ -314,7 +314,7 @@ docs/
 │  ├─ performance.md    # 네트워크 지연, 비동기 UI 및 성능 검증
 │  ├─ security.md       # 인증·권한, 외부 입력, 개인정보 및 보안 검토
 │  ├─ common-source.md  # 공통 소스 가이드 작업 진입점
-│  └─ local-llm.md      # Ollama, Continue 및 로컬 LLM 작업
+│  └─ local-llm.md      # Ollama, NInfer 및 로컬 LLM 작업
 └─ common-source/
    ├─ index.md          # 가이드 범위와 적용 절차
    ├─ tailwind.md       # Tailwind CSS 기반 구현 가이드

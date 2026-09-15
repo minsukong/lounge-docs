@@ -11,6 +11,17 @@
 - 변경한 파일 목록만 나열하지 않고 변경 목적, 주요 내용, 미확정 항목과 검증 결과를 함께 기록합니다.
 - 같은 작업에서 Markdown과 HTML을 함께 수정했다면 하나의 변경 항목으로 기록합니다.
 
+## 2026-09-15
+
+### NInfer(Docker) 256K 컨텍스트 옵션 추가
+
+- [`react_code_exports.html`](./guides/ui/react_code_exports.html)의 로컬 LLM 섹션에 Ollama(64K)와 함께 NInfer(Docker, 256K)를 병행 실행 옵션으로 추가했습니다.
+- Ollama는 64K 컨텍스트에서 안정적으로 동작하지만 128K 이상으로 확장 시 RTX 4090 24GB VRAM 한계로 응답 속도가 크게 떨어지는 한계를 명시했습니다.
+- NInfer는 WSL2 + Docker Desktop에서 RTX 4090 전용 포크(`sergiuszm/ninfer-4090`, `rtx4090-port` 브랜치)를 실행하여 256K 컨텍스트를 고속 처리합니다. MTP 스펙케줄과 `rk4v4-e8` KV 양자화 설정을 포함합니다.
+- Cline에서 NInfer는 OpenAI Compatible Provider로 연결하며(Base URL: `http://127.0.0.1:8080/v1`, Model: `qwen3.8-27b`, Context: 262144), Ollama(포트 11434)와 NInfer(포트 8080)가 동시에 실행되어 작업 규모에 따라 전환할 수 있습니다.
+- 성능 비교표, 테스트 결과(Ollama 64K / NInfer 256K 분리)와 개발 PC 권장 사양에 256K 확장 행을 추가했습니다.
+- 검증: HTML 구조, 섹션 번호 연속성(5.1~5.9), 코드 블록과 테이블 마크업, 기존 Ollama 내용 보존 여부를 확인했습니다.
+
 ## 2026-09-09
 
 ### 앱 소스 상위 경로와 Flutter·WebView 역할 기준 정리

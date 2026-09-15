@@ -377,10 +377,10 @@ Source: Dev resource 참고</code></pre>
       <section>
         <h2 class="bx-active">5. VS Code, AI 도구 및 로컬 LLM을 이용한 구현</h2>
         <p>
-          VS Code에서 Cline과 Ollama 기반 로컬 LLM을 사용해 React와 Tailwind CSS
-          구현 초안을 작성할 수 있습니다. 이 가이드의 기본 로컬 모델은
-          <code>qwen3.8:27b-mtp-q4_K_M</code>입니다. 생성된 코드의 구조와 품질을
-          최종 판단하는 주체는 프론트엔드 개발자입니다.
+          VS Code에서 Cline과 LLM을 사용해 React와 Tailwind CSS 구현 초안을
+          작성할 수 있습니다. 로컬 LLM을 사용할 때는 Ollama 또는 NInfer(Docker)로
+          실행하며, 기본 모델은 Qwen3.8-27B 계열입니다. 생성된 코드의 구조와
+          품질을 최종 판단하는 주체는 프론트엔드 개발자입니다.
         </p>
         <p>
           사람과 LLM이 작성한 코드의 공통 품질 기준은
@@ -396,13 +396,14 @@ Source: Dev resource 참고</code></pre>
             수정합니다.
           </li>
           <li>
-            Ollama는 <code>qwen3.8:27b-mtp-q4_K_M</code> 모델을 로컬에서
-            실행합니다.
+            로컬 LLM을 사용할 때는 Ollama 또는 NInfer가 Qwen3.8-27B 계열 모델을
+            로컬에서 실행합니다. 64K 컨텍스트는 Ollama, 256K 컨텍스트가 필요한
+            대규모 코드베이스 작업은 NInfer(Docker)를 사용할 수 있습니다.
           </li>
           <li>파일 변경과 명령 실행 전후에 범위와 결과를 사람이 확인합니다.</li>
         </ul>
 
-        <h3>5.2 Ollama와 Qwen 설치</h3>
+        <h3>5.2 Ollama와 Qwen 설치 (64K 기본)</h3>
         <p>
           Ollama를 설치한 뒤 Ollama 표시 기준 약 18GB인 MTP Q4_K_M 기본 모델을
           다음 명령으로 내려받고 실행 여부를 확인합니다.
@@ -413,7 +414,129 @@ Source: Dev resource 참고</code></pre>
 ollama list
 ollama run qwen3.8:27b-mtp-q4_K_M</code></pre>
 
-        <h3>5.3 Cline 설정</h3>
+        <h3>5.3 NInfer(Docker)와 Qwen 설치 (256K 확장)</h3>
+        <p>
+          Ollama는 64K 컨텍스트에서 안정적인 반면 128K 이상으로 확장하면 RTX 4090
+          24GB VRAM 한계로 속도가 크게 떨어집니다. NInfer는
+          <a href="https://github.com/sergiuszm/ninfer-4090"
+            >RTX 4090 전용 포크</a
+          >를 Docker로 실행하여 256K 컨텍스트를 매우 빠르게 처리합니다. 대규모
+          저장소 전체를 컨텍스트에 유지해야 하는 작업에 적합합니다.
+        </p>
+        <p>
+          Windows의 기존 Ollama는 그대로 두고 WSL2 + Docker Desktop에서 NInfer를
+          별도 포트로 실행하므로 동시에 사용할 수 있습니다.
+        </p>
+
+        <h4>사용한 저장소와 모델</h4>
+        <ul>
+          <li>
+            저장소:
+            <a href="https://github.com/sergiuszm/ninfer-4090"
+              >sergiuszm/ninfer-4090</a
+            >, 브랜치 <code>rtx4090-port</code>
+          </li>
+          <li>
+            모델 아티팩트:
+            <a
+              href="https://huggingface.co/neroued/Qwen3.8-27B-NInfer"
+              >neroued/Qwen3.8-27B-NInfer</a
+            >, 파일 <code>qwen3_8_27b.ninfer</code> (16.96 GiB)
+          </li>
+          <li>
+            호환성: 설치 당시 최신 아티팩트는 DFlash2 항목 때문에 특정 커밋과
+            호환되지 않으므로 아티팩트 리비전을 고정합니다.
+          </li>
+        </ul>
+
+        <h4>빌드 및 다운로드</h4>
+        <p>WSL2 Ubuntu 터미널에서 실행합니다.</p>
+        <pre
+          class="hljs"
+        ><code data-language="bash">git clone --branch rtx4090-port https://github.com/sergiuszm/ninfer-4090.git
+cd ninfer-4090
+git checkout 1bd56c9a1bdf
+
+docker build --tag ninfer-4090:sm89 .
+
+mkdir -p models
+hf download neroued/Qwen3.8-27B-NInfer qwen3_8_27b.ninfer \
+  --revision 18dfc887423fa5aabf3cb56fac41490e462b3fab \
+  --local-dir models
+
+sha256sum models/qwen3_8_27b.ninfer</code></pre>
+
+        <h4>서버 실행</h4>
+        <pre
+          class="hljs"
+        ><code data-language="bash">docker run -d \
+  --name ninfer-qwen38-4090 \
+  --restart unless-stopped \
+  --gpus all \
+  --publish 8080:8080 \
+  --volume "$PWD/models:/workspace/models:ro" \
+  ninfer-4090:sm89 \
+  ninfer-serve models/qwen3_8_27b.ninfer \
+  --host 0.0.0.0 --port 8080 \
+  --max-context 262144 --kv-capacity 262144 \
+  --max-concurrency 1 --max-pending-requests 16 \
+  --pending-timeout-ms 600000 \
+  --prefill-chunk 1024 --kv-dtype rk4v4-e8 \
+  --spec mtp --draft-tokens 3 --lm-head-draft \
+  --preserve-thinking</code></pre>
+
+        <h4>관리 명령</h4>
+        <pre
+          class="hljs"
+        ><code data-language="bash">docker start ninfer-qwen38-4090
+docker stop ninfer-qwen38-4090
+docker logs -f ninfer-qwen38-4090</code></pre>
+
+        <h4>동작 확인</h4>
+        <pre
+          class="hljs"
+        ><code data-language="bash">curl http://127.0.0.1:8080/health
+curl http://127.0.0.1:8080/v1/models
+nvidia-smi</code></pre>
+        <p>
+          <code>/v1</code> 자체는 웹페이지가 아니므로 브라우저에서 404가 나와도
+          정상입니다.
+        </p>
+
+        <h4>성능 비교: Ollama vs NInfer</h4>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">구분</th>
+              <th scope="col">Ollama</th>
+              <th scope="col">NInfer (Docker)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>실행 방식</td>
+              <td>Windows 네이티브, 포트 11434</td>
+              <td>WSL2 + Docker Desktop, 포트 8080</td>
+            </tr>
+            <tr>
+              <td>적정 컨텍스트</td>
+              <td>64K (128K는 가능하나 느림)</td>
+              <td>256K까지 고속 처리</td>
+            </tr>
+            <tr>
+              <td>모델 파일</td>
+              <td><code>qwen3.8:27b-mtp-q4_K_M</code> (약 18GB)</td>
+              <td><code>qwen3_8_27b.ninfer</code> (16.96 GiB)</td>
+            </tr>
+            <tr>
+              <td>사용 권장</td>
+              <td>일상 코딩, 64K 내 작업</td>
+              <td>대규모 저장소, 256K 컨텍스트 필요 시</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>5.4 Cline 설정</h3>
         <p>
           VS Code에 Cline 확장을 설치한 뒤 Cline의 API 설정으로 이동합니다.
           <strong>API Provider</strong>에서 <code>Ollama</code>를 선택하고,
@@ -438,6 +561,40 @@ ollama run qwen3.8:27b-mtp-q4_K_M</code></pre>
           긴 대화를 한 번에 유지해야 할 때만 선택적으로 사용합니다. 이 경우
           Cline 화면에서는 <strong>130K(128K 토큰)</strong>로 설정하고, 숫자를
           직접 입력하는 화면에서는 <code>131072</code>를 입력합니다.
+        </p>
+
+        <h4>NInfer 연동 (256K 확장)</h4>
+        <p>
+          NInfer는 OpenAI 호환 API를 제공하므로 Cline에서
+          <strong>OpenAI Compatible</strong> Provider로 연결합니다.
+        </p>
+        <ol>
+          <li>
+            <strong>API Provider</strong>에서 <code>OpenAI Compatible</code>를
+            선택합니다.
+          </li>
+          <li>
+            Base URL은 <code>http://127.0.0.1:8080/v1</code>로 설정합니다.
+          </li>
+          <li>
+            API Key는 <code>local-ninfer</code> (인증 비활성이라 임의 문자열).
+          </li>
+          <li>
+            Model ID는 <code>qwen3.8-27b</code>로 입력합니다.
+          </li>
+          <li>
+            <strong>Model Context Window</strong>는 <strong>262144</strong>
+            (256K)로 설정합니다.
+          </li>
+          <li>
+            <strong>Max Output Tokens</strong>는 <code>8192</code>로
+            설정합니다.
+          </li>
+        </ol>
+        <p>
+          Ollama는 포트 <code>11434</code>, NInfer는 포트 <code>8080</code>를
+          사용하므로 동시에 실행할 수 있습니다. 작업 규모에 따라 Cline의 API
+          Provider를 전환하여 사용합니다.
         </p>
 
         <h4>초기 컨텍스트 사용량</h4>
@@ -569,11 +726,10 @@ ollama run qwen3.8:27b-mtp-q4_K_M</code></pre>
           >를 참고합니다.
         </p>
 
-        <h3>5.4 로컬 LLM 테스트 및 권장 사양</h3>
+        <h3>5.5 로컬 LLM 테스트 및 권장 사양</h3>
         <p>
-          아래 기준은 Ollama 표시 기준 약 18GB인
-          <code>qwen3.8:27b-mtp-q4_K_M</code> 모델을 Ollama와 Cline에서 사용하는
-          환경을 전제로 합니다.
+          아래 기준은 Qwen3.8-27B 계열 모델을 Ollama(64K) 또는
+          NInfer(Docker, 256K)와 Cline에서 사용하는 환경을 전제로 합니다.
         </p>
 
         <h4>모델 선택 원칙과 실사용 평가</h4>
@@ -631,16 +787,29 @@ ollama run qwen3.8:27b-mtp-q4_K_M</code></pre>
             </tr>
             <tr>
               <td>모델</td>
-              <td><code>qwen3.8:27b-mtp-q4_K_M</code>, 약 18GB</td>
+              <td>
+                Ollama: <code>qwen3.8:27b-mtp-q4_K_M</code> (약 18GB) /
+                NInfer: <code>qwen3_8_27b.ninfer</code> (16.96 GiB)
+              </td>
             </tr>
           </tbody>
         </table>
         <blockquote>
           <p>
-            <strong>테스트 결과</strong>: 약 18GB MTP Q4_K_M 모델과 128K 토큰
-            컨텍스트를 사용한 고사양 환경에서는 응답 속도와 추론 품질이 모두
-            실사용 가능한 수준이었습니다. 다만 64K보다 응답이 느려질 수 있으므로
-            일반 개발 PC와 반복 작업에서는 64K를 기본값으로 권장합니다.
+            <strong>Ollama 64K 테스트 결과</strong>: 약 18GB MTP Q4_K_M 모델을
+            Ollama에서 64K 컨텍스트로 사용할 때 응답 속도와 추론 품질이 모두
+            실사용 가능한 수준이었습니다. 128K로 확장하면 RTX 4090 24GB VRAM
+            한계로 속도가 크게 떨어집니다.
+          </p>
+        </blockquote>
+        <blockquote>
+          <p>
+            <strong>NInfer 256K 테스트 결과</strong>: NInfer(Docker)에서
+            <code>qwen3_8_27b.ninfer</code> 모델을 256K 컨텍스트로 실행할 때
+            Ollama의 128K 대비 응답 속도가 현격히 빨랐습니다. MTP 스펙케줄
+            (<code>--spec mtp --draft-tokens 3</code>)과
+            <code>rk4v4-e8</code> KV 양자화로 256K 컨텍스트를 RTX 4090에서
+            실용적으로 사용할 수 있었습니다.
           </p>
         </blockquote>
         <p>
@@ -684,6 +853,16 @@ ollama run qwen3.8:27b-mtp-q4_K_M</code></pre>
                 모델 일부가 CPU로 이동하여 응답 속도가 크게 느려질 수 있음
               </td>
             </tr>
+            <tr>
+              <td>256K 확장 (NInfer)</td>
+              <td>VRAM 24GB</td>
+              <td>64GB</td>
+              <td>최신 8코어 이상</td>
+              <td>
+                WSL2 + Docker Desktop 필요. Ollama와 동시에 실행 가능(포트
+                분리)
+              </td>
+            </tr>
           </tbody>
         </table>
         <p>
@@ -694,15 +873,19 @@ ollama run qwen3.8:27b-mtp-q4_K_M</code></pre>
         </p>
         <p>
           64K는 일반적인 코드 조사, Figma 화면 구현과 웹검색 결과 정리에 필요한
-          문맥을 확보하면서 128K보다 빠르게 작업하기 위한 기본값입니다. 다른 GPU
-          사용 프로그램을 최소화하고 <code>ollama ps</code>에서 모델이 가능한 한
-          <code>100% GPU</code>로 적재되었는지 확인합니다. 세부 내용은
+          문맥을 확보하면서 128K보다 빠르게 작업하기 위한 기본값입니다.
+          256K가 필요한 대규모 코드베이스 작업에서는 NInfer(Docker)를
+          사용합니다. 다른 GPU 사용 프로그램을 최소화하고
+          <code>ollama ps</code>에서 모델이 가능한 한
+          <code>100% GPU</code>로 적재되었는지 확인합니다. NInfer에서는
+          <code>nvidia-smi</code>로 VRAM 사용량을 확인합니다. 세부 내용은
           <a href="https://docs.ollama.com/context-length"
             >Ollama Context length</a
-          >와 <a href="https://docs.ollama.com/faq">Ollama FAQ</a>를 참고합니다.
+          >와 <a href="https://docs.ollama.com/faq">Ollama FAQ</a>를
+          참고합니다.
         </p>
 
-        <h3>5.5 Figma Desktop MCP 설정</h3>
+        <h3>5.6 Figma Desktop MCP 설정</h3>
         <p>
           Figma Desktop에서 선택한 레이어 또는 프레임 정보를 Cline에 전달하려면
           Cline의 MCP 설정에 다음 서버를 등록합니다.
@@ -730,7 +913,7 @@ ollama run qwen3.8:27b-mtp-q4_K_M</code></pre>
           컴포넌트, 디자인 토큰 및 구현 규칙을 함께 확인한 뒤 결과를 적용합니다.
         </p>
 
-        <h3>5.6 Cline 웹검색과 Tavily MCP</h3>
+        <h3>5.7 Cline 웹검색과 Tavily MCP</h3>
         <h4>Cline 기본 브라우저 도구</h4>
         <p>
           Cline은 기본 브라우저 도구를 사용해 웹페이지를 열고, 화면을 탐색하고,
@@ -818,7 +1001,7 @@ ollama run qwen3.8:27b-mtp-q4_K_M</code></pre>
         ><code data-language="text">Tavily를 사용해 관련 기술의 최신 공식 문서를 검색하고,
 핵심 내용과 출처 URL을 함께 정리해줘.</code></pre>
 
-        <h3>5.7 React Code Exports 작업 흐름</h3>
+        <h3>5.8 React Code Exports 작업 흐름</h3>
         <ol>
           <li>Figma에서 구현할 레이어 또는 프레임을 선택합니다.</li>
           <li>
@@ -857,7 +1040,7 @@ ollama run qwen3.8:27b-mtp-q4_K_M</code></pre>
           <li>구현 화면을 Figma와 비교하고 차이를 수정합니다.</li>
         </ol>
 
-        <h3>5.8 검수 기준</h3>
+        <h3>5.9 검수 기준</h3>
         <ul>
           <li>Figma에서 의도한 레이어 또는 프레임을 정확히 선택했는가?</li>
           <li>기존 컴포넌트와 디자인 토큰을 우선 사용했는가?</li>

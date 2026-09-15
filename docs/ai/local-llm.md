@@ -1,12 +1,13 @@
 # 로컬 LLM 작업 기준
 
-> 기준 원본: [React Code Exports 가이드](../guides/ui/react_code_exports.html)의 Ollama·Gemma 4·Continue 전략
+> 기준 원본: [React Code Exports 가이드](../guides/ui/react_code_exports.html)의 Ollama·NInfer·Gemma 4 전략
 >
 > 설치 방법, 장비별 기준, 모델 호환성 및 검증 결과는 오랜 검증을 거친 기준 원본에 보존합니다. 이 문서는 그 내용을 대체하거나 축약해 재정의하지 않습니다.
 
 ## 사용 원칙
 
-- Continue와 Ollama 기반 로컬 LLM은 코드 탐색, 작은 React 컴포넌트 초안, 반복 JSX와 Tailwind 구조 정리에 우선 활용합니다.
+- Ollama 또는 NInfer(Docker) 기반 로컬 LLM은 코드 탐색, 작은 React 컴포넌트 초안, 반복 JSX와 Tailwind 구조 정리에 활용할 수 있습니다.
+- 로컬 LLM을 사용할 때 64K 컨텍스트 작업에는 Ollama, 256K 컨텍스트가 필요한 대규모 코드베이스 작업에는 NInfer(Docker)를 사용할 수 있습니다.
 - 작업을 시작할 때 루트 `AGENTS.md`와 현재 작업에 해당하는 `docs/ai/` 문서를 컨텍스트로 제공합니다.
 - 한 번에 작은 범위의 파일과 명확한 완료 조건을 전달합니다.
 - 수정 전 기존 컴포넌트, Tailwind 토큰과 영향 범위를 먼저 읽게 합니다.
