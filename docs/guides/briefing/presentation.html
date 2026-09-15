@@ -40,7 +40,7 @@
           <p class="lead muted">
             <code class="tree-folder human">사람</code>이 방향을 정해 가이드에
             남기면,<br />
-            <code class="tree-folder docs">AI</code>가 그 기준대로 만들고 사람이
+            <code class="tree-folder docs">AI</code>가 그 기준대로 구현하고 사람이
             결과를 확인합니다.
           </p>
           <div class="diagram-panel system-flow sequence-palette">
@@ -105,7 +105,7 @@
             <p>
               <code class="tree-folder human">사람</code>이 직접 결정하고
               검토하여 가이드를 작성합니다. <br />
-              <code class="tree-folder docs">AI</code>는 서포터로써 존재 합니다.
+              <code class="tree-folder docs">AI</code>는 그 기준을 따라 구현을 돕습니다.
             </p>
           </div>
           <div class="diagram-panel">
@@ -129,7 +129,7 @@
               <section class="responsibility-column card-surface">
                 <b class="role-kicker">GUIDE · 기준</b>
                 <h3>작업 기준으로 정리</h3>
-                <p>사람과 AI가 가이드대로 작업, 검토하도록 정리합니다.</p>
+                <p>사람과 AI가 가이드에 따라 작업하고 검토하도록 정리합니다.</p>
                 <ul>
                   <li>저장소·담당 범위</li>
                   <li>UI·상태 구현 기준</li>
@@ -291,8 +291,8 @@ flowchart TB
               </h2>
             </div>
             <p>
-              <code class="tree-folder docs">docs/guides/</code> 경로의 상세
-              가이드 내용 입니다.
+              <code class="tree-folder docs">docs/guides/</code> 아래 상세
+              가이드입니다.
             </p>
           </div>
           <div class="diagram-panel">
@@ -333,7 +333,7 @@ flowchart TB
                 <b>GUIDE 02 · UI &amp; STATE</b>
                 <h3>UI와 상태 구현</h3>
                 <p class="cluster-purpose">
-                  Figma를 실제 화면과 상태로 구현하고 확인할 때
+                  Figma 화면을 실제 UI로 구현하고 검토할 때
                 </p>
                 <ul>
                   <li>
@@ -414,7 +414,7 @@ flowchart TB
             </div>
             <p>
               앱 전체를 실행하지 않아도 필요한 UI만 따로 열어봅니다.<br />
-              화면 상태와 사용자 동작도 같은 조건으로 다시 확인합니다.
+              화면 상태와 사용자 동작도 일관된 조건으로 다시 확인합니다.
             </p>
           </div>
           <div class="diagram-panel">
@@ -482,7 +482,7 @@ flowchart TB
               <h2>Storybook에서<br /><em>구현된 UI를 검수</em></h2>
             </div>
             <p>
-              이미 구현된 UI를 상태별로 재현해 디자인·동작·접근성을
+              구현된 UI를 상태별로 재현해 디자인·동작·접근성을
               확인합니다.<br />문제가 있으면 수정 후 다시 검수하고 이상이 없으면
               완료합니다.
             </p>
@@ -555,8 +555,8 @@ flowchart TB
               결과를 검토합니다. <br />
               <code class="tree-folder docs">AI</code>는 기존 코드와 가이드를
               확인한 뒤 구현하고 검사합니다. <br />
-              <code class="tree-folder amber">서비스</code> 결정이 필요하면
-              담당자에게 묻습니다.
+              <code class="tree-folder amber">서비스</code>·업무 기준이 명확하지 않으면
+              담당자에게 확인합니다.
             </p>
           </div>
           <div class="diagram-panel">
@@ -613,13 +613,13 @@ flowchart TB
               <p class="eyebrow">08 · UNIT WORK EXAMPLE</p>
               <h2>
                 UI·기능 단위 작업<br />
-                <em>연결과 검사</em>
+                <em>구현부터 검증까지</em>
               </h2>
             </div>
             <p>
               API로 목록을 불러오는 화면을 만든다고 가정합니다.<br />
-              UI 구현과 응답별 동작 확인, API 연결과 검사까지 <br />
-              완료해야 작업이 완료됩니다.
+              UI 구현, API 연결, 실제 환경 검증까지 <br />
+              완료해야 작업이 끝납니다.
             </p>
           </div>
           <div class="diagram-panel">
@@ -751,7 +751,7 @@ flowchart TB
               </article>
               <article class="guide-update-example card-surface tone-source">
                 <b>가이드 갱신 ❌</b>
-                <h3>기준이 바꾸지 않는 작은 변경</h3>
+                <h3>기준을 바꾸지 않는 작은 변경</h3>
                 <div>
                   <span>한 화면의 문구·스타일</span><span>일부 오류 수정</span
                   ><span>브리핑 문구·배치 조정</span
@@ -801,7 +801,7 @@ flowchart TB
           >
             <b>UPDATE RULE</b>
             <span>
-              정책 및 기준이 업데이트 되면, 가이드도 함께 업데이트 됩니다.
+              정책과 기준이 바뀌면 가이드도 함께 갱신됩니다.
             </span>
           </aside>
           <a href="./index.html"> 기존 템플릿으로 브리핑 살펴보기<b>⧉</b> </a>
