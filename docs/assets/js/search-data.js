@@ -10,7 +10,7 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
     "document": "1. JavaScript 기초",
     "section": "마스터 실습과 증거",
     "excerpt": "검색 자동완성에 Debounce, 취소, 최신 응답 판별과 Cleanup을 적용합니다. 빠른 입력, 느린 응답, 화면 이탈, 네트워크 오류를 각각 재현합니다. 실행 순서 타임라인, 실패 원인, 선택한 해결 방식과 대안의 차이를 기록합니다. Timer, Listener와 요청이 남지 않는지 테스트합니다. 통과 기준: 정상 결과만 보여주는 것으로 부족합니다. 오래된 결과가 화면을 덮는 정확한 순…",
-    "content": "7. 마스터 실습과 증거 검색 자동완성에 Debounce, 취소, 최신 응답 판별과 Cleanup을 적용합니다. 빠른 입력, 느린 응답, 화면 이탈, 네트워크 오류를 각각 재현합니다. 실행 순서 타임라인, 실패 원인, 선택한 해결 방식과 대안의 차이를 기록합니다. Timer, Listener와 요청이 남지 않는지 테스트합니다. 통과 기준: 정상 결과만 보여주는 것으로 부족합니다. 오래된 결과가 화면을 덮는 정확한 순서를 설명하고, 취소와 실패를 구분하며, 중첩 참조 공유와 자원 누수를 코드에서 찾아낼 수 있어야 합니다. 1. JavaScript 기초",
+    "content": "7. 마스터 실습과 증거 검색 자동완성에 Debounce, 취소, 최신 응답 판별과 Cleanup을 적용합니다. 빠른 입력, 느린 응답, 화면 이탈, 네트워크 오류를 각각 재현합니다. 실행 순서 타임라인, 실패 원인, 선택한 해결 방식과 대안의 차이를 기록합니다. Timer, Listener와 요청이 남지 않는지 테스트합니다. 통과 기준: 정상 결과만 보여주는 것으로 부족합니다. 오래된 결과가 화면을 덮는 정확한 순서를 설명하고, 취소와 실패를 구분하며, 중첩 참조 공유와 자원 누수를 코드에서 찾아낼 수 있어야 합니다. 교육 과정 · 다음: TypeScript 기본 1. JavaScript 기초",
     "url": "./../guides/learning/ai-frontend-growth/01-javascript-foundations.html#section-7"
   },
   {
@@ -23,8 +23,8 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
   {
     "document": "1. JavaScript 기초",
     "section": "완료 확인",
-    "excerpt": "map , filter 와 find 의 차이를 설명할 수 있습니다. 기존 객체를 직접 수정한 코드를 찾을 수 있습니다. async 함수의 성공과 실패 경로를 구분할 수 있습니다. 비동기 응답 순서가 달라질 때 오래된 결과가 화면을 덮는 문제를 발견할 수 있습니다. Closure, 얕은 복사와 정리되지 않은 외부 작업이 만드는 버그를 설명할 수 있습니다. 교육 과정으로 · 2단계 TypeScr…",
-    "content": "5. 완료 확인 map , filter 와 find 의 차이를 설명할 수 있습니다. 기존 객체를 직접 수정한 코드를 찾을 수 있습니다. async 함수의 성공과 실패 경로를 구분할 수 있습니다. 비동기 응답 순서가 달라질 때 오래된 결과가 화면을 덮는 문제를 발견할 수 있습니다. Closure, 얕은 복사와 정리되지 않은 외부 작업이 만드는 버그를 설명할 수 있습니다. 교육 과정으로 · 2단계 TypeScript 기본으로",
+    "excerpt": "map , filter 와 find 의 차이를 설명할 수 있습니다. 기존 객체를 직접 수정한 코드를 찾을 수 있습니다. async 함수의 성공과 실패 경로를 구분할 수 있습니다. 비동기 응답 순서가 달라질 때 오래된 결과가 화면을 덮는 문제를 발견할 수 있습니다. Closure, 얕은 복사와 정리되지 않은 외부 작업이 만드는 버그를 설명할 수 있습니다.",
+    "content": "5. 완료 확인 map , filter 와 find 의 차이를 설명할 수 있습니다. 기존 객체를 직접 수정한 코드를 찾을 수 있습니다. async 함수의 성공과 실패 경로를 구분할 수 있습니다. 비동기 응답 순서가 달라질 때 오래된 결과가 화면을 덮는 문제를 발견할 수 있습니다. Closure, 얕은 복사와 정리되지 않은 외부 작업이 만드는 버그를 설명할 수 있습니다.",
     "url": "./../guides/learning/ai-frontend-growth/01-javascript-foundations.html#section-5"
   },
   {
@@ -66,14 +66,14 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
     "document": "10. WebView Bridge와 보안",
     "section": "마스터 실습과 증거",
     "excerpt": "카메라 또는 파일 선택 Capability를 타입 안전 Adapter로 구현합니다. Bridge 없음, 지원하지 않는 Version, 잘못된 Payload, Timeout, 중복 응답과 사용자 취소를 주입합니다. Web fallback과 App 담당자에게 확인할 계약 질문을 함께 제출합니다. 통과 기준: 화면과 Native 구현의 결합을 Adapter에서 차단하고, 입력·응답·오류·Versi…",
-    "content": "7. 마스터 실습과 증거 카메라 또는 파일 선택 Capability를 타입 안전 Adapter로 구현합니다. Bridge 없음, 지원하지 않는 Version, 잘못된 Payload, Timeout, 중복 응답과 사용자 취소를 주입합니다. Web fallback과 App 담당자에게 확인할 계약 질문을 함께 제출합니다. 통과 기준: 화면과 Native 구현의 결합을 Adapter에서 차단하고, 입력·응답·오류·Version·요청 수명을 계약으로 설명할 수 있어야 합니다. 10. WebView Bridge와 보안",
+    "content": "7. 마스터 실습과 증거 카메라 또는 파일 선택 Capability를 타입 안전 Adapter로 구현합니다. Bridge 없음, 지원하지 않는 Version, 잘못된 Payload, Timeout, 중복 응답과 사용자 취소를 주입합니다. Web fallback과 App 담당자에게 확인할 계약 질문을 함께 제출합니다. 통과 기준: 화면과 Native 구현의 결합을 Adapter에서 차단하고, 입력·응답·오류·Version·요청 수명을 계약으로 설명할 수 있어야 합니다. 이전: 서버·클라이언트 상태 · 교육 과정 · 다음: 테스트와 디버깅 10. WebView Bridge와 보안",
     "url": "./../guides/learning/ai-frontend-growth/10-webview-bridge-and-security.html#section-7"
   },
   {
     "document": "10. WebView Bridge와 보안",
     "section": "완료 확인",
     "excerpt": "Native 기능이 필요한 이유와 Web 구현 범위를 설명할 수 있습니다. Bridge 미지원 환경을 안전한 실패 상태로 처리할 수 있습니다. URL, Storage, Bridge와 로그에 포함하면 안 되는 값을 구분할 수 있습니다. Bridge 응답 검증, 요청 식별, Timeout과 중복 실행 정책을 계약 질문으로 만들 수 있습니다. 화면이 Native 전역 객체와 범용 실행 통로에 직접…",
-    "content": "5. 완료 확인 Native 기능이 필요한 이유와 Web 구현 범위를 설명할 수 있습니다. Bridge 미지원 환경을 안전한 실패 상태로 처리할 수 있습니다. URL, Storage, Bridge와 로그에 포함하면 안 되는 값을 구분할 수 있습니다. Bridge 응답 검증, 요청 식별, Timeout과 중복 실행 정책을 계약 질문으로 만들 수 있습니다. 화면이 Native 전역 객체와 범용 실행 통로에 직접 의존하는 코드를 발견할 수 있습니다. 이전 단계 · 11단계 테스트와 디버깅으로",
+    "content": "5. 완료 확인 Native 기능이 필요한 이유와 Web 구현 범위를 설명할 수 있습니다. Bridge 미지원 환경을 안전한 실패 상태로 처리할 수 있습니다. URL, Storage, Bridge와 로그에 포함하면 안 되는 값을 구분할 수 있습니다. Bridge 응답 검증, 요청 식별, Timeout과 중복 실행 정책을 계약 질문으로 만들 수 있습니다. 화면이 Native 전역 객체와 범용 실행 통로에 직접 의존하는 코드를 발견할 수 있습니다.",
     "url": "./../guides/learning/ai-frontend-growth/10-webview-bridge-and-security.html#section-5"
   },
   {
@@ -101,7 +101,7 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
     "document": "11. 테스트와 디버깅",
     "section": "검사 선택",
     "excerpt": "기획과 Backend API 계약이 확정되기 전에는 API Mock을 만들지 않습니다. 계약 확정 후 사용할 수 있는 Backend 환경에서 필요한 상태를 재현하기 어렵다면 Front-end 책임자 또는 프로젝트 담당자와 테스트 범위·관리 책임을 정한 뒤 API Mock 도입 판단 기준 을 확인합니다. 검사 확인 범위 Typecheck 타입과 모듈 경계 오류 Lint Hook, 비동기 패턴과…",
-    "content": "2. 검사 선택 기획과 Backend API 계약이 확정되기 전에는 API Mock을 만들지 않습니다. 계약 확정 후 사용할 수 있는 Backend 환경에서 필요한 상태를 재현하기 어렵다면 Front-end 책임자 또는 프로젝트 담당자와 테스트 범위·관리 책임을 정한 뒤 API Mock 도입 판단 기준 을 확인합니다. 검사 확인 범위 Typecheck 타입과 모듈 경계 오류 Lint Hook, 비동기 패턴과 정적으로 찾을 수 있는 접근성 오류 Test 입력, 상태 변화, 오류 처리와 사용자에게 보이는 결과 Build 병합·통합 시 Production 구성과 전체 연결 기본 순서는 Typecheck → Lint → Test입니다. 테스트 도구와 스크립트는 실제 앱의 설치 상태를 확인하며, 문서의 후보 도구가 설치된 것처럼 가정하지 않습니다. 가장 작은 신뢰 가능한 경계를 테스트 순수 변환과 승인된 계약의 Parser는 입력·출력을 직접 테스트하고, 컴포넌트는 사용자 역할·이름·행동과 결과를 확인합니다. API 요청 경계는 실제 Backend 환경에서 먼저 검증하고, 선택한 Mock 도구가 있더라도 실제 연동 검증을 대신하지 않습니다. Mock은 Front-end 테스트 범위에서 선택한다 Fixture와 Handler는 승인된 API 계약에서 파생하며 Front-end가 계약보다 먼저 만들지 않습니다. 별도 Mock이 필요하면 Front-end 책임자 또는 프로젝트 담당자가 대상 상태, 관리 책임과 폐기 시점을 정합니다. API 동작과 기준 데이터는 Backend가 승인한 계약이 전달되기 전까지 TBD 로 남기고, Mock이 계약을 바꾸지 않는 테스트 도구임을 Backend에 공유합니다. 재현에서 원인까지 증거를 연결 오류 문구만 보고 코드를 바꾸지 않습니다. 사용자 입력, Route, 요청 Payload, 응답 Status·본문, Parser 결과, Query 상태와 렌더링 결과를 순서대로 좁힙니다. AI의 원인 후보마다 확인할 관찰값을 요구하고 확인되지 않은 후보를 사실처럼 기록하지 않습니다. 테스트 통과의 한계 단위·컴포넌트 테스트는 실제 브라우저 Layout, Focus, WebView Bridge와 배포 설정을 보장하지 않습니다. 변경 위험에 따라 실제 화면, 모바일 너비, 키보드, Network와 WebView 기기 동작을 별도로 확인합니다.",
+    "content": "2. 검사 선택 기획과 Backend API 계약이 확정되기 전에는 API Mock을 만들지 않습니다. 계약 확정 후 사용할 수 있는 Backend 환경에서 필요한 상태를 재현하기 어렵다면 Front-end 책임자 또는 프로젝트 담당자와 테스트 범위·관리 책임을 정한 뒤 API Mock 도입 판단 기준 을 확인합니다. 검사 확인 범위 Typecheck 타입과 모듈 경계 오류 Lint Hook, 비동기 패턴과 정적으로 찾을 수 있는 접근성 오류 Test 입력, 상태 변화, 오류 처리와 사용자에게 보이는 결과 Storybook 실제 컴포넌트·화면의 대표 상태, Viewport와 독립 렌더링 Build 병합·통합 시 Production 구성과 전체 연결 기본 순서는 Typecheck → Lint → Test입니다. 테스트 도구와 스크립트는 실제 앱의 설치 상태를 확인하며, 문서의 후보 도구가 설치된 것처럼 가정하지 않습니다. 공통 UI나 사용자 노출 화면을 변경했다면 관련 Story의 실제 export, Props, Variant와 상태도 확인합니다. Storybook 대상이면 정적 Build를 실행하되, Storybook 렌더링만으로 실제 Route, Backend, WebView Bridge와 배포 환경이 검증됐다고 판단하지 않습니다. 가장 작은 신뢰 가능한 경계를 테스트 순수 변환과 승인된 계약의 Parser는 입력·출력을 직접 테스트하고, 컴포넌트는 사용자 역할·이름·행동과 결과를 확인합니다. API 요청 경계는 실제 Backend 환경에서 먼저 검증하고, 선택한 Mock 도구가 있더라도 실제 연동 검증을 대신하지 않습니다. Mock은 Front-end 테스트 범위에서 선택한다 Fixture와 Handler는 승인된 API 계약에서 파생하며 Front-end가 계약보다 먼저 만들지 않습니다. 별도 Mock이 필요하면 Front-end 책임자 또는 프로젝트 담당자가 대상 상태, 관리 책임과 폐기 시점을 정합니다. API 동작과 기준 데이터는 Backend가 승인한 계약이 전달되기 전까지 TBD 로 남기고, Mock이 계약을 바꾸지 않는 테스트 도구임을 Backend에 공유합니다. 재현에서 원인까지 증거를 연결 오류 문구만 보고 코드를 바꾸지 않습니다. 사용자 입력, Route, 요청 Payload, 응답 Status·본문, Parser 결과, Query 상태와 렌더링 결과를 순서대로 좁힙니다. AI의 원인 후보마다 확인할 관찰값을 요구하고 확인되지 않은 후보를 사실처럼 기록하지 않습니다. 테스트 통과의 한계 단위·컴포넌트 테스트는 실제 브라우저 Layout, Focus, WebView Bridge와 배포 설정을 보장하지 않습니다. 변경 위험에 따라 실제 화면, 모바일 너비, 키보드, Network와 WebView 기기 동작을 별도로 확인합니다.",
     "url": "./../guides/learning/ai-frontend-growth/11-testing-and-debugging.html#section-2"
   },
   {
@@ -114,15 +114,15 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
   {
     "document": "11. 테스트와 디버깅",
     "section": "마스터 실습과 증거",
-    "excerpt": "간헐적으로 이전 사용자 데이터가 보이는 결함을 진단합니다. 최소 재현, 시간순 증거, 세 가지 가설과 반증, Root Cause, 수정 전후 테스트를 제출합니다. 테스트가 잡지 못하는 실제 환경 위험도 별도로 적습니다. 통과 기준: 테스트 개수가 아니라 위험과 검증 경계의 연결을 설명하고, 증상 패치가 아니라 원인을 좁혀 재발 방지까지 제안할 수 있어야 합니다. 11. 테스트와 디버깅",
-    "content": "7. 마스터 실습과 증거 간헐적으로 이전 사용자 데이터가 보이는 결함을 진단합니다. 최소 재현, 시간순 증거, 세 가지 가설과 반증, Root Cause, 수정 전후 테스트를 제출합니다. 테스트가 잡지 못하는 실제 환경 위험도 별도로 적습니다. 통과 기준: 테스트 개수가 아니라 위험과 검증 경계의 연결을 설명하고, 증상 패치가 아니라 원인을 좁혀 재발 방지까지 제안할 수 있어야 합니다. 11. 테스트와 디버깅",
+    "excerpt": "간헐적으로 이전 사용자 데이터가 보이는 결함을 진단합니다. 최소 재현, 시간순 증거, 세 가지 가설과 반증, Root Cause, 수정 전후 테스트를 제출합니다. 테스트가 잡지 못하는 실제 환경 위험도 별도로 적습니다. 통과 기준: 테스트 개수가 아니라 위험과 검증 경계의 연결을 설명하고, 증상 패치가 아니라 원인을 좁혀 재발 방지까지 제안할 수 있어야 합니다. 이전: WebView Brid…",
+    "content": "7. 마스터 실습과 증거 간헐적으로 이전 사용자 데이터가 보이는 결함을 진단합니다. 최소 재현, 시간순 증거, 세 가지 가설과 반증, Root Cause, 수정 전후 테스트를 제출합니다. 테스트가 잡지 못하는 실제 환경 위험도 별도로 적습니다. 통과 기준: 테스트 개수가 아니라 위험과 검증 경계의 연결을 설명하고, 증상 패치가 아니라 원인을 좁혀 재발 방지까지 제안할 수 있어야 합니다. 이전: WebView Bridge와 보안 · 교육 과정 · 다음: 기능 통합과 리뷰 11. 테스트와 디버깅",
     "url": "./../guides/learning/ai-frontend-growth/11-testing-and-debugging.html#section-7"
   },
   {
     "document": "11. 테스트와 디버깅",
     "section": "완료 확인",
-    "excerpt": "검사 하나가 통과해도 다른 검사를 대체하지 못하는 이유를 설명할 수 있습니다. 위험도가 높은 로직과 사용자 흐름을 우선 테스트할 수 있습니다. Lint Disable, Test Skip과 무조건 재시도로 오류를 숨기지 않습니다. Parser·컴포넌트·요청 경계 중 어떤 수준을 테스트해야 하는지 선택할 수 있습니다. 실제 Backend 환경을 우선하고 필요한 경우에만 Front-end 범위에서…",
-    "content": "5. 완료 확인 검사 하나가 통과해도 다른 검사를 대체하지 못하는 이유를 설명할 수 있습니다. 위험도가 높은 로직과 사용자 흐름을 우선 테스트할 수 있습니다. Lint Disable, Test Skip과 무조건 재시도로 오류를 숨기지 않습니다. Parser·컴포넌트·요청 경계 중 어떤 수준을 테스트해야 하는지 선택할 수 있습니다. 실제 Backend 환경을 우선하고 필요한 경우에만 Front-end 범위에서 선택한 Mock 도구의 범위와 한계를 설명할 수 있습니다. 입력부터 화면 결과까지 증거를 따라가며 AI의 원인 추측을 검증할 수 있습니다. 이전 단계 · 12단계 기능 통합과 리뷰로",
+    "excerpt": "검사 하나가 통과해도 다른 검사를 대체하지 못하는 이유를 설명할 수 있습니다. Storybook 대상과 제외 대상을 근거로 구분하고 실제 코드와 Story의 불일치를 찾을 수 있습니다. 위험도가 높은 로직과 사용자 흐름을 우선 테스트할 수 있습니다. Lint Disable, Test Skip과 무조건 재시도로 오류를 숨기지 않습니다. Parser·컴포넌트·요청 경계 중 어떤 수준을 테스트해야…",
+    "content": "5. 완료 확인 검사 하나가 통과해도 다른 검사를 대체하지 못하는 이유를 설명할 수 있습니다. Storybook 대상과 제외 대상을 근거로 구분하고 실제 코드와 Story의 불일치를 찾을 수 있습니다. 위험도가 높은 로직과 사용자 흐름을 우선 테스트할 수 있습니다. Lint Disable, Test Skip과 무조건 재시도로 오류를 숨기지 않습니다. Parser·컴포넌트·요청 경계 중 어떤 수준을 테스트해야 하는지 선택할 수 있습니다. 실제 Backend 환경을 우선하고 필요한 경우에만 Front-end 범위에서 선택한 Mock 도구의 범위와 한계를 설명할 수 있습니다. 입력부터 화면 결과까지 증거를 따라가며 AI의 원인 추측을 검증할 수 있습니다.",
     "url": "./../guides/learning/ai-frontend-growth/11-testing-and-debugging.html#section-5"
   },
   {
@@ -142,22 +142,22 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
   {
     "document": "11. 테스트와 디버깅",
     "section": "학습 목표",
-    "excerpt": "이전: WebView Bridge와 보안 · 교육 과정 · 다음: 기능 통합과 리뷰 Typecheck, Lint, Test와 Build의 역할을 구분합니다. 구현 세부사항보다 사용자 동작과 결과를 테스트합니다. AI에게 바로 수정시키기 전에 오류 원인과 영향 범위를 확인합니다.",
-    "content": "1. 학습 목표 이전: WebView Bridge와 보안 · 교육 과정 · 다음: 기능 통합과 리뷰 Typecheck, Lint, Test와 Build의 역할을 구분합니다. 구현 세부사항보다 사용자 동작과 결과를 테스트합니다. AI에게 바로 수정시키기 전에 오류 원인과 영향 범위를 확인합니다.",
+    "excerpt": "이전: WebView Bridge와 보안 · 교육 과정 · 다음: 기능 통합과 리뷰 Typecheck, Lint, Test와 Build의 역할을 구분합니다. Storybook의 독립 UI 검수와 정적 Build가 실제 애플리케이션 검증을 대신하지 않는 이유를 설명합니다. 구현 세부사항보다 사용자 동작과 결과를 테스트합니다. AI에게 바로 수정시키기 전에 오류 원인과 영향 범위를 확인합니다.",
+    "content": "1. 학습 목표 이전: WebView Bridge와 보안 · 교육 과정 · 다음: 기능 통합과 리뷰 Typecheck, Lint, Test와 Build의 역할을 구분합니다. Storybook의 독립 UI 검수와 정적 Build가 실제 애플리케이션 검증을 대신하지 않는 이유를 설명합니다. 구현 세부사항보다 사용자 동작과 결과를 테스트합니다. AI에게 바로 수정시키기 전에 오류 원인과 영향 범위를 확인합니다.",
     "url": "./../guides/learning/ai-frontend-growth/11-testing-and-debugging.html#section-1"
   },
   {
     "document": "12. 기능 통합과 리뷰",
     "section": "기능 통합 단계 완료 기준",
     "excerpt": "다음 내용을 AI의 도움을 받아도 좋지만 최종적으로 개발자가 설명하고 승인할 수 있어야 합니다. 이 기능의 사용자 목표와 실패 경로 컴포넌트와 파일을 나눈 이유 각 State의 소유자와 선택한 도구 외부 입력을 검증하는 경계 담당자와 확인한 계약과 아직 미확정인 항목 자동 검사와 직접 확인한 결과 다음 변경에서 주의해야 할 회귀 위험 API 미확정 상태에서 정리한 Backend 질문과 남아…",
-    "content": "5. 기능 통합 단계 완료 기준 다음 내용을 AI의 도움을 받아도 좋지만 최종적으로 개발자가 설명하고 승인할 수 있어야 합니다. 이 기능의 사용자 목표와 실패 경로 컴포넌트와 파일을 나눈 이유 각 State의 소유자와 선택한 도구 외부 입력을 검증하는 경계 담당자와 확인한 계약과 아직 미확정인 항목 자동 검사와 직접 확인한 결과 다음 변경에서 주의해야 할 회귀 위험 API 미확정 상태에서 정리한 Backend 질문과 남아 있는 TBD 로그아웃·사용자 전환 때 제거해야 할 사용자 범위 상태 자동 검사와 실제 화면·Network·WebView 검증이 각각 보장하는 범위 기능 통합 단계 완료는 AI 없이 모든 코드를 작성하는 상태가 아닙니다. AI에게 더 정확한 맥락을 제공하고 잘못된 가정과 구현을 발견하며 제품과 기술 결정에 책임질 수 있는 상태입니다. 이전 단계 · 13단계 Front-End 보안과 개인정보로 · AI 협업 성장 가이드",
+    "content": "5. 기능 통합 단계 완료 기준 다음 내용을 AI의 도움을 받아도 좋지만 최종적으로 개발자가 설명하고 승인할 수 있어야 합니다. 이 기능의 사용자 목표와 실패 경로 컴포넌트와 파일을 나눈 이유 각 State의 소유자와 선택한 도구 외부 입력을 검증하는 경계 담당자와 확인한 계약과 아직 미확정인 항목 자동 검사와 직접 확인한 결과 다음 변경에서 주의해야 할 회귀 위험 API 미확정 상태에서 정리한 Backend 질문과 남아 있는 TBD 로그아웃·사용자 전환 때 제거해야 할 사용자 범위 상태 자동 검사와 실제 화면·Network·WebView 검증이 각각 보장하는 범위 기능 통합 단계 완료는 AI 없이 모든 코드를 작성하는 상태가 아닙니다. AI에게 더 정확한 맥락을 제공하고 잘못된 가정과 구현을 발견하며 제품과 기술 결정에 책임질 수 있는 상태입니다.",
     "url": "./../guides/learning/ai-frontend-growth/12-feature-integration-and-review.html#section-5"
   },
   {
     "document": "12. 기능 통합과 리뷰",
     "section": "마스터 통과 심사",
-    "excerpt": "학습자는 30분 동안 설계를 설명하고, 리뷰어가 넣은 새로운 요구와 실패 조건 하나를 작은 변경으로 반영합니다. 이어서 알 수 없는 오류 하나를 증거로 진단하고 Rollback 또는 안전한 배포 범위를 제안합니다. 통과 기준: 기능 동작뿐 아니라 결정 이유, 위험, 미확정 사항, 검증 한계를 설명하고 AI가 만든 잘못된 가정과 과도한 구조를 스스로 수정해야 합니다. 12. 기능 통합과 리뷰",
-    "content": "7. 마스터 통과 심사 학습자는 30분 동안 설계를 설명하고, 리뷰어가 넣은 새로운 요구와 실패 조건 하나를 작은 변경으로 반영합니다. 이어서 알 수 없는 오류 하나를 증거로 진단하고 Rollback 또는 안전한 배포 범위를 제안합니다. 통과 기준: 기능 동작뿐 아니라 결정 이유, 위험, 미확정 사항, 검증 한계를 설명하고 AI가 만든 잘못된 가정과 과도한 구조를 스스로 수정해야 합니다. 12. 기능 통합과 리뷰",
+    "excerpt": "학습자는 30분 동안 설계를 설명하고, 리뷰어가 넣은 새로운 요구와 실패 조건 하나를 작은 변경으로 반영합니다. 이어서 알 수 없는 오류 하나를 증거로 진단하고 Rollback 또는 안전한 배포 범위를 제안합니다. 통과 기준: 기능 동작뿐 아니라 결정 이유, 위험, 미확정 사항, 검증 한계를 설명하고 AI가 만든 잘못된 가정과 과도한 구조를 스스로 수정해야 합니다. 이전: 테스트와 디버깅 ·…",
+    "content": "7. 마스터 통과 심사 학습자는 30분 동안 설계를 설명하고, 리뷰어가 넣은 새로운 요구와 실패 조건 하나를 작은 변경으로 반영합니다. 이어서 알 수 없는 오류 하나를 증거로 진단하고 Rollback 또는 안전한 배포 범위를 제안합니다. 통과 기준: 기능 동작뿐 아니라 결정 이유, 위험, 미확정 사항, 검증 한계를 설명하고 AI가 만든 잘못된 가정과 과도한 구조를 스스로 수정해야 합니다. 이전: 테스트와 디버깅 · 교육 과정 · 다음: Front-End 보안과 개인정보 12. 기능 통합과 리뷰",
     "url": "./../guides/learning/ai-frontend-growth/12-feature-integration-and-review.html#section-7"
   },
   {
@@ -199,7 +199,7 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
     "document": "13. Front-End 보안과 개인정보",
     "section": "과정 완료 기준",
     "excerpt": "신뢰하지 않는 입력과 위험한 출력 지점을 코드에서 찾을 수 있습니다. 인증, 권한과 UI 제한의 책임을 구분할 수 있습니다. 자격 증명과 개인정보의 저장·전달·삭제 경로를 설명할 수 있습니다. Client 검증, 자동 Test와 서버·기기 통합 검증의 한계를 설명할 수 있습니다. React·Next.js의 공식 보안 공지를 기준으로 실제 설치·배포 Version의 영향 여부와 필요한 대응을…",
-    "content": "6. 과정 완료 기준 신뢰하지 않는 입력과 위험한 출력 지점을 코드에서 찾을 수 있습니다. 인증, 권한과 UI 제한의 책임을 구분할 수 있습니다. 자격 증명과 개인정보의 저장·전달·삭제 경로를 설명할 수 있습니다. Client 검증, 자동 Test와 서버·기기 통합 검증의 한계를 설명할 수 있습니다. React·Next.js의 공식 보안 공지를 기준으로 실제 설치·배포 Version의 영향 여부와 필요한 대응을 판단할 수 있습니다. AI의 “안전하다”는 설명을 근거 없이 승인하지 않고 확인할 파일과 설정을 지정할 수 있습니다. 확인된 문제, 미확정 계약과 검증하지 못한 위험을 구분해 병합 여부를 판단할 수 있습니다. 이전 단계 · 교육 과정 다시 보기 · Front-End 보안 기준 확인",
+    "content": "6. 과정 완료 기준 신뢰하지 않는 입력과 위험한 출력 지점을 코드에서 찾을 수 있습니다. 인증, 권한과 UI 제한의 책임을 구분할 수 있습니다. 자격 증명과 개인정보의 저장·전달·삭제 경로를 설명할 수 있습니다. Client 검증, 자동 Test와 서버·기기 통합 검증의 한계를 설명할 수 있습니다. React·Next.js의 공식 보안 공지를 기준으로 실제 설치·배포 Version의 영향 여부와 필요한 대응을 판단할 수 있습니다. AI의 “안전하다”는 설명을 근거 없이 승인하지 않고 확인할 파일과 설정을 지정할 수 있습니다. 확인된 문제, 미확정 계약과 검증하지 못한 위험을 구분해 병합 여부를 판단할 수 있습니다.",
     "url": "./../guides/learning/ai-frontend-growth/13-frontend-security-and-privacy.html#section-6"
   },
   {
@@ -220,7 +220,7 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
     "document": "13. Front-End 보안과 개인정보",
     "section": "보안 마스터 실습과 Fail Gate",
     "excerpt": "12단계에서 완성한 기능의 데이터 흐름도를 만들고 XSS, CSRF, 권한, 사용자 간 캐시 격리, Storage, Bridge, 로그와 Dependency 위험을 검토합니다. Front-end에서 해결할 항목과 Backend·App·배포 담당자에게 확인할 항목을 분리합니다. 즉시 미통과: 사용자 간 데이터 노출, Client만의 권한 검증, 인증정보의 URL·로그 저장, 신뢰하지 않은 HT…",
-    "content": "8. 보안 마스터 실습과 Fail Gate 12단계에서 완성한 기능의 데이터 흐름도를 만들고 XSS, CSRF, 권한, 사용자 간 캐시 격리, Storage, Bridge, 로그와 Dependency 위험을 검토합니다. Front-end에서 해결할 항목과 Backend·App·배포 담당자에게 확인할 항목을 분리합니다. 즉시 미통과: 사용자 간 데이터 노출, Client만의 권한 검증, 인증정보의 URL·로그 저장, 신뢰하지 않은 HTML 실행, 계약이 없는 보안 정책의 임의 확정이 하나라도 남으면 다른 점수와 관계없이 과정을 완료할 수 없습니다. 최종 통과 기준: 위협을 과장하거나 축소하지 않고 실제 데이터 흐름과 공격 조건을 근거로 우선순위를 정하며, 방어의 한계와 담당자별 책임을 설명할 수 있어야 합니다. 13. Front-End 보안과 개인정보",
+    "content": "8. 보안 마스터 실습과 Fail Gate 12단계에서 완성한 기능의 데이터 흐름도를 만들고 XSS, CSRF, 권한, 사용자 간 캐시 격리, Storage, Bridge, 로그와 Dependency 위험을 검토합니다. Front-end에서 해결할 항목과 Backend·App·배포 담당자에게 확인할 항목을 분리합니다. 즉시 미통과: 사용자 간 데이터 노출, Client만의 권한 검증, 인증정보의 URL·로그 저장, 신뢰하지 않은 HTML 실행, 계약이 없는 보안 정책의 임의 확정이 하나라도 남으면 다른 점수와 관계없이 과정을 완료할 수 없습니다. 최종 통과 기준: 위협을 과장하거나 축소하지 않고 실제 데이터 흐름과 공격 조건을 근거로 우선순위를 정하며, 방어의 한계와 담당자별 책임을 설명할 수 있어야 합니다. 이전: 기능 통합과 리뷰 · 교육 과정 · 보안 기준 원본 13. Front-End 보안과 개인정보",
     "url": "./../guides/learning/ai-frontend-growth/13-frontend-security-and-privacy.html#section-8"
   },
   {
@@ -262,14 +262,14 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
     "document": "2. TypeScript 기본",
     "section": "마스터 실습과 증거",
     "excerpt": "결제 또는 예약 상태를 최소 여섯 상태의 판별 가능한 Union으로 모델링합니다. 새 상태 하나를 추가해 누락된 UI, Analytics와 버튼 정책이 모두 컴파일 단계에서 발견되는지 확인합니다. 잘못된 as , ! , 선택 속성 남용이 숨기는 버그도 한 개씩 재현합니다. 통과 기준: 타입 오류를 없애는 것이 아니라 도메인의 가능한 값과 전이를 정확히 표현하고, 타입 검사와 실행 중 검증의…",
-    "content": "7. 마스터 실습과 증거 결제 또는 예약 상태를 최소 여섯 상태의 판별 가능한 Union으로 모델링합니다. 새 상태 하나를 추가해 누락된 UI, Analytics와 버튼 정책이 모두 컴파일 단계에서 발견되는지 확인합니다. 잘못된 as , ! , 선택 속성 남용이 숨기는 버그도 한 개씩 재현합니다. 통과 기준: 타입 오류를 없애는 것이 아니라 도메인의 가능한 값과 전이를 정확히 표현하고, 타입 검사와 실행 중 검증의 책임 차이를 자신의 말로 설명할 수 있어야 합니다. 2. TypeScript 기본",
+    "content": "7. 마스터 실습과 증거 결제 또는 예약 상태를 최소 여섯 상태의 판별 가능한 Union으로 모델링합니다. 새 상태 하나를 추가해 누락된 UI, Analytics와 버튼 정책이 모두 컴파일 단계에서 발견되는지 확인합니다. 잘못된 as , ! , 선택 속성 남용이 숨기는 버그도 한 개씩 재현합니다. 통과 기준: 타입 오류를 없애는 것이 아니라 도메인의 가능한 값과 전이를 정확히 표현하고, 타입 검사와 실행 중 검증의 책임 차이를 자신의 말로 설명할 수 있어야 합니다. 이전: JavaScript 기초 · 교육 과정 · 다음: TypeScript 경계 2. TypeScript 기본",
     "url": "./../guides/learning/ai-frontend-growth/02-typescript-basics.html#section-7"
   },
   {
     "document": "2. TypeScript 기본",
     "section": "완료 확인",
     "excerpt": "추론 가능한 값에 타입을 반복하지 않는 이유를 설명할 수 있습니다. string 과 Literal Union 중 적절한 방식을 선택할 수 있습니다. any , as 와 ! 가 오류를 숨길 수 있음을 설명할 수 있습니다. 판별 가능한 Union과 누락 없는 분기로 불가능한 상태를 제거할 수 있습니다. satisfies , Generic과 타입 단언을 각각 어떤 근거로 선택하는지 설명할 수 있습…",
-    "content": "5. 완료 확인 추론 가능한 값에 타입을 반복하지 않는 이유를 설명할 수 있습니다. string 과 Literal Union 중 적절한 방식을 선택할 수 있습니다. any , as 와 ! 가 오류를 숨길 수 있음을 설명할 수 있습니다. 판별 가능한 Union과 누락 없는 분기로 불가능한 상태를 제거할 수 있습니다. satisfies , Generic과 타입 단언을 각각 어떤 근거로 선택하는지 설명할 수 있습니다. 이전 단계 · 3단계 TypeScript 경계로",
+    "content": "5. 완료 확인 추론 가능한 값에 타입을 반복하지 않는 이유를 설명할 수 있습니다. string 과 Literal Union 중 적절한 방식을 선택할 수 있습니다. any , as 와 ! 가 오류를 숨길 수 있음을 설명할 수 있습니다. 판별 가능한 Union과 누락 없는 분기로 불가능한 상태를 제거할 수 있습니다. satisfies , Generic과 타입 단언을 각각 어떤 근거로 선택하는지 설명할 수 있습니다.",
     "url": "./../guides/learning/ai-frontend-growth/02-typescript-basics.html#section-5"
   },
   {
@@ -311,7 +311,7 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
     "document": "3. TypeScript 경계",
     "section": "마스터 실습과 증거",
     "excerpt": "승인된 정상 응답, 필드 누락, 알 수 없는 Enum, 잘못된 날짜, 빈 본문, JSON이 아닌 본문을 Fixture로 만들고 Parser를 검증합니다. API 계약이 승인되지 않았다면 Parser를 만들지 말고 요청·응답·오류 질문서와 TBD 만 제출합니다. 통과 기준: 외부 unknown 이 안전한 내부 모델이 되는 단일 경계를 찾을 수 있고, 형태 검증·의미 검증·정규화·오류 표시의 책…",
-    "content": "7. 마스터 실습과 증거 승인된 정상 응답, 필드 누락, 알 수 없는 Enum, 잘못된 날짜, 빈 본문, JSON이 아닌 본문을 Fixture로 만들고 Parser를 검증합니다. API 계약이 승인되지 않았다면 Parser를 만들지 말고 요청·응답·오류 질문서와 TBD 만 제출합니다. 통과 기준: 외부 unknown 이 안전한 내부 모델이 되는 단일 경계를 찾을 수 있고, 형태 검증·의미 검증·정규화·오류 표시의 책임을 분리할 수 있어야 합니다. 3. TypeScript 경계",
+    "content": "7. 마스터 실습과 증거 승인된 정상 응답, 필드 누락, 알 수 없는 Enum, 잘못된 날짜, 빈 본문, JSON이 아닌 본문을 Fixture로 만들고 Parser를 검증합니다. API 계약이 승인되지 않았다면 Parser를 만들지 말고 요청·응답·오류 질문서와 TBD 만 제출합니다. 통과 기준: 외부 unknown 이 안전한 내부 모델이 되는 단일 경계를 찾을 수 있고, 형태 검증·의미 검증·정규화·오류 표시의 책임을 분리할 수 있어야 합니다. 이전: TypeScript 기본 · 교육 과정 · 다음: React 컴포넌트와 상태 3. TypeScript 경계",
     "url": "./../guides/learning/ai-frontend-growth/03-typescript-boundaries.html#section-7"
   },
   {
@@ -324,8 +324,8 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
   {
     "document": "3. TypeScript 경계",
     "section": "완료 확인",
-    "excerpt": "Props 타입이 컴포넌트 사용법을 표현하는지 검토할 수 있습니다. 타입 선언만으로 외부 응답이 안전해지지 않는 이유를 설명할 수 있습니다. Runtime Guard가 필요한 경계를 선택할 수 있습니다. 형태가 잘못된 응답과 업무상 빈 응답을 서로 다른 실패로 처리할 수 있습니다. 생성된 타입이 Runtime 검증을 대신하지 못하는 이유를 설명할 수 있습니다. 이전 단계 · 4단계 React…",
-    "content": "5. 완료 확인 Props 타입이 컴포넌트 사용법을 표현하는지 검토할 수 있습니다. 타입 선언만으로 외부 응답이 안전해지지 않는 이유를 설명할 수 있습니다. Runtime Guard가 필요한 경계를 선택할 수 있습니다. 형태가 잘못된 응답과 업무상 빈 응답을 서로 다른 실패로 처리할 수 있습니다. 생성된 타입이 Runtime 검증을 대신하지 못하는 이유를 설명할 수 있습니다. 이전 단계 · 4단계 React 컴포넌트와 상태로",
+    "excerpt": "Props 타입이 컴포넌트 사용법을 표현하는지 검토할 수 있습니다. 타입 선언만으로 외부 응답이 안전해지지 않는 이유를 설명할 수 있습니다. Runtime Guard가 필요한 경계를 선택할 수 있습니다. 형태가 잘못된 응답과 업무상 빈 응답을 서로 다른 실패로 처리할 수 있습니다. 생성된 타입이 Runtime 검증을 대신하지 못하는 이유를 설명할 수 있습니다.",
+    "content": "5. 완료 확인 Props 타입이 컴포넌트 사용법을 표현하는지 검토할 수 있습니다. 타입 선언만으로 외부 응답이 안전해지지 않는 이유를 설명할 수 있습니다. Runtime Guard가 필요한 경계를 선택할 수 있습니다. 형태가 잘못된 응답과 업무상 빈 응답을 서로 다른 실패로 처리할 수 있습니다. 생성된 타입이 Runtime 검증을 대신하지 못하는 이유를 설명할 수 있습니다.",
     "url": "./../guides/learning/ai-frontend-growth/03-typescript-boundaries.html#section-5"
   },
   {
@@ -360,7 +360,7 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
     "document": "4. React 컴포넌트와 상태",
     "section": "마스터 실습과 증거",
     "excerpt": "검색·필터·선택·인라인 편집이 있는 목록을 구현합니다. 먼저 값별 소유자와 수명을 표로 작성하고, Props 복사·Index Key·중복 파생 State가 있는 결함 버전을 리뷰합니다. React DevTools로 불필요한 렌더를 관찰하되 측정 없이 Memoization을 추가하지 않습니다. 통과 기준: 각 State가 왜 그 컴포넌트에 있으며 언제 보존·초기화되는지 설명하고, Context…",
-    "content": "7. 마스터 실습과 증거 검색·필터·선택·인라인 편집이 있는 목록을 구현합니다. 먼저 값별 소유자와 수명을 표로 작성하고, Props 복사·Index Key·중복 파생 State가 있는 결함 버전을 리뷰합니다. React DevTools로 불필요한 렌더를 관찰하되 측정 없이 Memoization을 추가하지 않습니다. 통과 기준: 각 State가 왜 그 컴포넌트에 있으며 언제 보존·초기화되는지 설명하고, Context나 전역 Store가 필요한 실제 공유 범위를 증명할 수 있어야 합니다. 4. React 컴포넌트와 상태",
+    "content": "7. 마스터 실습과 증거 검색·필터·선택·인라인 편집이 있는 목록을 구현합니다. 먼저 값별 소유자와 수명을 표로 작성하고, Props 복사·Index Key·중복 파생 State가 있는 결함 버전을 리뷰합니다. React DevTools로 불필요한 렌더를 관찰하되 측정 없이 Memoization을 추가하지 않습니다. 통과 기준: 각 State가 왜 그 컴포넌트에 있으며 언제 보존·초기화되는지 설명하고, Context나 전역 Store가 필요한 실제 공유 범위를 증명할 수 있어야 합니다. 이전: TypeScript 경계 · 교육 과정 · 다음: React Effect와 폼 4. React 컴포넌트와 상태",
     "url": "./../guides/learning/ai-frontend-growth/04-react-components-and-state.html#section-7"
   },
   {
@@ -373,8 +373,8 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
   {
     "document": "4. React 컴포넌트와 상태",
     "section": "완료 확인",
-    "excerpt": "State가 아닌 계산 가능한 값을 찾을 수 있습니다. 상태 소유자를 선택한 이유를 설명할 수 있습니다. 컴포넌트를 합치거나 나눌 근거를 책임으로 설명할 수 있습니다. key 와 트리 위치가 상태 보존에 미치는 영향을 설명할 수 있습니다. Props, 지역 State, Context와 전역 Store 중 상태의 제어 주체를 선택할 수 있습니다. 이전 단계 · 5단계 React Effect와…",
-    "content": "5. 완료 확인 State가 아닌 계산 가능한 값을 찾을 수 있습니다. 상태 소유자를 선택한 이유를 설명할 수 있습니다. 컴포넌트를 합치거나 나눌 근거를 책임으로 설명할 수 있습니다. key 와 트리 위치가 상태 보존에 미치는 영향을 설명할 수 있습니다. Props, 지역 State, Context와 전역 Store 중 상태의 제어 주체를 선택할 수 있습니다. 이전 단계 · 5단계 React Effect와 폼으로",
+    "excerpt": "State가 아닌 계산 가능한 값을 찾을 수 있습니다. 상태 소유자를 선택한 이유를 설명할 수 있습니다. 컴포넌트를 합치거나 나눌 근거를 책임으로 설명할 수 있습니다. key 와 트리 위치가 상태 보존에 미치는 영향을 설명할 수 있습니다. Props, 지역 State, Context와 전역 Store 중 상태의 제어 주체를 선택할 수 있습니다.",
+    "content": "5. 완료 확인 State가 아닌 계산 가능한 값을 찾을 수 있습니다. 상태 소유자를 선택한 이유를 설명할 수 있습니다. 컴포넌트를 합치거나 나눌 근거를 책임으로 설명할 수 있습니다. key 와 트리 위치가 상태 보존에 미치는 영향을 설명할 수 있습니다. Props, 지역 State, Context와 전역 Store 중 상태의 제어 주체를 선택할 수 있습니다.",
     "url": "./../guides/learning/ai-frontend-growth/04-react-components-and-state.html#section-5"
   },
   {
@@ -409,14 +409,14 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
     "document": "5. React Effect와 폼",
     "section": "마스터 실습과 증거",
     "excerpt": "회원 정보 수정 폼에 동기 검증, 서버 오류 매핑, 제출 취소와 중복 제출 방지를 구현합니다. 느린 응답 중 사용자를 전환하고, 이전 응답이 새 사용자의 폼을 덮지 않는지 테스트합니다. 각 Effect가 동기화하는 외부 시스템을 한 문장으로 설명합니다. 통과 기준: Event와 Effect를 구분하고, 오래된 Closure·누락 Dependency·경쟁 상태를 재현하며, UI 초안과 서버의…",
-    "content": "7. 마스터 실습과 증거 회원 정보 수정 폼에 동기 검증, 서버 오류 매핑, 제출 취소와 중복 제출 방지를 구현합니다. 느린 응답 중 사용자를 전환하고, 이전 응답이 새 사용자의 폼을 덮지 않는지 테스트합니다. 각 Effect가 동기화하는 외부 시스템을 한 문장으로 설명합니다. 통과 기준: Event와 Effect를 구분하고, 오래된 Closure·누락 Dependency·경쟁 상태를 재현하며, UI 초안과 서버의 최종 진실이 충돌할 때 복구 정책을 설명할 수 있어야 합니다. 5. React Effect와 폼",
+    "content": "7. 마스터 실습과 증거 회원 정보 수정 폼에 동기 검증, 서버 오류 매핑, 제출 취소와 중복 제출 방지를 구현합니다. 느린 응답 중 사용자를 전환하고, 이전 응답이 새 사용자의 폼을 덮지 않는지 테스트합니다. 각 Effect가 동기화하는 외부 시스템을 한 문장으로 설명합니다. 통과 기준: Event와 Effect를 구분하고, 오래된 Closure·누락 Dependency·경쟁 상태를 재현하며, UI 초안과 서버의 최종 진실이 충돌할 때 복구 정책을 설명할 수 있어야 합니다. 이전: React 컴포넌트와 상태 · 교육 과정 · 다음: Next.js App Router 5. React Effect와 폼",
     "url": "./../guides/learning/ai-frontend-growth/05-react-effects-and-forms.html#section-7"
   },
   {
     "document": "5. React Effect와 폼",
     "section": "완료 확인",
-    "excerpt": "Event와 Effect의 차이를 실제 코드로 설명할 수 있습니다. 폼 값과 서버 상태를 같은 Store에 넣지 않는 이유를 설명할 수 있습니다. 필드 오류, 업무 오류와 네트워크 오류를 구분할 수 있습니다. Effect의 시작과 정리 경로, 의존성과 경쟁 상태를 검토할 수 있습니다. 폼 상태와 Mutation 상태를 중복 저장하지 않고 성공·실패 UX를 연결할 수 있습니다. 이전 단계 ·…",
-    "content": "5. 완료 확인 Event와 Effect의 차이를 실제 코드로 설명할 수 있습니다. 폼 값과 서버 상태를 같은 Store에 넣지 않는 이유를 설명할 수 있습니다. 필드 오류, 업무 오류와 네트워크 오류를 구분할 수 있습니다. Effect의 시작과 정리 경로, 의존성과 경쟁 상태를 검토할 수 있습니다. 폼 상태와 Mutation 상태를 중복 저장하지 않고 성공·실패 UX를 연결할 수 있습니다. 이전 단계 · 6단계 Next.js App Router로",
+    "excerpt": "Event와 Effect의 차이를 실제 코드로 설명할 수 있습니다. 폼 값과 서버 상태를 같은 Store에 넣지 않는 이유를 설명할 수 있습니다. 필드 오류, 업무 오류와 네트워크 오류를 구분할 수 있습니다. Effect의 시작과 정리 경로, 의존성과 경쟁 상태를 검토할 수 있습니다. 폼 상태와 Mutation 상태를 중복 저장하지 않고 성공·실패 UX를 연결할 수 있습니다.",
+    "content": "5. 완료 확인 Event와 Effect의 차이를 실제 코드로 설명할 수 있습니다. 폼 값과 서버 상태를 같은 Store에 넣지 않는 이유를 설명할 수 있습니다. 필드 오류, 업무 오류와 네트워크 오류를 구분할 수 있습니다. Effect의 시작과 정리 경로, 의존성과 경쟁 상태를 검토할 수 있습니다. 폼 상태와 Mutation 상태를 중복 저장하지 않고 성공·실패 UX를 연결할 수 있습니다.",
     "url": "./../guides/learning/ai-frontend-growth/05-react-effects-and-forms.html#section-5"
   },
   {
@@ -465,14 +465,14 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
     "document": "6. Next.js App Router",
     "section": "마스터 실습과 증거",
     "excerpt": "공개 콘텐츠, 로그인 사용자 정보, 상호작용 폼이 함께 있는 Route를 설계합니다. 파일별 실행 위치, 직렬화 경계, 캐시·신선도 정책을 표로 제출하고 서버 전용 모듈이 Client Bundle에 들어가지 않는지 확인합니다. 통과 기준: 습관적으로 전체 화면에 use client 를 붙이지 않고, 로딩·오류·Not Found 책임과 사용자별 데이터 격리를 포함한 경계 선택을 설명할 수 있어…",
-    "content": "7. 마스터 실습과 증거 공개 콘텐츠, 로그인 사용자 정보, 상호작용 폼이 함께 있는 Route를 설계합니다. 파일별 실행 위치, 직렬화 경계, 캐시·신선도 정책을 표로 제출하고 서버 전용 모듈이 Client Bundle에 들어가지 않는지 확인합니다. 통과 기준: 습관적으로 전체 화면에 use client 를 붙이지 않고, 로딩·오류·Not Found 책임과 사용자별 데이터 격리를 포함한 경계 선택을 설명할 수 있어야 합니다. 6. Next.js App Router",
+    "content": "7. 마스터 실습과 증거 공개 콘텐츠, 로그인 사용자 정보, 상호작용 폼이 함께 있는 Route를 설계합니다. 파일별 실행 위치, 직렬화 경계, 캐시·신선도 정책을 표로 제출하고 서버 전용 모듈이 Client Bundle에 들어가지 않는지 확인합니다. 통과 기준: 습관적으로 전체 화면에 use client 를 붙이지 않고, 로딩·오류·Not Found 책임과 사용자별 데이터 격리를 포함한 경계 선택을 설명할 수 있어야 합니다. 이전: React Effect와 폼 · 교육 과정 · 다음: Tailwind UI와 접근성 6. Next.js App Router",
     "url": "./../guides/learning/ai-frontend-growth/06-nextjs-app-router.html#section-7"
   },
   {
     "document": "6. Next.js App Router",
     "section": "완료 확인",
-    "excerpt": "Route와 Layout의 책임을 설명할 수 있습니다. Client Component가 필요한 이유를 구체적으로 말할 수 있습니다. 확정된 App Router 규칙과 미확정 렌더링 정책을 구분할 수 있습니다. Hydration 불일치와 Client Bundle로 서버 전용 코드가 유입되는 위험을 찾을 수 있습니다. URL, Route 경계와 컴포넌트 상태의 책임을 구분할 수 있습니다. 이전…",
-    "content": "5. 완료 확인 Route와 Layout의 책임을 설명할 수 있습니다. Client Component가 필요한 이유를 구체적으로 말할 수 있습니다. 확정된 App Router 규칙과 미확정 렌더링 정책을 구분할 수 있습니다. Hydration 불일치와 Client Bundle로 서버 전용 코드가 유입되는 위험을 찾을 수 있습니다. URL, Route 경계와 컴포넌트 상태의 책임을 구분할 수 있습니다. 이전 단계 · 7단계 Tailwind UI와 접근성으로",
+    "excerpt": "Route와 Layout의 책임을 설명할 수 있습니다. Client Component가 필요한 이유를 구체적으로 말할 수 있습니다. 확정된 App Router 규칙과 미확정 렌더링 정책을 구분할 수 있습니다. Hydration 불일치와 Client Bundle로 서버 전용 코드가 유입되는 위험을 찾을 수 있습니다. URL, Route 경계와 컴포넌트 상태의 책임을 구분할 수 있습니다.",
+    "content": "5. 완료 확인 Route와 Layout의 책임을 설명할 수 있습니다. Client Component가 필요한 이유를 구체적으로 말할 수 있습니다. 확정된 App Router 규칙과 미확정 렌더링 정책을 구분할 수 있습니다. Hydration 불일치와 Client Bundle로 서버 전용 코드가 유입되는 위험을 찾을 수 있습니다. URL, Route 경계와 컴포넌트 상태의 책임을 구분할 수 있습니다.",
     "url": "./../guides/learning/ai-frontend-growth/06-nextjs-app-router.html#section-5"
   },
   {
@@ -500,28 +500,28 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
     "document": "7. Tailwind UI와 접근성",
     "section": "꼭 알아야 할 내용",
     "excerpt": "토큰 우선 bg-background , text-foreground , border-border 처럼 목적이 드러나는 토큰을 원시 색상보다 우선합니다. 성공·경고·안내 색상이 확정되기 전에는 임의의 색을 제품 의미로 고정하지 않습니다. 기존 UI 우선 src/components/ui 의 shadcn/ui와 프로젝트 컴포넌트를 먼저 확인합니다. 한 화면의 차이는 className 과 cn 으로…",
-    "content": "2. 꼭 알아야 할 내용 토큰 우선 bg-background , text-foreground , border-border 처럼 목적이 드러나는 토큰을 원시 색상보다 우선합니다. 성공·경고·안내 색상이 확정되기 전에는 임의의 색을 제품 의미로 고정하지 않습니다. 기존 UI 우선 src/components/ui 의 shadcn/ui와 프로젝트 컴포넌트를 먼저 확인합니다. 한 화면의 차이는 className 과 cn 으로 시작하고 반복이 확인된 뒤 Variant를 추가합니다. 접근성 이동은 Link, 실행은 Button을 사용합니다. 입력에는 Label, 아이콘 Button에는 접근 가능한 이름을 제공하고 Focus 표시와 shadcn/ui의 키보드·ARIA 동작을 유지합니다. 레이아웃은 고정 화면이 아니라 제약으로 구현 디자인 한 장의 좌표를 복사하지 않고 최소·최대 너비, 줄바꿈, Overflow, Safe Area와 터치 영역을 확인합니다. 긴 한국어·영문, 빈 데이터, 작은 화면, 확대와 키보드 표시 상태에서도 핵심 행동이 가려지지 않아야 합니다. 오류와 상태 전달 색상만으로 상태를 구분하지 않습니다. 입력 오류는 설명 문구를 해당 입력과 연결하고, 비동기 오류와 완료 안내는 필요한 경우 role=\"alert\" 또는 Live Region을 사용하되 반복 안내가 발생하지 않는지 확인합니다. Focus 흐름 Dialog·Drawer가 열리고 닫힐 때 Focus 이동과 복귀를 확인합니다. DOM 순서와 시각 순서를 다르게 만드는 CSS를 피하고, 숨겨진 요소가 Tab 순서에 남지 않게 합니다. shadcn/ui의 기본 ARIA와 키보드 동작을 스타일링 과정에서 제거하지 않습니다.",
+    "content": "2. 꼭 알아야 할 내용 토큰 우선 bg-background , text-foreground , border-border 처럼 목적이 드러나는 토큰을 원시 색상보다 우선합니다. 성공·경고·안내 색상이 확정되기 전에는 임의의 색을 제품 의미로 고정하지 않습니다. 기존 UI 우선 src/components/ui 의 shadcn/ui와 프로젝트 컴포넌트를 먼저 확인합니다. 한 화면의 차이는 className 과 cn 으로 시작하고 반복이 확인된 뒤 Variant를 추가합니다. Figma·코드·Story 연결 Figma Main Component의 Description과 Dev resource에 코드 이름이나 경로가 있으면 실제 export, Props와 사용처를 함께 확인합니다. 공통 컴포넌트나 사용자 노출 화면을 만들거나 변경하면 실제 지원 상태를 Story에 반영하고, Storybook을 위해 제품에 없는 Props·Variant·Mock을 추가하지 않습니다. Safari 15와 구형 WebView 호환 Tailwind CSS 4를 유지하되 공통 CSS 하한은 Safari 15로 봅니다. 최신 Utility를 사용하기 전에 실제 생성 CSS의 지원 여부를 확인하고, 지원되지 않는 표현은 핵심 정보·입력·이동이 동작하는 호환 표현으로 대체합니다. 시각 효과의 차이는 허용할 수 있지만 핵심 업무 흐름이 막혀서는 안 됩니다. 접근성 이동은 Link, 실행은 Button을 사용합니다. 입력에는 Label, 아이콘 Button에는 접근 가능한 이름을 제공하고 Focus 표시와 shadcn/ui의 키보드·ARIA 동작을 유지합니다. 레이아웃은 고정 화면이 아니라 제약으로 구현 디자인 한 장의 좌표를 복사하지 않고 최소·최대 너비, 줄바꿈, Overflow, Safe Area와 터치 영역을 확인합니다. 긴 한국어·영문, 빈 데이터, 작은 화면, 확대와 키보드 표시 상태에서도 핵심 행동이 가려지지 않아야 합니다. 오류와 상태 전달 색상만으로 상태를 구분하지 않습니다. 입력 오류는 설명 문구를 해당 입력과 연결하고, 비동기 오류와 완료 안내는 필요한 경우 role=\"alert\" 또는 Live Region을 사용하되 반복 안내가 발생하지 않는지 확인합니다. Focus 흐름 Dialog·Drawer가 열리고 닫힐 때 Focus 이동과 복귀를 확인합니다. DOM 순서와 시각 순서를 다르게 만드는 CSS를 피하고, 숨겨진 요소가 Tab 순서에 남지 않게 합니다. shadcn/ui의 기본 ARIA와 키보드 동작을 스타일링 과정에서 제거하지 않습니다.",
     "url": "./../guides/learning/ai-frontend-growth/07-tailwind-ui-accessibility.html#section-2"
   },
   {
     "document": "7. Tailwind UI와 접근성",
     "section": "마스터 실습과 증거",
-    "excerpt": "복합 폼과 Dialog를 마우스 없이 완료합니다. 320px·200% 확대·긴 문구·고대비 모드에서 검수하고 자동 검사와 수동 키보드 결과를 별도로 기록합니다. 색상만 제거해도 상태가 구분되는지 확인합니다. 통과 기준: 특정 Figma 좌표를 복사하지 않고 Layout 제약을 설명하며, 키보드·Focus·이름·오류 관계를 실제 동작으로 증명해야 합니다. 7. Tailwind UI와 접근성",
-    "content": "7. 마스터 실습과 증거 복합 폼과 Dialog를 마우스 없이 완료합니다. 320px·200% 확대·긴 문구·고대비 모드에서 검수하고 자동 검사와 수동 키보드 결과를 별도로 기록합니다. 색상만 제거해도 상태가 구분되는지 확인합니다. 통과 기준: 특정 Figma 좌표를 복사하지 않고 Layout 제약을 설명하며, 키보드·Focus·이름·오류 관계를 실제 동작으로 증명해야 합니다. 7. Tailwind UI와 접근성",
+    "excerpt": "복합 폼과 Dialog를 마우스 없이 완료합니다. 320px·200% 확대·긴 문구·고대비 모드에서 검수하고 자동 검사와 수동 키보드 결과를 별도로 기록합니다. 색상만 제거해도 상태가 구분되는지 확인합니다. 통과 기준: 특정 Figma 좌표를 복사하지 않고 Layout 제약을 설명하며, 키보드·Focus·이름·오류 관계를 실제 동작으로 증명해야 합니다. 이전: Next.js App Route…",
+    "content": "7. 마스터 실습과 증거 복합 폼과 Dialog를 마우스 없이 완료합니다. 320px·200% 확대·긴 문구·고대비 모드에서 검수하고 자동 검사와 수동 키보드 결과를 별도로 기록합니다. 색상만 제거해도 상태가 구분되는지 확인합니다. 통과 기준: 특정 Figma 좌표를 복사하지 않고 Layout 제약을 설명하며, 키보드·Focus·이름·오류 관계를 실제 동작으로 증명해야 합니다. 이전: Next.js App Router · 교육 과정 · 다음: API 계약과 오류 7. Tailwind UI와 접근성",
     "url": "./../guides/learning/ai-frontend-growth/07-tailwind-ui-accessibility.html#section-7"
   },
   {
     "document": "7. Tailwind UI와 접근성",
     "section": "완료 확인",
-    "excerpt": "Tailwind 클래스가 표현하는 CSS Layout을 설명할 수 있습니다. Semantic Token과 원시 색상의 차이를 설명할 수 있습니다. 자동 Lint가 찾지 못하는 Focus와 실제 키보드 문제를 직접 확인할 수 있습니다. 긴 문구, 확대, Safe Area와 작은 화면에서 레이아웃 제약을 검증할 수 있습니다. 입력 오류, 비동기 상태와 Focus 이동이 보조 기술에 전달되는지 확…",
-    "content": "5. 완료 확인 Tailwind 클래스가 표현하는 CSS Layout을 설명할 수 있습니다. Semantic Token과 원시 색상의 차이를 설명할 수 있습니다. 자동 Lint가 찾지 못하는 Focus와 실제 키보드 문제를 직접 확인할 수 있습니다. 긴 문구, 확대, Safe Area와 작은 화면에서 레이아웃 제약을 검증할 수 있습니다. 입력 오류, 비동기 상태와 Focus 이동이 보조 기술에 전달되는지 확인할 수 있습니다. 이전 단계 · 8단계 API 계약과 오류로",
+    "excerpt": "Tailwind 클래스가 표현하는 CSS Layout을 설명할 수 있습니다. Semantic Token과 원시 색상의 차이를 설명할 수 있습니다. Figma 정보와 실제 컴포넌트·Story가 다를 때 차이를 확인하고 임의로 한쪽을 정답으로 만들지 않습니다. Safari 15와 지원 대상 구형 WebView에서 사용할 수 없는 CSS를 식별하고 핵심 기능을 유지하는 대체를 선택할 수 있습니다.…",
+    "content": "5. 완료 확인 Tailwind 클래스가 표현하는 CSS Layout을 설명할 수 있습니다. Semantic Token과 원시 색상의 차이를 설명할 수 있습니다. Figma 정보와 실제 컴포넌트·Story가 다를 때 차이를 확인하고 임의로 한쪽을 정답으로 만들지 않습니다. Safari 15와 지원 대상 구형 WebView에서 사용할 수 없는 CSS를 식별하고 핵심 기능을 유지하는 대체를 선택할 수 있습니다. 자동 Lint가 찾지 못하는 Focus와 실제 키보드 문제를 직접 확인할 수 있습니다. 긴 문구, 확대, Safe Area와 작은 화면에서 레이아웃 제약을 검증할 수 있습니다. 입력 오류, 비동기 상태와 Focus 이동이 보조 기술에 전달되는지 확인할 수 있습니다.",
     "url": "./../guides/learning/ai-frontend-growth/07-tailwind-ui-accessibility.html#section-5"
   },
   {
     "document": "7. Tailwind UI와 접근성",
     "section": "제약 기반 UI와 접근성 심화",
     "excerpt": "반응형은 Breakpoint 목록이 아니다 320px 너비, 긴 한국어·영어 문구, 200% 확대, 모바일 키보드, Safe Area와 가로·세로 전환을 입력 조건으로 봅니다. 고정 높이와 무분별한 overflow-hidden 으로 문제를 감추지 않습니다. 접근 가능한 이름과 관계 Label, 설명, 오류와 입력의 관계를 의미 있는 HTML과 aria-describedby 로 연결합니다. A…",
-    "content": "6. 제약 기반 UI와 접근성 심화 반응형은 Breakpoint 목록이 아니다 320px 너비, 긴 한국어·영어 문구, 200% 확대, 모바일 키보드, Safe Area와 가로·세로 전환을 입력 조건으로 봅니다. 고정 높이와 무분별한 overflow-hidden 으로 문제를 감추지 않습니다. 접근 가능한 이름과 관계 Label, 설명, 오류와 입력의 관계를 의미 있는 HTML과 aria-describedby 로 연결합니다. ARIA는 올바른 기본 요소가 없을 때 보완하며, Button을 Div로 다시 만들기 위한 도구가 아닙니다. Web Content Accessibility Guidelines (WCAG) 를 추가 기준으로 사용합니다. Focus는 사용자 흐름이다 Dialog가 열리면 적절한 시작점으로 이동하고, 닫히면 호출한 요소로 돌아와야 합니다. 오류 발생 시 첫 오류로 무조건 이동시키기보다 현재 작업과 오류 요약 방식에 맞는 정책을 정합니다. 동적 완료·오류는 필요한 경우 Live Region으로 전달합니다.",
+    "content": "6. 제약 기반 UI와 접근성 심화 반응형은 Breakpoint 목록이 아니다 320px 너비, 긴 한국어·영어 문구, 200% 확대, 모바일 키보드, Safe Area와 가로·세로 전환을 입력 조건으로 봅니다. 고정 높이와 무분별한 overflow-hidden 으로 문제를 감추지 않습니다. 접근 가능한 이름과 관계 Label, 설명, 오류와 입력의 관계를 의미 있는 HTML과 aria-describedby 로 연결합니다. ARIA는 올바른 기본 요소가 없을 때 보완하며, Button을 Div로 다시 만들기 위한 도구가 아닙니다. Web Content Accessibility Guidelines (WCAG) 를 추가 기준으로 사용합니다. Focus는 사용자 흐름이다 Dialog가 열리면 적절한 시작점으로 이동하고, 닫히면 호출한 요소로 돌아와야 합니다. 오류 발생 시 첫 오류로 무조건 이동시키기보다 현재 작업과 오류 요약 방식에 맞는 정책을 정합니다. 동적 완료·오류는 필요한 경우 Live Region으로 전달합니다. Storybook은 구현과 함께 갱신한다 공통 UI, 독립 검수 가치가 있는 Feature 또는 사용자에게 노출되는 Screen이 대상이면 같은 변경에서 기존 Story를 확인하고 필요한 상태와 Viewport를 갱신합니다. 실제 프로젝트에 정의된 Storybook 정적 Build와 검사를 실행하며, Script나 Addon이 설치된 것처럼 추측하지 않습니다.",
     "url": "./../guides/learning/ai-frontend-growth/07-tailwind-ui-accessibility.html#section-6"
   },
   {
@@ -534,8 +534,8 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
   {
     "document": "7. Tailwind UI와 접근성",
     "section": "학습 목표",
-    "excerpt": "이전: Next.js App Router · 교육 과정 · 다음: API 계약과 오류 Tailwind Utility가 표현하는 CSS Layout과 반응형 동작을 설명합니다. 원시 색상보다 의미 기반 토큰과 기존 shadcn/ui를 우선합니다. 의미 있는 HTML, Label, 키보드와 Focus를 확인합니다.",
-    "content": "1. 학습 목표 이전: Next.js App Router · 교육 과정 · 다음: API 계약과 오류 Tailwind Utility가 표현하는 CSS Layout과 반응형 동작을 설명합니다. 원시 색상보다 의미 기반 토큰과 기존 shadcn/ui를 우선합니다. 의미 있는 HTML, Label, 키보드와 Focus를 확인합니다.",
+    "excerpt": "이전: Next.js App Router · 교육 과정 · 다음: API 계약과 오류 Tailwind Utility가 표현하는 CSS Layout과 반응형 동작을 설명합니다. 원시 색상보다 의미 기반 토큰과 기존 shadcn/ui를 우선합니다. Figma의 의도를 실제 코드·Story와 연결하고 Safari 15 호환 범위를 확인합니다. 의미 있는 HTML, Label, 키보드와 Focus를…",
+    "content": "1. 학습 목표 이전: Next.js App Router · 교육 과정 · 다음: API 계약과 오류 Tailwind Utility가 표현하는 CSS Layout과 반응형 동작을 설명합니다. 원시 색상보다 의미 기반 토큰과 기존 shadcn/ui를 우선합니다. Figma의 의도를 실제 코드·Story와 연결하고 Safari 15 호환 범위를 확인합니다. 의미 있는 HTML, Label, 키보드와 Focus를 확인합니다.",
     "url": "./../guides/learning/ai-frontend-growth/07-tailwind-ui-accessibility.html#section-1"
   },
   {
@@ -563,14 +563,14 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
     "document": "8. API 계약과 오류",
     "section": "마스터 실습과 증거",
     "excerpt": "승인된 계약 하나를 Status·본문·Parser·화면 상태·재시도 정책으로 연결합니다. 204, 400, 401, 403, 404, 409, 429, 500, Timeout, Offline과 취소를 주입하고 사용자 메시지, 로그, 재시도 가능 여부를 표로 제출합니다. 통과 기준: 네트워크 오류, HTTP 오류, Parsing 오류, 도메인 오류와 취소를 구분하며 미확정 계약을 코드로 추측하…",
-    "content": "7. 마스터 실습과 증거 승인된 계약 하나를 Status·본문·Parser·화면 상태·재시도 정책으로 연결합니다. 204, 400, 401, 403, 404, 409, 429, 500, Timeout, Offline과 취소를 주입하고 사용자 메시지, 로그, 재시도 가능 여부를 표로 제출합니다. 통과 기준: 네트워크 오류, HTTP 오류, Parsing 오류, 도메인 오류와 취소를 구분하며 미확정 계약을 코드로 추측하지 않아야 합니다. 8. API 계약과 오류",
+    "content": "7. 마스터 실습과 증거 승인된 계약 하나를 Status·본문·Parser·화면 상태·재시도 정책으로 연결합니다. 204, 400, 401, 403, 404, 409, 429, 500, Timeout, Offline과 취소를 주입하고 사용자 메시지, 로그, 재시도 가능 여부를 표로 제출합니다. 통과 기준: 네트워크 오류, HTTP 오류, Parsing 오류, 도메인 오류와 취소를 구분하며 미확정 계약을 코드로 추측하지 않아야 합니다. 이전: Tailwind UI와 접근성 · 교육 과정 · 다음: 서버·클라이언트 상태 8. API 계약과 오류",
     "url": "./../guides/learning/ai-frontend-growth/08-api-contracts-and-errors.html#section-7"
   },
   {
     "document": "8. API 계약과 오류",
     "section": "완료 확인",
     "excerpt": "API 구현 전에 nullable과 오류 계약을 질문할 수 있습니다. 사용자에게 필요한 오류 상태를 구분할 수 있습니다. 서버 오류 원문과 Stack Trace를 그대로 노출하면 안 되는 이유를 설명할 수 있습니다. 204 , JSON 오류, Timeout, 취소와 응답 검증 실패를 구분할 수 있습니다. 공통 요청 계층과 기능별 API·Parser의 책임을 나누고 과도한 Wrapper를 거부…",
-    "content": "5. 완료 확인 API 구현 전에 nullable과 오류 계약을 질문할 수 있습니다. 사용자에게 필요한 오류 상태를 구분할 수 있습니다. 서버 오류 원문과 Stack Trace를 그대로 노출하면 안 되는 이유를 설명할 수 있습니다. 204 , JSON 오류, Timeout, 취소와 응답 검증 실패를 구분할 수 있습니다. 공통 요청 계층과 기능별 API·Parser의 책임을 나누고 과도한 Wrapper를 거부할 수 있습니다. API 미확정 상태에서 구현을 선행하지 않고 Backend 확인 질문과 TBD 를 정리한 뒤 승인된 계약으로 구현을 시작할 수 있습니다. 이전 단계 · 9단계 서버·클라이언트 상태로",
+    "content": "5. 완료 확인 API 구현 전에 nullable과 오류 계약을 질문할 수 있습니다. 사용자에게 필요한 오류 상태를 구분할 수 있습니다. 서버 오류 원문과 Stack Trace를 그대로 노출하면 안 되는 이유를 설명할 수 있습니다. 204 , JSON 오류, Timeout, 취소와 응답 검증 실패를 구분할 수 있습니다. 공통 요청 계층과 기능별 API·Parser의 책임을 나누고 과도한 Wrapper를 거부할 수 있습니다. API 미확정 상태에서 구현을 선행하지 않고 Backend 확인 질문과 TBD 를 정리한 뒤 승인된 계약으로 구현을 시작할 수 있습니다.",
     "url": "./../guides/learning/ai-frontend-growth/08-api-contracts-and-errors.html#section-5"
   },
   {
@@ -598,7 +598,7 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
     "document": "9. 서버·클라이언트 상태",
     "section": "마스터 실습과 증거",
     "excerpt": "두 사용자와 두 필터가 있는 조회·수정 흐름을 구현합니다. Query Key 충돌, 낙관적 갱신 실패, 사용자 전환 중 늦은 응답을 의도적으로 재현하고 수정합니다. 캐시 Inspector와 테스트로 이전 사용자 데이터가 남지 않음을 확인합니다. 통과 기준: 지역·폼·URL·서버·세션 상태를 구분하고, 데이터별 소유자·신선도·정리 시점을 설명하며 서버 데이터를 전역 Store에 불필요하게 복제…",
-    "content": "7. 마스터 실습과 증거 두 사용자와 두 필터가 있는 조회·수정 흐름을 구현합니다. Query Key 충돌, 낙관적 갱신 실패, 사용자 전환 중 늦은 응답을 의도적으로 재현하고 수정합니다. 캐시 Inspector와 테스트로 이전 사용자 데이터가 남지 않음을 확인합니다. 통과 기준: 지역·폼·URL·서버·세션 상태를 구분하고, 데이터별 소유자·신선도·정리 시점을 설명하며 서버 데이터를 전역 Store에 불필요하게 복제하지 않아야 합니다. 9. 서버·클라이언트 상태",
+    "content": "7. 마스터 실습과 증거 두 사용자와 두 필터가 있는 조회·수정 흐름을 구현합니다. Query Key 충돌, 낙관적 갱신 실패, 사용자 전환 중 늦은 응답을 의도적으로 재현하고 수정합니다. 캐시 Inspector와 테스트로 이전 사용자 데이터가 남지 않음을 확인합니다. 통과 기준: 지역·폼·URL·서버·세션 상태를 구분하고, 데이터별 소유자·신선도·정리 시점을 설명하며 서버 데이터를 전역 Store에 불필요하게 복제하지 않아야 합니다. 이전: API 계약과 오류 · 교육 과정 · 다음: WebView Bridge와 보안 9. 서버·클라이언트 상태",
     "url": "./../guides/learning/ai-frontend-growth/09-server-and-client-state.html#section-7"
   },
   {
@@ -612,7 +612,7 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
     "document": "9. 서버·클라이언트 상태",
     "section": "완료 확인",
     "excerpt": "상태 도구를 소유자와 수명으로 선택할 수 있습니다. TanStack Query 데이터와 Zustand 상태를 구분할 수 있습니다. Persist가 필요한 실제 요구와 보안 위험을 설명할 수 있습니다. 세션 확인 실패와 비로그인을 구분하고 회원 상세 데이터를 세션에 넣지 않을 수 있습니다. Query Key, 무효화, Cache 갱신과 낙관적 갱신의 선택 근거를 설명할 수 있습니다. 로그아웃·…",
-    "content": "5. 완료 확인 상태 도구를 소유자와 수명으로 선택할 수 있습니다. TanStack Query 데이터와 Zustand 상태를 구분할 수 있습니다. Persist가 필요한 실제 요구와 보안 위험을 설명할 수 있습니다. 세션 확인 실패와 비로그인을 구분하고 회원 상세 데이터를 세션에 넣지 않을 수 있습니다. Query Key, 무효화, Cache 갱신과 낙관적 갱신의 선택 근거를 설명할 수 있습니다. 로그아웃·사용자 전환 때 제거해야 할 사용자 범위 상태를 추적할 수 있습니다. 이전 단계 · 10단계 WebView Bridge와 보안으로",
+    "content": "5. 완료 확인 상태 도구를 소유자와 수명으로 선택할 수 있습니다. TanStack Query 데이터와 Zustand 상태를 구분할 수 있습니다. Persist가 필요한 실제 요구와 보안 위험을 설명할 수 있습니다. 세션 확인 실패와 비로그인을 구분하고 회원 상세 데이터를 세션에 넣지 않을 수 있습니다. Query Key, 무효화, Cache 갱신과 낙관적 갱신의 선택 근거를 설명할 수 있습니다. 로그아웃·사용자 전환 때 제거해야 할 사용자 범위 상태를 추적할 수 있습니다.",
     "url": "./../guides/learning/ai-frontend-growth/09-server-and-client-state.html#section-5"
   },
   {
@@ -913,7 +913,7 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
     "document": "디자인 토큰 가이드",
     "section": "Tokens Studio 무료 운영",
     "excerpt": "무료 라이선스에서는 Token Set을 Figma의 Variables와 Styles로 내보낼 수 있습니다. Token Set마다 Variable Collection이 생성되며, Collection 안의 Mode 생성과 다른 Figma 파일의 Variable 참조는 지원되지 않습니다. 자세한 범위는 Tokens Studio Token Set 내보내기 를 확인합니다. base 와 semantic…",
-    "content": "5. Tokens Studio 무료 운영 무료 라이선스에서는 Token Set을 Figma의 Variables와 Styles로 내보낼 수 있습니다. Token Set마다 Variable Collection이 생성되며, Collection 안의 Mode 생성과 다른 Figma 파일의 Variable 참조는 지원되지 않습니다. 자세한 범위는 Tokens Studio Token Set 내보내기 를 확인합니다. base 와 semantic 두 Token Set으로 시작합니다. semantic 은 base 값을 참조합니다. 무료 범위에서 Theme와 여러 Mode를 자동 생성하는 흐름을 전제로 하지 않습니다. Token 이름과 타입을 바꿀 때 Figma 사용처와 코드 영향을 함께 확인합니다. 여러 Token Set과 Mode가 실제로 필요해진 뒤 유료 기능이나 자동화를 검토합니다. TBD : Tokens Studio JSON을 저장소에서 관리할 경로와 동기화 방식은 첫 프로젝트 토큰 값이 승인된 뒤 결정합니다. 값이 확정되기 전에는 빈 토큰 파일이나 변환 파이프라인을 만들지 않습니다.",
+    "content": "5. Tokens Studio 무료 운영 무료 라이선스에서는 Token Set을 Figma의 Variables와 Styles로 내보낼 수 있습니다. Token Set마다 Variable Collection이 생성되며, Collection 안의 Mode 생성과 다른 Figma 파일의 Variable 참조는 지원되지 않습니다. 자세한 범위는 Tokens Studio Token Set 내보내기 를 확인합니다. base 와 semantic 두 Token Set으로 시작합니다. semantic 은 base 값을 참조합니다. 무료 범위에서 Theme와 여러 Mode를 자동 생성하는 흐름을 전제로 하지 않습니다. Token 이름과 타입을 바꿀 때 Figma 사용처와 코드 영향을 함께 확인합니다. 여러 Token Set과 Mode가 실제로 필요해진 뒤 유료 기능이나 자동화를 검토합니다. 관리 원칙 : 디자인 토큰은 Figma에서만 생성·수정·삭제합니다. 저장소의 토큰 파일을 직접 수정하는 것은 금지합니다.",
     "url": "./../guides/ui/design_tokens.html#section-5"
   },
   {
@@ -1094,8 +1094,8 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
   {
     "document": "AI 협업 기반 Front-End 성장 가이드",
     "section": "순차 교육 과정",
-    "excerpt": "JavaScript와 TypeScript 기초부터 React, Next.js, API, WebView, 테스트, 기능 통합과 보안 리뷰까지 번호 순서대로 학습할 수 있는 교육 문서를 제공합니다. AI 협업 Front-End 교육 과정 시작하기 AI 협업 기반 Front-End 성장 가이드",
-    "content": "11. 순차 교육 과정 JavaScript와 TypeScript 기초부터 React, Next.js, API, WebView, 테스트, 기능 통합과 보안 리뷰까지 번호 순서대로 학습할 수 있는 교육 문서를 제공합니다. AI 협업 Front-End 교육 과정 시작하기 AI 협업 기반 Front-End 성장 가이드",
+    "excerpt": "JavaScript와 TypeScript 기초부터 React, Next.js, API, WebView, UI·브라우저·다국어 검증, 테스트, 기능 통합과 보안 리뷰까지 순서대로 학습할 수 있는 교육 문서를 제공합니다. AI 협업 Front-End 교육 과정 시작하기 AI 협업 기반 Front-End 성장 가이드",
+    "content": "11. 순차 교육 과정 JavaScript와 TypeScript 기초부터 React, Next.js, API, WebView, UI·브라우저·다국어 검증, 테스트, 기능 통합과 보안 리뷰까지 순서대로 학습할 수 있는 교육 문서를 제공합니다. AI 협업 Front-End 교육 과정 시작하기 AI 협업 기반 Front-End 성장 가이드",
     "url": "./../guides/learning/ai-frontend-growth/index.html#section-11"
   },
   {
@@ -1109,7 +1109,7 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
     "document": "AI 협업 기반 Front-End 성장 가이드",
     "section": "프로젝트에서 우선 학습할 영역",
     "excerpt": "학습 순서는 실제 기능에서 필요한 개념을 우선합니다. 고급 문법이나 전체 Framework 기능을 미리 학습하지 않습니다. 6.1 JavaScript와 TypeScript 다음 항목을 실제 props, API 응답, 폼과 오류 처리에 연결해 익힙니다. 객체, 배열, 함수, module과 async · await 타입 추론, 함수 입력과 출력, 객체 타입 선택적 속성, null 과 undefi…",
-    "content": "6. 프로젝트에서 우선 학습할 영역 학습 순서는 실제 기능에서 필요한 개념을 우선합니다. 고급 문법이나 전체 Framework 기능을 미리 학습하지 않습니다. 6.1 JavaScript와 TypeScript 다음 항목을 실제 props, API 응답, 폼과 오류 처리에 연결해 익힙니다. 객체, 배열, 함수, module과 async · await 타입 추론, 함수 입력과 출력, 객체 타입 선택적 속성, null 과 undefined Union, Literal Type과 Narrowing 외부 입력을 unknown 으로 받고 확인하는 Runtime Guard 비동기 실행 순서, Closure와 오래된 값이 만드는 오류 요청 취소, Timer·구독·Event Listener의 수명과 정리 판별 가능한 Union, 누락 없는 분기와 satisfies 얕은 복사, 참조 공유와 React 변경 감지의 관계 복잡한 Generic, Conditional Type과 타입 수준 추상화는 실제 필요가 확인된 뒤 학습합니다. 타입 오류를 any , 과도한 as 또는 non-null assertion으로 없애는 것을 해결로 간주하지 않습니다. 6.2 React 상태와 데이터 흐름 UI를 상태의 조합으로 설명하는 연습을 우선합니다. props와 state의 차이 계산할 수 있는 값을 중복 state로 저장하지 않는 방법 상태를 사용하는 가장 가까운 공통 소유자 사용자 Event와 외부 시스템 동기화를 위한 Effect의 차이 상태의 보존과 초기화 조건 key 와 컴포넌트 위치가 상태 보존에 미치는 영향 Effect 의존성, 오래된 Closure, Cleanup과 요청 경쟁 상태 제어·비제어 입력과 Props를 State로 복사할 때 생기는 동기화 문제 Context와 전역 Store가 실제로 필요한 공유 범위 useEffect 로 다른 state를 맞추는 코드가 생기면 렌더링 중 계산하거나 사용자 Event에서 처리할 수 있는지 먼저 검토합니다. 6.3 Next.js와 외부 경계 첫 기능에서는 Route, Layout과 Server·Client Component의 기본 차이를 익힙니다. 데이터 연결 단계에서는 API 요청, 오류 경계, 캐시와 인증 책임을 기능 요구에 맞춰 추가합니다. WebView 화면은 Android·iOS 전역 객체를 직접 사용하지 않고 타입이 정의된 Bridge adapter를 통해 Native 기능을 요청합니다. Bridge가 없거나 지원하지 않는 환경도 실패 상태로 처리합니다. Server·Client Component 사이에는 직렬화 가능한 값만 전달하고 서버 전용 비밀값과 모듈이 Client Bundle에 포함되지 않는지 확인합니다. Hydration 첫 결과, URL 상태, Route Loading·Error와 컴포넌트 Query 상태의 책임도 구분합니다. 6.4 Tailwind CSS와 접근성 Tailwind utility를 사용할 때 해당 CSS의 Layout, 크기, Overflow와 반응형 동작을 함께 확인합니다. 원시 색상값보다 프로젝트의 의미 기반 토큰과 기존 shadcn/ui 컴포넌트를 우선합니다. AI가 만든 화면은 의미 있는 HTML, Label, 키보드, Focus, 접근 가능한 이름과 필요한 대체 텍스트를 별도로 검토합니다. 시각적으로 같다는 이유만으로 구현 완료로 판단하지 않습니다. 한 장의 디자인 좌표만 맞추지 않고 긴 문구, 빈 값, 확대, 모바일 너비, Safe Area, Overflow와 터치 영역을 확인합니다. 입력 오류와 비동기 상태는 색상뿐 아니라 문구와 접근성 관계로 전달하고 Dialog·Drawer의 Focus 이동과 복귀를 실제 키보드로 검증합니다. 6.5 테스트와 디버깅 모든 컴포넌트를 형식적으로 테스트하지 않습니다. 폼 검증, 조건 분기, API 성공·실패, 중복 제출과 핵심 사용자 흐름처럼 오류 영향이 큰 동작을 먼저 테스트합니다. AI에게 오류를 바로 수정하도록 요청하기 전에 원인, 영향을 받는 범위와 가능한 해결 방법을 설명하도록 합니다. 수정 후에는 같은 문제가 다시 발생하지 않도록 필요한 테스트 또는 검수 항목을 남깁니다. Parser는 승인된 계약의 입력과 출력을 직접 검증하고, 컴포넌트는 사용자 행동과 보이는 결과를 검증합니다. 계약 확정 후 사용할 수 있는 Backend 환경에서 필요한 상태를 재현하기 어렵다면 Front-end 책임자 또는 프로젝트 담당자와 범위·관리 책임을 정한 Mock 도구를 테스트에 사용할 수 있습니다. 자동 Test가 실제 API, Layout, Focus, WebView와 배포 구성을 보장한다고 가정하지 않습니다. 6.6 API 미확정 상태에서의 진행 기준 기획 흐름과 Backend API 계약이 확정되지 않았다면 요청 함수, Runtime Parser, Fixture와 Mock Handler를 구현하지 않습니다. Swagger 또는 OpenAPI 제공을 미리 가정하지 않고, 현재 단계에서는 다음 Backend 확인 질문과 화면 상태 목록만 정리합니다. 사용자 행동과 필요한 화면 상태가 무엇인지 확인합니다. Backend가 제공할 기능, 권한과 데이터 소유 경계를 질문합니다. endpoint, method, status, 요청·응답 필드, 인증과 오류 계약을 TBD 로 남깁니다. 계약이 승인된 뒤 Path·Method·Status에 맞춰 API 함수와 Parser를 처음 작성합니다. 실제 환경에서 재현하기 어려운 테스트 상태가 확인되면 Front-end 책임자 또는 프로젝트 담당자가 Front-end 테스트 범위와 관리 책임을 정해 Mock 도구를 검토합니다. API 동작과 기준 데이터는 승인된 계약이 전달되기 전까지 TBD 로 둡니다. Backend가 없다는 이유만으로 Front-end가 임시 API 계약과 Mock 서버를 먼저 만들지 않습니다. 6.7 Front-End 보안과 개인정보 보안은 별도 담당자가 마지막에 확인하는 부가 작업이 아니라 기능의 입력, 출력, 저장과 전달 경계를 설계하는 기준입니다. API, URL, Storage, 외부 SDK와 Bridge 응답을 신뢰하지 않습니다. React의 기본 Escape를 유지하고 HTML·URL·Script 실행 경계를 검토합니다. UI 제한과 Backend의 인증·권한 최종 검증을 구분합니다. 자격 증명과 개인정보가 Client Bundle, URL, 저장소, Bridge, 로그와 분석 도구에 남지 않게 합니다. Cookie 인증의 CSRF·CORS·SameSite와 CSP 실제 값은 Backend·배포 계약으로 확인합니다. Client 파일 검증과 Native 검증이 Backend 검증을 대신하지 않는다는 점을 설명할 수 있어야 합니다. 새 package의 필요성, Lock File, Audit 결과와 업데이트 책임을 확인합니다. 기능 통합이 끝나면 13단계 Front-End 보안과 개인정보 에서 동일 기능의 데이터 흐름과 미확정 보안 계약을 검토합니다.",
+    "content": "6. 프로젝트에서 우선 학습할 영역 학습 순서는 실제 기능에서 필요한 개념을 우선합니다. 고급 문법이나 전체 Framework 기능을 미리 학습하지 않습니다. 6.1 JavaScript와 TypeScript 다음 항목을 실제 props, API 응답, 폼과 오류 처리에 연결해 익힙니다. 객체, 배열, 함수, module과 async · await 타입 추론, 함수 입력과 출력, 객체 타입 선택적 속성, null 과 undefined Union, Literal Type과 Narrowing 외부 입력을 unknown 으로 받고 확인하는 Runtime Guard 비동기 실행 순서, Closure와 오래된 값이 만드는 오류 요청 취소, Timer·구독·Event Listener의 수명과 정리 판별 가능한 Union, 누락 없는 분기와 satisfies 얕은 복사, 참조 공유와 React 변경 감지의 관계 복잡한 Generic, Conditional Type과 타입 수준 추상화는 실제 필요가 확인된 뒤 학습합니다. 타입 오류를 any , 과도한 as 또는 non-null assertion으로 없애는 것을 해결로 간주하지 않습니다. 6.2 React 상태와 데이터 흐름 UI를 상태의 조합으로 설명하는 연습을 우선합니다. props와 state의 차이 계산할 수 있는 값을 중복 state로 저장하지 않는 방법 상태를 사용하는 가장 가까운 공통 소유자 사용자 Event와 외부 시스템 동기화를 위한 Effect의 차이 상태의 보존과 초기화 조건 key 와 컴포넌트 위치가 상태 보존에 미치는 영향 Effect 의존성, 오래된 Closure, Cleanup과 요청 경쟁 상태 제어·비제어 입력과 Props를 State로 복사할 때 생기는 동기화 문제 Context와 전역 Store가 실제로 필요한 공유 범위 useEffect 로 다른 state를 맞추는 코드가 생기면 렌더링 중 계산하거나 사용자 Event에서 처리할 수 있는지 먼저 검토합니다. 6.3 Next.js와 외부 경계 첫 기능에서는 Route, Layout과 Server·Client Component의 기본 차이를 익힙니다. 데이터 연결 단계에서는 API 요청, 오류 경계, 캐시와 인증 책임을 기능 요구에 맞춰 추가합니다. WebView 화면은 Android·iOS 전역 객체를 직접 사용하지 않고 타입이 정의된 Bridge adapter를 통해 Native 기능을 요청합니다. Bridge가 없거나 지원하지 않는 환경도 실패 상태로 처리합니다. Server·Client Component 사이에는 직렬화 가능한 값만 전달하고 서버 전용 비밀값과 모듈이 Client Bundle에 포함되지 않는지 확인합니다. Hydration 첫 결과, URL 상태, Route Loading·Error와 컴포넌트 Query 상태의 책임도 구분합니다. 6.4 Tailwind CSS와 접근성 Tailwind utility를 사용할 때 해당 CSS의 Layout, 크기, Overflow와 반응형 동작을 함께 확인합니다. 원시 색상값보다 프로젝트의 의미 기반 토큰과 기존 shadcn/ui 컴포넌트를 우선합니다. AI가 만든 화면은 의미 있는 HTML, Label, 키보드, Focus, 접근 가능한 이름과 필요한 대체 텍스트를 별도로 검토합니다. 시각적으로 같다는 이유만으로 구현 완료로 판단하지 않습니다. 한 장의 디자인 좌표만 맞추지 않고 긴 문구, 빈 값, 확대, 모바일 너비, Safe Area, Overflow와 터치 영역을 확인합니다. 입력 오류와 비동기 상태는 색상뿐 아니라 문구와 접근성 관계로 전달하고 Dialog·Drawer의 Focus 이동과 복귀를 실제 키보드로 검증합니다. 6.5 테스트와 디버깅 모든 컴포넌트를 형식적으로 테스트하지 않습니다. 폼 검증, 조건 분기, API 성공·실패, 중복 제출과 핵심 사용자 흐름처럼 오류 영향이 큰 동작을 먼저 테스트합니다. AI에게 오류를 바로 수정하도록 요청하기 전에 원인, 영향을 받는 범위와 가능한 해결 방법을 설명하도록 합니다. 수정 후에는 같은 문제가 다시 발생하지 않도록 필요한 테스트 또는 검수 항목을 남깁니다. Parser는 승인된 계약의 입력과 출력을 직접 검증하고, 컴포넌트는 사용자 행동과 보이는 결과를 검증합니다. 계약 확정 후 사용할 수 있는 Backend 환경에서 필요한 상태를 재현하기 어렵다면 Front-end 책임자 또는 프로젝트 담당자와 범위·관리 책임을 정한 Mock 도구를 테스트에 사용할 수 있습니다. 자동 Test가 실제 API, Layout, Focus, WebView와 배포 구성을 보장한다고 가정하지 않습니다. 6.6 API 미확정 상태에서의 진행 기준 기획 흐름과 Backend API 계약이 확정되지 않았다면 요청 함수, Runtime Parser, Fixture와 Mock Handler를 구현하지 않습니다. Swagger 또는 OpenAPI 제공을 미리 가정하지 않고, 현재 단계에서는 다음 Backend 확인 질문과 화면 상태 목록만 정리합니다. 사용자 행동과 필요한 화면 상태가 무엇인지 확인합니다. Backend가 제공할 기능, 권한과 데이터 소유 경계를 질문합니다. endpoint, method, status, 요청·응답 필드, 인증과 오류 계약을 TBD 로 남깁니다. 계약이 승인된 뒤 Path·Method·Status에 맞춰 API 함수와 Parser를 처음 작성합니다. 실제 환경에서 재현하기 어려운 테스트 상태가 확인되면 Front-end 책임자 또는 프로젝트 담당자가 Front-end 테스트 범위와 관리 책임을 정해 Mock 도구를 검토합니다. API 동작과 기준 데이터는 승인된 계약이 전달되기 전까지 TBD 로 둡니다. Backend가 없다는 이유만으로 Front-end가 임시 API 계약과 Mock 서버를 먼저 만들지 않습니다. 6.7 Front-End 보안과 개인정보 보안은 별도 담당자가 마지막에 확인하는 부가 작업이 아니라 기능의 입력, 출력, 저장과 전달 경계를 설계하는 기준입니다. API, URL, Storage, 외부 SDK와 Bridge 응답을 신뢰하지 않습니다. React의 기본 Escape를 유지하고 HTML·URL·Script 실행 경계를 검토합니다. UI 제한과 Backend의 인증·권한 최종 검증을 구분합니다. 자격 증명과 개인정보가 Client Bundle, URL, 저장소, Bridge, 로그와 분석 도구에 남지 않게 합니다. Cookie 인증의 CSRF·CORS·SameSite와 CSP 실제 값은 Backend·배포 계약으로 확인합니다. Client 파일 검증과 Native 검증이 Backend 검증을 대신하지 않는다는 점을 설명할 수 있어야 합니다. 새 package의 필요성, Lock File, Audit 결과와 업데이트 책임을 확인합니다. 기능 통합이 끝나면 13단계 Front-End 보안과 개인정보 에서 동일 기능의 데이터 흐름과 미확정 보안 계약을 검토합니다. 6.8 Figma·실제 코드·Storybook 연결 Figma는 시각적 기준과 의도를, 실제 컴포넌트는 공개 API와 동작을, Storybook은 구현된 UI의 대표 상태와 Viewport를 보여줍니다. 세 자료가 다르면 하나를 임의로 정답으로 만들지 않고 실제 사용처와 변경 의도를 확인합니다. 공통 UI나 사용자 노출 화면을 변경하면 관련 Story를 함께 확인하고, Storybook을 위해 제품에 없는 Props·Variant·Mock을 추가하지 않습니다. 6.9 Safari 15·구형 WebView와 성능 검증 Tailwind CSS 4를 유지하되 프로젝트의 공통 CSS 하한은 Safari 15입니다. 공식 완전 호환 버전을 앱 최소 버전으로 그대로 적용하지 않고 실제 사용하는 CSS와 Utility를 지원 대상 WebView에서 확인합니다. 로딩·갱신·Empty·Timeout·Offline을 구분하고, 취소·순서 역전·중복 실행과 입력 보존을 실제 위험에 맞춰 검증합니다. 성능은 단일 점수보다 같은 조건의 변경 전후를 비교합니다. 6.10 다국어 UI와 번역 검증 번역 대상 UI 문구와 사용자명·브랜드·서버 콘텐츠를 구분합니다. 한국어 원문, 정적으로 추출 가능한 메시지, 변수와 자리표시자 보존, Locale 선택과 Fallback을 확인합니다. 로컬 LLM 번역은 개발 중 카탈로그 후보를 만드는 도구이며 결제·환불·개인정보·약관처럼 영향이 큰 문구는 담당자가 검토합니다.",
     "url": "./../guides/learning/ai-frontend-growth/index.html#section-6"
   },
   {
@@ -1137,8 +1137,8 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
     "document": "AI 협업 Front-End 교육 과정",
     "section": "공통 완료 기준",
     "excerpt": "핵심 개념을 자신의 말로 설명할 수 있습니다. AI가 만든 코드에서 해당 단계의 위험을 찾을 수 있습니다. Lounge 프로젝트의 작은 기능에 적용할 수 있습니다. 확인된 기준과 미확정 계약을 구분할 수 있습니다. 실행한 검사와 직접 확인한 항목을 구분해 설명할 수 있습니다. AI의 조사 범위, 변경 파일과 추측을 통제하고 Diff를 근거로 승인할 수 있습니다. API가 확정되지 않았을 때…",
-    "content": "6. 공통 완료 기준 핵심 개념을 자신의 말로 설명할 수 있습니다. AI가 만든 코드에서 해당 단계의 위험을 찾을 수 있습니다. Lounge 프로젝트의 작은 기능에 적용할 수 있습니다. 확인된 기준과 미확정 계약을 구분할 수 있습니다. 실행한 검사와 직접 확인한 항목을 구분해 설명할 수 있습니다. AI의 조사 범위, 변경 파일과 추측을 통제하고 Diff를 근거로 승인할 수 있습니다. API가 확정되지 않았을 때 구현을 선행하지 않고 Backend 확인 질문과 TBD 를 정리할 수 있습니다. API 확정 뒤 화면을 다시 만들지 않고 계약 경계와 테스트를 함께 교체할 수 있습니다. 세션·회원·서버·폼·UI 상태의 소유자와 사용자 전환 시 정리 범위를 설명할 수 있습니다. 외부 입력, 인증·권한, Client 저장소, 개인정보와 Bridge의 보안 경계를 검토할 수 있습니다. 1단계 JavaScript 기초 시작하기 AI 협업 Front-End 교육 과정",
-    "url": "./../guides/learning/ai-frontend-growth/curriculum.html#section-6"
+    "content": "7. 공통 완료 기준 핵심 개념을 자신의 말로 설명할 수 있습니다. AI가 만든 코드에서 해당 단계의 위험을 찾을 수 있습니다. Lounge 프로젝트의 작은 기능에 적용할 수 있습니다. 확인된 기준과 미확정 계약을 구분할 수 있습니다. 실행한 검사와 직접 확인한 항목을 구분해 설명할 수 있습니다. AI의 조사 범위, 변경 파일과 추측을 통제하고 Diff를 근거로 승인할 수 있습니다. API가 확정되지 않았을 때 구현을 선행하지 않고 Backend 확인 질문과 TBD 를 정리할 수 있습니다. API 확정 뒤 화면을 다시 만들지 않고 계약 경계와 테스트를 함께 교체할 수 있습니다. 세션·회원·서버·폼·UI 상태의 소유자와 사용자 전환 시 정리 범위를 설명할 수 있습니다. 외부 입력, 인증·권한, Client 저장소, 개인정보와 Bridge의 보안 경계를 검토할 수 있습니다. UI 변경 시 Figma·실제 코드·Story의 차이와 Safari 15 호환 여부를 확인할 수 있습니다. 다국어 대상 문구와 사용자·서버 콘텐츠를 구분하고 번역 Fallback과 변수 보존을 검증할 수 있습니다. 1단계 JavaScript 기초 시작하기 AI 협업 Front-End 교육 과정",
+    "url": "./../guides/learning/ai-frontend-growth/curriculum.html#section-7"
   },
   {
     "document": "AI 협업 Front-End 교육 과정",
@@ -1157,22 +1157,29 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
   {
     "document": "AI 협업 Front-End 교육 과정",
     "section": "실제 서비스 연결",
-    "excerpt": "API 계약과 오류 — 공통 요청 계층, Runtime Parser, 응답·오류·취소 분류 서버·클라이언트 상태 — Query 수명, Mutation 일관성, 세션·회원과 사용자 전환 WebView Bridge와 보안 — Native 경계, 응답 검증, 요청 수명과 최소 노출 이 구간을 마치면 Backend·App 담당자에게 필요한 계약 질문을 하고, API 미확정 상태에서는 구현을 선행하지…",
-    "content": "4. 실제 서비스 연결 API 계약과 오류 — 공통 요청 계층, Runtime Parser, 응답·오류·취소 분류 서버·클라이언트 상태 — Query 수명, Mutation 일관성, 세션·회원과 사용자 전환 WebView Bridge와 보안 — Native 경계, 응답 검증, 요청 수명과 최소 노출 이 구간을 마치면 Backend·App 담당자에게 필요한 계약 질문을 하고, API 미확정 상태에서는 구현을 선행하지 않은 채 TBD 를 관리하며, 계약 확정 후 세션과 사용자별 상태의 수명을 설계할 수 있어야 합니다.",
+    "excerpt": "API 계약과 오류 — 공통 요청 계층, Runtime Parser, 지연·Offline·응답·오류·취소 분류 서버·클라이언트 상태 — Query 수명, Mutation 일관성, 세션·회원과 사용자 전환 WebView Bridge와 보안 — Native 경계, 응답 검증, 요청 수명과 최소 노출 이 구간을 마치면 Backend·App 담당자에게 필요한 계약 질문을 하고, API 미확정 상태에…",
+    "content": "4. 실제 서비스 연결 API 계약과 오류 — 공통 요청 계층, Runtime Parser, 지연·Offline·응답·오류·취소 분류 서버·클라이언트 상태 — Query 수명, Mutation 일관성, 세션·회원과 사용자 전환 WebView Bridge와 보안 — Native 경계, 응답 검증, 요청 수명과 최소 노출 이 구간을 마치면 Backend·App 담당자에게 필요한 계약 질문을 하고, API 미확정 상태에서는 구현을 선행하지 않은 채 TBD 를 관리하며, 계약 확정 후 세션과 사용자별 상태의 수명을 설계할 수 있어야 합니다.",
     "url": "./../guides/learning/ai-frontend-growth/curriculum.html#section-4"
   },
   {
     "document": "AI 협업 Front-End 교육 과정",
     "section": "품질과 독립적인 판단",
-    "excerpt": "테스트와 디버깅 — 테스트 경계, Backend 환경 우선과 증거 기반 원인 추적 기능 통합과 리뷰 — 승인된 계약에서 구현과 검증까지 하나의 기능 완성 Front-End 보안과 개인정보 — 완성한 기능의 신뢰 경계, 개인정보와 보안 위험 검토 마지막 구간에서는 AI의 구현을 그대로 승인하지 않고 기능·회귀·보안 위험과 변경 영향을 검토해 병합 여부를 판단합니다.",
-    "content": "5. 품질과 독립적인 판단 테스트와 디버깅 — 테스트 경계, Backend 환경 우선과 증거 기반 원인 추적 기능 통합과 리뷰 — 승인된 계약에서 구현과 검증까지 하나의 기능 완성 Front-End 보안과 개인정보 — 완성한 기능의 신뢰 경계, 개인정보와 보안 위험 검토 마지막 구간에서는 AI의 구현을 그대로 승인하지 않고 기능·회귀·보안 위험과 변경 영향을 검토해 병합 여부를 판단합니다.",
+    "excerpt": "테스트와 디버깅 — 테스트 경계, Storybook 검수, Backend 환경 우선과 증거 기반 원인 추적 기능 통합과 리뷰 — 승인된 계약에서 구현과 검증까지 하나의 기능 완성 Front-End 보안과 개인정보 — 완성한 기능의 신뢰 경계, 개인정보와 보안 위험 검토 마지막 구간에서는 AI의 구현을 그대로 승인하지 않고 기능·회귀·보안 위험과 변경 영향을 검토해 병합 여부를 판단합니다.",
+    "content": "5. 품질과 독립적인 판단 테스트와 디버깅 — 테스트 경계, Storybook 검수, Backend 환경 우선과 증거 기반 원인 추적 기능 통합과 리뷰 — 승인된 계약에서 구현과 검증까지 하나의 기능 완성 Front-End 보안과 개인정보 — 완성한 기능의 신뢰 경계, 개인정보와 보안 위험 검토 마지막 구간에서는 AI의 구현을 그대로 승인하지 않고 기능·회귀·보안 위험과 변경 영향을 검토해 병합 여부를 판단합니다.",
     "url": "./../guides/learning/ai-frontend-growth/curriculum.html#section-5"
   },
   {
     "document": "AI 협업 Front-End 교육 과정",
+    "section": "프로젝트 적용 확장 학습",
+    "excerpt": "13단계의 공통 흐름을 실제 Lounge 기능에 적용할 때는 작업 성격에 맞는 현재 가이드를 추가로 학습합니다. 아래 항목을 모든 기능에 기계적으로 적용하지 않고, 해당 화면과 데이터 흐름에 실제로 필요한 범위만 선택합니다. React Code Exports 가이드 와 Storybook 운영 가이드 — Figma 의도, 기존 컴포넌트, Semantic Token, Story와 실제 코드 연결…",
+    "content": "6. 프로젝트 적용 확장 학습 13단계의 공통 흐름을 실제 Lounge 기능에 적용할 때는 작업 성격에 맞는 현재 가이드를 추가로 학습합니다. 아래 항목을 모든 기능에 기계적으로 적용하지 않고, 해당 화면과 데이터 흐름에 실제로 필요한 범위만 선택합니다. React Code Exports 가이드 와 Storybook 운영 가이드 — Figma 의도, 기존 컴포넌트, Semantic Token, Story와 실제 코드 연결 Flutter WebView 설정 가이드 와 네트워크 지연 대응 및 성능 검증 가이드 — Safari 15·구형 WebView 호환, 저속 네트워크, Offline과 변경 전후 성능 확인 다국어 및 로컬 LLM 번역 가이드 — 한국어 원문 작성, 메시지 추출, 번역 검토, Locale 선택과 Fallback 검증 정확한 Storybook Script, 번역 도구와 Runtime 구성은 실제 애플리케이션에 설치되고 승인된 설정을 확인한 뒤 사용합니다. 가이드에 후보가 있다는 이유만으로 구현이 완료됐다고 가정하지 않습니다.",
+    "url": "./../guides/learning/ai-frontend-growth/curriculum.html#section-6"
+  },
+  {
+    "document": "AI 협업 Front-End 교육 과정",
     "section": "React와 화면 구현",
-    "excerpt": "React 컴포넌트와 상태 — 책임, 상태 소유자, 렌더링 위치·Key와 상태 보존 React Effect와 폼 — Effect 수명·경쟁 상태, 입력과 Mutation 흐름 Next.js App Router — Route, Server·Client 경계, Hydration과 오류 책임 Tailwind UI와 접근성 — 토큰, Layout 제약, 상태 전달과 Focus 흐름 이 구간을 마치면…",
-    "content": "3. React와 화면 구현 React 컴포넌트와 상태 — 책임, 상태 소유자, 렌더링 위치·Key와 상태 보존 React Effect와 폼 — Effect 수명·경쟁 상태, 입력과 Mutation 흐름 Next.js App Router — Route, Server·Client 경계, Hydration과 오류 책임 Tailwind UI와 접근성 — 토큰, Layout 제약, 상태 전달과 Focus 흐름 이 구간을 마치면 화면을 시각적 레이어가 아니라 사용자 동작과 상태의 조합으로 설계할 수 있어야 합니다.",
+    "excerpt": "React 컴포넌트와 상태 — 책임, 상태 소유자, 렌더링 위치·Key와 상태 보존 React Effect와 폼 — Effect 수명·경쟁 상태, 입력과 Mutation 흐름 Next.js App Router — Route, Server·Client 경계, Hydration과 오류 책임 Tailwind UI와 접근성 — 토큰, Figma·Story 연결, Safari 15 호환, 상태 전달과…",
+    "content": "3. React와 화면 구현 React 컴포넌트와 상태 — 책임, 상태 소유자, 렌더링 위치·Key와 상태 보존 React Effect와 폼 — Effect 수명·경쟁 상태, 입력과 Mutation 흐름 Next.js App Router — Route, Server·Client 경계, Hydration과 오류 책임 Tailwind UI와 접근성 — 토큰, Figma·Story 연결, Safari 15 호환, 상태 전달과 Focus 흐름 이 구간을 마치면 화면을 시각적 레이어가 아니라 사용자 동작과 상태의 조합으로 설계할 수 있어야 합니다.",
     "url": "./../guides/learning/ai-frontend-growth/curriculum.html#section-3"
   },
   {
@@ -1255,8 +1262,8 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
   {
     "document": "APP 개발 표준",
     "section": "Project Structure",
-    "excerpt": "WebView Front-end source와 설정은 apps/app-webview , 구현과 검토 문서는 docs 에서 관리합니다. API와 Bridge는 승인된 계약과 실제 사용처를 기준으로 앱 내부에 연결합니다. 저장소 구조 <repository-root>/ ├── AGENTS.md # 저장소 전체 구현 지침 ├── apps/ │ ├── mobile/ # Flutter Native 앱…",
-    "content": "13. Project Structure WebView Front-end source와 설정은 apps/app-webview , 구현과 검토 문서는 docs 에서 관리합니다. API와 Bridge는 승인된 계약과 실제 사용처를 기준으로 앱 내부에 연결합니다. 저장소 구조 <repository-root>/ ├── AGENTS.md # 저장소 전체 구현 지침 ├── apps/ │ ├── mobile/ # Flutter Native 앱 │ └── app-webview/ # 앱 내 Next.js WebView │ ├── AGENTS.md # 앱 전용 구현 지침 │ ├── .storybook/ # Storybook 설정 │ └── src/ # 애플리케이션 source ├── docs/ # 상세 가이드와 AI 작업 기준 └── README.md 코드 요약: 애플리케이션 코드는 실제 사용처 가까이에 두고 변경 범위에 따라 Lint·Test·Storybook·Build를 수행합니다. 존재하지 않는 package, 공통 영역과 계약 구조는 추측하지 않습니다. Next.js WebView · apps/app-webview src/ # Next.js WebView 애플리케이션 소스 Root ├── app/ # App Router의 Route, Layout과 전역 Provider 구성 │ ├── <route>/ # URL별 Page, Loading, Error 등 Route Segment │ ├── globals.css # Tailwind CSS 진입점과 최소 전역 스타일 │ ├── layout.tsx # 공통 문서 구조와 Root Layout │ └── providers.tsx # TanStack Query 등 Client Provider 조립 ├── components/ # 여러 Route와 Feature에서 재사용하는 UI │ ├── common/ # WebView 공통 Layout과 조합형 컴포넌트 │ └── ui/ # shadcn/ui 원형과 공통 UI 컴포넌트 ├── features/ # 예약, 라운지 등 업무 기능별 Module 모음 │ └── <feature>/ # 하나의 사용자 업무 흐름을 구성하는 기능 단위 │ ├── api/ # 기능별 Query, Mutation과 API 호출 정의 │ ├── components/ # 해당 Feature 내부에서만 사용하는 UI │ ├── forms/ # Form Schema, Validation과 입력 변환 │ ├── hooks/ # 기능별 TanStack Query 및 상태 연동 Hook │ └── types/ # 기능 전용 Type과 View Model 정의 ├── lib/ # Framework·서비스 연동을 위한 공통 Adapter │ ├── api/ # 공통 API Client의 환경·인증·오류 정책 연결 │ ├── bridge/ # Native Bridge 요청·응답 검증과 호출 Adapter │ └── utils/ # 기능에 종속되지 않는 순수 Utility 함수 └── stores/ # Zustand 기반 전역 UI·클라이언트 상태 코드 요약: Next.js App Router는 app/ 에서 관리하고 Tailwind CSS 4의 전역 진입점은 app/globals.css 에 둡니다. components/ui 에는 shadcn/ui 원형과 공통 컴포넌트를 둡니다. lib/api 는 승인된 API 계약을 환경·인증 정책과 연결하고, features/*/api 와 hooks 에는 기능별 TanStack Query 연동을 배치합니다. stores 에는 Zustand 상태를 둡니다. 앱 내부 구성 기준 영역 Directory 설명 WebView apps/app-webview/src/app Next.js Route, Layout, Provider와 Tailwind 전역 스타일 WebView apps/app-webview/src/components shadcn/ui 원형과 공통 WebView UI 컴포넌트 WebView apps/app-webview/src/features 서비스 기능별 UI, React Hook Form, API, TanStack Query Hook과 Type WebView apps/app-webview/src/lib/bridge 공통 Bridge 계약을 사용하는 WebView 전용 검증과 호출 Adapter WebView apps/app-webview/src/stores Zustand 기반 전역 UI·클라이언트 상태 저장소 운영 및 배포 기준 Flutter Native 앱과 WebView Front-end는 Toolchain, 배포 Pipeline, 환경 변수, Version과 Rollback 단위를 각각 관리합니다. 변경된 영역을 빌드·테스트하고 Bridge 계약을 변경하면 Native 앱과 WebView Front-end의 호환성을 함께 검증합니다. API Endpoint, 인증 Client, WebView Origin Allowlist와 배포 Secret은 애플리케이션과 환경별로 분리하고 저장소에 포함하지 않습니다. 배포 시점이 다른 Native 앱과 WebView가 함께 동작할 수 있도록 Bridge와 API 계약은 하위 호환성을 유지하고, Breaking Change는 Version을 올려 단계적으로 전환합니다. APP 개발 표준",
+    "excerpt": "Flutter Native source와 설정은 apps/mobile , WebView Front-end source와 설정은 apps/app-webview , 구현과 검토 문서는 docs 에서 관리합니다. API와 Bridge는 승인된 계약과 실제 사용처를 기준으로 앱 내부에 연결합니다. 저장소 구조 <repository-root>/ ├── AGENTS.md # 저장소 전체 구현 지침 ├─…",
+    "content": "13. Project Structure Flutter Native source와 설정은 apps/mobile , WebView Front-end source와 설정은 apps/app-webview , 구현과 검토 문서는 docs 에서 관리합니다. API와 Bridge는 승인된 계약과 실제 사용처를 기준으로 앱 내부에 연결합니다. 저장소 구조 <repository-root>/ ├── AGENTS.md # 저장소 전체 구현 지침 ├── apps/ │ ├── mobile/ # Flutter Native 앱 │ └── app-webview/ # 앱 내 Next.js WebView │ ├── AGENTS.md # 앱 전용 구현 지침 │ ├── .storybook/ # Storybook 설정 │ └── src/ # 애플리케이션 source ├── docs/ # 상세 가이드와 AI 작업 기준 └── README.md 코드 요약: 애플리케이션 코드는 실제 사용처 가까이에 두고 변경 범위에 따라 Lint·Test·Storybook·Build를 수행합니다. 존재하지 않는 package, 공통 영역과 계약 구조는 추측하지 않습니다. Next.js WebView · apps/app-webview src/ # Next.js WebView 애플리케이션 소스 Root ├── app/ # App Router의 Route, Layout과 전역 Provider 구성 │ ├── <route>/ # URL별 Page, Loading, Error 등 Route Segment │ ├── globals.css # Tailwind CSS 진입점과 최소 전역 스타일 │ ├── layout.tsx # 공통 문서 구조와 Root Layout │ └── providers.tsx # TanStack Query 등 Client Provider 조립 ├── components/ # 여러 Route와 Feature에서 재사용하는 UI │ ├── common/ # WebView 공통 Layout과 조합형 컴포넌트 │ └── ui/ # shadcn/ui 원형과 공통 UI 컴포넌트 ├── features/ # 예약, 라운지 등 업무 기능별 Module 모음 │ └── <feature>/ # 하나의 사용자 업무 흐름을 구성하는 기능 단위 │ ├── api/ # 기능별 Query, Mutation과 API 호출 정의 │ ├── components/ # 해당 Feature 내부에서만 사용하는 UI │ ├── forms/ # Form Schema, Validation과 입력 변환 │ ├── hooks/ # 기능별 TanStack Query 및 상태 연동 Hook │ └── types/ # 기능 전용 Type과 View Model 정의 ├── lib/ # Framework·서비스 연동을 위한 공통 Adapter │ ├── api/ # 공통 API Client의 환경·인증·오류 정책 연결 │ ├── bridge/ # Native Bridge 요청·응답 검증과 호출 Adapter │ └── utils/ # 기능에 종속되지 않는 순수 Utility 함수 └── stores/ # Zustand 기반 전역 UI·클라이언트 상태 코드 요약: Next.js App Router는 app/ 에서 관리하고 Tailwind CSS 4의 전역 진입점은 app/globals.css 에 둡니다. components/ui 에는 shadcn/ui 원형과 공통 컴포넌트를 둡니다. lib/api 는 승인된 API 계약을 환경·인증 정책과 연결하고, features/*/api 와 hooks 에는 기능별 TanStack Query 연동을 배치합니다. stores 에는 Zustand 상태를 둡니다. 앱 내부 구성 기준 영역 Directory 설명 WebView apps/app-webview/src/app Next.js Route, Layout, Provider와 Tailwind 전역 스타일 WebView apps/app-webview/src/components shadcn/ui 원형과 공통 WebView UI 컴포넌트 WebView apps/app-webview/src/features 서비스 기능별 UI, React Hook Form, API, TanStack Query Hook과 Type WebView apps/app-webview/src/lib/bridge 공통 Bridge 계약을 사용하는 WebView 전용 검증과 호출 Adapter WebView apps/app-webview/src/stores Zustand 기반 전역 UI·클라이언트 상태 저장소 운영 및 배포 기준 Flutter Native 앱과 WebView Front-end는 Toolchain, 배포 Pipeline, 환경 변수, Version과 Rollback 단위를 각각 관리합니다. 변경된 영역을 빌드·테스트하고 Bridge 계약을 변경하면 Native 앱과 WebView Front-end의 호환성을 함께 검증합니다. API Endpoint, 인증 Client, WebView Origin Allowlist와 배포 Secret은 애플리케이션과 환경별로 분리하고 저장소에 포함하지 않습니다. 배포 시점이 다른 Native 앱과 WebView가 함께 동작할 수 있도록 Bridge와 API 계약은 하위 호환성을 유지하고, Breaking Change는 Version을 올려 단계적으로 전환합니다. APP 개발 표준",
     "url": "./../guides/app/app.html#section-13"
   },
   {
@@ -1899,8 +1906,8 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
   {
     "document": "Front-End Lint 가이드",
     "section": "참고 자료",
-    "excerpt": "Next.js ESLint 설정 typescript-eslint no-floating-promises eslint-plugin-jsx-a11y Front-End Lint 가이드",
-    "content": "9. 참고 자료 Next.js ESLint 설정 typescript-eslint no-floating-promises eslint-plugin-jsx-a11y Front-End Lint 가이드",
+    "excerpt": "Next.js ESLint 설정 typescript-eslint no-floating-promises eslint-plugin-jsx-a11y UI 접근성 준수 가이드 Front-End Lint 가이드",
+    "content": "9. 참고 자료 Next.js ESLint 설정 typescript-eslint no-floating-promises eslint-plugin-jsx-a11y UI 접근성 준수 가이드 Front-End Lint 가이드",
     "url": "./../guides/lint/index.html#section-9"
   },
   {
@@ -1918,266 +1925,203 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
     "url": "./../guides/lint/index.html#section-4"
   },
   {
-    "document": "Lounge Front-end 구축 가이드 · Presentation",
-    "section": "가이드와 Source를 책임에 맞는 경로에서 관리합니다.",
-    "excerpt": "01 Root AGENTS.md 실제 구현 작업용 최상위 지침 02 docs/AGENTS.md 가이드 작성 · HTML 검증 03 docs/guides · assets 상세 가이드 · 공통 자산 04 docs/ai · common-source 작업별 요약 · 적용 기준 05 apps/app-webview Application Source · Storybook 현재 저장소는 통합을 마친 실제…",
-    "content": "가이드와 Source를 책임에 맞는 경로에서 관리합니다. 01 Root AGENTS.md 실제 구현 작업용 최상위 지침 02 docs/AGENTS.md 가이드 작성 · HTML 검증 03 docs/guides · assets 상세 가이드 · 공통 자산 04 docs/ai · common-source 작업별 요약 · 적용 기준 05 apps/app-webview Application Source · Storybook 현재 저장소는 통합을 마친 실제 프로젝트 구조입니다. 애플리케이션 Source는 apps/app-webview , 문서·자산·AI 요약은 docs 에서 관리하며 중간 복제 구조를 두지 않습니다. Root AGENTS.md 는 구현 규칙, docs/AGENTS.md 는 문서 작성과 HTML 검증 규칙을 담당합니다. 작업자는 이 둘과 실제 Application 가까이에 있는 지침을 함께 읽고, 경로가 더 가까운 지침을 우선 적용합니다. 14 · HUMAN GUIDE",
-    "url": "./../guides/briefing/presentation.html#section-13"
-  },
-  {
-    "document": "Lounge Front-end 구축 가이드 · Presentation",
-    "section": "구현과 검증을 같은 작업으로 봅니다.",
-    "excerpt": "영역 핵심 확인 완료 근거 접근성 Semantic HTML · Keyboard · Focus · 이름 · Contrast 주요 사용자 흐름 직접 확인 Test 업무 규칙 · 상태 전환 · 오류 매핑 · Adapter 위험과 회귀 가능성 중심 정적 검사 TypeScript · Lint · 실제 설정 프로젝트 명령 성공 Build Storybook · Application 정적 Build와 통합…",
-    "content": "구현과 검증을 같은 작업으로 봅니다. 영역 핵심 확인 완료 근거 접근성 Semantic HTML · Keyboard · Focus · 이름 · Contrast 주요 사용자 흐름 직접 확인 Test 업무 규칙 · 상태 전환 · 오류 매핑 · Adapter 위험과 회귀 가능성 중심 정적 검사 TypeScript · Lint · 실제 설정 프로젝트 명령 성공 Build Storybook · Application 정적 Build와 통합 결과 완료 보고 재사용 · 신규 UI · 미검증 환경 · TBD 검사 결과와 한계 명시 정상 화면만 보이는 것은 완료가 아닙니다. 주요 흐름의 Keyboard와 Focus, 오류 상태, 다국어, 지원 Viewport와 실제 Build 결과 중 해당 기능에 필요한 근거를 같은 변경에서 남깁니다. 13 · GUIDE REPOSITORY",
-    "url": "./../guides/briefing/presentation.html#section-12"
-  },
-  {
-    "document": "Lounge Front-end 구축 가이드 · Presentation",
-    "section": "기능 하나도 준비부터 완료 보고까지 연결합니다.",
-    "excerpt": "01 준비 기획 · Figma · AGENTS.md 확인 02 탐색과 설계 기존 UI · Token · 상태 책임 · 예외 03 구현 Component · Story · 기능 코드 04 적용과 검증 화면 · 접근성 · 다국어 · 보안 · Test · Build 05 완료 보고 재사용 · 신규 구현 · 검사 결과 · 미확정 승인된 API 계약이 없다면 Endpoint, Parser, Fixtu…",
-    "content": "기능 하나도 준비부터 완료 보고까지 연결합니다. 01 준비 기획 · Figma · AGENTS.md 확인 02 탐색과 설계 기존 UI · Token · 상태 책임 · 예외 03 구현 Component · Story · 기능 코드 04 적용과 검증 화면 · 접근성 · 다국어 · 보안 · Test · Build 05 완료 보고 재사용 · 신규 구현 · 검사 결과 · 미확정 승인된 API 계약이 없다면 Endpoint, Parser, Fixture와 Mock Handler를 임의로 만들지 않고 TBD 로 남깁니다. 준비에서는 요구사항과 기존 구현을 찾고, 설계에서는 새로 만들 범위와 상태 소유를 정합니다. 구현한 뒤에는 실제 화면과 지원 환경에서 확인하고, 검증하지 못한 항목까지 완료 보고에 남깁니다. 04 · UI × FIGMA",
-    "url": "./../guides/briefing/presentation.html#section-3"
-  },
-  {
-    "document": "Lounge Front-end 구축 가이드 · Presentation",
-    "section": "기존 Component와 Semantic Token을 우선합니다.",
-    "excerpt": "기존 Props와 Variant 확인 한 기능의 조합은 기능 가까이에 배치 실제 반복과 변경 이유가 같을 때 공통화 Storybook만을 위한 API는 추가하지 않음 Figma · Main Component Continue PATH components/ui/Button.tsx PROPS variant · size · loading STATES default · disabled · loadin…",
-    "content": "기존 Component와 Semantic Token을 우선합니다. 기존 Props와 Variant 확인 한 기능의 조합은 기능 가까이에 배치 실제 반복과 변경 이유가 같을 때 공통화 Storybook만을 위한 API는 추가하지 않음 Figma · Main Component Continue PATH components/ui/Button.tsx PROPS variant · size · loading STATES default · disabled · loading RULE 실제 Source에서 API 재확인 Implementation import { Button } from '@/components/ui/Button' <Button loading={isPending}> Continue </Button> 05 · STORYBOOK × FIGMA",
-    "url": "./../guides/briefing/presentation.html#section-4"
-  },
-  {
-    "document": "Lounge Front-end 구축 가이드 · Presentation",
-    "section": "미확정 항목은 구현이 아니라 TBD로 관리합니다.",
-    "excerpt": "PRODUCT 화면과 API 업무 규칙 · 사용자 문구 · Endpoint · Field · 오류 PLATFORM 인증과 Bridge Cookie · Token · Session · Native Method · 메시지 OPERATIONS 배포와 보안 모니터링 · 장애 대응 · CSP · CORS · 개인정보 보존 QUALITY 도구와 Locale Storybook · Schema · Retr…",
-    "content": "미확정 항목은 구현이 아니라 TBD로 관리합니다. PRODUCT 화면과 API 업무 규칙 · 사용자 문구 · Endpoint · Field · 오류 PLATFORM 인증과 Bridge Cookie · Token · Session · Native Method · 메시지 OPERATIONS 배포와 보안 모니터링 · 장애 대응 · CSP · CORS · 개인정보 보존 QUALITY 도구와 Locale Storybook · Schema · Retry · Store · 번역 검수 · 통화 예시를 실제 계약처럼 구현하지 않습니다. 필요한 담당자와 입력 자료를 확인한 뒤 확정합니다. 19 · THE PRINCIPLE",
-    "url": "./../guides/briefing/presentation.html#section-18"
-  },
-  {
-    "document": "Lounge Front-end 구축 가이드 · Presentation",
-    "section": "번역은 문구 치환이 아니라 실행 환경 전체의 품질입니다.",
-    "excerpt": "MESSAGE Key와 문맥 UI 문구를 코드에서 분리하고 변수·복수형·성별·문맥을 보존합니다. RUNTIME Locale과 Fallback 언어 선택, 기본 언어, 누락 메시지와 시간대·통화 규칙을 확인합니다. LAYOUT & A11Y 긴 문구와 읽기 늘어난 문구, 줄바꿈, Focus, 접근 가능한 이름과 실제 발음을 검증합니다. 로컬 LLM 번역은 초안입니다. 중요 문구는 담당자 검수와…",
-    "content": "번역은 문구 치환이 아니라 실행 환경 전체의 품질입니다. MESSAGE Key와 문맥 UI 문구를 코드에서 분리하고 변수·복수형·성별·문맥을 보존합니다. RUNTIME Locale과 Fallback 언어 선택, 기본 언어, 누락 메시지와 시간대·통화 규칙을 확인합니다. LAYOUT & A11Y 긴 문구와 읽기 늘어난 문구, 줄바꿈, Focus, 접근 가능한 이름과 실제 발음을 검증합니다. 로컬 LLM 번역은 초안입니다. 중요 문구는 담당자 검수와 승인 절차가 필요하며 동적 콘텐츠의 기기 번역 범위도 별도 계약으로 둡니다. Locale 변경은 메시지 카탈로그뿐 아니라 날짜·시간대·통화·숫자 표시, 접근 가능한 이름과 실제 발음까지 함께 영향을 줍니다. 11 · SECURITY & PRIVACY",
-    "url": "./../guides/briefing/presentation.html#section-10"
-  },
-  {
-    "document": "Lounge Front-end 구축 가이드 · Presentation",
-    "section": "사람과 AI가 바뀌어도 같은 기준으로 구축합니다.",
-    "excerpt": "BUILD 구축 구조 프로젝트 · Component · 상태 · API · WebView · Storybook · Test · Build VERIFY 사용 환경 OS · Browser · 반응형 · 다국어 · 접근성 · 보안 · 개인정보 OPERATE 가이드 운영 사람용 원본 · AI용 요약 · 실제 프로젝트 · 변경 동기화 실제 Application이 생성된 뒤에는 설치 Package, 기…",
-    "content": "사람과 AI가 바뀌어도 같은 기준으로 구축합니다. BUILD 구축 구조 프로젝트 · Component · 상태 · API · WebView · Storybook · Test · Build VERIFY 사용 환경 OS · Browser · 반응형 · 다국어 · 접근성 · 보안 · 개인정보 OPERATE 가이드 운영 사람용 원본 · AI용 요약 · 실제 프로젝트 · 변경 동기화 실제 Application이 생성된 뒤에는 설치 Package, 기존 Source와 승인된 프로젝트 계약을 일반 예시보다 우선합니다. 이 브리핑은 특정 화면이나 API를 확정하는 문서가 아닙니다. 코드를 어디에 배치하고 기존 구현을 어떻게 찾을지, 상태와 예외를 어떤 책임으로 나누고 무엇을 확인해야 완료인지 공통 기준을 제공합니다. 02 · REPOSITORY",
-    "url": "./../guides/briefing/presentation.html#section-1"
-  },
-  {
-    "document": "Lounge Front-end 구축 가이드 · Presentation",
-    "section": "사람용 가이드는 판단과 Review의 기준입니다.",
-    "excerpt": "전체 문서를 처음부터 외우는 대신 현재 작업에 필요한 상세 가이드와 Checklist를 선택해 사용합니다. 확정된 기준과 TBD를 구분하고, 실제 프로젝트의 Package·Source·계약이 확인되면 일반 예시보다 우선합니다. 작업을 시작할 때 README와 검색에서 관련 가이드를 찾습니다. 현재 작업에 직접 필요한 Section만 확인합니다. 실제 Source와 승인된 계약을 다시 대조합니…",
-    "content": "사람용 가이드는 판단과 Review의 기준입니다. 전체 문서를 처음부터 외우는 대신 현재 작업에 필요한 상세 가이드와 Checklist를 선택해 사용합니다. 확정된 기준과 TBD를 구분하고, 실제 프로젝트의 Package·Source·계약이 확인되면 일반 예시보다 우선합니다. 작업을 시작할 때 README와 검색에서 관련 가이드를 찾습니다. 현재 작업에 직접 필요한 Section만 확인합니다. 실제 Source와 승인된 계약을 다시 대조합니다. 구현과 Review를 마칠 때 가이드의 완료 기준을 Checklist로 사용합니다. 확인하지 못한 환경과 미확정 계약을 분리합니다. 반복된 문제와 실제 차이를 근거로 가이드를 갱신합니다. 문서 진입점 · Lounge DOCS README · 가이드 검색 15 · AI CODING GUIDE",
-    "url": "./../guides/briefing/presentation.html#section-14"
-  },
-  {
-    "document": "Lounge Front-end 구축 가이드 · Presentation",
-    "section": "상태의 성격에 따라 소유 도구를 구분합니다.",
-    "excerpt": "LOCAL UI React State 열림 · 선택 등 가까운 UI RESTORABLE URL / Route 검색 조건 · Tab · Page FORM React Hook Form 입력 · 검증 · 제출 SERVER TanStack Query Cache · 갱신 · 실패 SHARED CLIENT Zustand 여러 화면의 UI 상태 서버 데이터를 Zustand에 복제하지 않습니다. Form…",
-    "content": "상태의 성격에 따라 소유 도구를 구분합니다. LOCAL UI React State 열림 · 선택 등 가까운 UI RESTORABLE URL / Route 검색 조건 · Tab · Page FORM React Hook Form 입력 · 검증 · 제출 SERVER TanStack Query Cache · 갱신 · 실패 SHARED CLIENT Zustand 여러 화면의 UI 상태 서버 데이터를 Zustand에 복제하지 않습니다. Form 도구도 Backend 업무 규칙과 검증을 대신하지 않습니다. 공유 Client 상태가 실제로 확인되기 전에는 Store를 만들지 않습니다. Schema 검증과 서버 오류 매핑 역시 승인된 계약을 받은 뒤 확정합니다. 07 · API & ASYNC UI",
-    "url": "./../guides/briefing/presentation.html#section-6"
-  },
-  {
-    "document": "Lounge Front-end 구축 가이드 · Presentation",
-    "section": "자동화는 반복을 줄이고, 담당자는 계약과 품질을 결정합니다.",
-    "excerpt": "담당 주요 책임 변경 시 연결 Front-end 화면 · 상태 · UI · 접근성 · 반응형 · Test 코드 ↔ Story ↔ 가이드 Designer 시각 기준과 Figma 구현 설명 Component 경로 · Props · Variant Backend / Security API · 인증 · 권한 · 보안 정책 계약 ↔ Adapter ↔ Test Flutter Bridge · OS 권한 ·…",
-    "content": "자동화는 반복을 줄이고, 담당자는 계약과 품질을 결정합니다. 담당 주요 책임 변경 시 연결 Front-end 화면 · 상태 · UI · 접근성 · 반응형 · Test 코드 ↔ Story ↔ 가이드 Designer 시각 기준과 Figma 구현 설명 Component 경로 · Props · Variant Backend / Security API · 인증 · 권한 · 보안 정책 계약 ↔ Adapter ↔ Test Flutter Bridge · OS 권한 · Native 동작 Method ↔ 메시지 ↔ 실제 기기 AI / Reviewer 탐색·초안·반복 검사 / 최종 검토 후보 발견 ↔ 사람의 판단 Front-end가 독립적으로 결정할 수 없는 계약은 임의로 확정하지 않습니다. 담당자가 승인한 계약을 코드와 관련 가이드에 함께 반영합니다. 17 · OPERATION LINKS",
-    "url": "./../guides/briefing/presentation.html#section-16"
-  },
-  {
-    "document": "Lounge Front-end 구축 가이드 · Presentation",
-    "section": "정상 응답뿐 아니라 기다림과 실패도 설계합니다.",
-    "excerpt": "LOADING 조회와 갱신 최초 Loading과 기존 데이터를 유지하는 갱신을 구분합니다. EMPTY / ERROR 결과와 재시도 빈 결과와 사용자가 복구할 수 있는 오류를 표현합니다. SLOW / OFFLINE 지연과 단절 중복 제출을 막고 연결 복구 뒤 갱신합니다. CONTRACT 승인된 계약 응답을 방어적으로 확인하되 권한과 업무 규칙은 Backend가 강제합니다. Timeout과 Re…",
-    "content": "정상 응답뿐 아니라 기다림과 실패도 설계합니다. LOADING 조회와 갱신 최초 Loading과 기존 데이터를 유지하는 갱신을 구분합니다. EMPTY / ERROR 결과와 재시도 빈 결과와 사용자가 복구할 수 있는 오류를 표현합니다. SLOW / OFFLINE 지연과 단절 중복 제출을 막고 연결 복구 뒤 갱신합니다. CONTRACT 승인된 계약 응답을 방어적으로 확인하되 권한과 업무 규칙은 Backend가 강제합니다. Timeout과 Retry는 요청 종류, 멱등성과 업무 위험도에 따라 결정합니다. 결제·예약은 Front-end 재시도만으로 안전하지 않습니다. 승인된 계약이 있고 실제 환경에서 오류 상태를 반복 재현하기 어려울 때만 MSW 같은 도구를 선택적으로 검토합니다. Mock은 계약을 만드는 근거가 아니라 승인된 계약을 재현하는 수단입니다. 08 · WEBVIEW BOUNDARY",
-    "url": "./../guides/briefing/presentation.html#section-7"
-  },
-  {
-    "document": "Lounge Front-end 구축 가이드 · Presentation",
-    "section": "하나가 바뀌면 연결된 기준도 함께 확인합니다.",
-    "excerpt": "UI와 디자인 연결 Component 경로·이름 → Import·Figma·문서 Props·Variant → 사용처·Story·Figma 상태 Token → 실제 화면·Storybook·Theme 중요 화면 상태 → Story 등록·누락 점검 실행 환경과 계약 연결 Browser·OS → CSS 요구사항·실제 기기 API·Bridge → Adapter·상태·Test·담당 문서 인증·개인정보·…",
-    "content": "하나가 바뀌면 연결된 기준도 함께 확인합니다. UI와 디자인 연결 Component 경로·이름 → Import·Figma·문서 Props·Variant → 사용처·Story·Figma 상태 Token → 실제 화면·Storybook·Theme 중요 화면 상태 → Story 등록·누락 점검 실행 환경과 계약 연결 Browser·OS → CSS 요구사항·실제 기기 API·Bridge → Adapter·상태·Test·담당 문서 인증·개인정보·SDK → 저장·Log·Network·보안 문구·Locale → 카탈로그·Fallback·긴 문구 가이드가 바뀌면 검색 Index를 다시 만들고, Package가 바뀌면 Lock File·하위 의존성·보안 공지와 Owner를 함께 확인합니다. 18 · OPEN CONTRACTS",
-    "url": "./../guides/briefing/presentation.html#section-17"
-  },
-  {
-    "document": "Lounge Front-end 구축 가이드 · Presentation",
-    "section": "AI가 구현과 반복 검사를 돕고, 가이드와 개발자가 범위·계약·품질을 통제합니다.",
-    "excerpt": "기존 구현을 먼저 찾습니다 기능 가까이에서 작게 시작합니다 검증 근거가 생기면 공통화합니다 변경된 연결 관계를 함께 갱신합니다 전체 브리핑 문서 보기 ↗ ↑ ↓ · PAGE UP / DOWN",
-    "content": "AI가 구현과 반복 검사를 돕고, 가이드와 개발자가 범위·계약·품질을 통제합니다. 기존 구현을 먼저 찾습니다 기능 가까이에서 작게 시작합니다 검증 근거가 생기면 공통화합니다 변경된 연결 관계를 함께 갱신합니다 전체 브리핑 문서 보기 ↗ ↑ ↓ · PAGE UP / DOWN",
-    "url": "./../guides/briefing/presentation.html#section-19"
-  },
-  {
-    "document": "Lounge Front-end 구축 가이드 · Presentation",
-    "section": "AI에는 전체 문서보다 작업에 필요한 기준을 제공합니다.",
-    "excerpt": "공통 규칙은 실제 프로젝트의 AGENTS.md 에서 관리하고, 도구 전용 설정에는 그 도구만의 동작만 둡니다. AI가 만든 결과는 구현 초안이며 공개 API, 불필요한 추상화, 누락된 상태와 기존 구조의 충돌을 개발자가 검토합니다. 확인 순서 저장소의 AGENTS.md 작업별 docs/ai/* 설치 Package와 기존 Source 필요한 사람용 원본과 Figma 설명 완료 보고 재사용·신규…",
-    "content": "AI에는 전체 문서보다 작업에 필요한 기준을 제공합니다. 공통 규칙은 실제 프로젝트의 AGENTS.md 에서 관리하고, 도구 전용 설정에는 그 도구만의 동작만 둡니다. AI가 만든 결과는 구현 초안이며 공개 API, 불필요한 추상화, 누락된 상태와 기존 구조의 충돌을 개발자가 검토합니다. 확인 순서 저장소의 AGENTS.md 작업별 docs/ai/* 설치 Package와 기존 Source 필요한 사람용 원본과 Figma 설명 완료 보고 재사용·신규 Component와 생성 이유 사용 Token과 추가·변경한 Story 실행한 검사, 미검증 환경과 남은 TBD AI가 후보를 찾고 반복 검사를 도울 수 있지만, 계약·지원 범위·위험과 최종 품질은 개발자와 관련 담당자가 판단합니다. 16 · OWNERSHIP",
-    "url": "./../guides/briefing/presentation.html#section-15"
-  },
-  {
-    "document": "Lounge Front-end 구축 가이드 · Presentation",
-    "section": "Application 가까이에서 작게 시작합니다.",
-    "excerpt": "Flutter Native 앱과 WebView Front-end는 같은 저장소에서 관리하되 각 Toolchain과 구현 책임은 분리합니다. apps/ ├─ mobile/ Flutter Native App └─ app-webview/ WebView 서비스 화면 docs/ 구현·검토 가이드 Native와 WebView는 승인된 Bridge 계약으로 연결하고 서로의 내부 Source를 직접 참조하…",
-    "content": "Application 가까이에서 작게 시작합니다. Flutter Native 앱과 WebView Front-end는 같은 저장소에서 관리하되 각 Toolchain과 구현 책임은 분리합니다. apps/ ├─ mobile/ Flutter Native App └─ app-webview/ WebView 서비스 화면 docs/ 구현·검토 가이드 Native와 WebView는 승인된 Bridge 계약으로 연결하고 서로의 내부 Source를 직접 참조하지 않습니다. 상세 기준 · Front-End 저장소 구조 기준 03 · CORE WORKFLOW",
-    "url": "./../guides/briefing/presentation.html#section-2"
-  },
-  {
-    "document": "Lounge Front-end 구축 가이드 · Presentation",
-    "section": "Browser와 반응형은 경계값까지 검증합니다.",
-    "excerpt": "공통 CSS 하한은 Safari 15로 두고 Android와 다른 Browser는 지원 대상 구형 버전의 실제 동작을 확인합니다. Chrome / Edge Legacy QA Safari 15+ Firefox Legacy QA Samsung Internet Legacy QA Mobile 320–767 Tablet 768–1023 PC 1024+ 767·768px, 1023·1024px을 함께…",
-    "content": "Browser와 반응형은 경계값까지 검증합니다. 공통 CSS 하한은 Safari 15로 두고 Android와 다른 Browser는 지원 대상 구형 버전의 실제 동작을 확인합니다. Chrome / Edge Legacy QA Safari 15+ Firefox Legacy QA Samsung Internet Legacy QA Mobile 320–767 Tablet 768–1023 PC 1024+ 767·768px, 1023·1024px을 함께 확인하고 지원되지 않는 최신 CSS는 사용하지 않거나 대체합니다. Tailwind CSS의 공식 최소 버전을 앱 지원 하한으로 그대로 사용하지 않습니다. 프로젝트가 실제로 쓰는 CSS와 Utility를 iOS 15 WKWebView와 지원 대상 구형 WebView에서 검증해 판단합니다. 10 · INTERNATIONALIZATION",
+    "document": "Lounge Front-end 작업 가이드 · Presentation",
+    "section": "모든 변경이 아니라 기준이 바뀔 때 갱신",
+    "excerpt": "다음 작업에도 적용할 구조·규칙·연동 기준이 바뀌었을 때만 관련 가이드를 함께 고칩니다. flowchart TB A[\"구현 또는 수정 발생 Source · Story · Test\"] --> B{\"다음 작업에도 영향을 주는 기준이 바뀌었는가?\"} B -->|\"YES\"| C[\"관련 상세 가이드 수정 docs/guides\"] B -->|\"NO\"| D[\"현재 구현만 수정 Source · Story…",
+    "content": "모든 변경이 아니라 기준이 바뀔 때 갱신 다음 작업에도 적용할 구조·규칙·연동 기준이 바뀌었을 때만 관련 가이드를 함께 고칩니다. flowchart TB A[\"구현 또는 수정 발생 Source · Story · Test\"] --> B{\"다음 작업에도 영향을 주는 기준이 바뀌었는가?\"} B -->|\"YES\"| C[\"관련 상세 가이드 수정 docs/guides\"] B -->|\"NO\"| D[\"현재 구현만 수정 Source · Story · Test\"] C --> E{\"AI 요약이나 구현 예시도 함께 바뀌는가?\"} E -->|\"YES\"| F[\"AI 요약 · 구현 예시 갱신 docs/ai · common-source\"] E -->|\"NO\"| G[\"상세 가이드만 갱신\"] F --> H{\"가이드 전체의 구조·정책을 크게 바꾼 작업인가?\"} G --> H H -->|\"YES\"| I[\"CHANGELOG 기록 변경 목적 · 주요 내용 · 검증 결과\"] H -->|\"NO\"| J[\"변경 기록 생략\"] D --> K[\"관련 검사 후 완료\"] I --> K J --> K class B,E,H decision class K complete UPDATE RULE 변경 범위에 필요한 문서만 함께 고칩니다. 작은 수정은 변경 기록을 남기지 않습니다. 가이드 갱신 ✅ 다음 작업의 기준이 달라지는 변경 저장소 구조·담당 범위 공개 API·인증·앱 연동 공통 UI·검증 원칙 지원 환경·보안 정책 가이드 갱신 ❌ 기준을 바꾸지 않는 작은 변경 한 화면의 문구·스타일 일부 오류 수정 브리핑 문구·배치 조정 검사를 위한 임시 편집 10 · SUMMARY",
     "url": "./../guides/briefing/presentation.html#section-9"
   },
   {
-    "document": "Lounge Front-end 구축 가이드 · Presentation",
-    "section": "Client 검증은 UX이고, 신뢰 경계는 서버에 있습니다.",
-    "excerpt": "INPUT / OUTPUT 안전한 출력 외부 입력을 신뢰하지 않고 HTML, URL과 파일 출력을 방어합니다. AUTH 사용자 전환 권한은 서버가 재검증하고 Cache와 화면 잔존 데이터를 정리합니다. STORAGE Secret과 Log 민감정보를 Client 저장소, Bundle과 Log에 남기지 않습니다. SUPPLY CHAIN Bridge와 의존성 Origin, 외부 리소스, SDK와…",
-    "content": "Client 검증은 UX이고, 신뢰 경계는 서버에 있습니다. INPUT / OUTPUT 안전한 출력 외부 입력을 신뢰하지 않고 HTML, URL과 파일 출력을 방어합니다. AUTH 사용자 전환 권한은 서버가 재검증하고 Cache와 화면 잔존 데이터를 정리합니다. STORAGE Secret과 Log 민감정보를 Client 저장소, Bundle과 Log에 남기지 않습니다. SUPPLY CHAIN Bridge와 의존성 Origin, 외부 리소스, SDK와 Package 변경 영향을 검토합니다. CSRF, CORS, CSP, 보안 Header, Server Secret과 허용 Origin은 담당 조직이 확정하고 적용 결과를 함께 확인합니다. Front-end는 안전한 출력, Client 저장소와 Log의 민감정보 노출 방지, 사용자 전환 시 Cache 정리를 책임집니다. 인증과 권한의 최종 강제는 서버 책임입니다. 12 · ACCESSIBILITY & QUALITY GATE",
-    "url": "./../guides/briefing/presentation.html#section-11"
+    "document": "Lounge Front-end 작업 가이드 · Presentation",
+    "section": "사람이 결정하고 AI가 구현을 돕습니다",
+    "excerpt": "사람 이 직접 결정하고 검토하여 가이드를 작성합니다. AI 는 그 기준을 따라 구현을 돕습니다. DECIDE · 사람과 담당자 방향과 기준을 결정 무엇을 왜 만들지 정하고 결과가 기준에 맞는지 판단합니다. 화면 목적·사용자 흐름 업무 규칙·우선순위 서버·앱 연동 방식 구조·최종 품질 결정을 정리 GUIDE · 기준 작업 기준으로 정리 사람과 AI가 가이드에 따라 작업하고 검토하도록 정리합니다…",
+    "content": "사람이 결정하고 AI가 구현을 돕습니다 사람 이 직접 결정하고 검토하여 가이드를 작성합니다. AI 는 그 기준을 따라 구현을 돕습니다. DECIDE · 사람과 담당자 방향과 기준을 결정 무엇을 왜 만들지 정하고 결과가 기준에 맞는지 판단합니다. 화면 목적·사용자 흐름 업무 규칙·우선순위 서버·앱 연동 방식 구조·최종 품질 결정을 정리 GUIDE · 기준 작업 기준으로 정리 사람과 AI가 가이드에 따라 작업하고 검토하도록 정리합니다. 저장소·담당 범위 UI·상태 구현 기준 연동·지원 환경 검증·완료 조건 기준을 전달 SUPPORT · AI 기준을 확인하고 구현 가이드와 현재 코드를 확인해 구현한 뒤 검사 결과를 정리합니다. 가이드·코드 확인 기존 UI 재사용 화면·상태·Story 구현 검사·빌드·결과 보고 FINAL CHECK · FRONT-END 사람이 최종 확인 AI가 만든 결과가 구조·업무 의도·품질 기준에 맞는지 확인 합니다. 02 · REPOSITORY",
+    "url": "./../guides/briefing/presentation.html#section-1"
   },
   {
-    "document": "Lounge Front-end 구축 가이드 · Presentation",
-    "section": "Native 기능은 승인된 Bridge로만 연결합니다.",
-    "excerpt": "화면 Component가 Flutter 객체와 OS별 메시지를 직접 다루지 않도록 Promise 기반 Adapter를 둡니다. ADAPTER 일관된 호출 경계 요청 ID · Method · Parameter · 결과를 한곳에서 처리합니다. CONTRACT 구현 전 합의 허용 Origin과 Method 성공·취소·권한 거부·Timeout 중복 요청과 화면 종료 iOS·Android 지원 범위…",
-    "content": "Native 기능은 승인된 Bridge로만 연결합니다. 화면 Component가 Flutter 객체와 OS별 메시지를 직접 다루지 않도록 Promise 기반 Adapter를 둡니다. ADAPTER 일관된 호출 경계 요청 ID · Method · Parameter · 결과를 한곳에서 처리합니다. CONTRACT 구현 전 합의 허용 Origin과 Method 성공·취소·권한 거부·Timeout 중복 요청과 화면 종료 iOS·Android 지원 범위 Bridge가 없거나 지원되지 않는 환경, 권한 거부, 취소, Timeout과 화면 종료까지 실패 계약에 포함합니다. 실제 기기에서 정상·실패 흐름을 모두 확인합니다. 09 · SUPPORT BASELINE",
-    "url": "./../guides/briefing/presentation.html#section-8"
+    "document": "Lounge Front-end 작업 가이드 · Presentation",
+    "section": "사람이 방향을 정하고 AI가 구현하는 순서",
+    "excerpt": "사람 은 작업을 요청하고 결과를 검토합니다. AI 는 기존 코드와 가이드를 확인한 뒤 구현하고 검사합니다. 서비스 ·업무 기준이 명확하지 않으면 담당자에게 확인합니다. 사람 · 요청과 최종 검토 AI · 코드 확인·구현·검사 담당자 · 서비스와 업무 결정 flowchart TB A[\"사람 · 작업 요청 만들 화면과 Figma 전달\"] --> B[\"AI · 1. 작업 범위 확인 AGENTS.m…",
+    "content": "사람이 방향을 정하고 AI가 구현하는 순서 사람 은 작업을 요청하고 결과를 검토합니다. AI 는 기존 코드와 가이드를 확인한 뒤 구현하고 검사합니다. 서비스 ·업무 기준이 명확하지 않으면 담당자에게 확인합니다. 사람 · 요청과 최종 검토 AI · 코드 확인·구현·검사 담당자 · 서비스와 업무 결정 flowchart TB A[\"사람 · 작업 요청 만들 화면과 Figma 전달\"] --> B[\"AI · 1. 작업 범위 확인 AGENTS.md에서 담당 범위와 주의사항 확인\"] B --> C[\"AI · 2. 현재 코드 확인 설치된 기능 · 기존 UI · 재사용 방법 확인\"] C --> D[\"AI · 3. 필요한 문서 확인 이번 작업에 필요한 가이드만 선택\"] D --> E{\"AI · 바로 구현할 수 있는가?\"} E -->|\"YES\"| I[\"AI · 4. 화면 구현 apps/app-webview에 코드 작성\"] E -->|\"NO\"| F{\"AI · 서비스·업무 결정이 필요한가?\"} F -->|\"YES\"| G[\"담당자 · 기준 결정 업무 규칙 · 서버 연결 · 앱 연동 방식 답변\"] F -->|\"NO\"| H[\"AI · 구현 방법 확인 구현 예시와 상세 가이드 확인\"] G --> I H --> I I --> J[\"AI · 5. 구현 결과 검사 Storybook에서 화면 확인 코드 검사 · 테스트 · 빌드 실행\"] J --> K[\"AI · 작업 결과 보고 바뀐 내용과 확인하지 못한 항목 정리\"] K --> L[\"사람 · 최종 검토와 완료 결과 확인과 품질 판단\"] class A,L human class B,C,D,E,F,H,I,J,K ai class G owner class E,F decision class L complete DECISION RULE AI가 정할 수 없는 서비스·업무 기준은 담당자가 결정합니다. 구현 결과는 사람이 마지막으로 확인합니다. 08 · UNIT WORK EXAMPLE",
+    "url": "./../guides/briefing/presentation.html#section-7"
   },
   {
-    "document": "Lounge Front-end 구축 가이드 · Presentation",
-    "section": "Story에서 연결된 Figma Frame을 확인합니다.",
-    "excerpt": "공식 Addon 데모에서 구현 Story는 위 Canvas에, 연결된 Figma Embed는 아래 Design 탭에 표시됩니다. @storybook/addon-designs 공식 Embed Frame 데모 캡처 공식 데모 흐름 Story 선택 → Design 탭 → Figma Embed 확인 Story를 우선 작성하는 대상 공통 Component와 주요 Variant, 상태 전환이 중요한 기…",
-    "content": "Story에서 연결된 Figma Frame을 확인합니다. 공식 Addon 데모에서 구현 Story는 위 Canvas에, 연결된 Figma Embed는 아래 Design 탭에 표시됩니다. @storybook/addon-designs 공식 Embed Frame 데모 캡처 공식 데모 흐름 Story 선택 → Design 탭 → Figma Embed 확인 Story를 우선 작성하는 대상 공통 Component와 주요 Variant, 상태 전환이 중요한 기능 조합, Loading·Empty·Error·Offline처럼 반복 재현하기 어려운 화면입니다. Storybook 밖에서 확인할 대상 실제 Routing, Backend 권한과 업무 규칙, WebView Bridge, 배포 환경과 전체 사용자 여정은 Application 통합 검증으로 확인합니다. 상세 기준 · Storybook 운영 가이드 06 · STATE OWNERSHIP",
+    "document": "Lounge Front-end 작업 가이드 · Presentation",
+    "section": "코드와 가이드를 같은 저장소에",
+    "excerpt": "apps/ 에는 실제 앱 코드, docs/ 에는 구현·검토 기준을 둡니다. 앱을 빌드할 때 문서는 포함하지 않습니다. PROJECT STRUCTURE Root/ ├─ AGENTS.md # AI 최상위 작업 원칙 ├─ apps/ # 앱 소스 │ ├─ mobile/ # Flutter Native │ └─ app-webview/ # WebView Front-end │ ├─ .storybook/ #…",
+    "content": "코드와 가이드를 같은 저장소에 apps/ 에는 실제 앱 코드, docs/ 에는 구현·검토 기준을 둡니다. 앱을 빌드할 때 문서는 포함하지 않습니다. PROJECT STRUCTURE Root/ ├─ AGENTS.md # AI 최상위 작업 원칙 ├─ apps/ # 앱 소스 │ ├─ mobile/ # Flutter Native │ └─ app-webview/ # WebView Front-end │ ├─ .storybook/ # UI 확인 │ └─ src/ # Source · Story · Test └─ docs/ # 가이드 ├─ AGENTS.md # AI 가이드 작성 기준 ├─ guides/ # 사람과 AI가 확인하는 상세 HTML 가이드 ├─ ai/ # AI 작업별 요약 ├─ common-source/ # 파일 단위 적용 예시 └─ assets/ · search/ · templates/ # 가이드 공통 자산 ROOT RULES AGENTS.md 저장소 전체에서 AI가 따라야 할 작업·편집·검증 원칙 APP SOURCE apps/ app-webview/ 은 Front-end, mobile/ 은 별도 앱 개발자가 담당 GUIDES docs/ 구현·검토 기준과 예시를 제공하며 앱에는 포함하지 않음 03 · DOCS LAYERS",
+    "url": "./../guides/briefing/presentation.html#section-2"
+  },
+  {
+    "document": "Lounge Front-end 작업 가이드 · Presentation",
+    "section": "AI가 지침 및 가이드를 찾는 프로세스",
+    "excerpt": "AGENTS.md 에서 시작해 docs/ai/ 의 작업별 기준을 확인합니다. 구현 예시나 상세 설명이 필요할 때만 다음 문서로 이동합니다. flowchart TB A[\"1 · 작업 위치의 규칙 확인 AGENTS.md (AI 지침)\"] --> B[\"2 · 작업별 핵심 기준 확인 docs/ai/*.md\"] B --> C{\"파일에 적용할 구현 예시가 필요한가?\"} C -->|\"YES\"| D[\"3…",
+    "content": "AI가 지침 및 가이드를 찾는 프로세스 AGENTS.md 에서 시작해 docs/ai/ 의 작업별 기준을 확인합니다. 구현 예시나 상세 설명이 필요할 때만 다음 문서로 이동합니다. flowchart TB A[\"1 · 작업 위치의 규칙 확인 AGENTS.md (AI 지침)\"] --> B[\"2 · 작업별 핵심 기준 확인 docs/ai/*.md\"] B --> C{\"파일에 적용할 구현 예시가 필요한가?\"} C -->|\"YES\"| D[\"3 · 파일 단위 예시 확인 docs/common-source/*.md\"] C -->|\"NO\"| G[\"4 · 실제 코드에 적용 apps/\"] D --> E{\"작업 배경·전체 범위도 확인해야 하는가?\"} E -->|\"YES\"| F[\"상세 가이드 확인 docs/guides/ 아래 *.html\"] E -->|\"NO\"| G F --> G class C,E decision class G source READING RULE 모든 문서를 처음부터 읽지 않고 현재 작업에 필요한 문서까지만 따라갑니다. 04 · GUIDE MAP",
+    "url": "./../guides/briefing/presentation.html#section-3"
+  },
+  {
+    "document": "Lounge Front-end 작업 가이드 · Presentation",
+    "section": "AI와 함께 구현하고 최종 확인은 사람이 합니다.",
+    "excerpt": "01 · DECIDE 사람이 방향과 기준을 결정 화면 목적·업무 규칙·연동 방식·최종 품질 가이드 02 · BUILD AI와 사람이 같이 구현 가이드와 기존 코드를 확인해 UI·상태·Story·Test 작성 검토 03 · COMPLETE 사람의 최종 확인으로 완료 Source·Story·검사·빌드 최종 결과 확인 UPDATE RULE 정책과 기준이 바뀌면 가이드도 함께 갱신됩니다. 기존 템플…",
+    "content": "AI와 함께 구현하고 최종 확인은 사람이 합니다. 01 · DECIDE 사람이 방향과 기준을 결정 화면 목적·업무 규칙·연동 방식·최종 품질 가이드 02 · BUILD AI와 사람이 같이 구현 가이드와 기존 코드를 확인해 UI·상태·Story·Test 작성 검토 03 · COMPLETE 사람의 최종 확인으로 완료 Source·Story·검사·빌드 최종 결과 확인 UPDATE RULE 정책과 기준이 바뀌면 가이드도 함께 갱신됩니다. 기존 템플릿으로 브리핑 살펴보기 ⧉ ↑ ↓",
+    "url": "./../guides/briefing/presentation.html#section-10"
+  },
+  {
+    "document": "Lounge Front-end 작업 가이드 · Presentation",
+    "section": "Front-end 가이드 지도",
+    "excerpt": "docs/guides/ 아래 상세 가이드입니다. GUIDE 01 · PROJECT & PLATFORM 프로젝트와 실행 환경 작업공간, 담당 및 협의점, 계획을 찾을 때 architecture/ 저장소 구조·담당 범위·빌드·배포 frontend/ Front-end 공통 기술과 구현 흐름 app/ 앱 개발 담당 범위와 Front-end 협업 기준 platform/webview/ WebView·B…",
+    "content": "Front-end 가이드 지도 docs/guides/ 아래 상세 가이드입니다. GUIDE 01 · PROJECT & PLATFORM 프로젝트와 실행 환경 작업공간, 담당 및 협의점, 계획을 찾을 때 architecture/ 저장소 구조·담당 범위·빌드·배포 frontend/ Front-end 공통 기술과 구현 흐름 app/ 앱 개발 담당 범위와 Front-end 협업 기준 platform/webview/ WebView·Bridge와 OS별 연결 기준 browser-support/ 지원 브라우저·화면 크기 기준 planning/ 범위 · 순서 · 일정 GUIDE 02 · UI & STATE UI와 상태 구현 Figma 화면을 실제 UI로 구현하고 검토할 때 ui/react_code_exports.html Figma 화면 구현과 기존 UI 재사용 ui/design_tokens.html 디자인 값과 프로젝트 토큰 연결 ui/zustand.html 공유 상태가 필요한 시점과 사용 기준 ui/accessibility.html 접근성·키보드·ARIA 구현 기준 storybook/ UI 상태를 독립적으로 구현·검토 typescript/ TypeScript 설정과 외부 입력 검증 GUIDE 03 · VERIFY & PROTECT 검증과 품질 유지 구현 결과를 검사하고 운영 중 품질을 지킬 때 testing/ · lint/ 테스트 작성과 코드 품질 검사 security/ 외부 입력·개인정보·패키지 보안 기준 performance/ 지연·오류·오프라인 대응과 성능 검증 i18n/ 번역·언어 설정과 긴 문구 레이아웃 확인 LEARNING PATH AI 결과를 직접 검토하기 위한 학습 가이드 learning/ai-frontend-growth/ 필요한 Front-end 지식과 검토 순서를 단계별로 확인합니다. 05 · STORYBOOK",
+    "url": "./../guides/briefing/presentation.html#section-4"
+  },
+  {
+    "document": "Lounge Front-end 작업 가이드 · Presentation",
+    "section": "Storybook 앱을 켜지 않고 UI를 확인하는 곳",
+    "excerpt": "앱 전체를 실행하지 않아도 필요한 UI만 따로 열어봅니다. 화면 상태와 사용자 동작도 일관된 조건으로 다시 확인합니다. Storybook 안에서 구현된 UI와 Figma 시안을 나란히 비교하는 예시 01 · RENDER 필요한 UI만 바로 열기 라우팅이나 전체 화면 흐름을 거치지 않고 컴포넌트·기능·화면을 따로 엽니다. 02 · REPRODUCE 같은 상태를 언제든 재현 Default·Loa…",
+    "content": "Storybook 앱을 켜지 않고 UI를 확인하는 곳 앱 전체를 실행하지 않아도 필요한 UI만 따로 열어봅니다. 화면 상태와 사용자 동작도 일관된 조건으로 다시 확인합니다. Storybook 안에서 구현된 UI와 Figma 시안을 나란히 비교하는 예시 01 · RENDER 필요한 UI만 바로 열기 라우팅이나 전체 화면 흐름을 거치지 않고 컴포넌트·기능·화면을 따로 엽니다. 02 · REPRODUCE 같은 상태를 언제든 재현 Default·Loading·Empty·Error 상태를 Story에 미리 준비합니다. 03 · REVIEW 디자인과 동작을 함께 검토 Figma와 실제 구현을 비교하고 사용자 동작·화면 크기·키보드 접근성을 확인합니다. STORYBOOK에서 확인 UI 자체의 품질 모양·상태·사용자 동작·화면 크기·접근성과 Figma 비교 실제 앱에서 확인 연결된 전체 사용자 흐름 라우팅·서버·인증·앱 연동과 실제 화면 간 이동 06 · STORYBOOK UI REVIEW",
     "url": "./../guides/briefing/presentation.html#section-5"
   },
   {
-    "document": "Lounge Front-end 구축 가이드 브리핑",
+    "document": "Lounge Front-end 작업 가이드 · Presentation",
+    "section": "Storybook에서 구현된 UI를 검수",
+    "excerpt": "구현된 UI를 상태별로 재현해 디자인·동작·접근성을 확인합니다. 문제가 있으면 수정 후 다시 검수하고 이상이 없으면 완료합니다. 1 · SELECT 검수할 UI와 상태 선택 검수할 화면과 Default·Loading·Error 등 필요한 상태를 정합니다. 2 · REPRODUCE Story에서 상태 재현 실제 Props와 테스트용 가상 데이터(Mock Data)를 넣어 같은 화면을 다시 띄웁…",
+    "content": "Storybook에서 구현된 UI를 검수 구현된 UI를 상태별로 재현해 디자인·동작·접근성을 확인합니다. 문제가 있으면 수정 후 다시 검수하고 이상이 없으면 완료합니다. 1 · SELECT 검수할 UI와 상태 선택 검수할 화면과 Default·Loading·Error 등 필요한 상태를 정합니다. 2 · REPRODUCE Story에서 상태 재현 실제 Props와 테스트용 가상 데이터(Mock Data)를 넣어 같은 화면을 다시 띄웁니다. 3 · REVIEW 디자인과 동작 검수 Figma와 비교하고 화면 크기·사용자 동작·키보드 접근성을 확인합니다. 4 · COMPLETE Storybook 검수 완료 발견한 문제를 수정한 뒤 같은 Story로 다시 확인합니다. 남은 문제가 없으면 검수를 마칩니다. RECOMMENDED 기본으로 준비하면 좋은 대표 상태 자주 쓰는 화면 상태를 Story로 만들어 두면 같은 조건에서 다시 검토하기 쉽습니다. 기본·성공 Loading Empty Error 권한 거부 Offline 긴 문구·다국어 Mobile·Tablet·Desktop 07 · AI BUILD FLOW",
+    "url": "./../guides/briefing/presentation.html#section-6"
+  },
+  {
+    "document": "Lounge Front-end 작업 가이드 · Presentation",
+    "section": "UI·기능 단위 작업 구현부터 검증까지",
+    "excerpt": "API로 목록을 불러오는 화면을 만든다고 가정합니다. UI 구현, API 연결, 실제 환경 검증까지 완료해야 작업이 끝납니다. 01 CHECK UI와 API 기준 확인 Figma와 기존 코드를 살펴보고 API 요청·응답 형식과 Loading·Empty·Error 상태를 확인합니다. 단계 결과 Figma · API 명세 · 완료 조건 이 정리됩니다. 02 BUILD UI와 주요 상태 구현 기존…",
+    "content": "UI·기능 단위 작업 구현부터 검증까지 API로 목록을 불러오는 화면을 만든다고 가정합니다. UI 구현, API 연결, 실제 환경 검증까지 완료해야 작업이 끝납니다. 01 CHECK UI와 API 기준 확인 Figma와 기존 코드를 살펴보고 API 요청·응답 형식과 Loading·Empty·Error 상태를 확인합니다. 단계 결과 Figma · API 명세 · 완료 조건 이 정리됩니다. 02 BUILD UI와 주요 상태 구현 기존 UI를 재사용해 화면을 만들고 테스트용 데이터로 기본·로딩·빈 결과·오류 상태를 Story에 준비합니다. 단계 결과 화면 · 주요 상태 · Story 를 확인할 수 있습니다. 03 CONNECT API 연결과 응답별 동작 확인 API 호출 코드를 연결하고 Storybook에서는 테스트용 응답을 바꿔 가며 상태 전환과 사용자 동작을 확인합니다. 단계 결과 API 요청 처리 · 응답별 화면 · 사용자 동작 을 확인할 수 있습니다. 04 COMPLETE 실제 앱·연결 환경에서 확인 실제 앱 또는 API가 연결된 개발 환경에서 서버 응답·인증·오류 흐름을 확인합니다. 테스트·코드 검사·빌드를 통과하고 사람이 최종 검토하면 단위 작업이 완료됩니다. 완료 결과 실제 API 연결 · Test · Build · 검토 결과 가 남습니다. 09 · GUIDE UPDATE",
+    "url": "./../guides/briefing/presentation.html#section-8"
+  },
+  {
+    "document": "Lounge Front-end 작업 가이드 브리핑",
     "section": "개발자와 관련 담당자의 책임",
     "excerpt": "담당 현재 책임 Front-end 개발자 사람용 가이드, 화면·상태·Component, 접근성, 반응형, 안전한 출력, Client 저장소와 민감정보 노출 방지, Test와 Storybook Designer 또는 편집 권한 보유자 Figma 시각 기준과 구현 설명 입력·갱신 Backend 담당자 API 요청 검증, 인증, 권한, Session, 업무 데이터와 오류 계약의 강제 적용 Flutt…",
     "content": "16. 개발자와 관련 담당자의 책임 담당 현재 책임 Front-end 개발자 사람용 가이드, 화면·상태·Component, 접근성, 반응형, 안전한 출력, Client 저장소와 민감정보 노출 방지, Test와 Storybook Designer 또는 편집 권한 보유자 Figma 시각 기준과 구현 설명 입력·갱신 Backend 담당자 API 요청 검증, 인증, 권한, Session, 업무 데이터와 오류 계약의 강제 적용 Flutter 담당자 Bridge Method, 메시지, OS 권한과 Native 동작 계약 승인 Backend·배포·보안 담당 CSRF, CORS, CSP, 보안 Header, Server Secret과 허용 Origin 정책의 확정 및 적용 AI 코딩 도구 기존 구현 탐색, 코드·Story 초안, 반복 검사와 결과 정리 Reviewer 요구사항, 구조, 공개 API, 예외 상태, 보안 영향과 검증 결과 Front-end가 독립적으로 결정할 수 없는 계약은 임의로 확정하지 않습니다. 담당자가 승인한 계약을 실제 코드와 관련 가이드에 함께 반영합니다.",
     "url": "./../guides/briefing/index.html#section-16"
   },
   {
-    "document": "Lounge Front-end 구축 가이드 브리핑",
-    "section": "구축 대상과 저장소 구조",
-    "excerpt": "WebView 서비스 화면과 업무 흐름은 apps/app-webview 에 구현합니다. apps/ └── app-webview/ # App에서 사용하는 WebView 서비스 화면 Application 가까이에서 시작합니다 apps/app-webview 안에서는 Routing과 화면 진입점, 기능 코드와 WebView 전용 UI를 가까운 위치에서 관리합니다. App-WebView 한 곳에서만…",
-    "content": "2. 구축 대상과 저장소 구조 WebView 서비스 화면과 업무 흐름은 apps/app-webview 에 구현합니다. apps/ └── app-webview/ # App에서 사용하는 WebView 서비스 화면 Application 가까이에서 시작합니다 apps/app-webview 안에서는 Routing과 화면 진입점, 기능 코드와 WebView 전용 UI를 가까운 위치에서 관리합니다. App-WebView 한 곳에서만 사용하는 shadcn/ui 원형과 Wrapper는 apps/app-webview/src/components/ui 에 둡니다. 검증된 구현만 공통으로 관리합니다 여러 기능에서 실제로 재사용되고 의미와 변경 이유가 같은 UI만 src/components/ui 에서 공통으로 관리합니다. 한 화면에서만 사용하는 Wrapper, 공통화 가능성을 예상한 Type과 Adapter는 미리 만들지 않습니다. apps/ 와 docs/ 의 최상위 분리는 실제 프로젝트 기준입니다. 앱 내부 Package 경계와 Build 구성은 실제 사용처와 현재 설정을 기준으로 판단합니다. 상세 기준: 저장소 경계와 공통화 기준은 Front-End 저장소 구조 기준 에서 확인합니다.",
-    "url": "./../guides/briefing/index.html#section-2"
-  },
-  {
-    "document": "Lounge Front-end 구축 가이드 브리핑",
+    "document": "Lounge Front-end 작업 가이드 브리핑",
     "section": "기능 하나를 구현하는 기본 순서",
-    "excerpt": "기획과 Figma에서 화면 목적, 상태, 입력과 사용자 동작을 확인합니다. 실제 프로젝트의 AGENTS.md 와 작업 종류에 해당하는 AI 요약을 확인합니다. Figma Component Description에 연결된 파일 이름과 경로를 확인합니다. 실제 Source에서 Export, Props, Variant와 사용처를 다시 확인합니다. 기존 Layout, Semantic Token, sh…",
-    "content": "3. 기능 하나를 구현하는 기본 순서 기획과 Figma에서 화면 목적, 상태, 입력과 사용자 동작을 확인합니다. 실제 프로젝트의 AGENTS.md 와 작업 종류에 해당하는 AI 요약을 확인합니다. Figma Component Description에 연결된 파일 이름과 경로를 확인합니다. 실제 Source에서 Export, Props, Variant와 사용처를 다시 확인합니다. 기존 Layout, Semantic Token, shadcn/ui와 프로젝트 Component로 표현할 범위를 판단합니다. 서버 데이터, Form, 화면 내부 상태와 공유 Client 상태의 소유 도구를 구분합니다. Loading, Empty, Error, 느린 응답과 연결 끊김 상태를 함께 설계합니다. 독립적으로 재현·검토할 가치가 있는 Component, 기능 조합이나 화면 상태라면 실제 구현과 Story를 같은 변경에서 작성합니다. 화면에 적용하고 접근성, 반응형, 상태 전환과 주요 사용자 동작을 확인합니다. 프로젝트에 실제로 구성된 TypeScript, Lint, Test, Storybook Build와 Application Build를 실행합니다. 재사용·신규 Component, 추가·변경한 Story와 재현 상태, 검증 결과와 확인하지 못한 항목을 완료 보고에 남깁니다. 위 순서는 준비, 탐색과 설계, 구현, 적용과 검증, 완료 보고의 다섯 단계로 이해할 수 있습니다. flowchart TD accTitle: Front-end 기능 하나를 구현하는 다섯 단계 accDescr: 기획과 Figma 확인 및 기존 소스 탐색으로 준비한 뒤 상태와 예외를 설계하고, 컴포넌트와 기능 코드 및 필요한 Story를 구현해 화면에 적용하며, 품질 검사와 완료 보고로 작업을 마칩니다. A[\"1. 준비 기획 · Figma · AGENTS.md 확인\"] --> B[\"2. 탐색과 설계 기존 Component · Token · 상태 책임 · 예외 상태\"] B --> C[\"3. 구현 Component · 기능 코드 · 재현할 Story\"] C --> D[\"4. 적용과 검증 화면 · 접근성 · 다국어 · 보안 · 반응형 · Test · Build\"] D --> E[\"5. 완료 보고 재사용 · 신규 구현 · 검사 결과 · 미확정 항목\"] 기능 확인부터 구현, 품질 검증과 완료 보고까지의 실무 흐름 준비 단계에서는 요구사항과 기존 구현을 찾고, 탐색과 설계 단계에서는 새로 만들 범위와 상태 소유를 결정합니다. 구현 후 실제 화면에 적용하여 품질 기준을 확인하고, 검증하지 못한 환경과 남은 계약까지 완료 보고에 포함합니다. API 계약이 아직 승인되지 않았다면 임의의 Endpoint, Parser, Fixture와 Mock Handler를 먼저 만들지 않습니다. 필요한 계약을 TBD 로 남기고 승인된 형식을 받은 뒤 연결합니다. 상세 기준: 파일 배치, 기술 스택, 상태와 검증의 전체 기준은 Front-End 개발 가이드 에서 확인합니다.",
+    "excerpt": "작업 요청과 Figma에서 화면 목적, 상태와 사용자 동작을 확인합니다. 작업 위치의 AGENTS.md 에서 담당 범위와 주의사항을 확인합니다. 설치된 패키지, 기존 UI와 실제 소스에서 재사용할 구현을 찾습니다. 작업별 docs/ai/ 요약을 읽고, 필요한 경우에만 구현 예시와 상세 가이드를 확인합니다. 서비스·업무·서버·앱 연동 결정이 필요하면 담당자에게 질문하고 확정된 기준을 반영합니다…",
+    "content": "3. 기능 하나를 구현하는 기본 순서 작업 요청과 Figma에서 화면 목적, 상태와 사용자 동작을 확인합니다. 작업 위치의 AGENTS.md 에서 담당 범위와 주의사항을 확인합니다. 설치된 패키지, 기존 UI와 실제 소스에서 재사용할 구현을 찾습니다. 작업별 docs/ai/ 요약을 읽고, 필요한 경우에만 구현 예시와 상세 가이드를 확인합니다. 서비스·업무·서버·앱 연동 결정이 필요하면 담당자에게 질문하고 확정된 기준을 반영합니다. 화면과 주요 상태를 구현하고, 독립적으로 검토할 가치가 있는 상태는 Story로 함께 작성합니다. Storybook에서 테스트용 API 응답을 바꿔 가며 UI 상태와 사용자 동작을 검토합니다. 실제 앱 또는 API가 연결된 개발 환경에서 서버 응답, 인증, 오류 흐름과 전체 동작을 확인합니다. 프로젝트에 구성된 코드 검사, 테스트와 빌드를 실행합니다. AI는 수정 결과와 확인하지 못한 항목을 보고하고, 사람이 최종 품질을 확인하면 작업이 완료됩니다. 전체 흐름은 범위 확인, 기존 구현 탐색, 구현, 검증, 결과 보고와 사람의 최종 확인으로 이어집니다. flowchart TD accTitle: Front-end 기능 하나를 구현하고 완료하는 순서 accDescr: 사람이 작업을 요청하면 AI가 범위와 기존 구현을 확인하고 필요한 기준에 따라 구현과 검증을 수행합니다. AI가 결과를 보고한 뒤 사람이 최종 품질을 확인하면 작업이 완료됩니다. A[\"사람 · 작업 요청 화면 목적 · Figma · 업무 기준\"] --> B[\"AI · 범위와 기존 구현 확인 AGENTS.md · Package · Source\"] B --> C{\"추가 결정이 필요한가?\"} C -->|\"YES\"| D[\"담당자 · 기준 결정 서비스 · 서버 · 앱 연동\"] C -->|\"NO\"| E[\"AI · 구현과 검증 화면 · 상태 · Story · API · Test · Build\"] D --> E E --> F[\"AI · 작업 결과 보고 검증 결과 · 남은 확인 항목\"] F --> G[\"사람 · 최종 검토와 완료 결과 확인 · 품질 판단\"] 사람이 기준을 결정하고 AI가 구현·검증한 뒤, 사람이 최종 품질을 확인하는 흐름 AI의 결과 보고는 작업 완료가 아니라 사람의 검토를 위한 입력입니다. 검증하지 못한 환경과 남은 계약도 숨기지 않고 함께 공유합니다. API 계약이 아직 승인되지 않았다면 임의의 Endpoint, Parser, Fixture와 Mock Handler를 먼저 만들지 않습니다. 필요한 계약을 TBD 로 남기고 승인된 형식을 받은 뒤 연결합니다. 상세 기준: 파일 배치, 기술 스택, 상태와 검증의 전체 기준은 Front-End 개발 가이드 에서 확인합니다.",
     "url": "./../guides/briefing/index.html#section-3"
   },
   {
-    "document": "Lounge Front-end 구축 가이드 브리핑",
-    "section": "다국어와 번역 운영",
+    "document": "Lounge Front-end 작업 가이드 브리핑",
+    "section": "다국어 UI와 번역",
     "excerpt": "서비스가 의미를 책임지는 UI 문구는 한국어 원문으로 작성하고 Build 전에 번역 카탈로그로 추출·검수합니다. 기본 지원 언어는 한국어 ko , 중국어 간체 zh-CN , 일본어 ja 와 영어 en 입니다. UI 메시지 작성과 추출 번역 Key를 먼저 만들지 않고 추출 가능한 정적 한국어 메시지를 작성합니다. 같은 문구의 의미가 다르면 메시지 가까이에 Context를 기록합니다. 문자열 조…",
-    "content": "10. 다국어와 번역 운영 서비스가 의미를 책임지는 UI 문구는 한국어 원문으로 작성하고 Build 전에 번역 카탈로그로 추출·검수합니다. 기본 지원 언어는 한국어 ko , 중국어 간체 zh-CN , 일본어 ja 와 영어 en 입니다. UI 메시지 작성과 추출 번역 Key를 먼저 만들지 않고 추출 가능한 정적 한국어 메시지를 작성합니다. 같은 문구의 의미가 다르면 메시지 가까이에 Context를 기록합니다. 문자열 조각을 이어 붙이지 않고 변수, ICU 문법과 React 자리표시자를 보존합니다. 사용자명, 브랜드명, 모델 번호와 Code는 번역 대상에서 분리합니다. 사용자 콘텐츠와 API 오류 문구를 자동으로 UI 카탈로그에 넣지 않습니다. 로컬 LLM 번역 로컬 LLM은 개발 과정에서 카탈로그의 비어 있거나 원문이 변경된 항목만 번역합니다. 실행 중인 사용자 화면에서는 LLM을 호출하지 않습니다. 메시지 ID와 결과 ID가 일치하는지 확인합니다. 변수, ICU 문법과 React 자리표시자를 검증합니다. 제품명과 번역 금지 용어를 용어집과 비교합니다. JSON Schema와 카탈로그 Compile 검사를 통과한 결과만 병합합니다. 결제, 환불, 개인정보, 약관과 이용 제한 문구는 담당자가 직접 검수합니다. 실행 언어와 Fallback Flutter App은 App 언어와 Device Locale을 관리하고 Next.js WebView는 지원 Locale 검증, 카탈로그 Load와 UI 표시를 담당합니다. 중국어·일본어 번역이 없으면 영어를 사용하고 영어도 없으면 한국어 원문을 표시합니다. 날짜, 시간, 숫자와 통화는 문자열을 직접 조합하지 않고 Locale과 통화 Code를 기준으로 Formatting합니다. 기준 시간대, 통화 반올림과 가격 표시 규칙은 업무 계약이 정해진 뒤 적용합니다. Layout과 접근성 번역 문구가 한국어보다 길어질 수 있으므로 Button, Tab, Form Label, 오류 메시지, Dialog와 Table에서 긴 영어·중국어·일본어 문구를 확인합니다. 고정 너비와 한 줄 표시를 기본으로 가정하지 않습니다. 줄바꿈, 말줄임, 화면 확대, 최소 터치 영역과 가로 Overflow를 지원 Viewport에서 확인합니다. 접근 가능한 이름과 Screen Reader 안내도 같은 번역 카탈로그에서 관리합니다. 동적 콘텐츠와 기기 번역 사용자 게시물과 후기 같은 동적 콘텐츠는 원문을 기본 표시하고 사용자가 요청했을 때만 Flutter의 번역 Capability를 확인해 기기 번역을 사용할 수 있습니다. 미지원 또는 실패 시 번역 기능만 비활성화하고 원문을 표시합니다. 번역 결과임을 표시하고 원문 보기 기능을 제공합니다. 현재 화면에 필요한 콘텐츠만 작은 단위로 요청합니다. 번역 결과도 외부 입력으로 취급하며 HTML로 직접 삽입하지 않습니다. 법률, 결제와 정책 문구에는 기기 번역을 확정 문구로 사용하지 않습니다. 다국어 완료 Checklist 새 문구가 추출 가능한 정적 형태인가? 지원 Locale 카탈로그와 Fallback이 갱신됐는가? 변수, ICU, 자리표시자와 Compile 검사를 통과했는가? 중요 업무 문구를 담당자가 검수했는가? 긴 문구, 접근성 이름과 주요 Viewport를 확인했는가? 실행 중 LLM 호출이나 승인되지 않은 외부 전송이 없는가? 상세 기준: Lingui 메시지 작성, 카탈로그, 로컬 LLM 번역, Flutter 기기 번역과 검증 코드는 Front-End 다국어 및 로컬 LLM 번역 가이드 에서 확인합니다.",
+    "content": "10. 다국어 UI와 번역 서비스가 의미를 책임지는 UI 문구는 한국어 원문으로 작성하고 Build 전에 번역 카탈로그로 추출·검수합니다. 기본 지원 언어는 한국어 ko , 중국어 간체 zh-CN , 일본어 ja 와 영어 en 입니다. UI 메시지 작성과 추출 번역 Key를 먼저 만들지 않고 추출 가능한 정적 한국어 메시지를 작성합니다. 같은 문구의 의미가 다르면 메시지 가까이에 Context를 기록합니다. 문자열 조각을 이어 붙이지 않고 변수, ICU 문법과 React 자리표시자를 보존합니다. 사용자명, 브랜드명, 모델 번호와 Code는 번역 대상에서 분리합니다. 사용자 콘텐츠와 API 오류 문구를 자동으로 UI 카탈로그에 넣지 않습니다. 로컬 LLM 번역 로컬 LLM은 개발 과정에서 카탈로그의 비어 있거나 원문이 변경된 항목만 번역합니다. 실행 중인 사용자 화면에서는 LLM을 호출하지 않습니다. 메시지 ID와 결과 ID가 일치하는지 확인합니다. 변수, ICU 문법과 React 자리표시자를 검증합니다. 제품명과 번역 금지 용어를 용어집과 비교합니다. JSON Schema와 카탈로그 Compile 검사를 통과한 결과만 병합합니다. 결제, 환불, 개인정보, 약관과 이용 제한 문구는 담당자가 직접 검수합니다. 실행 언어와 Fallback Flutter App은 App 언어와 Device Locale을 관리하고 Next.js WebView는 지원 Locale 검증, 카탈로그 Load와 UI 표시를 담당합니다. 중국어·일본어 번역이 없으면 영어를 사용하고 영어도 없으면 한국어 원문을 표시합니다. 날짜, 시간, 숫자와 통화는 문자열을 직접 조합하지 않고 Locale과 통화 Code를 기준으로 Formatting합니다. 기준 시간대, 통화 반올림과 가격 표시 규칙은 업무 계약이 정해진 뒤 적용합니다. Layout과 접근성 번역 문구가 한국어보다 길어질 수 있으므로 Button, Tab, Form Label, 오류 메시지, Dialog와 Table에서 긴 영어·중국어·일본어 문구를 확인합니다. 고정 너비와 한 줄 표시를 기본으로 가정하지 않습니다. 줄바꿈, 말줄임, 화면 확대, 최소 터치 영역과 가로 Overflow를 지원 Viewport에서 확인합니다. 접근 가능한 이름과 Screen Reader 안내도 같은 번역 카탈로그에서 관리합니다. 동적 콘텐츠와 기기 번역 사용자 게시물과 후기 같은 동적 콘텐츠는 원문을 기본 표시하고 사용자가 요청했을 때만 Flutter의 번역 Capability를 확인해 기기 번역을 사용할 수 있습니다. 미지원 또는 실패 시 번역 기능만 비활성화하고 원문을 표시합니다. 번역 결과임을 표시하고 원문 보기 기능을 제공합니다. 현재 화면에 필요한 콘텐츠만 작은 단위로 요청합니다. 번역 결과도 외부 입력으로 취급하며 HTML로 직접 삽입하지 않습니다. 법률, 결제와 정책 문구에는 기기 번역을 확정 문구로 사용하지 않습니다. 다국어 완료 Checklist 새 문구가 추출 가능한 정적 형태인가? 지원 Locale 카탈로그와 Fallback이 갱신됐는가? 변수, ICU, 자리표시자와 Compile 검사를 통과했는가? 중요 업무 문구를 담당자가 검수했는가? 긴 문구, 접근성 이름과 주요 Viewport를 확인했는가? 실행 중 LLM 호출이나 승인되지 않은 외부 전송이 없는가? 상세 기준: Lingui 메시지 작성, 카탈로그, 로컬 LLM 번역, Flutter 기기 번역과 검증 코드는 Front-End 다국어 및 로컬 LLM 번역 가이드 에서 확인합니다.",
     "url": "./../guides/briefing/index.html#section-10"
   },
   {
-    "document": "Lounge Front-end 구축 가이드 브리핑",
+    "document": "Lounge Front-end 작업 가이드 브리핑",
+    "section": "문서 계층과 확인 순서",
+    "excerpt": "저장소 구조는 2절에서 설명한 apps/ 와 docs/ 의 경계를 따릅니다. 여기서는 같은 내용을 반복하지 않고, 작업 중 어떤 문서를 언제 확인하는지만 정리합니다. 계층 역할 확인 시점 AGENTS.md 작업 위치의 담당 범위와 편집·검증 규칙 작업을 시작할 때 docs/ai/ 작업별 핵심 기준과 다음 문서 안내 현재 작업의 기준을 고를 때 docs/common-source/ 파일 단위 적…",
+    "content": "13. 문서 계층과 확인 순서 저장소 구조는 2절에서 설명한 apps/ 와 docs/ 의 경계를 따릅니다. 여기서는 같은 내용을 반복하지 않고, 작업 중 어떤 문서를 언제 확인하는지만 정리합니다. 계층 역할 확인 시점 AGENTS.md 작업 위치의 담당 범위와 편집·검증 규칙 작업을 시작할 때 docs/ai/ 작업별 핵심 기준과 다음 문서 안내 현재 작업의 기준을 고를 때 docs/common-source/ 파일 단위 적용 조건과 구현 예시 구현 예시가 필요할 때 docs/guides/ 기준의 배경, 전체 범위와 예외 추가 판단 근거가 필요할 때 apps/ 설치된 패키지, 설정과 실제 소스 구현 전후 항상 비교할 때 flowchart TB accTitle: 작업 중 필요한 문서를 단계적으로 확인하는 순서 accDescr: 작업 위치의 지침과 실제 코드를 확인하고 작업별 AI 요약에서 시작합니다. 구현 예시나 상세 근거가 필요할 때만 다음 문서로 이동한 뒤 실제 코드에 적용하고 검증합니다. A[\"작업 위치의 AGENTS.md\"] --> C[\"docs/ai 작업별 핵심 기준\"] C --> D{\"추가 자료가 필요한가?\"} D -->|\"구현 예시\"| E[\"docs/common-source\"] D -->|\"배경·전체 범위\"| F[\"docs/guides\"] D -->|\"NO\"| G[\"설치 Package · 설정 · 기존 Source와 비교해 적용·검증\"] E --> G F --> G 처음부터 모든 문서를 읽지 않고 현재 작업에 필요한 깊이까지만 확인합니다. 검색과 동기화 중앙 검색은 docs/guides 의 사람이 읽는 상세 가이드를 대상으로 합니다. docs/ai 와 docs/common-source 는 중복 검색 결과를 막기 위해 상세 가이드 검색 대상과 분리합니다. 문서 진입점: 필요한 원본 문서는 가이드 검색 에서 찾고, 실제 프로젝트에 적용할 AI 문서 계층은 프로젝트 구조 AI 요약 에서 확인합니다.",
+    "url": "./../guides/briefing/index.html#section-13"
+  },
+  {
+    "document": "Lounge Front-end 작업 가이드 브리핑",
     "section": "보안과 개인정보 기준",
     "excerpt": "외부 입력과 출력 API 응답, 사용자 입력, URL, Storage, HTML·Markdown, 외부 SDK와 Bridge 응답을 신뢰하지 않는 값으로 취급합니다. Front-end는 화면 출력과 Client 동작에 필요한 형태를 방어적으로 확인하고 출력 위치에 맞는 XSS 방어를 적용합니다. Backend의 요청 검증, 권한과 업무 규칙 검증은 별도로 수행합니다. 외부 URL과 Redir…",
     "content": "11. 보안과 개인정보 기준 외부 입력과 출력 API 응답, 사용자 입력, URL, Storage, HTML·Markdown, 외부 SDK와 Bridge 응답을 신뢰하지 않는 값으로 취급합니다. Front-end는 화면 출력과 Client 동작에 필요한 형태를 방어적으로 확인하고 출력 위치에 맞는 XSS 방어를 적용합니다. Backend의 요청 검증, 권한과 업무 규칙 검증은 별도로 수행합니다. 외부 URL과 Redirect는 Protocol과 Host를 확인하며 사용자 값을 그대로 href , src 와 Redirect에 연결하지 않습니다. 인증, 권한과 사용자 전환 Front-end의 UI 제한을 권한 검증으로 간주하지 않습니다. 인증 Token을 Web Storage, URL이나 일반 Zustand Persist에 저장하는 예시를 만들지 않습니다. 로그아웃과 사용자 전환 시 이전 사용자의 Query Cache, Persist 상태와 Form 입력을 정리합니다. 저장소, 로그와 Secret 비밀번호, 인증번호, 카드정보, 인증 Token과 불필요한 개인정보를 Client 저장소에 보관하지 않습니다. Token, Cookie, Form 전체 값, API 전체 응답과 Bridge Payload 전체를 Log나 분석 도구로 보내지 않습니다. API Secret, Signing Key와 서버 자격 증명을 Client Bundle, Source Map, 정적 파일과 Build Log에 포함하지 않습니다. Bridge, 외부 리소스와 의존성 Flutter Native App은 WebView Origin과 Bridge Method를 허용 목록으로 제한합니다. Front-end Adapter는 승인된 Method만 노출하고 임의 JavaScript 실행 기능을 제공하지 않습니다. CSP, 보안 Header와 허용 Origin은 Backend·배포·보안 담당자가 확정하고 Server·CDN·Hosting에 적용하며 Front-end는 필요한 Resource와 Browser 적용 결과를 확인합니다. 새 Package는 필요성, Owner, License, Version, 하위 의존성, 설치 Script와 취약점을 확인하고 Lock File 변경도 Review합니다. 보안 완료 보고 새 데이터 흐름과 신뢰 경계 Runtime 검증과 허용 목록 위치 저장소, Cache와 사용자 전환 시 정리 방식 로그와 분석 도구에 전달되는 정보 새 의존성과 Lock File 변경 확인한 Browser·WebView Network Payload와 남은 계약 상세 기준: XSS, 인증·권한, Client 저장소, 개인정보, CSP, Bridge와 공급망 대응은 Front-End 보안과 개인정보 가이드 에서 확인합니다.",
     "url": "./../guides/briefing/index.html#section-11"
   },
   {
-    "document": "Lounge Front-end 구축 가이드 브리핑",
+    "document": "Lounge Front-end 작업 가이드 브리핑",
     "section": "브리핑 목적",
-    "excerpt": "이 문서는 Lounge Front-end를 실제로 구축하고 운영할 개발자에게 현재 정리된 기술 기준, 작업 순서와 완료 판단 기준을 설명합니다. 특정 화면의 상세 기획이나 API 계약을 확정하는 문서가 아닙니다. 코드를 어디에 배치하고, 기존 Component를 어떻게 찾으며, 서버 상태와 Client 상태를 어떻게 구분하고, 어떤 검증을 거쳐 작업을 완료할 것인지 공유합니다. 개발자나 AI…",
-    "content": "1. 브리핑 목적 이 문서는 Lounge Front-end를 실제로 구축하고 운영할 개발자에게 현재 정리된 기술 기준, 작업 순서와 완료 판단 기준을 설명합니다. 특정 화면의 상세 기획이나 API 계약을 확정하는 문서가 아닙니다. 코드를 어디에 배치하고, 기존 Component를 어떻게 찾으며, 서버 상태와 Client 상태를 어떻게 구분하고, 어떤 검증을 거쳐 작업을 완료할 것인지 공유합니다. 개발자나 AI 도구가 바뀌어도 같은 기준으로 구현하고 검토하는 것이 목표입니다. 설치된 Package, 기존 Source와 승인된 프로젝트 계약을 가이드의 일반 예시보다 우선합니다. 한눈에 보는 전체 가이드 지도 전체 가이드는 코드를 만드는 기준, 실제 서비스 환경을 만족하는 기준, 그 기준을 사람과 AI가 계속 유지하는 방법의 세 영역으로 구성됩니다. flowchart TD accTitle: Lounge Front-end 가이드의 세 가지 영역 accDescr: 전체 가이드는 코드를 어떻게 만들지 설명하는 구축 구조, 어디에서 안전하게 동작해야 하는지 설명하는 사용 환경, 사람과 AI가 기준을 유지하는 방법을 설명하는 가이드 운영으로 나뉩니다. ROOT[\"Lounge Front-end 구축 가이드\"] ROOT --> A[\"1. 구축 구조 프로젝트 · Component · 상태 · API · WebView Storybook · Test · Build\"] A -->|\"구현한 결과를 검증\"| B[\"2. 사용 환경 OS · Browser · 반응형 다국어 · 접근성 · 보안 · 개인정보\"] B -->|\"검증 기준을 계속 유지\"| C[\"3. 가이드 운영 사람용 원본 · AI용 요약 · Common Source 실제 프로젝트 적용 · 변경 동기화\"] 구현 방법, 서비스 환경 검증과 가이드 운영으로 구분한 전체 문서 구조 구축 구조 는 개발자가 코드를 어디에 두고 어떤 순서로 구현·검증할지 설명합니다. 사용 환경 은 구현 결과가 지원 기기, 언어와 보안 조건에서 실제로 서비스 가능한지 확인합니다. 가이드 운영 은 확정된 기준을 사람용 원본, AI 요약과 실제 프로젝트 사이에서 계속 일치시키는 방법을 설명합니다. 코드를 만드는 것에서 끝나지 않고, 실제 환경에서 검증한 뒤 그 기준을 사람과 AI가 계속 유지하도록 연결한 구조입니다.",
+    "excerpt": "이 문서는 Lounge Front-end를 실제로 작업하고 운영할 개발자에게 현재 정리된 기술 기준, 작업 순서와 완료 판단 기준을 설명합니다. 특정 화면의 상세 기획이나 API 계약을 확정하는 문서가 아닙니다. 코드를 어디에 배치하고, 기존 Component를 어떻게 찾으며, 서버 상태와 Client 상태를 어떻게 구분하고, 어떤 검증을 거쳐 작업을 완료할 것인지 공유합니다. 개발자나 AI…",
+    "content": "1. 브리핑 목적 이 문서는 Lounge Front-end를 실제로 작업하고 운영할 개발자에게 현재 정리된 기술 기준, 작업 순서와 완료 판단 기준을 설명합니다. 특정 화면의 상세 기획이나 API 계약을 확정하는 문서가 아닙니다. 코드를 어디에 배치하고, 기존 Component를 어떻게 찾으며, 서버 상태와 Client 상태를 어떻게 구분하고, 어떤 검증을 거쳐 작업을 완료할 것인지 공유합니다. 개발자나 AI 도구가 바뀌어도 같은 기준으로 구현하고 검토하는 것이 목표입니다. 설치된 Package, 기존 Source와 승인된 프로젝트 계약을 가이드의 일반 예시보다 우선합니다. 한눈에 보는 작업 체계 사람이 방향과 기준을 정하고, 가이드가 이를 구현 가능한 형태로 연결하며, AI가 실제 코드와 함께 확인해 구현과 검증을 지원합니다. flowchart TD accTitle: 사람의 결정부터 작업 완료까지 이어지는 체계 accDescr: 사람이 방향과 기준을 결정하면 가이드가 구현 기준을 제공하고 AI가 기존 코드와 함께 확인해 구현과 검증을 지원합니다. AI가 결과를 보고한 뒤 사람이 최종 품질을 확인하면 작업이 완료됩니다. A[\"사람 · 방향과 기준 결정\"] --> B[\"가이드 · 구현과 검증 기준 제공\"] B --> C[\"AI · 기존 코드 확인 · 구현 · 검증\"] C --> D[\"AI · 결과와 남은 항목 보고\"] D --> E[\"사람 · 최종 품질 확인과 완료\"] 사람의 결정과 AI의 실행을 연결하고 사람이 최종 완료를 판단하는 흐름 AI가 결과를 만들었다고 바로 완료되는 것은 아닙니다. 검증 결과와 남은 항목을 사람이 확인하고 최종 품질을 판단합니다.",
     "url": "./../guides/briefing/index.html#section-1"
   },
   {
-    "document": "Lounge Front-end 구축 가이드 브리핑",
+    "document": "Lounge Front-end 작업 가이드 브리핑",
     "section": "사람이 보는 가이드 사용 방식",
     "excerpt": "작업 사람용 원본 확인 내용 저장소와 앱 경계 저장소 구조 기준 app-webview, docs와 공통화 일반 화면과 상태 Front-End 개발 가이드 배치, 상태 소유, Bridge와 품질 Figma UI React Code Exports·디자인 토큰 기존 UI, Token과 완료 기준 UI 개발과 상태 검증 Storybook 운영 가이드 Component·기능·화면 상태의 재현, Int…",
     "content": "14. 사람이 보는 가이드 사용 방식 작업 사람용 원본 확인 내용 저장소와 앱 경계 저장소 구조 기준 app-webview, docs와 공통화 일반 화면과 상태 Front-End 개발 가이드 배치, 상태 소유, Bridge와 품질 Figma UI React Code Exports·디자인 토큰 기존 UI, Token과 완료 기준 UI 개발과 상태 검증 Storybook 운영 가이드 Component·기능·화면 상태의 재현, Interaction, 접근성, 시각 검토와 반자동 점검 품질 TypeScript·Lint·Test 가이드 Type 경계, 정적 검사와 Test 범위 성능 성능 검증 가이드 Loading, Timeout, Retry와 측정 보안 보안과 개인정보 가이드 입력, 인증, 저장소, 로그와 공급망 App 연동 APP 개발 표준·WebView 가이드 OS, Bridge 계약과 실제 기기 다국어 다국어·번역 가이드 Key, Layout, Locale과 검수 호환성 Browser 지원 가이드 최소 Version, Viewport와 경계값 중앙 검색에서 기능이나 위험 Keyword를 검색합니다. 원본 가이드의 적용 범위와 미확정 항목을 확인합니다. 실제 Source와 설치 Package가 예시와 같은지 비교합니다. 다른 담당자 계약은 구현 전에 질문과 TBD 로 분리합니다. 구현과 Review에서 완료 기준을 Checklist로 사용합니다. 반복되는 문제와 실제 차이를 근거로 가이드를 갱신합니다. 가이드 목록: 전체 사람용 문서의 진입점은 Lounge DOCS README , Keyword 검색은 가이드 검색 을 사용합니다.",
     "url": "./../guides/briefing/index.html#section-14"
   },
   {
-    "document": "Lounge Front-end 구축 가이드 브리핑",
+    "document": "Lounge Front-end 작업 가이드 브리핑",
     "section": "상태와 데이터의 책임",
     "excerpt": "상태 종류 기본 도구 적용 기준 한 Component 내부 UI 상태 React 지역 상태 열림, 선택처럼 가까운 UI에서만 사용 공유·복원할 화면 상태 URL Search Params 또는 Route 검색 조건, Tab과 Page 입력, 검증과 제출 React Hook Form 하나의 Form 단위 상태와 오류 서버에서 조회·변경 TanStack Query Cache, 갱신, 실패와 재시도…",
     "content": "6. 상태와 데이터의 책임 상태 종류 기본 도구 적용 기준 한 Component 내부 UI 상태 React 지역 상태 열림, 선택처럼 가까운 UI에서만 사용 공유·복원할 화면 상태 URL Search Params 또는 Route 검색 조건, Tab과 Page 입력, 검증과 제출 React Hook Form 하나의 Form 단위 상태와 오류 서버에서 조회·변경 TanStack Query Cache, 갱신, 실패와 재시도 여러 화면의 Client 상태 Zustand 서버 원본이 아닌 공유 UI 상태 서버에서 받은 데이터를 Zustand에 복제하지 않습니다. 서버 상태는 TanStack Query Cache와 무효화 정책으로 관리합니다. Zustand는 여러 화면이 공유하는 Client 상태가 실제로 확인됐을 때 사용합니다. React Hook Form은 Form 상태 도구이며 업무 규칙과 Backend 검증을 대신하지 않습니다. Schema 검증 도구와 서버 오류 매핑은 실제 계약이 정해진 뒤 확정합니다. 상세 기준: 전체 상태 소유 기준은 Front-End 개발 가이드의 상태 및 데이터 관리 , Zustand의 Store 분리와 Persist 기준은 Zustand UI 상태 관리 가이드 에서 확인합니다.",
     "url": "./../guides/briefing/index.html#section-6"
   },
   {
-    "document": "Lounge Front-end 구축 가이드 브리핑",
+    "document": "Lounge Front-end 작업 가이드 브리핑",
     "section": "서버 통신과 비동기 화면",
     "excerpt": "승인된 API 계약을 받은 뒤 공통 요청 함수와 기능별 응답 검증 경계를 연결합니다. Front-end는 API 응답을 화면에 사용하기 전에 필요한 형태를 방어적으로 확인합니다. 요청 검증, 권한과 업무 규칙은 Backend가 다시 검증하며 Front-end Type과 검증 결과를 신뢰 근거로 사용하지 않습니다. 최초 조회 Loading과 기존 데이터를 유지한 갱신 상태 결과가 없는 Empt…",
     "content": "7. 서버 통신과 비동기 화면 승인된 API 계약을 받은 뒤 공통 요청 함수와 기능별 응답 검증 경계를 연결합니다. Front-end는 API 응답을 화면에 사용하기 전에 필요한 형태를 방어적으로 확인합니다. 요청 검증, 권한과 업무 규칙은 Backend가 다시 검증하며 Front-end Type과 검증 결과를 신뢰 근거로 사용하지 않습니다. 최초 조회 Loading과 기존 데이터를 유지한 갱신 상태 결과가 없는 Empty 상태 사용자 재시도가 가능한 Error 상태 느린 응답 중 중복 제출 방지와 진행 안내 연결 끊김과 복구 후 갱신 모든 요청에 같은 Timeout과 Retry를 적용하지 않습니다. 조회와 변경 요청, 멱등성과 업무 위험도를 기준으로 결정합니다. 결제·예약처럼 중복 실행 위험이 있는 작업은 Front-end 재시도만으로 안전하다고 판단하지 않습니다. 승인된 계약이 있고 실제 환경에서 오류 상태를 반복 재현하기 어렵다면 MSW를 선택적으로 검토합니다. MSW는 API 계약을 임의로 만드는 도구가 아닙니다. 상세 기준: 느린 Network, Loading, Timeout, Retry, Offline과 측정 방법은 네트워크 지연 대응 및 성능 검증 가이드 에서 확인합니다.",
     "url": "./../guides/briefing/index.html#section-7"
   },
   {
-    "document": "Lounge Front-end 구축 가이드 브리핑",
-    "section": "실제 프로젝트 구조와 문서 계층",
-    "excerpt": "이 저장소는 WebView 애플리케이션과 구현 가이드를 함께 관리합니다. 실제 Source는 apps/app-webview , 모든 가이드는 docs 에 두며 별도 가이드 저장소나 복제된 reference 문서를 운영하지 않습니다. <repository-root>/ ├── AGENTS.md # 저장소 전체 AI 구현 규칙 ├── README.md # 프로젝트 진입점 ├── apps/ │ ├─…",
-    "content": "13. 실제 프로젝트 구조와 문서 계층 이 저장소는 WebView 애플리케이션과 구현 가이드를 함께 관리합니다. 실제 Source는 apps/app-webview , 모든 가이드는 docs 에 두며 별도 가이드 저장소나 복제된 reference 문서를 운영하지 않습니다. <repository-root>/ ├── AGENTS.md # 저장소 전체 AI 구현 규칙 ├── README.md # 프로젝트 진입점 ├── apps/ │ ├── mobile/ # Flutter Native 앱 │ └── app-webview/ │ ├── AGENTS.md # WebView 앱 전용 규칙 │ ├── .storybook/ # Storybook 설정 │ └── src/ # 실제 Application Source └── docs/ ├── AGENTS.md # 문서 작성과 검증 규칙 ├── README.md # 전체 가이드 목록 ├── index.html # 사람이 보는 문서 진입점 ├── search/ # 상세 가이드 중앙 검색 ├── assets/ # 문서 공통 Style·Script·Image ├── templates/ # HTML 가이드 템플릿 ├── guides/ # 주제별 상세 HTML 가이드와 초안 ├── ai/ # 작업별 짧은 AI 요약 └── common-source/ # 조건부 참고 구현 문서별 역할 Root AGENTS.md 는 실제 Application 구현 규칙과 작업별 문서 선택을 담당합니다. apps/app-webview/AGENTS.md 는 실제 package·source 기준과 WebView 앱에만 필요한 추가 규칙을 관리합니다. docs/guides 는 사람이 기술 기준, 적용 조건, 예외와 Review 근거를 확인하는 원본입니다. docs/ai 는 작업별 요약이고 docs/common-source 는 실제 사용처, 설치 Package와 승인된 계약을 확인한 뒤 필요한 부분만 비교·병합하는 참고 구현입니다. flowchart TD accTitle: 실제 프로젝트에서 문서와 소스를 사용하는 흐름 accDescr: 저장소 루트 지침에서 시작해 앱의 실제 설정과 작업별 AI 요약을 확인하고, 필요한 상세 가이드와 공통 소스 적용 기준을 읽은 뒤 구현과 검증을 수행하며 변경된 기준을 문서에 동기화합니다. A[\"Root AGENTS.md\"] --> B[\"apps/app-webview AGENTS · Package · Source\"] B --> C[\"docs/ai 작업별 요약\"] C --> D[\"docs/guides 또는 docs/common-source 필요한 세부 기준\"] D --> E[\"Source 구현과 Storybook · 품질 검증\"] E --> F[\"구조·규칙 변경 시 관련 docs 동기화\"] 실제 프로젝트에서 지침과 가이드를 확인하고 Source와 문서를 함께 관리하는 흐름 문서 확인 우선순위 flowchart TD accTitle: 실제 업무에서 문서를 확인하는 우선순위 accDescr: 작업자는 실제 프로젝트 AGENTS 문서에서 시작해 작업별 AI 요약과 기존 소스를 확인하고, 세부 판단에는 사람용 원본 가이드와 승인된 담당자 계약을 사용합니다. A[\"실제 프로젝트 AGENTS.md\"] --> B[\"작업별 docs/ai 요약\"] B --> C[\"package.json · 설정 · 기존 Source\"] C --> D[\"사람용 원본 가이드\"] D --> E[\"승인된 기획 · Backend · Native · 배포 계약\"] 실제 프로젝트 규칙에서 원본 가이드와 승인된 계약까지 확인하는 흐름 검색과 동기화 중앙 검색은 docs/guides 의 사람이 읽는 상세 가이드를 대상으로 합니다. docs/ai 와 docs/common-source 는 중복 검색 결과를 막기 위해 상세 가이드 검색 대상과 분리합니다. 문서 진입점: 필요한 원본 문서는 가이드 검색 에서 찾고, 실제 프로젝트에 적용할 AI 문서 계층은 프로젝트 구조 AI 요약 에서 확인합니다.",
-    "url": "./../guides/briefing/index.html#section-13"
-  },
-  {
-    "document": "Lounge Front-end 구축 가이드 브리핑",
+    "document": "Lounge Front-end 작업 가이드 브리핑",
     "section": "운영 시 유지할 연결 관계",
-    "excerpt": "Component 경로·이름 변경 → Import, Figma Description과 관련 문서 Props·Variant 변경 → 사용처, Story와 Figma 상태 Token 변경 → 실제 화면, Storybook과 Theme Browser·OS 변경 → Tailwind 요구사항, 점유율과 실제 기기 공통 Component 또는 중요 기능·화면 상태 추가 → Story 등록과 AI 누락…",
-    "content": "17. 운영 시 유지할 연결 관계 Component 경로·이름 변경 → Import, Figma Description과 관련 문서 Props·Variant 변경 → 사용처, Story와 Figma 상태 Token 변경 → 실제 화면, Storybook과 Theme Browser·OS 변경 → Tailwind 요구사항, 점유율과 실제 기기 공통 Component 또는 중요 기능·화면 상태 추가 → Story 등록과 AI 누락 점검 가이드 변경 → 중앙 검색 Index 재생성 API·Bridge 계약 변경 → Adapter, 상태, Test와 담당 문서 인증·개인정보·SDK 변경 → 저장 위치, Log, Network와 보안 가이드 Package 변경 → Lock File, 하위 의존성, 보안 공지와 Owner UI 문구·Locale 변경 → 메시지 추출, 카탈로그, Fallback과 긴 문구 AI가 불일치 후보를 찾을 수 있지만 최종 변경 여부와 영향 범위는 개발자가 판단합니다.",
+    "excerpt": "모든 파일 변경마다 아래 항목을 전부 갱신하지는 않습니다. 현재 구현만 달라졌다면 관련 코드와 검증 자료만 수정하고, 다음 작업에도 적용할 공통 기준이나 계약이 바뀌었을 때 연결된 문서를 함께 갱신합니다. Component 경로·이름 변경 → Import, Figma Description과 관련 문서 Props·Variant 변경 → 사용처, Story와 Figma 상태 Token 변경 →…",
+    "content": "17. 운영 시 유지할 연결 관계 모든 파일 변경마다 아래 항목을 전부 갱신하지는 않습니다. 현재 구현만 달라졌다면 관련 코드와 검증 자료만 수정하고, 다음 작업에도 적용할 공통 기준이나 계약이 바뀌었을 때 연결된 문서를 함께 갱신합니다. Component 경로·이름 변경 → Import, Figma Description과 관련 문서 Props·Variant 변경 → 사용처, Story와 Figma 상태 Token 변경 → 실제 화면, Storybook과 Theme Browser·OS 변경 → Tailwind 요구사항, 점유율과 실제 기기 공통 Component 또는 중요 기능·화면 상태 추가 → Story 등록과 AI 누락 점검 가이드 변경 → 중앙 검색 Index 재생성 API·Bridge 계약 변경 → Adapter, 상태, Test와 담당 문서 인증·개인정보·SDK 변경 → 저장 위치, Log, Network와 보안 가이드 Package 변경 → Lock File, 하위 의존성, 보안 공지와 Owner UI 문구·Locale 변경 → 메시지 추출, 카탈로그, Fallback과 긴 문구 AI가 불일치 후보를 찾을 수 있지만 최종 변경 여부와 영향 범위는 개발자가 판단합니다. 가이드 전체의 구조나 정책을 크게 바꾼 경우에만 변경 기록을 남깁니다.",
     "url": "./../guides/briefing/index.html#section-17"
   },
   {
-    "document": "Lounge Front-end 구축 가이드 브리핑",
-    "section": "이 가이드로 구축할 때의 최종 원칙",
+    "document": "Lounge Front-end 작업 가이드 브리핑",
+    "section": "이 가이드로 작업할 때의 최종 원칙",
     "excerpt": "이 Section은 앞의 구현 단계를 다시 설명하는 곳이 아닙니다. 실무자가 여러 상세 가이드를 적용할 때 마지막까지 유지해야 할 판단 원칙을 정리합니다. 기존 구현을 먼저 찾습니다 새 Component와 구조를 만들기 전에 Figma 설명, 실제 Source, Storybook과 디자인 토큰을 확인합니다. 기존 구현으로 표현할 수 없는 경우에만 새 코드를 만들고 그 이유를 남깁니다. 구현과…",
-    "content": "19. 이 가이드로 구축할 때의 최종 원칙 이 Section은 앞의 구현 단계를 다시 설명하는 곳이 아닙니다. 실무자가 여러 상세 가이드를 적용할 때 마지막까지 유지해야 할 판단 원칙을 정리합니다. 기존 구현을 먼저 찾습니다 새 Component와 구조를 만들기 전에 Figma 설명, 실제 Source, Storybook과 디자인 토큰을 확인합니다. 기존 구현으로 표현할 수 없는 경우에만 새 코드를 만들고 그 이유를 남깁니다. 구현과 검증을 같은 작업으로 봅니다 정상 화면만 보이면 완료된 것이 아닙니다. 예외 상태, 다국어, 접근성, Front-end 보안, 반응형, Browser, Test와 Build 중 해당 기능에 필요한 검증까지 같은 변경에서 확인합니다. Backend·Native App·배포 정책은 Front-end가 대신 구현하지 않고 해당 담당자의 계약과 적용 결과를 확인합니다. 운영 중에도 기준을 연결합니다 코드가 바뀌면 Story, Figma 설명과 관련 가이드도 함께 확인합니다. AI는 탐색, 초안과 반복 검사를 돕지만 공개 API, 계약, 위험과 최종 품질은 개발자와 담당자가 판단합니다. 처음부터 복잡한 공통 구조를 만드는 것이 목표가 아닙니다. 기존 구현을 우선 사용하고 기능 가까이에서 작게 시작하며 실제 반복과 검증 근거가 생겼을 때 공통화합니다. AI가 구현과 반복 검사를 돕고, 가이드와 개발자가 범위·계약·품질을 통제합니다. Lounge Front-end 구축 가이드 브리핑",
+    "content": "19. 이 가이드로 작업할 때의 최종 원칙 이 Section은 앞의 구현 단계를 다시 설명하는 곳이 아닙니다. 실무자가 여러 상세 가이드를 적용할 때 마지막까지 유지해야 할 판단 원칙을 정리합니다. 기존 구현을 먼저 찾습니다 새 Component와 구조를 만들기 전에 Figma 설명, 실제 Source, Storybook과 디자인 토큰을 확인합니다. 기존 구현으로 표현할 수 없는 경우에만 새 코드를 만들고 그 이유를 남깁니다. 구현과 검증을 같은 작업으로 봅니다 정상 화면만 보이면 완료된 것이 아닙니다. 예외 상태, 다국어, 접근성, Front-end 보안, 반응형, Browser, Test와 Build 중 해당 기능에 필요한 검증까지 같은 변경에서 확인합니다. Backend·Native App·배포 정책은 Front-end가 대신 구현하지 않고 해당 담당자의 계약과 적용 결과를 확인합니다. AI가 결과와 남은 항목을 보고한 뒤 개발자가 최종 품질을 확인하면 작업이 완료됩니다. 운영 중에도 기준을 연결합니다 코드가 바뀌면 관련 Story와 Figma 설명을 함께 확인합니다. 다음 작업에도 적용할 공통 기준이나 계약이 바뀌었을 때만 관련 가이드도 함께 갱신합니다. AI는 탐색, 초안과 반복 검사를 돕지만 공개 API, 계약, 위험과 최종 품질은 개발자와 담당자가 판단합니다. 처음부터 복잡한 공통 구조를 만드는 것이 목표가 아닙니다. 기존 구현을 우선 사용하고 기능 가까이에서 작게 시작하며 실제 반복과 검증 근거가 생겼을 때 공통화합니다. 사람이 방향과 기준을 결정하고, AI가 구현과 반복 검사를 돕고, 사람이 최종 품질을 확인합니다. Lounge Front-end 작업 가이드 브리핑",
     "url": "./../guides/briefing/index.html#section-19"
   },
   {
-    "document": "Lounge Front-end 구축 가이드 브리핑",
+    "document": "Lounge Front-end 작업 가이드 브리핑",
+    "section": "작업 대상과 저장소 구조",
+    "excerpt": "WebView 서비스 화면과 업무 흐름은 apps/app-webview 에 구현합니다. apps/ ├── app-webview/ # Front-end가 구현하는 WebView 화면 └── mobile/ # 별도 앱 개발자가 담당하는 Flutter 소스 docs/ # 구현·검토 기준과 예시 Application 가까이에서 시작합니다 apps/app-webview 안에서는 Routing과 화면…",
+    "content": "2. 작업 대상과 저장소 구조 WebView 서비스 화면과 업무 흐름은 apps/app-webview 에 구현합니다. apps/ ├── app-webview/ # Front-end가 구현하는 WebView 화면 └── mobile/ # 별도 앱 개발자가 담당하는 Flutter 소스 docs/ # 구현·검토 기준과 예시 Application 가까이에서 시작합니다 apps/app-webview 안에서는 Routing과 화면 진입점, 기능 코드와 WebView 전용 UI를 가까운 위치에서 관리합니다. App-WebView 한 곳에서만 사용하는 shadcn/ui 원형과 Wrapper는 apps/app-webview/src/components/ui 에 둡니다. 검증된 구현만 공통으로 관리합니다 여러 기능에서 실제로 재사용되고 의미와 변경 이유가 같은 UI만 src/components/ui 에서 공통으로 관리합니다. 한 화면에서만 사용하는 Wrapper, 공통화 가능성을 예상한 Type과 Adapter는 미리 만들지 않습니다. apps/ 와 docs/ 의 최상위 분리는 실제 프로젝트 기준입니다. 앱 내부 Package 경계와 Build 구성은 실제 사용처와 현재 설정을 기준으로 판단합니다. 상세 기준: 저장소 경계와 공통화 기준은 Front-End 저장소 구조 기준 에서 확인합니다.",
+    "url": "./../guides/briefing/index.html#section-2"
+  },
+  {
+    "document": "Lounge Front-end 작업 가이드 브리핑",
     "section": "접근성, 테스트와 품질 Gate",
     "excerpt": "구현 중 함께 확인할 접근성 Semantic HTML과 Heading 구조 Keyboard 사용과 식별 가능한 Focus Input Label, 오류 메시지와 접근 가능한 이름 Dialog와 동적 UI의 Focus 이동 색상에만 의존하지 않는 상태 표현 긴 문구, 확대와 다국어에서 유지되는 Layout 기본 검증 순서는 TypeScript 검사 → Lint → Test 입니다. Story 변…",
     "content": "12. 접근성, 테스트와 품질 Gate 구현 중 함께 확인할 접근성 Semantic HTML과 Heading 구조 Keyboard 사용과 식별 가능한 Focus Input Label, 오류 메시지와 접근 가능한 이름 Dialog와 동적 UI의 Focus 이동 색상에만 의존하지 않는 상태 표현 긴 문구, 확대와 다국어에서 유지되는 Layout 기본 검증 순서는 TypeScript 검사 → Lint → Test 입니다. Story 변경에는 Storybook 정적 Build를 추가하고 실제 구성에 Build가 있으면 Application Build도 확인합니다. 우선 Test 대상 중요한 Form 검증과 제출 서버 성공·실패와 재시도 상태 권한 거부와 Bridge 오류 중요한 업무 분기와 회귀 위험 Interaction 작업 완료 Checklist 정상·예외 상태를 구현했는가? 기존 Component와 Token을 우선 사용했는가? 새 공통 Component와 독립 재현 가치가 있는 기능·화면 상태에 Story가 있는가? Keyboard, Focus와 접근 가능한 이름을 확인했는가? 지원 Browser와 필요한 Viewport에서 확인했는가? 실제로 구성된 검사가 통과했는가? 확인하지 못한 환경과 미확정 계약을 보고했는가? 상세 기준: Type 경계는 TypeScript 가이드 , 정적 검사는 Lint 가이드 , Test 대상과 제외 기준은 테스트 가이드 에서 확인합니다.",
     "url": "./../guides/briefing/index.html#section-12"
   },
   {
-    "document": "Lounge Front-end 구축 가이드 브리핑",
+    "document": "Lounge Front-end 작업 가이드 브리핑",
     "section": "현재 확정하지 않은 내용",
     "excerpt": "화면별 업무 규칙과 사용자 문구 API Endpoint, Method, Field와 오류 계약 인증, Cookie, Token과 Session Backend 개발·테스트 환경 Flutter Bridge Method와 메시지 배포, 모니터링, 장애 대응과 Release 승인 CSP, CORS, Origin과 개인정보 보존 기능별 Timeout, Retry와 Offline Storybook Ve…",
     "content": "18. 현재 확정하지 않은 내용 화면별 업무 규칙과 사용자 문구 API Endpoint, Method, Field와 오류 계약 인증, Cookie, Token과 Session Backend 개발·테스트 환경 Flutter Bridge Method와 메시지 배포, 모니터링, 장애 대응과 Release 승인 CSP, CORS, Origin과 개인정보 보존 기능별 Timeout, Retry와 Offline Storybook Version, Framework, Addon과 CI 명령 Schema 검증과 서버 오류 매핑 Zustand Store와 Persist 범위 Locale별 중요 문구의 검수 담당자와 승인 절차 시간대, 통화, 반올림과 가격 표시 규칙 동적 콘텐츠 기기 번역 범위와 기본 설정 미확정 항목의 예시를 실제 계약처럼 구현하지 않습니다. 필요한 담당자와 입력 자료를 확인한 뒤 확정합니다.",
     "url": "./../guides/briefing/index.html#section-18"
   },
   {
-    "document": "Lounge Front-end 구축 가이드 브리핑",
+    "document": "Lounge Front-end 작업 가이드 브리핑",
     "section": "AI 코딩 도구 사용 방식",
     "excerpt": "Cline, Claude Code, Codex와 로컬 LLM의 공통 규칙은 실제 프로젝트 AGENTS.md 에서 관리합니다. 도구 전용 설정에는 그 도구에서만 필요한 동작만 둡니다. 저장소의 AGENTS.md 작업별 docs/ai/* 설치 Package와 기존 Source 필요할 때 사람용 원본 Figma 설명과 실제 API의 일치 여부 AI에 전체 가이드를 한꺼번에 제공하지 않고 작업에 필…",
-    "content": "15. AI 코딩 도구 사용 방식 Cline, Claude Code, Codex와 로컬 LLM의 공통 규칙은 실제 프로젝트 AGENTS.md 에서 관리합니다. 도구 전용 설정에는 그 도구에서만 필요한 동작만 둡니다. 저장소의 AGENTS.md 작업별 docs/ai/* 설치 Package와 기존 Source 필요할 때 사람용 원본 Figma 설명과 실제 API의 일치 여부 AI에 전체 가이드를 한꺼번에 제공하지 않고 작업에 필요한 요약과 Source만 읽게 합니다. 생성 결과는 구현 초안이며 불필요한 추상화와 Props, 누락된 상태와 기존 구조 충돌을 개발자가 검토합니다. AI 작업 완료 보고 수정한 기능과 파일 재사용한 기존 Component 신규 Component와 생성 이유 사용한 Semantic Token 추가·변경한 Story와 상태 실행한 검사와 결과 재현하지 못한 환경 남은 TBD 와 담당자 결정 실제 프로젝트 기준: AI가 처음 읽을 공통 규칙은 저장소 Root AGENTS.md , 품질 작업별 요약은 AI 품질 가이드 에서 확인합니다.",
+    "content": "15. AI 코딩 도구 사용 방식 Cline, Claude Code, Codex와 로컬 LLM의 공통 규칙은 실제 프로젝트 AGENTS.md 에서 관리합니다. 도구 전용 설정에는 그 도구에서만 필요한 동작만 둡니다. 저장소의 AGENTS.md 작업별 docs/ai/* 설치 Package와 기존 Source 필요할 때 사람용 원본 Figma 설명과 실제 API의 일치 여부 AI에 전체 가이드를 한꺼번에 제공하지 않고 작업에 필요한 요약과 Source만 읽게 합니다. 생성 결과는 구현 초안이며 불필요한 추상화와 Props, 누락된 상태와 기존 구조 충돌을 개발자가 검토합니다. 관련 수정은 묶어서 진행합니다 관련 범위를 먼저 충분히 확인하고 여러 수정은 가능한 한 적은 편집으로 묶습니다. 작은 수정마다 같은 파일을 반복해서 읽지 않고 일괄 수정한 뒤 한 번 검증합니다. 사용하는 도구가 일괄 편집을 지원하지 않거나 실패하면 안전한 범위에서 나누되, 같은 부분을 불필요하게 재확인하지 않습니다. AI 작업 결과 보고 수정한 기능과 파일 재사용한 기존 Component 신규 Component와 생성 이유 사용한 Semantic Token 추가·변경한 Story와 상태 실행한 검사와 결과 재현하지 못한 환경 남은 TBD 와 담당자 결정 AI의 결과 보고만으로 작업이 완료되는 것은 아닙니다. 개발자가 구조·업무 의도·품질과 남은 확인 항목을 검토한 뒤 완료 여부를 판단합니다. 실제 프로젝트 기준: AI가 처음 읽을 공통 규칙은 저장소 Root AGENTS.md , 품질 작업별 요약은 AI 품질 가이드 에서 확인합니다.",
     "url": "./../guides/briefing/index.html#section-15"
   },
   {
-    "document": "Lounge Front-end 구축 가이드 브리핑",
+    "document": "Lounge Front-end 작업 가이드 브리핑",
     "section": "Browser, OS와 반응형 기준",
     "excerpt": "Browser 기본 검토 기준 Chrome·Edge 지원 대상 구형 버전 Safari 15 이상 Firefox 지원 대상 구형 버전 Samsung Internet 지원 대상 구형 버전 Tailwind CSS v4를 유지하고 공통 CSS 하한은 Safari 15에서 지원되는 기능 범위로 정합니다. Android와 다른 Browser는 특정 제품 버전을 기계적으로 대응시키지 않고 주요 구형·최신…",
     "content": "9. Browser, OS와 반응형 기준 Browser 기본 검토 기준 Chrome·Edge 지원 대상 구형 버전 Safari 15 이상 Firefox 지원 대상 구형 버전 Samsung Internet 지원 대상 구형 버전 Tailwind CSS v4를 유지하고 공통 CSS 하한은 Safari 15에서 지원되는 기능 범위로 정합니다. Android와 다른 Browser는 특정 제품 버전을 기계적으로 대응시키지 않고 주요 구형·최신 버전에서 실제 사용하는 Utility와 핵심 기능을 확인합니다. 지원되지 않는 최신 CSS 기능은 사용하지 않거나 대체합니다. 구간 CSS Viewport 주요 확인 Mobile 320~767px 입력, 터치, 긴 문구와 Overflow Tablet 768~1023px 열 전환, 방향과 밀도 PC 1024px 이상 최대 너비와 다단 Layout 767·768px, 1023·1024px 경계값을 함께 검증합니다. 지원 Browser에서 사용할 수 없는 CSS는 피하거나 동등한 Fallback을 제공합니다. 상세 기준: 국가별 점유율 근거, 자동 업데이트 예외와 대표 검증 너비는 반응형 웹 Browser 지원 가이드 , App WebView 최소 OS 근거는 WebView 지원 환경 개요 에서 확인합니다.",
     "url": "./../guides/briefing/index.html#section-9"
   },
   {
-    "document": "Lounge Front-end 구축 가이드 브리핑",
+    "document": "Lounge Front-end 작업 가이드 브리핑",
     "section": "Storybook을 이용한 UI 개발과 검증",
     "excerpt": "Storybook은 공통 Component만 만들거나 전시하는 공간이 아닙니다. Application 전체를 실행하지 않고도 Component, 기능 조합과 의미 있는 화면 상태를 격리해 재현하고, 구현·디자인 Review, 접근성, Interaction과 시각 회귀 검증에 사용하는 UI 개발 환경입니다. @storybook/addon-designs 공식 Embed Frame 데모 의 Sto…",
     "content": "5. Storybook을 이용한 UI 개발과 검증 Storybook은 공통 Component만 만들거나 전시하는 공간이 아닙니다. Application 전체를 실행하지 않고도 Component, 기능 조합과 의미 있는 화면 상태를 격리해 재현하고, 구현·디자인 Review, 접근성, Interaction과 시각 회귀 검증에 사용하는 UI 개발 환경입니다. @storybook/addon-designs 공식 Embed Frame 데모 의 Story와 Design 탭 각 Story에는 Figma 파일, Frame 또는 Prototype URL을 연결할 수 있습니다. 특정 Frame 링크에는 해당 Frame의 node-id 가 포함되며 Storybook의 Design 탭에서 Embed 결과를 확인합니다. Story 작성 대상을 선택합니다 Story는 파일 종류가 아니라 독립 재현과 검토 가치로 판단합니다. 다음 대상은 Story 작성을 우선 검토합니다. 여러 화면에서 사용하는 공통 Component와 주요 Variant Form, 검색 조건, Dialog와 단계형 흐름처럼 상태 전환이 중요한 기능 조합 Loading, Empty, Error, 권한 거부, Offline과 긴 응답처럼 실제 환경에서 반복 재현하기 어려운 화면 상태 긴 문구, 다국어, 좁은 Viewport, Theme과 접근성 검토가 필요한 Layout 또는 화면 구간 과거 장애나 회귀 위험이 있어 고정된 재현 조건이 필요한 UI 단순 Page Wrapper, Router만 연결하는 진입점, Story 안에서 실제 서비스와 동일하게 만들 수 없는 Backend 통합은 대상에서 제외할 수 있습니다. 화면 전체를 Story로 만들기 위해 업무 로직을 복제하지 않습니다. Component와 기능 상태를 구현하는 경우 실제 Component, 기능 조합 또는 화면 구간을 Application Source에 구현합니다. 같은 변경에서 검토할 상태를 Story로 구성합니다. Args, Decorator와 승인된 Mock 경계를 사용해 입력, Context, Viewport와 서버 상태를 제어합니다. Default, Disabled, Loading, Empty, Error, 긴 문구, 다국어와 필요한 화면 크기를 확인합니다. Play 또는 합의된 Test로 Keyboard Focus, 접근 가능한 이름과 주요 사용자 Interaction을 확인합니다. 디자인 검토와 시각 회귀 기준이 필요한 상태는 고정된 데이터와 결정적인 결과를 유지합니다. Storybook에서 검증한 구현을 실제 화면에 적용하고 Application 통합 검증을 별도로 수행합니다. Storybook이 대신하지 않는 검증 Storybook은 실제 Routing, Backend 권한과 업무 규칙, WebView Bridge, 배포 환경, 실제 Browser Network와 전체 사용자 여정을 보장하지 않습니다. Story의 Mock은 승인된 계약을 재현하는 검증 도구이며 API 계약을 새로 정의하는 근거가 아닙니다. 이 항목은 Application Test, 통합 Test, E2E와 실제 기기 검증으로 확인합니다. AI를 이용한 반자동 운영 공통 UI, 기능 조합과 중요 화면 상태를 비교하여 Story 누락 후보를 찾습니다. 기존 형식에 맞춰 Story 초안을 작성합니다. Props, Context, Mock 계약과 상태 변경에 따른 갱신 후보를 찾습니다. Storybook 정적 Build, Story 렌더링, Interaction, 접근성과 시각 회귀 중 합의된 검사를 실행합니다. 추가한 Story, 재현한 상태, 사용한 Mock 경계와 실패 항목을 정리합니다. 개발자는 Story 대상, 실제 지원 상태와 계약, Figma 일치 여부, 접근성, Interaction과 Application 통합 결과를 검토합니다. Storybook 정적 Build를 필수 검사로 사용하고 Story 렌더링, Interaction, 접근성과 시각 회귀 검사는 실제 package와 Workflow에 구성된 범위에서 실행합니다. 상세 기준: Story 작성 대상, AI 요청 예시, 누락 점검과 완료 조건은 Storybook 운영 가이드 에서 확인합니다.",
     "url": "./../guides/briefing/index.html#section-5"
   },
   {
-    "document": "Lounge Front-end 구축 가이드 브리핑",
+    "document": "Lounge Front-end 작업 가이드 브리핑",
     "section": "UI 구현과 Figma 연결",
     "excerpt": "디자인 토큰과 기존 Component를 우선합니다 색상, 글자, 간격, Radius와 상태 표현은 Figma 값이나 임의의 Tailwind Utility를 화면마다 복사하지 않고 프로젝트의 Semantic Token을 우선 사용합니다. Button, Input과 Dialog가 이미 존재하면 새 JSX를 작성하지 않고 기존 공개 API로 구현합니다. shadcn/ui는 외부 Package의 완…",
-    "content": "4. UI 구현과 Figma 연결 디자인 토큰과 기존 Component를 우선합니다 색상, 글자, 간격, Radius와 상태 표현은 Figma 값이나 임의의 Tailwind Utility를 화면마다 복사하지 않고 프로젝트의 Semantic Token을 우선 사용합니다. Button, Input과 Dialog가 이미 존재하면 새 JSX를 작성하지 않고 기존 공개 API로 구현합니다. shadcn/ui는 외부 Package의 완성품이 아니라 프로젝트가 소유하고 수정하는 Component Source로 취급합니다. 기존 Props와 Variant로 표현 가능한지 확인합니다. 기존 Component의 의미를 해치지 않는 확장인지 검토합니다. 한 기능에만 필요한 조합이면 기능 가까이에 둡니다. 여러 화면에서 의미와 변경 이유가 같을 때 공통 Component로 승격합니다. Storybook만을 위한 Props, Variant와 Wrapper를 추가하지 않습니다. Figma Main Component에 구현 정보를 남깁니다 실제 Component 이름과 파일 또는 Import 경로 주요 Props와 Variant 지원 상태와 사용 제한 대체하거나 우선 사용해야 하는 기존 Component 접근 가능한 Source 또는 Storybook Dev resource 구축 기간에는 디자인 편집 권한이 있는 담당자가 정보를 작성합니다. 운영 단계에는 Front-end 개발자가 경로, Props나 지원 상태를 변경했을 때 Figma 설명도 함께 갱신합니다. Code Connect 없이도 이 정보로 개발자와 AI의 탐색을 도울 수 있지만, Figma 설명만으로 실제 API를 보장하지 않으므로 Source를 반드시 다시 확인합니다. 상세 기준: Figma에서 React 코드로 옮기는 순서와 기존 Component 탐색은 React Code Exports 가이드 , Semantic Token 구성은 디자인 토큰 가이드 에서 확인합니다.",
+    "content": "4. UI 구현과 Figma 연결 디자인 토큰과 기존 Component를 우선합니다 색상, 글자, 간격, Radius와 상태 표현은 Figma 값이나 임의의 Tailwind Utility를 화면마다 복사하지 않고 프로젝트의 Semantic Token을 우선 사용합니다. Button, Input과 Dialog가 이미 존재하면 새 JSX를 작성하지 않고 기존 공개 API로 구현합니다. shadcn/ui는 외부 Package의 완성품이 아니라 프로젝트가 소유하고 수정하는 Component Source로 취급합니다. 기존 Props와 Variant로 표현 가능한지 확인합니다. 기존 Component의 의미를 해치지 않는 확장인지 검토합니다. 한 기능에만 필요한 조합이면 기능 가까이에 둡니다. 여러 화면에서 의미와 변경 이유가 같을 때 공통 Component로 승격합니다. Storybook만을 위한 Props, Variant와 Wrapper를 추가하지 않습니다. Figma Main Component에 구현 정보를 남깁니다 실제 Component 이름과 파일 또는 Import 경로 주요 Props와 Variant 지원 상태와 사용 제한 대체하거나 우선 사용해야 하는 기존 Component 접근 가능한 Source 또는 Storybook Dev resource Figma와 UI를 처음 연결할 때는 디자인 편집 권한이 있는 담당자가 구현 정보를 작성합니다. 이후 Front-end 개발자가 경로, Props나 지원 상태를 변경하면 Figma 설명도 함께 갱신합니다. Code Connect 없이도 이 정보로 개발자와 AI의 탐색을 도울 수 있지만, Figma 설명만으로 실제 API를 보장하지 않으므로 Source를 반드시 다시 확인합니다. 상세 기준: Figma에서 React 코드로 옮기는 순서와 기존 Component 탐색은 React Code Exports 가이드 , Semantic Token 구성은 디자인 토큰 가이드 에서 확인합니다.",
     "url": "./../guides/briefing/index.html#section-4"
   },
   {
-    "document": "Lounge Front-end 구축 가이드 브리핑",
+    "document": "Lounge Front-end 작업 가이드 브리핑",
     "section": "WebView와 Native App 경계",
     "excerpt": "서비스 업무 화면은 WebView에서 제공하고 Camera, 위치, Push와 Device 권한처럼 Native 기능이 필요한 경우에만 승인된 JavaScript Bridge를 호출합니다. 화면 Component가 Flutter 객체와 OS별 메시지를 직접 다루지 않도록 Bridge Adapter를 둡니다. Adapter는 요청 ID, Method, Parameter와 결과를 일관되게 처리하…",
     "content": "8. WebView와 Native App 경계 서비스 업무 화면은 WebView에서 제공하고 Camera, 위치, Push와 Device 권한처럼 Native 기능이 필요한 경우에만 승인된 JavaScript Bridge를 호출합니다. 화면 Component가 Flutter 객체와 OS별 메시지를 직접 다루지 않도록 Bridge Adapter를 둡니다. Adapter는 요청 ID, Method, Parameter와 결과를 일관되게 처리하고 화면에는 Promise 기반의 최소 API를 제공합니다. Bridge 구현 전에 필요한 계약 Flutter Native App이 검증할 허용 Origin과 호출 가능한 Method Request와 Response 메시지 형식 성공, 취소, 권한 거부, Timeout과 오류 구분 중복 요청과 화면 종료 시 처리 iOS와 Android 지원 범위 Bridge는 인증 Token 전달이나 Backend 권한 검증 우회 수단으로 사용하지 않습니다. 상세 기준: Native와 WebView의 전체 책임은 APP 개발 표준 , Bridge 계약과 구현 흐름은 WebView 개발 가이드 에서 확인합니다.",
@@ -2187,7 +2131,7 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
     "document": "React Code Exports 가이드",
     "section": "기본 변환 흐름",
     "excerpt": "flowchart LR accTitle: Figma 디자인을 React 코드로 변환하는 기본 흐름 accDescr: 구현 범위를 지정하고 Figma 구조와 프로젝트 소스를 함께 확인한 뒤 기존 컴포넌트와 토큰을 우선 적용하여 코드를 생성하고 프론트엔드 개발자가 검수합니다. A[\"구현 범위 지정\"] --> B[\"Figma 구조와 화면 의도 확인\"] B --> C[\"기존 컴포넌트와 토큰 매핑\"]…",
-    "content": "4. 기본 변환 흐름 flowchart LR accTitle: Figma 디자인을 React 코드로 변환하는 기본 흐름 accDescr: 구현 범위를 지정하고 Figma 구조와 프로젝트 소스를 함께 확인한 뒤 기존 컴포넌트와 토큰을 우선 적용하여 코드를 생성하고 프론트엔드 개발자가 검수합니다. A[\"구현 범위 지정\"] --> B[\"Figma 구조와 화면 의도 확인\"] B --> C[\"기존 컴포넌트와 토큰 매핑\"] C --> D[\"React와 Tailwind CSS 초안 생성\"] D --> E[\"화면 비교와 품질 검수\"] E --> F[\"공통 컴포넌트 Story 작성 또는 갱신\"] F --> G[\"프론트엔드 승인\"] React Code Exports 기본 흐름 구현할 Figma 화면 또는 영역을 지정합니다. Figma의 컴포넌트, Auto Layout, Variables와 화면 의도를 확인합니다. 기존 shadcn/ui 및 프로젝트 컴포넌트와 토큰을 우선 적용합니다. 기존 요소로 표현할 수 없는 부분만 새로 작성합니다. 생성 화면을 Figma와 비교하고 프로젝트 품질 기준으로 검수합니다. 새로 만들거나 공개 API를 변경한 공통·재사용 컴포넌트는 Story를 함께 작성하거나 갱신하고 정적 Storybook 빌드로 확인합니다. 4.1 Code Connect 도입 시 장점 영역 장점 기존 컴포넌트 재사용 Figma 컴포넌트를 실제 코드의 컴포넌트 이름과 경로에 연결하여 AI의 임의 구현과 중복 생성을 줄일 수 있습니다. 속성과 variant 매핑 Figma의 variant, 상태와 텍스트 속성을 React props에 연결하여 디자인 의도가 코드에 더 일관되게 반영됩니다. AI 컨텍스트 보강 컴포넌트 사용법과 프로젝트 지침을 Figma MCP에 함께 제공하여 코드 생성 시 추측해야 하는 범위를 줄입니다. 화면 간 일관성 같은 Figma 컴포넌트가 여러 화면에서 동일한 코드 컴포넌트로 해석되도록 도와줍니다. 검수 비용 절감 잘못된 import, 불필요한 새 컴포넌트와 속성 누락을 줄여 프론트엔드 개발자의 반복 정리 작업을 줄일 수 있습니다. TBD Code Connect는 Figma Organization 또는 Enterprise 플랜 비용, 좌석과 권한, 저장소 연결 정책을 검토한 후 도입 여부를 결정합니다. 도입 전에도 위 흐름이 동작하도록 운영합니다. 4.2 Code Connect 미도입 시 기존 컴포넌트 연결 Code Connect를 도입하기 전에는 Figma의 공통 컴포넌트에 실제 코드 컴포넌트 정보를 기록하고, Cline이 구현 전에 프로젝트 소스를 검색하도록 하여 기존 컴포넌트를 우선 사용합니다. 이 방식은 Code Connect의 자동 매핑을 대체하지 않지만, 컴포넌트 이름과 import 경로를 추측하는 범위를 줄이기 위한 기본 운영 방식입니다. 작성 대상과 내용 모든 Frame과 내부 레이어에 정보를 작성하지 않습니다. Button, Input, Dialog, Card와 같이 실제 React 컴포넌트에 대응하는 Figma Main Component 또는 Component Set을 대상으로 합니다. 코드의 컴포넌트 이름과 named export 프로젝트에서 사용하는 import 경로 주요 Props와 variant 컴포넌트의 사용 목적과 중요한 제약 가능한 경우 실제 코드 또는 컴포넌트 문서의 Dev resource 링크 Code component: Button Import: @/components/ui/button Props: variant, size, disabled Usage: 일반적인 사용자 action에 사용 Source: Dev resource 참고 로컬 절대 경로는 다른 작업자가 사용할 수 없으므로 기록하지 않습니다. import alias, 저장소 상대 경로 또는 팀이 접근할 수 있는 소스 링크를 사용합니다. Figma와 코드의 variant 이름이 다르면 대응 관계를 설명에 함께 기록합니다. 아직 구현이나 경로가 확정되지 않은 항목은 추측하지 않고 Code mapping: TBD 로 표시합니다. Figma 작성 방법 컴포넌트 라이브러리의 원본 Figma 파일을 엽니다. Instance가 아니라 Main Component, Component Set 또는 설명이 필요한 개별 Variant를 선택합니다. Design Mode의 Component configuration에서 Description을 열고 코드 컴포넌트 정보를 입력합니다. 실제 코드나 문서 URL이 있으면 Documentation link 또는 Dev Mode의 Dev resource로 연결합니다. 공통 링크는 개별 Instance가 아니라 Main Component에 연결하여 모든 Instance에서 같은 정보를 확인할 수 있게 합니다. 라이브러리로 운영하는 경우 변경 내용을 검토한 뒤 Publish합니다. Description을 수정하려면 원본 Figma Design 파일의 편집 권한이 필요합니다. Dev Mode에서는 Description과 연결된 리소스를 확인하고, 권한이 허용된 경우 실제 코드나 문서의 Dev resource를 추가합니다. 구축과 운영 책임 구축 기간에는 Figma Design 편집 권한이 있는 담당자가 구현된 공통 컴포넌트의 이름, import 경로와 사용 설명을 원본 컴포넌트에 작성합니다. 프론트엔드 개발자는 실제 코드의 export, Props, variant와 소스 링크가 정확한지 확인합니다. 운영 이후 프론트엔드 개발자는 Dev Mode를 기본으로 사용합니다. Description 변경이 필요한 경우 회사의 좌석 관리 정책에 따라 해당 개발자에게 일시적으로 Figma Design 편집 권한을 부여합니다. Figma 계정과 로그인 정보는 공유하지 않으며, 관리자 기능으로 개인 계정의 좌석과 권한을 변경합니다. 컴포넌트 이름, 경로 또는 공개 API가 변경되면 코드와 Figma 설명을 함께 갱신합니다. Cline 구현 기준 선택된 Figma 요소가 공통 컴포넌트 Instance인지 확인합니다. Description과 Dev resource에서 코드 컴포넌트 정보를 확인합니다. 안내된 경로의 실제 파일을 읽어 export, Props와 variant를 검증합니다. 현재 기능과 apps/app-webview/src/components/ui 에서 기존 사용 예시를 검색합니다. 확인된 컴포넌트를 import하여 사용하고, 존재하지 않는 경로나 API는 추측하지 않습니다. 기존 컴포넌트로 표현할 수 없는 부분만 새로 작성하고 그 이유를 변경 설명에 남깁니다.",
+    "content": "4. 기본 변환 흐름 flowchart LR accTitle: Figma 디자인을 React 코드로 변환하는 기본 흐름 accDescr: 구현 범위를 지정하고 Figma 구조와 프로젝트 소스를 함께 확인한 뒤 기존 컴포넌트와 토큰을 우선 적용하여 코드를 생성하고 프론트엔드 개발자가 검수합니다. A[\"구현 범위 지정\"] --> B[\"Figma 구조와 화면 의도 확인\"] B --> C[\"기존 컴포넌트와 토큰 매핑\"] C --> D[\"React와 Tailwind CSS 초안 생성\"] D --> E[\"화면 비교와 품질 검수\"] E --> F[\"공통 컴포넌트 Story 작성 또는 갱신\"] F --> G[\"프론트엔드 승인\"] React Code Exports 기본 흐름 구현할 Figma 화면 또는 영역을 지정합니다. Figma의 컴포넌트, Auto Layout, Variables와 화면 의도를 확인합니다. 기존 shadcn/ui 및 프로젝트 컴포넌트와 토큰을 우선 적용합니다. 기존 요소로 표현할 수 없는 부분만 새로 작성합니다. 생성 화면을 Figma와 비교하고 프로젝트 품질 기준으로 검수합니다. 새로 만들거나 공개 API를 변경한 공통·재사용 컴포넌트는 Story를 함께 작성하거나 갱신하고 정적 Storybook 빌드로 확인합니다. 4.1 Code Connect 도입 시 장점 영역 장점 기존 컴포넌트 재사용 Figma 컴포넌트를 실제 코드의 컴포넌트 이름과 경로에 연결하여 AI의 임의 구현과 중복 생성을 줄일 수 있습니다. 속성과 variant 매핑 Figma의 variant, 상태와 텍스트 속성을 React props에 연결하여 디자인 의도가 코드에 더 일관되게 반영됩니다. AI 컨텍스트 보강 컴포넌트 사용법과 프로젝트 지침을 Figma MCP에 함께 제공하여 코드 생성 시 추측해야 하는 범위를 줄입니다. 화면 간 일관성 같은 Figma 컴포넌트가 여러 화면에서 동일한 코드 컴포넌트로 해석되도록 도와줍니다. 검수 비용 절감 잘못된 import, 불필요한 새 컴포넌트와 속성 누락을 줄여 프론트엔드 개발자의 반복 정리 작업을 줄일 수 있습니다. TBD Code Connect는 Figma Organization 또는 Enterprise 플랜 비용, 좌석과 권한, 저장소 연결 정책을 검토한 후 도입 여부를 결정합니다. 도입 전에도 위 흐름이 동작하도록 운영합니다. 4.2 Code Connect 미도입 시 기존 컴포넌트 연결 Code Connect를 도입하기 전에는 Figma에 정보를 기록하여 AI의 정확도를 극대화하거나, 정보가 없더라도 AI가 직접 코드베이스를 검색하여 기존 컴포넌트를 찾아 사용하도록 운영합니다. Description이 있는 경우: AI가 즉시 정확한 컴포넌트 이름, 경로, Props를 파악하여 구현 속도와 정확도를 극대화합니다. Description이 없는 경우: AI가 코드베이스 검색( search_codebase 등)을 통해 Figma 요소와 유사한 컴포넌트, Import 경로, 사용 패턴을 스스로 찾아내어 매핑합니다. 작성 대상과 내용 모든 Frame과 내부 레이어에 정보를 작성하지 않습니다. Button, Input, Dialog, Card와 같이 실제 React 컴포넌트에 대응하는 Figma Main Component 또는 Component Set을 대상으로 합니다. 코드의 컴포넌트 이름과 named export 프로젝트에서 사용하는 import 경로 주요 Props와 variant 컴포넌트의 사용 목적과 중요한 제약 가능한 경우 실제 코드 또는 컴포넌트 문서의 Dev resource 링크 Code component: Button Import: @/components/ui/button Props: variant, size, disabled Usage: 일반적인 사용자 action에 사용 Source: Dev resource 참고 로컬 절대 경로는 다른 작업자가 사용할 수 없으므로 기록하지 않습니다. import alias, 저장소 상대 경로 또는 팀이 접근할 수 있는 소스 링크를 사용합니다. Figma와 코드의 variant 이름이 다르면 대응 관계를 설명에 함께 기록합니다. 아직 구현이나 경로가 확정되지 않은 항목은 추측하지 않고 Code mapping: TBD 로 표시합니다. Figma 작성 방법 컴포넌트 라이브러리의 원본 Figma 파일을 엽니다. Instance가 아니라 Main Component, Component Set 또는 설명이 필요한 개별 Variant를 선택합니다. 정확도를 높이려면 Design Mode의 Component configuration의 Description에 코드 컴포넌트 정보를 입력하는 것을 권장합니다. 실제 코드나 문서 URL이 있으면 Documentation link 또는 Dev Mode의 Dev resource로 연결합니다. 공통 링크는 개별 Instance가 아니라 Main Component에 연결하여 모든 Instance에서 같은 정보를 확인할 수 있게 합니다. 라이브러리로 운영하는 경우 변경 내용을 검토한 뒤 Publish합니다. Description을 수정하려면 원본 Figma Design 파일의 편집 권한이 필요합니다. Dev Mode에서는 Description과 연결된 리소스를 확인하고, 권한이 허용된 경우 실제 코드나 문서의 Dev resource를 추가합니다. 구축과 운영 책임 구축 기간에는 Figma Design 편집 권한이 있는 담당자가 구현된 공통 컴포넌트의 이름, import 경로와 사용 설명을 원본 컴포넌트에 작성합니다. 프론트엔드 개발자는 실제 코드의 export, Props, variant와 소스 링크가 정확한지 확인합니다. 운영 이후 프론트엔드 개발자는 Dev Mode를 기본으로 사용합니다. Description 변경이 필요한 경우 회사의 좌석 관리 정책에 따라 해당 개발자에게 일시적으로 Figma Design 편집 권한을 부여합니다. Figma 계정과 로그인 정보는 공유하지 않으며, 관리자 기능으로 개인 계정의 좌석과 권한을 변경합니다. 컴포넌트 이름, 경로 또는 공개 API가 변경되면 코드와 Figma 설명을 함께 갱신합니다. AI 구현 기준 선택된 Figma 요소가 공통 컴포넌트 Instance인지 확인합니다. Description 또는 Dev resource에 정보가 있다면 이를 최우선으로 확인합니다. 정보가 없다면, AI가 프로젝트 소스를 검색하여 유사한 컴포넌트와 사용 패턴을 스스로 찾아냅니다. 찾아낸 컴포넌트의 실제 파일을 읽어 export, Props와 variant를 검증합니다. 현재 기능과 apps/app-webview/src/components/ui 에서 기존 사용 예시를 검색합니다. 확인된 컴포넌트를 import하여 사용하고, 존재하지 않는 경로나 API는 추측하지 않습니다. 기존 컴포넌트로 표현할 수 없는 부분만 새로 작성하고 그 이유를 변경 설명에 남깁니다. 구현 패턴 예시: 매핑 기반 컴포넌트 (Icon) AI가 Description 이 없는 상태에서도 코드베이스 검색을 통해 기존 컴포넌트를 정확히 찾아내고 사용할 수 있도록, 매핑 테이블을 활용한 패턴을 권장합니다. import { ArrowRight, Search, X } from 'lucide-react' ; import { cn } from '@/lib/utils' ; // 1. 컴포넌트 정의: 이름(name)과 실제 라이브러리/경로를 매핑 const iconMap = { arrow_right : ArrowRight, search : Search, close : X, } as const ; export type IconName = keyof typeof iconMap; interface IconProps { name : IconName ; className ?: string ; } export const Icon = ( { name, className }: IconProps ) => { const SelectedIcon = iconMap[name]; if (!SelectedIcon) return null ; return < SelectedIcon className = {cn('inline-flex', className)} /> ; }; // 2. 사용 예시: AI는 'name'의 자동 완성을 통해 정확한 컴포넌트를 호출합니다. < Icon name = \"search\" className = \"size-5 text-primary\" />",
     "url": "./../guides/ui/react_code_exports.html#section-4"
   },
   {
@@ -2241,9 +2185,9 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
   },
   {
     "document": "React Code Exports 가이드",
-    "section": "VS Code, Cline 및 로컬 LLM을 이용한 구현",
-    "excerpt": "VS Code에서 Cline과 Ollama 기반 로컬 LLM을 사용해 React와 Tailwind CSS 구현 초안을 작성할 수 있습니다. 이 가이드의 기본 로컬 모델은 qwen3.8:27b-mtp-q4_K_M 입니다. 생성된 코드의 구조와 품질을 최종 판단하는 주체는 프론트엔드 개발자입니다. 사람과 LLM이 작성한 코드의 공통 품질 기준은 Front-End Lint 가이드 를 따릅니다. 5…",
-    "content": "5. VS Code, Cline 및 로컬 LLM을 이용한 구현 VS Code에서 Cline과 Ollama 기반 로컬 LLM을 사용해 React와 Tailwind CSS 구현 초안을 작성할 수 있습니다. 이 가이드의 기본 로컬 모델은 qwen3.8:27b-mtp-q4_K_M 입니다. 생성된 코드의 구조와 품질을 최종 판단하는 주체는 프론트엔드 개발자입니다. 사람과 LLM이 작성한 코드의 공통 품질 기준은 Front-End Lint 가이드 를 따릅니다. 5.1 도구와 책임 VS Code는 소스 편집, Diff 확인과 검증 명령 실행에 사용합니다. Cline은 프로젝트 컨텍스트와 Figma 정보를 바탕으로 코드를 생성하고 수정합니다. Ollama는 qwen3.8:27b-mtp-q4_K_M 모델을 로컬에서 실행합니다. 파일 변경과 명령 실행 전후에 범위와 결과를 사람이 확인합니다. 5.2 Ollama와 Qwen 설치 Ollama를 설치한 뒤 Ollama 표시 기준 약 18GB인 MTP Q4_K_M 기본 모델을 다음 명령으로 내려받고 실행 여부를 확인합니다. ollama pull qwen3.8:27b-mtp-q4_K_M ollama list ollama run qwen3.8:27b-mtp-q4_K_M 5.3 Cline 설정 VS Code에 Cline 확장을 설치한 뒤 Cline의 API 설정으로 이동합니다. API Provider 에서 Ollama 를 선택하고, Ollama의 기본 주소와 사용할 모델을 지정합니다. Cline 설정에서 API Configuration 을 엽니다. API Provider 에서 Ollama 를 선택합니다. Base URL은 http://localhost:11434 로 설정합니다. Model에서 qwen3.8:27b-mtp-q4_K_M 를 선택합니다. Model Context Window 는 속도와 프로젝트 문맥의 균형을 고려해 64K 로 설정합니다. 숫자를 직접 입력하는 화면에서는 65536 을 입력합니다. Context Window를 변경한 뒤 설정을 저장하고 새 작업에서 선택한 모델과 컨텍스트 크기가 적용되었는지 확인합니다. 128K는 대규모 저장소나 매우 긴 대화를 한 번에 유지해야 할 때만 선택적으로 사용합니다. 이 경우 Cline 화면에서는 130K(128K 토큰) 로 설정하고, 숫자를 직접 입력하는 화면에서는 131072 를 입력합니다. 초기 컨텍스트 사용량 동일하거나 유사한 Cline 및 MCP 구성에서 Figma Desktop MCP와 Tavily MCP를 활성화하고, 새 채팅에 안녕 처럼 짧은 메시지를 입력했을 때 다음과 같은 초기 컨텍스트 사용량이 관찰되었습니다. 일반 qwen3.8:27b : 약 18.2K — 기존 테스트 관찰값 qwen3.8:27b-mtp-q4_K_M : 약 7~8K — 사용자 실측값 이는 사용자 메시지 자체의 크기뿐 아니라 Cline이 Agent 작업을 시작하기 위해 미리 전달하는 기본 컨텍스트가 함께 계산된 결과입니다. 초기 컨텍스트에는 일반적으로 다음 정보가 포함됩니다. Cline의 시스템 지침과 도구 사용 규칙 파일 읽기, 수정, 명령 실행과 브라우저 등 기본 도구 정의 Figma와 Tavily MCP가 제공하는 도구 이름, 설명 및 입력 구조 Cline Rules, 작업 환경과 모델에 전달되는 기타 기본 정보 따라서 MCP 서버와 도구를 많이 활성화할수록 실제 대화를 시작하기 전의 컨텍스트 사용량도 커질 수 있습니다. 위의 18.2K와 7~8K는 각 테스트 환경에서 관찰된 값입니다. MTP의 주된 목적은 출력 생성 가속이며, MTP 자체가 Cline의 시스템 및 MCP 컨텍스트 토큰을 원리적으로 줄인다고 단정할 수 없습니다. 모델과 토크나이저, 도구 스키마 처리 방식, Cline 버전, 활성 도구, MCP 서버 및 프로젝트 설정 차이에 따라 값이 달라질 수 있습니다. 64K 설정에서는 이 초기 사용량을 제외한 나머지 공간에 대화, 파일 내용과 도구 실행 결과가 누적되므로 한 채팅에는 하나의 작업 목표만 유지하고 필요하면 새 채팅으로 분리합니다. 자세한 컨텍스트 구성은 Cline Task Management 를 참고합니다. /newtask 로 작업 이어가기 /newtask 는 현재 채팅을 단순히 종료하는 명령이 아니라, 지금까지의 핵심 내용을 정리해 깨끗한 컨텍스트의 새 Task로 전달하는 작업 인계 기능입니다. 컨텍스트가 많이 찼지만 동일한 목표를 계속 진행해야 하거나, 조사와 계획을 마치고 구현 단계로 전환할 때 사용합니다. 채팅 입력창에 /newtask 를 입력합니다. Cline이 현재 대화에서 인계할 내용을 요약해 제안합니다. 목표, 완료 작업, 관련 파일과 다음 단계가 정확한지 확인합니다. 누락되거나 잘못 요약된 내용을 직접 보완한 뒤 새 Task 생성을 승인합니다. 새 Task에서 요약된 컨텍스트를 기준으로 작업을 계속합니다. 새 Task를 시작하기 전에 인계 요약에 다음 항목이 포함되었는지 확인합니다. 최종 목표와 현재 작업 범위 이미 결정한 구현 방향과 변경하면 안 되는 제약 조건 완료한 작업, 수정한 파일과 현재 검증 결과 해결되지 않은 문제, 확인이 필요한 항목과 다음 작업 순서 새 Task에는 전체 대화와 모든 도구 출력이 그대로 복사되지 않습니다. Figma와 Tavily MCP 연결 설정은 계속 사용할 수 있지만, 이전 검색 결과나 Figma 분석 내용은 인계 요약에 포함되어야 새 Task가 알 수 있습니다. 따라서 중요한 결정과 근거가 빠지지 않았는지 확인한 뒤 전환합니다. 주요 슬래시 명령 명령 기능 권장 사용 시점 /newtask 현재 작업의 핵심 내용을 요약해 새 Task로 인계 컨텍스트가 많이 찼거나 작업 단계를 전환할 때 /smol 핵심 내용을 유지하면서 현재 대화 기록을 압축 같은 Task를 유지하면서 컨텍스트 공간만 확보할 때 /newrule 반복해서 적용할 프로젝트 또는 개인 규칙 생성 같은 코딩 기준이나 금지사항을 매번 설명하고 있을 때 /deep-planning 코드베이스를 조사하고 상세 구현 계획과 후속 Task 생성 여러 영역에 영향을 주는 복잡한 기능이나 구조 변경 전 /explain-changes Git Diff의 변경 내용을 설명하며 VS Code에서만 사용 가능 미커밋 변경, 커밋 또는 브랜치 차이를 검토할 때 /reportbug Cline 진단 정보를 포함해 문제 보고 준비 Cline 자체 오류, 비정상 종료 또는 반복되는 오동작을 보고할 때 현재 설치 버전에서 지원되는 명령은 채팅 입력창에 / 를 입력해 확인합니다. 명령 상세와 변경 사항은 Cline Using Commands 를 참고합니다. 5.4 로컬 LLM 테스트 및 권장 사양 아래 기준은 Ollama 표시 기준 약 18GB인 qwen3.8:27b-mtp-q4_K_M 모델을 Ollama와 Cline에서 사용하는 환경을 전제로 합니다. 모델 선택 원칙과 실사용 평가 로컬 LLM은 파라미터 수나 출시 시점만으로 우열을 판단하지 않습니다. 프로젝트 가이드 리뷰, 실제 코드 구현, 리팩터링과 범용 Agent 작업처럼 실제로 맡길 업무의 동일한 프롬프트를 각 모델에 적용하고 결과 품질, 응답 속도, 지시 준수, 커뮤니케이션과 출력 안정성을 함께 비교합니다. Gemma4 : 커뮤니케이션과 Soul 준수가 뛰어나고, 문서 리뷰뿐 아니라 프로젝트 전체 맥락과 의도를 파악하는 능력이 우수했습니다. 범용 Agent 작업을 안정적으로 맡길 수 있는 모델로 평가합니다. Qwen 계열 : 응답이 느리고 커뮤니케이션은 상대적으로 약하지만 Cline 코딩 작업에서는 강점이 있었습니다. Hermes에서는 과도한 Reasoning과 출력 불안정이 관찰되었으므로, 범용 Agent나 문서 리뷰에는 사용하지 않고 Cline 기반 코드 구현·수정·리팩터링 용도로만 사용합니다. 위 평가는 현재 테스트 환경에서 관찰한 업무별 특성이며 고정된 종합 순위가 아닙니다. 모델이나 실행 도구가 변경되면 같은 실제 업무 테스트를 다시 수행한 뒤 용도별 기본 모델을 결정합니다. 테스트 환경 구분 테스트 사양 CPU AMD Ryzen 9 7950X3D GPU NVIDIA GeForce RTX 4090 24GB 메모리 DDR5 96GB 저장 장치 NVMe Gen4 SSD 1TB 모델 qwen3.8:27b-mtp-q4_K_M , 약 18GB 테스트 결과 : 약 18GB MTP Q4_K_M 모델과 128K 토큰 컨텍스트를 사용한 고사양 환경에서는 응답 속도와 추론 품질이 모두 실사용 가능한 수준이었습니다. 다만 64K보다 응답이 느려질 수 있으므로 일반 개발 PC와 반복 작업에서는 64K를 기본값으로 권장합니다. 위 장비는 검증 결과가 좋은 고사양 테스트 환경이며 모든 개발 PC의 필수 사양은 아닙니다. 로컬 LLM에서는 GPU 연산 성능뿐 아니라 모델과 컨텍스트를 처리할 수 있는 VRAM 용량이 중요합니다. 개발 PC 권장 기준 사용 범위 GPU 시스템 메모리 CPU 운영 기준 64K 기본 권장 VRAM 24GB 64GB 최신 8코어 이상 Cline을 이용한 일반적인 코딩 작업의 기본 권장선 64K 여유 구성 VRAM 24GB 64~96GB 최신 12코어급 권장 개발 서버와 다른 작업 도구를 함께 사용할 때 여유 확보 실행 가능한 최소 VRAM 16GB 64GB 최신 12코어급 모델 일부가 CPU로 이동하여 응답 속도가 크게 느려질 수 있음 비용과 성능의 균형을 고려하면 RTX 3090 24GB, 시스템 메모리 64GB, 최신 8~12코어 CPU와 NVMe SSD 1TB 구성을 권장합니다. RTX 3090은 RTX 4090보다 연산 속도는 낮지만 VRAM이 동일하게 24GB이므로 약 18GB 모델의 64K 컨텍스트를 사용하는 개발 PC에 적합합니다. 64K는 일반적인 코드 조사, Figma 화면 구현과 웹검색 결과 정리에 필요한 문맥을 확보하면서 128K보다 빠르게 작업하기 위한 기본값입니다. 다른 GPU 사용 프로그램을 최소화하고 ollama ps 에서 모델이 가능한 한 100% GPU 로 적재되었는지 확인합니다. 세부 내용은 Ollama Context length 와 Ollama FAQ 를 참고합니다. 5.5 Figma Desktop MCP 설정 Figma Desktop에서 선택한 레이어 또는 프레임 정보를 Cline에 전달하려면 Cline의 MCP 설정에 다음 서버를 등록합니다. { \"mcpServers\": { \"figma-desktop\": { \"type\": \"streamableHttp\", \"url\": \"http://127.0.0.1:3845/mcp\", \"disabled\": false, \"autoApprove\": [] } } } Figma Desktop에서 코드로 변환할 레이어 또는 프레임을 선택한 뒤 Cline에 다음과 같이 명령합니다. 현재 figma에서 선택된 레이어(프레임) 정보/코딩 이 명령을 사용하면 현재 Figma에서 선택된 부분의 정보를 읽어 해당 영역의 소스 코드를 생성할 수 있습니다. 선택 대상과 프로젝트의 기존 컴포넌트, 디자인 토큰 및 구현 규칙을 함께 확인한 뒤 결과를 적용합니다. 5.6 Cline 웹검색과 Tavily MCP Cline 기본 브라우저 도구 Cline은 기본 브라우저 도구를 사용해 웹페이지를 열고, 화면을 탐색하고, 검색 사이트의 결과와 문서 내용을 확인할 수 있습니다. 별도의 검색 API 가입 없이 사용할 수 있지만 웹사이트 화면을 직접 조작하는 방식이므로 검색 결과 수집과 여러 출처 비교에는 시간이 더 걸릴 수 있습니다. 브라우저 사용은 Cline의 승인 설정에서 허용해야 합니다. 특정 URL의 공식 문서를 읽거나 구현 화면을 확인하는 작업에는 기본 브라우저를 사용하고, 최신 자료를 여러 출처에서 검색하고 정리하는 작업에는 Tavily MCP를 사용합니다. Tavily MCP 설정 Tavily는 AI Agent용 웹검색 서비스로, 검색 결과와 관련 페이지 내용을 Cline이 처리하기 쉬운 형태로 제공합니다. 기존 MCP 설정의 mcpServers 에 다음 항목을 추가합니다. \"tavily\": { \"type\": \"streamableHttp\", \"url\": \"https://mcp.tavily.com/mcp/\", \"headers\": { \"Authorization\": \"Bearer YOUR_TAVILY_API_KEY\" }, \"disabled\": false, \"autoApprove\": [] } YOUR_TAVILY_API_KEY 는 Tavily에서 발급받은 키로 교체합니다. API 키가 포함된 설정 파일은 저장소에 커밋하지 않습니다. 처음에는 autoApprove 를 비워 두고 검색 도구 호출 내용을 확인한 뒤 승인합니다. 무료 및 유료 사용 구분 구분 제공량 또는 비용 사용 기준 Researcher 무료 매월 1,000 API 크레딧, 카드 등록 불필요 개인 개발과 필요한 공식 문서 검색에 기본 사용 기본 검색 요청 1회당 1크레딧 무료 범위에서 우선 사용 고급 검색 요청 1회당 2크레딧 기본 검색 결과가 부족할 때만 사용 Pay As You Go 크레딧당 미화 0.008달러 무료 제공량을 초과하고 사용량이 일정하지 않을 때 선택 월간 유료 플랜 월 30달러·4,000크레딧부터 사용량별 단계 제공 팀에서 반복적으로 많은 검색을 수행할 때 검토 이 가이드에서는 무료 Researcher 플랜을 기준으로 기본 검색을 우선 사용합니다. 사이트 전체 탐색이나 대규모 Research 요청은 크레딧을 빠르게 소비할 수 있으므로 필요한 공식 문서와 최신 정보 확인 범위로 제한합니다. 가격과 크레딧 정책은 변경될 수 있으므로 Tavily Credits & Pricing 에서 현재 기준을 확인합니다. Tavily를 사용해 관련 기술의 최신 공식 문서를 검색하고, 핵심 내용과 출처 URL을 함께 정리해줘. 5.7 React Code Exports 작업 흐름 Figma에서 구현할 레이어 또는 프레임을 선택합니다. Cline에 현재 figma에서 선택된 레이어(프레임) 정보/코딩 이라고 요청합니다. 코드를 작성하기 전에 현재 기능과 애플리케이션의 공통 UI에서 같은 역할의 기존 컴포넌트를 검색합니다. 사용할 컴포넌트의 실제 파일, export, Props, variant와 기존 사용 예시를 확인합니다. 존재하지 않는 import 경로, Props, variant 또는 토큰은 추측하지 않습니다. globals.css 의 Semantic Token과 기존 Tailwind 사용 방식을 확인합니다. 공통 CSS 하한은 Safari 15로 적용합니다. Figma 표현에 최신 CSS가 필요해 보이더라도 Safari 15에서 지원되지 않는 Tailwind Utility는 사용하지 않고 호환 가능한 기본 Utility나 기존 프로젝트 패턴으로 대체합니다. 기존 요소를 우선 재사용하고 불명확한 동작이나 데이터는 담당자에게 확인합니다. 생성된 Diff를 검토하고 승인한 범위만 반영합니다. typecheck , lint 와 필요한 production build를 실행합니다. 구현 화면을 Figma와 비교하고 차이를 수정합니다. 5.8 검수 기준 Figma에서 의도한 레이어 또는 프레임을 정확히 선택했는가? 기존 컴포넌트와 디자인 토큰을 우선 사용했는가? 기존 컴포넌트의 실제 파일, export, Props와 variant를 확인했는가? 기존 컴포넌트로 표현할 수 있는 요소를 native JSX와 Tailwind로 중복 구현하지 않았는가? 생성된 import가 실제 경로와 export를 가리키는지 TypeScript 검사로 확인했는가? 작업 범위를 벗어난 파일, 의존성 또는 설정을 변경하지 않았는가? Safari 15에서 지원되지 않는 최신 CSS 기반 Utility에 핵심 UI를 의존시키지 않았는가? Android와 다른 브라우저에 임의의 대응 버전을 지정하지 않고 프로젝트가 정한 구형 검증 환경에서 실제 사용 Utility와 핵심 기능을 확인했는가? 확인되지 않은 API, 상태 관리 구조 또는 공통화를 추가하지 않았는가? 최종 Diff를 사람이 검토했는가? typecheck , lint 와 필요한 build를 통과했는가? LLM과 Agent는 구현 속도를 높이는 작업 도구이며 승인 주체가 아닙니다. 생성된 코드는 사람이 작성한 코드와 같은 리뷰 및 검증 기준을 적용합니다.",
+    "section": "VS Code, AI 도구 및 로컬 LLM을 이용한 구현",
+    "excerpt": "VS Code에서 Cline과 LLM을 사용해 React와 Tailwind CSS 구현 초안을 작성할 수 있습니다. 로컬 LLM을 사용할 때는 Ollama 또는 NInfer(Docker)로 실행하며, 기본 모델은 Qwen3.8-27B 계열입니다. 생성된 코드의 구조와 품질을 최종 판단하는 주체는 프론트엔드 개발자입니다. 사람과 LLM이 작성한 코드의 공통 품질 기준은 Front-End Lin…",
+    "content": "5. VS Code, AI 도구 및 로컬 LLM을 이용한 구현 VS Code에서 Cline과 LLM을 사용해 React와 Tailwind CSS 구현 초안을 작성할 수 있습니다. 로컬 LLM을 사용할 때는 Ollama 또는 NInfer(Docker)로 실행하며, 기본 모델은 Qwen3.8-27B 계열입니다. 생성된 코드의 구조와 품질을 최종 판단하는 주체는 프론트엔드 개발자입니다. 사람과 LLM이 작성한 코드의 공통 품질 기준은 Front-End Lint 가이드 를 따릅니다. 5.1 도구와 책임 VS Code는 소스 편집, Diff 확인과 검증 명령 실행에 사용합니다. AI 도구는 프로젝트 컨텍스트와 Figma 정보를 바탕으로 코드를 생성하고 수정합니다. 로컬 LLM을 사용할 때는 Ollama 또는 NInfer가 Qwen3.8-27B 계열 모델을 로컬에서 실행합니다. 64K 컨텍스트는 Ollama, 256K 컨텍스트가 필요한 대규모 코드베이스 작업은 NInfer(Docker)를 사용할 수 있습니다. 파일 변경과 명령 실행 전후에 범위와 결과를 사람이 확인합니다. 5.2 Ollama와 Qwen 설치 (64K 기본) Ollama를 설치한 뒤 Ollama 표시 기준 약 18GB인 MTP Q4_K_M 기본 모델을 다음 명령으로 내려받고 실행 여부를 확인합니다. ollama pull qwen3.8:27b-mtp-q4_K_M ollama list ollama run qwen3.8:27b-mtp-q4_K_M 5.3 NInfer(Docker)와 Qwen 설치 (256K 확장) Ollama는 64K 컨텍스트에서 안정적인 반면 128K 이상으로 확장하면 RTX 4090 24GB VRAM 한계로 속도가 크게 떨어집니다. NInfer는 RTX 4090 전용 포크 를 Docker로 실행하여 256K 컨텍스트를 매우 빠르게 처리합니다. 대규모 저장소 전체를 컨텍스트에 유지해야 하는 작업에 적합합니다. Windows의 기존 Ollama는 그대로 두고 WSL2 + Docker Desktop에서 NInfer를 별도 포트로 실행하므로 동시에 사용할 수 있습니다. 사용한 저장소와 모델 저장소: sergiuszm/ninfer-4090 , 브랜치 rtx4090-port 모델 아티팩트: neroued/Qwen3.8-27B-NInfer , 파일 qwen3_8_27b.ninfer (16.96 GiB) 호환성: 설치 당시 최신 아티팩트는 DFlash2 항목 때문에 특정 커밋과 호환되지 않으므로 아티팩트 리비전을 고정합니다. 빌드 및 다운로드 WSL2 Ubuntu 터미널에서 실행합니다. git clone --branch rtx4090-port https://github.com/sergiuszm/ninfer-4090.git cd ninfer-4090 git checkout 1bd56c9a1bdf docker build --tag ninfer-4090:sm89 . mkdir -p models hf download neroued/Qwen3.8-27B-NInfer qwen3_8_27b.ninfer \\ --revision 18dfc887423fa5aabf3cb56fac41490e462b3fab \\ --local-dir models sha256sum models/qwen3_8_27b.ninfer 서버 실행 docker run -d \\ --name ninfer-qwen38-4090 \\ --restart unless-stopped \\ --gpus all \\ --publish 8080:8080 \\ --volume \"$PWD/models:/workspace/models:ro\" \\ ninfer-4090:sm89 \\ ninfer-serve models/qwen3_8_27b.ninfer \\ --host 0.0.0.0 --port 8080 \\ --max-context 262144 --kv-capacity 262144 \\ --max-concurrency 1 --max-pending-requests 16 \\ --pending-timeout-ms 600000 \\ --prefill-chunk 1024 --kv-dtype rk4v4-e8 \\ --spec mtp --draft-tokens 3 --lm-head-draft \\ --preserve-thinking 관리 명령 docker start ninfer-qwen38-4090 docker stop ninfer-qwen38-4090 docker logs -f ninfer-qwen38-4090 동작 확인 curl http://127.0.0.1:8080/health curl http://127.0.0.1:8080/v1/models nvidia-smi /v1 자체는 웹페이지가 아니므로 브라우저에서 404가 나와도 정상입니다. 성능 비교: Ollama vs NInfer 구분 Ollama NInfer (Docker) 실행 방식 Windows 네이티브, 포트 11434 WSL2 + Docker Desktop, 포트 8080 적정 컨텍스트 64K (128K는 가능하나 느림) 256K까지 고속 처리 모델 파일 qwen3.8:27b-mtp-q4_K_M (약 18GB) qwen3_8_27b.ninfer (16.96 GiB) 사용 권장 일상 코딩, 64K 내 작업 대규모 저장소, 256K 컨텍스트 필요 시 5.4 Cline 설정 VS Code에 Cline 확장을 설치한 뒤 Cline의 API 설정으로 이동합니다. API Provider 에서 Ollama 를 선택하고, Ollama의 기본 주소와 사용할 모델을 지정합니다. Cline 설정에서 API Configuration 을 엽니다. API Provider 에서 Ollama 를 선택합니다. Base URL은 http://localhost:11434 로 설정합니다. Model에서 qwen3.8:27b-mtp-q4_K_M 를 선택합니다. Model Context Window 는 속도와 프로젝트 문맥의 균형을 고려해 64K 로 설정합니다. 숫자를 직접 입력하는 화면에서는 65536 을 입력합니다. Context Window를 변경한 뒤 설정을 저장하고 새 작업에서 선택한 모델과 컨텍스트 크기가 적용되었는지 확인합니다. 128K는 대규모 저장소나 매우 긴 대화를 한 번에 유지해야 할 때만 선택적으로 사용합니다. 이 경우 Cline 화면에서는 130K(128K 토큰) 로 설정하고, 숫자를 직접 입력하는 화면에서는 131072 를 입력합니다. NInfer 연동 (256K 확장) NInfer는 OpenAI 호환 API를 제공하므로 Cline에서 OpenAI Compatible Provider로 연결합니다. API Provider 에서 OpenAI Compatible 를 선택합니다. Base URL은 http://127.0.0.1:8080/v1 로 설정합니다. API Key는 local-ninfer (인증 비활성이라 임의 문자열). Model ID는 qwen3.8-27b 로 입력합니다. Model Context Window 는 262144 (256K)로 설정합니다. Max Output Tokens 는 8192 로 설정합니다. Ollama는 포트 11434 , NInfer는 포트 8080 를 사용하므로 동시에 실행할 수 있습니다. 작업 규모에 따라 Cline의 API Provider를 전환하여 사용합니다. 초기 컨텍스트 사용량 동일하거나 유사한 Cline 및 MCP 구성에서 Figma Desktop MCP와 Tavily MCP를 활성화하고, 새 채팅에 안녕 처럼 짧은 메시지를 입력했을 때 다음과 같은 초기 컨텍스트 사용량이 관찰되었습니다. 일반 qwen3.8:27b : 약 18.2K — 기존 테스트 관찰값 qwen3.8:27b-mtp-q4_K_M : 약 7~8K — 사용자 실측값 이는 사용자 메시지 자체의 크기뿐 아니라 Cline이 Agent 작업을 시작하기 위해 미리 전달하는 기본 컨텍스트가 함께 계산된 결과입니다. 초기 컨텍스트에는 일반적으로 다음 정보가 포함됩니다. Cline의 시스템 지침과 도구 사용 규칙 파일 읽기, 수정, 명령 실행과 브라우저 등 기본 도구 정의 Figma와 Tavily MCP가 제공하는 도구 이름, 설명 및 입력 구조 Cline Rules, 작업 환경과 모델에 전달되는 기타 기본 정보 따라서 MCP 서버와 도구를 많이 활성화할수록 실제 대화를 시작하기 전의 컨텍스트 사용량도 커질 수 있습니다. 위의 18.2K와 7~8K는 각 테스트 환경에서 관찰된 값입니다. MTP의 주된 목적은 출력 생성 가속이며, MTP 자체가 Cline의 시스템 및 MCP 컨텍스트 토큰을 원리적으로 줄인다고 단정할 수 없습니다. 모델과 토크나이저, 도구 스키마 처리 방식, Cline 버전, 활성 도구, MCP 서버 및 프로젝트 설정 차이에 따라 값이 달라질 수 있습니다. 64K 설정에서는 이 초기 사용량을 제외한 나머지 공간에 대화, 파일 내용과 도구 실행 결과가 누적되므로 한 채팅에는 하나의 작업 목표만 유지하고 필요하면 새 채팅으로 분리합니다. 자세한 컨텍스트 구성은 Cline Task Management 를 참고합니다. /newtask 로 작업 이어가기 /newtask 는 현재 채팅을 단순히 종료하는 명령이 아니라, 지금까지의 핵심 내용을 정리해 깨끗한 컨텍스트의 새 Task로 전달하는 작업 인계 기능입니다. 컨텍스트가 많이 찼지만 동일한 목표를 계속 진행해야 하거나, 조사와 계획을 마치고 구현 단계로 전환할 때 사용합니다. 채팅 입력창에 /newtask 를 입력합니다. Cline이 현재 대화에서 인계할 내용을 요약해 제안합니다. 목표, 완료 작업, 관련 파일과 다음 단계가 정확한지 확인합니다. 누락되거나 잘못 요약된 내용을 직접 보완한 뒤 새 Task 생성을 승인합니다. 새 Task에서 요약된 컨텍스트를 기준으로 작업을 계속합니다. 새 Task를 시작하기 전에 인계 요약에 다음 항목이 포함되었는지 확인합니다. 최종 목표와 현재 작업 범위 이미 결정한 구현 방향과 변경하면 안 되는 제약 조건 완료한 작업, 수정한 파일과 현재 검증 결과 해결되지 않은 문제, 확인이 필요한 항목과 다음 작업 순서 새 Task에는 전체 대화와 모든 도구 출력이 그대로 복사되지 않습니다. Figma와 Tavily MCP 연결 설정은 계속 사용할 수 있지만, 이전 검색 결과나 Figma 분석 내용은 인계 요약에 포함되어야 새 Task가 알 수 있습니다. 따라서 중요한 결정과 근거가 빠지지 않았는지 확인한 뒤 전환합니다. 주요 슬래시 명령 명령 기능 권장 사용 시점 /newtask 현재 작업의 핵심 내용을 요약해 새 Task로 인계 컨텍스트가 많이 찼거나 작업 단계를 전환할 때 /smol 핵심 내용을 유지하면서 현재 대화 기록을 압축 같은 Task를 유지하면서 컨텍스트 공간만 확보할 때 /newrule 반복해서 적용할 프로젝트 또는 개인 규칙 생성 같은 코딩 기준이나 금지사항을 매번 설명하고 있을 때 /deep-planning 코드베이스를 조사하고 상세 구현 계획과 후속 Task 생성 여러 영역에 영향을 주는 복잡한 기능이나 구조 변경 전 /explain-changes Git Diff의 변경 내용을 설명하며 VS Code에서만 사용 가능 미커밋 변경, 커밋 또는 브랜치 차이를 검토할 때 /reportbug Cline 진단 정보를 포함해 문제 보고 준비 Cline 자체 오류, 비정상 종료 또는 반복되는 오동작을 보고할 때 현재 설치 버전에서 지원되는 명령은 채팅 입력창에 / 를 입력해 확인합니다. 명령 상세와 변경 사항은 Cline Using Commands 를 참고합니다. 5.5 로컬 LLM 테스트 및 권장 사양 아래 기준은 Qwen3.8-27B 계열 모델을 Ollama(64K) 또는 NInfer(Docker, 256K)와 Cline에서 사용하는 환경을 전제로 합니다. 모델 선택 원칙과 실사용 평가 로컬 LLM은 파라미터 수나 출시 시점만으로 우열을 판단하지 않습니다. 프로젝트 가이드 리뷰, 실제 코드 구현, 리팩터링과 범용 Agent 작업처럼 실제로 맡길 업무의 동일한 프롬프트를 각 모델에 적용하고 결과 품질, 응답 속도, 지시 준수, 커뮤니케이션과 출력 안정성을 함께 비교합니다. Gemma4 : 커뮤니케이션과 Soul 준수가 뛰어나고, 문서 리뷰뿐 아니라 프로젝트 전체 맥락과 의도를 파악하는 능력이 우수했습니다. 범용 Agent 작업을 안정적으로 맡길 수 있는 모델로 평가합니다. Qwen 계열 : 응답이 느리고 커뮤니케이션은 상대적으로 약하지만 Cline 코딩 작업에서는 강점이 있었습니다. Hermes에서는 과도한 Reasoning과 출력 불안정이 관찰되었으므로, 범용 Agent나 문서 리뷰에는 사용하지 않고 Cline 기반 코드 구현·수정·리팩터링 용도로만 사용합니다. 위 평가는 현재 테스트 환경에서 관찰한 업무별 특성이며 고정된 종합 순위가 아닙니다. 모델이나 실행 도구가 변경되면 같은 실제 업무 테스트를 다시 수행한 뒤 용도별 기본 모델을 결정합니다. 테스트 환경 구분 테스트 사양 CPU AMD Ryzen 9 7950X3D GPU NVIDIA GeForce RTX 4090 24GB 메모리 DDR5 96GB 저장 장치 NVMe Gen4 SSD 1TB 모델 Ollama: qwen3.8:27b-mtp-q4_K_M (약 18GB) / NInfer: qwen3_8_27b.ninfer (16.96 GiB) Ollama 64K 테스트 결과 : 약 18GB MTP Q4_K_M 모델을 Ollama에서 64K 컨텍스트로 사용할 때 응답 속도와 추론 품질이 모두 실사용 가능한 수준이었습니다. 128K로 확장하면 RTX 4090 24GB VRAM 한계로 속도가 크게 떨어집니다. NInfer 256K 테스트 결과 : NInfer(Docker)에서 qwen3_8_27b.ninfer 모델을 256K 컨텍스트로 실행할 때 Ollama의 128K 대비 응답 속도가 현격히 빨랐습니다. MTP 스펙케줄 ( --spec mtp --draft-tokens 3 )과 rk4v4-e8 KV 양자화로 256K 컨텍스트를 RTX 4090에서 실용적으로 사용할 수 있었습니다. 위 장비는 검증 결과가 좋은 고사양 테스트 환경이며 모든 개발 PC의 필수 사양은 아닙니다. 로컬 LLM에서는 GPU 연산 성능뿐 아니라 모델과 컨텍스트를 처리할 수 있는 VRAM 용량이 중요합니다. 개발 PC 권장 기준 사용 범위 GPU 시스템 메모리 CPU 운영 기준 64K 기본 권장 VRAM 24GB 64GB 최신 8코어 이상 Cline을 이용한 일반적인 코딩 작업의 기본 권장선 64K 여유 구성 VRAM 24GB 64~96GB 최신 12코어급 권장 개발 서버와 다른 작업 도구를 함께 사용할 때 여유 확보 실행 가능한 최소 VRAM 16GB 64GB 최신 12코어급 모델 일부가 CPU로 이동하여 응답 속도가 크게 느려질 수 있음 256K 확장 (NInfer) VRAM 24GB 64GB 최신 8코어 이상 WSL2 + Docker Desktop 필요. Ollama와 동시에 실행 가능(포트 분리) 비용과 성능의 균형을 고려하면 RTX 3090 24GB, 시스템 메모리 64GB, 최신 8~12코어 CPU와 NVMe SSD 1TB 구성을 권장합니다. RTX 3090은 RTX 4090보다 연산 속도는 낮지만 VRAM이 동일하게 24GB이므로 약 18GB 모델의 64K 컨텍스트를 사용하는 개발 PC에 적합합니다. 64K는 일반적인 코드 조사, Figma 화면 구현과 웹검색 결과 정리에 필요한 문맥을 확보하면서 128K보다 빠르게 작업하기 위한 기본값입니다. 256K가 필요한 대규모 코드베이스 작업에서는 NInfer(Docker)를 사용합니다. 다른 GPU 사용 프로그램을 최소화하고 ollama ps 에서 모델이 가능한 한 100% GPU 로 적재되었는지 확인합니다. NInfer에서는 nvidia-smi 로 VRAM 사용량을 확인합니다. 세부 내용은 Ollama Context length 와 Ollama FAQ 를 참고합니다. 5.6 Figma Desktop MCP 설정 Figma Desktop에서 선택한 레이어 또는 프레임 정보를 Cline에 전달하려면 Cline의 MCP 설정에 다음 서버를 등록합니다. { \"mcpServers\": { \"figma-desktop\": { \"type\": \"streamableHttp\", \"url\": \"http://127.0.0.1:3845/mcp\", \"disabled\": false, \"autoApprove\": [] } } } Figma Desktop에서 코드로 변환할 레이어 또는 프레임을 선택한 뒤 Cline에 다음과 같이 명령합니다. 현재 figma에서 선택된 레이어(프레임) 정보/코딩 이 명령을 사용하면 현재 Figma에서 선택된 부분의 정보를 읽어 해당 영역의 소스 코드를 생성할 수 있습니다. 선택 대상과 프로젝트의 기존 컴포넌트, 디자인 토큰 및 구현 규칙을 함께 확인한 뒤 결과를 적용합니다. 5.7 Cline 웹검색과 Tavily MCP Cline 기본 브라우저 도구 Cline은 기본 브라우저 도구를 사용해 웹페이지를 열고, 화면을 탐색하고, 검색 사이트의 결과와 문서 내용을 확인할 수 있습니다. 별도의 검색 API 가입 없이 사용할 수 있지만 웹사이트 화면을 직접 조작하는 방식이므로 검색 결과 수집과 여러 출처 비교에는 시간이 더 걸릴 수 있습니다. 브라우저 사용은 Cline의 승인 설정에서 허용해야 합니다. 특정 URL의 공식 문서를 읽거나 구현 화면을 확인하는 작업에는 기본 브라우저를 사용하고, 최신 자료를 여러 출처에서 검색하고 정리하는 작업에는 Tavily MCP를 사용합니다. Tavily MCP 설정 Tavily는 AI Agent용 웹검색 서비스로, 검색 결과와 관련 페이지 내용을 Cline이 처리하기 쉬운 형태로 제공합니다. 기존 MCP 설정의 mcpServers 에 다음 항목을 추가합니다. \"tavily\": { \"type\": \"streamableHttp\", \"url\": \"https://mcp.tavily.com/mcp/\", \"headers\": { \"Authorization\": \"Bearer YOUR_TAVILY_API_KEY\" }, \"disabled\": false, \"autoApprove\": [] } YOUR_TAVILY_API_KEY 는 Tavily에서 발급받은 키로 교체합니다. API 키가 포함된 설정 파일은 저장소에 커밋하지 않습니다. 처음에는 autoApprove 를 비워 두고 검색 도구 호출 내용을 확인한 뒤 승인합니다. 무료 및 유료 사용 구분 구분 제공량 또는 비용 사용 기준 Researcher 무료 매월 1,000 API 크레딧, 카드 등록 불필요 개인 개발과 필요한 공식 문서 검색에 기본 사용 기본 검색 요청 1회당 1크레딧 무료 범위에서 우선 사용 고급 검색 요청 1회당 2크레딧 기본 검색 결과가 부족할 때만 사용 Pay As You Go 크레딧당 미화 0.008달러 무료 제공량을 초과하고 사용량이 일정하지 않을 때 선택 월간 유료 플랜 월 30달러·4,000크레딧부터 사용량별 단계 제공 팀에서 반복적으로 많은 검색을 수행할 때 검토 이 가이드에서는 무료 Researcher 플랜을 기준으로 기본 검색을 우선 사용합니다. 사이트 전체 탐색이나 대규모 Research 요청은 크레딧을 빠르게 소비할 수 있으므로 필요한 공식 문서와 최신 정보 확인 범위로 제한합니다. 가격과 크레딧 정책은 변경될 수 있으므로 Tavily Credits & Pricing 에서 현재 기준을 확인합니다. Tavily를 사용해 관련 기술의 최신 공식 문서를 검색하고, 핵심 내용과 출처 URL을 함께 정리해줘. 5.8 React Code Exports 작업 흐름 Figma에서 구현할 레이어 또는 프레임을 선택합니다. Cline에 현재 figma에서 선택된 레이어(프레임) 정보/코딩 이라고 요청합니다. 코드를 작성하기 전에 현재 기능과 애플리케이션의 공통 UI에서 같은 역할의 기존 컴포넌트를 검색합니다. 사용할 컴포넌트의 실제 파일, export, Props, variant와 기존 사용 예시를 확인합니다. 존재하지 않는 import 경로, Props, variant 또는 토큰은 추측하지 않습니다. globals.css 의 Semantic Token과 기존 Tailwind 사용 방식을 확인합니다. 공통 CSS 하한은 Safari 15로 적용합니다. Figma 표현에 최신 CSS가 필요해 보이더라도 Safari 15에서 지원되지 않는 Tailwind Utility는 사용하지 않고 호환 가능한 기본 Utility나 기존 프로젝트 패턴으로 대체합니다. 기존 요소를 우선 재사용하고 불명확한 동작이나 데이터는 담당자에게 확인합니다. 생성된 Diff를 검토하고 승인한 범위만 반영합니다. typecheck , lint 와 필요한 production build를 실행합니다. 구현 화면을 Figma와 비교하고 차이를 수정합니다. 5.9 검수 기준 Figma에서 의도한 레이어 또는 프레임을 정확히 선택했는가? 기존 컴포넌트와 디자인 토큰을 우선 사용했는가? 기존 컴포넌트의 실제 파일, export, Props와 variant를 확인했는가? 기존 컴포넌트로 표현할 수 있는 요소를 native JSX와 Tailwind로 중복 구현하지 않았는가? 생성된 import가 실제 경로와 export를 가리키는지 TypeScript 검사로 확인했는가? 작업 범위를 벗어난 파일, 의존성 또는 설정을 변경하지 않았는가? Safari 15에서 지원되지 않는 최신 CSS 기반 Utility에 핵심 UI를 의존시키지 않았는가? Android와 다른 브라우저에 임의의 대응 버전을 지정하지 않고 프로젝트가 정한 구형 검증 환경에서 실제 사용 Utility와 핵심 기능을 확인했는가? 확인되지 않은 API, 상태 관리 구조 또는 공통화를 추가하지 않았는가? 최종 Diff를 사람이 검토했는가? typecheck , lint 와 필요한 build를 통과했는가? LLM과 Agent는 구현 속도를 높이는 작업 도구이며 승인 주체가 아닙니다. 생성된 코드는 사람이 작성한 코드와 같은 리뷰 및 검증 기준을 적용합니다.",
     "url": "./../guides/ui/react_code_exports.html#section-5"
   },
   {
@@ -2385,6 +2329,139 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
     "excerpt": "5.1 Props는 컴포넌트의 사용법을 표현 Props 이름은 DOM 동작보다 사용자의 의도를 나타냅니다. type ReservationCardProps = { title : string ; onConfirm : () => void ; onCancel : () => void ; }; // 피해야 함 type ReservationCardProps = { text : string ; handle…",
     "content": "5. React에서 타입 활용 5.1 Props는 컴포넌트의 사용법을 표현 Props 이름은 DOM 동작보다 사용자의 의도를 나타냅니다. type ReservationCardProps = { title : string ; onConfirm : () => void ; onCancel : () => void ; }; // 피해야 함 type ReservationCardProps = { text : string ; handleButtonClick : ( value : unknown ) => void ; }; 5.2 DOM Event보다 필요한 값을 전달 공통 입력 컴포넌트는 DOM Event를 외부로 그대로 전달하지 않고 사용처가 필요한 값을 전달합니다. type SearchInputProps = { value : string ; onValueChange : ( value : string ) => void ; }; export function SearchInput ( { value, onValueChange }: SearchInputProps ) { return ( < input type = \"search\" value = {value} onChange = {(event) => onValueChange(event.currentTarget.value)} /> ); } const [keyword, setKeyword] = useState ( \"\" ); < SearchInput value = {keyword} onValueChange = {setKeyword} /> ; 5.3 shadcn/ui 사용 shadcn/ui는 외부 라이브러리를 감싸서 사용하는 방식이 아니라, 프로젝트가 생성된 컴포넌트 소스를 소유하고 수정하는 방식으로 사용합니다. 설치된 컴포넌트와 Props를 먼저 그대로 사용합니다. 프로젝트 전체에 적용할 디자인과 동작은 해당 UI 원형에서 수정합니다. 특정 기능의 조합과 업무 동작은 기능 코드 가까이에 둡니다. 단순히 이름이나 스타일을 바꾸기 위한 공통 Wrapper는 만들지 않습니다. 수정할 때 기존 사용처와 키보드·포커스·ARIA 동작을 함께 확인합니다. import { Button } from \"@/components/ui/button\" ; export function TicketActions ( ) { return ( < div > < Button variant = \"outline\" > 취소 </ Button > < Button > 예약하기 </ Button > </ div > ); } 컴포넌트 Props가 필요하면 같은 타입을 다시 작성하지 않고 실제 컴포넌트에서 가져옵니다. import type { ComponentProps } from \"react\" ; import { Button } from \"@/components/ui/button\" ; type SubmitButtonProps = Omit < ComponentProps < typeof Button >, \"type\" > & { isSubmitting ?: boolean ; }; export function SubmitButton ( { isSubmitting = false , disabled, children, ...buttonProps }: SubmitButtonProps ) { return ( < Button { ...buttonProps } type = \"submit\" disabled = {disabled || isSubmitting } aria-busy = {isSubmitting} > {isSubmitting ? \"처리 중\" : children} </ Button > ); } SubmitButton 처럼 반복되는 동작이 있을 때만 Wrapper로 분리합니다. 한 화면에서만 필요하면 기존 Button 을 직접 사용합니다. // 피해야 함: 기존 Props를 다시 정의하는 의미 없는 Wrapper type CommonButtonProps = { text : string ; color ?: string ; onClick ?: () => void ; }; Variant가 프로젝트 전체에서 반복되면 Wrapper를 추가하기보다 shadcn/ui 컴포넌트의 원본 Variant를 확장합니다. 한 화면의 스타일 차이는 className 과 cn 으로 처리하고, 반복되는 Variant 조합이 확인된 경우에만 cva 로 이동합니다. Dialog, Select와 같은 복합 컴포넌트는 설치된 구현과 공식 문서의 구성 순서를 따릅니다. 이동은 Link, 실행은 Button처럼 HTML 의미를 유지하며, 링크를 버튼처럼 표시해야 할 때는 설치한 shadcn/ui 구현이 제공하는 조합 방식이나 스타일 Helper를 사용합니다. 참고: shadcn/ui 공식 문서 5.4 공통 타입을 React에서 사용 공통 타입은 컴포넌트의 구체적인 사용법을 단순하게 만들 때 사용합니다. type SelectFieldProps <T extends string > = { options : readonly SelectOption <T>[]; value : T; onValueChange : ( value : T ) => void ; }; export function SelectField <T extends string >({ options, value, onValueChange, }: SelectFieldProps <T>) { return ( < select value = {value} onChange = {(event) => { const selected = options.find( (option) => option.value === event.currentTarget.value, ); if (selected) onValueChange(selected.value); }} > {options.map((option) => ( < option key = {option.value} value = {option.value} > {option.label} </ option > ))} </ select > ); } type TicketFilter = \"all\" | \"available\" | \"used\" ; const ticketFilterOptions : readonly SelectOption < TicketFilter >[] = [ { label : \"전체\" , value : \"all\" }, { label : \"사용 가능\" , value : \"available\" }, { label : \"사용 완료\" , value : \"used\" }, ]; const [filter, setFilter] = useState< TicketFilter >( \"all\" ); < SelectField options = {ticketFilterOptions} value = {filter} onValueChange = {setFilter} /> ; Generic이 단순한 Props보다 이해하기 어렵거나 하나의 사용처에만 필요하면 구체적인 타입을 사용합니다.",
     "url": "./../guides/typescript/index.html#section-5"
+  },
+  {
+    "document": "UI 접근성 준수 가이드",
+    "section": "검증과 코드 리뷰 체크리스트",
+    "excerpt": "자동화 검사 Lint와 정적 분석으로 자동화 가능한 항목은 Lint 가이드 의 eslint-plugin-jsx-a11y 규칙으로 검사합니다. Lint가 발견하지 못하는 항목은 아래 수작업으로 검증합니다. 수작업 검증 검증 항목 방법 통과 기준 키보드 이동 Tab / Shift+Tab 으로 전체 화면 순회 모든 원소 도달, 포커스 링 가시성 VoiceOver iOS 15+ 기기에 VoiceOv…",
+    "content": "11. 검증과 코드 리뷰 체크리스트 자동화 검사 Lint와 정적 분석으로 자동화 가능한 항목은 Lint 가이드 의 eslint-plugin-jsx-a11y 규칙으로 검사합니다. Lint가 발견하지 못하는 항목은 아래 수작업으로 검증합니다. 수작업 검증 검증 항목 방법 통과 기준 키보드 이동 Tab / Shift+Tab 으로 전체 화면 순회 모든 원소 도달, 포커스 링 가시성 VoiceOver iOS 15+ 기기에 VoiceOver 활성화 후 핵심 업무 시나리오 수행 올바른 이름과 역할로 낭독 TalkBack Android 기기에 TalkBack 활성화 후 핵심 업무 시나리오 수행 VoiceOver와 동일한 기준 대비 Lighthouse 또는 WebAIM Contrast Checker로 확인 본문 4.5:1, UI 3:1 이상 모션 OS 설정에서 \"모션 최소화\" 활성화 후 확인 장식적 애니메이션 제거 텍스트 확대 iOS 200% 확대 또는 DevTools 200% Zoom 텍스트 잘림 없음 코드 리뷰 체크리스트 모든 Button, Link, Input이 Tab 키로 도달 가능한 가? 포커스 링이 outline: none 으로 제거되지 않았는가? 모든 <input> , <select> 에 <label htmlFor> 가 연결되어 있는가? 오류 메시지가 aria-invalid 와 aria-describedby 로 전달되는가? Dialog에 role=\"dialog\" , aria-modal=\"true\" , aria-labelledby 가 있는가? Dialog 열림/닫힘 시 포커스 이동과 복귀가 구현되어 있는가? Escape 키로 Dialog를 닫을 수 있는가? 장식적 아이콘에 aria-hidden=\"true\" 가 있는가? 동적 변경 영역에 aria-live 또는 role=\"alert\" 가 있는가? prefers-reduced-motion 에서 애니메이션이 제거되는가? 색상만으로 정보를 전달하지 않는가? 터치 가능한 원소가 최소 44×44pt인가? Landmark 구조( <main> , <nav> )가 올바른가? 확장 검토 Accessibility Mark(KACA) 취득 시 모든 화면에 대한 시나리오 기반 수작업 검증 보고서 axe-core 자동화 검사를 CI/CD에 통합",
+    "url": "./../guides/ui/accessibility.html#section-11"
+  },
+  {
+    "document": "UI 접근성 준수 가이드",
+    "section": "대화상자와 오버레이",
+    "excerpt": "Dialog, Sheet, Popover, Toast처럼 배경 위에 겹쳐지는 오버레이는 포커스 관리와 배경 차단을 명시적으로 처리합니다. 필수 구현 항목 구현 기준 역할 role=\"dialog\" 또는 role=\"alertdialog\" 모달 표시 aria-modal=\"true\" 이름 aria-labelledby 로 제목 연결 또는 aria-label 포커스 트랩 열림 시 포커스 내부 이동, T…",
+    "content": "8. 대화상자와 오버레이 Dialog, Sheet, Popover, Toast처럼 배경 위에 겹쳐지는 오버레이는 포커스 관리와 배경 차단을 명시적으로 처리합니다. 필수 구현 항목 구현 기준 역할 role=\"dialog\" 또는 role=\"alertdialog\" 모달 표시 aria-modal=\"true\" 이름 aria-labelledby 로 제목 연결 또는 aria-label 포커스 트랩 열림 시 포커스 내부 이동, Tab / Shift+Tab 순환 포커스 복귀 닫힘 시 이전 원소로 복귀 닫기 Escape 키 + 닫기 버튼 배경 차단 배경 원소에 aria-hidden=\"true\" 와 inert 속성 적용 shadcn/ui Dialog shadcn/ui의 <Dialog> 컴포넌트는 Radix UI 기반으로 위 요구사항을 기본적으로 제공합니다. 커스텀 Dialog를 만들 때만 수동으로 구현합니다. 확장 검토 VoiceOver에서 Dialog가 AXDialog 로 인식되는지 확인 inert 속성의 Safari 15 지원 여부 확인 (미지원 시 aria-hidden + 포커스 차단만으로 대체)",
+    "url": "./../guides/ui/accessibility.html#section-8"
+  },
+  {
+    "document": "UI 접근성 준수 가이드",
+    "section": "문서 목적과 범위",
+    "excerpt": "이 문서는 apps/app-webview 의 UI가 준수해야 하는 접근성(Accessibility) 기준을 정의합니다. 접근성이란 시각, 청각, 운동, 인지 능력에 제약이 있는 사용자에게도 동일한 정보와 업무 흐름을 제공할 수 있도록 화면을 설계하고 구현하는 활동을 의미합니다. 준수 기준은 W3C가 발표한 WCAG 2.1의 AA 수준을 목표로 합니다. AA 수준은 A 수준보다 엄격한 실질적…",
+    "content": "1. 문서 목적과 범위 이 문서는 apps/app-webview 의 UI가 준수해야 하는 접근성(Accessibility) 기준을 정의합니다. 접근성이란 시각, 청각, 운동, 인지 능력에 제약이 있는 사용자에게도 동일한 정보와 업무 흐름을 제공할 수 있도록 화면을 설계하고 구현하는 활동을 의미합니다. 준수 기준은 W3C가 발표한 WCAG 2.1의 AA 수준을 목표로 합니다. AA 수준은 A 수준보다 엄격한 실질적 기준을 요구하는 레벨입니다. 적용 환경은 iOS 15 이상 WKWebView와 지원 대상 Android System WebView입니다. Safari 15 CSS 하한 기준과 동일한 호환성 범위를 따릅니다. 이 문서는 현재 준수해야 하는 \"기본 준수\" 기준과, 향후 Accessibility Mark 취득 시 추가로 검토할 \"확장 검토\" 항목을 구분합니다. 확장 검토 항목은 아직 확정된 의무가 아닙니다. 컴포넌트 스타일과 토큰은 디자인 토큰 가이드 , UI 구현 절차는 React Code Exports 가이드 를 따릅니다. Lint와 자동화 검사 경계는 Lint 가이드 를 따릅니다.",
+    "url": "./../guides/ui/accessibility.html#section-1"
+  },
+  {
+    "document": "UI 접근성 준수 가이드",
+    "section": "색상과 대비",
+    "excerpt": "텍스트와 배경의 명도 차이를 수치로 보장합니다. 대비 비율(Contrast Ratio)은 WCAG에서 상대 밝기 기준으로 정의하며, foreground 와 background 토큰이 이 값을 충족해야 합니다. 최소 대비 비율 대상 최소 대비 예시 일반 본문 텍스트 (16px 미만) 4.5 : 1 예약 안내 문구, 이용권 상세 설명, 폼 라벨 대형 텍스트 (18px 이상 또는 14px 이상 b…",
+    "content": "3. 색상과 대비 텍스트와 배경의 명도 차이를 수치로 보장합니다. 대비 비율(Contrast Ratio)은 WCAG에서 상대 밝기 기준으로 정의하며, foreground 와 background 토큰이 이 값을 충족해야 합니다. 최소 대비 비율 대상 최소 대비 예시 일반 본문 텍스트 (16px 미만) 4.5 : 1 예약 안내 문구, 이용권 상세 설명, 폼 라벨 대형 텍스트 (18px 이상 또는 14px 이상 bold) 3 : 1 화면 제목, 큰 가격 표시 UI 컴포넌트 경계 (버튼 테두리, 입력框) 3 : 1 border-border , 입력框 테두리 아이콘과 시각적 표시 3 : 1 상태 아이콘, 체크박스, 라디오 버튼 색상 단독 의존 금지 정보를 전달할 때 색상에만 의존하지 않습니다. 오류 상태를 표시할 때 빨간색뿐 아니라 aria-invalid 속성과 텍스트 메시지로 중복 전달합니다. 오류: 빨간색 테두리 + aria-invalid=\"true\" + 텍스트 메시지 완료: 초록색 + 체크 아이콘 + \"완료\" 텍스트 비활성: 흐린색 + disabled + aria-disabled=\"true\" 토큰 기반 관리 개별 컴포넌트에서 원시 색상값으로 대비를 조정하지 않습니다. globals.css 의 Semantic Token ( --background , --foreground , --primary , --muted-foreground 등)이 대비 비율을 충족하도록 정의하고, 컴포넌트는 이 토큰만 사용합니다. 확장 검토 모든 텍스트 조합의 대비 비율을 자동화 도구로 검증 고대비 모드에서 포커스 링과 상태 표시가 유지되는지 확인 시스템 색 반전 모드에서 UI 상태가 구분되는지 확인",
+    "url": "./../guides/ui/accessibility.html#section-3"
+  },
+  {
+    "document": "UI 접근성 준수 가이드",
+    "section": "스크린 리더와 ARIA",
+    "excerpt": "HTML 원어의 의미를 우선 사용합니다. <button> , <nav> , <label> 같은 의미 있는 원소는 ARIA 없이도 스크린 리더에 올바르게 전달됩니다. ARIA 사용 원칙 첫 번째 규칙: ARIA가 필요하지 않은 상황에서는 ARIA를 사용하지 않습니다. 두 번째 규칙: 사용해야 한다면 표준 ARIA 속성만 사용합니다. 세 번째 규칙: 사용해야 한다면, 기능적으로 올바른 ARIA를…",
+    "content": "5. 스크린 리더와 ARIA HTML 원어의 의미를 우선 사용합니다. <button> , <nav> , <label> 같은 의미 있는 원소는 ARIA 없이도 스크린 리더에 올바르게 전달됩니다. ARIA 사용 원칙 첫 번째 규칙: ARIA가 필요하지 않은 상황에서는 ARIA를 사용하지 않습니다. 두 번째 규칙: 사용해야 한다면 표준 ARIA 속성만 사용합니다. 세 번째 규칙: 사용해야 한다면, 기능적으로 올바른 ARIA를 사용합니다. 자주 사용하는 ARIA 속성 속성 목적 aria-label 텍스트가 없는 원소(아이콘 버튼)에 이름을 부여 aria-describedby 오류 메시지나 추가 설명을 연결 aria-invalid 입력 오류 상태를 표시 aria-live 동적 변경을 스크린 리더에 전달 aria-hidden 장식적 아이콘을 스크린 리더에서 제외 role HTML 원어가 표현할 수 없는 역할을 부여 aria-modal Dialog가 배경을 차단함을 표시 Landmark 구조 WebView 화면은 <main> , <nav> , <header> , <footer> 같은 Landmark 원소로 큰 영역을 나눕니다. Next.js layout.tsx 에서 <main> 이 이미 제공되는 경우 화면 컴포넌트에서 중복으로 추가하지 않습니다. Live Region 서버 응답, 오류, 진행 상태처럼 화면이 동적으로 바뀌는 영역에는 aria-live=\"polite\" 를 적용합니다. 오류 메시지는 assertive 또는 role=\"alert\" 를 사용합니다. 확장 검토 VoiceOver와 TalkBack에서 모든 Landmark를 순회하며 구조 검증 prefers-reduced-motion 과 prefers-contrast 설정에 대한 동작 검증",
+    "url": "./../guides/ui/accessibility.html#section-5"
+  },
+  {
+    "document": "UI 접근성 준수 가이드",
+    "section": "애니메이션과 운동감",
+    "excerpt": "화면 이동, Dialog 등장, 로딩 표시처럼 요소가 위치·크기·투명도를 바꾸는 모든 Motion은 prefers-reduced-motion 설정을 존중합니다. 이 설정은 전정운동질환 사용자에게 중요합니다. 핵심 규칙 @media (prefers-reduced-motion: reduce) 안에서 모든 장식적 애니메이션을 animation: none 과 transition: none 으로 제거…",
+    "content": "9. 애니메이션과 운동감 화면 이동, Dialog 등장, 로딩 표시처럼 요소가 위치·크기·투명도를 바꾸는 모든 Motion은 prefers-reduced-motion 설정을 존중합니다. 이 설정은 전정운동질환 사용자에게 중요합니다. 핵심 규칙 @media (prefers-reduced-motion: reduce) 안에서 모든 장식적 애니메이션을 animation: none 과 transition: none 으로 제거합니다. 기능적 애니메이션(로딩 표시자, 오류 강조)은 유지하되 강도를 낮춥니다. 3초 이상 지속되는 반복 애니메이션은 prefers-reduced-motion 에서 중단합니다. 3초 이내에 3회 이상 깜빡이는 콘텐츠는 사용하지 않습니다. (WCAG 2.3.1) Tailwind CSS 적용 < div className = \"animate-spin motion-reduce:animate-none\" > 로딩 중... </ div > 확장 검토 prefers-reduced-motion 활성화 시 모든 라우트 전환, Dialog, Toast 동작을 검증",
+    "url": "./../guides/ui/accessibility.html#section-9"
+  },
+  {
+    "document": "UI 접근성 준수 가이드",
+    "section": "용어와 기준",
+    "excerpt": "이 문서에서 사용하는 주요 용어의 의미를 정리합니다. 이후 섹션에서는 이 용어들을 그대로 사용합니다. 용어 정의 WCAG W3C가 발표한 웹 콘텐츠 접근성 가이드라인. 이 프로젝트는 2.1을 기준으로 사용합니다. AA 수준 WCAG의 준수 등급 중 A보다 엄격하고 AAA보다 완화된 수준. Screen Reader 화면 내용을 음성으로 낭독하는 보조 기술. iOS는 VoiceOver, Andr…",
+    "content": "2. 용어와 기준 이 문서에서 사용하는 주요 용어의 의미를 정리합니다. 이후 섹션에서는 이 용어들을 그대로 사용합니다. 용어 정의 WCAG W3C가 발표한 웹 콘텐츠 접근성 가이드라인. 이 프로젝트는 2.1을 기준으로 사용합니다. AA 수준 WCAG의 준수 등급 중 A보다 엄격하고 AAA보다 완화된 수준. Screen Reader 화면 내용을 음성으로 낭독하는 보조 기술. iOS는 VoiceOver, Android는 TalkBack. ARIA HTML 원소에는 접근성 정보가 부족할 때 역할을 보완하는 속성 세트. Focus 키보드나 보조 기술이 현재 상호작용 가능한 원소를 표시하는 상태. Focus Trap Dialog 안에서 포커스가 배경 문서로 나가지 않도록 포커스 순서를 제한하는 기법. Landmark 화면을 큰 영역으로 나누는 HTML 구조( header , nav , main , footer ). Live Region 내용이 동적으로 바뀌면 스크린 리더가 변경을 자동으로 낭독하는 영역. Touch Target 사용자가 터치로 선택하는 최소 영역. iOS HIG 기준 44×44pt. Motion 화면 요소의 위치, 크기, 투명도 변화. 애니메이션과 트랜지션을 포함. Accessibility Mark 국가 또는 지자체가 발행하는 접근성 인증 마크. 한국은 KACA.",
+    "url": "./../guides/ui/accessibility.html#section-2"
+  },
+  {
+    "document": "UI 접근성 준수 가이드",
+    "section": "참고 문서",
+    "excerpt": "WCAG 2.1 Quick Reference WAI-ARIA Authoring Practices Guide MDN ARIA Apple HIG Accessibility web.dev Learn Accessibility Lint 가이드 디자인 토큰 가이드 React Code Exports 가이드 UI 접근성 준수 가이드",
+    "content": "12. 참고 문서 WCAG 2.1 Quick Reference WAI-ARIA Authoring Practices Guide MDN ARIA Apple HIG Accessibility web.dev Learn Accessibility Lint 가이드 디자인 토큰 가이드 React Code Exports 가이드 UI 접근성 준수 가이드",
+    "url": "./../guides/ui/accessibility.html#section-12"
+  },
+  {
+    "document": "UI 접근성 준수 가이드",
+    "section": "키보드 접근성",
+    "excerpt": "모든 상호작용 기능을 키보드만으로 수행할 수 있어야 합니다. 이는 스크린 리더 사용자가 VoiceOver의 두 손가락 탭, TalkBack의 두 손가락 탭으로 상호작용하는 것과 동일한 경로를 보장합니다. 핵심 규칙 모든 Button, Link, Input, Select, Tab을 Tab 키로 순차적으로 도달할 수 있습니다. 포커스 순서가 화면의 시각적 읽기 순서(위에서 아래, 왼쪽에서 오른쪽…",
+    "content": "4. 키보드 접근성 모든 상호작용 기능을 키보드만으로 수행할 수 있어야 합니다. 이는 스크린 리더 사용자가 VoiceOver의 두 손가락 탭, TalkBack의 두 손가락 탭으로 상호작용하는 것과 동일한 경로를 보장합니다. 핵심 규칙 모든 Button, Link, Input, Select, Tab을 Tab 키로 순차적으로 도달할 수 있습니다. 포커스 순서가 화면의 시각적 읽기 순서(위에서 아래, 왼쪽에서 오른쪽)와 일치합니다. 포커스 있는 원소에 포커스 링이 표시됩니다. outline: none 으로 제거하지 않습니다. Tab 과 Shift+Tab 으로 모든 상호작용 원소를 순환할 수 있으며, 포커스가 문서 밖으로 빠져나가지 않습니다. Escape 키로 Dialog, Dropdown, Popover를 닫을 수 있습니다. Enter 또는 Space 로 Button과 Link를 활성화할 수 있습니다. 포커스 표시 포커스 링은 outline 또는 box-shadow 로 표시합니다. globals.css 의 --ring 토큰을 사용합니다. 포커스 링과 배경의 대비는 3:1 이상입니다. .focus-visible { outline: 2 px solid var ( --ring ); outline-offset: 2 px; } 확장 검토 키보드 전용 시나리오(마우스 없이 전체 업무 흐름 완료)를 VoiceOver와 함께 검증 prefers-reduced-motion 활성화 시 포커스 이동 애니메이션이 제거되는지 확인",
+    "url": "./../guides/ui/accessibility.html#section-4"
+  },
+  {
+    "document": "UI 접근성 준수 가이드",
+    "section": "터치와 반응형",
+    "excerpt": "WebView는 터치 입력이 기본입니다. 손가락 움직임이 제한된 사용자도 핵심 업무를 완료할 수 있도록 터치 영역과 반응형을 관리합니다. 터치 영역 모든 터치 가능한 원소의 최소 크기는 44×44pt입니다. (Apple HIG 기준) 인접한 터치 원소 사이 간격은 최소 8pt 이상입니다. 작은 아이콘 버튼은 padding 이나 min-w-11 min-h-11 로 터치 영역을 확보합니다. 텍스…",
+    "content": "10. 터치와 반응형 WebView는 터치 입력이 기본입니다. 손가락 움직임이 제한된 사용자도 핵심 업무를 완료할 수 있도록 터치 영역과 반응형을 관리합니다. 터치 영역 모든 터치 가능한 원소의 최소 크기는 44×44pt입니다. (Apple HIG 기준) 인접한 터치 원소 사이 간격은 최소 8pt 이상입니다. 작은 아이콘 버튼은 padding 이나 min-w-11 min-h-11 로 터치 영역을 확보합니다. 텍스트 확대 사용자가 브라우저나 OS에서 텍스트를 200%까지 확대해도 내용이 잘리지 않고 모든 기능을 사용할 수 있어야 합니다. px 단위로 고정하지 않고 rem 또는 em 을 사용합니다. max-height , line-clamp 로 텍스트를 자르는 경우 overflow 와 스크롤로 대체할 수 있습니다. 확장 검토 손가락 움직임이 제한된 사용자를 위한 Switch Control 시나리오 검증 prefers-contrast: high 에서 UI 상태 구분 확인",
+    "url": "./../guides/ui/accessibility.html#section-10"
+  },
+  {
+    "document": "UI 접근성 준수 가이드",
+    "section": "포커스 관리",
+    "excerpt": "포커스는 사용자가 현재 어디에 있는지 알려주는 핵심 신호입니다. Dialog, Sheet, Modal이 열리고 닫힐 때 포커스 위치를 명시적으로 관리합니다. Dialog 포커스 순서 Dialog가 열리면 포커스는 Dialog의 첫 번째 상호작용 원소로 이동합니다. Dialog 안의 포커스는 Tab / Shift+Tab 으로 순환하며 배경 문서로 빠져나가지 않습니다. (Focus Trap) E…",
+    "content": "6. 포커스 관리 포커스는 사용자가 현재 어디에 있는지 알려주는 핵심 신호입니다. Dialog, Sheet, Modal이 열리고 닫힐 때 포커스 위치를 명시적으로 관리합니다. Dialog 포커스 순서 Dialog가 열리면 포커스는 Dialog의 첫 번째 상호작용 원소로 이동합니다. Dialog 안의 포커스는 Tab / Shift+Tab 으로 순환하며 배경 문서로 빠져나가지 않습니다. (Focus Trap) Escape 또는 닫기 버튼으로 Dialog가 닫히면 포커스는 Dialog를 연 원소로 복귀합니다. Dialog가 닫힌 뒤 배경 문서의 aria-hidden 이 제거됩니다. 화면 전환 시 포커스 라우트 전환 이후 포커스는 <main> 의 첫 번째 <h1> 또는 tabindex=\"-1\" 이 부여된 컨테이너로 이동합니다. Next.js usePathname 과 useEffect 로 포커스를 관리합니다. 확장 검토 포커스 이동 시 prefers-reduced-motion 설정에 따라 scroll 애니메이션 비활성화 VoiceOver의 AXSelected 상태와 HTML focus 가 일치하는지 검증",
+    "url": "./../guides/ui/accessibility.html#section-6"
+  },
+  {
+    "document": "UI 접근성 준수 가이드",
+    "section": "폼 접근성",
+    "excerpt": "폼은 사용자가 정보를 입력하는 핵심 흐름입니다. 예약, 결제, 회원 정보 수정처럼 업무가 완료되지 않으면 안 되는 화면에서 특히 중요합니다. 필드 라벨 모든 <input> , <select> , <textarea> 에 <label htmlFor> 를 연결합니다. 라벨 텍스트는 필드의 목적을 명확히 표현합니다. \"이곳에 입력\"이 아니라 \"이름\", \"연락처\", \"예약 날짜\"처럼 구체적인 내용이…",
+    "content": "7. 폼 접근성 폼은 사용자가 정보를 입력하는 핵심 흐름입니다. 예약, 결제, 회원 정보 수정처럼 업무가 완료되지 않으면 안 되는 화면에서 특히 중요합니다. 필드 라벨 모든 <input> , <select> , <textarea> 에 <label htmlFor> 를 연결합니다. 라벨 텍스트는 필드의 목적을 명확히 표현합니다. \"이곳에 입력\"이 아니라 \"이름\", \"연락처\", \"예약 날짜\"처럼 구체적인 내용이 들어갑니다. placeholder 는 힌트만 사용하며 라벨의 대체로 사용하지 않습니다. 필수 필드 표시 필수 필드는 required 속성과 aria-required=\"true\" 를 함께 사용합니다. 시각적으로는 * 표시와 \"필수\" 텍스트를 함께 제공합니다. 오류 표시 오류는 aria-invalid=\"true\" 와 aria-describedby 로 연결합니다. 오류 메시지는 <span> 에 id를 부여하고 필드의 aria-describedby 로 연결합니다. 오류 색상은 대비 4.5:1을 충족합니다. 오류 메시지는 텍스트로 제공하며 색상만으로 구분하지 않습니다. 입력框 유형 올바른 type 속성을 사용합니다. type=\"email\" , type=\"tel\" , type=\"number\" 등은 모바일 키보드를 적절히 표시하고 스크린 리더에서 입력 유형을 알려줍니다. 확장 검토 VoiceOver의 필드 낭독 순서와 오류 안내를 검증 폼 제출 후 포커스가 첫 번째 오류 필드로 이동하는지 확인",
+    "url": "./../guides/ui/accessibility.html#section-7"
+  },
+  {
+    "document": "WebView 외부 결제 안정화 가이드 — Native 연동 설계와 장애 대응",
+    "section": "결제 중단·복귀 문제의 화면 처리",
+    "excerpt": "화면과 플랫폼 Callback을 단순 success · failure Boolean으로 연결하지 않습니다. 아래 상태는 복귀 화면 설계를 위한 후보이며, 실제 상태 이름, 판정 주체와 Backend 연동은 모두 TBD 입니다. 상태 의미 사용자 처리 준비 중 Web 결제 절차를 준비하는 중이며 세부 처리 주체는 TBD 중복 입력 차단과 진행 표시 외부 결제 진행 중 Web이 구성한 요청에 따…",
+    "content": "6. 결제 중단·복귀 문제의 화면 처리 화면과 플랫폼 Callback을 단순 success · failure Boolean으로 연결하지 않습니다. 아래 상태는 복귀 화면 설계를 위한 후보이며, 실제 상태 이름, 판정 주체와 Backend 연동은 모두 TBD 입니다. 상태 의미 사용자 처리 준비 중 Web 결제 절차를 준비하는 중이며 세부 처리 주체는 TBD 중복 입력 차단과 진행 표시 외부 결제 진행 중 Web이 구성한 요청에 따라 Native가 외부 앱을 열었음 앱 복귀 안내와 중복 실행 차단 결과 확인 중 앱 복귀 또는 재진입 후 협의된 방식으로 결과를 확인함 결제 성공으로 미리 표시하지 않음 완료 협의된 결과 계약에서 성공으로 확인됨 예약·이용권 등 후속 결과 표시 실패 협의된 결과 계약에서 실패로 확인됨 안전한 재시도 또는 결제수단 변경 제공 취소 사용자가 결제 흐름을 명시적으로 취소함 오류로 과장하지 않고 기존 화면 복귀 미확정 복귀 유실, Timeout 또는 결과 확인 지연 자동 재결제 금지, 협의된 확인 수단 제공 앱이 백그라운드로 이동한 것만으로 취소 처리하지 않습니다. 앱이 활성화되어도 Web Return URL 처리가 완료되지 않았을 수 있습니다. 이때 결과를 확인하고 미확정 상태를 해소하는 방법은 Backend 협의 후 확정합니다.",
+    "url": "./../guides/platform/webview/external_payment.html#section-6"
+  },
+  {
+    "document": "WebView 외부 결제 안정화 가이드 — Native 연동 설계와 장애 대응",
+    "section": "문제 배경과 해결 방향",
+    "excerpt": "Flutter WebView 외부 결제에서는 결제 앱, 인증 앱 또는 시스템 브라우저로 이동하는 과정에서 Android Intent와 iOS Custom Scheme 처리 차이, 앱 미설치, 앱 복귀와 수명주기 문제로 결제 흐름이 중단될 수 있습니다. 외부 결제 화면, 결제사 연동, 결제 요청, Return URL과 결과 처리는 WebView에서 구성합니다. Web 콘텐츠가 외부 앱 URL로…",
+    "content": "1. 문제 배경과 해결 방향 Flutter WebView 외부 결제에서는 결제 앱, 인증 앱 또는 시스템 브라우저로 이동하는 과정에서 Android Intent와 iOS Custom Scheme 처리 차이, 앱 미설치, 앱 복귀와 수명주기 문제로 결제 흐름이 중단될 수 있습니다. 외부 결제 화면, 결제사 연동, 결제 요청, Return URL과 결과 처리는 WebView에서 구성합니다. Web 콘텐츠가 외부 앱 URL로 이동할 때 Flutter WebView Navigation Delegate가 이를 감지해 Native에 전달하고, Android Kotlin과 iOS Swift는 허용된 외부 앱을 여는 OS 연동만 담당합니다. 서비스 앱 복귀 Scheme은 Native 설정에 등록하고, 복귀 이후에는 WebView 결제 화면을 재개하거나 Web과 App이 협의한 복구 Route로 진입합니다. 해결 방향은 결제 기능 전체를 Native로 옮기는 것이 아닙니다. WebView가 결제 업무와 화면을 유지하고, Flutter에서 불안정하거나 플랫폼 차이가 큰 외부 앱 실행·복귀 경계만 Android·iOS Native로 분리합니다. Flutter와 Android·iOS Native 사이의 호출 경계 외부 결제 앱 또는 브라우저 실행과 앱 복귀 앱 종료·백그라운드 전환·중복 실행·사용자 취소 처리 결제 결과 확인 방식 TBD — Web·Backend·결제사 협의 필요 보안, 로그, 테스트와 배포 전 점검 기준 TBD Backend의 역할과 처리 범위는 아직 협의되지 않았습니다. 결제 요청 생성, 금액·주문 검증, 결제사 Callback, 상태 조회 API, 멱등성, 승인·취소·환불 규칙을 포함한 Backend 관련 내용은 이 문서에서 확정하지 않습니다. 현재 외부 결제에는 결제사 Native SDK를 사용하지 않습니다. 판매 대상과 출시 국가에 따라 앱 마켓의 외부 결제 허용 범위가 달라질 수 있으므로 구현 전에 법무·사업·배포 담당자가 스토어별 현재 정책을 확인하고 승인해야 합니다.",
+    "url": "./../guides/platform/webview/external_payment.html#section-1"
+  },
+  {
+    "document": "WebView 외부 결제 안정화 가이드 — Native 연동 설계와 장애 대응",
+    "section": "해결 방안: 플랫폼 기능의 Native 분리",
+    "excerpt": "외부 결제 설정과 흐름은 Web이 소유합니다. Flutter WebView Navigation Delegate는 Web 콘텐츠의 외부 앱 URL 이동을 감지해 Native에 중계하고, Native는 Intent·Scheme을 검증해 OS에 전달하며 서비스 앱 복귀 Scheme을 등록합니다. 영역 담당 책임 WebView Front-end WebView 승인된 웹 결제 설정의 적용, 결제 요청…",
+    "content": "3. 해결 방안: 플랫폼 기능의 Native 분리 외부 결제 설정과 흐름은 Web이 소유합니다. Flutter WebView Navigation Delegate는 Web 콘텐츠의 외부 앱 URL 이동을 감지해 Native에 중계하고, Native는 Intent·Scheme을 검증해 OS에 전달하며 서비스 앱 복귀 Scheme을 등록합니다. 영역 담당 책임 WebView Front-end WebView 승인된 웹 결제 설정의 적용, 결제 요청, 외부 앱 이동 URL 발생, Return URL과 결과 화면 처리 결제·운영 담당 결제·운영 결제사 관리자 설정, Merchant 정보, 허용 Return URL과 출시 환경별 결제수단 관리 앱 조정 계층 Flutter WebView Navigation Delegate에서 외부 앱 URL을 감지해 Native에 중계하고, 앱 복귀 시 WebView 재개 또는 Web과 App이 확정한 복구 Route 진입 조정 Android OS 연동 Kotlin 허용된 Intent·Custom Scheme 분석과 외부 앱 실행, 서비스 앱 복귀 Scheme 등록 iOS OS 연동 Swift 허용된 Custom Scheme·HTTPS URL로 외부 앱 실행, 서비스 앱 복귀 Scheme 등록 결제 Backend Backend TBD 역할, 처리 범위와 Web·결제사 간 계약 전체 협의 필요 결제 사업자 PG·간편결제 승인 UI, 사용자 인증, 결제 처리와 Return·Callback 제공. 프로젝트 적용 방식은 TBD 외부 결제 설정과 결과 처리는 Web이 담당합니다. Native는 WebView에서 전달받은 Intent·Scheme으로 외부 앱을 열고 서비스 앱의 복귀 Scheme을 등록하는 OS 연동만 담당하며, 결제 성공 여부를 판단하거나 결제 상태를 관리하지 않습니다. 이 역할 분리는 APP 개발 표준 의 “일반 웹 결제를 우선 적용하고 필요한 Native 연동만 Flutter에서 처리” 기준을 구체화합니다. 현재 외부 결제는 WebView 방식으로 확정하며 APP 개발 표준의 Native SDK용 payment.open 흐름은 적용하지 않습니다.",
+    "url": "./../guides/platform/webview/external_payment.html#section-3"
+  },
+  {
+    "document": "WebView 외부 결제 안정화 가이드 — Native 연동 설계와 장애 대응",
+    "section": "Flutter 처리 시 예상되는 문제점",
+    "excerpt": "Flutter에서 외부 결제를 처리할 수 없는 것은 아닙니다. 다만 Web 결제 중 발생하는 플랫폼 전용 URL과 앱 전환을 Dart 코드 또는 범용 플러그인만으로 처리하면 Android·iOS의 실제 동작 차이가 추상화에 가려져 장애 원인과 책임 경계를 찾기 어려워질 수 있습니다. 문제 영역 발생 가능한 문제 이 프로젝트의 대응 Android Intent 해석 intent: URL의 Sch…",
+    "content": "2. Flutter 처리 시 예상되는 문제점 Flutter에서 외부 결제를 처리할 수 없는 것은 아닙니다. 다만 Web 결제 중 발생하는 플랫폼 전용 URL과 앱 전환을 Dart 코드 또는 범용 플러그인만으로 처리하면 Android·iOS의 실제 동작 차이가 추상화에 가려져 장애 원인과 책임 경계를 찾기 어려워질 수 있습니다. 문제 영역 발생 가능한 문제 이 프로젝트의 대응 Android Intent 해석 intent: URL의 Scheme, Package, Fallback URL과 Extra를 플러그인이 모두 지원하지 않거나 원문을 잘못 변환할 수 있음 WebView가 감지한 값을 Kotlin에 전달하고 허용 범위를 검증해 Intent 실행 Android 앱 조회 제한 Android 11 이상에서 PackageManager 로 결제 앱을 사전 조회하면 Package Visibility에 따라 결과가 필터링될 수 있음 사전 조회가 필요할 때만 Manifest에 Query 등록. 바로 startActivity() 를 호출하는 방식은 ActivityNotFoundException 처리 iOS Scheme 조회 제한 LSApplicationQueriesSchemes 에 없는 Scheme은 canOpenURL 결과가 실제 설치 상태와 다를 수 있음 Web과 합의한 Scheme 중 설치 확인이 필요한 값만 등록 외부 앱 전환 Flutter의 inactive · paused 만으로 취소, 성공과 앱 복귀를 구분할 수 없음 Native는 외부 앱 실행과 복귀 Scheme 수신만 처리하고 WebView가 상태 복구 Cold Start·Engine 재생성 복귀 시 Flutter Engine이나 WebView가 준비되지 않아 정보가 유실될 수 있음 Native가 앱 진입 정보를 보관하고, 준비 완료 후 기존 WebView가 있으면 재개하며 프로세스가 종료됐다면 Web과 App이 확정한 복구 Route로 새로 진입 플러그인별 구현 차이 Android·iOS 구현 범위, 오류 코드, 업데이트 시점과 지원 OS가 다를 수 있음 외부 앱 실행 경계를 Kotlin·Swift Adapter로 고정하고 실제 기기 검증 오류 정보 축약 앱 미설치, 허용되지 않은 Scheme과 실행 실패가 하나의 예외로 반환될 수 있음 플랫폼 원인을 공통 앱 오류로 변환하되 민감한 원문은 Web에 노출하지 않음 설정의 이중 소유 결제사 URL·Scheme을 Web과 Flutter에서 각각 관리하면 변경 시 불일치 발생 결제사 설정은 Web, App은 최소 허용 목록과 복귀 Scheme만 관리 WebView Callback 범위 Android shouldOverrideUrlLoading 은 모든 Navigation에서 호출되지 않으며 POST 요청에는 호출되지 않음 결제사별 이동 방식과 Redirect를 실제 WebView에서 확인하고 Callback만으로 전체 흐름을 보장한다고 가정하지 않음 문제의 원인을 Flutter Framework 자체로 단정하지 않습니다. 실제 원인은 WebView Navigation 처리, 사용 중인 플러그인, Android Manifest, iOS URL Types, 앱 수명주기 또는 결제사 URL 규격 중 하나일 수 있으므로 계층별 로그와 실제 기기로 구분해 확인합니다. Flutter 플러그인을 유지할 수 있는 조건 지원하는 Intent·Scheme과 오류 상태가 결제사 요구사항을 모두 충족합니다. Android·iOS 최소 지원 버전과 실제 결제 앱 조합에서 검증되었습니다. 앱 복귀와 Cold Start가 유실되지 않으며 WebView 복원 책임이 명확합니다. 플러그인 업데이트와 장애 대응 책임을 프로젝트에서 유지할 수 있습니다. 이 조건을 충족하지 못하거나 플랫폼별 수정이 반복되면 Flutter에서 결제사별 로직을 늘리는 대신 Kotlin·Swift OS 연동 Adapter로 분리합니다.",
+    "url": "./../guides/platform/webview/external_payment.html#section-2"
+  },
+  {
+    "document": "WebView 외부 결제 안정화 가이드 — Native 연동 설계와 장애 대응",
+    "section": "Native 처리 범위와 구현 전 확정 항목",
+    "excerpt": "Flutter는 결제사별 세부사항을 포함하지 않고 WebView가 전달한 외부 이동 URL을 Native에 중계합니다. 실제 앱의 WebView Navigation Delegate와 Platform Channel 구성을 기준으로 확정합니다. 사용자의 명시적인 결제 동작에서 한 번만 시작합니다. 동시에 하나의 결제 시도만 활성화하고 빠른 중복 Tap을 차단합니다. Flutter 화면이나 Act…",
+    "content": "7. Native 처리 범위와 구현 전 확정 항목 Flutter는 결제사별 세부사항을 포함하지 않고 WebView가 전달한 외부 이동 URL을 Native에 중계합니다. 실제 앱의 WebView Navigation Delegate와 Platform Channel 구성을 기준으로 확정합니다. 사용자의 명시적인 결제 동작에서 한 번만 시작합니다. 동시에 하나의 결제 시도만 활성화하고 빠른 중복 Tap을 차단합니다. Flutter 화면이나 Activity·ViewController가 다시 만들어진 경우 Web과 App이 확정한 복구 Route로 진입합니다. 중복 Callback 처리와 결제 결과 확인 방식은 Backend 협의 후 확정합니다. Flutter Engine이 없는 상태에서 들어온 복귀 이벤트는 안전하게 보관한 뒤 전달합니다. 채널 연결 해제, 앱 종료와 Timeout이 발생해도 결제를 자동으로 다시 실행하지 않습니다. 호출 계약에서 확정할 항목 TBD Platform Channel과 Method 이름, WebView가 전달할 URL 형식, 허용 Scheme·Host·Package, 앱 미설치 오류, 실행 중 WebView 재개와 Cold Start 복구 Route를 Web과 App이 확정합니다. WebView가 외부 앱 실행을 요청하려면 intent: URL 또는 Custom Scheme URL을 Flutter·Native에 전달할 수 있습니다. Native는 허용 Scheme·Host·Package와 Fallback 범위를 검증한 뒤 원본 URL을 그대로 실행하거나 요청 전체를 거부합니다. 결제 URL의 Query를 임의로 제거하거나 변경하지 않으며, 민감정보는 로그에서만 마스킹합니다. 카드번호, CVC, 인증번호, 세션 Token과 결제사 Secret은 URL, Flutter 채널 또는 WebView Bridge로 전달하지 않습니다. WebView 외부 결제 안정화 가이드",
+    "url": "./../guides/platform/webview/external_payment.html#section-7"
+  },
+  {
+    "document": "WebView 외부 결제 안정화 가이드 — Native 연동 설계와 장애 대응",
+    "section": "Native 처리 적용 흐름",
+    "excerpt": "sequenceDiagram accTitle: WebView 외부 결제 Intent 실행과 복귀 흐름 accDescr: WebView가 결제를 구성하고 Intent 또는 Scheme을 Native에 전달하면 Native가 외부 앱을 열며, 서비스 앱 복귀 뒤 WebView가 협의된 후속 처리를 수행합니다. actor U as 사용자 participant W as Web 콘텐츠 particip…",
+    "content": "4. Native 처리 적용 흐름 sequenceDiagram accTitle: WebView 외부 결제 Intent 실행과 복귀 흐름 accDescr: WebView가 결제를 구성하고 Intent 또는 Scheme을 Native에 전달하면 Native가 외부 앱을 열며, 서비스 앱 복귀 뒤 WebView가 협의된 후속 처리를 수행합니다. actor U as 사용자 participant W as Web 콘텐츠 participant F as Flutter WebView Host participant N as Android·iOS Native participant P as 결제 사업자 U->>W: 결제 선택 W->>P: 결제사 Web 연동 실행 (세부 계약 TBD) P-->>W: intent URL·Custom Scheme Navigation W->>F: 외부 URL 이동 시도 F->>N: 외부 앱 열기 요청 N->>P: 허용된 Intent·Scheme을 OS에 전달 P-->>N: 결제사 규격에 따른 앱 복귀 N-->>F: 서비스 앱 진입 또는 재활성화 F-->>W: WebView 결제 화면 재개 또는 협의된 Web 복구 Route 진입 W->>W: 결과 확인·화면 처리 (Backend 연동 포함 TBD) WebView가 소유하는 외부 결제와 Native Intent·Scheme 연동 흐름 Native의 외부 앱 실행 결과와 앱 복귀 자체는 결제 결과를 의미하지 않습니다. 복귀 후 Web이 결제 결과를 확인하는 방식과 Backend 연동 여부·규격은 TBD 이며 Web·Backend·결제사 협의를 통해 확정합니다.",
+    "url": "./../guides/platform/webview/external_payment.html#section-4"
+  },
+  {
+    "document": "WebView 외부 결제 안정화 가이드 — Native 연동 설계와 장애 대응",
+    "section": "Web·결제사·Native 협의 항목",
+    "excerpt": "외부 결제와 최종 결과 화면은 WebView가 결제사 규격에 맞춰 구성합니다. Native와 Web이 함께 맞출 항목은 Web 결제에서 발생하는 외부 앱 Scheme 허용 범위, 서비스 앱 복귀 Scheme과 복귀 후 열 Web Route입니다. 담당 확정·구현할 항목 결제 담당·결제사 지원하는 외부 앱 Scheme과 Return·Redirect 방식, 성공·실패·취소 복귀 조건, 허용 UR…",
+    "content": "5. Web·결제사·Native 협의 항목 외부 결제와 최종 결과 화면은 WebView가 결제사 규격에 맞춰 구성합니다. Native와 Web이 함께 맞출 항목은 Web 결제에서 발생하는 외부 앱 Scheme 허용 범위, 서비스 앱 복귀 Scheme과 복귀 후 열 Web Route입니다. 담당 확정·구현할 항목 결제 담당·결제사 지원하는 외부 앱 Scheme과 Return·Redirect 방식, 성공·실패·취소 복귀 조건, 허용 URL 등록 위치 Web Front-end 결제사 연동 설정 적용, 결제 요청, Return URL, 외부 앱 URL 발생과 복귀 화면 처리. Backend와 연결되는 요청·결과 확인 방식은 TBD Backend TBD 결제 요청 생성 여부, 식별자, 검증, Callback, 상태 API, 멱등성과 오류 계약을 포함한 전체 처리 범위 협의 필요 Android Native 전달받은 Intent·Scheme의 허용 여부 확인과 외부 앱 실행, 서비스 앱 복귀 Scheme 등록 iOS Native 전달받은 Scheme·URL의 허용 여부 확인과 외부 앱 실행, 서비스 앱 복귀 Scheme 등록 App·Web 공통 외부 앱 Scheme 허용 목록, 서비스 앱 복귀 Scheme, 앱 미설치 오류, WebView 재개와 Cold Start Web 복구 Route 결제사에 전달할 Return·Redirect URL과 결과 Parameter는 Web에서 관리합니다. 서비스 앱 Scheme이 필요한 경우 Web은 Native에 등록된 확정 Scheme을 사용해야 합니다. Native는 결제사별 업무 설정을 갖지 않습니다. 다만 WebView가 전달한 임의 Intent를 그대로 실행하지 않도록 허용할 Scheme, Package와 Fallback URL 처리 기준은 Web과 합의합니다. 복귀 계약에서 확정할 항목 결제사 관리자 설정과 결제 준비 요청 중 Return URL을 지정하는 위치 환경별 개발·QA·운영 HTTPS Domain과 정확한 Path Android Manifest와 iOS URL Types에 등록할 서비스 앱 복귀 Scheme 결제 앱 설치·미설치와 Intent 실행 실패 시 Web 대체 화면 성공·실패·취소·사용자 이탈 시 결제사가 호출하는 URL과 Parameter 결제사 복귀 값과 내부 결제 시도 식별자를 안전하게 연결하는 방식 Callback 유실, 중복 Callback과 앱 재실행 시 결과 확인 방식 TBD 구버전 앱이 새 Return URL 또는 계약 버전을 처리하지 못할 때의 호환 정책 Return URL과 결과 Parameter 처리는 WebView가 담당합니다. Native는 외부 앱 실행과 서비스 앱 Scheme 수신을 담당하고, Flutter는 실행 중인 WebView를 재개하거나 Cold Start에서 협의된 Web 복구 Route를 엽니다. Backend를 통한 결과 확인 여부와 방식은 TBD 이며, Native와 Flutter는 결제 결과 값을 임의로 해석하지 않습니다.",
+    "url": "./../guides/platform/webview/external_payment.html#section-5"
   },
   {
     "document": "Zustand UI 상태 관리 가이드",
