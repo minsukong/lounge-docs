@@ -151,41 +151,41 @@
 
         <!-- SOURCE LANE -->
         <g data-node="src-app">
-          <rect x="100" y="30" width="200" height="70" rx="8" fill="var(--source-fill)" stroke="var(--source-stroke)" stroke-width="1.5"/>
-          <text x="200" y="58" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">src/app/</text>
-          <text x="200" y="78" text-anchor="middle" fill="var(--text-muted)" font-size="10">App Router · layout.tsx · page.tsx</text>
-          <text x="200" y="92" text-anchor="middle" fill="var(--text-dim)" font-size="9">route groups · dynamic segments</text>
+          <rect x="90" y="30" width="210" height="70" rx="8" fill="var(--source-fill)" stroke="var(--source-stroke)" stroke-width="1.5"/>
+          <text x="195" y="58" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">src/app/</text>
+          <text x="195" y="78" text-anchor="middle" fill="var(--text-muted)" font-size="10">App Router · layout · page</text>
+          <text x="195" y="92" text-anchor="middle" fill="var(--text-dim)" font-size="9">route groups · dynamic routes</text>
         </g>
         <g data-node="src-components">
-          <rect x="330" y="30" width="200" height="70" rx="8" fill="var(--source-fill)" stroke="var(--source-stroke)" stroke-width="1.5"/>
-          <text x="430" y="58" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">src/components/</text>
-          <text x="430" y="78" text-anchor="middle" fill="var(--text-muted)" font-size="10">UI primitives · features</text>
-          <text x="430" y="92" text-anchor="middle" fill="var(--text-dim)" font-size="9">shadcn/ui · custom widgets</text>
+          <rect x="315" y="30" width="210" height="70" rx="8" fill="var(--source-fill)" stroke="var(--source-stroke)" stroke-width="1.5"/>
+          <text x="420" y="58" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">src/components/</text>
+          <text x="420" y="78" text-anchor="middle" fill="var(--text-muted)" font-size="10">UI primitives · features</text>
+          <text x="420" y="92" text-anchor="middle" fill="var(--text-dim)" font-size="9">shadcn/ui · custom widgets</text>
         </g>
         <g data-node="globals-css">
-          <rect x="560" y="30" width="200" height="70" rx="8" fill="var(--source-fill)" stroke="var(--source-stroke)" stroke-width="1.5"/>
-          <text x="660" y="58" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">globals.css</text>
-          <text x="660" y="78" text-anchor="middle" fill="var(--text-muted)" font-size="10">@import "tailwindcss"</text>
-          <text x="660" y="92" text-anchor="middle" fill="var(--text-dim)" font-size="9">semantic tokens · @theme</text>
+          <rect x="540" y="30" width="210" height="70" rx="8" fill="var(--source-fill)" stroke="var(--source-stroke)" stroke-width="1.5"/>
+          <text x="645" y="58" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">globals.css</text>
+          <text x="645" y="78" text-anchor="middle" fill="var(--text-muted)" font-size="10">@import "tailwindcss"</text>
+          <text x="645" y="92" text-anchor="middle" fill="var(--text-dim)" font-size="9">semantic tokens · @theme</text>
         </g>
         <g data-node="tsconfig">
-          <rect x="790" y="30" width="200" height="70" rx="8" fill="var(--source-fill)" stroke="var(--source-stroke)" stroke-width="1.5"/>
-          <text x="890" y="58" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">빌드 설정</text>
-          <text x="890" y="78" text-anchor="middle" fill="var(--text-muted)" font-size="10">tsconfig · next.config · postcss</text>
-          <text x="890" y="92" text-anchor="middle" fill="var(--text-dim)" font-size="9">strict: true · paths: @/*</text>
+          <rect x="765" y="30" width="210" height="70" rx="8" fill="var(--source-fill)" stroke="var(--source-stroke)" stroke-width="1.5"/>
+          <text x="870" y="58" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">빌드 설정</text>
+          <text x="870" y="78" text-anchor="middle" fill="var(--text-muted)" font-size="10">tsconfig · Next.js · PostCSS</text>
+          <text x="870" y="92" text-anchor="middle" fill="var(--text-dim)" font-size="9">strict: true · paths: @/*</text>
         </g>
         <g data-node="storybook-config">
-          <rect x="1020" y="30" width="140" height="70" rx="8" fill="var(--source-fill)" stroke="var(--source-stroke)" stroke-width="1.5"/>
-          <text x="1090" y="58" text-anchor="middle" fill="var(--text)" font-size="12" font-weight="700">.storybook/</text>
-          <text x="1090" y="78" text-anchor="middle" fill="var(--text-muted)" font-size="10">main.ts · preview.ts</text>
-          <text x="1090" y="92" text-anchor="middle" fill="var(--text-dim)" font-size="9">stories/**/*.tsx</text>
+          <rect x="990" y="30" width="190" height="70" rx="8" fill="var(--source-fill)" stroke="var(--source-stroke)" stroke-width="1.5"/>
+          <text x="1085" y="58" text-anchor="middle" fill="var(--text)" font-size="12" font-weight="700">.storybook/</text>
+          <text x="1085" y="78" text-anchor="middle" fill="var(--text-muted)" font-size="10">main.ts · preview.ts</text>
+          <text x="1085" y="92" text-anchor="middle" fill="var(--text-dim)" font-size="9">stories/**/*.tsx</text>
         </g>
 
         <!-- Source to Compile arrows -->
-        <path data-from="src-app" data-to="nextjs" d="M200,100 C200,120 620,120 620,140" stroke="var(--arrow)" stroke-width="1" fill="none" marker-end="url(#ah)"/>
-        <path data-from="src-components" data-to="nextjs" d="M430,100 C430,120 660,120 660,140" stroke="var(--arrow)" stroke-width="1" fill="none" marker-end="url(#ah)"/>
-        <path data-from="globals-css" data-to="tailwind" d="M660,100 C660,120 430,120 430,140" stroke="var(--arrow)" stroke-width="1" fill="none" marker-end="url(#ah)"/>
-        <path data-from="tsconfig" data-to="typescript" d="M890,100 C890,120 200,120 200,140" stroke="var(--arrow)" stroke-width="1" fill="none" marker-end="url(#ah)"/>
+        <path data-from="src-app" data-to="nextjs" d="M195,100 C195,120 620,120 620,140" stroke="var(--arrow)" stroke-width="1" fill="none" marker-end="url(#ah)"/>
+        <path data-from="src-components" data-to="nextjs" d="M420,100 C420,120 660,120 660,140" stroke="var(--arrow)" stroke-width="1" fill="none" marker-end="url(#ah)"/>
+        <path data-from="globals-css" data-to="tailwind" d="M645,100 C645,120 430,120 430,140" stroke="var(--arrow)" stroke-width="1" fill="none" marker-end="url(#ah)"/>
+        <path data-from="tsconfig" data-to="typescript" d="M870,100 C870,120 200,120 200,140" stroke="var(--arrow)" stroke-width="1" fill="none" marker-end="url(#ah)"/>
         <!-- COMPILE LANE -->
         <g data-node="typescript">
           <rect x="100" y="140" width="200" height="70" rx="8" fill="var(--build-fill)" stroke="var(--build-stroke)" stroke-width="1.5"/>
@@ -251,7 +251,7 @@
         </g>
 
         <!-- Storybook source to its independent verification -->
-        <path data-from="storybook-config" data-to="build-storybook" d="M1090,100 C1090,120 760,440 760,465" stroke="var(--arrow)" stroke-width="1" fill="none" stroke-dasharray="3 3" marker-end="url(#ah)"/>
+        <path data-from="storybook-config" data-to="build-storybook" d="M1085,100 C1085,120 760,440 760,465" stroke="var(--arrow)" stroke-width="1" fill="none" stroke-dasharray="3 3" marker-end="url(#ah)"/>
 
         <!-- QUALITY LANE -->
         <g data-node="typecheck">
