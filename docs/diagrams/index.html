@@ -18,7 +18,7 @@
         overflow: hidden;
       }
       .build-scenario-frame {
-        height: 860px;
+        height: 1160px;
       }
       .diagram-card {
         border: 1px solid var(--krds-gray-20, #cdd1d5);
@@ -77,7 +77,9 @@
       <p>
         이 폴더는 더라운지 시스템 3.0의 아키텍처 다이어그램을 관리합니다. 현재는
         설계 단계의 예상 시나리오(Mermaid)를 유지하고, 실제 코드 구현 이후에는
-        Archify를 통해 검증 가능한 인터랙티브 HTML 다이어그램으로 전환합니다.
+        Archify를 통해 정적 구조를 검증 가능한 인터랙티브 HTML 다이어그램으로
+        전환합니다. Build와 API 실행 결과는 별도 실행 결과를 연결한 경우에만
+        표시합니다.
       </p>
     </header>
 
@@ -112,6 +114,18 @@
             자동 탐지.
           </p>
         </div>
+        <div class="diagram-card">
+          <h3>Stage 3: 실행 결과 연결 (선택)</h3>
+          <p>
+            <span class="status-badge status-future">FUTURE</span> 프로젝트와
+            CI의 검증 결과 연결
+          </p>
+          <p>
+            Build, typecheck, lint, test와 승인된 API 통합 테스트의 exit code와
+            요약 로그를 읽어 관련 노드 또는 연결에 PASS, FAIL, SKIP 상태를
+            표시합니다.
+          </p>
+        </div>
       </section>
 
       <section>
@@ -137,15 +151,29 @@
               </td>
             </tr>
             <tr>
-              <td>검증</td>
+              <td>정적 구조 검증</td>
               <td>
                 타입드 JSON → 스키마 검증 → 레이아웃/라벨/라우트 충돌 체크
+              </td>
+            </tr>
+            <tr>
+              <td>실행 결과 검증</td>
+              <td>
+                Archify가 임의로 실행하지 않음. 프로젝트 또는 CI가 만든 Build,
+                Test, API 검증 결과를 연결하는 방식은 향후 검토
               </td>
             </tr>
             <tr>
               <td>코드 근거</td>
               <td>
                 노드에 실제 소스 파일 경로 링크 (클릭 시 해당 파일로 이동)
+              </td>
+            </tr>
+            <tr>
+              <td>관계 강조</td>
+              <td>
+                노드 선택 시 선택 노드, 직접 연결된 노드와 그 사이 화살표를 함께
+                강조하고 나머지 관계는 흐리게 표시
               </td>
             </tr>
             <tr>
@@ -169,7 +197,10 @@
             </tr>
             <tr>
               <td>프로젝트 내 설치</td>
-              <td>없음. package.json, Build Pipeline에 개입하지 않음</td>
+              <td>
+                없음. 제품 package.json과 Build Pipeline에 포함하지 않고, 실행
+                결과 연동 시에도 기존 Script의 결과만 읽는 방식을 우선
+              </td>
             </tr>
           </tbody>
         </table>
@@ -197,7 +228,7 @@
             <tr>
               <td>검증</td>
               <td>없음</td>
-              <td>타입드 JSON + 다중 검증 게이트</td>
+              <td>타입드 JSON + 정적 구조 검증 게이트</td>
             </tr>
             <tr>
               <td>산출물</td>
@@ -303,9 +334,9 @@ apps/app-webview 실제 코드 기준으로 확인하고,
         <p>
           아래는 <code>apps/app-webview</code>의
           <strong>빌드 파이프라인 가상 시나리오</strong>입니다. 실제
-          package.json 이 생성되기 전, 알려진 기술 스택(Next.js 16 · React 19 ·
+          package.json이 생성되기 전, 알려진 기술 스택(Next.js 16 · React 19 ·
           Tailwind CSS 4 · Storybook) 기반으로 Source → Compile → Output →
-          Quality → Deploy 흐름을 시각화한 것입니다.
+          Verify → Result → Deploy 흐름을 시각화한 것입니다.
         </p>
         <p>
           <strong>레인 구성:</strong>
@@ -324,9 +355,15 @@ apps/app-webview 실제 코드 기준으로 확인하고,
             storybook-static/
           </li>
           <li>
-            <strong>QUALITY</strong> — typecheck, lint, test와 Storybook Build 후보.
-            실제 Script와 Build 차단 조건은
+            <strong>VERIFY</strong> — typecheck, lint, test, Storybook Build,
+            제품 Build와 승인된 API 통합 테스트 후보. 실제 Script, API 테스트
+            환경과 차단 조건은
             <code class="badge-tbd">TBD</code>
+          </li>
+          <li>
+            <strong>RESULT</strong> — 각 검사의 exit code, 요약 로그, 응답 상태와
+            실행 시각을 수집해 PASS, FAIL, SKIP, NOT RUN 상태로 연결하는 후보.
+            결과 형식과 연동 방식은 <code class="badge-tbd">TBD</code>
           </li>
           <li>
             <strong>DEPLOY</strong> — 정적 호스팅과 Next.js 서버를 대안으로
@@ -334,7 +371,11 @@ apps/app-webview 실제 코드 기준으로 확인하고,
             배포 방식과 연계 범위는 <code class="badge-tbd">TBD</code>
           </li>
         </ul>
-        <p>노드 클릭, 호버, 테마 전환을 직접 확인할 수 있습니다.</p>
+        <p>
+          노드를 선택하면 선택 노드, 직접 연결된 노드와 그 사이 화살표가 함께
+          강조됩니다. 같은 노드를 다시 선택하거나 배경을 선택하면 강조가
+          해제됩니다.
+        </p>
         <iframe
           class="archify-demo-frame build-scenario-frame"
           src="./build-scenario-webview.html"
@@ -344,7 +385,9 @@ apps/app-webview 실제 코드 기준으로 확인하고,
         <p class="demo-footer">
           이 다이어그램은 패키지 설치 전의
           <strong>가상 시나리오</strong>입니다. 실제 package.json, Next.js 설정,
-          CI와 배포 방식이 정해진 뒤 확인된 흐름으로 갱신합니다.
+          CI와 배포 방식이 정해진 뒤 확인된 흐름으로 갱신합니다. 정적 코드
+          연결과 실행 성공 여부는 구분하며, Build와 API의 PASS 또는 FAIL은 실제
+          명령과 승인된 테스트를 실행한 결과가 있을 때만 표시합니다.
         </p>
         <p>
           <a

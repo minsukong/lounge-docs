@@ -110,6 +110,19 @@ sequenceDiagram
   <figcaption>서명 생성 주체(WebView 직접 or Native Bridge)는 TBD입니다. 현재는 Bridge를 통한 방식이 유력합니다.</figcaption>
 </figure>
 
+## 실제 구현 후 검증 범위
+
+현재 다이어그램은 예상 시나리오이며 API 연결과 통신 성공을 검증한 결과가 아닙니다. 승인된 계약과 실제 소스가 준비되면 정적 구조 검증과 실행 검증을 구분해 적용합니다.
+
+| 구분 | 확인할 내용 | 다이어그램 표시 |
+|------|-------------|-----------------|
+| 정적 구조 검증 | 컴포넌트, Query/Hook, API Client, Parser와 실제 import·호출 관계 | 실제로 확인된 노드와 연결만 표시 |
+| 계약 검증 | 요청·응답 parser와 승인된 API 계약의 일치 여부 | 검증한 API 노드에 PASS 또는 FAIL 표시 |
+| 통합 테스트 | 승인된 테스트 환경의 응답 코드, timeout, 인증과 오류 처리 | 실제로 호출한 API 노드 또는 연결에 PASS, FAIL, SKIP 표시 |
+| 브라우저·WebView 검증 | CORS, Cookie, Origin, Native Bridge와 실제 WebView 동작 | 해당 환경의 실행 근거가 있을 때만 상태 표시 |
+
+Archify는 실제 코드 관계를 분석하지만 API 서버의 응답 성공을 코드만으로 판단하지 않습니다. API 실행 결과는 프로젝트 또는 CI의 health check와 integration test가 생성한 결과를 읽어 연결하는 방식을 우선합니다. 운영 API는 임의로 호출하지 않으며 테스트 주소, 인증 정보와 실행 범위는 담당자 승인 후 확정합니다.
+
 ## Front-end 미통신 레이어 (참고)
 
 | 레이어 | Base URL | 이유 |
