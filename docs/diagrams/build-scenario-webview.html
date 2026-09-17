@@ -1,0 +1,433 @@
+﻿<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>app-webview 빌드 시나리오 (가상)</title>
+  <script>
+    (function () {
+      try {
+        var theme = null;
+        try {
+          var param = new URLSearchParams(window.location.search).get('theme');
+          if (param === 'light' || param === 'dark') theme = param;
+        } catch (_) {}
+        if (!theme) {
+          try { theme = localStorage.getItem('build-scenario-theme'); } catch (_) {}
+        }
+        if (theme !== 'light' && theme !== 'dark') {
+          theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (_) {}
+    })();
+  </script>
+  <style>
+    :root, [data-theme="dark"] {
+      --bg: #020617; --grid: #1e293b; --text: #ffffff; --text-muted: #94a3b8;
+      --text-dim: #475569; --panel: rgba(15,23,42,0.5); --panel-border: #1e293b;
+      --mask: #0f172a;
+      --source-fill: rgba(8,51,68,0.4); --source-stroke: #22d3ee;
+      --build-fill: rgba(6,78,59,0.4); --build-stroke: #34d399;
+      --output-fill: rgba(76,29,149,0.4); --output-stroke: #a78bfa;
+      --quality-fill: rgba(120,53,15,0.3); --quality-stroke: #fbbf24;
+      --deploy-fill: rgba(136,19,55,0.4); --deploy-stroke: #fb7185;
+      --arrow: #64748b; --arrow-emphasis: #34d399;
+      --lane-fill: rgba(15,23,42,0.22); --lane-stroke: #334155;
+      --toolbar-bg: rgba(15,23,42,0.8); --toolbar-border: #334155; --toolbar-text: #e2e8f0;
+      --hl-node-stroke: #fbbf24; --hl-path: #fbbf24;
+    }
+    [data-theme="light"] {
+      --bg: #f8fafc; --grid: #e2e8f0; --text: #0f172a; --text-muted: #64748b;
+      --text-dim: #94a3b8; --panel: #ffffff; --panel-border: #e2e8f0; --mask: #ffffff;
+      --source-fill: rgba(34,211,238,0.15); --source-stroke: #0891b2;
+      --build-fill: rgba(52,211,153,0.18); --build-stroke: #059669;
+      --output-fill: rgba(167,139,250,0.2); --output-stroke: #7c3aed;
+      --quality-fill: rgba(251,191,36,0.18); --quality-stroke: #d97706;
+      --deploy-fill: rgba(251,113,133,0.15); --deploy-stroke: #e11d48;
+      --arrow: #94a3b8; --arrow-emphasis: #059669;
+      --lane-fill: rgba(248,250,252,0.65); --lane-stroke: #cbd5e1;
+      --toolbar-bg: rgba(255,255,255,0.92); --toolbar-border: #cbd5e1; --toolbar-text: #334155;
+      --hl-node-stroke: #d97706; --hl-path: #d97706;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace;
+      background: var(--bg); min-height: 100vh; padding: 2rem;
+      color: var(--text); transition: background 0.2s, color 0.2s;
+    }
+    .container { width:100%; max-width:1400px; margin:0 auto; }
+    .header { margin-bottom:1.5rem; }
+    .header-row { display:flex; align-items:center; gap:1rem; margin-bottom:0.5rem; }
+    .pulse-dot { width:12px; height:12px; background:var(--source-stroke); border-radius:50%; }
+    h1 { font-size:1.5rem; font-weight:700; letter-spacing:-0.025em; }
+    .subtitle { color:var(--text-muted); font-size:0.875rem; margin-left:1.75rem; }
+    .diagram-container {
+      background:var(--panel); border:1px solid var(--panel-border);
+      border-radius:1rem; padding:1.5rem; overflow:hidden;
+    }
+    svg { width:100%; display:block; }
+    .legend { display:flex; gap:1.5rem; margin-top:1.25rem; flex-wrap:wrap; }
+    .legend-item { display:flex; align-items:center; gap:0.4rem; font-size:0.7rem; color:var(--text-muted); }
+    .legend-swatch { width:14px; height:14px; border-radius:3px; border:1px solid; }
+    .toolbar {
+      position:fixed; top:1rem; right:1rem; display:flex; gap:0.4rem; padding:0.4rem;
+      background:var(--toolbar-bg); border:1px solid var(--toolbar-border);
+      border-radius:0.5rem; backdrop-filter:blur(10px); z-index:100;
+    }
+    .toolbar button {
+      border:0; background:transparent; color:var(--toolbar-text);
+      font:inherit; font-size:0.7rem; padding:0.35rem 0.7rem; border-radius:0.3rem; cursor:pointer;
+    }
+    .toolbar button:hover { background:var(--panel); }
+    .cards {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:1rem; margin-top:1.5rem;
+    }
+    .card {
+      background:var(--panel); border:1px solid var(--panel-border);
+      border-radius:0.75rem; padding:1rem 1.25rem;
+    }
+    .card h3 {
+      font-size:0.75rem; font-weight:700; color:var(--text-muted);
+      letter-spacing:0.08em; text-transform:uppercase; margin-bottom:0.5rem;
+    }
+    .card code { display:block; font-size:0.7rem; color:var(--text); line-height:1.6; }
+    .card .note { margin-top:0.5rem; font-size:0.65rem; color:var(--text-dim); line-height:1.4; }
+    /* Interactive highlight states */
+    g[data-node] { cursor:pointer; transition: opacity 0.2s; }
+    g[data-node] rect { transition: stroke 0.2s, stroke-width 0.2s, filter 0.2s; }
+    path[data-from] { transition: stroke 0.2s, stroke-width 0.2s, opacity 0.2s; }
+    /* Dimmed (inactive) state */
+    svg.has-selection g[data-node] { opacity: 0.3; }
+    svg.has-selection g[data-node].active { opacity: 1; }
+    svg.has-selection g[data-node].active rect {
+      stroke: var(--hl-node-stroke); stroke-width: 2.5;
+      filter: drop-shadow(0 0 6px var(--hl-node-stroke));
+    }
+    svg.has-selection path[data-from] { opacity: 0.15; }
+    svg.has-selection path[data-from].active {
+      opacity: 1; stroke: var(--hl-path); stroke-width: 2.5;
+    }
+    .hint {
+      position:absolute; bottom:0.75rem; right:1rem;
+      font-size:0.65rem; color:var(--text-dim); pointer-events:none;
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <button onclick="toggleTheme()" id="btn-theme">🌙 Dark</button>
+  </div>
+  <div class="container">
+    <header class="header">
+      <div class="header-row">
+        <div class="pulse-dot"></div>
+        <h1>app-webview 빌드 시나리오 (가상)</h1>
+      </div>
+      <p class="subtitle">Next.js 16 App Router · React 19 · TypeScript · Tailwind CSS 4 · Storybook · Vitest <span style="opacity:0.5;font-size:0.75em;">(package.json 미구성)</span></p>
+    </header>
+    <div class="diagram-container" style="position:relative;">
+      <svg id="diagram-svg" viewBox="0 0 1200 680" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="app-webview 빌드 시나리오 다이어그램">
+        <defs>
+          <marker id="ah" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="var(--arrow)"/></marker>
+          <marker id="ah-e" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="var(--arrow-emphasis)"/></marker>
+        </defs>
+        <text x="20" y="55" fill="var(--text-dim)" font-size="11" font-weight="600" letter-spacing="0.1em">SOURCE</text>
+        <text x="20" y="195" fill="var(--text-dim)" font-size="11" font-weight="600" letter-spacing="0.1em">COMPILE</text>
+        <text x="20" y="355" fill="var(--text-dim)" font-size="11" font-weight="600" letter-spacing="0.1em">OUTPUT</text>
+        <text x="20" y="505" fill="var(--text-dim)" font-size="11" font-weight="600" letter-spacing="0.1em">QUALITY</text>
+        <text x="20" y="620" fill="var(--text-dim)" font-size="11" font-weight="600" letter-spacing="0.1em">DEPLOY</text>
+        <line x1="80" y1="115" x2="1180" y2="115" stroke="var(--lane-stroke)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="80" y1="290" x2="1180" y2="290" stroke="var(--lane-stroke)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="80" y1="450" x2="1180" y2="450" stroke="var(--lane-stroke)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="80" y1="570" x2="1180" y2="570" stroke="var(--lane-stroke)" stroke-width="1" stroke-dasharray="4 4"/>
+
+        <!-- SOURCE LANE -->
+        <g data-node="src-app">
+          <rect x="100" y="30" width="200" height="70" rx="8" fill="var(--source-fill)" stroke="var(--source-stroke)" stroke-width="1.5"/>
+          <text x="200" y="58" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">src/app/</text>
+          <text x="200" y="78" text-anchor="middle" fill="var(--text-muted)" font-size="10">App Router · layout.tsx · page.tsx</text>
+          <text x="200" y="92" text-anchor="middle" fill="var(--text-dim)" font-size="9">route groups · dynamic segments</text>
+        </g>
+        <g data-node="src-components">
+          <rect x="330" y="30" width="200" height="70" rx="8" fill="var(--source-fill)" stroke="var(--source-stroke)" stroke-width="1.5"/>
+          <text x="430" y="58" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">src/components/</text>
+          <text x="430" y="78" text-anchor="middle" fill="var(--text-muted)" font-size="10">UI primitives · feature components</text>
+          <text x="430" y="92" text-anchor="middle" fill="var(--text-dim)" font-size="9">shadcn/ui · custom widgets</text>
+        </g>
+        <g data-node="globals-css">
+          <rect x="560" y="30" width="200" height="70" rx="8" fill="var(--source-fill)" stroke="var(--source-stroke)" stroke-width="1.5"/>
+          <text x="660" y="58" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">globals.css</text>
+          <text x="660" y="78" text-anchor="middle" fill="var(--text-muted)" font-size="10">@import "tailwindcss"</text>
+          <text x="660" y="92" text-anchor="middle" fill="var(--text-dim)" font-size="9">semantic tokens · @theme</text>
+        </g>
+        <g data-node="tsconfig">
+          <rect x="790" y="30" width="200" height="70" rx="8" fill="var(--source-fill)" stroke="var(--source-stroke)" stroke-width="1.5"/>
+          <text x="890" y="58" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">tsconfig.json</text>
+          <text x="890" y="78" text-anchor="middle" fill="var(--text-muted)" font-size="10">next.config.ts · postcss.config.mjs</text>
+          <text x="890" y="92" text-anchor="middle" fill="var(--text-dim)" font-size="9">strict: true · paths: @/*</text>
+        </g>
+        <g data-node="storybook-config">
+          <rect x="1020" y="30" width="140" height="70" rx="8" fill="var(--quality-fill)" stroke="var(--quality-stroke)" stroke-width="1.5"/>
+          <text x="1090" y="58" text-anchor="middle" fill="var(--text)" font-size="12" font-weight="700">.storybook/</text>
+          <text x="1090" y="78" text-anchor="middle" fill="var(--text-muted)" font-size="10">main.ts · preview.ts</text>
+          <text x="1090" y="92" text-anchor="middle" fill="var(--text-dim)" font-size="9">stories/**/*.tsx</text>
+        </g>
+
+        <!-- Source to Compile arrows -->
+        <!-- COMPILE LANE -->
+        <g data-node="typescript">
+          <rect x="100" y="140" width="200" height="70" rx="8" fill="var(--build-fill)" stroke="var(--build-stroke)" stroke-width="1.5"/>
+          <text x="200" y="168" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">TypeScript</text>
+          <text x="200" y="188" text-anchor="middle" fill="var(--text-muted)" font-size="10">tsc --noEmit (typecheck)</text>
+          <text x="200" y="202" text-anchor="middle" fill="var(--text-dim)" font-size="9">isolatedModules · verbatimModuleSyntax</text>
+        </g>
+        <g data-node="tailwind">
+          <rect x="330" y="140" width="200" height="70" rx="8" fill="var(--build-fill)" stroke="var(--build-stroke)" stroke-width="1.5"/>
+          <text x="430" y="168" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">Tailwind CSS 4</text>
+          <text x="430" y="188" text-anchor="middle" fill="var(--text-muted)" font-size="10">@import "tailwindcss" (CSS-first)</text>
+          <text x="430" y="202" text-anchor="middle" fill="var(--text-dim)" font-size="9">JIT scan · @theme tokens · PostCSS</text>
+        </g>
+        <g data-node="nextjs">
+          <rect x="560" y="140" width="260" height="70" rx="8" fill="var(--build-fill)" stroke="var(--build-stroke)" stroke-width="2"/>
+          <text x="690" y="165" text-anchor="middle" fill="var(--text)" font-size="14" font-weight="700">Next.js 16</text>
+          <text x="690" y="185" text-anchor="middle" fill="var(--text-muted)" font-size="10">App Router · RSC · Turbopack</text>
+          <text x="690" y="202" text-anchor="middle" fill="var(--text-dim)" font-size="9">SSG/SSR · chunk splitting · tree-shaking</text>
+        </g>
+        <g data-node="react">
+          <rect x="850" y="140" width="200" height="70" rx="8" fill="var(--build-fill)" stroke="var(--build-stroke)" stroke-width="1.5"/>
+          <text x="950" y="168" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">React 19</text>
+          <text x="950" y="188" text-anchor="middle" fill="var(--text-muted)" font-size="10">Server Components · Actions</text>
+          <text x="950" y="202" text-anchor="middle" fill="var(--text-dim)" font-size="9">useOptimistic · useActionState</text>
+        </g>
+
+        <!-- Compile to Output arrows -->
+        <path data-from="typescript" data-to="next-build" d="M200,210 L200,310" stroke="var(--arrow)" stroke-width="1.5" fill="none" marker-end="url(#ah)"/>
+        <path data-from="tailwind" data-to="next-static" d="M430,210 L430,310" stroke="var(--arrow)" stroke-width="1.5" fill="none" marker-end="url(#ah)"/>
+        <path data-from="nextjs" data-to="next-build" d="M690,210 L690,310" stroke="var(--arrow-emphasis)" stroke-width="2" fill="none" marker-end="url(#ah-e)"/>
+        <path data-from="react" data-to="html-pages" d="M950,210 L950,310" stroke="var(--arrow)" stroke-width="1.5" fill="none" marker-end="url(#ah)"/>
+        <path data-from="nextjs" data-to="next-static" d="M690,210 C690,250 500,270 500,310" stroke="var(--arrow)" stroke-width="1" fill="none" stroke-dasharray="3 3" marker-end="url(#ah)"/>
+        <path data-from="nextjs" data-to="html-pages" d="M690,210 C690,250 740,270 740,310" stroke="var(--arrow)" stroke-width="1" fill="none" stroke-dasharray="3 3" marker-end="url(#ah)"/>
+
+        <!-- OUTPUT LANE -->
+        <g data-node="next-build">
+          <rect x="100" y="310" width="260" height="80" rx="8" fill="var(--output-fill)" stroke="var(--output-stroke)" stroke-width="2"/>
+          <text x="230" y="338" text-anchor="middle" fill="var(--text)" font-size="14" font-weight="700">.next/</text>
+          <text x="230" y="358" text-anchor="middle" fill="var(--text-muted)" font-size="10">chunks/ · static/ · server/ · cache/</text>
+          <text x="230" y="375" text-anchor="middle" fill="var(--text-dim)" font-size="9">BUILD_ID · routes-manifest.json</text>
+          <text x="230" y="389" text-anchor="middle" fill="var(--text-dim)" font-size="9">webpack-runtime.js · app-build-manifest</text>
+        </g>
+        <g data-node="next-static">
+          <rect x="400" y="310" width="200" height="80" rx="8" fill="var(--output-fill)" stroke="var(--output-stroke)" stroke-width="1.5"/>
+          <text x="500" y="338" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">_next/static/</text>
+          <text x="500" y="358" text-anchor="middle" fill="var(--text-muted)" font-size="10">CSS bundles · JS chunks</text>
+          <text x="500" y="375" text-anchor="middle" fill="var(--text-dim)" font-size="9">fonts · images · media</text>
+          <text x="500" y="389" text-anchor="middle" fill="var(--text-dim)" font-size="9">content-hash filenames (cache busting)</text>
+        </g>
+        <g data-node="html-pages">
+          <rect x="640" y="310" width="200" height="80" rx="8" fill="var(--output-fill)" stroke="var(--output-stroke)" stroke-width="1.5"/>
+          <text x="740" y="338" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">HTML Pages</text>
+          <text x="740" y="358" text-anchor="middle" fill="var(--text-muted)" font-size="10">SSG: static HTML · SSR: on-demand</text>
+          <text x="740" y="375" text-anchor="middle" fill="var(--text-dim)" font-size="9">RSC payload (.rsc) · flight data</text>
+          <text x="740" y="389" text-anchor="middle" fill="var(--text-dim)" font-size="9">Safari 15 compat: no CSS nesting</text>
+        </g>
+        <g data-node="storybook-static">
+          <rect x="880" y="310" width="200" height="80" rx="8" fill="var(--quality-fill)" stroke="var(--quality-stroke)" stroke-width="1.5"/>
+          <text x="980" y="338" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">storybook-static/</text>
+          <text x="980" y="358" text-anchor="middle" fill="var(--text-muted)" font-size="10">Vite build · static output</text>
+          <text x="980" y="375" text-anchor="middle" fill="var(--text-dim)" font-size="9">index.html · iframe.html · assets</text>
+          <text x="980" y="389" text-anchor="middle" fill="var(--text-dim)" font-size="9">npm run build-storybook</text>
+        </g>
+
+        <!-- Source to Quality (parallel) -->
+        <path data-from="src-app" data-to="typecheck" d="M200,100 C200,120 180,440 180,465" stroke="var(--arrow)" stroke-width="1" fill="none" stroke-dasharray="3 3" marker-end="url(#ah)"/>
+        <path data-from="src-components" data-to="lint" d="M430,100 C430,120 370,440 370,465" stroke="var(--arrow)" stroke-width="1" fill="none" stroke-dasharray="3 3" marker-end="url(#ah)"/>
+        <path data-from="globals-css" data-to="test" d="M660,100 C660,120 560,440 560,465" stroke="var(--arrow)" stroke-width="1" fill="none" stroke-dasharray="3 3" marker-end="url(#ah)"/>
+        <path data-from="storybook-config" data-to="build-storybook" d="M1090,100 C1090,120 760,440 760,465" stroke="var(--arrow)" stroke-width="1" fill="none" stroke-dasharray="3 3" marker-end="url(#ah)"/>
+
+        <!-- QUALITY LANE -->
+        <g data-node="typecheck">
+          <rect x="100" y="465" width="160" height="60" rx="6" fill="var(--quality-fill)" stroke="var(--quality-stroke)" stroke-width="1.5"/>
+          <text x="180" y="490" text-anchor="middle" fill="var(--text)" font-size="12" font-weight="700">typecheck</text>
+          <text x="180" y="508" text-anchor="middle" fill="var(--text-muted)" font-size="10">tsc --noEmit</text>
+        </g>
+        <g data-node="lint">
+          <rect x="290" y="465" width="160" height="60" rx="6" fill="var(--quality-fill)" stroke="var(--quality-stroke)" stroke-width="1.5"/>
+          <text x="370" y="490" text-anchor="middle" fill="var(--text)" font-size="12" font-weight="700">lint</text>
+          <text x="370" y="508" text-anchor="middle" fill="var(--text-muted)" font-size="10">ESLint + Prettier</text>
+        </g>
+        <g data-node="test">
+          <rect x="480" y="465" width="160" height="60" rx="6" fill="var(--quality-fill)" stroke="var(--quality-stroke)" stroke-width="1.5"/>
+          <text x="560" y="490" text-anchor="middle" fill="var(--text)" font-size="12" font-weight="700">test</text>
+          <text x="560" y="508" text-anchor="middle" fill="var(--text-muted)" font-size="10">Vitest + Testing Library</text>
+        </g>
+        <g data-node="build-storybook">
+          <rect x="670" y="465" width="180" height="60" rx="6" fill="var(--quality-fill)" stroke="var(--quality-stroke)" stroke-width="1.5"/>
+          <text x="760" y="490" text-anchor="middle" fill="var(--text)" font-size="12" font-weight="700">build:storybook</text>
+          <text x="760" y="508" text-anchor="middle" fill="var(--text-muted)" font-size="10">static build (verify)</text>
+        </g>
+        <g data-node="npm-build">
+          <rect x="880" y="465" width="160" height="60" rx="6" fill="var(--deploy-fill)" stroke="var(--deploy-stroke)" stroke-width="2"/>
+          <text x="960" y="490" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">npm run build</text>
+          <text x="960" y="508" text-anchor="middle" fill="var(--text-muted)" font-size="10">next build (production)</text>
+        </g>
+
+        <!-- Quality to Build gate (all quality → build) -->
+        <path data-from="npm-build" data-to="npm-build" d="M560,465 L560,455 L960,455 L960,465" stroke="var(--arrow-emphasis)" stroke-width="1.5" fill="none" marker-end="url(#ah-e)"/>
+
+        <!-- Build to Deploy -->
+        <path data-from="npm-build" data-to="webview-load" d="M960,525 C960,560 800,560 800,590" stroke="var(--arrow-emphasis)" stroke-width="2" fill="none" marker-end="url(#ah-e)"/>
+
+        <!-- DEPLOY LANE -->
+        <g data-node="static-hosting">
+          <rect x="100" y="590" width="260" height="60" rx="8" fill="var(--deploy-fill)" stroke="var(--deploy-stroke)" stroke-width="1.5"/>
+          <text x="230" y="617" text-anchor="middle" fill="var(--text)" font-size="12" font-weight="700">Static Hosting / CDN</text>
+          <text x="230" y="635" text-anchor="middle" fill="var(--text-muted)" font-size="10">out/ (export) or _next/static + HTML</text>
+        </g>
+        <g data-node="node-server">
+          <rect x="400" y="590" width="260" height="60" rx="8" fill="var(--deploy-fill)" stroke="var(--deploy-stroke)" stroke-width="1.5"/>
+          <text x="530" y="617" text-anchor="middle" fill="var(--text)" font-size="12" font-weight="700">Node.js Server</text>
+          <text x="530" y="635" text-anchor="middle" fill="var(--text-muted)" font-size="10">next start (SSR · API routes)</text>
+        </g>
+        <g data-node="webview-load">
+          <rect x="700" y="590" width="200" height="60" rx="8" fill="var(--deploy-fill)" stroke="var(--deploy-stroke)" stroke-width="1.5"/>
+          <text x="800" y="617" text-anchor="middle" fill="var(--text)" font-size="12" font-weight="700">WebView Load</text>
+          <text x="800" y="635" text-anchor="middle" fill="var(--text-muted)" font-size="10">Flutter app → http(s)://localhost</text>
+        </g>
+
+        <!-- Deploy cross-links -->
+        <path data-from="static-hosting" data-to="node-server" d="M360,620 L400,620" stroke="var(--arrow)" stroke-width="1" fill="none" stroke-dasharray="3 3" marker-end="url(#ah)"/>
+        <path data-from="node-server" data-to="webview-load" d="M660,620 L700,620" stroke="var(--arrow)" stroke-width="1" fill="none" stroke-dasharray="3 3" marker-end="url(#ah)"/>
+        <path data-from="npm-build" data-to="static-hosting" d="M880,525 L360,590" stroke="var(--arrow)" stroke-width="1" fill="none" stroke-dasharray="3 3" marker-end="url(#ah)"/>
+        <path data-from="npm-build" data-to="node-server" d="M920,525 L530,590" stroke="var(--arrow)" stroke-width="1" fill="none" stroke-dasharray="3 3" marker-end="url(#ah)"/>
+      </svg>
+      <span class="hint">노드 클릭: 연결 하이라이트 · 배경 클릭: 해제</span>
+      <div class="legend">
+        <div class="legend-item"><div class="legend-swatch" style="background:var(--source-fill);border-color:var(--source-stroke);"></div>소스 파일</div>
+        <div class="legend-item"><div class="legend-swatch" style="background:var(--build-fill);border-color:var(--build-stroke);"></div>컴파일/처리</div>
+        <div class="legend-item"><div class="legend-swatch" style="background:var(--output-fill);border-color:var(--output-stroke);"></div>빌드 산출물</div>
+        <div class="legend-item"><div class="legend-swatch" style="background:var(--quality-fill);border-color:var(--quality-stroke);"></div>품질 게이트</div>
+        <div class="legend-item"><div class="legend-swatch" style="background:var(--deploy-fill);border-color:var(--deploy-stroke);"></div>배포</div>
+      </div>
+    </div>
+    </div>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Production Build</h3>
+        <code>npm run build</code>
+        <p class="note">Next.js production build. 출력: .next/ (chunks, static assets, HTML). SSG 라우트는 정적 HTML로, 동적 라우트는 SSR 런타임으로 분리.</p>
+      </div>
+      <div class="card">
+        <h3>Quality Gate (병렬)</h3>
+        <code>npm run typecheck<br>npm run lint<br>npm run test<br>npm run build-storybook</code>
+        <p class="note">모두 통과해야 production build가 실행됩니다. CI 파이프라인에서 순차 게이트로 운영.</p>
+      </div>
+      <div class="card">
+        <h3>Development</h3>
+        <code>npm run dev</code>
+        <p class="note">Turbopack 기반 dev server (Next.js 16 default). HMR, on-demand compilation. WebView 개발 중에는 http://localhost:3000에서 로드.</p>
+      </div>
+      <div class="card">
+        <h3>Storybook</h3>
+        <code>npm run storybook<br>npm run build-storybook</code>
+        <p class="note">dev: Vite dev server로 스토리 뷰어. build: storybook-static/ 정적 출력. QA/디자이너가 독립적으로 UI 검증.</p>
+      </div>
+      <div class="card">
+        <h3>배포 시나리오</h3>
+        <code>정적: next build --outdir out → CDN<br>동적: next start (Node.js 서버)<br>WebView: Flutter → localhost:3000</code>
+        <p class="note">WebView 프론트엔드는 Flutter 네이티브 앱이 WebView를 통해 로컬/리모트 URL에서 로드합니다.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+(function(){
+  function toggleTheme(){
+    var h=document.documentElement;
+    var next=h.getAttribute('data-theme')==='dark'?'light':'dark';
+    h.setAttribute('data-theme',next);
+    document.getElementById('btn-theme').textContent=next==='dark'?'🌙 Dark':'☀️ Light';
+    try{localStorage.setItem('archify-theme',next)}catch(_){}
+  }
+  function init(){
+    var h=document.documentElement;
+    var t=null;
+    try{t=localStorage.getItem('archify-theme')}catch(_){}
+    if(!t)t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';
+    h.setAttribute('data-theme',t);
+    var b=document.getElementById('btn-theme');
+    if(b)b.textContent=t==='dark'?'🌙 Dark':'☀️ Light';
+  }
+  init();
+  document.getElementById('btn-theme').addEventListener('click',toggleTheme);
+
+  // --- Interactivity: node click highlights connected arrows ---
+  var svg=document.getElementById('diagram-svg');
+  if(!svg)return;
+  var nodes=svg.querySelectorAll('[data-node]');
+  var paths=svg.querySelectorAll('[data-from][data-to]');
+  var activeNode=null;
+
+  function clearHighlight(){
+    paths.forEach(function(p){
+      p.style.opacity='';
+      p.style.strokeWidth='';
+    });
+    nodes.forEach(function(n){
+      n.style.opacity='';
+      n.querySelector('rect').style.filter='';
+    });
+    activeNode=null;
+  }
+
+  function highlightNode(nodeId){
+    clearHighlight();
+    activeNode=nodeId;
+    // dim all
+    nodes.forEach(function(n){
+      if(n.getAttribute('data-node')!==nodeId)n.style.opacity='0.35';
+      else{var r=n.querySelector('rect');if(r)r.style.filter='brightness(1.3)'}
+    });
+    // highlight connected paths
+    paths.forEach(function(p){
+      var from=p.getAttribute('data-from');
+      var to=p.getAttribute('data-to');
+      if(from===nodeId||to===nodeId){
+        p.style.opacity='1';
+        p.style.strokeWidth='2.5';
+      }else{
+        p.style.opacity='0.15';
+      }
+    });
+  }
+
+  nodes.forEach(function(n){
+    n.style.cursor='pointer';
+    n.addEventListener('click',function(e){
+      e.stopPropagation();
+      var id=n.getAttribute('data-node');
+      if(activeNode===id){clearHighlight()}else{highlightNode(id)}
+    });
+    // hover effect
+    n.addEventListener('mouseenter',function(){
+      if(!activeNode){
+        var r=n.querySelector('rect');
+        if(r)r.style.filter='brightness(1.2)';
+      }
+    });
+    n.addEventListener('mouseleave',function(){
+      if(!activeNode){
+        var r=n.querySelector('rect');
+        if(r)r.style.filter='';
+      }
+    });
+  });
+
+  // click background to clear
+  svg.addEventListener('click',function(){clearHighlight()});
+})();
+  </script>
+</body>
+</html>

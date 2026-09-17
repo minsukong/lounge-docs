@@ -61,6 +61,10 @@
         color: #fff;
         border: 1px solid #1a6e2c;
       }
+      .demo-footer {
+        font-size: 0.875rem;
+        opacity: 0.7;
+      }
     </style>
   </head>
   <body>
@@ -270,14 +274,14 @@ apps/app-webview 실제 코드 기준으로 확인하고,
           title="Archify 데모 — Web App 아키텍처 다이어그램 (Sample)"
           loading="lazy"
         ></iframe>
-        <p>
+        <p class="demo-footer">
           위 데모는 <strong>Sample Web App</strong> 아키텍처 다이어그램입니다.
           노드 클릭, 호버, 테마 전환(Dark/Light), 내보내기(PNG/SVG)를 직접
           시도해 보세요.
         </p>
         <p>
           <a href="./archify-demo-web-app.html" target="_blank" rel="noopener">
-            예시 보기 ↗
+            Archify 데모 보기 ↗
           </a>
         </p>
         <p>
@@ -292,7 +296,64 @@ apps/app-webview 실제 코드 기준으로 확인하고,
       </section>
 
       <section>
-        <h2>5. 운영 기준</h2>
+        <h2>5. 빌드 시나리오 다이어그램</h2>
+        <p>
+          아래는 <code>apps/app-webview</code>의
+          <strong>빌드 파이프라인 가상 시나리오</strong>입니다. 실제
+          package.json 이 생성되기 전, 알려진 기술 스택(Next.js 16 · React 19 ·
+          Tailwind CSS 4 · Storybook) 기반으로 Source → Compile → Output →
+          Quality → Deploy 흐름을 시각화한 것입니다.
+        </p>
+        <p>
+          <strong>레인 구성:</strong>
+        </p>
+        <ul>
+          <li>
+            <strong>SOURCE</strong> — App Router, 컴포넌트, Tailwind 4,
+            TypeScript, Storybook 설정
+          </li>
+          <li>
+            <strong>COMPILE</strong> — TypeScript → Tailwind JIT → Next.js
+            (Turbopack) → React 19 (RSC)
+          </li>
+          <li>
+            <strong>OUTPUT</strong> — .next/, content-hash 정적 자산, HTML
+            Pages, storybook-static/
+          </li>
+          <li>
+            <strong>QUALITY</strong> — typecheck → lint → test → build:storybook
+            → production build (gate)
+          </li>
+          <li>
+            <strong>DEPLOY</strong> — Static Hosting/CDN, Node.js Server (SSR),
+            WebView Load (Flutter)
+          </li>
+        </ul>
+        <p>노드 클릭, 호버, 테마 전환을 직접 확인할 수 있습니다.</p>
+        <iframe
+          class="archify-demo-frame"
+          src="./build-scenario-webview.html"
+          title="app-webview 빌드 시나리오 다이어그램 (가상)"
+          loading="lazy"
+        ></iframe>
+        <p class="demo-footer">
+          이 다이어그램은 패키지 설치 전의
+          <strong>예상 파이프라인</strong>입니다. 실제 package.json 생성 및 빌드
+          확인 후에는 Archify를 통해 코드 검증 버전으로 전환합니다.
+        </p>
+        <p>
+          <a
+            href="./build-scenario-webview.html"
+            target="_blank"
+            rel="noopener"
+          >
+            빌드 시나리오 데모 보기 ↗
+          </a>
+        </p>
+      </section>
+
+      <section>
+        <h2>6. 운영 기준</h2>
         <ul>
           <li>
             <strong>[TBD] 파일</strong>은 확정 전 문서입니다. Backend 확인 및
