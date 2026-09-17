@@ -13,13 +13,18 @@
 
 ## 2026-09-17
 
-### `build-scenario-webview.html` 다이어그램 정합성 수정
+### 빌드·API 검증 시나리오와 다이어그램 상호작용 정리
 
-- `docs/diagrams/build-scenario-webview.html`의 localStorage 테마 키 불일치(head: `build-scenario-theme`, bottom: `archify-theme`)를 `archify-theme`으로 통일하고, 하단 `init()`이 head 스크립트가 이미 설정한 테마를 override하지 않도록 button label 갱신만 수행하도록 수정했습니다.
-- 미확정 구현 세부사항(`useOptimistic · useActionState`)을 제거하고 React 19 노드의 상세를 "Hooks · Suspense · Error Boundary"로 일반화했습니다.
-- "tsconfig.json" 노드 라벨을 "빌드 설정"으로 수정하고 서브텍스트를 "tsconfig · next.config · postcss"로 변경해 단일 파일명이 아닌 설정 묶음임을 명확히 했습니다.
-- SOURCE lane의 `.storybook/` 노드 색상을 품질 게이트 색상에서 소스 색상으로 통일했습니다.
-- 검증: localStorage 키가 파일 내 전역적으로 `archify-theme` 하나만 사용되는지 grep 확인, 수정된 SVG 노드 텍스트와 fill/stroke 속성이 의도한 대로 적용됐는지 확인했습니다.
+설계 단계의 가상 화면이 실제 검증 완료 상태처럼 보이지 않도록 현재 상태와 향후 검증 방식을 분리하고, 다이어그램의 연결 관계를 더 쉽게 탐색할 수 있도록 개선했습니다.
+
+- **현재 상태:** `apps/app-webview`에는 아직 `package.json`과 실제 구현 소스가 없습니다. 빌드 명령과 API 통신은 실행할 수 없으므로 모든 검증 항목을 `TBD` 또는 `NOT RUN`으로 표시했습니다.
+- **검증 범위:** 실제 파일, import와 의존 관계를 확인하는 **정적 구조 검증**과 빌드 명령, 품질 검사 또는 API 요청을 직접 실행하는 **실행 검증**을 구분했습니다. 코드 연결이 있다는 사실만으로 실행 성공을 판단하지 않습니다.
+- **다이어그램 구성:** 빌드 흐름을 `SOURCE → COMPILE → OUTPUT → VERIFY → RESULT → DEPLOY`로 정리했습니다. `VERIFY`에는 typecheck, lint, test, Storybook 정적 빌드, 제품 빌드와 승인된 API 통합 테스트 후보를 배치했습니다. `RESULT`에는 종료 코드, 요약 로그, 응답 상태와 실행 시각을 수집하는 구조를 표시했습니다.
+- **향후 결과 연동:** 실제 프로젝트 또는 CI가 만든 결과를 얇은 어댑터로 읽어 관련 노드와 연결에 `PASS`, `FAIL`, `SKIP`, `NOT RUN`을 표시하는 방향을 문서화했습니다. API 검증은 승인된 계약, 테스트 주소와 인증 조건이 있을 때만 수행합니다.
+- **연결 관계 강조:** 노드를 선택하면 선택한 노드, 직접 연결된 노드와 그 사이 화살표가 함께 강조됩니다. 관계없는 항목은 흐리게 표시되며, 같은 노드나 배경을 다시 선택하면 강조가 해제됩니다. 이 동작을 향후 Archify HTML 산출물의 공통 기준으로 추가했습니다.
+- **기존 화면 정리:** 테마 저장 키를 `archify-theme`으로 통일하고 React 19, 빌드 설정과 `.storybook/` 노드의 표현을 미확정 상태에 맞게 정리했습니다. 잘못 닫힌 HTML 구조도 바로잡았습니다.
+- **관련 문서:** `docs/diagrams/README.md`, `docs/diagrams/index.html`과 `[TBD]_api-layers.md`에도 같은 판단 기준을 반영했습니다.
+- **검증 결과:** 23개 노드와 21개 연결에 중복이나 끊어진 참조가 없으며 HTML 구조, 인라인 JavaScript 문법과 Git 공백 검사를 통과했습니다. 실제 빌드와 API 테스트는 실행 가능한 소스와 환경이 없어 수행하지 않았습니다.
 
 ## 2026-09-15
 
