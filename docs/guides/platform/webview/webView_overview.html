@@ -8,7 +8,10 @@
       content="기획자, 관리자와 신규 참여자를 위한 모바일 앱 WebView 개념 및 도입 안내"
     />
     <title>모바일 앱 WebView 개요</title>
-    <link rel="stylesheet" href="../../../assets/style/presentation-theme.css" />
+    <link
+      rel="stylesheet"
+      href="../../../assets/style/presentation-theme.css"
+    />
   </head>
   <body>
     <header>
@@ -64,8 +67,8 @@
         </p>
         <blockquote>
           <p>
-            WebView는 Chrome이나 Safari 앱을 그대로 넣은 것이 아닙니다. Android와
-            iOS가 앱에 제공하는 전용 웹 표시 기능을 사용합니다.
+            WebView는 Chrome이나 Safari 앱을 그대로 넣은 것이 아닙니다.
+            Android와 iOS가 앱에 제공하는 전용 웹 표시 기능을 사용합니다.
           </p>
         </blockquote>
         <table>
@@ -138,15 +141,20 @@
       <section>
         <h2 class="bx-active">4. WebView를 사용하는 이유</h2>
         <ul>
-          <li>Android와 iOS에서 동일한 서비스 화면과 업무 흐름을 제공할 수 있습니다.</li>
-          <li>웹 화면만 변경할 때 App 전체를 다시 배포하지 않아도 될 수 있습니다.</li>
+          <li>
+            Android와 iOS에서 동일한 서비스 화면과 업무 흐름을 제공할 수
+            있습니다.
+          </li>
+          <li>
+            웹 화면만 변경할 때 App 전체를 다시 배포하지 않아도 될 수 있습니다.
+          </li>
           <li>기존 웹 기술과 개발 인력을 활용할 수 있습니다.</li>
           <li>필요한 경우 App의 카메라·위치·파일 기능과 연결할 수 있습니다.</li>
         </ul>
         <p>
           모든 화면을 WebView로 만드는 것이 항상 유리한 것은 아닙니다. 앱 시작,
-          Push, 생체인증, 보안 저장소와 운영체제 권한처럼 App이 직접 처리해야 하는
-          기능은 Flutter Native 영역에 둡니다.
+          Push, 생체인증, 보안 저장소와 운영체제 권한처럼 App이 직접 처리해야
+          하는 기능은 Flutter Native 영역에 둡니다.
         </p>
       </section>
 
@@ -208,7 +216,9 @@
             <tr>
               <td>Android</td>
               <td>Android SDK 24 이상</td>
-              <td>지원 대상 System WebView에서 프로젝트 사용 CSS와 핵심 기능</td>
+              <td>
+                지원 대상 System WebView에서 프로젝트 사용 CSS와 핵심 기능
+              </td>
             </tr>
             <tr>
               <td>iOS</td>
@@ -218,9 +228,9 @@
           </tbody>
         </table>
         <p>
-          Tailwind CSS v4의 공식 최소 브라우저 버전을 WebView의 일괄 차단 기준으로
-          사용하지 않습니다. Safari 15와 지원 대상 구형 WebView에서 프로젝트가
-          실제 사용하는 CSS와 주요 기능이 정상 동작하는지 확인합니다.
+          Tailwind CSS v4의 공식 최소 브라우저 버전을 WebView의 일괄 차단
+          기준으로 사용하지 않습니다. Safari 15와 지원 대상 구형 WebView에서
+          프로젝트가 실제 사용하는 CSS와 주요 기능이 정상 동작하는지 확인합니다.
         </p>
         <p>
           공통 CSS 하한은 Safari 15에서 지원되는 기능 범위로 정합니다. Android는
@@ -230,16 +240,17 @@
 
         <h3>최소 기준을 정한 근거</h3>
         <p>
-          주요 서비스 국가는 한국·중국·일본·미국이며 그 밖의 국가는 글로벌
-          기준으로 검토합니다. 2026년 7월 StatCounter 모바일 트래픽에서 Android와
-          iOS의 비중은 한국 65.39%·34.60%, 중국 70.37%·29.51%, 일본
-          36.41%·63.59%, 미국 40.39%·59.58%, 전 세계 68.36%·31.60%입니다.
-          따라서 Android 중심 국가와 iOS 중심 국가를 모두 지원해야 하며, 한 국가의
+          주요 서비스 국가는 한국·중국·일본·영문이며 그 밖의 국가는 글로벌
+          기준으로 검토합니다. 2026년 7월 StatCounter 모바일 트래픽에서
+          Android와 iOS의 비중은 한국 65.39%·34.60%, 중국 70.37%·29.51%, 일본
+          36.41%·63.59%, 영문 40.39%·59.58%, 전 세계 68.36%·31.60%입니다. 따라서
+          Android 중심 국가와 iOS 중심 국가를 모두 지원해야 하며, 한 국가의
           통계만으로 전체 지원 범위를 판단하지 않습니다.
         </p>
         <ul>
           <li>
-            <a href="https://gs.statcounter.com/os-market-share/mobile/south-korea"
+            <a
+              href="https://gs.statcounter.com/os-market-share/mobile/south-korea"
               >한국 모바일 OS 점유율</a
             >
           </li>
@@ -254,12 +265,14 @@
             >
           </li>
           <li>
-            <a href="https://gs.statcounter.com/os-market-share/mobile/united-states-of-america"
-              >미국 모바일 OS 점유율</a
+            <a
+              href="https://gs.statcounter.com/os-market-share/mobile/united-states-of-america"
+              >영문 모바일 OS 점유율</a
             >
           </li>
           <li>
-            <a href="https://gs.statcounter.com/os-market-share/mobile/worldwide"
+            <a
+              href="https://gs.statcounter.com/os-market-share/mobile/worldwide"
               >전 세계 모바일 OS 점유율</a
             >
           </li>
@@ -269,23 +282,24 @@
           0.8%이므로 API 24 이상은 약 99.2%입니다. 이 수치는 Google의 Android
           활성 기기 분포이며 중국 시장 또는 이 서비스의 실제 고객 분포와 같다고
           보지 않습니다.
-          <a href="https://dl.google.com/android/studio/metadata/distributions.json"
+          <a
+            href="https://dl.google.com/android/studio/metadata/distributions.json"
             >Google Android 버전 배포 원본 데이터</a
           >에서 조사일과 API별 비율을 확인합니다.
         </p>
         <p>
           Apple이 2026년 6월 7일 App Store에서 거래한 기기를 집계한 결과 전체
-          iPhone의 79%가 iOS 26을 사용합니다. 이 값만으로 iOS 15 이상 전체 비율이나
-          실제 서비스의 지원 도달률을 계산하지 않습니다.
-          자세한 내용은
+          iPhone의 79%가 iOS 26을 사용합니다. 이 값만으로 iOS 15 이상 전체
+          비율이나 실제 서비스의 지원 도달률을 계산하지 않습니다. 자세한 내용은
           <a href="https://developer.apple.com/support/app-store/"
             >Apple iOS 사용 현황</a
           >에서 확인합니다.
         </p>
         <blockquote>
           <p>
-            공개 점유율은 기준 선정의 참고 자료입니다. 출시 후에는 국가·OS·Android
-            WebView 엔진별 실제 활성 사용자 분포와 오류율을 우선 근거로 사용합니다.
+            공개 점유율은 기준 선정의 참고 자료입니다. 출시 후에는
+            국가·OS·Android WebView 엔진별 실제 활성 사용자 분포와 오류율을 우선
+            근거로 사용합니다.
           </p>
         </blockquote>
       </section>
@@ -322,8 +336,8 @@
         </table>
         <p>
           App 연동이 필요한 기능은 웹 화면만 수정해서 추가할 수 없습니다. App과
-          Web 사이의 통신 규격을 정하고 Android·iOS 앱을 함께 개발·배포해야 할 수
-          있습니다.
+          Web 사이의 통신 규격을 정하고 Android·iOS 앱을 함께 개발·배포해야 할
+          수 있습니다.
         </p>
       </section>
 
@@ -478,8 +492,8 @@
 
         <h3>Safari에서 동작하면 iOS WebView에서도 동작하나요?</h3>
         <p>
-          Safari와 WKWebView는 WebKit을 공유하지만 제공 기능과 실행 조건에 차이가
-          있을 수 있으므로 실제 앱에서 검증해야 합니다.
+          Safari와 WKWebView는 WebKit을 공유하지만 제공 기능과 실행 조건에
+          차이가 있을 수 있으므로 실제 앱에서 검증해야 합니다.
         </p>
 
         <h3>WebView에서 결제와 로그인을 처리해도 되나요?</h3>

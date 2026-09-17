@@ -36,37 +36,37 @@ Tailwind CSS v4는 유지하되 검증된 v4.1 이상의 버전을 잠금 파일
 
 ### PC
 
-| 운영체제 | 브라우저 | 최소 버전 | 적용 기준 |
-| --- | --- | ---: | --- |
-| Windows | Chrome | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
-| Windows | Edge | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
-| Windows | Firefox | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
-| macOS | Safari | 15 이상 | 프로젝트의 WebKit 최소 지원 기준 |
-| macOS | Chrome | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
-| macOS | Edge | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
-| macOS | Firefox | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
+| 운영체제 | 브라우저 |           최소 버전 | 적용 기준                                         |
+| -------- | -------- | ------------------: | ------------------------------------------------- |
+| Windows  | Chrome   | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
+| Windows  | Edge     | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
+| Windows  | Firefox  | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
+| macOS    | Safari   |             15 이상 | 프로젝트의 WebKit 최소 지원 기준                  |
+| macOS    | Chrome   | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
+| macOS    | Edge     | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
+| macOS    | Firefox  | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
 
 한국에서 비중이 있는 Whale과 중국의 360 Safe, UC, QQ 등 Chromium 계열 브라우저는 제품 버전과 Chromium 엔진 버전의 대응이 일정하지 않으므로 특정 엔진 버전만으로 차단하지 않습니다. 국가별 주요 구형 버전과 최신 안정 버전에서 핵심 흐름을 각각 확인합니다.
 
 ### 태블릿
 
-| 운영체제 | 브라우저 | 최소 버전 | 적용 기준 |
-| --- | --- | ---: | --- |
-| iPadOS | Safari | 15 이상 | 프로젝트의 WebKit 최소 지원 기준 |
-| Android | Chrome | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
-| Android | Samsung Internet | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
-| Android | Edge | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
-| Android | Firefox | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
+| 운영체제 | 브라우저         |           최소 버전 | 적용 기준                                         |
+| -------- | ---------------- | ------------------: | ------------------------------------------------- |
+| iPadOS   | Safari           |             15 이상 | 프로젝트의 WebKit 최소 지원 기준                  |
+| Android  | Chrome           | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
+| Android  | Samsung Internet | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
+| Android  | Edge             | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
+| Android  | Firefox          | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
 
 ### 모바일
 
-| 운영체제 | 브라우저 | 최소 버전 | 적용 기준 |
-| --- | --- | ---: | --- |
-| iOS | Safari | 15 이상 | 프로젝트의 WebKit 최소 지원 기준 |
-| Android | Chrome | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
-| Android | Samsung Internet | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
-| Android | Edge | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
-| Android | Firefox | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
+| 운영체제 | 브라우저         |           최소 버전 | 적용 기준                                         |
+| -------- | ---------------- | ------------------: | ------------------------------------------------- |
+| iOS      | Safari           |             15 이상 | 프로젝트의 WebKit 최소 지원 기준                  |
+| Android  | Chrome           | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
+| Android  | Samsung Internet | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
+| Android  | Edge             | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
+| Android  | Firefox          | 지원 대상 구형 버전 | Safari 15 공통 CSS 기준과 프로젝트 사용 기능 검증 |
 
 iOS와 iPadOS의 Chrome, Edge, Firefox 등 Safari 이외의 브라우저는 브라우저 이름과 별개로 해당 OS의 WebKit 영향을 받습니다. 따라서 iOS·iPadOS 15와 최신 버전에서 각 주요 브라우저를 확인합니다.
 
@@ -76,11 +76,11 @@ iOS와 iPadOS의 Chrome, Edge, Firefox 등 Safari 이외의 브라우저는 브�
 
 반응형 구분은 기기의 물리 해상도나 제품 이름이 아니라 브라우저의 **CSS pixel 기준 viewport 너비**로 판단합니다. 고해상도 기기도 Device Pixel Ratio에 따라 CSS viewport가 작게 계산될 수 있으므로 하드웨어 해상도를 breakpoint로 사용하지 않습니다.
 
-| 구분 | Viewport 너비 | Tailwind CSS v4 기준 | 대표 검증 너비 |
-| --- | --- | --- | --- |
-| Mobile | 320~767px | 기본 구간, `sm` 640px 포함 | 320, 360, 390, 430px |
-| Tablet | 768~1023px | `md` 768px 이상 | 768, 820px |
-| PC | 1024px 이상 | `lg` 1024px 이상 | 1024, 1280, 1440, 1920px |
+| 구분   | Viewport 너비 | Tailwind CSS v4 기준       | 대표 검증 너비           |
+| ------ | ------------- | -------------------------- | ------------------------ |
+| Mobile | 320~767px     | 기본 구간, `sm` 640px 포함 | 320, 360, 390, 430px     |
+| Tablet | 768~1023px    | `md` 768px 이상            | 768, 820px               |
+| PC     | 1024px 이상   | `lg` 1024px 이상           | 1024, 1280, 1440, 1920px |
 
 `sm`, `md`, `lg`는 특정 기기 이름이 아니라 최소 너비 조건입니다. 1024px 너비의 태블릿 가로 화면에는 PC 구간의 레이아웃이 적용될 수 있으며, 브라우저 창을 좁힌 PC에는 Tablet 또는 Mobile 구간이 적용될 수 있습니다.
 
@@ -100,25 +100,25 @@ Tailwind CSS v4의 기본 breakpoint는 [Tailwind CSS 반응형 디자인 문서
 
 아래 수치는 StatCounter의 2026년 7월 PC·모바일·태블릿 통합 웹 사용량 기준입니다. 설치 대수나 당사 고객 수가 아니며, 각 국가에서 우선 검증할 브라우저 제품군을 정하는 보조 근거로 사용합니다.
 
-| 지역 | 주요 브라우저 점유율 | 표에 표시한 제품군 합계 | 근거 |
-| --- | --- | ---: | --- |
-| 한국 | Chrome 57.99%, Safari 11.76%, Samsung Internet 10.40%, Edge 8.99%, Whale 8.37%, Firefox 0.83% | 98.34% | [StatCounter 한국](https://gs.statcounter.com/browser-market-share/desktop-mobile-tablet/south-korea) |
-| 중국 | Chrome 51.59%, Edge 16.35%, Safari 14.44%, 360 Safe 4.88%, UC 4.85%, QQ 3.69% | 95.80% | [StatCounter 중국](https://gs.statcounter.com/browser-market-share/desktop-mobile-tablet/china) |
-| 일본 | Chrome 55.96%, Safari 23.21%, Edge 14.42%, Firefox 2.84%, Brave 1.12%, Samsung Internet 0.70% | 98.25% | [StatCounter 일본](https://gs.statcounter.com/browser-market-share/desktop-mobile-tablet/japan) |
-| 미국 | Chrome 51.55%, Safari 29.83%, Edge 7.14%, Firefox 6.78%, Samsung Internet 1.69%, Brave 1.10% | 98.09% | [StatCounter 미국](https://gs.statcounter.com/browser-market-share/desktop-mobile-tablet/united-states-of-america/) |
-| 전 세계 | Chrome 68.25%, Safari 16.48%, Edge 5.34%, Firefox 3.34%, Samsung Internet 2.06%, Opera 1.88% | 97.35% | [StatCounter 전 세계](https://gs.statcounter.com/browser-market-share/desktop-mobile-tablet/worldwide) |
+| 지역    | 주요 브라우저 점유율                                                                          | 표에 표시한 제품군 합계 | 근거                                                                                                                |
+| ------- | --------------------------------------------------------------------------------------------- | ----------------------: | ------------------------------------------------------------------------------------------------------------------- |
+| 한국    | Chrome 57.99%, Safari 11.76%, Samsung Internet 10.40%, Edge 8.99%, Whale 8.37%, Firefox 0.83% |                  98.34% | [StatCounter 한국](https://gs.statcounter.com/browser-market-share/desktop-mobile-tablet/south-korea)               |
+| 중국    | Chrome 51.59%, Edge 16.35%, Safari 14.44%, 360 Safe 4.88%, UC 4.85%, QQ 3.69%                 |                  95.80% | [StatCounter 중국](https://gs.statcounter.com/browser-market-share/desktop-mobile-tablet/china)                     |
+| 일본    | Chrome 55.96%, Safari 23.21%, Edge 14.42%, Firefox 2.84%, Brave 1.12%, Samsung Internet 0.70% |                  98.25% | [StatCounter 일본](https://gs.statcounter.com/browser-market-share/desktop-mobile-tablet/japan)                     |
+| 영문    | Chrome 51.55%, Safari 29.83%, Edge 7.14%, Firefox 6.78%, Samsung Internet 1.69%, Brave 1.10%  |                  98.09% | [StatCounter 영문](https://gs.statcounter.com/browser-market-share/desktop-mobile-tablet/united-states-of-america/) |
+| 전 세계 | Chrome 68.25%, Safari 16.48%, Edge 5.34%, Firefox 3.34%, Samsung Internet 2.06%, Opera 1.88%  |                  97.35% | [StatCounter 전 세계](https://gs.statcounter.com/browser-market-share/desktop-mobile-tablet/worldwide)              |
 
 이 점유율은 Chrome, Safari, Edge 등 **브라우저 제품군의 비중**입니다. 프로젝트 최소 버전 이상 사용자의 정확한 비율을 뜻하지 않습니다. 공개된 상위 버전 목록 일부만 합산해 최소 버전 지원률로 표현하지 않습니다.
 
-한국은 Chromium 계열뿐 아니라 Safari, Samsung Internet과 Whale을 포함해야 주요 사용 환경을 대부분 확인할 수 있습니다. 일본과 미국은 Safari 비중이 높아 macOS, iPhone, iPad의 Safari 검증을 Chromium 검증으로 대체할 수 없습니다. 중국은 360 Safe, UC, QQ의 비중을 고려해 최신 안정 버전의 별도 호환 확인이 필요합니다.
+한국은 Chromium 계열뿐 아니라 Safari, Samsung Internet과 Whale을 포함해야 주요 사용 환경을 대부분 확인할 수 있습니다. 일본과 영문은 Safari 비중이 높아 macOS, iPhone, iPad의 Safari 검증을 Chromium 검증으로 대체할 수 없습니다. 중국은 360 Safe, UC, QQ의 비중을 고려해 최신 안정 버전의 별도 호환 확인이 필요합니다.
 
 ## 6. 기기 구분별 필수 검증 환경
 
-| 구분 | 최소 버전 검증 | 최신 버전 검증 | 국가별 추가 검증 |
-| --- | --- | --- | --- |
-| PC | Safari 15, Chrome·Edge·Firefox 지원 대상 구형 버전 | 각 브라우저 최신 안정 버전 | 한국 Whale, 중국 360 Safe·UC·QQ의 구형·최신 버전 |
+| 구분   | 최소 버전 검증                                              | 최신 버전 검증                              | 국가별 추가 검증                                      |
+| ------ | ----------------------------------------------------------- | ------------------------------------------- | ----------------------------------------------------- |
+| PC     | Safari 15, Chrome·Edge·Firefox 지원 대상 구형 버전          | 각 브라우저 최신 안정 버전                  | 한국 Whale, 중국 360 Safe·UC·QQ의 구형·최신 버전      |
 | 태블릿 | iPadOS Safari 15, Android 주요 브라우저 지원 대상 구형 버전 | iPadOS·Android 주요 브라우저 최신 안정 버전 | 주요 서비스 국가에서 비중이 높은 실제 태블릿 1종 이상 |
-| 모바일 | iOS Safari 15, Android 주요 브라우저 지원 대상 구형 버전 | iOS·Android 주요 브라우저 최신 안정 버전 | 한국·중국·일본·미국의 주요 실제 단말 |
+| 모바일 | iOS Safari 15, Android 주요 브라우저 지원 대상 구형 버전    | iOS·Android 주요 브라우저 최신 안정 버전    | 한국·중국·일본·영문의 주요 실제 단말                  |
 
 반응형 검증은 브라우저 최소 버전 검증과 별개로 수행합니다. 프로젝트가 확정한 breakpoint의 경계값 전후, 세로·가로 화면, 확대와 글자 크기 변화에서 레이아웃을 확인합니다. 기기 이름만으로 Desktop, Tablet, Mobile 레이아웃을 고정하지 않습니다.
 
