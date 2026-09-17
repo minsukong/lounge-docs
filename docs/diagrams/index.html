@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="아키텍처 다이어그램 폴더의 목적, 현재 상태, Archify 활용 기준과 데모를 제공합니다."
+    />
+    <title>아키텍처 다이어그램 가이드</title>
+    <link rel="stylesheet" href="../assets/style/presentation-theme.css" />
+    <style>
+      .archify-demo-frame {
+        width: 100%;
+        height: 600px;
+        border: 1px solid var(--color-border, #e5e5e5);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .diagram-card {
+        border: 1px solid var(--color-border, #e5e5e5);
+        border-radius: 8px;
+        padding: 1rem 1.25rem;
+        margin: 1rem 0;
+      }
+      .status-badge {
+        display: inline-block;
+        padding: 0.125rem 0.625rem;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+      .status-tbd { background: #fef3c7; color: #92400e; }
+      .status-future { background: #e0e7ff; color: #3730a3; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="type">ARCHITECTURE · DIAGRAMS · ARCHIFY</div>
+      <h1>아키텍처 다이어그램 가이드</h1>
+      <p>
+        이 폴더는 더라운지 시스템 3.0의 아키텍처 다이어그램을 관리합니다.
+        현재는 설계 단계의 예상 시나리오(Mermaid)를 유지하고,
+        실제 코드 구현 이후에는 Archify를 통해 검증 가능한
+        인터랙티브 HTML 다이어그램으로 전환합니다.
+      </p>
+    </header>
+
+    <main>
+      <section>
+        <h2 class="bx-active">1. 폴더 목적</h2>
+        <p>
+          이 폴더는 프로젝트의 <strong>시스템 구조를 시각화하고 추적</strong>하기 위해
+          사용합니다. 팀 내 개발자, 운영자, 신규 인력이 저장소를 한눈에 파악할 수 있게
+          하는 공통 참조 자료입니다.
+        </p>
+        <div class="diagram-card">
+          <h3>Stage 1: 계획/설계 (현재)</h3>
+          <p><span class="status-badge status-tbd">TBD</span> Mermaid 기반 — 예상 구조 문서화</p>
+          <p>인터페이스 설계서·회의 결과 기반. 코드 검증 불가, 구현 시 달라질 수 있습니다.</p>
+        </div>
+        <div class="diagram-card">
+          <h3>Stage 2: 구현/검증 (향후)</h3>
+          <p><span class="status-badge status-future">FUTURE</span> Archify 기반 — 실제 코드 검증</p>
+          <p>AI가 코드를 분석하여 실제 구조를 검증 가능한 HTML로 생성. 불일치 자동 탐지.</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>3. Archify란</h2>
+        <p>
+          Archify는 AI Agent Skill입니다. 저장소의 실제 코드를 분석하여
+          검증 가능한 인터랙티브 HTML 다이어그램을 생성합니다.
+        </p>
+        <h3>핵심 특성</h3>
+        <table>
+          <thead><tr><th>항목</th><th>설명</th></tr></thead>
+          <tbody>
+            <tr><td>출력</td><td>셀프컨테이널 HTML 파일 1개 (서버/호스팅 불필요, 브라우저로 열면 됨)</td></tr>
+            <tr><td>검증</td><td>타입드 JSON → 스키마 검증 → 레이아웃/라벨/라우트 충돌 체크</td></tr>
+            <tr><td>코드 근거</td><td>노드에 실제 소스 파일 경로 링크 (클릭 시 해당 파일로 이동)</td></tr>
+            <tr><td>테마</td><td>Dark/Light 자동 전환</td></tr>
+            <tr><td>내보내기</td><td>PNG / JPEG / WebP / SVG / WebM</td></tr>
+            <tr><td>Delta</td><td>두 시점의 다이어그램을 비교하여 추가/삭제/이동 표시</td></tr>
+            <tr><td>설치</td><td><code>npx skills add tt-a1i/archify -g</code> (AI IDE 사용자만 필요)</td></tr>
+            <tr><td>프로젝트 내 설치</td><td>없음. package.json, Build Pipeline에 개입하지 않음</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Mermaid vs Archify</h3>
+        <table>
+          <thead><tr><th></th><th>Mermaid (Stage 1)</th><th>Archify (Stage 2)</th></tr></thead>
+          <tbody>
+            <tr><td>목적</td><td>"이렇게 될 계획" 문서화</td><td>"실제로 이렇게 구현됐다" 검증</td></tr>
+            <tr><td>근거</td><td>작성자의 지식/설계서</td><td>실제 코드 파일 분석</td></tr>
+            <tr><td>검증</td><td>없음</td><td>타입드 JSON + 다중 검증 게이트</td></tr>
+            <tr><td>산출물</td><td>Markdown 내 인라인 (GitLab 렌더링)</td><td>standalone HTML (브라우저에서 열림)</td></tr>
+            <tr><td>변경 추적</td><td>수동</td><td>Architecture Delta (Before/After)</td></tr>
+            <tr><td>사용자</td><td>개발/기획/리뷰</td><td>개발/운영/온보딩/외부 공유</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>4. Archify 적용 시점과 방법</h2>
+        <h3>적용 시점</h3>
+        <table>
+          <thead><tr><th>시점</th><th>용도</th></tr></thead>
+          <tbody>
+            <tr><td>Phase 1 완료 (UI 컴포넌트 + API adapter 구현 후)</td><td>초기 아키텍처 맵 생성 + 실제 코드 검증</td></tr>
+            <tr><td>Feature 추가/변경 시</td><td>Delta 다이어그램 (무엇이 바뀌었는지 확인)</td></tr>
+            <tr><td>운영 이관 시</td><td>최종 아키텍처 HTML 산출물 운영자에게 전달</td></tr>
+            <tr><td>신규 인력 온보딩 시</td><td>"저장소 아키텍처 맵 만들어줘" → 즉시 전체 구조 파악</td></tr>
+          </tbody>
+        </table>
+
+        <h3>사용 방법</h3>
+        <p>AI IDE (Cursor, Claude Code, Codex 등)에서:</p>
+        <pre><code># 설치 (한 번만)
+npx skills add tt-a1i/archify -g
+
+# 프롬프트 예시
+"docs/diagrams/[TBD]_architecture-overview.md의 내용을 archify로
+검증 가능한 아키텍처 다이어그램으로 만들어줘.
+apps/app-webview 실제 코드 기준으로 확인하고,
+코드에 없는 컴포넌트나 연결은 제외해줘."</code></pre>
+        <p>
+          출력물은 이 폴더에 <code>*.html</code> 파일로 저장. <code>next build</code>에 포함되지 않습니다.
+        </p>
+      </section>
+
+      <section>
+        <h2>5. Archify 데모 보기</h2>
+        <p>
+          아래는 Archify가 생성한 <strong>Sample Web App</strong> 아키텍처
+          다이어그램입니다. 인터랙티브 동작(노드 클릭, 호버, Dark/Light 전환,
+          PNG/SVG 내보내기)을 직접 확인할 수 있습니다.
+        </p>
+        <iframe
+          class="archify-demo-frame"
+          src="./archify-demo-web-app.html"
+          title="Archify 데모 — Web App 아키텍처 다이어그램 (Sample)"
+          loading="lazy"
+        ></iframe>
+        <p style="font-size: 0.875rem; opacity: 0.7;">
+          위 데모는 <strong>Sample Web App</strong> 아키텍처 다이어그램입니다.
+          노드 클릭, 호버, 테마 전환(Dark/Light), 내보내기(PNG/SVG)를 직접 시도해 보세요.
+          <br /><a href="https://tt-a1i.github.io/archify" target="_blank" rel="noopener">
+            더 많은 예시 보기 (Archify 공식 사이트) ↗
+          </a>
+        </p>
+      </section>
+
+      <section>
+        <h2>6. 운영 기준</h2>
+        <ul>
+          <li>
+            <strong>[TBD] 파일</strong>은 확정 전 문서입니다. Backend 확인 및
+            기획 승인을 거친 후 파일을 수정하고 <code>[TBD]</code> 프릭스를 제거합니다.
+          </li>
+          <li>
+            <strong>Archify HTML 산출물</strong>은 이 폴더에 commit합니다.
+            Git 히스토리로 시점별 아키텍처를 추적합니다.
+          </li>
+          <li>
+            <strong>빌드 제외</strong>: 이 폴더의 모든 파일은
+            <code>next build</code> 대상이 아닙니다.
+          </li>
+          <li>
+            <strong>공유</strong>: HTML 파일은 셀프컨테이널이라
+            Slack/Confluence/이메일로 첨부하면 됩니다. 별도 호스팅 불필요.
+          </li>
+          <li>
+            <strong>Archify 설치</strong>: 결과물(HTML)을 <em>보는</em>
+            사람에게는 설치 불필요. AI로 다이어그램을 <em>만드는</em>
+            사람만 AI IDE + Skill 설치.
+          </li>
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
