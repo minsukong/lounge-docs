@@ -13,7 +13,7 @@
           if (param === 'light' || param === 'dark') theme = param;
         } catch (_) {}
         if (!theme) {
-          try { theme = localStorage.getItem('build-scenario-theme'); } catch (_) {}
+          try { theme = localStorage.getItem('archify-theme'); } catch (_) {}
         }
         if (theme !== 'light' && theme !== 'dark') {
           theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
@@ -170,12 +170,12 @@
         </g>
         <g data-node="tsconfig">
           <rect x="790" y="30" width="200" height="70" rx="8" fill="var(--source-fill)" stroke="var(--source-stroke)" stroke-width="1.5"/>
-          <text x="890" y="58" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">tsconfig.json</text>
-          <text x="890" y="78" text-anchor="middle" fill="var(--text-muted)" font-size="10">Next.js · PostCSS config</text>
+          <text x="890" y="58" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">빌드 설정</text>
+          <text x="890" y="78" text-anchor="middle" fill="var(--text-muted)" font-size="10">tsconfig · next.config · postcss</text>
           <text x="890" y="92" text-anchor="middle" fill="var(--text-dim)" font-size="9">strict: true · paths: @/*</text>
         </g>
         <g data-node="storybook-config">
-          <rect x="1020" y="30" width="140" height="70" rx="8" fill="var(--quality-fill)" stroke="var(--quality-stroke)" stroke-width="1.5"/>
+          <rect x="1020" y="30" width="140" height="70" rx="8" fill="var(--source-fill)" stroke="var(--source-stroke)" stroke-width="1.5"/>
           <text x="1090" y="58" text-anchor="middle" fill="var(--text)" font-size="12" font-weight="700">.storybook/</text>
           <text x="1090" y="78" text-anchor="middle" fill="var(--text-muted)" font-size="10">main.ts · preview.ts</text>
           <text x="1090" y="92" text-anchor="middle" fill="var(--text-dim)" font-size="9">stories/**/*.tsx</text>
@@ -209,7 +209,7 @@
           <rect x="850" y="140" width="200" height="70" rx="8" fill="var(--build-fill)" stroke="var(--build-stroke)" stroke-width="1.5"/>
           <text x="950" y="168" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">React 19</text>
           <text x="950" y="188" text-anchor="middle" fill="var(--text-muted)" font-size="10">Server Components · Actions</text>
-          <text x="950" y="202" text-anchor="middle" fill="var(--text-dim)" font-size="9">useOptimistic · useActionState</text>
+          <text x="950" y="202" text-anchor="middle" fill="var(--text-dim)" font-size="9">Hooks · Suspense · Error Boundary</text>
         </g>
 
         <!-- Compile to Output arrows -->
@@ -359,13 +359,9 @@
     try{localStorage.setItem('archify-theme',next)}catch(_){}
   }
   function init(){
-    var h=document.documentElement;
-    var t=null;
-    try{t=localStorage.getItem('archify-theme')}catch(_){}
-    if(!t)t=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark';
-    h.setAttribute('data-theme',t);
     var b=document.getElementById('btn-theme');
-    if(b)b.textContent=t==='dark'?'🌙 Dark':'☀️ Light';
+    var current=document.documentElement.getAttribute('data-theme')||'dark';
+    if(b)b.textContent=current==='dark'?'🌙 Dark':'☀️ Light';
   }
   init();
   document.getElementById('btn-theme').addEventListener('click',toggleTheme);
