@@ -17,6 +17,9 @@
         border-radius: var(--krds-radius, 8px);
         overflow: hidden;
       }
+      .build-scenario-frame {
+        height: 860px;
+      }
       .diagram-card {
         border: 1px solid var(--krds-gray-20, #cdd1d5);
         border-radius: var(--krds-radius, 8px);
@@ -313,33 +316,35 @@ apps/app-webview 실제 코드 기준으로 확인하고,
             TypeScript, Storybook 설정
           </li>
           <li>
-            <strong>COMPILE</strong> — TypeScript → Tailwind JIT → Next.js
-            (Turbopack) → React 19 (RSC)
+            <strong>COMPILE</strong> — TypeScript·TSX 변환, Tailwind CSS 처리,
+            Next.js Build와 React 렌더링
           </li>
           <li>
-            <strong>OUTPUT</strong> — .next/, content-hash 정적 자산, HTML
-            Pages, storybook-static/
+            <strong>OUTPUT</strong> — .next/, 정적 자산, 렌더링 결과 후보,
+            storybook-static/
           </li>
           <li>
-            <strong>QUALITY</strong> — typecheck → lint → test → build:storybook
-            → production build (gate)
+            <strong>QUALITY</strong> — typecheck, lint, test와 Storybook Build 후보.
+            실제 Script와 Build 차단 조건은
+            <code class="badge-tbd">TBD</code>
           </li>
           <li>
-            <strong>DEPLOY</strong> — Static Hosting/CDN, Node.js Server (SSR),
-            WebView Load (Flutter)
+            <strong>DEPLOY</strong> — 정적 호스팅과 Next.js 서버를 대안으로
+            비교하고, Flutter WebView가 승인된 HTTPS 주소를 로드하는 흐름.
+            배포 방식과 연계 범위는 <code class="badge-tbd">TBD</code>
           </li>
         </ul>
         <p>노드 클릭, 호버, 테마 전환을 직접 확인할 수 있습니다.</p>
         <iframe
-          class="archify-demo-frame"
+          class="archify-demo-frame build-scenario-frame"
           src="./build-scenario-webview.html"
           title="app-webview 빌드 시나리오 다이어그램 (가상)"
           loading="lazy"
         ></iframe>
         <p class="demo-footer">
           이 다이어그램은 패키지 설치 전의
-          <strong>예상 파이프라인</strong>입니다. 실제 package.json 생성 및 빌드
-          확인 후에는 Archify를 통해 코드 검증 버전으로 전환합니다.
+          <strong>가상 시나리오</strong>입니다. 실제 package.json, Next.js 설정,
+          CI와 배포 방식이 정해진 뒤 확인된 흐름으로 갱신합니다.
         </p>
         <p>
           <a

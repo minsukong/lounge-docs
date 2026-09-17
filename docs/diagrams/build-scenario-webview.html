@@ -64,9 +64,9 @@
     .subtitle { color:var(--text-muted); font-size:0.875rem; margin-left:1.75rem; }
     .diagram-container {
       background:var(--panel); border:1px solid var(--panel-border);
-      border-radius:1rem; padding:1.5rem; overflow:hidden;
+      border-radius:1rem; padding:1.5rem; overflow-x:auto; overflow-y:hidden;
     }
-    svg { width:100%; display:block; }
+    svg { width:100%; min-width:1100px; height:auto; display:block; overflow:visible; }
     .legend { display:flex; gap:1.5rem; margin-top:1.25rem; flex-wrap:wrap; }
     .legend-item { display:flex; align-items:center; gap:0.4rem; font-size:0.7rem; color:var(--text-muted); }
     .legend-swatch { width:14px; height:14px; border-radius:3px; border:1px solid; }
@@ -113,11 +113,17 @@
       position:absolute; bottom:0.75rem; right:1rem;
       font-size:0.65rem; color:var(--text-dim); pointer-events:none;
     }
+    @media (max-width: 720px) {
+      body { padding:0.75rem; }
+      .diagram-container { padding:0.75rem; }
+      .subtitle { margin-left:0; }
+      .hint { display:none; }
+    }
   </style>
 </head>
 <body>
   <div class="toolbar">
-    <button onclick="toggleTheme()" id="btn-theme">🌙 Dark</button>
+    <button type="button" id="btn-theme">🌙 Dark</button>
   </div>
   <div class="container">
     <header class="header">
@@ -153,7 +159,7 @@
         <g data-node="src-components">
           <rect x="330" y="30" width="200" height="70" rx="8" fill="var(--source-fill)" stroke="var(--source-stroke)" stroke-width="1.5"/>
           <text x="430" y="58" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">src/components/</text>
-          <text x="430" y="78" text-anchor="middle" fill="var(--text-muted)" font-size="10">UI primitives · feature components</text>
+          <text x="430" y="78" text-anchor="middle" fill="var(--text-muted)" font-size="10">UI primitives · features</text>
           <text x="430" y="92" text-anchor="middle" fill="var(--text-dim)" font-size="9">shadcn/ui · custom widgets</text>
         </g>
         <g data-node="globals-css">
@@ -165,7 +171,7 @@
         <g data-node="tsconfig">
           <rect x="790" y="30" width="200" height="70" rx="8" fill="var(--source-fill)" stroke="var(--source-stroke)" stroke-width="1.5"/>
           <text x="890" y="58" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">tsconfig.json</text>
-          <text x="890" y="78" text-anchor="middle" fill="var(--text-muted)" font-size="10">next.config.ts · postcss.config.mjs</text>
+          <text x="890" y="78" text-anchor="middle" fill="var(--text-muted)" font-size="10">Next.js · PostCSS config</text>
           <text x="890" y="92" text-anchor="middle" fill="var(--text-dim)" font-size="9">strict: true · paths: @/*</text>
         </g>
         <g data-node="storybook-config">
@@ -176,18 +182,22 @@
         </g>
 
         <!-- Source to Compile arrows -->
+        <path data-from="src-app" data-to="nextjs" d="M200,100 C200,120 620,120 620,140" stroke="var(--arrow)" stroke-width="1" fill="none" marker-end="url(#ah)"/>
+        <path data-from="src-components" data-to="nextjs" d="M430,100 C430,120 660,120 660,140" stroke="var(--arrow)" stroke-width="1" fill="none" marker-end="url(#ah)"/>
+        <path data-from="globals-css" data-to="tailwind" d="M660,100 C660,120 430,120 430,140" stroke="var(--arrow)" stroke-width="1" fill="none" marker-end="url(#ah)"/>
+        <path data-from="tsconfig" data-to="typescript" d="M890,100 C890,120 200,120 200,140" stroke="var(--arrow)" stroke-width="1" fill="none" marker-end="url(#ah)"/>
         <!-- COMPILE LANE -->
         <g data-node="typescript">
           <rect x="100" y="140" width="200" height="70" rx="8" fill="var(--build-fill)" stroke="var(--build-stroke)" stroke-width="1.5"/>
           <text x="200" y="168" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">TypeScript</text>
-          <text x="200" y="188" text-anchor="middle" fill="var(--text-muted)" font-size="10">tsc --noEmit (typecheck)</text>
-          <text x="200" y="202" text-anchor="middle" fill="var(--text-dim)" font-size="9">isolatedModules · verbatimModuleSyntax</text>
+          <text x="200" y="188" text-anchor="middle" fill="var(--text-muted)" font-size="10">TypeScript / TSX 변환</text>
+          <text x="200" y="202" text-anchor="middle" fill="var(--text-dim)" font-size="9">typecheck는 품질 검사에서 분리</text>
         </g>
         <g data-node="tailwind">
           <rect x="330" y="140" width="200" height="70" rx="8" fill="var(--build-fill)" stroke="var(--build-stroke)" stroke-width="1.5"/>
           <text x="430" y="168" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">Tailwind CSS 4</text>
-          <text x="430" y="188" text-anchor="middle" fill="var(--text-muted)" font-size="10">@import "tailwindcss" (CSS-first)</text>
-          <text x="430" y="202" text-anchor="middle" fill="var(--text-dim)" font-size="9">JIT scan · @theme tokens · PostCSS</text>
+          <text x="430" y="188" text-anchor="middle" fill="var(--text-muted)" font-size="10">CSS-first · @theme</text>
+          <text x="430" y="202" text-anchor="middle" fill="var(--text-dim)" font-size="9">source scan · PostCSS</text>
         </g>
         <g data-node="nextjs">
           <rect x="560" y="140" width="260" height="70" rx="8" fill="var(--build-fill)" stroke="var(--build-stroke)" stroke-width="2"/>
@@ -203,47 +213,44 @@
         </g>
 
         <!-- Compile to Output arrows -->
-        <path data-from="typescript" data-to="next-build" d="M200,210 L200,310" stroke="var(--arrow)" stroke-width="1.5" fill="none" marker-end="url(#ah)"/>
-        <path data-from="tailwind" data-to="next-static" d="M430,210 L430,310" stroke="var(--arrow)" stroke-width="1.5" fill="none" marker-end="url(#ah)"/>
-        <path data-from="nextjs" data-to="next-build" d="M690,210 L690,310" stroke="var(--arrow-emphasis)" stroke-width="2" fill="none" marker-end="url(#ah-e)"/>
-        <path data-from="react" data-to="html-pages" d="M950,210 L950,310" stroke="var(--arrow)" stroke-width="1.5" fill="none" marker-end="url(#ah)"/>
-        <path data-from="nextjs" data-to="next-static" d="M690,210 C690,250 500,270 500,310" stroke="var(--arrow)" stroke-width="1" fill="none" stroke-dasharray="3 3" marker-end="url(#ah)"/>
-        <path data-from="nextjs" data-to="html-pages" d="M690,210 C690,250 740,270 740,310" stroke="var(--arrow)" stroke-width="1" fill="none" stroke-dasharray="3 3" marker-end="url(#ah)"/>
+        <path data-from="typescript" data-to="next-build" d="M200,210 L200,305" stroke="var(--arrow)" stroke-width="1.5" fill="none" marker-end="url(#ah)"/>
+        <path data-from="tailwind" data-to="next-static" d="M430,210 L430,305" stroke="var(--arrow)" stroke-width="1.5" fill="none" marker-end="url(#ah)"/>
+        <path data-from="nextjs" data-to="next-build" d="M690,210 L690,305" stroke="var(--arrow-emphasis)" stroke-width="2" fill="none" marker-end="url(#ah-e)"/>
+        <path data-from="react" data-to="html-pages" d="M950,210 L950,305" stroke="var(--arrow)" stroke-width="1.5" fill="none" marker-end="url(#ah)"/>
+        <path data-from="nextjs" data-to="next-static" d="M690,210 C690,250 500,270 500,305" stroke="var(--arrow)" stroke-width="1" fill="none" stroke-dasharray="3 3" marker-end="url(#ah)"/>
+        <path data-from="nextjs" data-to="html-pages" d="M690,210 C690,250 740,270 740,305" stroke="var(--arrow)" stroke-width="1" fill="none" stroke-dasharray="3 3" marker-end="url(#ah)"/>
 
         <!-- OUTPUT LANE -->
         <g data-node="next-build">
-          <rect x="100" y="310" width="260" height="80" rx="8" fill="var(--output-fill)" stroke="var(--output-stroke)" stroke-width="2"/>
-          <text x="230" y="338" text-anchor="middle" fill="var(--text)" font-size="14" font-weight="700">.next/</text>
-          <text x="230" y="358" text-anchor="middle" fill="var(--text-muted)" font-size="10">chunks/ · static/ · server/ · cache/</text>
-          <text x="230" y="375" text-anchor="middle" fill="var(--text-dim)" font-size="9">BUILD_ID · routes-manifest.json</text>
-          <text x="230" y="389" text-anchor="middle" fill="var(--text-dim)" font-size="9">webpack-runtime.js · app-build-manifest</text>
+          <rect x="100" y="305" width="260" height="100" rx="8" fill="var(--output-fill)" stroke="var(--output-stroke)" stroke-width="2"/>
+          <text x="230" y="333" text-anchor="middle" fill="var(--text)" font-size="14" font-weight="700">.next/</text>
+          <text x="230" y="355" text-anchor="middle" fill="var(--text-muted)" font-size="10">chunks · static · server · cache</text>
+          <text x="230" y="376" text-anchor="middle" fill="var(--text-dim)" font-size="9">BUILD_ID · routes-manifest.json</text>
+          <text x="230" y="395" text-anchor="middle" fill="var(--text-dim)" font-size="9">내부 구조와 파일명은 실제 Build에서 확인</text>
         </g>
         <g data-node="next-static">
-          <rect x="400" y="310" width="200" height="80" rx="8" fill="var(--output-fill)" stroke="var(--output-stroke)" stroke-width="1.5"/>
-          <text x="500" y="338" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">_next/static/</text>
-          <text x="500" y="358" text-anchor="middle" fill="var(--text-muted)" font-size="10">CSS bundles · JS chunks</text>
-          <text x="500" y="375" text-anchor="middle" fill="var(--text-dim)" font-size="9">fonts · images · media</text>
-          <text x="500" y="389" text-anchor="middle" fill="var(--text-dim)" font-size="9">content-hash filenames (cache busting)</text>
+          <rect x="400" y="305" width="200" height="100" rx="8" fill="var(--output-fill)" stroke="var(--output-stroke)" stroke-width="1.5"/>
+          <text x="500" y="333" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">_next/static/</text>
+          <text x="500" y="355" text-anchor="middle" fill="var(--text-muted)" font-size="10">CSS bundles · JS chunks</text>
+          <text x="500" y="376" text-anchor="middle" fill="var(--text-dim)" font-size="9">fonts · images · media</text>
+          <text x="500" y="395" text-anchor="middle" fill="var(--text-dim)" font-size="9">content-hash filenames</text>
         </g>
         <g data-node="html-pages">
-          <rect x="640" y="310" width="200" height="80" rx="8" fill="var(--output-fill)" stroke="var(--output-stroke)" stroke-width="1.5"/>
-          <text x="740" y="338" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">HTML Pages</text>
-          <text x="740" y="358" text-anchor="middle" fill="var(--text-muted)" font-size="10">SSG: static HTML · SSR: on-demand</text>
-          <text x="740" y="375" text-anchor="middle" fill="var(--text-dim)" font-size="9">RSC payload (.rsc) · flight data</text>
-          <text x="740" y="389" text-anchor="middle" fill="var(--text-dim)" font-size="9">Safari 15 compat: no CSS nesting</text>
+          <rect x="640" y="305" width="200" height="100" rx="8" fill="var(--output-fill)" stroke="var(--output-stroke)" stroke-width="1.5"/>
+          <text x="740" y="333" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">렌더링 결과 후보</text>
+          <text x="740" y="355" text-anchor="middle" fill="var(--text-muted)" font-size="10">SSR · SSG · ISR 정책 TBD</text>
+          <text x="740" y="376" text-anchor="middle" fill="var(--text-dim)" font-size="9">RSC · 캐시 정책은 구성 후 확인</text>
+          <text x="740" y="395" text-anchor="middle" fill="var(--text-dim)" font-size="9">Safari 15 핵심 흐름 · CSS 검증</text>
         </g>
         <g data-node="storybook-static">
-          <rect x="880" y="310" width="200" height="80" rx="8" fill="var(--quality-fill)" stroke="var(--quality-stroke)" stroke-width="1.5"/>
-          <text x="980" y="338" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">storybook-static/</text>
-          <text x="980" y="358" text-anchor="middle" fill="var(--text-muted)" font-size="10">Vite build · static output</text>
-          <text x="980" y="375" text-anchor="middle" fill="var(--text-dim)" font-size="9">index.html · iframe.html · assets</text>
-          <text x="980" y="389" text-anchor="middle" fill="var(--text-dim)" font-size="9">npm run build-storybook</text>
+          <rect x="880" y="305" width="200" height="100" rx="8" fill="var(--quality-fill)" stroke="var(--quality-stroke)" stroke-width="1.5"/>
+          <text x="980" y="333" text-anchor="middle" fill="var(--text)" font-size="13" font-weight="700">storybook-static/</text>
+          <text x="980" y="355" text-anchor="middle" fill="var(--text-muted)" font-size="10">Vite build · static output</text>
+          <text x="980" y="376" text-anchor="middle" fill="var(--text-dim)" font-size="9">index.html · iframe.html · assets</text>
+          <text x="980" y="395" text-anchor="middle" fill="var(--text-dim)" font-size="9">npm run build-storybook</text>
         </g>
 
-        <!-- Source to Quality (parallel) -->
-        <path data-from="src-app" data-to="typecheck" d="M200,100 C200,120 180,440 180,465" stroke="var(--arrow)" stroke-width="1" fill="none" stroke-dasharray="3 3" marker-end="url(#ah)"/>
-        <path data-from="src-components" data-to="lint" d="M430,100 C430,120 370,440 370,465" stroke="var(--arrow)" stroke-width="1" fill="none" stroke-dasharray="3 3" marker-end="url(#ah)"/>
-        <path data-from="globals-css" data-to="test" d="M660,100 C660,120 560,440 560,465" stroke="var(--arrow)" stroke-width="1" fill="none" stroke-dasharray="3 3" marker-end="url(#ah)"/>
+        <!-- Storybook source to its independent verification -->
         <path data-from="storybook-config" data-to="build-storybook" d="M1090,100 C1090,120 760,440 760,465" stroke="var(--arrow)" stroke-width="1" fill="none" stroke-dasharray="3 3" marker-end="url(#ah)"/>
 
         <!-- QUALITY LANE -->
@@ -260,7 +267,7 @@
         <g data-node="test">
           <rect x="480" y="465" width="160" height="60" rx="6" fill="var(--quality-fill)" stroke="var(--quality-stroke)" stroke-width="1.5"/>
           <text x="560" y="490" text-anchor="middle" fill="var(--text)" font-size="12" font-weight="700">test</text>
-          <text x="560" y="508" text-anchor="middle" fill="var(--text-muted)" font-size="10">Vitest + Testing Library</text>
+          <text x="560" y="508" text-anchor="middle" fill="var(--text-muted)" font-size="9">Vitest + Testing Library</text>
         </g>
         <g data-node="build-storybook">
           <rect x="670" y="465" width="180" height="60" rx="6" fill="var(--quality-fill)" stroke="var(--quality-stroke)" stroke-width="1.5"/>
@@ -273,34 +280,34 @@
           <text x="960" y="508" text-anchor="middle" fill="var(--text-muted)" font-size="10">next build (production)</text>
         </g>
 
-        <!-- Quality to Build gate (all quality → build) -->
-        <path data-from="npm-build" data-to="npm-build" d="M560,465 L560,455 L960,455 L960,465" stroke="var(--arrow-emphasis)" stroke-width="1.5" fill="none" marker-end="url(#ah-e)"/>
-
-        <!-- Build to Deploy -->
-        <path data-from="npm-build" data-to="webview-load" d="M960,525 C960,560 800,560 800,590" stroke="var(--arrow-emphasis)" stroke-width="2" fill="none" marker-end="url(#ah-e)"/>
+        <!-- Quality candidates converge on the production build gate -->
+        <path data-from="typecheck" data-to="npm-build" d="M260,495 C470,430 730,430 880,485" stroke="var(--arrow-emphasis)" stroke-width="1" fill="none" marker-end="url(#ah-e)"/>
+        <path data-from="lint" data-to="npm-build" d="M450,495 C600,445 760,445 880,490" stroke="var(--arrow-emphasis)" stroke-width="1" fill="none" marker-end="url(#ah-e)"/>
+        <path data-from="test" data-to="npm-build" d="M640,495 C720,465 810,465 880,495" stroke="var(--arrow-emphasis)" stroke-width="1" fill="none" marker-end="url(#ah-e)"/>
+        <path data-from="build-storybook" data-to="npm-build" d="M850,495 L880,495" stroke="var(--arrow-emphasis)" stroke-width="1" fill="none" marker-end="url(#ah-e)"/>
 
         <!-- DEPLOY LANE -->
         <g data-node="static-hosting">
           <rect x="100" y="590" width="260" height="60" rx="8" fill="var(--deploy-fill)" stroke="var(--deploy-stroke)" stroke-width="1.5"/>
-          <text x="230" y="617" text-anchor="middle" fill="var(--text)" font-size="12" font-weight="700">Static Hosting / CDN</text>
-          <text x="230" y="635" text-anchor="middle" fill="var(--text-muted)" font-size="10">out/ (export) or _next/static + HTML</text>
+          <text x="230" y="617" text-anchor="middle" fill="var(--text)" font-size="12" font-weight="700">정적 호스팅 / CDN 후보</text>
+          <text x="230" y="635" text-anchor="middle" fill="var(--text-muted)" font-size="10">output: export 사용 여부 TBD</text>
         </g>
         <g data-node="node-server">
           <rect x="400" y="590" width="260" height="60" rx="8" fill="var(--deploy-fill)" stroke="var(--deploy-stroke)" stroke-width="1.5"/>
-          <text x="530" y="617" text-anchor="middle" fill="var(--text)" font-size="12" font-weight="700">Node.js Server</text>
-          <text x="530" y="635" text-anchor="middle" fill="var(--text-muted)" font-size="10">next start (SSR · API routes)</text>
+          <text x="530" y="617" text-anchor="middle" fill="var(--text)" font-size="12" font-weight="700">Next.js 서버 후보</text>
+          <text x="530" y="635" text-anchor="middle" fill="var(--text-muted)" font-size="10">SSR · Route Handler 사용 범위 TBD</text>
         </g>
         <g data-node="webview-load">
           <rect x="700" y="590" width="200" height="60" rx="8" fill="var(--deploy-fill)" stroke="var(--deploy-stroke)" stroke-width="1.5"/>
-          <text x="800" y="617" text-anchor="middle" fill="var(--text)" font-size="12" font-weight="700">WebView Load</text>
-          <text x="800" y="635" text-anchor="middle" fill="var(--text-muted)" font-size="10">Flutter app → http(s)://localhost</text>
+          <text x="800" y="617" text-anchor="middle" fill="var(--text)" font-size="12" font-weight="700">Flutter WebView</text>
+          <text x="800" y="635" text-anchor="middle" fill="var(--text-muted)" font-size="10">승인된 HTTPS 주소 로드 · TBD</text>
         </g>
 
-        <!-- Deploy cross-links -->
-        <path data-from="static-hosting" data-to="node-server" d="M360,620 L400,620" stroke="var(--arrow)" stroke-width="1" fill="none" stroke-dasharray="3 3" marker-end="url(#ah)"/>
-        <path data-from="node-server" data-to="webview-load" d="M660,620 L700,620" stroke="var(--arrow)" stroke-width="1" fill="none" stroke-dasharray="3 3" marker-end="url(#ah)"/>
+        <!-- Alternative deployment branches -->
         <path data-from="npm-build" data-to="static-hosting" d="M880,525 L360,590" stroke="var(--arrow)" stroke-width="1" fill="none" stroke-dasharray="3 3" marker-end="url(#ah)"/>
         <path data-from="npm-build" data-to="node-server" d="M920,525 L530,590" stroke="var(--arrow)" stroke-width="1" fill="none" stroke-dasharray="3 3" marker-end="url(#ah)"/>
+        <path data-from="static-hosting" data-to="webview-load" d="M360,620 C480,665 610,665 700,630" stroke="var(--arrow)" stroke-width="1" fill="none" stroke-dasharray="3 3" marker-end="url(#ah)"/>
+        <path data-from="node-server" data-to="webview-load" d="M660,620 L700,620" stroke="var(--arrow)" stroke-width="1" fill="none" stroke-dasharray="3 3" marker-end="url(#ah)"/>
       </svg>
       <span class="hint">노드 클릭: 연결 하이라이트 · 배경 클릭: 해제</span>
       <div class="legend">
@@ -317,27 +324,27 @@
       <div class="card">
         <h3>Production Build</h3>
         <code>npm run build</code>
-        <p class="note">Next.js production build. 출력: .next/ (chunks, static assets, HTML). SSG 라우트는 정적 HTML로, 동적 라우트는 SSR 런타임으로 분리.</p>
+        <p class="note">Next.js 제품 Build 후보입니다. 실제 Script, 산출물과 렌더링 방식은 package.json, Next.js 설정과 배포 방식이 확정된 뒤 확인합니다.</p>
       </div>
       <div class="card">
-        <h3>Quality Gate (병렬)</h3>
+        <h3>Quality Gate 후보 (TBD)</h3>
         <code>npm run typecheck<br>npm run lint<br>npm run test<br>npm run build-storybook</code>
-        <p class="note">모두 통과해야 production build가 실행됩니다. CI 파이프라인에서 순차 게이트로 운영.</p>
+        <p class="note">검증 항목의 후보입니다. 실제 Script 이름, 병렬 실행 여부와 제품 Build 차단 조건은 package.json과 CI 설정에서 확정합니다.</p>
       </div>
       <div class="card">
         <h3>Development</h3>
-        <code>npm run dev</code>
-        <p class="note">Turbopack 기반 dev server (Next.js 16 default). HMR, on-demand compilation. WebView 개발 중에는 http://localhost:3000에서 로드.</p>
+        <code>npm run dev (후보)</code>
+        <p class="note">Next.js 개발 서버를 사용하는 일반적인 예시입니다. Flutter 기기와 에뮬레이터의 개발 서버 접근 주소와 연결 방식은 환경별로 확정합니다.</p>
       </div>
       <div class="card">
         <h3>Storybook</h3>
         <code>npm run storybook<br>npm run build-storybook</code>
-        <p class="note">dev: Vite dev server로 스토리 뷰어. build: storybook-static/ 정적 출력. QA/디자이너가 독립적으로 UI 검증.</p>
+        <p class="note">Storybook 개발 화면과 정적 Build의 일반적인 예시입니다. 실제 Script와 Builder는 package.json과 Storybook 설정에서 확인합니다.</p>
       </div>
       <div class="card">
         <h3>배포 시나리오</h3>
-        <code>정적: next build --outdir out → CDN<br>동적: next start (Node.js 서버)<br>WebView: Flutter → localhost:3000</code>
-        <p class="note">WebView 프론트엔드는 Flutter 네이티브 앱이 WebView를 통해 로컬/리모트 URL에서 로드합니다.</p>
+        <code>정적 후보: output: "export" 설정 → next build → CDN<br>서버 후보: next build → next start<br>WebView: 승인된 HTTPS 배포 주소 로드</code>
+        <p class="note">정적 배포와 서버 배포는 서로 이어지는 단계가 아닌 대안입니다. 배포 플랫폼, 렌더링 방식과 Native 앱 연계 범위는 모두 TBD입니다.</p>
       </div>
     </div>
   </div>
