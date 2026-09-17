@@ -11,6 +11,16 @@
 - 변경한 파일 목록만 나열하지 않고 변경 목적, 주요 내용, 미확정 항목과 검증 결과를 함께 기록합니다.
 - 같은 작업에서 Markdown과 HTML을 함께 수정했다면 하나의 변경 항목으로 기록합니다.
 
+## 2026-09-17
+
+### `build-scenario-webview.html` 다이어그램 정합성 수정
+
+- `docs/diagrams/build-scenario-webview.html`의 localStorage 테마 키 불일치(head: `build-scenario-theme`, bottom: `archify-theme`)를 `archify-theme`으로 통일하고, 하단 `init()`이 head 스크립트가 이미 설정한 테마를 override하지 않도록 button label 갱신만 수행하도록 수정했습니다.
+- 미확정 구현 세부사항(`useOptimistic · useActionState`)을 제거하고 React 19 노드의 상세를 "Hooks · Suspense · Error Boundary"로 일반화했습니다.
+- "tsconfig.json" 노드 라벨을 "빌드 설정"으로 수정하고 서브텍스트를 "tsconfig · next.config · postcss"로 변경해 단일 파일명이 아닌 설정 묶음임을 명확히 했습니다.
+- SOURCE lane의 `.storybook/` 노드 색상을 품질 게이트 색상에서 소스 색상으로 통일했습니다.
+- 검증: localStorage 키가 파일 내 전역적으로 `archify-theme` 하나만 사용되는지 grep 확인, 수정된 SVG 노드 텍스트와 fill/stroke 속성이 의도한 대로 적용됐는지 확인했습니다.
+
 ## 2026-09-15
 
 ### NInfer(Docker) 256K 컨텍스트 옵션 추가
