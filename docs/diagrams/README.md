@@ -11,6 +11,9 @@
 | `[TBD]_api-layers.md` | API 레이어별 통신 구조 및 인증 | TBD |
 | `[TBD]_webview-bridge.md` | WebView ↔ Native(Bridge) 통신 흐름 | TBD |
 | `[TBD]_frontend-internal.md` | Front-end(app-webview) 내부 구조 | TBD |
+| `index.html` | 폴더 가이드 — 목적, Archify 활용 기준, 운영 기준과 데모 임베드 | 유지 관리 |
+| `archify-demo-web-app.html` | Archify 예제 "Sample Web App" 인터랙티브 HTML 데모 | 데모 |
+| `build-scenario-webview.html` | app-webview 빌드 시나리오 인터랙티브 HTML (가상 시나리오) | 가상 시나리오 |
 
 ## Archify 활용
 

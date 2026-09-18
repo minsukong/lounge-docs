@@ -2,7 +2,7 @@
 
 ## 구현 기준
 
-- 저장소 루트 `AGENTS.md`와 현재 작업에 해당하는 `docs/ai/` 문서를 먼저 확인합니다.
+- 저장소 루트 `AGENTS.md`와 현재 작업의 실제 소스를 먼저 확인합니다. `docs/ai/` 문서는 실제 소스만으로 판단하기 어렵거나 작업에 세부 기준이 필요할 때 관련 문서만 선택해서 읽습니다.
 - package, script, 설정, import 경로와 설치 버전은 이 앱에 존재하는 실제 파일과 잠금 파일을 기준으로 사용하며, 확인되지 않은 구성을 추측하지 않습니다.
 - Next.js 16 App Router, React 19, TypeScript, Tailwind CSS 4.1 이상과 shadcn/ui `base-nova`를 프로젝트 기술 기준으로 사용합니다.
 - 공통 CSS 하한은 Safari 15이며, iOS 15 WKWebView에서 핵심 흐름을 실제 검증합니다.
