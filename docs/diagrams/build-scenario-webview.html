@@ -684,46 +684,6 @@
           <!-- SOURCE LANE -->
           <g data-node="src-app">
             <rect
-              x="90"
-              y="30"
-              width="210"
-              height="70"
-              rx="8"
-              fill="var(--source-fill)"
-              stroke="var(--source-stroke)"
-              stroke-width="1.5"
-            />
-            <text
-              x="195"
-              y="58"
-              text-anchor="middle"
-              fill="var(--text)"
-              font-size="13"
-              font-weight="700"
-            >
-              src/app/
-            </text>
-            <text
-              x="195"
-              y="78"
-              text-anchor="middle"
-              fill="var(--text-muted)"
-              font-size="10"
-            >
-              App Router · layout · page
-            </text>
-            <text
-              x="195"
-              y="92"
-              text-anchor="middle"
-              fill="var(--text-dim)"
-              font-size="9"
-            >
-              route groups · dynamic routes
-            </text>
-          </g>
-          <g data-node="src-components">
-            <rect
               x="315"
               y="30"
               width="210"
@@ -741,7 +701,7 @@
               font-size="13"
               font-weight="700"
             >
-              src/components/
+              src/app/
             </text>
             <text
               x="420"
@@ -750,7 +710,7 @@
               fill="var(--text-muted)"
               font-size="10"
             >
-              UI primitives · features
+              App Router · layout · page
             </text>
             <text
               x="420"
@@ -759,10 +719,10 @@
               fill="var(--text-dim)"
               font-size="9"
             >
-              shadcn/ui · custom widgets
+              route groups · dynamic routes
             </text>
           </g>
-          <g data-node="globals-css">
+          <g data-node="src-components">
             <rect
               x="540"
               y="30"
@@ -781,7 +741,7 @@
               font-size="13"
               font-weight="700"
             >
-              globals.css
+              src/components/
             </text>
             <text
               x="645"
@@ -790,7 +750,7 @@
               fill="var(--text-muted)"
               font-size="10"
             >
-              @import "tailwindcss"
+              UI primitives · features
             </text>
             <text
               x="645"
@@ -799,10 +759,10 @@
               fill="var(--text-dim)"
               font-size="9"
             >
-              semantic tokens · @theme
+              shadcn/ui · custom widgets
             </text>
           </g>
-          <g data-node="tsconfig">
+          <g data-node="globals-css">
             <rect
               x="765"
               y="30"
@@ -821,7 +781,7 @@
               font-size="13"
               font-weight="700"
             >
-              빌드 설정
+              globals.css
             </text>
             <text
               x="870"
@@ -830,7 +790,7 @@
               fill="var(--text-muted)"
               font-size="10"
             >
-              tsconfig · Next.js · PostCSS
+              @import "tailwindcss"
             </text>
             <text
               x="870"
@@ -839,10 +799,10 @@
               fill="var(--text-dim)"
               font-size="9"
             >
-              값은 TBD · 파일 생성 후 확인
+              semantic tokens · @theme
             </text>
           </g>
-          <g data-node="storybook-config">
+          <g data-node="tsconfig">
             <rect
               x="990"
               y="30"
@@ -858,10 +818,10 @@
               y="58"
               text-anchor="middle"
               fill="var(--text)"
-              font-size="12"
+              font-size="13"
               font-weight="700"
             >
-              .storybook/
+              빌드 설정
             </text>
             <text
               x="1085"
@@ -870,7 +830,7 @@
               fill="var(--text-muted)"
               font-size="10"
             >
-              main.ts · preview.ts
+              tsconfig · Next.js · PostCSS
             </text>
             <text
               x="1085"
@@ -879,15 +839,64 @@
               fill="var(--text-dim)"
               font-size="9"
             >
-              stories/**/*.tsx
+              값은 TBD · 파일 생성 후 확인
+            </text>
+          </g>
+          <g data-node="storybook-config">
+            <rect
+              x="90"
+              y="30"
+              width="210"
+              height="70"
+              rx="8"
+              fill="var(--source-fill)"
+              stroke="var(--source-stroke)"
+              stroke-width="1.5"
+            />
+            <text
+              x="195"
+              y="58"
+              text-anchor="middle"
+              fill="var(--text)"
+              font-size="13"
+              font-weight="700"
+            >
+              Storybook 입력
+            </text>
+            <text
+              x="195"
+              y="78"
+              text-anchor="middle"
+              fill="var(--text-muted)"
+              font-size="10"
+            >
+              .storybook/ · stories/**/*.tsx
+            </text>
+            <text
+              x="195"
+              y="92"
+              text-anchor="middle"
+              fill="var(--text-dim)"
+              font-size="9"
+            >
+              설정과 스토리를 함께 사용
             </text>
           </g>
 
           <!-- Source to Compile arrows -->
           <path
+            data-from="storybook-config"
+            data-to="storybook-build"
+            d="M195,100 L200,140"
+            stroke="var(--arrow)"
+            stroke-width="1"
+            fill="none"
+            marker-end="url(#ah)"
+          />
+          <path
             data-from="src-app"
             data-to="nextjs"
-            d="M195,100 C195,120 620,120 620,140"
+            d="M420,100 L430,140"
             stroke="var(--arrow)"
             stroke-width="1"
             fill="none"
@@ -896,7 +905,7 @@
           <path
             data-from="src-components"
             data-to="nextjs"
-            d="M420,100 C420,120 660,120 660,140"
+            d="M645,100 L650,140"
             stroke="var(--arrow)"
             stroke-width="1"
             fill="none"
@@ -904,8 +913,8 @@
           />
           <path
             data-from="globals-css"
-            data-to="tailwind"
-            d="M645,100 C645,120 430,120 430,140"
+            data-to="nextjs"
+            d="M870,100 L870,140"
             stroke="var(--arrow)"
             stroke-width="1"
             fill="none"
@@ -913,15 +922,15 @@
           />
           <path
             data-from="tsconfig"
-            data-to="typescript"
-            d="M870,100 C870,120 200,120 200,140"
+            data-to="nextjs"
+            d="M1085,100 L1040,140"
             stroke="var(--arrow)"
             stroke-width="1"
             fill="none"
             marker-end="url(#ah)"
           />
           <!-- COMPILE LANE -->
-          <g data-node="typescript">
+          <g data-node="storybook-build">
             <rect
               x="100"
               y="140"
@@ -940,7 +949,7 @@
               font-size="13"
               font-weight="700"
             >
-              TypeScript
+              Storybook 빌드
             </text>
             <text
               x="200"
@@ -949,7 +958,7 @@
               fill="var(--text-muted)"
               font-size="10"
             >
-              TypeScript / TSX 변환
+              npm run build:storybook
             </text>
             <text
               x="200"
@@ -958,54 +967,14 @@
               fill="var(--text-dim)"
               font-size="9"
             >
-              typecheck는 품질 검사에서 분리
-            </text>
-          </g>
-          <g data-node="tailwind">
-            <rect
-              x="330"
-              y="140"
-              width="200"
-              height="70"
-              rx="8"
-              fill="var(--build-fill)"
-              stroke="var(--build-stroke)"
-              stroke-width="1.5"
-            />
-            <text
-              x="430"
-              y="168"
-              text-anchor="middle"
-              fill="var(--text)"
-              font-size="13"
-              font-weight="700"
-            >
-              Tailwind CSS 4
-            </text>
-            <text
-              x="430"
-              y="188"
-              text-anchor="middle"
-              fill="var(--text-muted)"
-              font-size="10"
-            >
-              CSS-first · @theme
-            </text>
-            <text
-              x="430"
-              y="202"
-              text-anchor="middle"
-              fill="var(--text-dim)"
-              font-size="9"
-            >
-              source scan · PostCSS
+              스크립트·빌더는 구성 후 확인
             </text>
           </g>
           <g data-node="nextjs">
             <rect
-              x="560"
+              x="330"
               y="140"
-              width="260"
+              width="780"
               height="70"
               rx="8"
               fill="var(--build-fill)"
@@ -1013,79 +982,39 @@
               stroke-width="2"
             />
             <text
-              x="690"
+              x="720"
               y="165"
               text-anchor="middle"
               fill="var(--text)"
               font-size="14"
               font-weight="700"
             >
-              Next.js 16
+              Next.js 16 빌드 파이프라인
             </text>
             <text
-              x="690"
+              x="720"
               y="185"
               text-anchor="middle"
               fill="var(--text-muted)"
               font-size="10"
             >
-              App Router · RSC · Turbopack
+              App Router · React 19 · RSC · Turbopack
             </text>
             <text
-              x="690"
+              x="720"
               y="202"
               text-anchor="middle"
               fill="var(--text-dim)"
               font-size="9"
             >
-              SSG/SSR · chunk splitting · tree-shaking
-            </text>
-          </g>
-          <g data-node="react">
-            <rect
-              x="850"
-              y="140"
-              width="200"
-              height="70"
-              rx="8"
-              fill="var(--build-fill)"
-              stroke="var(--build-stroke)"
-              stroke-width="1.5"
-            />
-            <text
-              x="950"
-              y="168"
-              text-anchor="middle"
-              fill="var(--text)"
-              font-size="13"
-              font-weight="700"
-            >
-              React 19
-            </text>
-            <text
-              x="950"
-              y="188"
-              text-anchor="middle"
-              fill="var(--text-muted)"
-              font-size="10"
-            >
-              Server Components · Actions
-            </text>
-            <text
-              x="950"
-              y="202"
-              text-anchor="middle"
-              fill="var(--text-dim)"
-              font-size="9"
-            >
-              Hooks · Suspense · Error Boundary
+              SWC/TypeScript · Tailwind/PostCSS · 렌더링 정책
             </text>
           </g>
 
           <!-- Compile to Output arrows -->
           <path
-            data-from="typescript"
-            data-to="next-build"
+            data-from="storybook-build"
+            data-to="storybook-static"
             d="M200,210 L200,305"
             stroke="var(--arrow)"
             stroke-width="1.5"
@@ -1093,9 +1022,18 @@
             marker-end="url(#ah)"
           />
           <path
-            data-from="tailwind"
+            data-from="nextjs"
+            data-to="html-pages"
+            d="M440,210 L440,305"
+            stroke="var(--arrow)"
+            stroke-width="1.5"
+            fill="none"
+            marker-end="url(#ah)"
+          />
+          <path
+            data-from="nextjs"
             data-to="next-static"
-            d="M430,210 L430,305"
+            d="M680,210 L680,305"
             stroke="var(--arrow)"
             stroke-width="1.5"
             fill="none"
@@ -1104,46 +1042,16 @@
           <path
             data-from="nextjs"
             data-to="next-build"
-            d="M690,210 L690,305"
+            d="M950,210 L950,305"
             stroke="var(--arrow-emphasis)"
             stroke-width="2"
             fill="none"
             marker-end="url(#ah-e)"
           />
-          <path
-            data-from="react"
-            data-to="html-pages"
-            d="M950,210 L950,305"
-            stroke="var(--arrow)"
-            stroke-width="1.5"
-            fill="none"
-            marker-end="url(#ah)"
-          />
-          <path
-            data-from="nextjs"
-            data-to="next-static"
-            d="M690,210 C690,250 500,270 500,305"
-            stroke="var(--arrow)"
-            stroke-width="1"
-            fill="none"
-            stroke-dasharray="3 3"
-            marker-end="url(#ah)"
-          />
-          <path
-            data-from="nextjs"
-            data-to="html-pages"
-            d="M690,210 C690,250 740,270 740,305"
-            stroke="var(--arrow)"
-            stroke-width="1"
-            fill="none"
-            stroke-dasharray="3 3"
-            marker-end="url(#ah)"
-          />
-
           <!-- OUTPUT LANE -->
           <g data-node="next-build">
             <rect
-              x="100"
+              x="820"
               y="305"
               width="260"
               height="100"
@@ -1153,7 +1061,7 @@
               stroke-width="2"
             />
             <text
-              x="230"
+              x="950"
               y="333"
               text-anchor="middle"
               fill="var(--text)"
@@ -1163,7 +1071,7 @@
               .next/
             </text>
             <text
-              x="230"
+              x="950"
               y="355"
               text-anchor="middle"
               fill="var(--text-muted)"
@@ -1172,7 +1080,7 @@
               chunks · static · server · cache
             </text>
             <text
-              x="230"
+              x="950"
               y="376"
               text-anchor="middle"
               fill="var(--text-dim)"
@@ -1181,18 +1089,18 @@
               BUILD_ID · routes-manifest.json
             </text>
             <text
-              x="230"
+              x="950"
               y="395"
               text-anchor="middle"
               fill="var(--text-dim)"
               font-size="9"
             >
-              내부 구조와 파일명은 실제 Build에서 확인
+              내부 구조와 파일명은 실제 빌드에서 확인
             </text>
           </g>
           <g data-node="next-static">
             <rect
-              x="400"
+              x="580"
               y="305"
               width="200"
               height="100"
@@ -1202,7 +1110,7 @@
               stroke-width="1.5"
             />
             <text
-              x="500"
+              x="680"
               y="333"
               text-anchor="middle"
               fill="var(--text)"
@@ -1212,7 +1120,7 @@
               _next/static/
             </text>
             <text
-              x="500"
+              x="680"
               y="355"
               text-anchor="middle"
               fill="var(--text-muted)"
@@ -1221,7 +1129,7 @@
               CSS bundles · JS chunks
             </text>
             <text
-              x="500"
+              x="680"
               y="376"
               text-anchor="middle"
               fill="var(--text-dim)"
@@ -1230,7 +1138,7 @@
               fonts · images · media
             </text>
             <text
-              x="500"
+              x="680"
               y="395"
               text-anchor="middle"
               fill="var(--text-dim)"
@@ -1241,7 +1149,7 @@
           </g>
           <g data-node="html-pages">
             <rect
-              x="640"
+              x="340"
               y="305"
               width="200"
               height="100"
@@ -1251,56 +1159,56 @@
               stroke-width="1.5"
             />
             <text
-              x="740"
+              x="440"
               y="333"
               text-anchor="middle"
               fill="var(--text)"
               font-size="13"
               font-weight="700"
             >
-              렌더링 결과 후보
+              정적 내보내기 후보
             </text>
             <text
-              x="740"
+              x="440"
               y="355"
               text-anchor="middle"
               fill="var(--text-muted)"
               font-size="10"
             >
-              SSR · SSG · ISR 정책 TBD
+              out/ · output: "export" 설정 시
             </text>
             <text
-              x="740"
+              x="440"
               y="376"
               text-anchor="middle"
               fill="var(--text-dim)"
               font-size="9"
             >
-              RSC · 캐시 정책은 구성 후 확인
+              서버 렌더링 방식과는 대안 관계
             </text>
             <text
-              x="740"
+              x="440"
               y="395"
               text-anchor="middle"
               fill="var(--text-dim)"
               font-size="9"
             >
-              Safari 15 하한 대상 산출물
+              정적 호스팅 적합성은 검증 필요
             </text>
           </g>
           <g data-node="storybook-static">
             <rect
-              x="880"
+              x="100"
               y="305"
               width="200"
               height="100"
               rx="8"
-              fill="var(--quality-fill)"
-              stroke="var(--quality-stroke)"
+              fill="var(--output-fill)"
+              stroke="var(--output-stroke)"
               stroke-width="1.5"
             />
             <text
-              x="980"
+              x="200"
               y="333"
               text-anchor="middle"
               fill="var(--text)"
@@ -1310,16 +1218,16 @@
               storybook-static/
             </text>
             <text
-              x="980"
+              x="200"
               y="355"
               text-anchor="middle"
               fill="var(--text-muted)"
               font-size="10"
             >
-              Vite build · static output
+              정적 산출물 · 빌더 TBD
             </text>
             <text
-              x="980"
+              x="200"
               y="376"
               text-anchor="middle"
               fill="var(--text-dim)"
@@ -1328,7 +1236,7 @@
               index.html · iframe.html · assets
             </text>
             <text
-              x="980"
+              x="200"
               y="395"
               text-anchor="middle"
               fill="var(--text-dim)"
@@ -1337,28 +1245,6 @@
               npm run build:storybook (후보)
             </text>
           </g>
-
-          <!-- Storybook source to its independent verification -->
-          <path
-            data-from="storybook-config"
-            data-to="build-storybook"
-            d="M1140,100 L1140,350 C1140,405 1105,430 1040,430 L670,430 C645,430 630,440 630,450 L630,465"
-            stroke="var(--arrow)"
-            stroke-width="1"
-            fill="none"
-            stroke-dasharray="3 3"
-            marker-end="url(#ah)"
-          />
-          <path
-            data-from="storybook-config"
-            data-to="storybook-static"
-            d="M1085,100 L1085,205 C1085,250 1055,275 1010,280 L1000,280 C985,280 980,290 980,300 L980,305"
-            stroke="var(--arrow)"
-            stroke-width="1"
-            fill="none"
-            stroke-dasharray="3 3"
-            marker-end="url(#ah)"
-          />
 
           <!-- VERIFY LANE: independent checks, all currently not run -->
           <g data-node="typecheck" data-check="typecheck" data-status="not-run">
@@ -1429,7 +1315,7 @@
               fill="var(--text-muted)"
               font-size="9"
             >
-              ESLint + Prettier
+              lint / format 도구 TBD
             </text>
             <text
               x="305"
@@ -1513,7 +1399,7 @@
               fill="var(--text-muted)"
               font-size="9"
             >
-              정적 Build 검증
+              정적 빌드 및 산출물 확인
             </text>
             <text
               x="630"
@@ -1553,7 +1439,7 @@
               fill="var(--text-muted)"
               font-size="9"
             >
-              exit code + Build 로그
+              종료 코드 + 빌드 로그
             </text>
             <text
               x="815"
@@ -1640,7 +1526,7 @@
               fill="var(--text-muted)"
               font-size="9"
             >
-              exit code · 요약 로그 · 응답 상태 · 실행 시각
+              종료 코드 · 요약 로그 · 응답 상태 · 실행 시각
             </text>
             <text
               x="600"
@@ -1736,7 +1622,7 @@
               fill="var(--text-muted)"
               font-size="10"
             >
-              output: export 사용 여부 TBD
+              입력: out/ · output: "export"
             </text>
           </g>
           <g data-node="node-server">
@@ -1767,7 +1653,7 @@
               fill="var(--text-muted)"
               font-size="10"
             >
-              SSR · Route Handler 사용 범위 TBD
+              입력: .next/ · next start 후보
             </text>
           </g>
           <g data-node="webview-load">
@@ -1802,7 +1688,7 @@
             </text>
           </g>
 
-          <!-- Alternative deployment branches -->
+          <!-- Alternative deployment branches; each node states its real input. -->
           <path
             data-from="verification-result"
             data-to="static-hosting"
@@ -1933,17 +1819,18 @@
           <code>Page → Query → API Client → Backend</code>
           <p class="note">
             실제 소스가 생기면 파일, import와 의존 관계를 분석해 노드와 연결의
-            존재 여부를 확인할 수 있습니다. 이는 API 응답 성공이나 Build 실행
+            존재 여부를 확인할 수 있습니다. 이는 API 응답 성공이나 빌드 실행
             성공을 보장하지 않습니다.
           </p>
         </div>
         <div class="card">
-          <h3>Build 및 품질 실행 검증 (TBD)</h3>
+          <h3>빌드 및 품질 실행 검증 (TBD)</h3>
           <code>typecheck · lint · test · build:storybook · build</code>
           <p class="note">
-            실제 package.json에 정의된 Script만 실행합니다. 별도 실행기가 exit
-            code, 실행 시간과 요약 로그를 공통 결과로 저장하면 다이어그램의 대응
-            노드에 PASS, FAIL, SKIP 상태를 연결할 수 있습니다.
+            실제 package.json에 정의된 script만 실행합니다. 별도 실행기가 종료
+            코드, 실행 시간과 요약 로그를 공통 결과로 저장하면 다이어그램의 대응
+            노드에 PASS, FAIL, SKIP 상태를 연결할 수 있습니다. Safari 15와
+            WKWebView 호환성은 별도의 브라우저 실행 검증으로 확인합니다.
           </p>
         </div>
         <div class="card">
@@ -1951,7 +1838,7 @@
           <code>health check · integration test</code>
           <p class="note">
             승인된 API 계약, 테스트 주소와 인증 조건이 있을 때만 실제 요청
-            결과를 수집합니다. 응답 코드, timeout과 계약 검증 결과를 API 노드
+            결과를 수집합니다. 응답 코드, 타임아웃과 계약 검증 결과를 API 노드
             또는 해당 연결에 표시하며 운영 API를 임의로 호출하지 않습니다.
           </p>
         </div>
@@ -1959,7 +1846,7 @@
           <h3>판정 원칙</h3>
           <code>구조 존재 ≠ 실행 성공</code>
           <p class="note">
-            Build 실패는 Build 노드에, 특정 API 통합 테스트 실패는 검증한 API
+            빌드 실패는 빌드 노드에, 특정 API 통합 테스트 실패는 검증한 API
             노드나 연결에 표시합니다. 근거가 없는 실패 전파나 원인 추정은 하지
             않고 원문 로그와 실행 환경을 함께 남깁니다.
           </p>
@@ -1973,7 +1860,7 @@
           >
           <p class="note">
             정적 배포와 서버 배포는 서로 이어지는 단계가 아닌 대안입니다. 배포
-            차단 조건, 플랫폼, 렌더링 방식과 Native 앱 연계 범위는 실제 구성과
+            차단 조건, 플랫폼, 렌더링 방식과 네이티브 앱 연계 범위는 실제 구성과
             담당자 협의 후 확정합니다.
           </p>
         </div>
@@ -2092,14 +1979,14 @@
             ],
           },
           {
-            label: "컴파일",
+            label: "빌드 처리",
             detail:
-              "TypeScript→JS, Tailwind→utility, Next.js bundling, React 컴파일링",
-            focus: ["typescript", "tailwind", "nextjs", "react"],
+              "Next.js가 SWC/TypeScript, React 19, Tailwind/PostCSS 처리를 통합합니다.",
+            focus: ["storybook-build", "nextjs"],
           },
           {
             label: "빌드 산출물",
-            detail: ".next/, static assets, 렌더링 결과 페이지 생성",
+            detail: ".next/, 정적 자산, 정적 내보내기와 Storybook 산출물 후보 생성",
             focus: [
               "next-build",
               "next-static",
@@ -2110,19 +1997,20 @@
           {
             label: "품질 검증",
             detail:
-              "typecheck · lint · test · build:storybook · build · API 통합",
+              "typecheck · lint · test · build:storybook 산출물 · build · API 통합",
             focus: [
               "typecheck",
               "lint",
               "test",
               "build-storybook",
+              "storybook-static",
               "npm-build",
               "api-check",
             ],
           },
           {
             label: "결과 수집",
-            detail: "exit code, 로그, 응답 상태가 공통 결과로 수집됩니다.",
+            detail: "종료 코드, 로그, 응답 상태가 공통 결과로 수집됩니다.",
             focus: ["verification-result"],
           },
           {
