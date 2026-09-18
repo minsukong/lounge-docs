@@ -36,6 +36,8 @@
       --lane-fill: rgba(15,23,42,0.22); --lane-stroke: #334155;
       --toolbar-bg: rgba(15,23,42,0.8); --toolbar-border: #334155; --toolbar-text: #e2e8f0;
       --hl-node-stroke: #fbbf24; --hl-path: #fbbf24;
+      --build-tint: rgba(52,211,153,0.12); --build-tint-hover: rgba(52,211,153,0.25);
+      --source-tint: rgba(34,211,238,0.12); --build-glow: rgba(52,211,153,0.15);
     }
     [data-theme="light"] {
       --bg: #f8fafc; --grid: #e2e8f0; --text: #0f172a; --text-muted: #64748b;
@@ -49,6 +51,8 @@
       --lane-fill: rgba(248,250,252,0.65); --lane-stroke: #cbd5e1;
       --toolbar-bg: rgba(255,255,255,0.92); --toolbar-border: #cbd5e1; --toolbar-text: #334155;
       --hl-node-stroke: #d97706; --hl-path: #d97706;
+      --build-tint: rgba(5,150,105,0.12); --build-tint-hover: rgba(5,150,105,0.25);
+      --source-tint: rgba(8,145,178,0.12); --build-glow: rgba(5,150,105,0.15);
     }
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
@@ -128,11 +132,72 @@
       position:absolute; bottom:0.75rem; right:1rem;
       font-size:0.65rem; color:var(--text-dim); pointer-events:none;
     }
+    /* Story playback panel - prominent placement */
+    .story-panel {
+      display:flex; align-items:center; gap:0.75rem;
+      padding:0.75rem 1rem; margin:1rem 0;
+      background:var(--panel); border:1.5px solid var(--build-stroke);
+      border-radius:0.6rem; flex-wrap:wrap;
+      box-shadow:0 0 12px var(--build-glow);
+    }
+    .story-play-btn {
+      display:inline-flex; align-items:center; gap:0.4rem;
+      border:2px solid var(--build-stroke); border-radius:0.45rem;
+      background:var(--build-tint);
+      color:var(--text); font:inherit; font-size:0.85rem; font-weight:700;
+      padding:0.5rem 1.1rem; cursor:pointer; transition:background 0.15s, transform 0.1s;
+    }
+    .story-play-btn:hover { background:var(--build-tint-hover); transform:scale(1.03); }
+    .story-play-btn:active { transform:scale(0.97); }
+    .story-play-btn.playing { border-color:var(--source-stroke); background:var(--source-tint); }
+    .story-play-btn .play-icon { font-size:1rem; }
+    .story-nav-btn {
+      border:1px solid var(--panel-border); border-radius:0.4rem;
+      background:transparent; color:var(--text); font:inherit; font-size:0.85rem;
+      padding:0.45rem 0.7rem; cursor:pointer; transition:background 0.15s;
+    }
+    .story-nav-btn:hover { background:var(--lane-fill); }
+    .story-nav-btn:disabled { opacity:0.3; cursor:default; }
+    .story-steps {
+      display:flex; gap:0.3rem; align-items:center;
+    }
+    .story-step-dot {
+      width:11px; height:11px; border-radius:50%;
+      background:var(--text-dim); border:1.5px solid var(--panel-border);
+      transition:background 0.2s, transform 0.2s, border-color 0.2s; cursor:pointer;
+    }
+    .story-step-dot.active {
+      background:var(--build-stroke); border-color:var(--build-stroke);
+      transform:scale(1.35); box-shadow:0 0 6px var(--build-stroke);
+    }
+    .story-step-dot:hover { background:var(--text-muted); }
+    .story-caption {
+      flex:1; min-width:220px; font-size:0.82rem; color:var(--text);
+      display:flex; align-items:baseline; gap:0.5rem;
+    }
+    .story-caption-index {
+      font-size:0.7rem; font-weight:700; color:var(--build-stroke);
+      min-width:1.5em; text-align:right;
+    }
+    .story-caption-label {
+      font-weight:700; font-size:0.88rem;
+    }
+    .story-caption-detail {
+      font-size:0.72rem; color:var(--text-muted);
+    }
+    .story-show-all {
+      border:1px solid var(--panel-border); border-radius:0.4rem;
+      background:transparent; color:var(--text-muted); font:inherit; font-size:0.75rem;
+      padding:0.4rem 0.7rem; cursor:pointer; transition:background 0.15s, color 0.15s;
+    }
+    .story-show-all:hover { background:var(--lane-fill); color:var(--text); }
     @media (max-width: 720px) {
       body { padding:0.75rem; }
       .diagram-container { padding:0.75rem; }
       .subtitle { margin-left:0; }
       .hint { display:none; }
+      .story-panel { gap:0.4rem; }
+      .story-caption { min-width:100%; }
     }
   </style>
 </head>
@@ -148,6 +213,22 @@
       </div>
       <p class="subtitle">Next.js 16 App Router · React 19 · TypeScript · Tailwind CSS 4 · Storybook · Vitest <span style="opacity:0.65;font-size:0.75em;">(현재: package.json 미구성 · 검증 미실행)</span></p>
     </header>
+    <!-- Story Playback Panel -->
+    <div class="story-panel" role="toolbar" aria-label="빌드 시나리오 재생">
+      <button class="story-play-btn" id="story-play" type="button" aria-label="Play build scenario" aria-pressed="false">
+        <span class="play-icon" id="story-play-icon" aria-hidden="true">&#9654;</span>
+        <span id="story-play-label">Play</span>
+      </button>
+      <button class="story-nav-btn" id="story-prev" type="button" aria-label="Previous step" title="이전 스텝" disabled>&#8592;</button>
+      <button class="story-nav-btn" id="story-next" type="button" aria-label="Next step" title="다음 스텝">&#8594;</button>
+      <div class="story-steps" id="story-steps" role="group" aria-label="시나리오 스텝"></div>
+      <div class="story-caption" aria-live="polite" aria-atomic="true">
+        <span class="story-caption-index" id="story-caption-index">—</span>
+        <strong class="story-caption-label" id="story-caption-label">빌드 시나리오</strong>
+        <span class="story-caption-detail" id="story-caption-detail">Play 또는 스텝을 선택하세요</span>
+      </div>
+      <button class="story-show-all" id="story-show-all" type="button" aria-label="Show entire diagram">전체</button>
+    </div>
     <div class="diagram-container" style="position:relative;">
       <svg id="diagram-svg" viewBox="0 0 1200 810" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="app-webview 빌드 및 실행 검증 시나리오 다이어그램">
         <defs>
@@ -419,6 +500,7 @@
   var nodes=svg.querySelectorAll('[data-node]');
   var paths=svg.querySelectorAll('[data-from][data-to]');
   var activeNode=null;
+  var storyActiveIndex=-1;
 
   function clearHighlight(){
     svg.classList.remove('has-selection');
@@ -459,26 +541,166 @@
     n.style.cursor='pointer';
     n.addEventListener('click',function(e){
       e.stopPropagation();
+      if(storyActiveIndex!==-1)return;
       var id=n.getAttribute('data-node');
       if(activeNode===id){clearHighlight()}else{highlightNode(id)}
     });
-    // hover effect
     n.addEventListener('mouseenter',function(){
-      if(!activeNode){
+      if(!activeNode&&storyActiveIndex===-1){
         var r=n.querySelector('rect');
         if(r)r.style.filter='brightness(1.2)';
       }
     });
     n.addEventListener('mouseleave',function(){
-      if(!activeNode){
+      if(!activeNode&&storyActiveIndex===-1){
         var r=n.querySelector('rect');
         if(r)r.style.filter='';
       }
     });
   });
+  svg.addEventListener('click',function(){
+    if(storyActiveIndex===-1)clearHighlight();
+  });
 
-  // click background to clear
-  svg.addEventListener('click',function(){clearHighlight()});
+  // --- Story Playback ---
+  var STORY_STEPS=[
+    {label:'소스 입력',detail:'App Router, 컴포넌트, 스타일, 설정 파일이 빌드 파이프라인의 입력입니다.',focus:['src-app','src-components','globals-css','tsconfig','storybook-config']},
+    {label:'컴파일',detail:'TypeScript→JS, Tailwind→utility, Next.js bundling, React 컴파일링',focus:['typescript','tailwind','nextjs','react']},
+    {label:'빌드 산출물',detail:'.next/, static assets, 렌더링 결과 페이지 생성',focus:['next-build','next-static','html-pages','storybook-static']},
+    {label:'품질 검증',detail:'typecheck · lint · test · build:storybook · build · API 통합',focus:['typecheck','lint','test','build-storybook','npm-build','api-check']},
+    {label:'결과 수집',detail:'exit code, 로그, 응답 상태가 공통 결과로 수집됩니다.',focus:['verification-result']},
+    {label:'배포',detail:'정적 호스팅 또는 Next.js 서버 → WebView HTTPS 로드',focus:['static-hosting','node-server','webview-load']}
+  ];
+  var PLAY_INTERVAL_MS=3200;
+  var storyPlaying=false;
+  var storyTimer=null;
+  var btnPlay=document.getElementById('story-play');
+  var btnPlayIcon=document.getElementById('story-play-icon');
+  var btnPlayLabel=document.getElementById('story-play-label');
+  var btnPrev=document.getElementById('story-prev');
+  var btnNext=document.getElementById('story-next');
+  var btnShowAll=document.getElementById('story-show-all');
+  var stepsContainer=document.getElementById('story-steps');
+  var capIndex=document.getElementById('story-caption-index');
+  var capLabel=document.getElementById('story-caption-label');
+  var capDetail=document.getElementById('story-caption-detail');
+
+  STORY_STEPS.forEach(function(step,i){
+    var dot=document.createElement('span');
+    dot.className='story-step-dot';
+    dot.setAttribute('role','button');
+    dot.setAttribute('aria-label','Step '+(i+1)+': '+step.label);
+    dot.setAttribute('tabindex','0');
+    dot.addEventListener('click',function(){goToStep(i)});
+    dot.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();goToStep(i)}
+    });
+    stepsContainer.appendChild(dot);
+  });
+  var stepDots=stepsContainer.querySelectorAll('.story-step-dot');
+
+  function goToStep(index){
+    if(index<0||index>=STORY_STEPS.length)return;
+    storyActiveIndex=index;
+    var step=STORY_STEPS[index];
+    var focusSet={};
+    step.focus.forEach(function(id){focusSet[id]=true});
+    clearHighlight();
+    svg.classList.add('has-selection');
+    var connected={};
+    step.focus.forEach(function(id){connected[id]=true});
+    paths.forEach(function(p){
+      var from=p.getAttribute('data-from');
+      var to=p.getAttribute('data-to');
+      if(focusSet[from]||focusSet[to]){
+        p.classList.add('active');
+        connected[from]=true;
+        connected[to]=true;
+      }
+    });
+    nodes.forEach(function(n){
+      var id=n.getAttribute('data-node');
+      if(connected[id])n.classList.add('active');
+      if(focusSet[id])n.classList.add('selected');
+    });
+    capIndex.textContent=(index+1<10?'0'+(index+1):String(index+1));
+    capLabel.textContent=step.label;
+    capDetail.textContent=step.detail;
+    stepDots.forEach(function(dot,di){dot.classList.toggle('active',di===index)});
+    btnPrev.disabled=false;
+    btnNext.disabled=(index===STORY_STEPS.length-1);
+  }
+
+  function stopStory(){
+    storyPlaying=false;
+    if(storyTimer){clearTimeout(storyTimer);storyTimer=null}
+    btnPlayIcon.innerHTML='&#9654;';
+    btnPlayLabel.textContent='Play';
+    btnPlay.classList.remove('playing');
+    btnPlay.setAttribute('aria-pressed','false');
+  }
+  function startStory(){
+    stopStory();
+    storyPlaying=true;
+    btnPlayIcon.innerHTML='&#9646;&#9646;';
+    btnPlayLabel.textContent='Stop';
+    btnPlay.classList.add('playing');
+    btnPlay.setAttribute('aria-pressed','true');
+    var startIdx=(storyActiveIndex>=0&&storyActiveIndex<STORY_STEPS.length-1)?storyActiveIndex+1:0;
+    if(storyActiveIndex===STORY_STEPS.length-1)startIdx=0;
+    goToStep(startIdx);
+    scheduleNext();
+  }
+  function scheduleNext(){
+    if(!storyPlaying)return;
+    storyTimer=setTimeout(function(){
+      if(!storyPlaying)return;
+      var next=storyActiveIndex+1;
+      if(next>=STORY_STEPS.length){
+        showAll();
+        return;
+      }
+      goToStep(next);
+      scheduleNext();
+    },PLAY_INTERVAL_MS);
+  }
+  function showAll(){
+    stopStory();
+    storyActiveIndex=-1;
+    clearHighlight();
+    capIndex.textContent='—';
+    capLabel.textContent='빌드 시나리오';
+    capDetail.textContent='Play 또는 스텝을 선택하세요';
+    stepDots.forEach(function(dot){dot.classList.remove('active')});
+    btnPrev.disabled=true;
+    btnNext.disabled=false;
+  }
+
+  btnPlay.addEventListener('click',function(){
+    if(storyPlaying)stopStory();else startStory();
+  });
+  btnPrev.addEventListener('click',function(){
+    if(storyActiveIndex>0){stopStory();goToStep(storyActiveIndex-1)}
+    else if(storyActiveIndex===0){stopStory();showAll()}
+  });
+  btnNext.addEventListener('click',function(){
+    if(storyActiveIndex<STORY_STEPS.length-1){stopStory();goToStep(storyActiveIndex+1)}
+    else if(storyActiveIndex===-1){stopStory();goToStep(0)}
+  });
+  btnShowAll.addEventListener('click',showAll);
+  document.addEventListener('keydown',function(e){
+    if(e.target&&(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA'))return;
+    if(e.key==='p'||e.key==='P'){e.preventDefault();if(storyPlaying)stopStory();else startStory()}
+    if(e.key==='Escape'){showAll()}
+    if(e.key==='ArrowRight'){
+      if(storyActiveIndex<STORY_STEPS.length-1){stopStory();goToStep(storyActiveIndex+1)}
+      else if(storyActiveIndex===-1){goToStep(0)}
+    }
+    if(e.key==='ArrowLeft'){
+      if(storyActiveIndex>0){stopStory();goToStep(storyActiveIndex-1)}
+      else if(storyActiveIndex===0){showAll()}
+    }
+  });
 })();
   </script>
 </body>
