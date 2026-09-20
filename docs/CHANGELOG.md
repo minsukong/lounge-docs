@@ -11,6 +11,16 @@
 - 변경한 파일 목록만 나열하지 않고 변경 목적, 주요 내용, 미확정 항목과 검증 결과를 함께 기록합니다.
 - 같은 작업에서 Markdown과 HTML을 함께 수정했다면 하나의 변경 항목으로 기록합니다.
 
+## 2026-09-18
+
+### Flutter 카드 스캔 기술 가이드 추가
+
+- 실제 Flutter 프로젝트의 Provider, 화면, Router, Android·iOS 설정과 잠금 파일을 기준으로 [`Flutter 카드 스캔 기술 가이드`](./guides/platform/webview/card_scan.html)를 추가했습니다.
+- `flutter_card_scanner_plus 0.1.2`의 설치 소스와 공식 문서를 대조해 OCR 처리, 완료 조건, 결과 필드, 지원 카드, 카메라 권한과 플랫폼 최소 버전을 정리했습니다.
+- 전체 카드 번호의 로그·일반 저장소 보관 금지, CVV 제외, 화면 캡처 방지 미구현과 PCI DSS 책임 경계를 현재 구현과 권장사항으로 구분했습니다.
+- 현재 Flutter Route와 결과 화면은 개발 확인용 임시 구현으로 구분하고, 최종 방향을 WebView 요청 → Native Scanner 실행 → 기존 WebView 복귀·카드정보 반환 흐름으로 명시했습니다. 구체적인 Bridge Method, 요청 ID, Payload와 오류 계약은 `TBD`로 남겼습니다.
+- 검증: HTML 구조와 공통 자산 경로, 코드 블록 Highlight Markup, Mermaid 접근성 설명, Prettier, 임시 검색 색인 생성과 로컬 브라우저 렌더링을 확인했습니다.
+
 ## 2026-09-17
 
 ### 빌드·API 검증 시나리오와 다이어그램 상호작용 정리

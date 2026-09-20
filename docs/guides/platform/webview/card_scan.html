@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Flutter 앱에서 flutter_card_scanner_plus와 Riverpod으로 카드 번호·유효기간·소유자명을 인식하는 실제 구현, 플랫폼 설정, 보안과 테스트 기준"
+    />
+    <title>Flutter 카드 스캔 기술 가이드 — 구현, 보안과 검증</title>
+    <link rel="stylesheet" href="../../../assets/style/presentation-theme.css" />
+  </head>
+  <body>
+    <header>
+      <div class="type">APP · CAMERA · OCR</div>
+      <h1>Flutter 카드 스캔 기술 가이드</h1>
+      <p>
+        <code>flutter_card_scanner_plus</code>와 Riverpod으로 구현된 카드 스캔 기능의
+        동작, 플랫폼 설정, 민감정보 처리와 실제 기기 검증 기준입니다.
+      </p>
+    </header>
+
+    <main>
+      <section>
+        <h2 class="bx-active">1. 목적과 적용 범위</h2>
+        <p>
+          이 문서는 Flutter 앱에서 카메라 OCR로 결제 카드의 번호, 유효기간과 카드
+          소유자명을 읽는 현재 임시 구현과 WebView 연동 목표를 설명합니다. 최종
+          흐름에서는 WebView의 요청으로 Native 스캐너를 열고, 스캔을 마치면 기존
+          WebView로 돌아가 카드정보를 전달합니다. 구현 근거는 실제 Flutter 프로젝트의
+          소스와 잠금 파일, 로컬에 설치된
+          <code>flutter_card_scanner_plus 0.1.2</code> 소스이며, 패키지 동작은
+          <a href="https://pub.dev/packages/flutter_card_scanner_plus"
+            >pub.dev 패키지 페이지</a
+          >와
+          <a href="https://pub.dev/documentation/flutter_card_scanner_plus/latest/"
+            >공식 API 문서</a
+          >를 함께 확인했습니다.
+        </p>
+        <blockquote>
+          <p>
+            이 기능은 OCR로 카드 표면의 문자열을 읽는 입력 보조 기능입니다. Luhn과
+            카드 브랜드 규칙을 통과하더라도 실제 발급 카드, 사용 가능한 카드 또는
+            결제 가능한 카드임을 보장하지 않습니다.
+          </p>
+        </blockquote>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">구분</th>
+              <th scope="col">현재 상태</th>
+              <th scope="col">근거 또는 경계</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>구현 완료</td>
+              <td>임시 화면에서 기본 스캐너 실행, 결과 저장, 마스킹 번호·유효기간·소유자명 표시</td>
+              <td><code>CardScanPage</code>, <code>cardScanProvider</code> · 개발 확인용</td>
+            </tr>
+            <tr>
+              <td>패키지 제공</td>
+              <td>iOS Vision, Android ML Kit OCR, Luhn 검사, 브랜드·길이 판별</td>
+              <td><code>flutter_card_scanner_plus 0.1.2</code></td>
+            </tr>
+            <tr>
+              <td>현재 미구현</td>
+              <td>WebView 요청 수신·결과 반환, 화면 캡처 방지, 앱 전용 권한 복구 UI, 만료 카드 차단·경고</td>
+              <td>확인한 Flutter·Android·iOS 소스에 해당 처리가 없음</td>
+            </tr>
+            <tr>
+              <td>권장사항</td>
+              <td>오류 상태 구분, 민감정보 수명 최소화, 실제 기기 회귀 테스트</td>
+              <td>제품 보안·UX 정책 확정 후 별도 구현 필요</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          참고사항과 실제 코드가 다른 부분은 실제 코드를 기준으로 했습니다. 현재
+          <code>/cardscan</code> Route와 결과 표시 화면은 스캐너 동작을 확인하기 위한
+          임시 구현입니다. 최종 WebView Bridge의 Method, 요청 식별자, 결과 Payload,
+          성공·취소·오류 형식은 아직 코드에 없으므로 <code class="badge-tbd">TBD</code>로
+          구분합니다. 앱 Manifest에는 카메라 권한이 직접 선언되어 있지 않고 Android
+          플러그인의 Manifest가 병합될 때 선언됩니다.
+        </p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">2. 확인한 구현과 파일 구조</h2>
+        <p>
+          문서 저장소에는 Flutter 소스가 없으므로 실제 구현 프로젝트를 별도로 확인했습니다.
+          아래 경로는 해당 프로젝트 루트를 <code>&lt;flutter-project&gt;</code>로 줄여
+          표시합니다.
+        </p>
+        <pre class="hljs"><code data-language="text">&lt;flutter-project&gt;/
+├── pubspec.yaml
+├── pubspec.lock
+├── lib/
+│   ├── core/router/
+│   │   ├── app_router.dart
+│   │   └── router_path.dart
+│   └── features/card_scan/
+│       ├── page/card_scan_page.dart
+│       └── provider/card_scan_provider.dart
+├── android/app/
+│   ├── build.gradle.kts
+│   └── src/main/AndroidManifest.xml
+└── ios/
+    ├── Podfile
+    └── Runner/Info.plist</code></pre>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">파일</th>
+              <th scope="col">확인한 내용</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>pubspec.yaml</code></td>
+              <td><code>flutter_card_scanner_plus: ^0.1.2</code>, Riverpod과 GoRouter 사용</td>
+            </tr>
+            <tr>
+              <td><code>pubspec.lock</code></td>
+              <td>카드 스캔 패키지가 pub.dev의 <code>0.1.2</code>로 잠김</td>
+            </tr>
+            <tr>
+              <td><code>card_scan_provider.dart</code></td>
+              <td><code>CardScanResult?</code>를 보관하는 Auto Dispose Notifier</td>
+            </tr>
+            <tr>
+              <td><code>card_scan_page.dart</code></td>
+              <td>스캐너 실행, 취소 처리, 결과 저장과 마스킹 표시</td>
+            </tr>
+            <tr>
+              <td><code>app_router.dart</code>, <code>router_path.dart</code></td>
+              <td><code>/cardscan</code> Route와 <code>CardScanPage</code> 연결</td>
+            </tr>
+            <tr>
+              <td>Android·iOS 설정</td>
+              <td>Android 최소 SDK 24, iOS Deployment Target 15.0, iOS 카메라 목적 문구</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">3. 전체 동작 흐름</h2>
+        <p>
+          아래 흐름은 확정된 최종 방향입니다. WebView Bridge의 구체적인 이름과 Payload는
+          아직 구현되지 않았으며, 현재 임시 화면의 Provider 저장·결과 표시 흐름을
+          대체합니다.
+        </p>
+        <figure class="diagram-frame">
+          <!-- prettier-ignore -->
+          <div class="mermaid">
+sequenceDiagram
+  accTitle: WebView 요청 기반 Flutter 카드 스캔과 결과 반환 흐름
+  accDescr: WebView에서 카드 스캔을 요청하면 Flutter가 Native 카메라 화면을 열고, 스캔이 끝나면 기존 WebView로 복귀하여 승인된 Bridge 응답으로 카드정보를 전달하며 취소와 오류는 카드정보 없이 구분해 반환합니다.
+  actor U as 사용자
+  participant W as WebView
+  participant B as Flutter Bridge
+  participant S as CardScannerPage
+  participant N as Native Camera · OCR
+  U->>W: 카드 스캔 버튼 선택
+  W->>B: 카드 스캔 요청 · 계약 TBD
+  B->>S: show · standard 요구사항
+  S->>N: 카메라 실행과 OCR 시작
+  N->>N: 번호·유효기간·이름 후보를 여러 Frame에서 확인
+  alt 번호와 유효기간 충족
+    N-->>S: CardScanResult
+    S-->>B: 결과 반환 후 Scanner 닫기
+    B-->>W: 승인된 카드정보 응답 · Payload TBD
+    W-->>U: 카드 입력 화면 갱신
+  else 사용자가 닫음
+    S-->>B: null 반환
+    B-->>W: 취소 응답 · 형식 TBD
+  else 권한·카메라 오류
+    S-->>B: 구분 가능한 오류
+    B-->>W: 오류 응답 · 형식 TBD
+  end
+          </div>
+          <figcaption>최종 목표인 WebView 요청, Native 스캔과 WebView 결과 반환 흐름</figcaption>
+        </figure>
+        <p>
+          <code>ScanRequirements.standard</code>는 카드 번호와 유효기간을 필수로,
+          카드 소유자명을 선호 필드로 처리합니다. 필수 필드가 안정화된 뒤 이름을 최대
+          12 OCR Frame 동안 더 기다리고, 이름이 없으면 번호와 유효기간만으로 완료할 수
+          있습니다. 사용자가 스캐너를 닫으면 <code>null</code>이 반환됩니다. 스캔 화면은
+          기존 WebView 위에 열리고 종료되므로 별도의 WebView를 새로 만들지 않습니다.
+        </p>
+        <p>
+          권한 거부나 카메라 오류는 사용자 취소와 같은 사건이 아닙니다. 패키지의 기본
+          스캐너 화면이 오류를 표시하며, 사용자가 그 화면을 닫은 뒤에야 호출부에는
+          <code>null</code>이 반환될 수 있습니다. 최종 연동에서는 취소와 오류를 WebView가
+          구분할 수 있어야 하며, 현재 앱 화면은 패키지 오류 코드를 별도 상태로 보관하지
+          않습니다.
+        </p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">4. 주요 클래스와 Riverpod 상태 관리</h2>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">구성 요소</th>
+              <th scope="col">역할</th>
+              <th scope="col">현재 구현 특성</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>CardScanPage</code></td>
+              <td>스캔 버튼, 결과 영역과 스캐너 호출을 구성</td>
+              <td>현재 개발 확인용 임시 화면</td>
+            </tr>
+            <tr>
+              <td><code>_CardResultView</code></td>
+              <td>스캔 결과를 사용자에게 표시</td>
+              <td>전체 번호 대신 <code>maskedNumber</code> 사용</td>
+            </tr>
+            <tr>
+              <td><code>cardScanProvider</code></td>
+              <td>임시 화면의 <code>CardScanResult?</code> 보관</td>
+              <td><code>NotifierProvider.autoDispose</code> · 최종 Bridge 흐름 사용 여부 재검토</td>
+            </tr>
+            <tr>
+              <td><code>CardScanNotifier</code></td>
+              <td>초기화, 결과 저장과 명시적 초기화</td>
+              <td><code>build()</code>는 <code>null</code>, <code>setResult()</code>와 <code>clear()</code> 제공</td>
+            </tr>
+            <tr>
+              <td><code>CardScannerPage</code></td>
+              <td>패키지 기본 전체 화면 카메라 UI</td>
+              <td>완료 시 결과, 닫기 시 <code>null</code> 반환</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Provider는 실제 코드에서 다음과 같이 구성되어 있습니다.</p>
+        <pre
+          class="hljs"
+        ><code data-language="dart"><span class="hljs-keyword">final</span> cardScanProvider =
+    <span class="hljs-title class_">NotifierProvider</span>.autoDispose&lt;<span class="hljs-title class_">CardScanNotifier</span>, <span class="hljs-title class_">CardScanResult</span>?&gt;(
+      <span class="hljs-title class_">CardScanNotifier</span>.new,
+    );
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">CardScanNotifier</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Notifier</span>&lt;<span class="hljs-title class_">CardScanResult</span>?&gt; {
+  <span class="hljs-meta">@override</span>
+  <span class="hljs-title class_">CardScanResult</span>? <span class="hljs-title function_">build</span>() =&gt; <span class="hljs-literal">null</span>;
+
+  <span class="hljs-keyword">void</span> <span class="hljs-title function_">setResult</span>(<span class="hljs-title class_">CardScanResult</span> result) {
+    state = result;
+  }
+
+  <span class="hljs-keyword">void</span> <span class="hljs-title function_">clear</span>() {
+    state = <span class="hljs-literal">null</span>;
+  }
+}</code></pre>
+        <p>
+          화면이 <code>ref.watch(cardScanProvider)</code>로 구독하는 동안 결과는 메모리에
+          유지됩니다. Route에서 벗어나 구독이 사라지면 Auto Dispose가 상태를 폐기하므로
+          재진입 시 초기값 <code>null</code>부터 시작합니다. 앱은 이 결과를 영구 저장소에
+          복사하지 않습니다. 최종 WebView 흐름은 결과를 전달한 직후 Native 쪽 참조를
+          정리하는 것을 기본으로 하며, 임시 화면의 Provider를 그대로 유지할 필요는 없습니다.
+        </p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">5. 스캐너 실행과 결과 처리</h2>
+        <p>현재 임시 화면의 핵심 실행 코드는 다음과 같습니다.</p>
+        <pre
+          class="hljs"
+        ><code data-language="dart"><span class="hljs-keyword">final</span> result = <span class="hljs-keyword">await</span> <span class="hljs-title class_">CardScannerPage</span>.<span class="hljs-title function_">show</span>(
+  context,
+  title: <span class="hljs-string">'카드 스캔'</span>,
+  requirements: <span class="hljs-title class_">ScanRequirements</span>.standard,
+);
+
+<span class="hljs-keyword">if</span> (result == <span class="hljs-literal">null</span> || !context.mounted) {
+  <span class="hljs-keyword">return</span>;
+}
+
+ref.<span class="hljs-title function_">read</span>(cardScanProvider.notifier).<span class="hljs-title function_">setResult</span>(result);</code></pre>
+        <ol>
+          <li>현재는 임시 Flutter 화면의 버튼, 최종 구조에서는 WebView 요청으로 패키지 기본 카메라 화면을 엽니다.</li>
+          <li>Native OCR이 카드 Frame 안의 문자를 단말 내부에서 분석합니다.</li>
+          <li>패키지의 Dart Parser가 후보 번호를 브랜드 길이와 Luhn으로 검증합니다.</li>
+          <li>여러 Frame의 결과가 일치하고 필수 필드가 충족되면 <code>CardScanResult</code>가 반환됩니다.</li>
+          <li>사용자 취소 또는 화면 닫기는 <code>null</code>을 반환하므로 Provider를 변경하지 않습니다.</li>
+          <li>현재는 결과를 Provider에 저장하지만 최종 구조에서는 요청을 보낸 기존 WebView에 결과를 반환합니다.</li>
+          <li>WebView가 결과를 받은 뒤 카드 입력 UI를 갱신하고, Flutter는 전달이 끝난 결과를 불필요하게 보관하지 않습니다.</li>
+        </ol>
+        <p>
+          현재 호출부에는 <code>CardScannerException</code>을 구분하는
+          <code>try/catch</code>가 없습니다. 기본 스캐너가 내부 오류를 화면에 표시하지만,
+          앱 고유의 재시도·설정 이동·분석 Event가 필요하다면 별도 오류 설계가 필요합니다.
+          WebView 요청 처리에서는 동시 실행 방지, 요청과 응답을 연결할 식별자, WebView
+          이탈·재생성 시 응답 폐기 기준도 함께 정의해야 합니다.
+        </p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">6. 임시 Route와 최종 WebView 연결</h2>
+        <p>
+          Route 상수는 <code>RouterPath.cardscan = '/cardscan'</code>이고,
+          <code>AppRouter</code>가 이 경로를 <code>CardScanPage</code>에 연결합니다. 현재
+          Splash의 후속 이동도 <code>context.go(RouterPath.cardscan)</code>으로 설정되어
+          있습니다. 이 Route는 현재 스캐너를 단독 검증하기 위한 임시 진입점입니다.
+        </p>
+        <pre
+          class="hljs"
+        ><code data-language="dart"><span class="hljs-title class_">GoRoute</span>(
+  path: <span class="hljs-title class_">RouterPath</span>.cardscan,
+  builder: (context, state) {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">const</span> <span class="hljs-title class_">CardScanPage</span>();
+  },
+),</code></pre>
+        <p>
+          최종 구조에서는 WebView 화면을 <code>/cardscan</code>으로 교체하지 않습니다.
+          WebView에서 승인된 Bridge 요청이 들어오면 현재 WebView의 Flutter
+          <code>BuildContext</code>에서 <code>CardScannerPage.show()</code>를 열고, Scanner가
+          닫히면 유지 중인 WebView에 결과를 응답합니다. Method 이름, 요청 ID, 중복 요청,
+          성공·취소·오류 Payload와 JavaScript Callback 방식은
+          <code class="badge-tbd">TBD</code>이며 실제 계약 없이 임의로 구현하지 않습니다.
+        </p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">7. Android 설정과 권한</h2>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">항목</th>
+              <th scope="col">현재 설정</th>
+              <th scope="col">확인 사항</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>최소 SDK</td>
+              <td><code>minSdk = 24</code></td>
+              <td>앱 설정과 패키지 최소 요구사항이 일치</td>
+            </tr>
+            <tr>
+              <td>OCR</td>
+              <td>ML Kit Text Recognition</td>
+              <td>패키지가 Bundled Model <code>16.0.1</code>을 포함하며 오프라인 실행</td>
+            </tr>
+            <tr>
+              <td>카메라 선언</td>
+              <td>플러그인 Manifest의 <code>android.permission.CAMERA</code></td>
+              <td>앱 Manifest에 직접 중복 선언하지 않아도 병합 결과에 포함</td>
+            </tr>
+            <tr>
+              <td>카메라 필수 여부</td>
+              <td><code>android.hardware.camera</code>의 <code>required="false"</code></td>
+              <td>카메라 없는 단말에서는 <code>noCamera</code> 처리 필요</td>
+            </tr>
+            <tr>
+              <td>Runtime 권한</td>
+              <td>플러그인이 직접 요청</td>
+              <td>거부 시 <code>permissionDenied</code> 오류</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          배포 전에 병합된 Manifest에서 카메라 권한을 확인합니다. 프로젝트에 설치된
+          <code>permission_handler</code>가 있더라도 현재 카드 스캔 화면은 이 패키지를
+          통해 별도 사전 권한을 요청하지 않습니다. 같은 권한을 두 계층에서 동시에
+          요청하지 않도록 소유 주체를 하나로 유지합니다.
+        </p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">8. iOS 설정과 권한</h2>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">항목</th>
+              <th scope="col">현재 설정</th>
+              <th scope="col">확인 사항</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Deployment Target</td>
+              <td><code>platform :ios, '15.0'</code></td>
+              <td>패키지 Podspec의 최소 iOS 15.0과 일치</td>
+            </tr>
+            <tr>
+              <td>OCR</td>
+              <td>Apple Vision</td>
+              <td>AVFoundation 카메라 Frame을 단말 내부에서 분석</td>
+            </tr>
+            <tr>
+              <td>카메라 목적 문구</td>
+              <td>카드 정보를 스캔하기 위해 카메라 권한이 필요합니다.</td>
+              <td><code>NSCameraUsageDescription</code>에 등록됨</td>
+            </tr>
+            <tr>
+              <td>Runtime 권한</td>
+              <td>플러그인이 <code>AVCaptureDevice.requestAccess</code>로 요청</td>
+              <td>거부 시 <code>permissionDenied</code> 오류</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          Xcode Runner Target의 Deployment Target과 Podfile이 다르면 낮은 값이 남지
+          않도록 함께 확인합니다. 권한을 한 번 거부한 사용자를 설정 앱으로 안내하는
+          제품 전용 UI는 현재 구현에 없으며, 추가 여부는 앱 UX 정책으로 결정합니다.
+        </p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">9. 스캔 결과 필드</h2>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">필드</th>
+              <th scope="col">형식과 의미</th>
+              <th scope="col">현재 화면 사용</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>number</code></td>
+              <td>공백 없는 전체 카드 번호 문자열. 인식 전에는 <code>null</code></td>
+              <td>화면에 직접 표시하지 않음</td>
+            </tr>
+            <tr>
+              <td><code>maskedNumber</code></td>
+              <td>마지막 네 자리만 남긴 <code>•••• 1234</code> 형식</td>
+              <td>결과 화면의 번호 표시에 사용</td>
+            </tr>
+            <tr>
+              <td><code>last4</code></td>
+              <td>번호 마지막 네 자리 또는 <code>null</code></td>
+              <td>현재 직접 사용하지 않음</td>
+            </tr>
+            <tr>
+              <td><code>brand</code></td>
+              <td><code>visa</code>, <code>mastercard</code>, <code>amex</code> 중 하나</td>
+              <td>현재 직접 표시하지 않음</td>
+            </tr>
+            <tr>
+              <td><code>expiryMonth</code></td>
+              <td>1부터 12까지의 월 또는 <code>null</code></td>
+              <td><code>formattedExpiry</code> 계산에 사용</td>
+            </tr>
+            <tr>
+              <td><code>expiryYear</code></td>
+              <td>네 자리 연도 또는 <code>null</code></td>
+              <td><code>formattedExpiry</code> 계산에 사용</td>
+            </tr>
+            <tr>
+              <td><code>formattedExpiry</code></td>
+              <td><code>MM/YY</code> 형식. 월·연도가 없으면 <code>null</code></td>
+              <td>값이 있을 때 표시</td>
+            </tr>
+            <tr>
+              <td><code>cardholderName</code></td>
+              <td>카드에 인쇄된 대문자 이름. 인식되지 않으면 <code>null</code></td>
+              <td>값이 있을 때 표시</td>
+            </tr>
+            <tr>
+              <td><code>isComplete</code></td>
+              <td>현재 요구한 필드가 여러 Frame에서 확인되어 완료됐는지 표시</td>
+              <td>현재 직접 사용하지 않음</td>
+            </tr>
+            <tr>
+              <td><code>isExpired()</code></td>
+              <td>호출 시점을 기준으로 유효기간이 지났는지 계산</td>
+              <td>현재 호출하지 않아 만료 카드를 차단·경고하지 않음</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          <code>number</code>는 패키지가 Luhn과 지원 브랜드의 BIN·길이 규칙을 통과한
+          경우에만 결과 후보가 됩니다. 그러나 이 검사는 번호 형식의 유효성을
+          확인할 뿐 발급 상태, 소유권이나 결제 가능 여부를 확인하지 않습니다.
+        </p>
+        <h3>WebView 반환 계약</h3>
+        <p>
+          최종 흐름에서는 WebView가 카드 입력을 이어갈 수 있도록 스캔 결과를 반환합니다.
+          전체 번호가 필요한지, 만료 월·연도를 숫자로 나눌지, 브랜드와 소유자명을
+          포함할지는 Web 담당자와 승인된 계약으로 확정합니다. 현재 코드에는 계약이
+          없으므로 필드 이름, JSON 구조와 Callback 이름은
+          <code class="badge-tbd">TBD</code>입니다.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">응답 종류</th>
+              <th scope="col">전달 원칙</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>성공</td>
+              <td>승인된 최소 카드정보만 요청 ID와 연결해 한 번 반환</td>
+            </tr>
+            <tr>
+              <td>사용자 취소</td>
+              <td>카드정보 없이 취소 상태만 반환</td>
+            </tr>
+            <tr>
+              <td>권한·카메라 오류</td>
+              <td>민감한 Native 원문 없이 합의된 오류 코드만 반환</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">10. 마스킹과 민감정보 처리</h2>
+        <blockquote>
+          <p>
+            카드 번호가 Native에서 Dart 영역으로 전달된 순간부터
+            <code>CardScanResult.number</code>를 카드 소유자 데이터로 취급합니다. 화면에
+            마스킹했다고 해서 메모리의 전체 번호가 사라지는 것은 아닙니다.
+          </p>
+        </blockquote>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">항목</th>
+              <th scope="col">현재 구현</th>
+              <th scope="col">유지 기준</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>화면 표시</td>
+              <td><code>maskedNumber</code>만 사용</td>
+              <td><code>number</code>나 <code>formattedNumber</code>를 UI에 직접 표시하지 않음</td>
+            </tr>
+            <tr>
+              <td>로그</td>
+              <td>카드 스캔 기능에서 결과를 로그로 출력하지 않음</td>
+              <td>전체 번호, 결과 객체와 OCR 원문을 로그·Crash·Analytics에 전달하지 않음</td>
+            </tr>
+            <tr>
+              <td>저장소</td>
+              <td>Auto Dispose Provider 메모리에만 일시 보관</td>
+              <td>SharedPreferences, 일반 파일, Database와 Clipboard에 저장하지 않음</td>
+            </tr>
+            <tr>
+              <td>WebView 전달</td>
+              <td>최종 연동 목표이며 현재 미구현</td>
+              <td>허용된 WebView와 요청에만 최소 필드를 일회성 응답으로 전달하고 URL·Query·범용 Event에는 포함하지 않음</td>
+            </tr>
+            <tr>
+              <td>CVV</td>
+              <td>패키지의 인식 필드가 아니며 앱도 처리하지 않음</td>
+              <td>스캔, 저장, 로그와 전송 대상에 추가하지 않음</td>
+            </tr>
+            <tr>
+              <td>카메라 Frame</td>
+              <td>패키지가 Native 메모리에서 처리하고 저장·전송하지 않음</td>
+              <td>별도 사진 저장이나 Gallery 스캔을 추가할 때 다시 검토</td>
+            </tr>
+            <tr>
+              <td>화면 캡처 방지</td>
+              <td>현재 확인한 앱 코드에는 구현되어 있지 않음</td>
+              <td>제품 정책 확정 후 Android·iOS에서 별도 구현·검증</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          패키지의 <code>toString()</code>은 번호를 마스킹하지만 앱 정책은 더 엄격하게
+          유지합니다. 객체의 다른 필드와 이름·유효기간도 개인정보가 될 수 있으므로
+          결과 객체 자체를 일반 로그에 남기지 않습니다. 이 패키지를 사용하거나
+          Luhn 검사를 통과했다고 해서 PCI DSS 요구사항을 충족하거나 인증을 대신하는
+          것은 아닙니다.
+        </p>
+        <p>
+          전체 번호를 WebView에 반환하면 Native뿐 아니라 WebView JavaScript 영역도
+          카드정보 처리 범위에 포함됩니다. 허용 Origin, 요청 Method, 응답 대상 Frame,
+          페이지 이동·새로고침·중복 Callback 시 폐기 기준을 제한하고, Console,
+          Analytics, Session Replay, URL, Browser Storage와 오류 수집 도구에 값이
+          노출되지 않는지 Web과 App 양쪽에서 검증합니다.
+        </p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">11. 지원 카드와 인식 제한</h2>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">카드 브랜드</th>
+              <th scope="col">지원 번호 길이</th>
+              <th scope="col">판별 기준</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Visa</td>
+              <td>16자리 또는 19자리</td>
+              <td>4로 시작, 길이와 Luhn 통과</td>
+            </tr>
+            <tr>
+              <td>Mastercard</td>
+              <td>16자리</td>
+              <td>51–55 또는 2221–2720 BIN 범위, 길이와 Luhn 통과</td>
+            </tr>
+            <tr>
+              <td>American Express</td>
+              <td>15자리</td>
+              <td>34 또는 37로 시작, 길이와 Luhn 통과</td>
+            </tr>
+          </tbody>
+        </table>
+        <ul>
+          <li>지원 목록 밖의 브랜드는 Luhn을 통과해도 거부됩니다.</li>
+          <li>카드 소유자명은 휴리스틱 인식이므로 배경이 복잡하거나 양각·비라틴 문자·무기명 카드에서는 <code>null</code>일 수 있습니다.</li>
+          <li>현재 패키지 Scanner UI는 세로 방향 사용을 전제로 합니다.</li>
+          <li>반사광, 낮은 조도, 흔들림, 손가락 가림과 훼손된 인쇄는 인식률을 낮춥니다.</li>
+          <li>카드가 아닌 인쇄물도 지원 BIN·길이와 Luhn을 만족하면 카드 번호로 오인될 수 있습니다.</li>
+          <li>유효기간이 지난 카드도 OCR 결과로 반환될 수 있으며 현재 앱은 <code>isExpired()</code>로 거부하지 않습니다.</li>
+          <li>Gallery 정적 이미지 스캔과 사용자 정의 Overlay는 패키지 기능이지만 현재 앱은 사용하지 않습니다.</li>
+        </ul>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">12. 실제 기기 테스트</h2>
+        <p>
+          카메라 초점, 반사광, OCR 엔진과 권한 설정은 플랫폼과 단말에 따라 달라지므로
+          Android와 iOS 실제 기기에서 각각 검증합니다. 운영 카드 번호나 실제 고객
+          데이터를 Test Artifact로 남기지 않고, 카드사·결제사가 제공한 공식 Test
+          번호를 사용해 제작한 명확한 Test Data임을 표시합니다.
+        </p>
+        <ol>
+          <li>깨끗한 설치 상태에서 앱을 실행하고 <code>/cardscan</code> 화면에 진입합니다.</li>
+          <li>최초 카메라 권한 Prompt에서 허용과 거부를 각각 검증합니다.</li>
+          <li>지원 브랜드별 Test Card를 Frame 안에 두고 결과 반환 시간을 확인합니다.</li>
+          <li>표시된 번호가 마지막 네 자리 외에는 가려졌는지 확인합니다.</li>
+          <li>유효기간과 이름의 값·누락 처리를 실제 Test Card와 대조합니다.</li>
+          <li>화면을 벗어났다가 다시 진입해 이전 결과가 남지 않는지 확인합니다.</li>
+          <li>Device Log, Crash Report, Analytics와 저장소에 전체 번호가 남지 않는지 확인합니다.</li>
+        </ol>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">시나리오</th>
+              <th scope="col">현재 기대 결과</th>
+              <th scope="col">플랫폼</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Visa 카드</td><td>지원 BIN·길이·Luhn 통과 후 마스킹 결과 표시</td><td>Android·iOS</td></tr>
+            <tr><td>Mastercard 카드</td><td>16자리 규칙 통과 후 마스킹 결과 표시</td><td>Android·iOS</td></tr>
+            <tr><td>American Express 카드</td><td>15자리 규칙 통과 후 마스킹 결과 표시</td><td>Android·iOS</td></tr>
+            <tr><td>유효기간이 지난 카드</td><td>현재는 인식 가능. <code>isExpired()</code>는 참이지만 화면 경고 없음</td><td>Android·iOS</td></tr>
+            <tr><td>카드 소유자명이 없는 카드</td><td>대기 후 이름 없이 번호·유효기간으로 완료 가능</td><td>Android·iOS</td></tr>
+            <tr><td>반사광이 있는 환경</td><td>오인식 없이 안정화되거나 계속 대기. 반복 실패율 기록</td><td>Android·iOS</td></tr>
+            <tr><td>어두운 환경</td><td>Torch 사용 가능 여부와 인식·실패 동작 확인</td><td>Android·iOS</td></tr>
+            <tr><td>카메라 권한 허용</td><td>Preview가 열리고 OCR이 시작됨</td><td>Android·iOS</td></tr>
+            <tr><td>카메라 권한 거부</td><td>기본 Scanner의 권한 오류 표시, 앱 전용 복구 UI는 없음</td><td>Android·iOS</td></tr>
+            <tr><td>스캔 도중 사용자 취소</td><td><code>null</code> 반환, 기존 Provider 상태 변경 없음</td><td>Android·iOS</td></tr>
+            <tr><td>동일 카드 반복 인식</td><td>다시 스캔 시 새 결과가 현재 Provider 상태를 대체</td><td>Android·iOS</td></tr>
+            <tr><td>카드가 아닌 숫자·바코드</td><td>대부분 거부. 우연히 모든 규칙을 만족하면 오인식 가능성 기록</td><td>Android·iOS</td></tr>
+            <tr><td>화면 이탈 후 재진입</td><td>Auto Dispose 이후 안내 초기 상태 표시</td><td>Android·iOS</td></tr>
+            <tr><td>WebView 정상 요청</td><td>Scanner가 즉시 열리고 완료 후 기존 WebView에 성공 응답을 한 번 전달</td><td>Android·iOS · 최종 연동 후</td></tr>
+            <tr><td>WebView 요청 후 취소</td><td>기존 WebView로 복귀하고 카드정보 없이 취소 응답 전달</td><td>Android·iOS · 최종 연동 후</td></tr>
+            <tr><td>WebView 이탈·재생성</td><td>오래된 페이지에 결과를 전달하지 않고 합의된 기준으로 응답 폐기</td><td>Android·iOS · 최종 연동 후</td></tr>
+            <tr><td>중복 스캔 요청</td><td>두 Scanner를 동시에 열지 않고 합의된 중복 오류 또는 기존 요청 유지</td><td>Android·iOS · 최종 연동 후</td></tr>
+            <tr><td>허용되지 않은 WebView 요청</td><td>Scanner를 열지 않고 요청 거부, 카드정보 미전달</td><td>Android·iOS · 최종 연동 후</td></tr>
+            <tr><td>Android 실제 기기</td><td>API 24 이상 대표·최신 단말에서 카메라와 ML Kit 확인</td><td>Android</td></tr>
+            <tr><td>iOS 실제 기기</td><td>iOS 15와 최신 지원 iOS에서 카메라와 Vision 확인</td><td>iOS</td></tr>
+          </tbody>
+        </table>
+        <p>
+          현재 Flutter 프로젝트에는 카드 스캔 전용 자동화 Test가 확인되지 않았습니다.
+          따라서 위 표는 실제 기기 수동 Test 기준이며, 자동화가 추가되기 전까지 수행
+          결과와 단말·OS 정보를 별도 Test 기록으로 남깁니다. 기록에는 전체 카드 번호나
+          원본 카드 사진을 첨부하지 않습니다.
+        </p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">13. 자주 발생하는 오류와 확인 순서</h2>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">증상</th>
+              <th scope="col">주요 원인</th>
+              <th scope="col">확인과 해결</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Android 최소 SDK 충돌</td>
+              <td>앱의 <code>minSdk</code>가 패키지 요구사항 24보다 낮음</td>
+              <td><code>android/app/build.gradle.kts</code>를 확인. 현재 프로젝트는 24로 일치</td>
+            </tr>
+            <tr>
+              <td>iOS Deployment Target 오류</td>
+              <td>Runner 또는 Pod Target이 iOS 15보다 낮음</td>
+              <td>Podfile과 Xcode Target을 모두 iOS 15 이상으로 맞춤</td>
+            </tr>
+            <tr>
+              <td>iOS 카메라 실행 시 종료</td>
+              <td><code>NSCameraUsageDescription</code> 누락</td>
+              <td><code>Info.plist</code>에 실제 목적 문구가 있는지 확인. 현재 등록됨</td>
+            </tr>
+            <tr>
+              <td><code>permissionDenied</code></td>
+              <td>사용자가 카메라 권한을 거부함</td>
+              <td>설정 앱에서 권한 복구 안내를 검토하고 거부 상태를 별도 Test</td>
+            </tr>
+            <tr>
+              <td><code>noCamera</code> 또는 카메라 초기화 오류</td>
+              <td>사용 가능한 후면 카메라가 없음</td>
+              <td>iOS는 <code>noCamera</code>를 명시적으로 반환하며, Android는 초기화 오류로 나타날 수 있으므로 Native Log와 실제 기기를 함께 확인</td>
+            </tr>
+            <tr>
+              <td><code>cameraError</code></td>
+              <td>카메라 Input·Output 구성 또는 Session 시작 실패</td>
+              <td>다른 앱의 카메라 점유, OS 상태와 Native Log를 확인한 뒤 재시도</td>
+            </tr>
+            <tr>
+              <td><code>alreadyRunning</code></td>
+              <td>스캐너가 실행 중인데 다시 시작함</td>
+              <td>연속 Tap과 중복 호출을 막고 기존 Scanner 종료 후 재실행</td>
+            </tr>
+            <tr>
+              <td>Native 의존성 반영 실패</td>
+              <td>패키지 추가 뒤 생성 파일·Pod·Gradle Cache가 오래됨</td>
+              <td><code>flutter pub get</code> 후 현재 프로젝트의 CocoaPods·Gradle 절차로 재생성하고 잠금 파일 차이를 확인</td>
+            </tr>
+            <tr>
+              <td>스캔이 완료되지 않음</td>
+              <td>번호·유효기간 미인식, 지원하지 않는 브랜드, Luhn 실패 또는 환경 문제</td>
+              <td>조명·거리·초점을 조정하고 공식 Test Card로 브랜드·유효기간을 분리 확인</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          Build 설정을 임의로 올리기 전에 <code>pubspec.lock</code>, 패키지 Release,
+          Android 병합 Manifest, Xcode Runner Target과 실제 Native 오류를 먼저 확인합니다.
+          오류 재현 자료에는 전체 카드 번호와 OCR 원문을 남기지 않습니다.
+        </p>
+      </section>
+
+      <hr />
+
+      <section>
+        <h2 class="bx-active">14. 유지보수와 향후 개선</h2>
+        <h3>유지보수 시 주의사항</h3>
+        <ul>
+          <li>패키지 Version 변경 전 <code>pubspec.lock</code>의 실제 해석 Version과 공식 Changelog를 확인합니다.</li>
+          <li>지원 브랜드, BIN, 번호 길이와 Luhn 규칙을 앱 코드에 별도로 복제하지 않습니다.</li>
+          <li><code>ScanRequirements</code>를 바꾸면 완료 조건과 이름 누락 UX, 실제 기기 Test를 함께 갱신합니다.</li>
+          <li>Provider를 Keep Alive 또는 영구 저장으로 바꾸면 전체 번호의 수명과 삭제 시점을 다시 설계합니다.</li>
+          <li>로그·Crash·Analytics·Session Replay 도구를 추가할 때 카드 화면과 결과 객체의 수집 여부를 점검합니다.</li>
+          <li>WebView Bridge는 카드 스캔 전용 Method와 응답 경계만 제공하고 범용 JavaScript 실행 통로로 확장하지 않습니다.</li>
+          <li>WebView Navigation 또는 재생성 뒤 이전 요청의 결과가 다른 페이지에 전달되지 않도록 요청 수명을 관리합니다.</li>
+          <li>화면에 브랜드나 마지막 네 자리를 추가해도 전체 번호를 다시 조립할 수 있는 Data를 노출하지 않습니다.</li>
+          <li>Android·iOS 권한 요청을 패키지와 앱 양쪽에서 중복 소유하지 않습니다.</li>
+          <li>기능 완료 판단은 Emulator만으로 끝내지 않고 최소 지원 OS와 최신 OS의 실제 기기에서 수행합니다.</li>
+        </ul>
+
+        <h3>향후 개선사항</h3>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">우선순위</th>
+              <th scope="col">개선 항목</th>
+              <th scope="col">현재 상태</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>높음</td>
+              <td>권한 거부, 카메라 없음, 카메라 오류와 중복 실행을 앱 상태로 구분</td>
+              <td>권장사항 · 미구현</td>
+            </tr>
+            <tr>
+              <td>높음</td>
+              <td>만료 카드의 경고 또는 차단 정책을 확정하고 <code>isExpired()</code> 적용</td>
+              <td>제품 정책 <code class="badge-tbd">TBD</code></td>
+            </tr>
+            <tr>
+              <td>높음</td>
+              <td>WebView 요청·응답 Bridge, 허용 Origin, 요청 ID와 성공·취소·오류 계약 구현</td>
+              <td>연동 계약 <code class="badge-tbd">TBD</code></td>
+            </tr>
+            <tr>
+              <td>높음</td>
+              <td>WebView에 전달할 카드정보의 최소 필드와 전달 직후 Native 참조 폐기 시점 확정</td>
+              <td>보안·연동 계약 <code class="badge-tbd">TBD</code></td>
+            </tr>
+            <tr>
+              <td>중간</td>
+              <td>민감 화면의 Screenshot·App Switcher Preview 차단 여부 결정</td>
+              <td>보안 정책 <code class="badge-tbd">TBD</code></td>
+            </tr>
+            <tr>
+              <td>중간</td>
+              <td>연속 Tap 방지, 진행 상태와 재시도 UX 보강</td>
+              <td>권장사항 · 미구현</td>
+            </tr>
+            <tr>
+              <td>중간</td>
+              <td>Notifier와 결과 표시의 Unit·Widget Test 추가</td>
+              <td>권장사항 · 미구현</td>
+            </tr>
+            <tr>
+              <td>중간</td>
+              <td>지원 브랜드·조도·반사광·오인식 실제 기기 회귀 Test 정례화</td>
+              <td>운영 절차 <code class="badge-tbd">TBD</code></td>
+            </tr>
+          </tbody>
+        </table>
+        <blockquote>
+          <p>
+            WebView 요청으로 Scanner를 열고 결과를 기존 WebView에 반환하는 방향은
+            확정됐지만 구체적인 Bridge 계약과 구현은 아직 완료되지 않았습니다. 화면
+            캡처 방지, 만료 카드 정책과 반환 Payload는 보안·제품·Web·App 담당자가
+            범위를 확정한 뒤 앱 코드와 이 문서를 함께 갱신합니다.
+          </p>
+        </blockquote>
+      </section>
+    </main>
+
+    <footer>
+      <p>Flutter 카드 스캔 기술 가이드</p>
+    </footer>
+    <script src="../../../assets/js/common.js"></script>
+    <script src="../../../assets/js/mermaid.js"></script>
+  </body>
+</html>

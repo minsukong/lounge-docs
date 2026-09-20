@@ -1,6 +1,6 @@
 # WebView 외부 결제 Native 연동 핵심 규칙
 
-> 기준 원본: [WebView 외부 결제 안정화 가이드](../guides/platform/webview/external_payment.html)
+> 기준 원본: [WebView 외부 결제 안정화 가이드](../guides/platform/webview/app_external_payment.html)
 >
 > 이 문서는 AI 코딩용 요약입니다. 결제사 URL 규격, 앱 복귀 설정 또는 플랫폼별 세부 판단이 필요하면 기준 원본과 실제 프로젝트 설정을 확인합니다.
 
