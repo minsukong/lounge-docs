@@ -125,7 +125,7 @@ apps/app-webview/
 
 ## Phase 3: 브릿지 통신 테스트
 
-> 기준: `docs/guides/platform/webview/webView_guide.html` §10
+> 기준: `docs/guides/platform/webview/app_webview_guide.html` §10
 > ⚠️ **TBD 의존**: Bridge 계약(채널명, 요청·응답·오류 규격)은 Flutter 담당자와 Front-end가 합의해야 합니다.
 
 | 순서 | 작업 | 산출물 |

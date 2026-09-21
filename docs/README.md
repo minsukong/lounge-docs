@@ -9,6 +9,7 @@
 - [html template](./templates/index.html)
 - [Front-End 저장소 구조 기준](./guides/architecture/index.html) · [GitLab Pages와 Confluence 운영](./guides/architecture/index.html#document-pages)
 - [APP 개발 표준](./guides/app/app.html)
+- [Flutter 카드 스캔 기술 가이드](./guides/platform/webview/card_scan.html)
 - [Front-End 개발 가이드](./guides/frontend/index.html)
 - [Front-end 구축 일정 산정 보고서](./guides/planning/web.html)
 - [Flutter APP 구축 일정 산정 보고서](./guides/planning/app.html)
