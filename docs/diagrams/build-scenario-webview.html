@@ -3193,7 +3193,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         min-width: 0;
         padding: 0.45rem 0.6rem;
         border-radius: 0.55rem;
-        font-size: 0.75rem;
+        font-size: 1.75rem;
       }
       .guided-views > #guided-view-prev,
       .guided-views > #guided-view-next {
@@ -3209,6 +3209,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         padding: 0.2rem 0.5rem;
         border-left: 1px solid var(--toolbar-border);
         overflow: hidden;
+        font-size: 1rem;
       }
       .guided-view-meta {
         display: flex;
@@ -3306,13 +3307,13 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       }
       .guided-view-copy strong {
         color: var(--toolbar-text);
-        font-size: 0.75rem;
+        font-size: 1.5rem;
         line-height: 1.35;
       }
       .guided-view-copy small {
         margin-top: 0;
         color: var(--text-muted);
-        font-size: 0.625rem;
+        font-size: 1rem;
         line-height: 1.35;
       }
       .guided-story-caption {
@@ -3344,13 +3345,23 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         border-right: 1px solid
           color-mix(in srgb, var(--frontend-stroke) 28%, var(--toolbar-border));
         color: var(--frontend-stroke);
-        font-size: 0.5625rem;
+        font-size: 0.75rem;
         font-weight: 800;
         letter-spacing: 0.08em;
         text-transform: uppercase;
       }
       .guided-story-caption strong,
       .guided-story-caption small {
+        font-family:
+          "Inter",
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          "Helvetica Neue",
+          Arial,
+          sans-serif;
         display: block;
         min-width: 0;
         overflow: hidden;
@@ -3359,13 +3370,13 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       }
       .guided-story-caption strong {
         color: var(--toolbar-text);
-        font-size: 0.6875rem;
-        line-height: 1.3;
+        font-size: 0.875rem;
+        line-height: 2;
       }
       .guided-story-caption small {
         color: var(--text-muted);
-        font-size: 0.5625rem;
-        line-height: 1.35;
+        font-size: 0.75rem;
+        line-height: 2;
       }
       .guided-story-caption-next {
         grid-column: 3;
@@ -3449,7 +3460,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         color: var(--text-muted);
         cursor: pointer;
         font-family: inherit;
-        font-size: 0.5625rem;
+        font-size: 0.9rem;
         font-weight: 650;
         letter-spacing: 0.02em;
         line-height: 1;
@@ -3567,7 +3578,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         gap: 0.38rem;
         min-width: 6.25rem !important;
         color: var(--frontend-stroke) !important;
-        font-size: 0.625rem !important;
+        font-size: 1rem !important;
       }
       .guided-view-play[aria-pressed="true"] {
         background: var(--toolbar-hover);
@@ -3575,7 +3586,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
       .guided-view-all {
         min-width: 3.25rem !important;
         color: var(--text-muted) !important;
-        font-size: 0.625rem !important;
+        font-size: 1rem !important;
       }
       .guided-view-beat-link {
         display: inline-flex;
@@ -3585,7 +3596,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         min-width: 5.4rem !important;
         min-height: 1.5rem;
         color: var(--text-muted) !important;
-        font-size: 0.5625rem !important;
+        font-size: 1rem !important;
         letter-spacing: 0.025em;
         transition:
           background 140ms ease,
@@ -3724,9 +3735,8 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         min-width: 0;
         overflow: hidden;
         color: var(--toolbar-text);
-        font-size: 0.8rem;
+        font-size: 1rem;
         font-weight: 700;
-        line-height: 1.3;
         text-overflow: ellipsis;
         white-space: nowrap;
       }
@@ -3735,7 +3745,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         grid-row: 1;
         margin-left: 0.38rem;
         color: var(--text-faint);
-        font-size: 0.5rem;
+        font-size: 0.8rem;
         font-style: normal;
         font-weight: 650;
         white-space: nowrap;
@@ -7794,18 +7804,18 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
           <!-- Phase headers -->
           <line
             x1="68"
-            y1="35"
+            y1="27"
             x2="320"
-            y2="35"
+            y2="27"
             class="a-default"
             stroke-width="1.1"
           />
-          <rect x="68" y="27" width="252" height="16" rx="4" class="c-mask" />
+          <rect x="68" y="15" width="252" height="24" rx="4" class="c-mask" />
           <text
             x="194"
-            y="39"
+            y="31"
             class="t-muted"
-            font-size="8"
+            font-size="11"
             font-weight="600"
             text-anchor="middle"
           >
@@ -7813,18 +7823,18 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
           </text>
           <line
             x1="390"
-            y1="35"
+            y1="27"
             x2="684"
-            y2="35"
+            y2="27"
             class="a-emphasis"
             stroke-width="1.1"
           />
-          <rect x="390" y="27" width="294" height="16" rx="4" class="c-mask" />
+          <rect x="390" y="15" width="294" height="24" rx="4" class="c-mask" />
           <text
             x="537"
-            y="39"
+            y="31"
             class="t-backend"
-            font-size="8"
+            font-size="11"
             font-weight="600"
             text-anchor="middle"
           >
@@ -7832,25 +7842,25 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
           </text>
           <line
             x1="825.6000000000001"
-            y1="35"
+            y1="27"
             x2="1114.8000000000002"
-            y2="35"
+            y2="27"
             class="a-dashed"
             stroke-width="1.1"
           />
           <rect
             x="825.6000000000001"
-            y="27"
+            y="15"
             width="289.19999999999993"
-            height="16"
+            height="24"
             rx="4"
             class="c-mask"
           />
           <text
             x="970.2"
-            y="39"
+            y="31"
             class="t-messagebus"
-            font-size="8"
+            font-size="11"
             font-weight="600"
             text-anchor="middle"
           >
@@ -17455,7 +17465,7 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
           var automaticPlaybackAllowed = storyAutomaticPlaybackAllowed();
           panel.setAttribute("data-playing", playing ? "true" : "false");
           syncStoryPlayback();
-          play.disabled = !playing && !automaticPlaybackAllowed;
+          play.disabled = false;
           play.setAttribute("aria-pressed", playing ? "true" : "false");
           play.setAttribute(
             "aria-label",
@@ -17550,21 +17560,27 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
           if (activeIndex < views.length - 1) {
             var destinationIndex = activeIndex + 1;
             activate(destinationIndex, { playback: true });
-            afterHandoff(function () {
-              if (!playing || activeIndex !== destinationIndex) return;
+            if (playing && activeIndex === destinationIndex) {
               storyBeatElapsedMs = 0;
               setStoryBeat(0, { pulse: true, follow: true });
               scheduleStoryPlayback();
-            });
+            }
             return true;
           }
-          pausePlayback({ complete: true });
+          playing = false;
+          stopStoryBeatTimer();
+          clearStoryPulse();
+          clearStoryFollow();
+          storyPlaybackComplete = false;
+          resetProgress(1);
+          renderPlayback();
+          showAll({ updateUrl: false, resetView: false });
           return true;
         }
 
         function scheduleStoryPlayback() {
           var total = storySteps.length;
-          if (!playing || !total || reducedMotion()) {
+          if (!playing || !total) {
             if (playing) pausePlayback();
             return false;
           }
@@ -17605,10 +17621,6 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
         }
 
         function startPlayback() {
-          if (!storyAutomaticPlaybackAllowed()) {
-            renderPlayback();
-            return false;
-          }
           autoplayPending = false;
           setAutoplayState(null);
           setShareCueProgress(0);
@@ -17619,12 +17631,8 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
           if (activeIndex < 0) activate(0, { playback: true });
           playing = true;
           renderPlayback();
-          afterHandoff(function () {
-            if (!playing) return;
-            if (storyBeatIndex >= 0)
-              followStoryStep(storySteps[storyBeatIndex]);
-            scheduleStoryPlayback();
-          });
+          if (storyBeatIndex >= 0) followStoryStep(storySteps[storyBeatIndex]);
+          scheduleStoryPlayback();
           return true;
         }
 
