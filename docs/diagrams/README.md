@@ -13,7 +13,8 @@
 | `[TBD]_frontend-internal.md` | Front-end(app-webview) 내부 구조 | TBD |
 | `index.html` | 폴더 가이드 — 목적, Archify 활용 기준, 운영 기준과 데모 임베드 | 유지 관리 |
 | `archify-demo-web-app.html` | Archify 예제 "Sample Web App" 인터랙티브 HTML 데모 | 데모 |
-| `build-scenario-webview.html` | app-webview 빌드 시나리오 인터랙티브 HTML (가상 시나리오) | 가상 시나리오 |
+| `build-scenario-webview.workflow.json` | app-webview 빌드·검증·배포 예상 흐름의 Archify workflow 기준 원본 | 가상 시나리오 · showcase 검증 통과 |
+| `build-scenario-webview.html` | workflow JSON에서 생성한 셀프컨테이너 인터랙티브 HTML | Archify 생성물 |
 
 ## Archify 활용
 
@@ -57,7 +58,8 @@ Archify의 기본 역할은 실제 소스 파일, import와 의존 관계를 근
 |------|------|
 | `apps/app-webview/` | 초기화 전 (코드 없음) |
 | 다이어그램 | **초기 계획용** — 예상 시나리오 기반, 실제 코드·실행 검증 불가 |
-| Archify 적용 | ⏳ 코드 구현 후 (Phase 1~2 완료 시점) |
+| 빌드 시나리오 | Archify workflow v2 적용 및 showcase 검증 완료 · 실행 상태는 `NOT RUN` |
+| 실제 코드 기반 Archify 검증 | ⏳ 코드 구현 후 (Phase 1~2 완료 시점) |
 
 ### 언제 적용하는가
 
@@ -84,6 +86,6 @@ apps/app-webview 실제 코드 기준으로 확인하고,
 코드에 없는 컴포넌트나 연결은 제외해줘."
 ```
 
-**출력물:** 이 폴더에 `*.html` 파일로 저장. 별도 서버/호스팅 불필요, 브라우저로 열면 됩니다.
+**출력물:** 이 폴더에 `*.html` 파일로 저장합니다. 별도 서버나 호스팅 없이 브라우저로 열 수 있습니다. Archify workflow는 `*.workflow.json`을 기준 원본으로 관리합니다. 생성된 HTML의 다이어그램 구조는 직접 수정하지 않으며, `build-scenario-webview.html`에는 가독성을 위해 최대 폭 1440px, 확대된 노드 글자와 세로 스크롤 우선 설정만 뷰어 계층에 적용합니다.
 
 **제품 Build와 분리:** Archify는 프로젝트 내 패키지가 아니며 산출물은 정적 HTML 파일이라 `next build`에 포함되지 않습니다. 향후 실행 결과를 연동하더라도 프로젝트 또는 CI의 기존 Script를 외부에서 실행하고 결과만 읽는 방식을 우선합니다.

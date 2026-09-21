@@ -1,0 +1,327 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "app-webview 빌드 및 배포 검증 흐름",
+    "animation": "trace",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "build-path",
+        "label": "애플리케이션 빌드",
+        "focus": ["source", "dependencies", "next-build", "verification-result"],
+        "note": "소스와 잠금 파일에서 Next.js 빌드 결과를 수집하는 주 경로입니다."
+      },
+      {
+        "id": "quality-gates",
+        "label": "품질 게이트",
+        "focus": ["typecheck", "lint", "test", "storybook-build", "verification-result"],
+        "note": "실제 package.json에 정의된 검사만 실행하고 결과를 독립적으로 기록합니다."
+      },
+      {
+        "id": "api-evidence",
+        "label": "API 실행 근거",
+        "focus": ["api-check", "verification-result"],
+        "note": "승인된 계약과 테스트 환경이 있을 때만 통합 테스트 결과를 연결합니다."
+      },
+      {
+        "id": "deployment-options",
+        "label": "배포 대안",
+        "focus": ["verification-result", "deployment-target", "webview"],
+        "note": "정적 호스팅과 Node.js 서버는 병렬 단계가 아니라 선택 가능한 배포 대안입니다."
+      }
+    ],
+    "output": "docs/diagrams/build-scenario-webview.html"
+  },
+  "lanes": [
+    { "id": "pipeline", "label": "소스 및 빌드" },
+    { "id": "verification", "label": "품질 및 통합 검증", "variant": "exception" },
+    { "id": "delivery", "label": "배포 및 앱 실행" }
+  ],
+  "phases": [
+    { "id": "prepare", "label": "준비", "fromCol": 0, "toCol": 1 },
+    { "id": "compile", "label": "컴파일 및 검사", "fromCol": 2, "toCol": 3, "variant": "emphasis" },
+    { "id": "release", "label": "판정 및 배포", "fromCol": 4, "toCol": 5, "variant": "dashed" }
+  ],
+  "groups": [
+    {
+      "id": "build-products",
+      "label": "빌드 산출물 후보",
+      "lane": "pipeline",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "quality-checks",
+      "label": "독립 실행 검사",
+      "lane": "verification",
+      "fromCol": 1,
+      "toCol": 4,
+      "variant": "dashed"
+    }
+  ],
+  "mainPath": [
+    "source",
+    "dependencies",
+    "next-build",
+    "verification-result",
+    "deployment-target",
+    "webview"
+  ],
+  "semanticChecks": {
+    "allowedRoots": ["source"],
+    "allowedTerminals": ["webview"],
+    "requiredPaths": [
+      { "from": "source", "to": "verification-result" },
+      { "from": "verification-result", "to": "webview" }
+    ]
+  },
+  "nodes": [
+    {
+      "id": "source",
+      "lane": "pipeline",
+      "col": 0,
+      "type": "frontend",
+      "label": "app-webview 소스",
+      "sublabel": "src · 설정 · package · lock",
+      "tag": "현재 초기화 전",
+      "width": 132
+    },
+    {
+      "id": "dependencies",
+      "lane": "pipeline",
+      "col": 1,
+      "type": "backend",
+      "label": "의존성 재현",
+      "sublabel": "잠금 파일 기준 설치",
+      "tag": "NOT RUN",
+      "width": 132
+    },
+    {
+      "id": "next-build",
+      "lane": "pipeline",
+      "col": 2,
+      "type": "backend",
+      "label": "Next.js Build",
+      "sublabel": "next build · .next/export",
+      "tag": "NOT RUN",
+      "width": 136
+    },
+    {
+      "id": "storybook-build",
+      "lane": "pipeline",
+      "col": 3,
+      "type": "frontend",
+      "label": "Storybook Build",
+      "sublabel": "정적 UI 검수 산출물",
+      "tag": "NOT RUN",
+      "width": 136
+    },
+    {
+      "id": "typecheck",
+      "lane": "verification",
+      "col": 1,
+      "type": "security",
+      "label": "Typecheck",
+      "sublabel": "타입 및 모듈 경계",
+      "tag": "NOT RUN",
+      "width": 132
+    },
+    {
+      "id": "lint",
+      "lane": "verification",
+      "col": 2,
+      "type": "security",
+      "label": "Lint",
+      "sublabel": "정적 규칙 및 기본 접근성",
+      "tag": "NOT RUN",
+      "width": 132
+    },
+    {
+      "id": "test",
+      "lane": "verification",
+      "col": 3,
+      "type": "security",
+      "label": "Vitest",
+      "sublabel": "로직 및 사용자 동작",
+      "tag": "NOT RUN",
+      "width": 132
+    },
+    {
+      "id": "api-check",
+      "lane": "verification",
+      "col": 4,
+      "type": "external",
+      "label": "API 통합 검사",
+      "sublabel": "계약 · 인증 · timeout",
+      "tag": "TBD · NOT RUN",
+      "width": 136
+    },
+    {
+      "id": "verification-result",
+      "lane": "pipeline",
+      "col": 4,
+      "type": "database",
+      "label": "검증 결과 수집",
+      "sublabel": "exit code · 시간 · 요약 로그",
+      "tag": "NOT RUN",
+      "width": 136
+    },
+    {
+      "id": "deployment-target",
+      "lane": "delivery",
+      "col": 4,
+      "type": "cloud",
+      "label": "배포 대상 선택",
+      "sublabel": "정적 CDN 또는 Next.js 서버",
+      "tag": "TBD · 승인 필요",
+      "width": 136
+    },
+    {
+      "id": "webview",
+      "lane": "delivery",
+      "col": 5,
+      "type": "external",
+      "label": "Flutter WebView",
+      "sublabel": "승인된 HTTPS 주소 로드",
+      "tag": "TBD · 실기기 검증",
+      "width": 136
+    }
+  ],
+  "edges": [
+    {
+      "id": "source-dependencies",
+      "from": "source",
+      "to": "dependencies",
+      "variant": "default",
+      "role": "main"
+    },
+    {
+      "id": "dependencies-next-build",
+      "from": "dependencies",
+      "to": "next-build",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "dependencies-typecheck",
+      "from": "dependencies",
+      "to": "typecheck",
+      "label": "검사 시작",
+      "variant": "dashed",
+      "role": "branch"
+    },
+    {
+      "id": "typecheck-lint",
+      "from": "typecheck",
+      "to": "lint",
+      "variant": "dashed",
+      "role": "branch"
+    },
+    {
+      "id": "lint-test",
+      "from": "lint",
+      "to": "test",
+      "variant": "dashed",
+      "role": "branch"
+    },
+    {
+      "id": "next-storybook",
+      "from": "next-build",
+      "to": "storybook-build",
+      "label": "별도 Build",
+      "variant": "dashed",
+      "role": "branch"
+    },
+    {
+      "id": "next-verification",
+      "from": "next-build",
+      "to": "verification-result",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "storybook-verification",
+      "from": "storybook-build",
+      "to": "verification-result",
+      "label": "정적 Build 결과",
+      "variant": "dashed",
+      "role": "branch"
+    },
+    {
+      "id": "test-verification",
+      "from": "test",
+      "to": "verification-result",
+      "label": "검사 결과",
+      "variant": "dashed",
+      "role": "branch"
+    },
+    {
+      "id": "test-api",
+      "from": "test",
+      "to": "api-check",
+      "label": "승인된 환경에서만",
+      "variant": "security",
+      "role": "branch"
+    },
+    {
+      "id": "api-verification",
+      "from": "api-check",
+      "to": "verification-result",
+      "label": "응답 및 계약 결과",
+      "variant": "security",
+      "role": "return",
+      "fromSide": "right",
+      "toSide": "top",
+      "via": [
+        [1157, 261],
+        [1157, 77],
+        [871.6, 77]
+      ],
+      "labelAt": [1048.3, 251]
+    },
+    {
+      "id": "verification-deployment",
+      "from": "verification-result",
+      "to": "deployment-target",
+      "label": "검증 통과 후 선택",
+      "variant": "emphasis",
+      "role": "main"
+    },
+    {
+      "id": "deployment-webview",
+      "from": "deployment-target",
+      "to": "webview",
+      "label": "HTTPS URL",
+      "variant": "emphasis",
+      "role": "main"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "현재 상태",
+      "items": [
+        "app-webview는 package.json과 실제 구현 소스가 없는 초기화 전 상태입니다.",
+        "모든 실행 결과는 실제 검증 전까지 NOT RUN으로 유지합니다."
+      ]
+    },
+    {
+      "dot": "cyan",
+      "title": "판정 원칙",
+      "items": [
+        "구조 존재와 Build·API 실행 성공을 구분합니다.",
+        "실제 package.json에 정의된 Script와 승인된 API 환경만 실행합니다."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "환경 검증 경계",
+      "items": [
+        "Safari 15와 WKWebView는 별도의 브라우저·실기기 검증이 필요합니다.",
+        "정적 호스팅과 Node.js 서버 중 실제 배포 방식은 아직 TBD입니다."
+      ]
+    }
+  ]
+}
