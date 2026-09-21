@@ -35,15 +35,6 @@
   - **`Icon` 컴포넌트 강제**: 반드시 `<Icon name="아이콘이름" className="..." />` 형식을 사용합니다.
   - **스타일 제어**: 색상(`text-*`)과 크기(`size-*`)는 Tailwind 유틸리티 클래스를 통해 `className`으로 전달합니다.
 
-
-- **디자인 토큰(Design Token) 적용 엄격 준수**
-  - **Hardcoded 값 사용 금지**: `px`, `rem`, `hex`, `rgb` 등의 값을 코드에 직접 입력하지 마세요. (예: `w-[340px]`, `text-[#737373]` 등은 모두 금지)
-  - **Fallback 사용 금지**: `var(--token, #fallback)` 형태의 코드를 작성하지 마세요. 토큰 이름이 확실하지 않다면 임의의 값을 넣지 말고, 사용자에게 어떤 토큰을 사용해야 하는지 질문하세요.
-  - **Color (색상)**: `#737373` 같은 색상 코드 대신, 프로젝트의 Semantic Token을 사용하세요. (예: `text-muted-foreground`, `text-foreground`, `bg-popover` 등)
-  - **Spacing & Sizing (간격 및 크기)**: `p-[16px]`, `gap-[8px]` 대신 Tailwind 유틸리티 클래스(예: `p-4`, `gap-2`) 또는 정의된 간격 토큰(예: `p-[var(--spacing-md)]`)을 사용하세요.
-  - **Radius (곡률)**: `rounded-[14px]` 대신 Tailwind 유틸리티(예: `rounded-xl`) 또는 정의된 곡률 토큰(예: `rounded-[var(--radius-xl)]`)을 사용하세요.
-  - **Typography (타이포그래피)**: `text-[16px]` 대신 Tailwind 유틸리티(예: `text-base`) 또는 정의된 폰트 토큰(예: `text-[var(--font-size-regular)]`)을 사용하세요.
-
 - Figma의 주요 화면과 상태를 Storybook의 `Components`, `Features`, `Screens` 분류에 연결하고 라우터 주소를 몰라도 UI를 찾을 수 있게 합니다.
 - 필요하면 Figma Description 또는 Dev resource에 연결되는 Story 이름이나 접근 가능한 Storybook URL을 기록합니다.
 - Story에는 Figma 파일, Frame 또는 Prototype URL을 연결할 수 있습니다. 특정 Frame을 표시할 때는 선택한 Frame의 링크를 사용합니다.
