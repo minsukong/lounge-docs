@@ -2,7 +2,7 @@
 
 ## 이 문서 묶음에서 얻는 것
 
-상위 Front-end 가이드가 기술 선택과 작성 방향을 설명한다면, 이 폴더는 실제 구현에 옮길 수 있는 **파일 단위 예시 코드**를 제공합니다. 모든 예제는 Next.js 16 App Router, React 19, TypeScript, Tailwind CSS 4, shadcn/ui `base-nova`, TanStack Query 기준입니다.
+상위 Front-end 가이드가 기술 선택과 작성 방향을 설명한다면, 이 폴더는 실제 구현에 옮길 수 있는 **파일 단위 예시 코드**를 제공합니다. 모든 예제는 Next.js 16 App Router, React 19, TypeScript 6, Tailwind CSS 4, shadcn/ui `base-nova`, TanStack Query 기준입니다.
 
 이 폴더에는 애플리케이션 파일을 직접 저장하지 않습니다. 코드 블록의 경로대로 실제 `apps/webview`에 옮기되, 같은 책임의 기존 파일이 있으면 새 파일을 만들지 말고 필요한 부분만 병합합니다.
 
