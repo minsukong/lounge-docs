@@ -2,7 +2,7 @@
 
 ## 문서 사용법
 
-이 문서는 `apps/app-webview`에 공통 소스를 적용할 조건, 승인된 계약이 필요한 예시와 아직 결정되지 않은 항목을 한곳에서 확인할 때 사용합니다.
+이 문서는 `apps/webview`에 공통 소스를 적용할 조건, 승인된 계약이 필요한 예시와 아직 결정되지 않은 항목을 한곳에서 확인할 때 사용합니다.
 
 기획 흐름과 API 계약에 의존하는 항목은 `TBD` 표시 여부와 관계없이 승인된 계약이 전달되기 전에는 구현하지 않습니다. Swagger 또는 OpenAPI 제공도 미리 가정하지 않습니다.
 
@@ -17,7 +17,7 @@
 | [Tailwind CSS와 UI 설정](./tailwind.md) | `src/app/globals.css` | 의미 기반 토큰 연결 | 실제 토큰 값, 밝은 화면·어두운 화면·포커스 |
 | [Tailwind CSS와 UI 설정](./tailwind.md) | `src/lib/utils.ts` | 조건부 클래스와 충돌 병합 | 기존 `cn` 존재 여부와 클래스 병합 |
 | [TypeScript 공통 설정과 검사 함수](./typescript.md) | `tsconfig.base.json` | 저장소 공통 strict 기준 | workspace 전체 오류 범위 |
-| [TypeScript 공통 설정과 검사 함수](./typescript.md) | `apps/app-webview/tsconfig.json` | Next 설정과 alias | Next가 생성한 설정과 app typecheck |
+| [TypeScript 공통 설정과 검사 함수](./typescript.md) | `apps/webview/tsconfig.json` | Next 설정과 alias | Next가 생성한 설정과 app typecheck |
 | [API 요청 기반 구현 예시](./network.md) | `src/lib/http/http-error.ts` | 계약 확정 후 HTTP 상태와 응답 본문 보존 | 승인된 오류 type과 상태 처리 방식 |
 | [API 요청 기반 구현 예시](./network.md) | `src/lib/http/request.ts` | 계약 확정 후 본문 읽기와 기능별 parser 연결 | 기존 fetch wrapper와 runtime 지원 범위 |
 | [테스트 공통 설정](./test.md) | `vitest.config.ts` | Client Component 테스트 환경 | 기존 테스트 실행 도구, alias와 테스트 실행 |
@@ -119,7 +119,7 @@
 ## 문서 검토 항목
 
 ```text
-[ ] 실제 애플리케이션 소스와 설정을 `apps/app-webview`에 두었다.
+[ ] 실제 애플리케이션 소스와 설정을 `apps/webview`에 두었다.
 [ ] 미확정 기술과 제품 계약에 TBD를 표시했다.
 [ ] 기획과 API 계약 확정 전에 요청 함수, parser, fixture와 handler를 구현하지 않았다.
 [ ] 예제의 API 경로, 토큰 값과 문구를 확정값으로 표현하지 않았다.

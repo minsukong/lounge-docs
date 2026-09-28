@@ -10,10 +10,10 @@
 | `[TBD]_architecture-overview.md` | 전체 시스템 아키텍처 (앱, API, 외부 시스템) | TBD |
 | `[TBD]_api-layers.md` | API 레이어별 통신 구조 및 인증 | TBD |
 | `[TBD]_webview-bridge.md` | WebView ↔ Native(Bridge) 통신 흐름 | TBD |
-| `[TBD]_frontend-internal.md` | Front-end(app-webview) 내부 구조 | TBD |
+| `[TBD]_frontend-internal.md` | Front-end(webview) 내부 구조 | TBD |
 | `index.html` | 폴더 가이드 — 목적, Archify 활용 기준, 운영 기준과 데모 임베드 | 유지 관리 |
 | `archify-demo-web-app.html` | Archify 예제 "Sample Web App" 인터랙티브 HTML 데모 | 데모 |
-| `build-scenario-webview.workflow.json` | app-webview 빌드·검증·배포 예상 흐름의 Archify workflow 기준 원본 | 가상 시나리오 · showcase 검증 통과 |
+| `build-scenario-webview.workflow.json` | webview 빌드·검증·배포 예상 흐름의 Archify workflow 기준 원본 | 가상 시나리오 · showcase 검증 통과 |
 | `build-scenario-webview.html` | workflow JSON에서 생성한 셀프컨테이너 인터랙티브 HTML | Archify 생성물 |
 
 ## Archify 활용
@@ -56,7 +56,7 @@ Archify의 기본 역할은 실제 소스 파일, import와 의존 관계를 근
 
 | 항목 | 상태 |
 |------|------|
-| `apps/app-webview/` | 초기화 전 (코드 없음) |
+| `apps/webview/` | 초기화 전 (코드 없음) |
 | 다이어그램 | **초기 계획용** — 예상 시나리오 기반, 실제 코드·실행 검증 불가 |
 | 빌드 시나리오 | Archify workflow v2 적용 및 showcase 검증 완료 · 실행 상태는 `NOT RUN` |
 | 실제 코드 기반 Archify 검증 | ⏳ 코드 구현 후 (Phase 1~2 완료 시점) |
@@ -82,7 +82,7 @@ AI IDE (Cursor, Claude Code 등)에서:
 ```
 "docs/diagrams/[TBD]_architecture-overview.md의 내용을 archify로
 검증 가능한 아키텍처 다이어그램으로 만들어줘.
-apps/app-webview 실제 코드 기준으로 확인하고,
+apps/webview 실제 코드 기준으로 확인하고,
 코드에 없는 컴포넌트나 연결은 제외해줘."
 ```
 

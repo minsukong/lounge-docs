@@ -1,4 +1,4 @@
-# [TBD] Front-end (app-webview) 내부 구조
+# [TBD] Front-end (webview) 내부 구조
 
 > 예상 시나리오 기반. 실제 구현 시 디렉터리가 추가·변경될 수 있습니다.
 
@@ -8,7 +8,7 @@
   <!-- prettier-ignore -->
   <div class="mermaid">
 flowchart TB
-  accTitle: app-webview 내부 구조 (예상)
+  accTitle: webview 내부 구조 (예상)
   accDescr: Next.js App Router 기반의 WebView 애플리케이션으로, 라우트/레이아웃, UI 컴포넌트, API/유틸리티, 테스트로 구성됩니다.
   
   subgraph APP["src/app/ (App Router)"]
@@ -20,7 +20,7 @@ flowchart TB
   subgraph COMPONENTS["src/components/"]
     UI["ui/ (shadcn/ui)<br/>- button, input, dialog<br/>- card, select, label<br/>- icon (Lucide)"]
     FEATURES["features/ (기능 컴포넌트)<br/>- lounge/<br/>- ticket/<br/>- esim/<br/>- payment/"]
-    COMMON["공통 (app-webview 전용)<br/>- loading-skeleton<br/>- error-boundary<br/>- empty-state"]
+    COMMON["공통 (webview 전용)<br/>- loading-skeleton<br/>- error-boundary<br/>- empty-state"]
   end
 
   subgraph LIB["src/lib/ (유틸리티·어댑터)"]

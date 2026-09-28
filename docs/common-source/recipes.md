@@ -9,7 +9,7 @@
 ## 완성 후 파일 구조
 
 ```text
-apps/app-webview/src/
+apps/webview/src/
 ├── app/profile/page.tsx
 └── features/profile/
     ├── api/

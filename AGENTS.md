@@ -5,12 +5,13 @@
 ## 작업 범위와 우선순위
 
 - 사용자가 파일, 선택자, 함수 또는 문구를 지정하면 해당 위치와 필요한 주변 범위부터 확인합니다. 작은 수정에 프로젝트 전체 구조나 관련 문서를 먼저 조사하지 않습니다.
-- 애플리케이션 기본 작업 범위는 `apps/app-webview/`입니다. `apps/mobile/`은 사용자가 Flutter 작업을 명시한 경우에만 수정합니다.
+- 애플리케이션 기본 작업 범위는 `apps/webview/`입니다. 이 저장소 `apps/`는 참고 골격이며 실제 WebView·Flutter 애플리케이션은 별도 저장소에서 관리합니다. `apps/mobile/`은 사용자가 Flutter 작업을 명시한 경우에만 수정합니다.
 - 실제 package, 잠금 파일, 설정, import와 기존 소스를 문서 예시보다 우선합니다. 확인되지 않은 기술 선택과 구조는 추측하지 않습니다.
 - 요청하지 않은 기능, 상태, 공통화, Wrapper, Adapter, Store 또는 package를 미리 추가하지 않습니다.
 - Front-end가 독립적으로 정할 수 없는 기획, 업무 규칙, API·인증·데이터 계약, Native Bridge, 배포·보안 정책은 승인되기 전까지 `TBD`로 둡니다. endpoint, parser, fixture, handler와 Mock을 임의로 구현하지 않습니다.
 - `docs/`는 문서 전용 영역이며 애플리케이션 Build 입력, 정적 자산 또는 배포 Artifact에 포함하지 않습니다.
-- 한국어 문서·주석·사용자 문구에는 자연스러운 표준 한국어를 사용하고, 의도하지 않은 한자·중국어 문자, `U+FFFD`와 깨진 문자를 남기지 않습니다. 번역 예시, 고유명사와 코드 식별자는 예외입니다.
+- 한국어 문서·주석·사용자 문구와 채팅 답변에는 자연스러운 표준 한국어를 사용합니다. 한자·중국어 문자(한자 병기 포함)와 `U+FFFD` 같은 깨진 문자는 어디에도 출력하지 않습니다. 번역 예시, 고유명사와 코드 식별자는 예외입니다.
+- 실제로 쓰이지 않는 자조 용어나 비표준 외래어 음사 표현(예: visual을 '시지컬'로 음사한 형태)을 만들지 않습니다. 실제로 통용되는 표준 명칭과 외래어(예: 비주얼)를 그대로 사용합니다.
 
 ## 지침과 참고 문서 선택
 
@@ -37,12 +38,12 @@
 
 ## 앱 구현 핵심
 
-- `apps/app-webview/`에서는 Next.js 16 App Router, React 19, TypeScript, Tailwind CSS 4와 프로젝트의 shadcn/ui 및 의미 기반 토큰을 사용합니다.
+- `apps/webview/`에서는 Next.js 16 App Router, React 19, TypeScript, Tailwind CSS 4와 프로젝트의 shadcn/ui 및 의미 기반 토큰을 사용합니다.
 - 공통 CSS 하한은 Safari 15입니다. 최신 CSS 표현보다 핵심 정보, 입력, 이동과 업무 흐름의 동작을 우선하고 필요한 경우 호환 표현으로 대체합니다.
 - 디자인 토큰은 Figma Tokens Studio에서만 생성·수정·삭제합니다. 저장소의 생성된 토큰 파일을 직접 수정하지 않습니다.
 - 기존 feature 구현과 `src/components/ui`를 새 컴포넌트보다 우선하며, import, Props와 variant를 실제 코드에서 확인합니다.
 - 공통 UI, 독립 검수 가치가 있는 Feature 또는 사용자 노출 Screen을 추가하거나 공개 Props·주요 상태·화면 구조를 바꾸면 관련 Storybook 대상도 확인합니다. Storybook을 위해 제품에 필요 없는 Props나 Mock을 추가하지 않습니다.
-- 세부 앱 규칙과 검증은 `apps/app-webview/AGENTS.md`를 따릅니다.
+- 세부 앱 규칙과 검증은 `apps/webview/AGENTS.md`를 따릅니다.
 
 ## 작업과 편집 방식
 

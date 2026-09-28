@@ -2,7 +2,7 @@
   "schema_version": 2,
   "diagram_type": "workflow",
   "meta": {
-    "title": "app-webview 빌드 및 배포 검증 흐름",
+    "title": "webview 빌드 및 배포 검증 흐름",
     "animation": "trace",
     "quality_profile": "showcase",
     "views": [
@@ -83,7 +83,7 @@
       "lane": "pipeline",
       "col": 0,
       "type": "frontend",
-      "label": "app-webview 소스",
+      "label": "webview 소스",
       "sublabel": "src · 설정 · package · lock",
       "tag": "현재 초기화 전",
       "width": 132
@@ -303,7 +303,7 @@
       "dot": "amber",
       "title": "현재 상태",
       "items": [
-        "app-webview는 package.json과 실제 구현 소스가 없는 초기화 전 상태입니다.",
+        "webview는 package.json과 실제 구현 소스가 없는 초기화 전 상태입니다.",
         "모든 실행 결과는 실제 검증 전까지 NOT RUN으로 유지합니다."
       ]
     },

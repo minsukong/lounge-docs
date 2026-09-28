@@ -6,7 +6,7 @@
 
 ## 현재 연결
 
-- 실제 적용 값은 `apps/app-webview/src/app/globals.css`의 `:root`와 `.dark`에 있습니다.
+- 실제 적용 값은 `apps/webview/src/app/globals.css`의 `:root`와 `.dark`에 있습니다.
 - Tailwind CSS 4 유틸리티 이름은 `@theme inline`에서 CSS Variables에 연결합니다.
 - shadcn/ui는 `components.json`의 `base-nova`, neutral base color, Lucide와 `cssVariables: true` 설정을 사용합니다.
 - Tailwind CSS 4에서는 별도 `tailwind.config` 파일을 만들지 않습니다.

@@ -198,7 +198,7 @@
 ├─ <span class="tree-file file1">AGENTS.md</span>                         <span class="tree-comment"># AI 최상위 작업 원칙</span>
 ├─ <span class="tree-folder app">apps/</span>                             <span class="tree-comment"># 앱 소스</span>
 │  ├─ <span class="tree-folder app">mobile/</span>                        <span class="tree-comment"># Flutter Native</span>
-│  └─ <span class="tree-folder app">app-webview/</span>                   <span class="tree-comment"># WebView Front-end</span>
+│  └─ <span class="tree-folder app">webview/</span>                   <span class="tree-comment"># WebView Front-end</span>
 │     ├─ <span class="tree-folder app">.storybook/</span>                 <span class="tree-comment"># UI 확인</span>
 │     └─ <span class="tree-folder app">src/</span>                        <span class="tree-comment"># Source · Story · Test</span>
 └─ <span class="tree-folder docs">docs/</span>                             <span class="tree-comment"># 가이드</span>
@@ -218,7 +218,7 @@
                 <b>APP SOURCE</b>
                 <h3>apps/</h3>
                 <p>
-                  <strong>app-webview/</strong>은 Front-end,
+                  <strong>webview/</strong>은 Front-end,
                   <strong>mobile/</strong>은 별도 앱 개발자가 담당
                 </p>
               </article>
@@ -576,7 +576,7 @@ flowchart TB
   B --> C["AI · 2. 현재 코드 확인<br/>설치된 기능 · 기존 UI · 재사용 방법 확인"]
   C --> D["AI · 3. 필요한 문서 확인<br/>이번 작업에 필요한 가이드만 선택"]
   D --> E{"AI · 바로 구현할 수<br/>있는가?"}
-  E -->|"YES"| I["AI · 4. 화면 구현<br/>apps/app-webview에 코드 작성"]
+  E -->|"YES"| I["AI · 4. 화면 구현<br/>apps/webview에 코드 작성"]
   E -->|"NO"| F{"AI · 서비스·업무 결정이<br/>필요한가?"}
   F -->|"YES"| G["담당자 · 기준 결정<br/>업무 규칙 · 서버 연결 · 앱 연동 방식 답변"]
   F -->|"NO"| H["AI · 구현 방법 확인<br/>구현 예시와 상세 가이드 확인"]

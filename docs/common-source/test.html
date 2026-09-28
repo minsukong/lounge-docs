@@ -17,7 +17,7 @@
 <section>
 <h2 class="bx-active">1. 적용 목적</h2>
 <p>Vitest와 React Testing Library로 Client Component를 사용자 관점에서 검증할 수 있는 최소 환경입니다. Query 컴포넌트도 실제 <code>QueryClientProvider</code> 아래에서 렌더링하며, 각 테스트는 독립된 QueryClient를 사용합니다.</p>
-<pre class="hljs"><code data-language="text">apps/app-webview/
+<pre class="hljs"><code data-language="text">apps/webview/
 ├── vitest.config.ts
 └── src/test/
     ├── render-with-providers.tsx
@@ -29,7 +29,7 @@
 
 <section>
 <h2 class="bx-active">2. 1단계: Vitest 설정</h2>
-<h3><code>apps/app-webview/vitest.config.ts</code></h3>
+<h3><code>apps/webview/vitest.config.ts</code></h3>
 <pre class="hljs"><code data-language="ts"><span class="hljs-keyword">import</span> path <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;node:path&quot;</span>
 <span class="hljs-keyword">import</span> { fileURLToPath } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;node:url&quot;</span>
 <span class="hljs-keyword">import</span> react <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;@vitejs/plugin-react&quot;</span>

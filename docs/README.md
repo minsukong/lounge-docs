@@ -34,8 +34,8 @@
 <repository-root>/
 ├── AGENTS.md                   # 실제 구현 작업용 AI 최상위 지침
 ├── README.md
-├── apps/
-│   └── app-webview/
+├── apps/                     # 참고 골격 (실제 앱은 별도 저장소)
+│   └── webview/
 │       ├── AGENTS.md           # WebView 앱 전용 지침
 │       ├── .storybook/
 │       └── src/
@@ -50,4 +50,4 @@
 
 상세 가이드의 기준 원본은 `guides/`입니다. 구현 작업은 저장소 루트 `AGENTS.md`에서 시작해 필요한 `ai/` 요약을 읽고, 세부 배경이나 적용 예시가 필요할 때 `guides/` 또는 `common-source/`로 이동합니다.
 
-실제 애플리케이션 `.ts`, `.tsx`, CSS와 package 설정은 저장소의 `apps/app-webview/`에서 관리하며 이 폴더에 복사하지 않습니다.
+실제 애플리케이션 `.ts`, `.tsx`, CSS와 package 설정은 별도 저장소의 WebView 애플리케이션에서 관리합니다. 이 저장소 `apps/webview/`는 참고 골격이며, `docs/`에는 애플리케이션 소스를 복사하지 않습니다.

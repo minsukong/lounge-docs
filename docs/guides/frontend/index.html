@@ -179,7 +179,7 @@ flowchart LR
         <h2 class="bx-active">3. 확정 기술 스택과 책임</h2>
 
         <p>
-          아래 기술 스택은 <code>apps/app-webview</code>에 적용합니다. Flutter
+          아래 기술 스택은 <code>apps/webview</code>에 적용합니다. Flutter
           Native 앱은 별도의 Dart·Flutter Toolchain과 구현 기준을 사용합니다.
         </p>
         <p>
@@ -264,16 +264,16 @@ flowchart LR
         <p>
           Flutter Native 앱과 앱 내 WebView Front-end는 하나의 모노레포에서
           관리합니다. Native 앱은 <code>apps/mobile</code>, WebView Front-end는
-          <code>apps/app-webview</code>, 구현·검토 문서는 <code>docs</code>에
+          <code>apps/webview</code>, 구현·검토 문서는 <code>docs</code>에
           둡니다. 이 문서에서 Front-end 또는 Web은
-          <code>apps/app-webview</code> 구현 영역을 의미합니다.
+          <code>apps/webview</code> 구현 영역을 의미합니다.
         </p>
         <blockquote>
           <p>
             전체 저장소 구조와 운영 원칙은
             <a href="../architecture/index.html">Front-End 저장소 구조 기준</a
             >을 단일 기준으로 사용합니다. 이 절은
-            <code>apps/app-webview</code>의 상세 배치 기준을 보완하며, 내용이
+            <code>apps/webview</code>의 상세 배치 기준을 보완하며, 내용이
             충돌하면 공통 기준을 우선합니다.
           </p>
         </blockquote>
@@ -281,7 +281,7 @@ flowchart LR
         <ul>
           <li>
             라우트, 레이아웃 및 Next.js 예약 파일은
-            <code>apps/app-webview/src/app</code>에서 관리합니다.
+            <code>apps/webview/src/app</code>에서 관리합니다.
           </li>
           <li>
             특정 기능에서만 쓰는 UI, API 연동, 폼, 훅과 타입은 해당 기능
@@ -289,7 +289,7 @@ flowchart LR
           </li>
           <li>
             여러 기능에서 실제로 공유하는 UI 원형과 WebView 전용 조합은
-            <code>apps/app-webview/src/components/ui</code>에서 관리합니다.
+            <code>apps/webview/src/components/ui</code>에서 관리합니다.
           </li>
           <li>
             비슷해 보인다는 이유만으로 코드를 공통 영역이나 공통 패키지로
@@ -304,7 +304,7 @@ flowchart LR
 ├── AGENTS.md                    # 저장소 전체 구현 지침
 ├── apps/
 │   ├── mobile/                  # Flutter Native 앱
-│   └── app-webview/             # 앱 내 Next.js WebView
+│   └── webview/             # 앱 내 Next.js WebView
 │       └── src/
 │           ├── app/             # Routes, Layouts, Providers
 │           ├── components/      # 공통 UI와 WebView 전용 UI 조합
@@ -921,7 +921,7 @@ flowchart TD
         <p>
           기본 검증 순서는 <code>TypeScript 검사 → Lint → Test</code>이며, 병합
           또는 통합 영향이 있는 변경에서는 production build를 추가로
-          확인합니다. 애플리케이션 Build 범위는 <code>apps/app-webview</code>이며
+          확인합니다. 애플리케이션 Build 범위는 <code>apps/webview</code>이며
           <code>docs/</code>는 제품 Bundle, 정적 자산과 배포 Artifact에 포함하지
           않습니다. 세부 기준은
           <a href="../lint/index.html">Front-End Lint 가이드</a>와

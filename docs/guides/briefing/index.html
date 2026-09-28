@@ -43,14 +43,14 @@ flowchart TD
 
       <section>
         <h2 class="bx-active">2. 작업 대상과 저장소 구조</h2>
-        <p>WebView 서비스 화면과 업무 흐름은 <code>apps/app-webview</code>에 구현합니다.</p>
+        <p>WebView 서비스 화면과 업무 흐름은 <code>apps/webview</code>에 구현합니다.</p>
         <pre class="hljs"><code data-language="text">apps/
-├── app-webview/             # Front-end가 구현하는 WebView 화면
+├── webview/             # Front-end가 구현하는 WebView 화면
 └── mobile/                  # 별도 앱 개발자가 담당하는 Flutter 소스
 
 docs/                        # 구현·검토 기준과 예시</code></pre>
         <h3>Application 가까이에서 시작합니다</h3>
-        <p><code>apps/app-webview</code> 안에서는 Routing과 화면 진입점, 기능 코드와 WebView 전용 UI를 가까운 위치에서 관리합니다. App-WebView 한 곳에서만 사용하는 shadcn/ui 원형과 Wrapper는 <code>apps/app-webview/src/components/ui</code>에 둡니다.</p>
+        <p><code>apps/webview</code> 안에서는 Routing과 화면 진입점, 기능 코드와 WebView 전용 UI를 가까운 위치에서 관리합니다. webview 한 곳에서만 사용하는 shadcn/ui 원형과 Wrapper는 <code>apps/webview/src/components/ui</code>에 둡니다.</p>
         <h3>검증된 구현만 공통으로 관리합니다</h3>
         <p>여러 기능에서 실제로 재사용되고 의미와 변경 이유가 같은 UI만 <code>src/components/ui</code>에서 공통으로 관리합니다. 한 화면에서만 사용하는 Wrapper, 공통화 가능성을 예상한 Type과 Adapter는 미리 만들지 않습니다.</p>
         <p><code>apps/</code>와 <code>docs/</code>의 최상위 분리는 실제 프로젝트 기준입니다. 앱 내부 Package 경계와 Build 구성은 실제 사용처와 현재 설정을 기준으로 판단합니다.</p>
@@ -388,7 +388,7 @@ flowchart TB
         <table>
           <thead><tr><th scope="col">작업</th><th scope="col">사람용 원본</th><th scope="col">확인 내용</th></tr></thead>
           <tbody>
-            <tr><td>저장소와 앱 경계</td><td>저장소 구조 기준</td><td>app-webview, docs와 공통화</td></tr>
+            <tr><td>저장소와 앱 경계</td><td>저장소 구조 기준</td><td>webview, docs와 공통화</td></tr>
             <tr><td>일반 화면과 상태</td><td>Front-End 개발 가이드</td><td>배치, 상태 소유, Bridge와 품질</td></tr>
             <tr><td>Figma UI</td><td>React Code Exports·디자인 토큰</td><td>기존 UI, Token과 완료 기준</td></tr>
             <tr><td>UI 개발과 상태 검증</td><td>Storybook 운영 가이드</td><td>Component·기능·화면 상태의 재현, Interaction, 접근성, 시각 검토와 반자동 점검</td></tr>

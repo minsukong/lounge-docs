@@ -5,7 +5,7 @@
 Vitest와 React Testing Library로 Client Component를 사용자 관점에서 검증할 수 있는 최소 환경입니다. Query 컴포넌트도 실제 `QueryClientProvider` 아래에서 렌더링하며, 각 테스트는 독립된 QueryClient를 사용합니다.
 
 ```text
-apps/app-webview/
+apps/webview/
 ├── vitest.config.ts
 └── src/test/
     ├── render-with-providers.tsx
@@ -16,7 +16,7 @@ apps/app-webview/
 
 ## 1단계: Vitest 설정
 
-### `apps/app-webview/vitest.config.ts`
+### `apps/webview/vitest.config.ts`
 
 ```ts
 import path from "node:path"

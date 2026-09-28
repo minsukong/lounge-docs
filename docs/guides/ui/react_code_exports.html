@@ -329,7 +329,7 @@ Source: Dev resource 참고</code></pre>
             찾아낸 컴포넌트의 실제 파일을 읽어 export, Props와 variant를 검증합니다.
           </li>
           <li>
-            현재 기능과 <code class="badge-tbd">apps/app-webview/src/components/ui</code>에서 기존
+            현재 기능과 <code class="badge-tbd">apps/webview/src/components/ui</code>에서 기존
             사용 예시를 검색합니다.
           </li>
           <li>
@@ -595,6 +595,36 @@ nvidia-smi</code></pre>
           Ollama는 포트 <code>11434</code>, NInfer는 포트 <code>8080</code>를
           사용하므로 동시에 실행할 수 있습니다. 작업 규모에 따라 Cline의 API
           Provider를 전환하여 사용합니다.
+        </p>
+
+        <h4>Reasoning Effort</h4>
+        <p>
+          Cline의 API 설정에는 모델의 추론 강도를 조절하는
+          <strong>Reasoning Effort</strong> 항목이 있습니다. 현재 사용 중인
+          Cline 버전에서는 <strong>None</strong>을 선택해도 추리를 끄는 것이
+          아니라 최상위 수준인 <strong>xhigh</strong>로 처리되어, 모델이 모든
+          단계마다 깊게 추론합니다. 그 덕분에 모델이 많이 생각하고 복잡한
+          판단을 잘 하지만, 응답 속도가 크게 느려집니다.
+        </p>
+        <p>
+          일상적인 구현, 수정, 리팩터링 작업은 <strong>Medium</strong> 수준을
+          기본으로 권장합니다. 구조 설계나 디버깅처럼 추론이 특히 필요한
+          작업에만 상급으로 올리고, 응답 속도가 더 중요한 작업은 하급으로
+          낮춰 사용할 수 있습니다.
+        </p>
+
+        <h4>터미널 설정 (PowerShell 7)</h4>
+        <p>
+          Cline이 명령을 실행할 때 사용하는 VS Code 통합 터미널은
+          <strong>PowerShell 7</strong>을 기본으로 설정합니다. VS Code
+          설정에서 <code>terminal.integrated.defaultProfile.windows</code>를
+          <code>PowerShell 7</code>로 지정하면 사람이 직접 명령을 실행할
+          때와 Cline이 명령을 실행할 때 동일한 셸 환경이 유지됩니다.
+        </p>
+        <p>
+          <code>typecheck</code>, <code>lint</code>, 테스트 등 검증 명령은
+          PowerShell 7 기준으로 정의되어 있으므로, 다른 셸과 문법을 섞어
+          사용하지 않습니다.
         </p>
 
         <h4>초기 컨텍스트 사용량</h4>
@@ -1147,8 +1177,8 @@ nvidia-smi</code></pre>
         <ul>
           <li>기존 컴포넌트가 있으면 동일한 요소를 새로 생성하지 않습니다.</li>
           <li>
-            app-webview에서만 사용하는 shadcn/ui 원형과 Wrapper는
-            <code>apps/app-webview/src/components/ui</code>에서 관리합니다.
+            webview에서만 사용하는 shadcn/ui 원형과 Wrapper는
+            <code>apps/webview/src/components/ui</code>에서 관리합니다.
           </li>
           <li>
             기존 컴포넌트를 사용할 때 파일명만으로 판단하지 않고 실제 named
@@ -1231,7 +1261,7 @@ nvidia-smi</code></pre>
         <p>Story에는 Figma 파일, Frame 또는 Prototype URL을 연결할 수 있습니다. 특정 Frame을 표시할 때는 선택한 Frame의 링크를 복사해 사용하며, Storybook의 <code>Design</code> 탭에서 Embed 결과를 확인합니다.</p>
         <ul>
           <li>
-            <code>apps/app-webview/src/components/ui</code>, 독립적으로 검수할 가치가 있는 Feature와
+            <code>apps/webview/src/components/ui</code>, 독립적으로 검수할 가치가 있는 Feature와
             사용자에게 노출되는 주요 Screen을 등록 대상으로 검토합니다.
           </li>
           <li>

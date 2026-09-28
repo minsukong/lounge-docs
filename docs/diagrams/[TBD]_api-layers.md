@@ -11,7 +11,7 @@ flowchart LR
   accTitle: Front-end API 통신 구조 (3개 레이어, 3개 Parser)
   accDescr: Front-end는 V3, IN-APP, ADMIN 세 레이어와 통신하며 각 레이어마다 인증 방식과 응답 포맷이 달라 3개의 응답 파서가 필요합니다.
   
-  FE["Front-end<br/>(app-webview / BO)"]
+  FE["Front-end<br/>(webview / BO)"]
 
   subgraph PARSERS["Response Parsers (3개)"]
     P1["V3 Parser<br/>success/status/data"]

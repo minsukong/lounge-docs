@@ -11,6 +11,16 @@
 - 변경한 파일 목록만 나열하지 않고 변경 목적, 주요 내용, 미확정 항목과 검증 결과를 함께 기록합니다.
 - 같은 작업에서 Markdown과 HTML을 함께 수정했다면 하나의 변경 항목으로 기록합니다.
 
+## 2026-09-28
+
+### 앱 폴더명 `webview` 통일과 저장소 구조 명시
+
+- WebView 애플리케이션 폴더명을 `apps/app-webview`에서 `apps/webview`로 통일하고, 관련 경로·구조도를 함께 반영했습니다.
+- 이 저장소는 문서·디자인 토큰과 참고용 앱 골격(`apps/webview/`)을 함께 두는 구조이며, 실제 WebView·Flutter 애플리케이션의 소스·빌드·배포는 각자 별도 저장소에서 관리한다는 점을 구조 문서에 명시했습니다.
+- `docs/ai/project.md`, `docs/guides/architecture/index.html`, 루트·docs README·AGENTS.md, `apps/webview/` 자기 설명문에 참고 골격과 별도 저장소 문구를 보강했습니다.
+- 문서 검색 색인(`search-data.js`)은 가이드 반영 후 공식 스크립트로 재생성합니다.
+- 검증: `git diff --check` 통과, 토큰 치환이 줄바꿈·인코딩을 보존하는지 파일별로 확인했습니다.
+
 ## 2026-09-18
 
 ### Flutter 카드 스캔 기술 가이드 추가
