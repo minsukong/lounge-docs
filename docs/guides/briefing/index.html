@@ -43,17 +43,16 @@ flowchart TD
 
       <section>
         <h2 class="bx-active">2. 작업 대상과 저장소 구조</h2>
-        <p>WebView 서비스 화면과 업무 흐름은 <code>apps/webview</code>에 구현합니다.</p>
-        <pre class="hljs"><code data-language="text">apps/
-├── webview/             # Front-end가 구현하는 WebView 화면
-└── mobile/                  # 별도 앱 개발자가 담당하는 Flutter 소스
+        <p>WebView 서비스 화면과 업무 흐름은 <code>front-end/webview</code>에 구현합니다.</p>
+        <pre class="hljs"><code data-language="text">front-end/
+└── webview/             # Front-end가 구현하는 WebView 화면 (참고 골격)
 
 docs/                        # 구현·검토 기준과 예시</code></pre>
         <h3>Application 가까이에서 시작합니다</h3>
-        <p><code>apps/webview</code> 안에서는 Routing과 화면 진입점, 기능 코드와 WebView 전용 UI를 가까운 위치에서 관리합니다. webview 한 곳에서만 사용하는 shadcn/ui 원형과 Wrapper는 <code>apps/webview/src/components/ui</code>에 둡니다.</p>
+        <p><code>front-end/webview</code> 안에서는 Routing과 화면 진입점, 기능 코드와 WebView 전용 UI를 가까운 위치에서 관리합니다. webview 한 곳에서만 사용하는 shadcn/ui 원형과 Wrapper는 <code>front-end/webview/src/components/ui</code>에 둡니다.</p>
         <h3>검증된 구현만 공통으로 관리합니다</h3>
         <p>여러 기능에서 실제로 재사용되고 의미와 변경 이유가 같은 UI만 <code>src/components/ui</code>에서 공통으로 관리합니다. 한 화면에서만 사용하는 Wrapper, 공통화 가능성을 예상한 Type과 Adapter는 미리 만들지 않습니다.</p>
-        <p><code>apps/</code>와 <code>docs/</code>의 최상위 분리는 실제 프로젝트 기준입니다. 앱 내부 Package 경계와 Build 구성은 실제 사용처와 현재 설정을 기준으로 판단합니다.</p>
+        <p><code>front-end/</code>와 <code>docs/</code>의 최상위 분리는 실제 프로젝트 기준입니다. 앱 내부 Package 경계와 Build 구성은 실제 사용처와 현재 설정을 기준으로 판단합니다.</p>
         <p><strong>상세 기준:</strong> 저장소 경계와 공통화 기준은 <a href="../architecture/index.html">Front-End 저장소 구조 기준</a>에서 확인합니다.</p>
       </section>
 
@@ -349,7 +348,7 @@ flowchart TD
 
       <section>
         <h2 class="bx-active">13. 문서 계층과 확인 순서</h2>
-        <p>저장소 구조는 2절에서 설명한 <code>apps/</code>와 <code>docs/</code>의 경계를 따릅니다. 여기서는 같은 내용을 반복하지 않고, 작업 중 어떤 문서를 언제 확인하는지만 정리합니다.</p>
+        <p>저장소 구조는 2절에서 설명한 <code>front-end/</code>와 <code>docs/</code>의 경계를 따릅니다. 여기서는 같은 내용을 반복하지 않고, 작업 중 어떤 문서를 언제 확인하는지만 정리합니다.</p>
         <table>
           <thead><tr><th scope="col">계층</th><th scope="col">역할</th><th scope="col">확인 시점</th></tr></thead>
           <tbody>
@@ -357,7 +356,7 @@ flowchart TD
             <tr><td><code>docs/ai/</code></td><td>작업별 핵심 기준과 다음 문서 안내</td><td>현재 작업의 기준을 고를 때</td></tr>
             <tr><td><code>docs/common-source/</code></td><td>파일 단위 적용 조건과 구현 예시</td><td>구현 예시가 필요할 때</td></tr>
             <tr><td><code>docs/guides/</code></td><td>기준의 배경, 전체 범위와 예외</td><td>추가 판단 근거가 필요할 때</td></tr>
-            <tr><td><code>apps/</code></td><td>설치된 패키지, 설정과 실제 소스</td><td>구현 전후 항상 비교할 때</td></tr>
+            <tr><td><code>front-end/</code></td><td>참고 골격 소스와 설정</td><td>구현 전후 항상 비교할 때</td></tr>
           </tbody>
         </table>
         <figure class="diagram-frame">

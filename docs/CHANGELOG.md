@@ -13,13 +13,23 @@
 
 ## 2026-09-28
 
-### 앱 폴더명 `webview` 통일과 저장소 구조 명시
+### 앱 골격 위치 재배치(`front-end/webview`)와 저장소 구조 명시
 
-- WebView 애플리케이션 폴더명을 `apps/app-webview`에서 `apps/webview`로 통일하고, 관련 경로·구조도를 함께 반영했습니다.
-- 이 저장소는 문서·디자인 토큰과 참고용 앱 골격(`apps/webview/`)을 함께 두는 구조이며, 실제 WebView·Flutter 애플리케이션의 소스·빌드·배포는 각자 별도 저장소에서 관리한다는 점을 구조 문서에 명시했습니다.
-- `docs/ai/project.md`, `docs/guides/architecture/index.html`, 루트·docs README·AGENTS.md, `apps/webview/` 자기 설명문에 참고 골격과 별도 저장소 문구를 보강했습니다.
+- WebView 애플리케이션 폴더명을 `apps/app-webview`에서 `webview`로 통일하던 중 `apps/` 폴더를 없애고 골격을 `front-end/webview`로 이동해, 관련 경로·구조도를 함께 반영했습니다.
+- 이 저장소는 문서·디자인 토큰과 참고용 앱 골격(`front-end/webview/`)을 함께 두는 구조이며, 실제 WebView·Flutter 애플리케이션의 소스·빌드·배포는 각자 별도 저장소에서 관리한다는 점을 구조 문서에 명시했습니다.
+- `docs/ai/project.md`, `docs/guides/architecture/index.html`, 루트·docs README·AGENTS.md, `front-end/webview/` 자기 설명문에 참고 골격과 별도 저장소 문구를 보강했습니다.
 - 문서 검색 색인(`search-data.js`)은 가이드 반영 후 공식 스크립트로 재생성합니다.
 - 검증: `git diff --check` 통과, 토큰 치환이 줄바꿈·인코딩을 보존하는지 파일별로 확인했습니다.
+
+### `apps/` 경로 참조 잔여분 정리
+
+- `apps/` 폴더 삭제와 `front-end/webview` 이동 이후 가이드에 남아 있던 오래된 경로 참조를 실제 구조에 맞게 통일했습니다.
+- 저장소 구조 기준, APP 개발 표준, Front-End 개발 가이드의 저장소 구조 트리와 애플리케이션 범위 표를 `front-end/`(webview) 구조로 갱신했고, `apps/mobile` 참조는 "Flutter Native 앱(별도 저장소)" 기준으로 바꿨습니다.
+- 구조 기준의 Workspace·의존성 항목에 Flutter Native 앱이 별도 저장소에서 관리된다는 기준을 반영하고, Directory 책임 표에 `front-end`와 `tokens` 영역을 정리했습니다.
+- Briefing·발표 자료, i18n, Lint, Storybook, 접근성, React Code Exports, 다이어그램 안내와 `docs/common-source/` 묶음의 `apps/webview` 참조를 `front-end/webview`로 교체했습니다.
+- `docs/AGENTS.md`의 "실제 애플리케이션 코드는 `apps/`에 둔다" 문구를 참고 골격과 별도 저장소 기준으로 바로잡았습니다.
+- 가이드 반영 후 문서 검색 색인(`search-data.js`)을 공식 스크립트(`node docs/search/build-search-index.mjs`)로 재생성했습니다.
+- 검증: 가이드와 검색 색인에 잔여 `apps/` 참조가 없음을 검사하고, 과거 변경 기록의 `apps/` 표기는 역사이므로 그대로 유지했습니다.
 
 ## 2026-09-18
 

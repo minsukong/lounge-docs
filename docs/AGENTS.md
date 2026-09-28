@@ -6,7 +6,7 @@
 
 - 사용자가 지정한 문서와 필요한 주변 범위부터 확인합니다. 링크되어 있다는 이유만으로 다른 가이드, README, 템플릿과 소스를 연쇄적으로 읽지 않습니다.
 - 문서 구조나 링크를 바꿀 때만 `docs/README.md`, 새 HTML 가이드를 만들 때만 `docs/templates/index.html`, 실제 구현 기준이 필요할 때만 관련 앱 소스나 상세 가이드 하나를 추가로 확인합니다.
-- 상세 가이드는 `docs/guides/`, 공통 자산은 `docs/assets/`, AI 요약은 `docs/ai/`, 파일 단위 구현 예시는 `docs/common-source/`에서 관리합니다. 실제 애플리케이션 코드는 `apps/`에 둡니다.
+- 상세 가이드는 `docs/guides/`, 공통 자산은 `docs/assets/`, AI 요약은 `docs/ai/`, 파일 단위 구현 예시는 `docs/common-source/`에서 관리합니다. `front-end/`는 Front-end 참고 골격이며 `front-end/webview/`는 Flutter 앱에서 WebView로 실행되는 웹 화면입니다. 실제 Front-end·Flutter Native 소스는 별도 저장소에서 관리합니다.
 - `docs/`는 제품 Build와 배포 대상이 아닙니다. 문서 검색, 링크, HTML과 JavaScript 검사는 문서 검증으로만 실행합니다.
 - 저장소 구조, package, API와 계약을 설명할 때는 실제 소스와 승인된 계약을 확인합니다. 확인되지 않은 내용은 확정하지 않고 `TBD`로 구분합니다.
 - 기존 기준과 다른 내용이 필요하면 문서에서 조용히 바꾸지 말고 충돌 지점과 변경 필요성을 먼저 알립니다.

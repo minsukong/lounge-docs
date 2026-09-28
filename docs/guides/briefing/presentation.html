@@ -180,10 +180,10 @@
               <h2>코드와 가이드를<br /><em>같은 저장소에</em></h2>
             </div>
             <p>
-              <code class="tree-folder app">apps/</code>에는 실제 앱 코드,
+              <code class="tree-folder app">front-end/</code>에는 앱 참고 골격,
               <code class="tree-folder docs">docs/</code>에는 구현·검토 기준을
               둡니다.<br />
-              앱을 빌드할 때 문서는 포함하지 않습니다.
+              실제 앱 코드는 별도 저장소이며, 앱을 빌드할 때 문서는 포함하지 않습니다.
             </p>
           </div>
           <div class="diagram-panel repository-layout">
@@ -196,8 +196,7 @@
                 aria-label="저장소 구조"
               ><span class="tree-root">Root/</span>
 ├─ <span class="tree-file file1">AGENTS.md</span>                         <span class="tree-comment"># AI 최상위 작업 원칙</span>
-├─ <span class="tree-folder app">apps/</span>                             <span class="tree-comment"># 앱 소스</span>
-│  ├─ <span class="tree-folder app">mobile/</span>                        <span class="tree-comment"># Flutter Native</span>
+├─ <span class="tree-folder app">front-end/</span>                         <span class="tree-comment"># Front-end 참고 골격</span>
 │  └─ <span class="tree-folder app">webview/</span>                   <span class="tree-comment"># WebView Front-end</span>
 │     ├─ <span class="tree-folder app">.storybook/</span>                 <span class="tree-comment"># UI 확인</span>
 │     └─ <span class="tree-folder app">src/</span>                        <span class="tree-comment"># Source · Story · Test</span>
@@ -215,11 +214,11 @@
                 <p>저장소 전체에서 AI가 따라야 할 작업·편집·검증 원칙</p>
               </article>
               <article class="card-surface tone-source">
-                <b>APP SOURCE</b>
-                <h3>apps/</h3>
+                <b>FRONT-END SOURCE</b>
+                <h3>front-end/</h3>
                 <p>
-                  <strong>webview/</strong>은 Front-end,
-                  <strong>mobile/</strong>은 별도 앱 개발자가 담당
+                  <strong>webview/</strong>는 WebView 화면 참고 골격, 실제 소스와
+                  Flutter Native는 별도 저장소
                 </p>
               </article>
               <article class="card-surface tone-ai">
@@ -257,7 +256,7 @@ flowchart TB
   A["1 · 작업 위치의 규칙 확인<br/>AGENTS.md (AI 지침)"] --> B["2 · 작업별 핵심 기준 확인<br/>docs/ai/*.md"]
   B --> C{"파일에 적용할<br/>구현 예시가 필요한가?"}
   C -->|"YES"| D["3 · 파일 단위 예시 확인<br/>docs/common-source/*.md"]
-  C -->|"NO"| G["4 · 실제 코드에 적용<br/>apps/"]
+  C -->|"NO"| G["4 · 실제 코드에 적용<br/>front-end/"]
   D --> E{"작업 배경·전체 범위도<br/>확인해야 하는가?"}
   E -->|"YES"| F["상세 가이드 확인<br/>docs/guides/ 아래 *.html"]
   E -->|"NO"| G
@@ -576,7 +575,7 @@ flowchart TB
   B --> C["AI · 2. 현재 코드 확인<br/>설치된 기능 · 기존 UI · 재사용 방법 확인"]
   C --> D["AI · 3. 필요한 문서 확인<br/>이번 작업에 필요한 가이드만 선택"]
   D --> E{"AI · 바로 구현할 수<br/>있는가?"}
-  E -->|"YES"| I["AI · 4. 화면 구현<br/>apps/webview에 코드 작성"]
+  E -->|"YES"| I["AI · 4. 화면 구현<br/>front-end/webview에 코드 작성"]
   E -->|"NO"| F{"AI · 서비스·업무 결정이<br/>필요한가?"}
   F -->|"YES"| G["담당자 · 기준 결정<br/>업무 규칙 · 서버 연결 · 앱 연동 방식 답변"]
   F -->|"NO"| H["AI · 구현 방법 확인<br/>구현 예시와 상세 가이드 확인"]

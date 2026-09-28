@@ -71,9 +71,10 @@
         <pre class="hljs"><code data-language="text">&lt;repository-root&gt;/
 ├── AGENTS.md                    # 저장소 전체 구현 지침
 ├── README.md                    # 프로젝트 진입점
-├── apps/
-│   ├── mobile/                  # Flutter Native 앱
-│   └── webview/             # 앱 내 Next.js WebView Front-end
+├── front-end/
+│   ├── AGENTS.md                # Front-end 폴더 구현 지침
+│   ├── README.md
+│   └── webview/                 # 앱 내 Next.js WebView Front-end
 │       ├── AGENTS.md            # 앱 전용 구현 지침
 │       ├── .storybook/          # Storybook 설정
 │       └── src/                 # 애플리케이션 source
@@ -84,8 +85,8 @@
     └── common-source/           # 파일 단위 구현 기준</code></pre>
 
         <p>
-          이 저장소 <code>apps/</code>는 참고 골격입니다. 실제 WebView 애플리케이션(<code>apps/webview</code>)과
-          Flutter Native 앱(<code>apps/mobile</code>)의 소스·빌드·배포는 각각 별도 저장소에서 관리하며, 이 저장소에서는 문서 검토와 구조 참고 용도로만 유지합니다.
+          이 저장소 <code>front-end/</code>는 참고 골격입니다. 실제 WebView 애플리케이션과
+          Flutter Native 앱의 소스·빌드·배포는 각각 별도 저장소에서 관리하며, 이 저장소에서는 문서 검토와 구조 참고 용도로만 유지합니다.
         </p>
 
         <h3>애플리케이션 범위</h3>
@@ -99,14 +100,14 @@
           </thead>
           <tbody>
             <tr>
-              <td><code>apps/mobile</code></td>
+              <td>Flutter Native 앱</td>
               <td>Flutter Native 앱과 기기 기능</td>
               <td>Flutter·Dart · 별도 저장소</td>
             </tr>
             <tr>
-              <td><code>apps/webview</code></td>
+              <td><code>front-end/webview</code></td>
               <td>앱 내 Front-end 서비스 화면과 업무 흐름</td>
-              <td>Next.js·React·TypeScript · 별도 저장소</td>
+              <td>Next.js·React·TypeScript · 실제 소스는 별도 저장소</td>
             </tr>
           </tbody>
         </table>
@@ -126,9 +127,14 @@
           </thead>
           <tbody>
             <tr>
-              <td><code>apps</code></td>
-              <td>독립적으로 빌드·테스트·배포 가능한 애플리케이션 (이 저장소에서는 참고 골격, 실제 빌드·배포는 별도 저장소)</td>
-              <td>다른 앱의 내부 소스 경로를 직접 Import하지 않음</td>
+              <td><code>front-end</code></td>
+              <td>Front-end 참고 골격. <code>front-end/webview</code>는 Flutter 앱에서 WebView로 실행되는 웹 화면이고 향후 반응형 웹까지 포함합니다. 실제 빌드·배포는 별도 저장소</td>
+              <td>애플리케이션 source를 문서와 함께 제품 Build에 포함하지 않음</td>
+            </tr>
+            <tr>
+              <td><code>tokens</code></td>
+              <td>Figma Tokens Studio에서 관리하는 디자인 토큰</td>
+              <td>생성된 토큰 파일을 직접 수정하지 않음</td>
             </tr>
             <tr>
               <td><code>docs</code></td>
@@ -154,7 +160,7 @@
           </li>
           <li>
             공통 UI와 WebView 전용 조합은 역할에 따라
-            <code>apps/webview/src/components</code>에서 관리합니다.
+            <code>front-end/webview/src/components</code>에서 관리합니다.
           </li>
           <li>
             API와 Bridge Type 또는 Adapter는 승인된 계약과 실제 사용처 가까이에
@@ -182,8 +188,8 @@
             관리합니다.
           </li>
           <li>
-            Flutter는 같은 저장소에 두되 Dart 의존성, Lock File과 빌드 도구를
-            Flutter Toolchain 기준으로 관리합니다.
+            Flutter Native 앱은 별도 저장소에서 관리하며 Dart 의존성, Lock
+            File과 빌드 도구를 Flutter Toolchain 기준으로 관리합니다.
           </li>
           <li>
             Web Workspace와 Flutter 등 각 Toolchain의 Lock File을 변경 사항과 함께
@@ -204,10 +210,10 @@
         <ul>
           <li>
             애플리케이션 Pipeline, Artifact, 환경 설정, Version, 승인과 Rollback은
-            <code>apps/webview</code>를 기준으로 관리합니다.
+            <code>front-end/webview</code>를 기준으로 관리합니다.
           </li>
           <li>
-            변경 경로와 의존 관계를 기준으로 <code>apps/webview</code>의
+            변경 경로와 의존 관계를 기준으로 <code>front-end/webview</code>의
             Lint·Test·Build를 수행합니다.
           </li>
           <li>
@@ -234,7 +240,7 @@
         <h3 id="document-pages">6.2 문서 게시와 GitLab Pages</h3>
         <p>
           애플리케이션 Build와 문서 게시를 서로 다른 CI Job으로 운영합니다.
-          애플리케이션 Job은 <code>apps/webview</code>만 Build하고, Pages Job은
+          애플리케이션 Job은 <code>front-end/webview</code>만 Build하고, Pages Job은
           문서 검증을 통과한 <code>docs/</code>만 정적 사이트로 게시합니다. Pages
           게시를 애플리케이션 Build나 Production 배포의 일부로 취급하지 않습니다.
         </p>
@@ -244,7 +250,7 @@
 flowchart TB
   accTitle: 애플리케이션 Build와 문서 게시 Pipeline 분리
   accDescr: 저장소 변경은 애플리케이션 검증과 문서 검증으로 나뉘며 애플리케이션은 제품 Artifact로 배포하고 문서는 GitLab Pages로 게시해 Confluence iframe에서 조회합니다.
-  A["저장소 변경"] --> B["Application Job<br/>apps/webview"]
+  A["저장소 변경"] --> B["Application Job<br/>front-end/webview"]
   A --> C["Documentation Job<br/>docs"]
   B --> D["Typecheck · Lint · Test · Build"]
   D --> E["제품 Artifact 배포"]
