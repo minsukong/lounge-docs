@@ -2,14 +2,14 @@
 
 ## 사용 조건
 
-실제 `apps/webview`가 생성되고 설치된 Next.js, React, Node.js와 Build 설정을 확인할 수 있을 때 적용합니다. Framework와 Addon 버전, Package Manager 및 Script 이름은 `package.json`과 Lock File을 기준으로 결정합니다.
+실제 `front-end/webview`가 생성되고 설치된 Next.js, React, Node.js와 Build 설정을 확인할 수 있을 때 적용합니다. Framework와 Addon 버전, Package Manager 및 Script 이름은 `package.json`과 Lock File을 기준으로 결정합니다.
 
 Storybook은 작은 공통 UI에서 도입을 시작할 수 있지만 운영 범위는 컴포넌트에 한정하지 않습니다. Component, Feature와 사용자에게 노출되는 Screen을 탐색하고 주요 상태를 독립적으로 재현·검수하는 UI 환경으로 확대합니다. 여러 Application에서 실제 공유되는 구성과 운영 필요성이 확인된 뒤 별도 Storybook Application 또는 공통 구성을 검토합니다.
 
 ## 적용 위치
 
 ```text
-apps/webview/
+front-end/webview/
 ├── .storybook/
 │   ├── main.ts
 │   └── preview.ts

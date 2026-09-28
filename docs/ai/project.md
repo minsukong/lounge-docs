@@ -6,7 +6,7 @@
 
 ## 현재 범위
 
-- `apps/webview`는 앱 내부 WebView에서 서비스 UI와 업무 흐름을 제공하는 Next.js 애플리케이션입니다.
+- `front-end/`는 Front-end(웹) 참고 골격으로, 실제 소스는 별도 저장소에서 관리합니다. `front-end/webview/`는 Flutter 앱에서 WebView로 실행되는 웹 화면이고, 향후 반응형 웹(브랜딩 사이트, 결제, 회원)까지 포함됩니다.
 - Native 기능은 화면에서 직접 구현하지 않고, 필요한 경우 타입이 정의된 Bridge adapter를 통해 요청합니다.
 - Android와 iOS의 전역 객체 차이를 화면 컴포넌트에 노출하지 않습니다.
 - 인증 토큰, 카드정보와 불필요한 개인정보를 브라우저 저장소에 보관하지 않습니다.
@@ -19,14 +19,17 @@
 - shadcn/ui, Base UI, Lucide
 - TanStack Query, Zustand, React Hook Form은 각 책임이 실제로 필요할 때 사용
 
-이 저장소는 참고용 앱 골격과 모든 가이드를 함께 관리하며, 실제 애플리케이션 소스는 별도 저장소에 있습니다.
+이 저장소는 참고용 Front-end 골격과 모든 가이드를 함께 관리하며, 실제 애플리케이션 소스는 별도 저장소에 있습니다.
 
 ```text
 <repository-root>/
 ├── AGENTS.md
-├── apps/
-│   ├── mobile/          # Flutter Native 앱
-│   └── webview/     # WebView Front-end (참고 골격, 실제 앱은 별도 저장소)
+├── front-end/              # Front-end 참고 골격 (실제 소스는 별도 저장소)
+│   ├── AGENTS.md
+│   └── webview/
+│       ├── AGENTS.md
+│       ├── .storybook/
+│       └── src/
 └── docs/
     ├── AGENTS.md
     ├── assets/
@@ -35,20 +38,20 @@
     └── common-source/
 ```
 
-이 문서는 `docs/ai/project.md`, 상세 HTML 가이드는 `docs/guides/`에서 관리합니다. 실제 애플리케이션 소스는 별도 저장소의 WebView 애플리케이션에 있으며, 이 저장소 `apps/webview/`는 참고 골격입니다.
+이 문서는 `docs/ai/project.md`, 상세 HTML 가이드는 `docs/guides/`에서 관리합니다. 실제 애플리케이션 소스는 별도 저장소에 있으며, 이 저장소 `front-end/webview/`는 참고 골격입니다.
 
 ```text
-apps/webview/src/
+front-end/webview/src/
 ├── app/          # 라우트, 레이아웃, Provider
 ├── components/   # UI와 기능 컴포넌트
 ├── lib/          # 프레임워크와 무관한 유틸리티 및 adapter
 └── test/         # 테스트 공통 설정
 ```
 
-Storybook 애플리케이션 설정은 `apps/webview/.storybook`에 두고, Story 파일은 실제 컴포넌트 가까이에 둡니다.
+Storybook 애플리케이션 설정은 `front-end/webview/.storybook`에 두고, Story 파일은 실제 컴포넌트 가까이에 둡니다.
 
 ```text
-apps/webview/
+front-end/webview/
 ├── .storybook/           # Storybook 실행과 전역 렌더링 설정
 └── src/
     ├── components/ui/
@@ -57,7 +60,7 @@ apps/webview/
     └── features/         # 독립 검증 가치가 있는 기능 컴포넌트만 Story 작성
 ```
 
-Storybook 설정은 `apps/webview/.storybook`, Story는 실제 컴포넌트 가까이에서 관리합니다. 실제 파일에서 확인되지 않는 별도 Storybook 앱이나 공통 package 구성을 추측하지 않습니다.
+Storybook 설정은 `front-end/webview/.storybook`, Story는 실제 컴포넌트 가까이에서 관리합니다. 실제 파일에서 확인되지 않는 별도 Storybook 앱이나 공통 package 구성을 추측하지 않습니다.
 
 ## 구현 원칙
 

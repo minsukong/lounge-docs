@@ -31,7 +31,7 @@
 
 ## 작업 전 확인
 
-- `apps/mobile`의 실제 WebView 구현과 사용 중인 Flutter package를 확인합니다.
+- Flutter 저장소의 실제 WebView 구현과 사용 중인 Flutter package를 확인합니다.
 - 실제 Navigation Delegate와 Platform Channel 구성을 확인합니다.
 - Android Manifest의 Intent Filter와 Package Query를 확인합니다.
 - iOS URL Types와 `LSApplicationQueriesSchemes`를 확인합니다.

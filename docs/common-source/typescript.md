@@ -7,7 +7,7 @@ TypeScript 공통 코드는 모든 타입을 `types.ts`에 모으는 작업이 �
 ```text
 실제 저장소
 ├── tsconfig.base.json
-└── apps/webview/
+└── front-end/webview/
     ├── tsconfig.json
     └── src/lib/
         ├── errors.ts
@@ -34,7 +34,7 @@ TypeScript 공통 코드는 모든 타입을 `types.ts`에 모으는 작업이 �
 }
 ```
 
-### `apps/webview/tsconfig.json`
+### `front-end/webview/tsconfig.json`
 
 ```json
 {

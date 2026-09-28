@@ -24,7 +24,7 @@ Cline, Claude Code와 Codex 중 어떤 도구를 사용하더라도 동일한 �
 
 다음 UI를 Story 작성 대상으로 합니다.
 
-- `apps/webview/src/components/ui`의 공통 UI
+- `front-end/webview/src/components/ui`의 공통 UI
 - 여러 화면에서 반복되며 독립적으로 상태를 확인할 가치가 있는 feature 컴포넌트
 - 공개 Props, variant 또는 상호작용 상태를 가진 컴포넌트
 - 라우터를 통해 사용자에게 제공되는 페이지와 화면 UI
@@ -48,7 +48,7 @@ Storybook 사이드바는 라우터 경로가 아니라 사람이 이해할 수 
 
 ## 4. 기본 구성
 
-Storybook은 먼저 `apps/webview`에서 작은 범위로 도입합니다. 여러 애플리케이션에서 실제 공유되는 UI와 운영 필요성이 확인된 뒤 별도 Storybook Application 또는 공통 구성을 검토합니다.
+Storybook은 먼저 `front-end/webview`에서 작은 범위로 도입합니다. 여러 애플리케이션에서 실제 공유되는 UI와 운영 필요성이 확인된 뒤 별도 Storybook Application 또는 공통 구성을 검토합니다.
 
 Next.js 프로젝트에서는 설치된 Next.js, React, Node.js와 Build 설정을 확인한 뒤 호환되는 Storybook Framework를 선택합니다. 특별한 Webpack 또는 Babel 제약이 없다면 공식 문서에서 권장하는 Next.js Vite Framework를 우선 검토합니다.
 

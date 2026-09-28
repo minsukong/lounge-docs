@@ -3,29 +3,29 @@
 > 작성일: 2026-09-17
 > 상태: 계획
 
-> **저장소 구조 전제**: 실제 WebView·Flutter 애플리케이션의 소스·빌드·배포는 각자 **별도 저장소**에서 진행합니다. 이 저장소는 문서·디자인 토큰과 참고용 앱 골격(`apps/webview/`)을 유지하며, 아래 단계는 대상 앱의 목표 구조·작업을 이 저장소 기준(docs·skeleton)으로 정의합니다. 앱 저장소 내부 경로·CI·환경값은 해당 저장소 기준으로 확정합니다(미정 시 `TBD`).
+> **저장소 구조 전제**: 실제 Front-end·Flutter 애플리케이션의 소스·빌드·배포는 각자 **별도 저장소**에서 진행합니다. 이 저장소는 문서·디자인 토큰과 참고용 Front-end 골격(`front-end/`)을 유지하며, 아래 단계는 대상 앱의 목표 구조·작업을 이 저장소 기준(docs·skeleton)으로 정의합니다. 앱 저장소 내부 경로·CI·환경값은 해당 저장소 기준으로 확정합니다(미정 시 `TBD`).
 
 ## 🔄 현재 프로젝트 상태
 
 | 항목                 | 상태                                                                            |
 | -------------------- | ------------------------------------------------------------------------------- |
-| `apps/webview/`      | 참고 골격만 존재. 실제 WebView 앱은 별도 저장소에서 개발·빌드·배포                          |
-| `apps/mobile/`       | 이 저장소에는 없음 (Flutter 앱은 별도 저장소·별도 담당에서 관리)                                          |
+| `front-end/webview/` | 참고 골격만 존재. 실제 Front-end 앱은 별도 저장소에서 개발·빌드·배포                          |
+| Flutter 앱        | 이 저장소에는 없음 (Flutter Native 앱은 별도 저장소·별도 담당에서 관리)                                          |
 | `tokens/tokens.json` | ✅ 디자인 토큰 세트 준비 완료 (color, spacing, typography, shadows, components) |
 | `docs/`              | ✅ 상세 가이드·AI 요약·공통 소스 문서 준비 완료                                 |
 | CI/CD                | 미구성 (앱 빌드·배포 CI는 앱 저장소 기준, 이 저장소는 문서 게시용)                                                                          |
 
-> **핵심 전제**: 이 저장소의 `apps/webview/`는 참고 골격이며 실제 앱은 별도 저장소에서 초기화됩니다. 아래 단계는 대상 앱의 목표 구조·작업을 이 저장소 기준(docs·skeleton)으로 정의하며, 실제 구현은 앱 저장소에서 수행합니다. 앱 저장소 내부 경로·구성값은 해당 저장소 기준으로 확정합니다(미정 시 `TBD`).
+> **핵심 전제**: 이 저장소의 `front-end/webview/`는 참고 골격이며 실제 앱은 별도 저장소에서 초기화됩니다. 아래 단계는 대상 앱의 목표 구조·작업을 이 저장소 기준(docs·skeleton)으로 정의하며, 실제 구현은 앱 저장소에서 수행합니다. 앱 저장소 내부 경로·구성값은 해당 저장소 기준으로 확정합니다(미정 시 `TBD`).
 
 ---
 
 ## Phase 0: 앱 초기화 (대상 앱 구조 기준)
 
-> 아래 항목은 **앱 저장소**에서 수행하며, 이 저장소 `apps/webview/` 참고 골격과 docs 기준을 따릅니다.
+> 아래 항목은 **앱 저장소**에서 수행하며, 이 저장소 `front-end/webview/` 참고 골격과 docs 기준을 따릅니다.
 
 | 순서 | 작업                                                                                                                        | 산출물                                                                  |
 | ---- | --------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| 0-1  | 앱 저장소에 Next.js 16 App Router 앱 초기화 (이 저장소 `apps/webview/` 골격 기준)                                                                             | `package.json`, `next.config.ts`, `tsconfig.json`, `src/app/layout.tsx` |
+| 0-1  | 앱 저장소에 Next.js 16 App Router 앱 초기화 (이 저장소 `front-end/webview/` 골격 기준)                                                                             | `package.json`, `next.config.ts`, `tsconfig.json`, `src/app/layout.tsx` |
 | 0-2  | 핵심 의존성 설치: React 19, TypeScript, Tailwind CSS 4.1+, `@tailwindcss/postcss`, `clsx`, `tailwind-merge`, `lucide-react` | lock file                                                               |
 | 0-3  | `postcss.config.mjs` 작성                                                                                                   | Tailwind CSS 4 PostCSS 연결                                             |
 | 0-4  | `src/lib/utils.ts`에 `cn` 함수 작성                                                                                         | 클래스 병합 유틸리티                                                    |
@@ -103,7 +103,7 @@ tokens/tokens.json
 **Storybook 구조:**
 
 ```text
-apps/webview/
+front-end/webview/
 ├── .storybook/
 │   ├── main.ts          # story glob, framework, addons
 │   └── preview.ts       # globals.css, providers, viewport, params

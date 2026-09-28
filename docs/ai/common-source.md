@@ -2,11 +2,11 @@
 
 > 상세 가이드: `docs/common-source/`
 
-모든 가이드는 `docs/`에서 관리하며, 실제 공통 소스는 `apps/webview`의 사용처, 기존 source와 설치 package를 확인해 구현합니다.
+모든 가이드는 `docs/`에서 관리하며, 실제 공통 소스는 `front-end/webview`의 사용처, 기존 source와 설치 package를 확인해 구현합니다.
 
 ## 작업 전 확인
 
-- `apps/webview`의 실제 파일과 설치 package를 먼저 확인합니다. 확인되지 않은 구성은 추측하지 않고 참고 구현의 적용 조건과 교체 지점을 명확히 작성합니다.
+- `front-end/webview`의 실제 파일과 설치 package를 먼저 확인합니다. 확인되지 않은 구성은 추측하지 않고 참고 구현의 적용 조건과 교체 지점을 명확히 작성합니다.
 - Tailwind와 shadcn 작업은 `docs/common-source/tailwind.md`를 읽습니다.
 - React component와 Provider 작업은 `docs/common-source/react.md`를 읽습니다.
 - TypeScript 설정과 runtime guard 작업은 `docs/common-source/typescript.md`를 읽습니다.

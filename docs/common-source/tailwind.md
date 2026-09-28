@@ -7,7 +7,7 @@
 적용 파일은 다음 네 개입니다.
 
 ```text
-apps/webview/
+front-end/webview/
 ├── components.json
 ├── postcss.config.mjs
 └── src/
@@ -25,7 +25,7 @@ Safari 15 지원은 10년 이상 운영된 기존 앱의 장기 이용자와 구
 
 shadcn/ui 컴포넌트도 이름이나 생성 여부만으로 Safari 15 호환을 보장하지 않습니다. Dialog, Select, Popover와 Drawer처럼 Portal, 포커스, 스크롤, 터치와 모바일 키보드가 결합되는 컴포넌트는 Safari 15에서 실제 사용자 흐름을 검증하고, 필요한 경우 프로젝트가 소유한 생성 코드를 호환 가능한 방식으로 조정합니다.
 
-### `apps/webview/postcss.config.mjs`
+### `front-end/webview/postcss.config.mjs`
 
 ```js
 const config = {
@@ -41,7 +41,7 @@ export default config
 
 ## 2단계: shadcn 생성 경로 고정
 
-### `apps/webview/components.json`
+### `front-end/webview/components.json`
 
 ```json
 {
@@ -101,7 +101,7 @@ shadcn은 컴포넌트 코드를 프로젝트에 복사하는 방식입니다. �
 
 ## 3단계: 디자인 전 사용할 토큰 정의
 
-### `apps/webview/src/app/globals.css`
+### `front-end/webview/src/app/globals.css`
 
 ```css
 @import "tailwindcss";
@@ -192,7 +192,7 @@ shadcn은 컴포넌트 코드를 프로젝트에 복사하는 방식입니다. �
 
 ## 4단계: 클래스 병합 함수
 
-### `apps/webview/src/lib/utils.ts`
+### `front-end/webview/src/lib/utils.ts`
 
 ```ts
 import { clsx, type ClassValue } from "clsx"
@@ -266,7 +266,7 @@ export function ProfilePanel() {
 
 모바일 WebView의 기본 화면 높이는 Safari 15에서 동작하는 `vh` 기반 `min-h-screen`을 사용합니다. `dvh`처럼 Safari 15 전체 범위에서 보장되지 않는 단위를 핵심 레이아웃에 사용하지 않습니다. 상태바와 홈 표시 영역까지 콘텐츠를 확장하는 구성이면 Next.js viewport에 `viewportFit: "cover"`를 지정하고 실제로 가려지는 화면 경계에만 safe area를 적용합니다.
 
-### `apps/webview/src/app/layout.tsx`
+### `front-end/webview/src/app/layout.tsx`
 
 ```tsx
 import type { Viewport } from "next"

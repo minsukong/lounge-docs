@@ -4,11 +4,11 @@
 
 상위 Front-end 가이드가 기술 선택과 작성 방향을 설명한다면, 이 폴더는 실제 구현에 옮길 수 있는 **파일 단위 예시 코드**를 제공합니다. 모든 예제는 Next.js 16 App Router, React 19, TypeScript 6, Tailwind CSS 4, shadcn/ui `base-nova`, TanStack Query 기준입니다.
 
-이 폴더에는 애플리케이션 파일을 직접 저장하지 않습니다. 코드 블록의 경로대로 실제 `apps/webview`에 옮기되, 같은 책임의 기존 파일이 있으면 새 파일을 만들지 말고 필요한 부분만 병합합니다.
+이 폴더에는 애플리케이션 파일을 직접 저장하지 않습니다. 코드 블록의 경로대로 실제 `front-end/webview`에 옮기되, 같은 책임의 기존 파일이 있으면 새 파일을 만들지 말고 필요한 부분만 병합합니다.
 
 기획 흐름과 Backend API 계약이 확정되기 전에는 API·세션 구현 예시와 Mock을 실제 코드로 옮기지 않습니다. Backend 확인 질문과 `TBD`만 정리하고, 승인된 계약과 개발 환경이 전달된 뒤 필요한 문서만 적용합니다.
 
-이 문서 묶음은 `docs/common-source/`에서 관리합니다. 상세 HTML 가이드는 `docs/guides/`, AI 요약은 `docs/ai/`, 문서 공통 자산은 `docs/assets/`에 두고 실제 WebView Front-end 코드는 `apps/webview/`에서 관리합니다.
+이 문서 묶음은 `docs/common-source/`에서 관리합니다. 상세 HTML 가이드는 `docs/guides/`, AI 요약은 `docs/ai/`, 문서 공통 자산은 `docs/assets/`에 두고 실제 Front-end 코드는 `front-end/webview/`에서 관리합니다.
 
 ## 작업별 문서
 
@@ -42,7 +42,7 @@
 ## 권장 파일 구조
 
 ```text
-apps/webview/
+front-end/webview/
 ├── .storybook/
 │   ├── main.ts
 │   └── preview.ts

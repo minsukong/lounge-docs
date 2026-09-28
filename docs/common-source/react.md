@@ -5,7 +5,7 @@
 이 문서는 앱 전체에 필요한 QueryClient·Provider와 폼에서 반복되는 접근성·제출 처리 중 동작을 완성된 파일 단위로 제공합니다.
 
 ```text
-apps/webview/src/
+front-end/webview/src/
 ├── app/
 │   ├── layout.tsx
 │   └── providers.tsx
