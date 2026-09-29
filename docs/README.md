@@ -53,3 +53,20 @@
 상세 가이드의 기준 원본은 `guides/`입니다. 구현 작업은 저장소 루트 `AGENTS.md`에서 시작해 필요한 `ai/` 요약을 읽고, 세부 배경이나 적용 예시가 필요할 때 `guides/` 또는 `common-source/`로 이동합니다.
 
 실제 애플리케이션 `.ts`, `.tsx`, CSS와 package 설정은 별도 저장소에서 관리합니다. 이 저장소 `front-end/`는 참고 골격이며, `docs/`에는 애플리케이션 소스를 복사하지 않습니다.
+
+## HTML 발표자 모드
+
+브리핑용 HTML은 공통 발표자 모드를 선택적으로 사용할 수 있습니다. 일반 문서에는 자동으로 적용되지 않으며, 필요한 문서에서 다음 순서로 연결합니다.
+
+1. 공통 스타일 `docs/assets/style/briefing-presenter.css`를 연결합니다.
+2. 문서 가까이에 `window.LoungeBriefingPresenterConfig`를 정의하는 노트 파일을 둡니다.
+3. 노트 파일 다음에 공통 실행 파일 `docs/assets/js/briefing-presenter.js`를 연결합니다.
+
+```html
+<link rel="stylesheet" href="../docs/assets/style/briefing-presenter.css" />
+
+<script src="./example-briefing-notes.js"></script>
+<script src="../docs/assets/js/briefing-presenter.js"></script>
+```
+
+노트 파일은 문서의 `main > section` 순서와 같은 순서로 `notes`를 정의합니다. 각 노트는 `key`, `say`, `avoid`, `question`을 사용합니다. 기본 명령은 `Ctrl + Shift + .`로 명령창을 열고 `/briefing`을 입력하는 방식이며, `Esc`로 종료합니다. URL의 `?briefing=1`로 바로 시작할 수도 있습니다.

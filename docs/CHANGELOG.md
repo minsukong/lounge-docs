@@ -11,6 +11,16 @@
 - 변경한 파일 목록만 나열하지 않고 변경 목적, 주요 내용, 미확정 항목과 검증 결과를 함께 기록합니다.
 - 같은 작업에서 Markdown과 HTML을 함께 수정했다면 하나의 변경 항목으로 기록합니다.
 
+## 2026-09-30
+
+### HTML 공용 발표자 모드 추가
+
+- 브리핑 HTML에서 공통으로 사용할 수 있는 발표자 패널 스타일과 실행 코드를 `docs/assets/style/briefing-presenter.css`, `docs/assets/js/briefing-presenter.js`에 추가했습니다.
+- 공용 실행 코드와 문서별 발표 노트를 분리해, 각 문서는 `window.LoungeBriefingPresenterConfig`에 섹션별 핵심 문장·주의 표현·확인 질문만 정의하도록 구성했습니다.
+- `Ctrl + Shift + .`와 `/briefing`, URL의 `?briefing=1`, `Esc` 종료, 현재 섹션 자동 감지, 이전·다음 이동과 인쇄 제외 동작을 공통으로 제공합니다.
+- `docs/README.md`에 공통 자산 연결 순서와 문서별 노트 설정 방법을 기록했습니다.
+- 검증: 공통 JavaScript 문법, CSS 괄호, HTML 자산 경로, 문서 섹션과 노트 수 일치 및 `git diff --check`를 확인했습니다.
+
 ## 2026-09-28
 
 ### 앱 골격 위치 재배치(`front-end/webview`)와 저장소 구조 명시
