@@ -20,8 +20,14 @@
       </p>
       <blockquote>
         <p>
-          미들급 Flutter 개발자 1명, AI 적극 활용, 신규 구축 기준으로 기능 구현부터
-          통합 QA와 출시 준비까지 120~155근무일, 약 6~7.75개월로 산정합니다.
+          <strong>산정 상태:</strong> 이 문서는 작성 당시 제공된 APP IA와 확인 가능한
+          자료를 바탕으로 만든 조건부 검토 자료입니다. APP IA의 분류 기준, 누락 범위와
+          최종 승인 여부가 확인되지 않았으므로 화면 수, 담당 범위와 예상 기간을 공식
+          범위나 확정 일정으로 사용할 수 없습니다.
+        </p>
+        <p>
+          당시 가정에서 미들급 Flutter 개발자 1명, AI 적극 활용, 신규 구축 기준으로 기능
+          구현부터 통합 QA와 출시 준비까지 120~155근무일, 약 6~7.75개월로 산정했습니다.
         </p>
       </blockquote>
     </header>
@@ -33,6 +39,11 @@
           이 문서는 앱 개발자와 APP 구축 일정을 검토하기 위한 산정 자료입니다. 특정
           착수일이나 완료일을 전제로 하지 않으며, 실제 개발 범위와 책임이 현재 가정과
           일치하는지 확인한 뒤 일정을 조정합니다.
+        </p>
+        <p>
+          이 문서의 화면 수와 기간은 확정값이 아닙니다. 최신 IA와 기능 범위를 검증하고
+          관련 파트의 협의 결과, 실제 투입 인력과 환경 제공 일정을 확인한 뒤 범위와
+          기간을 다시 산정해야 합니다.
         </p>
         <ul>
           <li><strong>개발자 구성:</strong> 미들급 Flutter 개발자 1명</li>
@@ -69,6 +80,13 @@
           IA의 화면 수만으로 일정을 계산하지 않고, 앱 Shell, 인증, WebView, 기기 기능,
           Android·iOS 검증과 배포 작업을 함께 반영했습니다.
         </p>
+        <blockquote>
+          <p>
+            APP IA는 최종 승인된 범위 자료로 확인되지 않았습니다. 아래 화면 수는 작성
+            당시 IA의 분류를 집계한 값이며, 현재 확정된 Flutter 구현 물량이나 담당 범위를
+            의미하지 않습니다.
+          </p>
+        </blockquote>
       </section>
 
       <hr />
@@ -76,15 +94,15 @@
       <section>
         <h2 class="bx-active">3. APP IA 범위 분석</h2>
         <p>
-          APP IA의 226개 화면 및 상태 중 <strong>Native 60개가 Flutter 직접 구현
-          범위</strong>입니다. WebView 166개의 웹 화면 구현은 Front-end 담당이므로 앱
+          작성 당시 APP IA의 226개 화면 및 상태 중 <strong>Native 60개가 Flutter 직접 구현
+          범위로 분류</strong>되어 있었습니다. WebView 166개의 웹 화면 구현은 Front-end 담당으로 분류돼 앱
           일정에 중복 계산하지 않습니다.
         </p>
         <table>
           <thead>
             <tr>
               <th scope="col">구분</th>
-              <th scope="col">항목 수</th>
+              <th scope="col">당시 IA 항목 수</th>
               <th scope="col">앱 개발 일정 반영</th>
             </tr>
           </thead>
@@ -180,7 +198,7 @@
           <li>번역문과 운영 콘텐츠 제작</li>
         </ul>
         <p>
-          제외 범위도 앱 일정의 의존 항목입니다. WebView URL, Bridge 계약, 인증 정책,
+          제외 범위도 앱 일정의 의존 항목입니다. WebView URL, Bridge 규격, 인증 정책,
           API 오류 형식과 결제 복귀 규칙이 늦게 확정되면 Flutter 구현에 재작업이
           발생합니다.
         </p>
@@ -244,7 +262,7 @@
           <tbody>
             <tr><td>AI 활용이 제한적</td><td>145~190근무일</td><td>반복 구현과 Test 작성의 수작업 비중이 큼</td></tr>
             <tr><td><strong>AI 적극 활용</strong></td><td><strong>120~155근무일</strong></td><td>본 보고서의 기본 산정값</td></tr>
-            <tr><td>모든 계약이 착수 전 확정된 이상적 조건</td><td>110~135근무일</td><td>대기와 재작업이 거의 없는 경우</td></tr>
+            <tr><td>모든 파트 간 협의사항이 착수 전 확정된 이상적 조건</td><td>110~135근무일</td><td>대기와 재작업이 거의 없는 경우</td></tr>
           </tbody>
         </table>
       </section>
@@ -260,7 +278,7 @@
           <li>WebView Origin, Redirect와 Bridge 보안 검증</li>
           <li>Push, Deep Link, Camera, QR와 OS 권한 처리</li>
           <li>Signing, 인증서, TestFlight와 Google Play 배포</li>
-          <li>기획·디자인·Backend·Front-end 담당자와의 계약 협의</li>
+          <li>기획·디자인·Backend·Front-end 담당자와의 협의</li>
         </ul>
         <p>
           AI가 코드를 생성해도 실제 계정, 인증서, 외부 서비스와 실기기에서 성공·실패
@@ -280,8 +298,8 @@
           <div class="mermaid">
 flowchart TB
   accTitle: Flutter APP 구축 단계
-  accDescr: 범위와 계약을 확인하고 앱 기반 및 WebView 구조를 구축한 뒤 Native 기능을 구현하고 실기기 통합 검증과 출시 준비를 수행하는 흐름입니다.
-  A["범위 · 계약 확인"] --> B["Architecture · 환경 · CI"]
+  accDescr: 범위와 파트 간 협의사항을 확인하고 앱 기반 및 WebView 구조를 구축한 뒤 Native 기능을 구현하고 실기기 통합 검증과 출시 준비를 수행하는 흐름입니다.
+  A["범위 · 협의사항 확인"] --> B["Architecture · 환경 · CI"]
   B --> C["앱 Shell · WebView · Bridge"]
   C --> D["회원 · 인증 · 계정"]
   D --> E["메인 · 월렛 · 여정"]
@@ -303,7 +321,7 @@ flowchart TB
             </tr>
           </thead>
           <tbody>
-            <tr><td>범위·계약 확인</td><td>Native/WebView, API, 인증과 Bridge 계약</td><td>7~10근무일</td><td>초기 계약 오류가 전체 재작업으로 연결됨</td></tr>
+            <tr><td>범위·협의사항 확인</td><td>Native/WebView, API 명세, 인증과 Bridge 규격</td><td>7~10근무일</td><td>초기 협의 오류가 전체 재작업으로 연결됨</td></tr>
             <tr><td>앱 기반 구축</td><td>Architecture, 상태, Flavor, 환경과 CI</td><td>12~15근무일</td><td>전체 기능이 공유하는 기반과 플랫폼 설정 필요</td></tr>
             <tr><td>앱 Shell·WebView</td><td>Navigation, WebView Controller와 Bridge 기본 구조</td><td>12~16근무일</td><td>Native와 WebView의 신뢰 경계 및 이동 정책 구현</td></tr>
             <tr><td>회원·인증</td><td>로그인, 가입, 소셜 연결, 본인인증과 계정 관리</td><td>25~30근무일</td><td>Native 60개 중 회원 영역이 39개이며 상태 분기가 많음</td></tr>
@@ -331,8 +349,8 @@ flowchart TB
         <h2>10. 일정이 성립하기 위한 전제 조건</h2>
         <ul>
           <li>UI/UX 디자인이 기능 개발 순서에 맞춰 확정되어 제공됩니다.</li>
-          <li>Backend가 승인된 API 계약, 인증 방식과 오류 규칙을 제공합니다.</li>
-          <li>Front-end가 WebView URL과 Bridge 요청·응답 계약을 함께 확정합니다.</li>
+          <li>Backend가 승인된 API 명세, 인증 방식과 오류 규칙을 제공합니다.</li>
+          <li>Front-end가 WebView URL과 Bridge 요청·응답 규격을 함께 확정합니다.</li>
           <li>소셜 로그인, 본인인증과 결제 연동 방식이 기능 착수 전에 확정됩니다.</li>
           <li>Firebase, Push, Signing과 Store 계정 접근 권한이 제공됩니다.</li>
           <li>Android·iOS 실기기와 QA 환경을 기능 완료 시점에 사용할 수 있습니다.</li>
@@ -355,7 +373,7 @@ flowchart TB
           </thead>
           <tbody>
             <tr><td>PL·운영·다른 프로젝트 병행</td><td><strong>10~20근무일 증가</strong></td><td>1명 구성에서 개발 가동률 감소가 핵심 경로에 직접 반영</td></tr>
-            <tr><td>Bridge 계약 지연 또는 변경</td><td><strong>5~10근무일 증가</strong></td><td>WebView Navigation과 Native 기능 호출을 재작업</td></tr>
+            <tr><td>Bridge 규격 협의 지연 또는 변경</td><td><strong>5~10근무일 증가</strong></td><td>WebView Navigation과 Native 기능 호출을 재작업</td></tr>
             <tr><td>소셜 로그인·본인인증 정책 변경</td><td><strong>5~10근무일 증가</strong></td><td>외부 SDK, Redirect와 Session 흐름을 다시 검증</td></tr>
             <tr><td>Native 결제 SDK 추가</td><td><strong>5~10근무일 증가</strong></td><td>플랫폼별 결제·복귀·중복 실행 검증 추가</td></tr>
             <tr><td>항공편·설정 기능 확정 지연</td><td><strong>5~10근무일 증가</strong></td><td><code class="badge-tbd">TBD</code> IA에 범위 확인 항목이 존재</td></tr>
@@ -376,7 +394,7 @@ flowchart TB
         <h2>12. 완료 기준</h2>
         <ul>
           <li>APP IA의 Native 대상 화면과 주요 상태가 구현되어 있습니다.</li>
-          <li>승인된 API와 인증 계약의 정상 및 주요 오류 흐름이 동작합니다.</li>
+          <li>승인된 API와 인증 관련 협의사항의 정상 및 주요 오류 흐름이 동작합니다.</li>
           <li>WebView Origin, Navigation과 Bridge 허용 정책이 검증되었습니다.</li>
           <li>Push, Deep Link, QR, 권한과 외부 앱 복귀가 실기기에서 동작합니다.</li>
           <li>결제 성공, 실패, 취소, 중복 방지와 주문 상태 재조회가 확인되었습니다.</li>
@@ -419,6 +437,13 @@ flowchart TB
 
       <section>
         <h2 class="bx-active">14. 산정 결과 요약</h2>
+        <blockquote>
+          <p>
+            <strong>아래 결과는 확정 일정이 아닙니다.</strong> 작성 당시 APP IA와 인력·환경
+            전제를 적용한 산정 시나리오이며, 최신 범위와 관련 파트의 협의 결과를 확인한
+            뒤 다시 산정해야 합니다.
+          </p>
+        </blockquote>
         <table>
           <thead>
             <tr>
@@ -434,13 +459,13 @@ flowchart TB
           </tbody>
         </table>
         <p>
-          기본 산정값은 <strong>미들급 Flutter 개발자 1명이 AI를 적극적으로 활용하고,
-          기능 개발에 충분히 참여하는 조건에서 120~155근무일, 약 6~7.75개월</strong>입니다.
+          당시 기본 산정값은 <strong>미들급 Flutter 개발자 1명이 AI를 적극적으로 활용하고,
+          기능 개발에 충분히 참여하는 조건에서 120~155근무일, 약 6~7.75개월</strong>이었습니다.
         </p>
         <p>
           WebView 화면 구현은 Front-end 일정에 포함되며 앱 일정에는 중복 계산하지
           않습니다. 다만 전체 출시 시점은 Front-end의 WebView 제공, Backend API,
-          Bridge 계약과 앱 통합 QA가 모두 완료되는 시점으로 결정됩니다.
+          Bridge 관련 협의와 앱 통합 QA가 모두 완료되는 시점으로 결정됩니다.
         </p>
       </section>
     </main>
