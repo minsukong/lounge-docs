@@ -6,9 +6,9 @@
     <title>더라운지 3.0 프로젝트 현황 및 정상화 필요사항</title>
     <link
       rel="stylesheet"
-      href="../assets/style/presentation-theme.css"
+      href="../../docs/assets/style/presentation-theme.css"
     />
-    <link rel="stylesheet" href="../assets/style/briefing-presenter.css" />
+    <link rel="stylesheet" href="../../assets/style/briefing-presenter.css" />
   </head>
   <body>
     <header>
@@ -30,15 +30,14 @@
         <h2 class="bx-active">1. 결론</h2>
         <blockquote>
           <p>
-            현재 확인한 IA, WBS, 기획, 디자인과 인터페이스 자료에는 최종
-            승인된 개발 기준임을 확인할 근거가 부족합니다. 기존 자료의
-            숫자, 일정과 목록은 담당 파트의 검증과 확정 전까지 참고
-            정보로 구분해야 합니다.
+            현재 확인한 IA, WBS, 기획, 디자인과 인터페이스 자료에는 최종 승인된
+            개발 기준임을 확인할 근거가 부족합니다. 기존 자료의 숫자, 일정과
+            목록은 담당 파트의 검증과 확정 전까지 참고 정보로 구분해야 합니다.
           </p>
           <p>
-            지금 필요한 것은 기존 일정의 날짜를 수정하는 작업이 아니라,
-            범위와 상태를 검증하고 파트 간 선후행 관계를 연결해 WBS를
-            다시 수립하는 것입니다.
+            지금 필요한 것은 기존 일정의 날짜를 수정하는 작업이 아니라, 범위와
+            상태를 검증하고 파트 간 선후행 관계를 연결해 WBS를 다시 수립하는
+            것입니다.
           </p>
         </blockquote>
         <table>
@@ -52,8 +51,8 @@
             <tr>
               <td>목적</td>
               <td>
-                현재 상태, 미확정 사항, 일정 영향과 정상화 조치를 공통
-                기준으로 공유
+                현재 상태, 미확정 사항, 일정 영향과 정상화 조치를 공통 기준으로
+                공유
               </td>
             </tr>
             <tr>
@@ -67,8 +66,8 @@
             <tr>
               <td>문서 한계</td>
               <td>
-                최종 IA, 화면별 기획서, 디자인 원본, Backend API 명세와
-                Native 연동 명세를 대신하지 않음
+                최종 IA, 화면별 기획서, 디자인 원본, Backend API 명세와 Native
+                연동 명세를 대신하지 않음
               </td>
             </tr>
           </tbody>
@@ -91,8 +90,8 @@
             <tr>
               <td>IA</td>
               <td>
-                Page, Layer, Tab, Link와 Content 상태의 집계 기준 및 누락
-                범위 확인 필요
+                Page, Layer, Tab, Link와 Content 상태의 집계 기준 및 누락 범위
+                확인 필요
               </td>
               <td><code class="badge-tbd">검증 필요</code></td>
             </tr>
@@ -107,16 +106,16 @@
             <tr>
               <td>기획</td>
               <td>
-                화면별 업무 규칙, 상태, 예외 흐름과 데이터 출처의 확정
-                여부 확인 필요
+                화면별 업무 규칙, 상태, 예외 흐름과 데이터 출처의 확정 여부 확인
+                필요
               </td>
               <td><code class="badge-tbd">확정 필요</code></td>
             </tr>
             <tr>
               <td>디자인</td>
               <td>
-                시각 구성과 실제 데이터·상태·이동 규칙이 연결되지 않은
-                항목이 존재함
+                시각 구성과 실제 데이터·상태·이동 규칙이 연결되지 않은 항목이
+                존재함
               </td>
               <td><code class="badge-tbd">협의 필요</code></td>
             </tr>
@@ -130,17 +129,18 @@
             </tr>
             <tr>
               <td>통합 검증</td>
-              <td>
-                QA·UAT, 실제 기기, 환경과 파트별 완료 기준의 연결 필요
-              </td>
+              <td>QA·UAT, 실제 기기, 환경과 파트별 완료 기준의 연결 필요</td>
               <td><code class="badge-tbd">계획 필요</code></td>
             </tr>
           </tbody>
         </table>
         <p>
-          현재 문제는 자료가 전혀 없다는 의미가 아닙니다. 자료에 포함된
-          값과 분류가 <strong>공식 개발 범위와 일정의 기준선으로 검증·확정된
-          상태가 아니라는 점</strong>이 핵심입니다.
+          현재 문제는 자료가 전혀 없다는 의미가 아닙니다. 자료에 포함된 값과
+          분류가
+          <strong
+            >공식 개발 범위와 일정의 기준선으로 검증·확정된 상태가 아니라는
+            점</strong
+          >이 핵심입니다.
         </p>
       </section>
 
@@ -159,16 +159,15 @@
           <li>WebView 환경과 Native 기능 연동 시 확인할 책임 경계</li>
         </ul>
         <p>
-          위 자료는 개발과 검토의 공통 기준으로 활용할 수 있습니다. 그러나
-          실제 업무 규칙이나 승인된 API 명세가 없는 상태에서 기능
-          요구사항을 대신 확정하지는 않습니다.
+          위 자료는 개발과 검토의 공통 기준으로 활용할 수 있습니다. 그러나 실제
+          업무 규칙이나 승인된 API 명세가 없는 상태에서 기능 요구사항을 대신
+          확정하지는 않습니다.
         </p>
 
         <h3>3.2 일정 산정 자료</h3>
         <p>
-          일정 산정 자료는 당시 IA에 분류된 값을 바탕으로 역할 구분 방식,
-          특정 인력 구성의 예상 기간과 일정 전제조건을 검토한 참고
-          자료입니다.
+          일정 산정 자료는 당시 IA에 분류된 값을 바탕으로 역할 구분 방식, 특정
+          인력 구성의 예상 기간과 일정 전제조건을 검토한 참고 자료입니다.
         </p>
         <ul>
           <li>
@@ -180,16 +179,16 @@
             시나리오입니다.
           </li>
           <li>
-            Web, WebView와 Native의 역할 분류 방식은 참고할 수 있지만 실제
-            기능, 화면과 수량은 다시 확인해야 합니다.
+            Web, WebView와 Native의 역할 분류 방식은 참고할 수 있지만 실제 기능,
+            화면과 수량은 다시 확인해야 합니다.
           </li>
         </ul>
 
         <h3>3.3 인터페이스 자료</h3>
         <p>
           현재 확인한 자료는 <code>v0.8.1 내부 확인용</code>입니다. API 영역,
-          Endpoint 목록, 일부 응답 형식과 오류 코드를 파악하는 참고
-          자료로는 사용할 수 있지만 최종 구현 기준은 아닙니다.
+          Endpoint 목록, 일부 응답 형식과 오류 코드를 파악하는 참고 자료로는
+          사용할 수 있지만 최종 구현 기준은 아닙니다.
         </p>
         <table>
           <thead>
@@ -238,39 +237,31 @@
           <tbody>
             <tr>
               <td>기획·IA</td>
-              <td>
-                목적, 진입 조건, 사용자 흐름, 업무 규칙, 예외와 권한 상태
-              </td>
+              <td>목적, 진입 조건, 사용자 흐름, 업무 규칙, 예외와 권한 상태</td>
               <td>범위 누락, 개별 판단과 재작업</td>
             </tr>
             <tr>
               <td>디자인</td>
-              <td>
-                데이터 출처, 등록 전후, 로딩·데이터 없음·실패, 이동 위치
-              </td>
+              <td>데이터 출처, 등록 전후, 로딩·데이터 없음·실패, 이동 위치</td>
               <td>시각 승인과 개발 가능 상태 혼동</td>
             </tr>
             <tr>
               <td>Backend API</td>
               <td>
-                Method, Parameter, 응답 Field, 인증, 오류, Token과 테스트
-                데이터
+                Method, Parameter, 응답 Field, 인증, 오류, Token과 테스트 데이터
               </td>
               <td>연동, 상태 처리와 테스트 불가</td>
             </tr>
             <tr>
               <td>Native·WebView</td>
               <td>
-                시작 주소, 세션, Bridge, 외부 앱 복귀, 구버전 호환과 실제
-                기기
+                시작 주소, 세션, Bridge, 외부 앱 복귀, 구버전 호환과 실제 기기
               </td>
               <td>로그인·이동·기기 기능 통합 지연</td>
             </tr>
             <tr>
               <td>QA·운영</td>
-              <td>
-                담당, 환경, 기기, 운영 콘텐츠, 장애 확인과 배포 순서
-              </td>
+              <td>담당, 환경, 기기, 운영 콘텐츠, 장애 확인과 배포 순서</td>
               <td>개발 완료 후 검증 및 배포 대기</td>
             </tr>
           </tbody>
@@ -330,9 +321,9 @@
           </tbody>
         </table>
         <p>
-          모든 선행조건이 완성될 때까지 전체 개발을 중단한다는 의미는
-          아닙니다. 기능별로 협의된 범위부터 진행하고, 협의되지 않은 기능은
-          대기 사유와 일정 영향을 구분해 관리해야 합니다.
+          모든 선행조건이 완성될 때까지 전체 개발을 중단한다는 의미는 아닙니다.
+          기능별로 협의된 범위부터 진행하고, 협의되지 않은 기능은 대기 사유와
+          일정 영향을 구분해 관리해야 합니다.
         </p>
       </section>
 
@@ -343,8 +334,8 @@
         <blockquote>
           <p>
             현재 기재된 화면 수, 작업 기간과 완료일을 확정 범위 또는 공식
-            일정으로 해석하기 어렵습니다. 기존 날짜를 수정하기 전에 범위
-            집계 기준과 선후행 관계부터 다시 세워야 합니다.
+            일정으로 해석하기 어렵습니다. 기존 날짜를 수정하기 전에 범위 집계
+            기준과 선후행 관계부터 다시 세워야 합니다.
           </p>
         </blockquote>
         <h3>6.1 WBS에 포함할 항목</h3>
@@ -371,8 +362,8 @@
           <li>위험이 현실화되면 완료일 또는 범위를 함께 조정합니다.</li>
         </ol>
         <p>
-          인력 보강은 병렬 구현에는 도움이 되지만, 기획·디자인·API와
-          Native 연동의 확인 대기나 의사결정 지연을 직접 줄이지는 못합니다.
+          인력 보강은 병렬 구현에는 도움이 되지만, 기획·디자인·API와 Native
+          연동의 확인 대기나 의사결정 지연을 직접 줄이지는 못합니다.
         </p>
       </section>
 
@@ -502,7 +493,9 @@ flowchart TD
   F --> G["5. 기능별 실행<br/>확정된 범위부터 구현"]
   G --> H["6. 통합 검증<br/>QA · UAT · 실제 기기 · 운영"]
           </div>
-          <figcaption>자료 검증, 파트별 협의, WBS 재수립과 실행 순서</figcaption>
+          <figcaption>
+            자료 검증, 파트별 협의, WBS 재수립과 실행 순서
+          </figcaption>
         </figure>
       </section>
 
@@ -544,14 +537,16 @@ flowchart TD
             </tr>
             <tr>
               <td>PM</td>
-              <td>범위, 담당, 선후행 관계, 결정 일정과 전체 완료 기준 통합 관리</td>
+              <td>
+                범위, 담당, 선후행 관계, 결정 일정과 전체 완료 기준 통합 관리
+              </td>
             </tr>
           </tbody>
         </table>
         <p>
-          세부 책임은 조직의 공식 역할 정의와 파트 간 협의 결과를
-          우선합니다. Front-end 문서군이 존재한다는 사실만으로 각 파트의
-          최종 결정과 산출물이 완료된 것은 아닙니다.
+          세부 책임은 조직의 공식 역할 정의와 파트 간 협의 결과를 우선합니다.
+          Front-end 문서군이 존재한다는 사실만으로 각 파트의 최종 결정과
+          산출물이 완료된 것은 아닙니다.
         </p>
       </section>
 
@@ -578,7 +573,9 @@ flowchart TD
         <h3>10.2 완료 기준</h3>
         <ul>
           <li>합의된 IA와 화면 상태가 구현되어 있습니다.</li>
-          <li>승인된 데이터와 API 기준으로 정상 및 주요 오류 흐름이 동작합니다.</li>
+          <li>
+            승인된 데이터와 API 기준으로 정상 및 주요 오류 흐름이 동작합니다.
+          </li>
           <li>WebView와 Native 연동 기능이 실제 앱 환경에서 검증됐습니다.</li>
           <li>결제, 인증과 권한의 성공·실패·취소·재시도가 확인됐습니다.</li>
           <li>주요 반응형 해상도와 지원 브라우저에서 동작합니다.</li>
@@ -595,17 +592,15 @@ flowchart TD
         <h2 class="bx-active">11. 최종 정리</h2>
         <blockquote>
           <p>
-            현재 Front-end 구현과 품질을 위한 기준 자료는 개발 방향을
-            통일하고 필요한 협의사항을 식별하는 데 활용할 수 있습니다.
-            그러나 이 자료가 IA, 기획, 디자인, API와 Native의 최종 확정을
-            대신하지는 않습니다.
+            현재 Front-end 구현과 품질을 위한 기준 자료는 개발 방향을 통일하고
+            필요한 협의사항을 식별하는 데 활용할 수 있습니다. 그러나 이 자료가
+            IA, 기획, 디자인, API와 Native의 최종 확정을 대신하지는 않습니다.
           </p>
           <p>
-            프로젝트 일정의 신뢰성을 확보하려면 IA와 기획 범위를 먼저
-            검증하고, 파트별 협의 결과와 실제 투입 인력을 새 WBS에
-            연결해야 합니다. 개발 가능한 기능은 순차적으로 진행하고,
-            협의가 필요한 기능은 대기 사유와 일정 영향을 투명하게
-            관리해야 합니다.
+            프로젝트 일정의 신뢰성을 확보하려면 IA와 기획 범위를 먼저 검증하고,
+            파트별 협의 결과와 실제 투입 인력을 새 WBS에 연결해야 합니다. 개발
+            가능한 기능은 순차적으로 진행하고, 협의가 필요한 기능은 대기 사유와
+            일정 영향을 투명하게 관리해야 합니다.
           </p>
         </blockquote>
       </section>
@@ -616,37 +611,39 @@ flowchart TD
         <h2>12. 참고 자료</h2>
         <ul>
           <li>
-            <a href="../docs/guides/planning/web.html"
+            <a href="../../docs/guides/planning/web.html"
               >Front-end 구축 일정 산정 보고서</a
             >
           </li>
           <li>
-            <a href="../docs/guides/planning/app.html"
+            <a href="../../docs/guides/planning/app.html"
               >Flutter APP 구축 일정 산정 보고서</a
             >
           </li>
           <li>
-            <a href="../docs/guides/frontend/index.html"
+            <a href="../../docs/guides/frontend/index.html"
               >Front-end 개발 가이드</a
             >
           </li>
           <li>
-            <a href="../docs/guides/architecture/index.html"
+            <a href="../../docs/guides/architecture/index.html"
               >Front-end 저장소 구조 기준</a
             >
           </li>
           <li>
-            <a href="../docs/guides/platform/webview/app_webview_overview.html"
+            <a
+              href="../../docs/guides/platform/webview/app_webview_overview.html"
               >모바일 앱 WebView 개요</a
             >
           </li>
           <li>
-            <a href="../docs/guides/platform/webview/app_webview_guide.html"
+            <a href="../../docs/guides/platform/webview/app_webview_guide.html"
               >Flutter WebView 설정 가이드</a
             >
           </li>
           <li>
-            <a href="../docs/guides/platform/webview/app_external_payment.html"
+            <a
+              href="../../docs/guides/platform/webview/app_external_payment.html"
               >WebView 외부 결제 안정화 가이드</a
             >
           </li>
@@ -656,9 +653,7 @@ flowchart TD
             >
           </li>
           <li>
-            <a href="./메인시안_리스크브리핑.html"
-              >메인 시안 리스크 브리핑</a
-            >
+            <a href="../메인시안_리스크브리핑.html">메인 시안 리스크 브리핑</a>
           </li>
         </ul>
       </section>
@@ -667,9 +662,9 @@ flowchart TD
     <footer>
       <p>더라운지 3.0 프로젝트 현황 및 정상화 필요사항</p>
     </footer>
-    <script src="../assets/js/common.js"></script>
-    <script src="../assets/js/mermaid.js"></script>
+    <script src="../../assets/js/common.js"></script>
+    <script src="../../assets/js/mermaid.js"></script>
     <script src="./project-status-briefing.js"></script>
-    <script src="../assets/js/briefing-presenter.js"></script>
+    <script src="../../assets/js/briefing-presenter.js"></script>
   </body>
 </html>
