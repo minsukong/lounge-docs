@@ -1,0 +1,588 @@
+﻿source_file,source_row,screen_id,raw_context,raw_after_id,source_sha256
+01.FO(MO_WEB)_IA.html,7,MO-CMM-B000000, |  | 공통 | 헤더 |  |  | , |  |  |  |  |  | (공통) 로고 - [로고] 클릭 시 메인화면으로 이동 |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,8,MO-CMM-C000000, |  | GNB |  |  | , |  |  |  |  |  | 사용처 카테고리 : BO에서 설정한 상품 카테고리 1depth 노출 월렛 : 이용권 보관함 글로벌 eSIM 노출 이벤트 : BO에서 등록한 이벤트/다운로드 쿠폰 정보 노출 혜택 : BO에서 등록한 혜택 노출 주문 : 장바구니 및 주문 내역 정보 노출 마이페이지 노출 고객센터 노출 |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,9,MO-CMM-D000000, |  | 플로팅버튼 |  |  | ," |  |  |  |  |  | 장바구니 : 회원/비회원 공통, 장바구니에 담은 상품 개수 표시, 클릭 시 장바구니 화면으로 이동 위시리스트 : 회원만 가능 : 위시리스트로 설정한 사용처+상품 개수 표시, 클릭 시 위시리스트 화면으로 이동 최근 본 상품 : 회원/비회원 공통, 최근 본 상품 개수 표시, 클릭 시 레이어 팝업 생성하여 최신순으로 노출, 사용처+상품 클릭 시 상세화면으로 이동 TOP : 회원/비회원 공통, 클릭 시 해당 화면 최상단으로 이동 |  |  |  |  |  |  |  | ",b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,10,MO-CMM-E000000, |  | 푸터 |  |  | ," |  |  |  |  |  | 고객센터 정보 : 더라운지 고객센터 전화번호 및 운영 시간 정보 노출 - [FAQ] 클릭 시 고객센터>자주 묻는 질문 화면으로 이동 - [1:1 문의하기] 클릭 시 고객센터>1:1 문의 화면으로 이동 공지사항 : 더라운지 공지사항 리스트 - [+] 클릭 시 고객센터>공지사항 화면으로 이동 - [공지사항명] 클릭 시 해당 공지사항 상세화면으로 이동 모바일 앱 QR코드 안내 더라운지 소개, 이용약관, 개인정보 처리 방침, 영상정보처리기기 운영·관리방침 : 클릭 시 약관 정보 팝업 생성 사용처안내 : 클릭 시 사용처안내 화면으로 이동 소셜네트워크 : 클릭 시 더라운지 SNS로 이동 카피라이트 로고 : 클릭 시 메인 화면으로 이동 |  |  |  |  |  |  |  | ",b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,11,MO-CMM-F010000, |  | 하단 아이콘 | 햄버거 메뉴 |  | , |  |  |  |  |  | (비로그인) : 로그인 유도 / (로그인) : 등급 및 회원명 노출 Category : BO에서 설정한 카테고리 1depth 노출 사용처 : BO에 등록된 사용처 노출 프로모션 : BO에서 등록한 이벤트 노출 |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,12,MO-CMM-F020000, |  | 검색 |  | ," |  |  |  |  |  | 클릭 시 검색화면으로 이동 - 검색어 입력 가능, 최근 검색어 노출, BO에서 설정한 인기 검색어 노출 |  |  |  |  |  |  |  | ",b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,13,MO-CMM-F030000, |  | 홈 |  | , |  |  |  |  |  | 클릭 시 메인화면으로 이동 |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,14,MO-CMM-F040000, |  | 마이페이지 |  | , |  |  |  |  |  | 클릭 시 마이페이지 화면으로 이동 |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,15,MO-CMM-F050000, |  | 장바구니 |  | ," |  |  |  |  |  | 장바구니 : 회원/비회원 공통, 장바구니에 담은 상품 개수 표시, 클릭 시 장바구니 화면으로 이동 |  |  |  |  |  |  |  | ",b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,16,MO-MAI-A000000, |  | 메인 | 홈 |  |  | ,"page |  |  |  |  |  | BO에서 설정한 PC 메인 전시 관리(홈상단 visual-이벤트/혜택, 인기 사용처, 제휴카드 혜택, 오퍼월 광고 영역, [배너] 중간 띠배너) 정보 노출 |  |  |  |  |  |  |  | ",b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,17,MO-MAI-B000000, |  | BEST |  |  | ,"page |  |  |  |  |  | - 사용처 카테고리 : 전체, 공항라운지, 공항 다이닝, 공항 커피, 패스트트랙, 글로벌 eSIM, 일본 다이닝, K공항 리무진, 공항 직통열차, 공항 발렛, 호텔 브런치, 골프장 커피, 골프 연습장, 다락휴 호텔 - 목록 : 카테고리별 최근 3주 기준 많이 판매된 사용처 목록 노출 |  |  |  |  |  |  |  | ",b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,18,MO-MAI-C000000, |  | 광고 영역 |  |  | ,page |  |  |  |  |  | 클릭시 오퍼월 해당 상세로 이동 |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,19,MO-MEM-A010000, |  | 회원 | 회원가입 | 회원가입 서브메인 |  | ,page |  |  |  |  |  | 회원 / 카카오 / 네이버 가입(추가 확정 필요) (기업회원/임직원은 일반회원으로 가입시만 체크하여 확인) |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,20,MO-MEM-A020100, |  | 일반 / 제휴회원 | 더라운지 회원 가입 | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,21,MO-MEM-A020200, |  | 더라운지 이용약관 동의 | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,22,MO-MEM-A030000, |  | 미성년자 회원 |  | ,page |  |  |  |  |  | 부모동의 프로세스 (정책 필요) |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,23,MO-MEM-A040100, |  | 카카오 아이디 회원가입 | 카카오 ID 로그인 | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,24,MO-MEM-A040200, |  | 약관동의(카카오+더라운지) | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,25,MO-MEM-A050100, |  | 네이버 아이디 회원가입 | 네이버 ID 로그인 | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,26,MO-MEM-A050200, |  | 약관동의(네이버) | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,27,MO-MEM-A050300, |  | 약관동의(더라운지) | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,28,MO-MEM-A060000, |  | 회원가입완료 |  | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,29,MO-MEM-B010000, |  | 로그인 | 로그인 서브메인 |  | ,page |  |  |  |  |  | 회원 / 카카오 / 네이버 가입(추가 확정 필요) (기업회원/임직원은 일반회원으로 가입시만 체크하여 확인) |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,30,MO-MEM-B020100, |  | 더라운지 회원 | 로그인 | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,31,MO-MEM-B020200, |  | 로그인 완료 (더라운지 회원 아님 - 안내페이지) | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,32,MO-MEM-B020201, |  | 더라운지 이용약관 동의,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,33,MO-MEM-B030100, |  | 카카오 계정 | 로그인 | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,34,MO-MEM-B030200, |  | 로그인 완료 (더라운지 회원 아님 - 안내페이지) | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,35,MO-MEM-B030201, |  | 더라운지 이용약관 동의,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,36,MO-MEM-B040100, |  | 네이버 계정 | 로그인 | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,37,MO-MEM-B040200, |  | 로그인 완료 (더라운지 회원 아님 - 안내페이지) | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,38,MO-MEM-B040201, |  | 더라운지 이용약관 동의,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,39,MO-MEM-B050100, |  | 비회원 주문확인 | 로그인 (주문번호/비밀번호 등) | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,40,MO-MEM-B050200, |  | 주문조회 | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,41,MO-MEM-B050301, |  | 주문번호/비밀번호 찾기 | 주문번호 찾기,page |  |  |  |  |  | 주문번호/비밀번호 분실시 휴대폰 인증 후 안내 |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,42,MO-MEM-B050302, |  | 비밀번호 찾기,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,43,MO-MEM-B060100, |  | 로그인 특수상황 | 비밀번호 변경 안내 | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,44,MO-MEM-B060201, |  | 탈퇴 회원 안내 | 탈퇴회원,page |  |  |  |  |  | 회원 정책 따름 |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,45,MO-MEM-B060301, |  | 아이디/비밀번호 찾기 | 아이디 찾기,page |  |  |  |  |  | 회원 정책 따름 |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,46,MO-MEM-B060302, |  | 비밀번호 찾기,page |  |  |  |  |  | 회원 정책 따름 |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,47,MO-MEM-C010000, |  | 마이페이지 | 마이페이지 서브메인 |  | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,48,MO-MEM-C020101, |  | 내 정보관리 | 개인정보 관리 | 본인인증,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,49,MO-MEM-C020102, |  | 개인정보 수정,"page |  |  |  |  |  | 주소, 휴대폰, 이메일, 선택정보, 광고정보 수신여부 |  |  |  |  |  |  |  | ",b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,50,MO-MEM-C020103, |  | 개인정보 수정완료,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,51,MO-MEM-C020200, |  | 회원탈퇴 | ,page |  |  |  |  |  | 회원 정책 따름 |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,52,MO-MEM-C020301, |  | 간편 로그인 설정 | 카카오 연결,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,53,MO-MEM-C020302, |  | 네이버 연결,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,54,MO-MEM-C030101, |  | 월렛 | 이용권 보관 목록 | 상세,page |  |  |  |  |  | 이미지 캡쳐 불가 기능(확인 필요) |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,55,MO-MEM-C040101, |  | 제휴카드 등록 | 상세 | 등록/수정/삭제,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,56,MO-MEM-C050101, |  | 내 주문관리 | 주문/내역 | 주문목록,page |  |  |  |  |  | 현장운영처리 이후 주문 내역에 대한 리뷰 작성 가능 |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,57,MO-MEM-C050102, |  | 주문상세,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,58,MO-MEM-C050103, |  | 취소신청 정보입력,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,59,MO-MEM-C050104, |  | 교환신청 정보입력,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,60,MO-MEM-C050105, |  | 선물하기 정보입력,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,61,MO-MEM-C050200, |  | 취소/교환 내역 | ,page |  |  |  |  |  | 정책 따름 |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,62,MO-MEM-C060100, |  | 내 활동관리 | 위시리스트 | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,63,MO-MEM-C060201, |  | 내 리뷰 | 목록,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,64,MO-MEM-C060202, |  | 상세,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,65,MO-MEM-C060301, |  | 상품 Q&A | 목록,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,66,MO-MEM-C060302, |  | 상세,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,67,MO-MEM-C060401, |  | 1:1문의 | 목록,"page |  |  |  |  |  | - 문의제목 : 사용자가 작성한 제목 - 일시 : 문의 작성일시 - 처리현황 : 문의접수, 답변완료 |  |  |  |  |  |  |  | ",b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,68,MO-MEM-C060402, |  | 상세,page |  |  |  |  |  | - 문의작성내용 표시 - 답변완료 시 문의내용 하단에 답변정보 표시 |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,69,MO-MEM-C060501, |  | 참여 이벤트 | 목록,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,70,MO-MEM-C060502, |  | 상세,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,71,MO-MEM-C070100, |  | 포인트 현황 | 포인트 현황 요약 | ,"page |  |  |  |  |  | 더라운지 사용가능 포인트, 이번달 더라운지 소멸 예정 포인트 노출 |  |  |  |  |  |  |  | ",b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,72,MO-MEM-C080101, |  | 선물함 | 선물 보관 목록 | 보내기 받기 상세,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,73,MO-MEM-C090000, |  | 내 쿠폰함 |  | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,74,MO-SCM-A010100, |  | 사용처 | 사용처 목록 유형 | 전시카테고리 목록 (유형별) | LIST - 리스트형 | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,75,MO-SCM-A010200, |  | LIST - 갤러리형(3xN) | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,76,MO-SCM-A010300, |  | LIST - 갤러리형(4xN) | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,77,MO-SCM-A020100, |  | 사용처별 카테고리 | 사용처 목록(A-Z) | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,78,MO-SCM-A020200, |  | 사용처 안내페이지 | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,79,MO-SCM-A020301, |  | 사용처별 상품목록 | LIST - 리스트형,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,80,MO-SCM-A020302, |  | LIST - 갤러리형(3xN),page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,81,MO-SCM-A020303, |  | LIST - 갤러리형(4xN),page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,82,MO-SCM-A030100, |  | 패키지상품 (가격할인X) | 패키지상품 서브메인 | ,"page |  |  |  |  |  | 사용처 배너 : BO에서 등록한 사용처 등록일 최신순 5개 노출 패키지상품 목록 : BO 등록일 최신순으로 노출 - 최초 n개 노출, [더보기] 클릭 시 n개씩 추가 노출 |  |  |  |  |  |  |  | ",b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,83,MO-SCM-A030201, |  |  | 패키지상품별 상품 목록 | 배너이미지 + 상품목록,"page |  |  |  |  |  | BO에서 설정한 패키지 상세 타입(A/B)에 따라 UI 변경됨 - 기본 상단 배너, 서브타이틀 탭(서브타이틀이 여러 개인 경우), 서브 타이틀별 상품 리스트 노출 - TOP3 상품 제외, n개 이상 패키지 상품이 있는 경우 페이징 적용 - 패키지 상품 클릭 시 상품 상세화면으로 이동 |  |  |  |  |  |  |  | ",b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,84,MO-SCM-A040000, |  | 상품상세 |  | ,"page |  |  |  |  |  | 기본정보 / 상품상세 / 리뷰 / 리뷰 작성 / 상품Q&A / 연관상품 - 청구 또는 할인 금액 표기, 가격메리트 화면표시 |  |  |  |  |  |  |  | ",b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,85,MO-SCM-A050100, |  | 사용처 리뷰모음 | 리뷰 목록 | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,86,MO-SCM-A050200, |  | 리뷰 상세 | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,87,MO-SCM-A060000, |  | 랭킹 |  | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,88,MO-CHN-A000000, |  | 판매채널 | 판매채널 |  |  | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,89,MO-PLC-A010100, |  | 제휴카드 혜택 | 제휴카드 | 목록 | 상세 | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,90,MO-PLC-A020101, |  | 추천 | 목록 | 상세,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,91,MO-PLC-A030100, |  | 혜택 검색 | 검색결과 | ,page |  |  |  |  |  | 이브릿지와 혜택 검색 확인 필요 |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,92,MO-ORD-A010100, |  | 주문/결제 | 주문내역 | 장바구니 | 회원 장바구니 | ,"page |  |  |  |  |  | 상품 옵션/수량 변경, 상품별 삭제, 할인내역 정보(즉시할인쿠폰) 주문 시 장바구니에서 주문하기 시점 장바구니 보관일 30일 이후 삭제, 유형별로 상품 그룹핑 금액표기 : 그룹핑된 상품별, 총합계 |  |  |  |  |  |  |  | ",b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,93,MO-ORD-A010200, |  | 비회원 장바구니 | ,"page |  |  |  |  |  | 상품 옵션/수량 변경, 유형별로 상품 그룹핑 금액표기:그룹핑된 상품별, 총합계 |  |  |  |  |  |  |  | ",b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,94,MO-ORD-A020100, |  | 주문 정보 입력 | 주문자 정보 | ,page |  |  |  |  |  | 주문자 정보 변경 기능 -주문자명 -휴대폰 -이메일 |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,95,MO-ORD-A020200, |  | 상품정보 | ,page |  |  |  |  |  | 그룹유형별로 그룹핑 |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,96,MO-ORD-A020300, |  | 포인트 조회/적용 | ,page |  |  |  |  |  | 포인트 조회 및 적용 기능 포인트 범위 및 정책 확인 필요 |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,97,MO-ORD-A020400, |  | 쿠폰 조회/적용 | ,page |  |  |  |  |  | 포인트 조회 및 적용 기능 포인트 범위 및 정책 확인 필요 |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,98,MO-ORD-A020500, |  | 제휴 할인 조회 적용 | ,page |  |  |  |  |  | 제휴 할인 조회 및 적용 기능 제휴 할인가 해제 기능 |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,99,MO-ORD-A020601, |  | 결제 금액 및 방법 | 결제진행 (PG팝업),page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,100,MO-ORD-A020602, |  | 결제실패 (팝업),page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,101,MO-ORD-A020700, |  | 구매/주문 약관 동의 | ,page |  |  |  |  |  | 구매/주문약관 동의 구매 및 주문약관 확인 필요 |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,102,MO-ORD-A020800, |  | 결제 진행 | ,page |  |  |  |  |  | PG사 팝업에서 처리 |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,103,MO-ORD-A020900, |  | 주문완료 | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,104,MO-ORD-A021000, |  | 주문실패 | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,105,MO-ORD-B010000, |  | 비회원 주문/결제 | 비회원 주문서 작성 | 비회원주문하기 |  | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,106,MO-ORD-B020100, |  | 주문정보 입력 | 주문자 정보 입력 | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,107,MO-ORD-B020200, |  | 상품정보 | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,108,MO-ORD-B020300, |  | 개인정보이용약관동의 | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,109,MO-ORD-B020400, |  | 구매/주문 약관 동의 | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,110,MO-ORD-B030000, |  | 결제진행 |  | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,111,MO-ORD-B040000, |  | 주문완료 |  | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,112,MO-ORD-B050000, |  | 주문 조회 |  | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,113,MO-SRC-A010000, |  | 검색 영역 | 검색 | 검색 서브메인 |  | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,114,MO-SRC-A020100, |  | 통합검색 결과 | 통합검색결과화면 | ,page |  |  |  |  |  | 검색엔진 미적용(검색 범위 확인 필요) |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,115,MO-SRC-A020200, |  | 상세검색필터1 | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,116,MO-SRC-A020301, |  | 상세검색필터2 | 컨텐츠,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,117,MO-SRC-A020400, |  | 통합검색결과화면_결과없을때 | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,118,MO-PMT-A010100, |  | 프로모션 | Event | 전체 | 목록 | ,page |  |  |  |  |  | 진행중인 이벤트/제휴 이벤트/종료된 이벤트/다운로드 가능한 쿠폰 목록(다운로드 가능) |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,119,MO-PMT-A010200, |  | 이벤트 상세 | ,"page |  |  |  |  |  | 이벤트 : 이벤트 유형(출석체크형, 그 외벤트형)에 따라 각각의 UI로 노출 - 댓글형 : 로그인해야 참여 가능, 댓글 입력 가능 - 출석체크형 : 로그인해야 참여 가능, 해당 날짜 출석체크 완료 처리 - 초대형 : 로그인해야 참여 가능, 친구초대코드 발급(전화번호 등 정책 확인 필요) - 룰렛이벤트형 : 로그인해야 참여 가능(통합회원), 룰렛 이벤트 참여하여 등수별 당첨 ※ 제휴 이벤트만 상세화면 이동 가능 체험단 신청 댓글 등록 |  |  |  |  |  |  |  | ",b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,120,MO-PMT-A020100, |  | 이벤트 | 이벤트 목록 | ,page |  |  |  |  |  | 진행중인 이벤트 목록 |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,121,MO-PMT-A020200, |  | 이벤트 상세 | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,122,MO-PMT-A030100, |  | 제휴이벤트 | 제휴 이벤트 목록 | ,page |  |  |  |  |  | 진행중인 제휴 이벤트 목록 |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,123,MO-PMT-A030200, |  | 이벤트 상세 | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,124,MO-PMT-A040000, |  | 쿠폰 |  | ,page |  |  |  |  |  | 다운로드 가능한 쿠폰 목록(다운로드 가능) |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,125,MO-PMT-A050000, |  | 이벤트 당첨자 |  | ,page |  |  |  |  |  | BO에서 등록한 이벤트 당첨자 발표 공지 - 정렬 : 등록일 최신순 - 제목 클릭 시 상세내용 펼침/닫힘 |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,126,MO-CSO-A010000, |  | 고객센터 | 고객센터 | 공지사항 |  | ,page |  |  |  |  |  | BO에서 등록한 더라운지 공지사항 - 정렬 : 등록일 최신순 - 제목 클릭 시 상세내용 펼침/닫힘 |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,127,MO-CSO-A020000, |  |  |  | 자주 묻는 질문 |  | ,"page |  |  |  |  |  | BO에서 등록한 FAQ 검색조건 : 검색어 입력하여 검색 시 제목에 해당 검색어가 있는 FAQ 조회 목록 - 카테고리 분류 : 전체, 사용처, 글로벌eSIM, 포인트, 이벤트, 회원, 주문/결제/취소, 예약(?) - 제목 클릭 시 상세내용 펼침/닫힘 |  |  |  |  |  |  |  | ",b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,128,MO-CSO-A030000, |  |  |  | 1:1문의 |  | ,"page |  |  |  |  |  | ※ 로그인 후에만 작성 가능 1:1 문의 작성 - 작성항목 : 문의유형(*), 사용처 문의, 주문선택, QR문의, 문의제목(*), 문의내용(*), 첨부파일 |  |  |  |  |  |  |  | ",b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,129,MO-CSO-A040000, |  |  |  | 1:1 답변확인 |  | ,page |  |  |  |  |  | 고객이 작성한 1:1 문의 내역 조회 - 정렬 : 1:1 문의 작성일 최신순 - 답변 상태 표시 - 제목 클릭 시 상세내용 펼침/닫힘 |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,130,MO-STU-A000000, |  | 설정 | 설정 |  |  | ,page |  |  |  |  |  | 설정 TO-BE 필요 |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,131,MO-ETC-A010000, |  | ETC | Error | 500 Error |  | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,132,MO-ETC-A020000, |  | 404 Error |  | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO(MO_WEB)_IA.html,133,MO-ETC-B000000, |  | Loding |  |  | ,page |  |  |  |  |  |  |  |  |  |  |  |  |  | ,b580a369e7de4cf60e50728ea54b255acea1bc265cf4ffeacd5fb57b75cea3a2
+01.FO_APP_IA.html,6,FO-CMM-A010100, | 1 | 공통 | 헤더 | 알림 | 알림 팝업 | , | ㅇ |  |  | Native |  | BO>프론트 관리>앱인트로>인트로'에서 설정한 스플래시 이미지 노출 |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,7,FO-CMM-A010200, | 2 | 알림 목록 | ,Layer |  |  |  | webview |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,8,FO-CMM-A010300, | 3 | 알림 상세 | ,page |  |  |  | webview |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,9,FO-CMM-A020000, | 4 | 검색 |  | ,page |  |  |  | webview |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,10,FO-CMM-B010000, | 5 | 플로팅 메뉴 | 쿠폰북 |  | ,Link |  |  |  | webview |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,11,FO-CMM-B020000, | 6 | 내 월렛 |  | ,Link |  |  |  | webview |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,12,FO-CMM-B030000, | 7 | 이벤트 |  | ,Link |  |  |  | webview |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,13,FO-CMM-B040000, | 8 | 공항안내 |  | ,Link |  |  |  | webview |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,14,FO-CMM-C000000, | 9 | 다국어 설정 |  |  | ,page |  |  |  | webview |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,15,FO-CMM-D010000, | 10 | GNB(전체메뉴) | 로그인 전 |  | ,page | ㅇ |  |  | Native |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,16,FO-CMM-D020000, | 11 | 로그인 후 |  | ,page | ㅇ |  |  | Native |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,17,FO-CMM-E010000, | 12 | 풋터 | 제휴문의 |  | ,page |  |  |  | webview |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,18,FO-CMM-E020000, | 13 | 개인정보처리방침 |  | ,page |  |  |  | webview |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,19,FO-CMM-E030000, | 14 | 이용약관 |  | ,page |  |  |  | webview |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,20,FO-CMM-E040000, | 15 | 위치정보이용동의 |  | ,page |  |  |  | webview |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,22,FO-MAI-A010000, | 17 | 메인 | 홈 | 로그인 전 |  | ,page | ㅇ |  |  | Native |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,23,FO-MAI-A010100, | 18 | 회원가입 혜택 | ,page |  |  |  | webview |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,24,FO-MAI-A010200, | 19 | 개인화 서비스 안내 | ,page |  |  |  | webview |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,25,FO-MAI-A020000, | 20 | 로그인 후 |  | ,page | ㅇ |  |  | Native |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,26,FO-MAI-A020101, | 21 | 내 제휴카드 | 제휴카드 미등록,page | ㅇ |  |  | Native |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,27,FO-MAI-A020102, | 22 | 제휴카드 등록,Layer | ㅇ |  |  | Native |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,28,FO-MAI-A020201, | 23 | 내 여정 | 여정 서비스 안내,Layer | ㅇ |  |  | Native |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,29,FO-MAI-A020202, | 24 | 여정 미등록,page | ㅇ |  |  | Native |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,30,FO-MAI-A020203, | 25 | 여정 등록 완료,content | ㅇ |  |  | Native |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,31,FO-MAI-A020300, | 26 | 내 월렛 | ,content | ㅇ |  |  | Native |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,32,FO-MAI-A020401, | 27 | 추천 상품 | 개인화 추천,"Layer |  |  |  | Native |  | 여정 등록시 혜택 및 공항 정보, 추천 서비스 소개 |  | 오지원 |  |  |  |  |  | ",b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,33,FO-MAI-A020402, | 28 | 테마 추천,content |  |  |  | webview |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,34,FO-MEM-A010000, | 29 | 회원 | 로그인 | 로그인화면 |  | ,content | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,35,FO-MEM-A020100, | 30 | 아이디 찾기 | 휴대전화번호로 찾기 | ,"Layer | ㅇ |  |  | Native |  | 네트워크 오프 상태, 본인이 보유한 이용권을 다운로드 한 월렛 |  | 이진혁 |  |  |  |  |  | ",b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,36,FO-MEM-A020200, | 31 | 인증번호 발송 안내 | ,page | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,37,FO-MEM-A020300, | 32 | ID 찾기 결과 | ,page | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,38,FO-MEM-A030100, | 33 | 비밀번호 찾기 | 휴대전화번호로 찾기 | ,page | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,39,FO-MEM-A030200, | 34 | 이메일로 찾기 | ,page | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,40,FO-MEM-A030201, | 35 |  | 새비밀번호 입력,page | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,41,FO-MEM-A030202, | 36 |  | 비밀번호 변경완료,page | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,42,FO-MEM-A040100, | 37 | 비회원 주문확인 | 로그인(주문번호/비밀번호 등) | ,page | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,43,FO-MEM-A040101, | 38 |  | 주문조회 목록,page | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,45,FO-MEM-A040201, | 39 | 주문번호/비밀번호 찾기 | 주문번호 찾기,page | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,46,FO-MEM-A040202, | 40 | 비밀번호 찾기,page | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,47,FO-MEM-B010100, | 41 | 회원가입 | 이메일로 가입 | 14세 이상 | ,page | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,48,FO-MEM-B010200, | 42 | 14세 이하 | ,page | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,49,FO-MEM-B020100," | 43 | SNS회원가입 | 카카오, 네이버, 애플, 구글 선택 | ",page | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,50,FO-MEM-B020101, | 44 | 결제 금액 선택,page | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,51,FO-MEM-B020102, | 45 | 본인확인 선택,Layer | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,52,FO-MEM-B020103, | 46 | 약관동의,page | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,53,FO-MEM-B020104, | 47 | 회원정보/입력,page | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,54,FO-MEM-B020200, | 48 | 회원가입완료 | ,page | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,55,FO-MEM-C010000, | 49 | 마이페이지 | 마이페이지 서브메인 |  | ,page |  |  |  | webview |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,56,FO-MEM-C020101, | 50 | 내 정보관리 | 개인정보 관리 | 본인인증,page | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,57,FO-MEM-C020102, | 51 | 개인정보 수정,page | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,58,FO-MEM-C020103, | 52 | 개인정보 수정완료,page | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,59,FO-MEM-C020200, | 53 | 회원탈퇴 | ,page |  |  |  | webview |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,60,FO-MEM-C020301, | 54 | 간편 로그인 설정 | 카카오 연결,page | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,61,FO-MEM-C020302, | 55 | 네이버 연결,"page | ㅇ |  |  | Native |  | 주소, 휴대폰, 이메일, 선택정보, 광고정보 수신여부 |  | 이진혁 |  |  |  |  |  | ",b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,62,FO-MEM-C030101, | 56 | 월렛 | 이용권 목록 | 구매 목록,page | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,63,FO-MEM-C030102, | 57 | 무료 제휴 이용권 목록,page | ㅇ |  |  | Native |  | 회원 정책 따름 |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,64,FO-MEM-C030200, | 58 | 이용권 등록 | ,page | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,65,FO-MEM-C030201, | 59 | QR code•Barcode scan,page | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,66,FO-MEM-C030301, | 60 | 이용권 상세(QR) | 사용전,tab | ㅇ |  |  | Native |  | 구매 및 받은 선물 이용권 목록 |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,67,FO-MEM-C030302, | 61 | 사용완료,tab | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,68,FO-MEM-C030303, | 62 | 보낸 선물,page | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,69,FO-MEM-C030304, | 63 | 이용권 사용안내,page |  |  |  | webview |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,70,FO-MEM-C040101, | 64 | 내 제휴카드 관리 | 목록 | 목록 있음,page |  |  |  | webview |  | 이미지 캡쳐 불가 기능(확인 필요) |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,71,FO-MEM-C040102, | 65 | 목록 없음,page |  |  |  | webview |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,72,FO-MEM-C040200, | 66 | 선호 카드 설정 | ,page | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,73,FO-MEM-C040300, | 67 | 상세 | ,Layer |  |  |  | webview |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,74,FO-MEM-C040301, | 68 | 이용권 발급 내역,page |  |  |  | webview |  | 본인이 등록한 제휴 카드 목록 |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,75,FO-MEM-C050101, | 69 | 내 주문관리 | 주문/내역 | 주문목록,page |  |  |  | webview |  | 등록한 제휴 카드 없는 경우 등록 안내 |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,76,FO-MEM-C050102, | 70 | 주문상세,page |  |  |  | webview |  | 카드 노출 순서 변경 |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,77,FO-MEM-C050103, | 71 | 취소신청 정보입력,page | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,78,FO-MEM-C050104, | 72 | 교환신청 정보입력,Layer | ㅇ |  |  | Native |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,79,FO-MEM-C050105, | 73 | 선물하기 정보입력,page | ㅇ |  |  | Native |  | 현장운영처리 이후 주문 내역에 대한 리뷰 작성 가능 |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,80,FO-MEM-C050200, | 74 | 취소/교환 내역 | ,page |  |  |  | webview |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,81,FO-MEM-C060100, | 75 | 내 활동관리 | 위시리스트 | ,page |  |  |  | webview |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,82,FO-MEM-C060201, | 76 | 내 리뷰 | 작성한 리뷰,page |  |  |  | webview |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,83,FO-MEM-C060202, | 77 | 작성 가능한 리뷰,page |  |  |  | webview |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,84,FO-MEM-C060301, | 78 | 상품 Q&A | 목록,page |  |  |  | webview |  | 정책 따름 |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,85,FO-MEM-C060302, | 79 | 상세,page |  |  |  | webview |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,86,FO-MEM-C060401, | 80 | 1:1문의 | 목록,page |  |  |  | webview |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,87,FO-MEM-C060402, | 81 | 상세,page |  |  |  | webview |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,88,FO-MEM-C060501, | 82 | 참여 이벤트 | 목록,page |  |  |  | webview |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,89,FO-MEM-C060502, | 83 | 상세,page |  |  |  | webview |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,90,FO-MEM-C070100, | 84 | 포인트 현황 | 포인트 현황 요약 | ,"page |  |  |  | webview |  | - 문의제목 : 사용자가 작성한 제목 - 일시 : 문의 작성일시 - 처리현황 : 문의접수, 답변완료 |  | 이진혁 |  |  |  |  |  | ",b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,91,FO-MEM-C080101, | 85 | 선물함 | 선물 보관 목록 | 보낸 목록,page |  |  |  | webview |  | - 문의작성내용 표시 - 답변완료 시 문의내용 하단에 답변정보 표시 |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,92,FO-MEM-C080102, | 86 | 보낸 선물 이력보기,page |  |  |  | webview |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,93,FO-MEM-C080103, | 87 | 주문 취소,page |  |  |  | webview |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,94,FO-MEM-C080104, | 88 | 받은 목록,"page |  |  |  | webview |  | 더라운지 사용가능 포인트, 이번달 더라운지 소멸 예정 포인트 노출 |  | 이진혁 |  |  |  |  |  | ",b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,95,FO-MEM-C090000, | 89 | 내 쿠폰함 |  | ,page |  |  |  | webview |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,96,FO-MEM-C100101, | 90 | 내 여정 관리 | 여정 목록 | 목록 있음,Layer |  |  |  | webview |  | 보낸 목록 內 보낸 선물 이력보기 기능 |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,97,FO-MEM-C100102, | 91 | 목록 없음,"Layer |  |  |  | webview |  | 최초 구매자만 노출되는 팝업, 사용완료 시 미노출 |  | 오지원 |  |  |  |  |  | ",b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,98,FO-MEM-C100201, | 92 | 여정 등록 | 여정 정보 입력,tab |  |  |  | webview |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,99,FO-MEM-C100202, | 93 | 선택 정보 입력,page |  |  |  | webview |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,100,FO-MEM-C100203, | 94 | 여정 등록 완료,page |  |  |  | webview |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,101,FO-MEM-C100301, | 95 | 여정 상세 | 대기중 여정,page | ㅇ |  |  | Native |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,102,FO-MEM-C100302, | 96 | D-day 여정,page | ㅇ |  |  | Native |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,103,FO-MEM-C100303, | 97 | 종료된 여정,page | ㅇ |  |  | Native |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,104,FO-MEM-C100304, | 98 | 리뷰 등록 안내,page |  |  |  | webview |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,105,FO-SCM-A000000, | 99 | 사용처 | 사용처 카테고리 |  |  | ,"page |  |  |  | webview |  | 등록된 여정 기반 추천 상품, 공항 서비스 안내 |  | 김동오/김수연 |  |  |  |  |  | ",b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,106,FO-SCM-B010000, | 100 | 사용처 검색 | 국가 목록 |  | ,"page |  |  |  | webview |  | 등록된 여정 정보, 항공권 정보, 보유 이용권 QR, 공항정보(라운지 혼잡도, 체크인 카운터, 주차현황, 출국 승객 예고 등), 공항 할인 혜택 |  | 김동오/김수연 |  |  |  |  |  | ",b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,107,FO-SCM-B020000, | 101 | 도시 목록 |  | ,"page |  |  |  | webview |  | 사용한 이용권 내역, 리뷰 작성 안내(사용처 리뷰) |  | 김동오/김수연 |  |  |  |  |  | ",b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,108,FO-SCM-B030000, | 102 | 공항 목록 |  | ,Layer |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,109,FO-SCM-B040100, | 103 | 검색 결과 | 결과 있음 | ,page |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,110,FO-SCM-B040200, | 104 | 결과 없음 | ,page |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,111,FO-SCM-C010100, | 105 | 사용처 | 공항 라운지 | 사용처 목록(라운지) | ,page |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,112,FO-SCM-C010200, | 106 |  | 상세 | ,page |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,113,FO-SCM-C020100, | 107 | 공항 다이닝 | 사용처 목록(다이닝) | ,page |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,114,FO-SCM-C020200, | 108 |  | 상세 | ,page |  |  |  | webview |  | 추천 사용처 안내 |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,115,FO-SCM-C030100, | 109 | 공항 커피 | 사용처 목록(커피) | ,page |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,116,FO-SCM-C030200, | 110 |  | 상세 | ,page |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,117,FO-SCM-C040100, | 111 | 패스트 트랙 | 상세 | ,page |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,118,FO-SCM-C040200, | 112 |  | 사용처 확인 | ,page |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,119,FO-SCM-C050100, | 113 | 더라운지 eSIM | 상세 | ,page |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,120,FO-SCM-C050200, | 114 |  | 이용 가능한 국가 안내 | ,page |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,121,FO-SCM-C050300, | 115 |  | 이용 가능한 휴대폰 단말기 안내 | ,page |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,122,FO-SCM-C060100, | 116 | 일본 다이닝 | 사용처 목록(다이닝) | ,"Layer |  |  |  | webview |  | 국가, 도시, 공항 검색하여 사용처 조회 |  | 김동오/김수연 |  |  |  |  |  | ",b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,123,FO-SCM-C060200, | 117 |  | 상세 | ,page |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,124,FO-SCM-C070100, | 118 | K공항리무진 | 노선 정보 | ,Layer |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,125,FO-SCM-C070200, | 119 |  | 노선 상세 | ,Layer |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,126,FO-SCM-C070300, | 120 |  | 정류장 위치 확인 | ,page |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,127,FO-SCM-C080100, | 121 | 공항철도 직통 열차 | 상세 | ,page |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,128,FO-SCM-C090100, | 122 | 공항 발렛 | 상세 | ,page |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,129,FO-SCM-C090200, | 123 |  | 예약하기 | ,page |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,130,FO-SCM-C100100, | 124 | 호텔 브런치 | 사용처 목록(호텔 브런치) | ,Layer |  |  |  | webview |  | 정류장 조회 및 위치 지도 |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,131,FO-SCM-C100200, | 125 |  | 상세 | ,page |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,132,FO-SCM-C110100, | 126 | 골프장 커피 | 사용처 목록(골프장) | ,page |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,133,FO-SCM-C110200, | 127 |  | 상세 | ,page |  |  |  | webview |  | 예약 기능 제공할지 확인 필요 |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,134,FO-SCM-C120100, | 128 | 골프 연습장 | 사용처 목록(골프 연습장) | ,page |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,135,FO-SCM-C130100, | 129 | 다락휴 호텔 | 사용처 목록(다락휴 호텔) | ,page |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,136,FO-SCM-C130200, | 130 |  | 상세 | ,page |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,137,FO-SCM-D010000, | 131 | 사용처 리뷰모음 | 리뷰 목록 |  | ,page |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,138,FO-SCM-D020000, | 132 | 리뷰 상세 |  | ,page |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,139,FO-PRD-A010000, | 133 | 상품 | 상품목록 | 목록 |  | ,page |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,140,FO-PRD-A020000, | 134 | 정렬 |  | ,"page |  |  |  | webview |  | 사용처 배너 : BO에서 등록한 사용처 등록일 최신순 5개 노출 패키지상품 목록 : BO 등록일 최신순으로 노출 - 최초 n개 노출, [더보기] 클릭 시 n개씩 추가 노출 |  | 김동오/김수연 |  |  |  |  |  | ",b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,141,FO-PRD-A030000, | 135 | 필터 |  | ,"page |  |  |  | webview |  | BO에서 설정한 패키지 상세 타입(A/B)에 따라 UI 변경됨 - 기본 상단 배너, 서브타이틀 탭(서브타이틀이 여러 개인 경우), 서브 타이틀별 상품 리스트 노출 - TOP3 상품 제외, n개 이상 패키지 상품이 있는 경우 페이징 적용 - 패키지 상품 클릭 시 상품 상세화면으로 이동 |  | 김동오/김수연 |  |  |  |  |  | ",b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,142,FO-PRD-B010000, | 136 | 상품상세 | 상품상세(일반) |  | ,"page |  |  |  | webview |  | 기본정보 / 상품상세 / 리뷰 / 리뷰 작성 / 상품Q&A / 연관상품 - 청구 또는 할인 금액 표기, 가격메리트 화면표시 |  | 김동오/김수연 |  |  |  |  |  | ",b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,143,FO-PRD-B010100, | 137 | 이용안내 및 환불규정 | ,page |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,144,FO-PRD-B010200, | 138 | 리뷰 목록 | ,Layer |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,145,FO-PRD-B020000, | 139 | 상품상세(해외라운지) |  | ,Layer |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,146,FO-PRD-B020100, | 140 | 이용안내 및 환불규정 | ,page |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,147,FO-PRD-B020200, | 141 | 리뷰 목록 | ,tab |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,148,FO-PRD-B020300, | 142 | 국가 검색 | ,tab |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,149,FO-PRD-B030000, | 143 | 상품상세(패키지) |  | ,page |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,150,FO-PRD-B030100, | 144 | 구성상품 | ,tab |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,151,FO-PRD-B030200, | 145 | 이용안내 및 환불규정 | ,tab |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,152,FO-PRD-B030300, | 146 | 리뷰 목록 | ,page |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,153,FO-PRD-B040100, | 147 | (공통) | 쿠폰다운로드 | ,page |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,154,FO-PRD-B040200, | 148 | 포인트 안내 | ,tab |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,155,FO-PRD-B040300, | 149 | 리뷰 전체보기 | ,tab |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,156,FO-PRD-B040400, | 150 | 리뷰 신고하기 | ,tab |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,157,FO-PRD-B040500, | 151 | 사용처 전체보기 | ,Layer |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,158,FO-PRD-B040600, | 152 | 상품문의 등록하기 | ,Layer |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,159,FO-PRD-B050000, | 153 | 옵션 |  | ,Layer |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,160,FO-PRD-B060100, | 154 | 예약정보 | 예약정보 선택 | ,Layer |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,161,FO-PRD-B070100, | 155 | 추가정보 | 방문 예정일 | ,Layer |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,162,FO-PRD-B070200, | 156 | 방문 국가 | ,Layer |  |  |  | webview |  |  |  | 김동오/김수연 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,163,FO-PLC-A010100, | 157 | 제휴카드 | 제휴카드 | 제휴카드 등록 | 카드번호 입력 | ,Layer |  |  |  | webview |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,164,FO-PLC-A010200, | 158 | 검색 결과 | ,Layer |  |  |  | webview |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,165,FO-PLC-A010300, | 159 | 등록 완료 | ,Layer |  |  |  | webview |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,166,FO-PLC-A020000, | 160 | 제휴카드 검색 |  | ,Layer |  |  |  | webview |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,167,FO-PLC-A020100, | 161 | 나에게 맞는 카드 검색 | ,page |  |  |  | webview |  | 카드 번호 입력하여 검색 |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,168,FO-PLC-A020201, | 162 | 검색 결과 | 결과 있음,page |  |  |  | webview |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,169,FO-PLC-A020202, | 163 |  | 결과 없음,page |  |  |  | webview |  |  |  | 이진혁 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,170,FO-ORD-A010100, | 164 | 주문/결제 | 주문서_바로구매 | 장바구니 | 회원 장바구니 | ,"page |  |  |  | webview |  | 제휴카드 검색 및 전체 목록, 카드 혜택 정보 |  | 유재희 |  |  |  |  |  | ",b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,171,FO-ORD-A010200, | 165 | 비회원 장바구니 | ,Layer |  |  |  | webview |  | 검색 옵션 |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,172,FO-ORD-A020100, | 166 | 주문 정보 입력 | 상품정보 | ,page |  |  |  | webview |  |  |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,173,FO-ORD-A020200, | 167 | 쿠폰 조회/적용 | ,"page |  |  |  | webview |  | 검색 결과 없는 경우, 추천 무료 제휴 카드 안내 |  | 유재희 |  |  |  |  |  | ",b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,174,FO-ORD-A020201, | 168 | 쿠폰 선택(팝업),page |  |  |  | webview |  | 바로구매/선물하기 공통 사용 |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,175,FO-ORD-A020300, | 169 | 포인트 조회/적용 | ,"page |  |  |  | webview |  | 포인트 조회 및 적용 기능 -포인트 범위 및 정책 확인 필요 -제휴포인트(현대 블루 멤버스, L POINT외 향후 추가되는 제휴포인트 포함) 조회 시, 제휴사 페이지(Mobile)/팝업(PC)에서 처리 |  | 유재희 |  |  |  |  |  | ",b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,176,FO-ORD-A020400, | 170 | 결제수단 선택 | ,"page |  |  |  | webview |  | 결제금액 확인 및 결제수단 선택 -결제수단 : 등록된 제휴카드, 간편결제, 국내신용카드, 해외신용카드 |  | 유재희 |  |  |  |  |  | ",b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,177,FO-ORD-A020501, | 171 | 결제진행 | 결제진행 (PG팝업),Layer |  |  |  | webview |  | PG사 페이지(Mobile)/팝업(PC)에서 처리 |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,178,FO-ORD-A020502, | 172 | 결제실패 (팝업),Layer |  |  |  | webview |  |  |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,179,FO-ORD-A020600, | 173 |  | 주문완료 | ,page |  |  |  | webview |  |  |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,180,FO-ORD-B010100, | 174 | 주문서_선물하기 | 주문 정보 입력 | 상품정보 | ,page |  |  |  | webview |  |  |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,181,FO-ORD-B010200, | 175 |  |  | 쿠폰 조회/적용 | ,page |  |  |  | webview |  |  |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,182,FO-ORD-B010300, | 176 |  |  | 포인트 조회/적용 | ,page |  |  |  | webview |  |  |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,183,FO-ORD-B010400, | 177 |  |  | 결제수단 선택 | ,page |  |  |  | webview |  |  |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,184,FO-ORD-B010501, | 178 |  |  | 결제진행 | 결제진행 (PG팝업),page |  |  |  | webview |  |  |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,185,FO-ORD-B010502, | 179 |  |  | 결제실패 (팝업),page |  |  |  | webview |  |  |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,186,FO-ORD-B020100, | 180 |  | 상세 정보 입력 | 상품정보 | ,page |  |  |  | webview |  |  |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,187,FO-ORD-B020200, | 181 |  | 발신자 정보 | ,page |  |  |  | webview |  |  |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,188,FO-ORD-B020300, | 182 |  | 발송채널 선택/수신자 정보 | ,page |  |  |  | webview |  |  |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,189,FO-ORD-B020400, | 183 |  | 메시지 입력 | ,page |  |  |  | webview |  |  |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,190,FO-ORD-B020500, | 184 |  | 선물 발송 완료 | ,Layer |  |  |  | webview |  |  |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,191,FO-ORD-C010100, | 185 | 비회원 주문/결제 | 비회원 주문서_바로구매 | 주문 정보 입력 | 구매자 정보 입력 | ,page |  |  |  | webview |  |  |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,192,FO-ORD-C010200, | 186 | 상품정보 | ,page |  |  |  | webview |  |  |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,193,FO-ORD-C010300, | 187 | 쿠폰 등록/적용 | ,Layer |  |  |  | webview |  |  |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,194,FO-ORD-C010400, | 188 | 결제수단 선택 | ,"page |  |  |  | webview |  | 결제금액 확인 및 결제수단 선택 -결제수단 : 간편결제, 국내신용카드, 해외신용카드 |  | 유재희 |  |  |  |  |  | ",b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,195,FO-ORD-C010501, | 189 | 결제진행 | 결제진행 (PG팝업),page |  |  |  | webview |  | PG사 페이지(Mobile)/팝업(PC)에서 처리 |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,196,FO-ORD-C010502, | 190 | 결제실패 (팝업),page |  |  |  | webview |  |  |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,197,FO-ORD-C010600, | 191 |  | 주문완료 | ,page |  |  |  | webview |  |  |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,198,FO-ORD-D010100, | 192 | 비회원 주문서_선물하기 | 주문 정보 입력 | 구매자 정보 입력 | ,page |  |  |  | webview |  |  |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,199,FO-ORD-D010200, | 193 | 상품정보 | ,page |  |  |  | webview |  |  |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,200,FO-ORD-D010300, | 194 | 쿠폰 등록/적용 | ,Layer |  |  |  | webview |  |  |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,201,FO-ORD-D010400, | 195 | 결제수단 선택 | ,page |  |  |  | webview |  |  |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,202,FO-ORD-D010501, | 196 | 결제진행 | 결제진행 (PG팝업),Layer |  |  |  | webview |  |  |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,203,FO-ORD-D010502, | 197 | 결제실패 (팝업),Layer |  |  |  | webview |  |  |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,204,FO-ORD-D020100, | 198 | 상세 정보 입력 | 상품정보 | ,page |  |  |  | webview |  |  |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,205,FO-ORD-D020200, | 199 | 발신자 정보 | ,page |  |  |  | webview |  |  |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,206,FO-ORD-D020300, | 200 | 발송채널 선택/수신자 정보 | ,page |  |  |  | webview |  |  |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,207,FO-ORD-D020400, | 201 | 메시지 입력 | ,page |  |  |  | webview |  |  |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,208,FO-ORD-D020500, | 202 | 선물 발송 완료 | ,Layer |  |  |  | webview |  |  |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,209,FO-ORD-D030000, | 203 |  | 주문 조회 |  | ,page |  |  |  | webview |  | 본인 확인 방식 : 이용권번호(또는 주문번호)+이름+휴대전화번호 |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,210,FO-PMT-A010100, | 204 | 프로모션/이벤트 | 이벤트 | 이벤트 목록 | 대기중 | ,page |  |  |  | webview |  |  |  | 이채원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,211,FO-PMT-A010200, | 205 | 진행중 | ,page |  |  |  | webview |  |  |  | 이채원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,212,FO-PMT-A010300, | 206 | 종료 | ,page |  |  |  | webview |  |  |  | 이채원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,213,FO-PMT-A020000, | 207 | 이벤트 상세 |  | ,page |  |  |  | webview |  |  |  | 이채원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,214,FO-PMT-A030100, | 208 | 이벤트 당첨자 | 목록 | ,page |  |  |  | webview |  |  |  | 이채원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,215,FO-PMT-A030200, | 209 | 상세 | ,page |  |  |  | webview |  |  |  | 이채원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,216,FO-COU-A010000, | 210 | 쿠폰북 | 쿠폰북 | 공항 목록 |  | ,page |  |  |  | webview |  |  |  | 이채원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,217,FO-COU-A020000, | 211 | 쿠폰북 목록 |  | ,page |  |  |  | webview |  |  |  | 이채원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,218,FO-COU-A030000, | 212 | 쿠폰북 상세 |  | ,Layer |  |  |  | webview |  |  |  | 이채원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,219,FO-AIR-A010000, | 213 | 공항안내 | 항공편 검색 | 출발편 |  | ,tab | ㅇ |  |  | Native |  | 해당 메뉴는 미확정 |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,220,FO-AIR-A020000, | 214 | 도착편 |  | ,tab | ㅇ |  |  | Native |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,221,FO-AIR-A030000, | 215 | 항공편 조회결과 |  | ,page | ㅇ |  |  | Native |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,222,FO-AIR-B000000, | 216 | 주자장 현황 |  |  | ,page | ㅇ |  |  | Native |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,223,FO-AIR-C000000, | 217 | 라운지 혼잡도 |  |  | ,page | ㅇ |  |  | Native |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,224,FO-AIR-D000000, | 218 | 체크인 카운터 |  |  | ,page | ㅇ |  |  | Native |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,225,FO-AIR-E000000, | 219 | 출국 승객 예고 |  |  | ,page | ㅇ |  |  | Native |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,226,FO-CSO-A010000, | 220 | 고객센터 | 고객센터 | 공지사항 |  | ,page |  |  |  | webview |  | BO에서 등록한 더라운지 공지사항 - 정렬 : 등록일 최신순 - 제목 클릭 시 상세내용 펼침/닫힘 |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,227,FO-CSO-A020000, | 221 | 자주 묻는 질문 |  | ,"page |  |  |  | webview |  | BO에서 등록한 FAQ 검색조건 : 검색어 입력하여 검색 시 제목에 해당 검색어가 있는 FAQ 조회 목록 - 카테고리 분류 : 전체, 사용처, 글로벌eSIM, 포인트, 이벤트, 회원, 주문/결제/취소, 예약(?) - 제목 클릭 시 상세내용 펼침/닫힘 |  | 유재희 |  |  |  |  |  | ",b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,228,FO-CSO-A030000, | 222 | 1:1문의 |  | ,"page |  |  |  | webview |  | ※ 로그인 후에만 작성 가능 1:1 문의 작성 - 작성항목 : 문의유형(*), 사용처 문의, 주문선택, QR문의, 문의제목(*), 문의내용(*), 첨부파일 |  | 유재희 |  |  |  |  |  | ",b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,229,FO-CSO-A040000, | 223 | 1:1 답변확인 |  | ,page |  |  |  | webview |  | 고객이 작성한 1:1 문의 내역 조회 - 정렬 : 1:1 문의 작성일 최신순 - 답변 상태 표시 - 제목 클릭 시 상세내용 펼침/닫힘 |  | 유재희 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,230,FO-STU-A000000, | 224 | 설정 | 설정 |  |  | ,page | o |  |  | Native |  | 설정 TO-BE 필요 |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,231,FO-ETC-A010000, | 225 | ETC | Error | 500 Error |  | ,page |  |  |  | webview |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,232,FO-ETC-A020000, | 226 | 404 Error |  | ,page |  |  |  | webview |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_APP_IA.html,233,FO-ETC-B000000, | 227 | Loding |  |  | ,page | o |  |  | Native |  |  |  | 오지원 |  |  |  |  |  | ,b9205a59de847f59806597ced32409844c8e19315c15046741fd1c7e69878e34
+01.FO_WEB_IA.html,7,FO-CMM-B010100, | 1 | 공통 | 헤더 | 알림 | 알림 팝업 | ,Layer |  | ㅇ | ㅇ | webview | 회원 |  |  | 오지원 |  |  |  |  | 8/31~9/9 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,8,FO-CMM-B010200, | 2 |  |  |  | 알림 목록 | ,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 오지원 |  |  |  |  | 8/31~9/9 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,9,FO-CMM-B010300, | 3 |  |  |  | 알림 상세 | ,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 오지원 |  |  |  |  | 8/31~9/9 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,10,FO-CMM-B020000, | 4 |  |  | 검색 |  | ,page |  | ㅇ | ㅇ | webview | 비회원 |  |  | 오지원 |  |  |  |  | 8/31~9/9 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,11,FO-CMM-C010000, | 5 |  | 플로팅 메뉴 | 쿠폰북 |  | ,Link |  | ㅇ | ㅇ | webview | 회원 |  |  | 오지원 |  |  |  |  | 8/31~9/9 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,12,FO-CMM-C020000, | 6 |  |  | 내 월렛 |  | ,Link |  | ㅇ | ㅇ | webview | 회원 |  |  | 오지원 |  |  |  |  | 8/31~9/9 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,13,FO-CMM-C030000, | 7 |  |  | 이벤트 |  | ,Link |  | ㅇ | ㅇ | webview | 회원 |  |  | 오지원 |  |  |  |  | 8/31~9/9 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,14,FO-CMM-C040000, | 8 |  |  | 공항안내 |  | ,Link |  | ㅇ | ㅇ | webview | 공통 |  |  | 오지원 |  |  |  |  | 8/31~9/9 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,15,FO-CMM-D000000, | 9 |  | 다국어 설정 |  |  | ,Layer |  | ㅇ | ㅇ | webview | 공통 |  |  | 오지원 |  |  |  |  | 8/31~9/9 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,16,FO-CMM-E000000, | 10 |  | GNB(전체메뉴) |  |  | ,Layer |  | ㅇ | ㅇ | webview | 공통 |  |  | 오지원 |  |  |  |  | 8/31~9/9 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,17,FO-CMM-F010000, | 11 |  | 풋터 | 제휴문의 |  | ,page |  | ㅇ | ㅇ | webview | 공통 |  |  | 오지원 |  |  |  |  | 8/31~9/9 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,18,FO-CMM-F020000, | 12 |  |  | 개인정보처리방침 |  | ,page |  | ㅇ | ㅇ | webview | 공통 |  |  | 오지원 |  |  |  |  | 8/31~9/9 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,19,FO-CMM-F030000, | 13 |  |  | 이용약관 |  | ,page |  | ㅇ | ㅇ | webview | 공통 |  |  | 오지원 |  |  |  |  | 8/31~9/9 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,20,FO-CMM-F040000, | 14 |  |  | 위치정보이용동의 |  | ,page |  | ㅇ | ㅇ | webview | 공통 |  |  | 오지원 |  |  |  |  | 8/31~9/9 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,21,FO-MAI-A010000, | 15 | 메인 | 홈 | 로그인 전 |  | ,page |  | ㅇ | ㅇ | webview | 비회원 |  |  | 오지원 |  |  |  |  | 9/10~9/19 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,22,FO-MAI-A010100, | 16 |  |  |  | 회원가입 혜택 | ,Layer |  | ㅇ | ㅇ | webview | 비회원 |  |  | 오지원 |  |  |  |  | 9/10~9/19 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,23,FO-MAI-A010200, | 17 |  |  |  | 개인화 서비스 안내 | ,Layer |  | ㅇ | ㅇ | webview | 비회원 |  |  | 오지원 |  |  |  |  | 9/10~9/19 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,24,FO-MAI-A020000, | 18 |  |  | 로그인 후 |  | ,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 오지원 |  |  |  |  | 9/10~9/19 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,25,FO-MAI-A020101, | 19 |  |  |  | 내 제휴카드 | 제휴카드 미등록,content |  | ㅇ | ㅇ | webview | 회원 |  |  | 오지원 |  |  |  |  | 9/10~9/19 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,26,FO-MAI-A020102, | 20 |  |  |  |  | 제휴카드 등록,content |  | ㅇ | ㅇ | webview | 회원 |  |  | 오지원 |  |  |  |  | 9/10~9/19 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,29,FO-MAI-A020201, | 23 |  |  |  | 내 여정 | 여정 서비스 안내,"Layer |  | ㅇ | ㅇ | webview | 회원 | 여정 등록시 혜택 및 공항 정보, 추천 서비스 소개 |  | 오지원 |  |  |  |  | 9/10~9/19 | ",aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,30,FO-MAI-A020202, | 24 |  |  |  |  | 여정 미등록,content |  | ㅇ | ㅇ | webview | 회원 |  |  | 오지원 |  |  |  |  | 9/10~9/19 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,31,FO-MAI-A020203, | 25 |  |  |  |  | 여정 등록 완료,content |  | ㅇ | ㅇ | webview | 회원 |  |  | 오지원 |  |  |  |  | 9/10~9/19 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,32,FO-MAI-A020300, | 26 |  |  |  | 내 월렛 | ,"Layer |  | ㅇ | ㅇ | webview | 회원 | 네트워크 오프 상태, 본인이 보유한 이용권을 다운로드 한 월렛 |  | 오지원 |  |  |  |  | 9/10~9/19 | ",aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,33,FO-MAI-A020401, | 27 |  |  |  | 추천 상품 | 개인화 추천,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 오지원 |  |  |  |  | 9/10~9/19 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,34,FO-MAI-A020402, | 28 |  |  |  |  | 테마 추천,page |  | ㅇ | ㅇ | webview | 공통 |  |  | 오지원 |  |  |  |  | 9/10~9/19 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,36,FO-MEM-A010000, | 30 | 회원 | 로그인 | 로그인화면 |  | ,page |  | O | O | webview |  | 회원 / 카카오 / 네이버 가입(추가 확정 필요) (기업회원/임직원은 일반회원으로 가입시만 체크하여 확인) |  | 이진혁 |  |  |  |  | 10/1~10/13 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,37,FO-MEM-A020100, | 31 |  | 아이디 찾기 | 휴대전화번호로 찾기 | ,page |  | O | O | webview |  |  |  | 이진혁 |  |  |  |  | 10/1~10/13 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,38,FO-MEM-A020200, | 32 |  |  | 인증번호 발송 안내 | ,page |  | O | O | webview |  |  |  | 이진혁 |  |  |  |  | 10/1~10/13 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,39,FO-MEM-A020300, | 33 |  |  | ID 찾기 결과 | ,page |  | O | O | webview |  | 부모동의 프로세스 (정책 필요) |  | 이진혁 |  |  |  |  | 10/1~10/13 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,40,FO-MEM-A030100, | 34 |  | 비밀번호 찾기 | 휴대전화번호로 찾기 | ,page |  | O | O | webview |  |  |  | 이진혁 |  |  |  |  | 10/1~10/13 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,41,FO-MEM-A030200, | 35 |  |  | 이메일로 찾기 | ,page |  | O | O | webview |  |  |  | 이진혁 |  |  |  |  | 10/1~10/13 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,42,FO-MEM-A030201, | 36 |  |  |  | 새비밀번호 입력,page |  | O | O | webview |  |  |  | 이진혁 |  |  |  |  | 10/1~10/13 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,43,FO-MEM-A030202, | 37 |  |  |  | 비밀번호 변경완료,page |  | O | O | webview |  |  |  | 이진혁 |  |  |  |  | 10/1~10/13 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,44,FO-MEM-A040100, | 38 |  | 비회원 주문확인 | 로그인(주문번호/비밀번호 등) | ,page |  | O | O | webview |  |  |  | 이진혁 |  |  |  |  | 10/1~10/13 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,45,FO-MEM-A040101, | 39 |  |  |  | 주문조회 목록,page |  | O | O | webview |  |  |  | 이진혁 |  |  |  |  | 10/1~10/13 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,47,FO-MEM-A040201, | 40 |  |  | 주문번호/비밀번호 찾기 | 주문번호 찾기,page |  | O | O | webview |  | 회원 / 카카오 / 네이버 가입(추가 확정 필요) (기업회원/임직원은 일반회원으로 가입시만 체크하여 확인) |  | 이진혁 |  |  |  |  | 10/1~10/13 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,48,FO-MEM-A040202, | 41 |  |  |  | 비밀번호 찾기,page |  | O | O | webview |  |  |  | 이진혁 |  |  |  |  | 10/1~10/13 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,49,FO-MEM-B010100, | 42 |  | 회원가입 | 이메일로 가입 | 14세 이상 | ,Layer |  | O | O | webview |  |  |  | 이진혁 |  |  |  |  | 10/1~10/13 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,50,FO-MEM-B010200, | 43 |  |  | 14세 이하 | ,page |  | O | O | webview |  |  |  | 이진혁 |  |  |  |  | 10/1~10/13 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,51,FO-MEM-B020100," | 44 |  | SNS회원가입 | 카카오, 네이버, 애플, 구글 선택 | ",page |  | O | O | webview |  |  |  | 이진혁 |  |  |  |  | 10/1~10/13 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,52,FO-MEM-B020101, | 45 |  |  |  | 결제 금액 선택,page |  | O | O | webview |  |  |  | 이진혁 |  |  |  |  | 10/1~10/13 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,53,FO-MEM-B020102, | 46 |  |  |  | 본인확인 선택,page |  | O | O | webview |  |  |  | 이진혁 |  |  |  |  | 10/1~10/13 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,54,FO-MEM-B020103, | 47 |  |  |  | 약관동의,page |  | O | O | webview |  |  |  | 이진혁 |  |  |  |  | 10/1~10/13 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,55,FO-MEM-B020104, | 48 |  |  |  | 회원정보/입력,page |  | O | O | webview |  |  |  | 이진혁 |  |  |  |  | 10/1~10/13 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,56,FO-MEM-B020200, | 49 |  |  | 회원가입완료 | ,page |  | O | O | webview |  |  |  | 이진혁 |  |  |  |  | 10/1~10/13 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,57,FO-MEM-C010000, | 50 |  | 마이페이지 | 마이페이지 서브메인 |  | ,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,58,FO-MEM-C020101, | 51 |  | 내 정보관리 | 개인정보 관리 | 본인인증,page |  | O | O | webview |  |  |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,59,FO-MEM-C020102, | 52 |  |  |  | 개인정보 수정,page |  | O | O | webview |  |  |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,60,FO-MEM-C020103, | 53 |  |  |  | 개인정보 수정완료,page |  | O | O | webview |  |  |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,61,FO-MEM-C020200, | 54 |  |  | 회원탈퇴 | ,page |  | O | O | webview |  |  |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,62,FO-MEM-C020301, | 55 |  |  | 간편 로그인 설정 | 카카오 연결,page |  | O | O | webview |  | 주문번호/비밀번호 분실시 휴대폰 인증 후 안내 |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,63,FO-MEM-C020302, | 56 |  |  |  | 네이버 연결,page |  | O | O | webview |  |  |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,64,FO-MEM-C030101, | 57 |  | 이용권함 | 이용권 목록 | 구매 목록,tab |  | ㅇ | ㅇ | webview | 회원 |  |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,65,FO-MEM-C030102, | 58 |  |  |  | 무료 제휴 이용권 목록,tab |  | ㅇ | ㅇ | webview | 회원 | 회원 정책 따름 |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,66,FO-MEM-C030200, | 59 |  |  | 이용권 등록 | ,page |  | ㅇ | ㅇ | webview | 회원 | 회원 정책 따름 |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,67,FO-MEM-C030201, | 60 |  |  |  | QR code•Barcode scan,page |  | ㅇ | ㅇ | webview | 회원 | 회원 정책 따름 |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,68,FO-MEM-C030301, | 61 |  |  | 이용권 상세(QR) | 사용전,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,69,FO-MEM-C030302, | 62 |  |  |  | 사용완료,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,71,FO-MEM-C030303, | 64 |  |  |  | 이용권 사용안내,Layer |  | ㅇ | ㅇ | webview | 회원 |  |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,72,FO-MEM-C040101, | 65 |  | 내 제휴카드 관리 | 목록 | 목록 있음,page |  | ㅇ | ㅇ | webview | 회원 | 회원 정책 따름 |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,73,FO-MEM-C040102, | 66 |  |  |  | 목록 없음,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,74,FO-MEM-C040200, | 67 |  |  | 선호 카드 설정 | ,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,75,FO-MEM-C040300, | 68 |  |  | 상세 | ,page |  | ㅇ | ㅇ | webview | 회원 | 구매 및 받은 선물 이용권 목록 |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,76,FO-MEM-C040301, | 69 |  |  |  | 이용권 발급 내역,Layer |  | ㅇ | ㅇ | webview | 회원 |  |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,77,FO-MEM-C050101, | 70 |  | 내 주문관리 | 주문/내역 | 주문목록,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,78,FO-MEM-C050102, | 71 |  |  |  | 주문상세,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,79,FO-MEM-C050103, | 72 |  |  |  | 취소신청 정보입력,page |  | ㅇ | ㅇ | webview | 회원 | 이미지 캡쳐 불가 기능(확인 필요) |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,80,FO-MEM-C050104, | 73 |  |  |  | 교환신청 정보입력,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,81,FO-MEM-C050105, | 74 |  |  |  | 선물하기 정보입력,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,82,FO-MEM-C050200, | 75 |  |  | 취소/교환 내역 | ,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,83,FO-MEM-C060100, | 76 |  | 내 활동관리 | 위시리스트 | ,page |  | ㅇ | ㅇ | webview | 회원 | 본인이 등록한 제휴 카드 목록 |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,84,FO-MEM-C060201, | 77 |  |  | 내 리뷰 | 작성한 리뷰,page |  | ㅇ | ㅇ | webview | 회원 | 등록한 제휴 카드 없는 경우 등록 안내 |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,85,FO-MEM-C060202, | 78 |  |  |  | 작성 가능한 리뷰,page |  | ㅇ | ㅇ | webview | 회원 | 카드 노출 순서 변경 |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,86,FO-MEM-C060301, | 79 |  |  | 상품 Q&A | 목록,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,87,FO-MEM-C060302, | 80 |  |  |  | 상세,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,88,FO-MEM-C060401, | 81 |  |  | 1:1문의 | 목록,page |  | ㅇ | ㅇ | webview | 회원 | 현장운영처리 이후 주문 내역에 대한 리뷰 작성 가능 |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,89,FO-MEM-C060402, | 82 |  |  |  | 상세,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,90,FO-MEM-C060501, | 83 |  |  | 참여 이벤트 | 목록,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,91,FO-MEM-C060502, | 84 |  |  |  | 상세,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,92,FO-MEM-C070100, | 85 |  | 포인트 현황 | 포인트 현황 요약 | ,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,93,FO-MEM-C080100, | 86 |  | 선물함 | 보낸 선물 목록 | ,page |  | ㅇ | ㅇ | webview | 회원 | 정책 따름 |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,94,FO-MEM-C080200, | 87 |  |  | 받은 선물 목록 | ,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,95,FO-MEM-C080300, | 88 |  |  | 보낸 선물 상세 | ,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,97,FO-MEM-C080301, | 89 |  |  |  | 보낸 선물 이력보기,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,99,FO-MEM-C090000, | 90 |  | 내 쿠폰함 |  | ,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 이진혁 |  |  |  |  | 10/14~10/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,100,FO-MEM-C100101, | 91 |  | 내 여정 관리 | 여정 목록 | 다가오는 여정,tab |  | ㅇ | ㅇ | webview | 회원 |  |  | 오지원 |  |  |  |  | 9/21~9/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,101,FO-MEM-C100102, | 92 |  |  | 지난 여정,"tab |  | ㅇ | ㅇ | webview | 회원 | - 문의제목 : 사용자가 작성한 제목 - 일시 : 문의 작성일시 - 처리현황 : 문의접수, 답변완료 |  | 오지원 |  |  |  |  | 9/21~9/30 | ",aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,103,FO-MEM-C100201, | 93 |  |  | 여정 등록 | 여정 정보 입력,page |  | ㅇ | ㅇ | webview | 회원 | - 문의작성내용 표시 - 답변완료 시 문의내용 하단에 답변정보 표시 |  | 오지원 |  |  |  |  | 9/21~9/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,104,FO-MEM-C100202, | 94 |  |  |  | 선택 정보 입력,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 오지원 |  |  |  |  | 9/21~9/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,105,FO-MEM-C100203, | 95 |  |  |  | 여정 등록 완료,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 오지원 |  |  |  |  | 9/21~9/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,106,FO-MEM-C100301, | 96 |  |  | 여정 상세 | 대기중 여정,"page |  | ㅇ | ㅇ | webview | 회원 | 더라운지 사용가능 포인트, 이번달 더라운지 소멸 예정 포인트 노출 |  | 오지원 |  |  |  |  | 9/21~9/30 | ",aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,107,FO-MEM-C100302, | 97 |  |  |  | D-day 여정,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 오지원 |  |  |  |  | 9/21~9/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,108,FO-MEM-C100303, | 98 |  |  |  | 종료된 여정,page |  | ㅇ | ㅇ | webview | 회원 | 보낸 목록 內 보낸 선물 이력보기 기능 |  | 오지원 |  |  |  |  | 9/21~9/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,109,FO-MEM-C100304, | 99 |  |  |  | 리뷰 등록 안내,"Layer |  | ㅇ | ㅇ | webview | 회원 | 최초 구매자만 노출되는 팝업, 사용완료 시 미노출 |  | 오지원 |  |  |  |  | 9/21~9/30 | ",aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,110,FO-SCM-A010000, | 100 | 사용처 | 사용처 | 사용처 카테고리 |  | ,page |  | ㅇ | ㅇ | webview | 공통 |  |  |  |  |  |  |  |  | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,177,FO-PLC-A010100, | 169 | 제휴카드 | 제휴카드 | 제휴카드 등록 | 카드번호 입력 | ,page |  | ㅇ | ㅇ | webview | 회원 | 카드 번호 입력하여 검색 |  | 이진혁 |  |  |  |  | 09/21~09/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,178,FO-PLC-A010201, | 170 |  |  |  | 검색 결과 | 결과 있음,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 이진혁 |  |  |  |  | 09/21~09/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,179,FO-PLC-A010202, | 171 |  |  |  |  | 결과 없음,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 이진혁 |  |  |  |  | 09/21~09/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,180,FO-PLC-A020000, | 172 |  |  | 제휴카드 검색 |  | ,"page |  | ㅇ | ㅇ | webview | 공통 | 제휴카드 검색 및 전체 목록, 카드 혜택 정보 |  | 이진혁 |  |  |  |  | 09/21~09/30 | ",aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,181,FO-PLC-A020100, | 173 |  |  |  | 상세검색 | ,Layer |  | ㅇ | ㅇ | webview | 공통 | 검색 옵션 |  | 이진혁 |  |  |  |  | 09/21~09/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,182,FO-PLC-A020200, | 174 |  |  |  | 나에게 맞는 카드 검색 | ,page |  | ㅇ | ㅇ | webview | 공통 |  |  | 이진혁 |  |  |  |  | 09/21~09/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,183,FO-PLC-A020301, | 175 |  |  |  | 검색 결과 | 결과 있음,"page |  | ㅇ | ㅇ | webview | 공통 | 검색 결과 없는 경우, 추천 무료 제휴 카드 안내 |  | 이진혁 |  |  |  |  | 09/21~09/30 | ",aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,185,FO-ORD-A010100, | 176 | 주문/결제 | 주문서_바로구매 | 장바구니 | 회원 장바구니 | ,"page |  | ㅇ | ㅇ | webview | 회원 | 상품 옵션/수량 변경, 상품별 삭제, 할인내역 정보(즉시할인쿠폰) 주문 시 장바구니에서 주문하기 시점 장바구니 보관일 30일 이후 삭제, 유형별로 상품 그룹핑 금액표기 : 그룹핑된 상품별, 총합계 |  | 유재희 |  |  |  |  | 08/12~09/04 | ",aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,186,FO-ORD-A010200, | 177 |  |  |  | 비회원 장바구니 | ,"page |  | ㅇ | ㅇ | webview | 회원 | 상품 옵션/수량 변경, 유형별로 상품 그룹핑 금액표기:그룹핑된 상품별, 총합계 |  | 유재희 |  |  |  |  | 08/12~09/04 | ",aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,187,FO-ORD-A020100, | 178 |  |  | 주문 정보 입력 | 상품정보 | ,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,188,FO-ORD-A020200, | 179 |  |  |  | 쿠폰 조회/적용 | ,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,189,FO-ORD-A020201, | 180 |  |  |  |  | 쿠폰 선택(팝업),page |  | ㅇ | ㅇ | webview | 회원 | 바로구매/선물하기 공통 사용 |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,190,FO-ORD-A020300, | 181 |  |  |  | 포인트 조회/적용 | ,"page |  | ㅇ | ㅇ | webview | 회원 | 포인트 조회 및 적용 기능 -포인트 범위 및 정책 확인 필요 -제휴포인트(현대 블루 멤버스, L POINT외 향후 추가되는 제휴포인트 포함) 조회 시, 제휴사 페이지(Mobile)/팝업(PC)에서 처리 |  | 유재희 |  |  |  |  | 08/12~09/04 | ",aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,191,FO-ORD-A020400, | 182 |  |  |  | 결제수단 선택 | ,"page |  | ㅇ | ㅇ | webview | 회원 | 결제금액 확인 및 결제수단 선택 -결제수단 : 등록된 제휴카드, 간편결제, 국내신용카드, 해외신용카드 |  | 유재희 |  |  |  |  | 08/12~09/04 | ",aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,192,FO-ORD-A020501, | 183 |  |  |  | 결제진행 | 결제진행 (PG팝업),Layer |  | ㅇ | ㅇ | webview | 회원 | PG사 페이지(Mobile)/팝업(PC)에서 처리 |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,193,FO-ORD-A020502, | 184 |  |  |  |  | 결제실패 (팝업),Layer |  | ㅇ | ㅇ | webview | 회원 |  |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,194,FO-ORD-A020600, | 185 |  |  |  | 주문완료 | ,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,195,FO-ORD-B010100, | 186 |  | 주문서_선물하기 | 주문 정보 입력 | 상품정보 | ,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,196,FO-ORD-B010200, | 187 |  |  |  | 쿠폰 조회/적용 | ,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,197,FO-ORD-B010300, | 188 |  |  |  | 포인트 조회/적용 | ,"page |  | ㅇ | ㅇ | webview | 회원 | 포인트 조회 및 적용 기능 -포인트 범위 및 정책 확인 필요 -제휴포인트(현대 블루 멤버스, L POINT외 향후 추가되는 제휴포인트 포함) 조회 시, 제휴사 페이지(Mobile)/팝업(PC)에서 처리 |  | 유재희 |  |  |  |  | 08/12~09/04 | ",aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,198,FO-ORD-B010400, | 189 |  |  |  | 결제수단 선택 | ,"page |  | ㅇ | ㅇ | webview | 회원 | 결제금액 확인 및 결제수단 선택 -결제수단 : 등록된 제휴카드, 간편결제, 국내신용카드, 해외신용카드 |  | 유재희 |  |  |  |  | 08/12~09/04 | ",aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,199,FO-ORD-B010501, | 190 |  |  |  | 결제진행 | 결제진행 (PG팝업),Layer |  | ㅇ | ㅇ | webview | 회원 | PG사 페이지(Mobile)/팝업(PC)에서 처리 |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,200,FO-ORD-B010502, | 191 |  |  |  |  | 결제실패 (팝업),Layer |  | ㅇ | ㅇ | webview | 회원 |  |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,201,FO-ORD-B020100, | 192 |  |  | 상세 정보 입력 | 상품정보 | ,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,202,FO-ORD-B020200, | 193 |  |  | 발신자 정보 | ,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,203,FO-ORD-B020300, | 194 |  |  | 발송채널 선택/수신자 정보 | ,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,204,FO-ORD-B020400, | 195 |  |  | 메시지 입력 | ,page |  | ㅇ | ㅇ | webview | 회원 |  |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,205,FO-ORD-B020500, | 196 |  |  | 선물 발송 완료 | ,Layer |  | ㅇ | ㅇ | webview | 회원 |  |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,206,FO-ORD-C010100, | 197 | 비회원 주문/결제 | 비회원 주문서_바로구매 | 주문 정보 입력 | 구매자 정보 입력 | ,page |  | ㅇ | ㅇ | webview | 비회원 |  |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,207,FO-ORD-C010200, | 198 |  |  | 상품정보 | ,page |  | ㅇ | ㅇ | webview | 비회원 |  |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,208,FO-ORD-C010300, | 199 |  |  | 쿠폰 등록/적용 | ,Layer |  | ㅇ | ㅇ | webview | 비회원 |  |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,209,FO-ORD-C010400, | 200 |  |  | 결제수단 선택 | ,"page |  | ㅇ | ㅇ | webview | 비회원 | 결제금액 확인 및 결제수단 선택 -결제수단 : 간편결제, 국내신용카드, 해외신용카드 |  | 유재희 |  |  |  |  | 08/12~09/04 | ",aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,210,FO-ORD-C010501, | 201 |  |  | 결제진행 | 결제진행 (PG팝업),page |  | ㅇ | ㅇ | webview | 비회원 | PG사 페이지(Mobile)/팝업(PC)에서 처리 |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,211,FO-ORD-C010502, | 202 |  |  |  | 결제실패 (팝업),page |  | ㅇ | ㅇ | webview | 비회원 |  |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,212,FO-ORD-C010600, | 203 |  |  | 주문완료 | ,page |  | ㅇ | ㅇ | webview | 비회원 |  |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,213,FO-ORD-D010100, | 204 |  | 비회원 주문서_선물하기 | 주문 정보 입력 | 구매자 정보 입력 | ,page |  | ㅇ | ㅇ | webview | 비회원 |  |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,214,FO-ORD-D010200, | 205 |  |  | 상품정보 | ,page |  | ㅇ | ㅇ | webview | 비회원 |  |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,215,FO-ORD-D010300, | 206 |  |  | 쿠폰 등록/적용 | ,Layer |  | ㅇ | ㅇ | webview | 비회원 |  |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,216,FO-ORD-D010400, | 207 |  |  | 결제수단 선택 | ,page |  | ㅇ | ㅇ | webview | 비회원 |  |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,217,FO-ORD-D010501, | 208 |  |  | 결제진행 | 결제진행 (PG팝업),Layer |  | ㅇ | ㅇ | webview | 비회원 |  |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,218,FO-ORD-D010502, | 209 |  |  |  | 결제실패 (팝업),Layer |  | ㅇ | ㅇ | webview | 비회원 |  |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,219,FO-ORD-D020100, | 210 |  | 상세 정보 입력 | 상품정보 | ,page |  | ㅇ | ㅇ | webview | 비회원 |  |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,220,FO-ORD-D020200, | 211 |  |  | 발신자 정보 | ,page |  | ㅇ | ㅇ | webview | 비회원 |  |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,221,FO-ORD-D020300, | 212 |  |  | 발송채널 선택/수신자 정보 | ,page |  | ㅇ | ㅇ | webview | 비회원 |  |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,222,FO-ORD-D020400, | 213 |  |  | 메시지 입력 | ,page |  | ㅇ | ㅇ | webview | 비회원 |  |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,223,FO-ORD-D020500, | 214 |  |  | 선물 발송 완료 | ,Layer |  | ㅇ | ㅇ | webview | 비회원 |  |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,224,FO-ORD-D030000, | 215 |  |  | 주문 조회 |  | ,page |  | ㅇ | ㅇ | webview | 비회원 | 본인 확인 방식 : 이용권번호(또는 주문번호)+이름+휴대전화번호 |  | 유재희 |  |  |  |  | 08/12~09/04 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,225,FO-PMT-A010100, | 216 | 프로모션/이벤트 | 이벤트 | 이벤트 목록 | 대기중 | ,"page |  | ㅇ | ㅇ | webview | 공통 | 이벤트, 제휴이벤트는 필터로 구분 |  | 이채원 |  |  |  |  |  | ",aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,226,FO-PMT-A010200, | 217 |  |  |  | 진행중 | ,"page |  | ㅇ | ㅇ | webview | 공통 | 이벤트 : 이벤트 유형(출석체크형, 그 외벤트형)에 따라 각각의 UI로 노출 - 댓글형 : 로그인해야 참여 가능, 댓글 입력 가능 - 출석체크형 : 로그인해야 참여 가능, 해당 날짜 출석체크 완료 처리 - 초대형 : 로그인해야 참여 가능, 친구초대코드 발급(전화번호 등 정책 확인 필요) - 룰렛이벤트형 : 로그인해야 참여 가능(통합회원), 룰렛 이벤트 참여하여 등수별 당첨 ※ 제휴 이벤트만 상세화면 이동 가능 체험단 신청 댓글 등록 |  | 이채원 |  |  |  |  |  | ",aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,227,FO-PMT-A010300, | 218 |  |  |  | 종료 | ,page |  | ㅇ | ㅇ | webview | 공통 | 진행중인 이벤트 목록 |  | 이채원 |  |  |  |  |  | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,228,FO-PMT-A020000, | 219 |  |  | 이벤트 상세 |  | ,page |  | ㅇ | ㅇ | webview | 공통 |  |  | 이채원 |  |  |  |  |  | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,229,FO-PMT-A030100, | 220 |  |  | 이벤트 당첨자 | 목록 | ,page |  | ㅇ | ㅇ |  |  |  |  |  |  |  |  |  |  | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,230,FO-PMT-A030200, | 221 |  |  | 상세 | ,page |  | ㅇ | ㅇ | webview | 공통 | BO에서 등록한 이벤트 당첨자 발표 공지 - 정렬 : 등록일 최신순 - 제목 클릭 시 상세내용 펼침/닫힘 |  | 이채원 |  |  |  |  |  | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,231,FO-COU-A010000, | 222 | 쿠폰북 | 쿠폰북 | 공항 목록 |  | ,page |  | ㅇ | ㅇ | webview | 공통 |  |  | 이채원 |  |  |  |  |  | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,232,FO-COU-A020000, | 223 |  |  | 쿠폰북 목록 |  | ,page |  | ㅇ | ㅇ | webview | 공통 |  |  | 이채원 |  |  |  |  |  | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,233,FO-COU-A030000, | 224 |  |  | 쿠폰북 상세 |  | ,Layer |  | ㅇ | ㅇ | webview | 공통 |  |  | 이채원 |  |  |  |  |  | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,234,FO-AIR-A010100, | 225 | 공항안내 | 공항안내 | 항공편 검색 | 출발편 | ,tab |  | ㅇ | ㅇ | webview | 공통 | 해당 메뉴는 미확정 |  | 오지원 |  |  |  |  | 요구사항 미확정 - 9/23까지 확정시 9/28~10/2 진행 예상 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,239,FO-AIR-A010200, | 226 |  |  |  | 항공편 검색 결과 | ,page |  | ㅇ | ㅇ | webview | 공통 |  |  | 오지원 |  |  |  |  | 요구사항 미확정 - 9/23까지 확정시 9/28~10/2 진행 예상 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,240,FO-AIR-A010300, | 227 |  |  |  | 항공편 등록 완료 | ,page |  | ㅇ | ㅇ | webview | 공통 |  |  | 오지원 |  |  |  |  | 요구사항 미확정 - 9/23까지 확정시 9/28~10/2 진행 예상 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,241,FO-AIR-A020000, | 228 |  |  | 주자장 현황 |  | ,page |  | ㅇ | ㅇ | webview | 공통 |  |  | 오지원 |  |  |  |  | 요구사항 미확정 - 9/23까지 확정시 9/28~10/2 진행 예상 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,242,FO-AIR-A030000, | 229 |  |  | 라운지 혼잡도 |  | ,page |  | ㅇ | ㅇ | webview | 공통 |  |  | 오지원 |  |  |  |  | 요구사항 미확정 - 9/23까지 확정시 9/28~10/2 진행 예상 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,243,FO-AIR-A040000, | 230 |  |  | 체크인 카운터 |  | ,page |  | ㅇ | ㅇ | webview | 공통 |  |  | 오지원 |  |  |  |  | 요구사항 미확정 - 9/23까지 확정시 9/28~10/2 진행 예상 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,244,FO-AIR-A050000, | 231 |  |  | 출국 승객 예고 |  | ,page |  | ㅇ | ㅇ | webview | 공통 |  |  | 오지원 |  |  |  |  | 요구사항 미확정 - 9/23까지 확정시 9/28~10/2 진행 예상 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,245,FO-CSO-A010000, | 232 | 고객센터 | 고객센터 | 공지사항 |  | ,page |  | ㅇ | ㅇ | webview | 공통 | BO에서 등록한 더라운지 공지사항 - 정렬 : 등록일 최신순 - 제목 클릭 시 상세내용 펼침/닫힘 |  | 유재희 |  |  |  |  | 09/7~09/11 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,246,FO-CSO-A020000, | 233 |  |  | 자주 묻는 질문 |  | ,"page |  | ㅇ | ㅇ | webview | 공통 | BO에서 등록한 FAQ 검색조건 : 검색어 입력하여 검색 시 제목에 해당 검색어가 있는 FAQ 조회 목록 - 카테고리 분류 : 전체, 사용처, 글로벌eSIM, 포인트, 이벤트, 회원, 주문/결제/취소, 예약(?) - 제목 클릭 시 상세내용 펼침/닫힘 |  | 유재희 |  |  |  |  | 09/7~09/11 | ",aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,247,FO-CSO-A030000, | 234 |  |  | 1:1문의 |  | ,"page |  | ㅇ | ㅇ | webview | 회원 | ※ 로그인 후에만 작성 가능 1:1 문의 작성 - 작성항목 : 문의유형(*), 사용처 문의, 주문선택, QR문의, 문의제목(*), 문의내용(*), 첨부파일 |  | 유재희 |  |  |  |  | 09/7~09/11 | ",aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,248,FO-CSO-A040000, | 235 |  |  | 1:1 답변확인 |  | ,page |  | ㅇ | ㅇ | webview | 회원 | 고객이 작성한 1:1 문의 내역 조회 - 정렬 : 1:1 문의 작성일 최신순 - 답변 상태 표시 - 제목 클릭 시 상세내용 펼침/닫힘 |  | 이진혁 |  |  |  |  | 09/7~09/11 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,249,FO-STU-A000000, | 236 | 설정 | 설정 |  |  | ,page |  | ㅇ | ㅇ | webview | 공통 | 설정 TO-BE 필요 |  | 오지원 |  |  |  |  | 9/21~9/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,250,FO-ETC-A010000, | 237 | ETC | Error | 500 Error |  | ,page |  | ㅇ | ㅇ | webview | 공통 |  |  | 오지원 |  |  |  |  | 9/21~9/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,251,FO-ETC-A020000, | 238 |  |  | 404 Error |  | ,page |  | ㅇ | ㅇ | webview | 공통 |  |  | 오지원 |  |  |  |  | 9/21~9/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_WEB_IA.html,252,FO-ETC-B000000, | 239 |  | Loding |  |  | ,page |  | ㅇ | ㅇ | webview | 공통 |  |  | 오지원 |  |  |  |  | 9/21~9/30 | ,aa365cbd81f8446e1fbac471449401b2311b46b7572f2e8d7eb591228f1e9804
+01.FO_판매채널_IA.html,7,FO-MAI-A000000, | 1 | 메인 | 메인(상품목록) |  |  | ,page |  | ㅇ | ㅇ |  |  |  |  |  |  |  |  |  | 10/5~10/30 | ,7abb7afd57c2c763b0ddd2af3e7a8e3474426211a69133faf3f68e9dd75e843c
+01.FO_판매채널_IA.html,8,FO-MAI-B000000, | 2 | 상품상세 |  |  | ,page |  | ㅇ | ㅇ |  |  |  |  |  |  |  |  |  |  | ,7abb7afd57c2c763b0ddd2af3e7a8e3474426211a69133faf3f68e9dd75e843c
+01.FO_판매채널_IA.html,9,FO-MAI-B010000, | 3 | 구매하기 |  | ,page |  | ㅇ | ㅇ |  |  |  |  |  |  |  |  |  |  | ,7abb7afd57c2c763b0ddd2af3e7a8e3474426211a69133faf3f68e9dd75e843c
+01.FO_판매채널_IA.html,10,FO-MAI-B010100, | 4 | 주문/결제 | ,page |  | ㅇ | ㅇ |  |  |  |  |  |  |  |  |  |  | ,7abb7afd57c2c763b0ddd2af3e7a8e3474426211a69133faf3f68e9dd75e843c
+01.FO_판매채널_IA.html,11,FO-MAI-B010200, | 5 | 결제완료 | ,page |  | ㅇ | ㅇ |  |  |  |  |  |  |  |  |  |  | ,7abb7afd57c2c763b0ddd2af3e7a8e3474426211a69133faf3f68e9dd75e843c
+01.FO_판매채널_IA.html,12,FO-MAI-B020000, | 6 | 선물하기 |  | ,page |  | ㅇ | ㅇ |  |  |  |  |  |  |  |  |  |  | ,7abb7afd57c2c763b0ddd2af3e7a8e3474426211a69133faf3f68e9dd75e843c
+01.FO_판매채널_IA.html,13,FO-MAI-B020100, | 7 | 선물하기 | ,page |  | ㅇ | ㅇ |  |  |  |  |  |  |  |  |  |  | ,7abb7afd57c2c763b0ddd2af3e7a8e3474426211a69133faf3f68e9dd75e843c
+01.FO_판매채널_IA.html,14,FO-MAI-B020200, | 8 | 선물완료 | ,page |  | ㅇ | ㅇ |  |  |  |  |  |  |  |  |  |  | ,7abb7afd57c2c763b0ddd2af3e7a8e3474426211a69133faf3f68e9dd75e843c
+01.FO_판매채널_IA.html,15,FO-MAI-C000000, | 9 | 사용처 검색 |  |  | ,Layer |  | ㅇ | ㅇ |  |  |  |  |  |  |  |  |  |  | ,7abb7afd57c2c763b0ddd2af3e7a8e3474426211a69133faf3f68e9dd75e843c
+01.FO_판매채널_IA.html,16,FO-ORD-A000000, | 10 | 결제 | 결제 목록 |  |  | ,page |  | ㅇ | ㅇ |  |  |  |  |  |  |  |  |  |  | ,7abb7afd57c2c763b0ddd2af3e7a8e3474426211a69133faf3f68e9dd75e843c
+01.FO_판매채널_IA.html,17,FO-ORD-A010000, | 11 |  | 결제 정보 확인 |  | ,page |  | ㅇ | ㅇ |  |  |  |  |  |  |  |  |  |  | ,7abb7afd57c2c763b0ddd2af3e7a8e3474426211a69133faf3f68e9dd75e843c
+01.FO_판매채널_IA.html,18,FO-CMM-A010000, | 12 | 공통 | 고객센터 | 1:1문의 |  | ,page |  | ㅇ | ㅇ |  |  |  |  |  |  |  |  |  |  | ,7abb7afd57c2c763b0ddd2af3e7a8e3474426211a69133faf3f68e9dd75e843c
+01.FO_판매채널_IA.html,19,FO-CMM-B000000, | 13 | 개인정보 처리 방침 |  |  | ,Layer |  | ㅇ | ㅇ |  |  |  |  |  |  |  |  |  |  | ,7abb7afd57c2c763b0ddd2af3e7a8e3474426211a69133faf3f68e9dd75e843c
+01.FO_판매채널_IA.html,20,FO-CMM-C000000, | 14 | 약관 |  |  | ,Layer |  | ㅇ | ㅇ |  |  |  |  |  |  |  |  |  |  | ,7abb7afd57c2c763b0ddd2af3e7a8e3474426211a69133faf3f68e9dd75e843c
+03.PO_IA.html,6,PO-CMM-A010000, |  | 공통 | 로그인 | PO 로그인 |  | ,page |  | O |  | webview | 파트너사 | (공통) 로고 - [로고] 클릭 시 메인화면으로 이동 |  |  |  |  |  |  | 10/19~10/30 | ,41ecb11888407fa67d855c07d64ee66670ff52da9100f9d154eb6733c82fd716
+03.PO_IA.html,7,PO-CMM-A020000, |  | 비밀번호 재설정 |  | ,page |  | O |  | webview | 파트너사 | 임시 비밀번호 발급 후 첫 로그인 시도시 패스워드 설정 진입 |  |  |  |  |  |  |  | ,41ecb11888407fa67d855c07d64ee66670ff52da9100f9d154eb6733c82fd716
+03.PO_IA.html,8,PO-CMM-A030000, |  | 로그아웃 |  | ,page |  | O |  | webview | 파트너사 |  |  |  |  |  |  |  |  | ,41ecb11888407fa67d855c07d64ee66670ff52da9100f9d154eb6733c82fd716
+03.PO_IA.html,9,PO-CMM-B010000, |  | 내 계정 | 내 정보 |  | ,page |  | O |  | webview | 파트너사 | 조회만 가능 |  |  |  |  |  |  |  | ,41ecb11888407fa67d855c07d64ee66670ff52da9100f9d154eb6733c82fd716
+03.PO_IA.html,10,PO-MAI-A010000, |  | PO 메인 | 홈 | 주문현황 |  | ,page |  | O |  | webview | 파트너사 | 주문/공지 |  |  |  |  |  |  |  | ,41ecb11888407fa67d855c07d64ee66670ff52da9100f9d154eb6733c82fd716
+03.PO_IA.html,11,PO-ORD-A010000, |  | 주문조회 | 주문 | 목록 |  | ,page |  | O |  | webview | 파트너사 |  |  |  |  |  |  |  |  | ,41ecb11888407fa67d855c07d64ee66670ff52da9100f9d154eb6733c82fd716
+03.PO_IA.html,12,PO-ORD-A020000, |  | 상세 |  | ,page |  | O |  | webview | 파트너사 |  |  |  |  |  |  |  |  | ,41ecb11888407fa67d855c07d64ee66670ff52da9100f9d154eb6733c82fd716
+03.PO_IA.html,15,PO-CSO-A010000, |  | 문의 | 1:1 문의 | 문의하기 |  | ,page |  | O |  | webview | 파트너사 |  |  |  |  |  |  |  |  | ,41ecb11888407fa67d855c07d64ee66670ff52da9100f9d154eb6733c82fd716
+03.PO_IA.html,16,PO-CSO-A020000, |  | 1:1 문의 내역 |  | ,page |  | O |  | webview | 파트너사 |  |  |  |  |  |  |  |  | ,41ecb11888407fa67d855c07d64ee66670ff52da9100f9d154eb6733c82fd716
+04.OO_IA.html,6,OO-OOS-A010000, | 1 | OO | 로그인 | 로그인 |  | ,page |  | O | O | webview | 현장운영자 | (공통) 로고 - [로고] 클릭 시 메인화면으로 이동 |  | 이윤희 |  |  |  |  | 10/1~10/30 | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,7,OO-OOS-A020000, | 2 | 비밀번호 재설정 |  | ,page |  | O | O | webview | 현장운영자 | 임시 비밀번호 발급 후 첫 로그인 시도시 패스워드 설정 진입 |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,8,OO-OOS-A030000, | 3 | 로그아웃 |  | ,page |  | O | O | webview | 현장운영자 |  |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,9,OO-OOS-B010000, | 4 | 내 계정 | 비밀번호 확인 |  | ,page |  | O | O | webview | 현장운영자 |  |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,10,OO-OOS-B020000, | 5 | 내 정보 |  | ,page |  | O | O | webview | 현장운영자 | 본인 계정 정보 수정 |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,11,OO-OOS-C010100, | 6 | 사용(입장/취소) 처리 | 국내 라운지 | 입장/취소 처리 | ,Tab |  | O | O | webview | 현장운영자 | 국내라운지 이용권 입장/취소 처리 |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,12,OO-OOS-C010200, | 7 | 처리내역 조회 | ,Tab |  | O | O | webview | 현장운영자 | 국내라운지 처리 내역 조회 |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,31,OO-OOS-C020000, | 26 | 인원수 |  | ,Layer |  | O | O | webview | 현장운영자 | 입장 인원 수 선택 |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,32,OO-OOS-C030000, | 27 | 취소사유 |  | ,Layer |  | O | O | webview | 현장운영자 | 취소 사유 선택 및 입력 |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,33,OO-OOS-C040000, | 28 | 추가 결제 |  | ,Layer |  | O | O | webview | 현장운영자 | 업그레이드 결제 시 추가 결제 입력 |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,34,OO-OOS-D010000, | 29 | 공지사항 | 목록 |  | ,page |  | O | O | webview | 현장운영자 |  |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,35,OO-OOS-D020000, | 30 | 상세 |  | ,page |  | O | O | webview | 현장운영자 |  |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,36,OO-OOS-E010000, | 31 | 1:1 문의 | 목록 |  | ,page |  | O | O | webview | 현장운영자 |  |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,37,OO-OOS-E020000, | 32 | 문의 작성 |  | ,page |  | O | O | webview | 현장운영자 |  |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,38,OO-OOS-E030000, | 33 | 상세 |  | ,page |  | O | O | webview | 현장운영자 |  |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,39,OO-OOS-F010000, | 34 | OO-K | 로그인 | 로그인 |  | ,page |  | O | O | webview | 승무사원 |  |  |  |  |  |  |  | 10/1~10/30 | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,40,OO-OOS-F020000, | 35 | 비밀번호 재설정 |  | ,page |  | O | O | webview | 승무사원 |  |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,41,OO-OOS-F030000, | 36 | 로그아웃 |  | ,page |  | O | O | webview | 승무사원 |  |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,44,OO-OOS-G010000, | 37 | 사용(입장/취소) 처리 | 입장/취소 |  | ,Tab |  | O | O | webview | 승무사원 |  |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,45,OO-OOS-G020000, | 38 | 내역 조회 |  | ,Tab |  | O | O | webview | 승무사원 |  |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,46,OO-OOS-G030000, | 39 | 취소사유 |  | ,Layer |  | O | O | webview | 승무사원 |  |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,47,OO-OOS-H010000, | 40 | 공지사항 | 목록 |  | ,page |  | O | O | webview | 승무사원 |  |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,48,OO-OOS-H020000, | 41 | 상세 |  | ,page |  | O | O | webview | 승무사원 |  |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,49,OO-OOS-I010000, | 42 | 1:1 문의 | 목록 |  | ,page |  | O | O | webview | 승무사원 |  |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,50,OO-OOS-I020000, | 43 | 문의 작성 |  | ,page |  | O | O | webview | 승무사원 |  |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,51,OO-OOS-I030000, | 44 | 상세 |  | ,page |  | O | O | webview | 승무사원 |  |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,54,OO-OOS-J010000, | 45 | PO-K | K공항리무진 제휴카드 | 목록 |  | ,"page |  | O |  | webview | 파트너사 | BO의 기능으로 구성됨, 반응형 모바일 구현 여부는 확인해야 함 |  |  |  |  |  |  | 10/1~10/30 | ",36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,55,OO-OOS-J020000, | 46 | 등록 |  | ,page |  | O |  | webview | 파트너사 |  |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,56,OO-OOS-J030000, | 47 | 상세 |  | ,page |  | O |  | webview | 파트너사 |  |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,57,OO-OOS-K010000, | 48 | 리무진 정보 | 목록 |  | ,page |  | O |  | webview | 파트너사 |  |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,58,OO-OOS-K020000, | 49 | 등록 |  | ,page |  | O |  | webview | 파트너사 |  |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,59,OO-OOS-K030000, | 50 | 상세 |  | ,page |  | O |  | webview | 파트너사 | 나의 1:1문의 목록 |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,60,OO-OOS-L010000, | 51 | 노선정보 | 목록 |  | ,page |  | O |  | webview | 파트너사 | 1:1 문의 작성 |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,61,OO-OOS-L020000, | 52 | 등록 |  | ,page |  | O |  | webview | 파트너사 | 작성한 문의 및 답변 |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,62,OO-OOS-L030000, | 53 | 상세 |  | ,page |  | O |  | webview | 파트너사 | K공항리무진에서 사용가능한 할인 제휴카드 목록 |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,63,OO-OOS-M010000, | 54 | 승무사원 | 목록 |  | ,page |  | O |  | webview | 파트너사 |  |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,64,OO-OOS-M020000, | 55 | 등록 |  | ,page |  | O |  | webview | 파트너사 |  |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,65,OO-OOS-M030000, | 55 | 상세 |  | ,"page |  | O |  | webview | 파트너사 | 리무진 차량 및 매표소 정보, 단말 코드 |  |  |  |  |  |  |  | ",36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,66,OO-OOS-N000000, | 55 | 승무사원 로그인 |  |  | ,page |  | O |  | webview | 파트너사 |  |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,67,OO-OOS-O010000, | 55 | 거래 기록 | 목록 |  | ,page |  | O |  | webview | 파트너사 |  |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,68,OO-OOS-O020000, | 55 | 취소 사유 선택 |  | ,"Layer |  | O |  | webview | 파트너사 | 노선 번호, 설명, 배차 간격 및 양방향 노선정보 |  |  |  |  |  |  |  | ",36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,69,OO-OOS-P000000, | 55 | 단말기 결제 통보 이력 |  |  | ,page |  | O |  | webview | 파트너사 |  |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,70,OO-OOS-Q000000, | 55 | 연동 이력 - DSP |  |  | ,page |  | O |  | webview | 파트너사 |  |  |  |  |  |  |  |  | ,36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e
+04.OO_IA.html,71,OO-OOS-R000000, | 55 | 연동 이력(취소) - GAON) |  |  | ,"page |  | O |  | webview | 파트너사 | 승무원(기사) 계정, 근무 위치, 직원코드 |  |  |  |  |  |  |  | ",36ee294d81090dd2fdd0f4452d0f45ab03ab80cb3a6fdd50124467fce0757d7e

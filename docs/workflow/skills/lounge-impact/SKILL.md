@@ -1,0 +1,20 @@
+---
+name: lounge-impact
+description: 더라운지 기능 변경의 화면·계약·상태·플랫폼 영향을 분석한다. 공통 UI·인증·API·회원·결제 변경 전에 사용한다.
+---
+
+# lounge-impact
+
+## 시작 위치
+사용자가 지정한 문서 저장소에서 루트 AGENTS.md, docs/AGENTS.md와 docs/workflow/AGENTS.md의 해당 항목을 확인한다. 실제 코드 workspace의 lounge-workflow.json이 있으면 docs_root를 workspace 기준으로 해석해 문서 저장소를 찾는다. 설정이 없고 현재 저장소에 docs/workflow/가 있으면 그 위치를 사용한다. 그 외에는 문서 위치를 먼저 확인하고 임의 경로를 만들지 않는다. 자동 스킬 호출이 없어도 이 SKILL.md를 직접 읽어 수행할 수 있다.
+가까운 AGENTS.md와 이번 카드·근거를 우선한다. 참고 문서는 이번 판단에 필요한 것만 읽는다. IA는 후보 자료이며, 승인 없는 정책·endpoint·parser·API mock·fixture·handler·Bridge command를 만들지 않는다.
+
+## 작업
+
+관련 카드와 요청한 변경, 실제 호출자·공유 상태·라우트·계약을 필요한 범위에서 탐색한다.
+- 직접 변경과 실제 소비자 영향을 구분한다. IA에 같은 이름이 있다고 공유 구현이라고 단정하지 않는다.
+- UI·폼·Query key/무효화·Store·인증·API·Bridge·WebView/웹 차이 중 실제 관련 항목을 확인한다.
+- 규칙과 기획·계약의 충돌이 있으면 근거와 영향받는 부분을 적는다.
+- 문서·카드·Story·테스트·실기기 검증에 갱신이 필요한 항목을 연결한다.
+- 아키텍처 개선은 반복된 변경 비용이나 확인된 결함이 있을 때 별도 후보로 제시한다. 미리 공통화·package·adapter를 만들지 않는다.
+결과는 영향 대상 / 근거 / 변경 필요 / 검증 / 담당·차단 조건이다. 영향 분석 요청만으로 코드나 전체 구조를 수정하지 않는다.

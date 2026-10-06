@@ -1,0 +1,15 @@
+
+01. 공통: https://www.figma.com/design/UjoSuu3ndjIjTjApvBqMdN/The-Lounge-3.0--%E1%84%80%E1%85%B5%E1%84%92%E1%85%AC%E1%86%A8-?node-id=40002114-8
+02. 메인: https://www.figma.com/design/UjoSuu3ndjIjTjApvBqMdN/The-Lounge-3.0--%E1%84%80%E1%85%B5%E1%84%92%E1%85%AC%E1%86%A8-?node-id=40002108-3141
+03. 로그인 & 회원가입: https://www.figma.com/design/UjoSuu3ndjIjTjApvBqMdN/The-Lounge-3.0--%E1%84%80%E1%85%B5%E1%84%92%E1%85%AC%E1%86%A8-?node-id=40002113-4
+04. 마이페이지: https://www.figma.com/design/UjoSuu3ndjIjTjApvBqMdN/The-Lounge-3.0--%E1%84%80%E1%85%B5%E1%84%92%E1%85%AC%E1%86%A8-?node-id=40002114-3
+04-01. 내 제휴카드 관리: https://www.figma.com/design/UjoSuu3ndjIjTjApvBqMdN/The-Lounge-3.0--%E1%84%80%E1%85%B5%E1%84%92%E1%85%AC%E1%86%A8-?node-id=40002128-11001
+04-02. 내 여정 관리: https://www.figma.com/design/UjoSuu3ndjIjTjApvBqMdN/The-Lounge-3.0--%E1%84%80%E1%85%B5%E1%84%92%E1%85%AC%E1%86%A8-?node-id=40002114-13
+05. 사용처 탐색: https://www.figma.com/design/UjoSuu3ndjIjTjApvBqMdN/The-Lounge-3.0--%E1%84%80%E1%85%B5%E1%84%92%E1%85%AC%E1%86%A8-?node-id=40002108-3140
+06. 상품: https://www.figma.com/design/UjoSuu3ndjIjTjApvBqMdN/The-Lounge-3.0--%E1%84%80%E1%85%B5%E1%84%92%E1%85%AC%E1%86%A8-?node-id=40002108-3142
+07. 제휴카드: https://www.figma.com/design/UjoSuu3ndjIjTjApvBqMdN/The-Lounge-3.0--%E1%84%80%E1%85%B5%E1%84%92%E1%85%AC%E1%86%A8-?node-id=40002113-2
+08. 주문/결제취소: https://www.figma.com/design/UjoSuu3ndjIjTjApvBqMdN/The-Lounge-3.0--%E1%84%80%E1%85%B5%E1%84%92%E1%85%AC%E1%86%A8-?node-id=40002108-3143
+09. 프로모션: https://www.figma.com/design/UjoSuu3ndjIjTjApvBqMdN/The-Lounge-3.0--%E1%84%80%E1%85%B5%E1%84%92%E1%85%AC%E1%86%A8-?node-id=40002111-3140
+10. 쿠폰팩: https://www.figma.com/design/UjoSuu3ndjIjTjApvBqMdN/The-Lounge-3.0--%E1%84%80%E1%85%B5%E1%84%92%E1%85%AC%E1%86%A8-?node-id=40002111-3141
+11. 공항안내: https://www.figma.com/design/UjoSuu3ndjIjTjApvBqMdN/The-Lounge-3.0--%E1%84%80%E1%85%B5%E1%84%92%E1%85%AC%E1%86%A8-?node-id=40002114-9
+12. 고객센터: https://www.figma.com/design/UjoSuu3ndjIjTjApvBqMdN/The-Lounge-3.0--%E1%84%80%E1%85%B5%E1%84%92%E1%85%AC%E1%86%A8-?node-id=40002114-10

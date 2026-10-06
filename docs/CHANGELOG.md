@@ -11,6 +11,21 @@
 - 변경한 파일 목록만 나열하지 않고 변경 목적, 주요 내용, 미확정 항목과 검증 결과를 함께 기록합니다.
 - 같은 작업에서 Markdown과 HTML을 함께 수정했다면 하나의 변경 항목으로 기록합니다.
 
+## 2026-10-06
+
+### 팀 운영 원본을 docs/workflow로 통합
+
+- work/workflow의 운영 문서와 스크립트, work/skills의 공용 스킬을 docs/workflow로 이동했습니다. IA 원본과 검토 자료는 work에 유지합니다.
+- 루트와 영역 안내, 내부 링크, IA 입력·생성 경로, 검사와 선택적 내보내기 설정, 사람용 Markdown·HTML을 새 구조에 맞췄습니다.
+- 정책·계약·제품 구현 범위는 변경하지 않습니다. 이동 후 Markdown 27개·IA 레코드 587개 검사, 원본 11개 파일의 해시 보존, IA 파생 결과 일치, 네 가지 내보내기의 미리보기·재실행·사용자 변경 보호, HTML 링크 검사를 통과했습니다.
+
+
+### 사람이 읽는 팀 공용 워크플로 가이드 추가
+
+- Markdown 원본과 HTML에 파일별 생성 이유·관리 시점, 공용 스킬 9개, Ready와 실제 사용 흐름을 정리했습니다.
+- 공통 스타일과 자동 메뉴를 사용하고 가이드 목록과 검색에 연결했습니다. 운영 원본과 IA는 변경하지 않습니다.
+- 정책·계약의 미정 사항과 문서 검사·제품 검증의 차이를 명시했습니다.
+
 ## 2026-09-30
 
 ### HTML 공용 발표자 모드 추가
@@ -45,7 +60,7 @@
 
 ### Flutter 카드 스캔 기술 가이드 추가
 
-- 실제 Flutter 프로젝트의 Provider, 화면, Router, Android·iOS 설정과 잠금 파일을 기준으로 [`Flutter 카드 스캔 기술 가이드`](./guides/platform/webview/card_scan.html)를 추가했습니다.
+- 실제 Flutter 프로젝트의 Provider, 화면, Router, Android·iOS 설정과 잠금 파일을 기준으로 [`Flutter 카드 스캔 기술 가이드`](guides/platform/webview/card_scan.html)를 추가했습니다.
 - `flutter_card_scanner_plus 0.1.2`의 설치 소스와 공식 문서를 대조해 OCR 처리, 완료 조건, 결과 필드, 지원 카드, 카메라 권한과 플랫폼 최소 버전을 정리했습니다.
 - 전체 카드 번호의 로그·일반 저장소 보관 금지, CVV 제외, 화면 캡처 방지 미구현과 PCI DSS 책임 경계를 현재 구현과 권장사항으로 구분했습니다.
 - 현재 Flutter Route와 결과 화면은 개발 확인용 임시 구현으로 구분하고, 최종 방향을 WebView 요청 → Native Scanner 실행 → 기존 WebView 복귀·카드정보 반환 흐름으로 명시했습니다. 구체적인 Bridge Method, 요청 ID, Payload와 오류 계약은 `TBD`로 남겼습니다.
@@ -70,7 +85,7 @@
 
 ### NInfer(Docker) 256K 컨텍스트 옵션 추가
 
-- [`react_code_exports.html`](./guides/ui/react_code_exports.html)의 로컬 LLM 섹션에 Ollama(64K)와 함께 NInfer(Docker, 256K)를 병행 실행 옵션으로 추가했습니다.
+- [`react_code_exports.html`](guides/ui/react_code_exports.html)의 로컬 LLM 섹션에 Ollama(64K)와 함께 NInfer(Docker, 256K)를 병행 실행 옵션으로 추가했습니다.
 - Ollama는 64K 컨텍스트에서 안정적으로 동작하지만 128K 이상으로 확장 시 RTX 4090 24GB VRAM 한계로 응답 속도가 크게 떨어지는 한계를 명시했습니다.
 - NInfer는 WSL2 + Docker Desktop에서 RTX 4090 전용 포크(`sergiuszm/ninfer-4090`, `rtx4090-port` 브랜치)를 실행하여 256K 컨텍스트를 고속 처리합니다. MTP 스펙케줄과 `rk4v4-e8` KV 양자화 설정을 포함합니다.
 - Cline에서 NInfer는 OpenAI Compatible Provider로 연결하며(Base URL: `http://127.0.0.1:8080/v1`, Model: `qwen3.8-27b`, Context: 262144), Ollama(포트 11434)와 NInfer(포트 8080)가 동시에 실행되어 작업 규모에 따라 전환할 수 있습니다.
@@ -90,7 +105,7 @@
 
 ### 접근성 AI 요약 문서 완성
 
-- UI 접근성 준수 가이드의 핵심 판단 기준을 AI 코딩용 요약으로 정리해 [`docs/ai/accessibility.md`](./ai/accessibility.md)를 완성했습니다. 기본 원칙(WCAG 2.1 AA, HTML 원어 우선, ARIA 4개 규칙), 색상 대비, 키보드 접근성, 스크린 리더·ARIA, 폼, Dialog·오버레이, 모션, 터치·반응형과 자동화 검사를 다룹니다.
+- UI 접근성 준수 가이드의 핵심 판단 기준을 AI 코딩용 요약으로 정리해 [`docs/ai/accessibility.md`](ai/accessibility.md)를 완성했습니다. 기본 원칙(WCAG 2.1 AA, HTML 원어 우선, ARIA 4개 규칙), 색상 대비, 키보드 접근성, 스크린 리더·ARIA, 폼, Dialog·오버레이, 모션, 터치·반응형과 자동화 검사를 다룹니다.
 - 같은 폴더의 `accessibility.html`은 Markdown 본문을 렌더링하는 기존 재사용 뷰이며, 저장소 루트 `AGENTS.md`의 작업별 요약 표와 필수 문서 목록에 이미 연결되어 있어 이번 작업에서 참조 파일 수정은 필요하지 않았습니다.
 - 미확정 항목: Accessibility Mark(KACA) 취득, `axe-core`의 CI/CD 통합과 `prefers-contrast` 검증은 승인 단계가 된 뒤에 진행하는 확장 검토 항목으로 문서에 남겼습니다.
 - 검증: 기준 원본(UI 접근성 준수 가이드, 디자인 토큰 가이드, Lint 가이드) 존재와 `docs/ai/accessibility.html` → `accessibility.md` 렌더링 경로, 루트 `AGENTS.md`·`docs/README.md`의 접근성 문서 링크가 실제 파일 경로와 일치하는지 확인했습니다.
@@ -117,9 +132,9 @@
 
 ### Front-end 및 Flutter APP 구축 일정 산정 보고서 연결
 
-- [`Front-end 구축 일정 산정 보고서`](./guides/planning/web.html)는 반응형 웹사이트 약 225개 화면 및 상태와 앱 WebView 166개 대응 범위를 기준으로 산정했습니다.
+- [`Front-end 구축 일정 산정 보고서`](guides/planning/web.html)는 반응형 웹사이트 약 225개 화면 및 상태와 앱 WebView 166개 대응 범위를 기준으로 산정했습니다.
 - Front-end는 시니어 2명 중 1명이 PL과 개발을 겸하는 구성에서 90~115근무일, 약 4.5~5.75개월로 정리했습니다.
-- [`Flutter APP 구축 일정 산정 보고서`](./guides/planning/app.html)는 미들급 Flutter 개발자 1명이 AI를 적극 활용하는 조건에서 기능 구현 95~120근무일, 통합 QA와 출시 준비까지 120~155근무일로 정리했습니다.
+- [`Flutter APP 구축 일정 산정 보고서`](guides/planning/app.html)는 미들급 Flutter 개발자 1명이 AI를 적극 활용하는 조건에서 기능 구현 95~120근무일, 통합 QA와 출시 준비까지 120~155근무일로 정리했습니다.
 - 두 일정은 기획·디자인·승인된 API 계약과 WebView Bridge 정보가 기능 개발 순서에 맞춰 제공되는 조건의 추정치이며, 미확정 사항과 반복 변경은 별도 일정 위험으로 구분했습니다.
 - Root README의 공통 가이드 목록과 예정 문서 위치 표에서 두 일정 보고서를 바로 열 수 있도록 연결했습니다.
 - HTML 문서 구조와 README 내부 링크가 실제 파일 경로와 일치하는지 확인했습니다.
@@ -141,8 +156,8 @@
 ### Front-end 구축 브리핑 문서와 PC 발표 페이지 추가
 
 - 오늘 정리한 Figma 구현 설명, AI의 기존 Component 탐색, Storybook 우선 개발과 반자동 운영, Tailwind CSS v4 기반 Browser 지원, 반응형 구간과 중앙 검색 운영을 하나의 브리핑으로 연결했습니다.
-- 일반 [`브리핑 문서`](./guides/briefing/index.html)는 공통 가이드 템플릿을 사용하고, Figma → AI → Storybook → 프로젝트 → 운영의 순환을 접근성 설명이 포함된 Mermaid로 정리했습니다.
-- 별도 [`PC 발표 페이지`](./guides/briefing/presentation.html)는 1440~1600px 콘텐츠 폭과 전면 장면을 사용하며, 대형 타이포그래피, 개발 도구 Panel, Storybook 상태 Canvas, Browser·Viewport 시각화와 운영 순환도를 추가했습니다.
+- 일반 [`브리핑 문서`](guides/briefing/index.html)는 공통 가이드 템플릿을 사용하고, Figma → AI → Storybook → 프로젝트 → 운영의 순환을 접근성 설명이 포함된 Mermaid로 정리했습니다.
+- 별도 [`PC 발표 페이지`](guides/briefing/presentation.html)는 1440~1600px 콘텐츠 폭과 전면 장면을 사용하며, 대형 타이포그래피, 개발 도구 Panel, Storybook 상태 Canvas, Browser·Viewport 시각화와 운영 순환도를 추가했습니다.
 - 발표 페이지는 외부 CDN이나 Animation Library 없이 독립 실행되며 Scroll Snap, 장면 노출 효과, 진행률, 우측 장면 Navigation과 방향키·Page Up/Down 이동을 제공합니다.
 - Archify는 핵심 Workflow를 별도 검증 산출물로 확장할 수 있도록 후보로 남기고, 현재 발표 페이지에서는 동일한 내용을 가벼운 자체 Workflow로 표현했습니다.
 - HTML 구조, JavaScript 문법과 자산 경로를 확인했으며, 1440×900 화면에서 표지와 핵심 Workflow를 시각 검증하고 일반 문서의 Mermaid 렌더링과 Console 오류가 없음을 확인했습니다.
@@ -155,16 +170,16 @@
 - 현대 브라우저의 자동 업데이트가 최소 버전 기준의 현실성을 높이지만, 기업 관리 정책, 장기 미재시작과 구형 OS에서는 업데이트가 지연될 수 있으므로 실제 운영 사용자 버전을 확인하도록 했습니다.
 - 반응형 화면을 물리 해상도가 아닌 CSS viewport 기준으로 Mobile 320–767px, Tablet 768–1023px, PC 1024px 이상으로 구분하고 Tailwind CSS의 `md` 768px, `lg` 1024px 경계와 대표 검증 너비를 추가했습니다.
 - 화면 구간은 기존 가이드와 같은 Mermaid 구조로 시각화하고 767·768px 및 1023·1024px 경계값, 세로·가로 전환, 확대와 넓은 화면 검증 항목을 정리했습니다.
-- [`반응형 웹 브라우저 지원 가이드`](./guides/browser-support/index.html)와 초안 [`draft.md`](./guides/browser-support/draft.md)를 추가하고 Root README에서 연결했습니다.
+- [`반응형 웹 브라우저 지원 가이드`](guides/browser-support/index.html)와 초안 [`draft.md`](guides/browser-support/draft.md)를 추가하고 Root README에서 연결했습니다.
 
 #### 전체 가이드 검색
 
-- 기존 가이드에 검색 UI를 반복 삽입하지 않고 중앙 [`가이드 검색`](./search/index.html) 페이지 한 곳에서 주요 가이드의 문서명, 목차와 본문을 검색하도록 구성했습니다.
+- 기존 가이드에 검색 UI를 반복 삽입하지 않고 중앙 [`가이드 검색`](search/index.html) 페이지 한 곳에서 주요 가이드의 문서명, 목차와 본문을 검색하도록 구성했습니다.
 - 검색 대상은 `docs/guides/` 아래의 HTML 가이드로 한정하고 README, 변경 로그, AI 요약, 공통 소스 문서와 검색 페이지 자체는 제외했습니다.
 - 검색 결과는 관련 문서의 `h2` 목차로 직접 이동하며 Tailwind, Storybook, Figma, 브라우저, WebView, TypeScript, 테스트, 보안, 다국어와 성능 추천 검색어를 제공합니다.
-- 의존성이나 검색 서버 없이 파일을 직접 열어도 동작하도록 [`build-search-index.mjs`](./search/build-search-index.mjs)가 전체 HTML에서 정적 색인을 생성하게 했습니다.
-- 가이드 변경 후 `node .\search\build-search-index.mjs`를 실행하면 [`search-data.js`](./assets/js/search-data.js)가 갱신되며, 생성 파일을 직접 수정하지 않도록 검색 페이지에 운영 방법을 기록했습니다.
-- 검색 전용 스타일과 브라우저 실행 코드는 각각 [`search.css`](./assets/style/search.css), [`search.js`](./assets/js/search.js)로 공통 자산 폴더에서 관리하고 색인 생성 스크립트만 검색 페이지 가까이에 유지했습니다.
+- 의존성이나 검색 서버 없이 파일을 직접 열어도 동작하도록 [`build-search-index.mjs`](search/build-search-index.mjs)가 전체 HTML에서 정적 색인을 생성하게 했습니다.
+- 가이드 변경 후 `node .\search\build-search-index.mjs`를 실행하면 [`search-data.js`](assets/js/search-data.js)가 갱신되며, 생성 파일을 직접 수정하지 않도록 검색 페이지에 운영 방법을 기록했습니다.
+- 검색 전용 스타일과 브라우저 실행 코드는 각각 [`search.css`](assets/style/search.css), [`search.js`](assets/js/search.js)로 공통 자산 폴더에서 관리하고 색인 생성 스크립트만 검색 페이지 가까이에 유지했습니다.
 
 #### 검증
 
@@ -189,18 +204,18 @@
 #### project 브랜치 적용 구조
 
 - 실제 업무용 [`AGENTS.md`](../AGENTS.md)에 Figma 구현 전 확인, 기존 컴포넌트 재사용과 Storybook 반자동 운영 규칙을 추가했습니다.
-- AI가 Storybook 작업 전에 읽는 [`storybook.md`](./ai/storybook.md)와 실제 `.storybook`, `*.stories.tsx`, Autodocs 및 정적 Build 적용 절차를 설명하는 [`common-source/storybook.md`](./common-source/storybook.md)를 추가했습니다.
+- AI가 Storybook 작업 전에 읽는 [`storybook.md`](ai/storybook.md)와 실제 `.storybook`, `*.stories.tsx`, Autodocs 및 정적 Build 적용 절차를 설명하는 [`common-source/storybook.md`](common-source/storybook.md)를 추가했습니다.
 - Root README, AI 문서 선택 흐름, 프로젝트 구조, UI·Figma·품질 요약과 공통 소스 목록에 Storybook 진입점을 연결했습니다.
 - 실제 애플리케이션이 생성되면 `apps/app-webview/.storybook`에 실행 설정을 두고 Story는 실제 컴포넌트 가까이에 배치합니다. Framework, Addon, package와 Script 이름은 실제 `package.json`과 Lock File을 확인한 뒤 확정합니다.
 - 여러 애플리케이션에서 의미와 변경 이유가 같은 재사용이 확인되기 전에는 별도 Storybook 애플리케이션이나 `packages/ui` 구성을 미리 만들지 않습니다.
 
 #### 주요 문서
 
-- [`Storybook 운영 가이드`](./guides/storybook/index.html) · [`초안`](./guides/storybook/draft.md)
-- [`React Code Exports 가이드`](./guides/ui/react_code_exports.html)
-- [`Front-End 개발 가이드`](./guides/frontend/index.html)
-- [`Storybook AI 요약`](./ai/storybook.md) · [`HTML`](./ai/storybook.html)
-- [`Storybook 적용 가이드`](./common-source/storybook.md) · [`HTML`](./common-source/storybook.html)
+- [`Storybook 운영 가이드`](guides/storybook/index.html) · [`초안`](guides/storybook/draft.md)
+- [`React Code Exports 가이드`](guides/ui/react_code_exports.html)
+- [`Front-End 개발 가이드`](guides/frontend/index.html)
+- [`Storybook AI 요약`](ai/storybook.md) · [`HTML`](ai/storybook.html)
+- [`Storybook 적용 가이드`](common-source/storybook.md) · [`HTML`](common-source/storybook.html)
 
 #### 검증
 
@@ -218,7 +233,7 @@
 - Core Web Vitals, LCP·CLS·INP, Bundle·Chunk·Main Thread, Lighthouse, 성능 회귀와 성능 Budget의 의미와 측정 목적을 보강했습니다.
 - 이 저장소는 Front-end 가이드이며 Front-end가 독립적으로 결정할 수 있는 구현·검증 원칙만 현재 기준으로 확정합니다. 기획, 업무 규칙, API·인증·데이터 계약, Backend 제공 환경, Native App 책임과 배포·운영처럼 다른 담당 영역이 필요한 내용은 승인 전까지 미확정으로 유지합니다.
 - 보안 문서에 적힌 Backend·Native App·배포 책임은 Front-end가 확인해야 할 외부 조건이며, 현재 프로젝트에서 구현이나 제공이 확정됐다는 의미가 아님을 명시했습니다.
-- [`성능 가이드 초안`](./guides/performance/draft.md)과 [`성능 가이드`](./guides/performance/index.html)에 느린 네트워크, API 응답 지연, Timeout, Offline과 연결 복구 시 Front-end 처리 기준을 추가했습니다.
+- [`성능 가이드 초안`](guides/performance/draft.md)과 [`성능 가이드`](guides/performance/index.html)에 느린 네트워크, API 응답 지연, Timeout, Offline과 연결 복구 시 Front-end 처리 기준을 추가했습니다.
 - 최초 로딩과 기존 데이터 갱신을 구분하고 Skeleton, Spinner, Progress와 Toast는 설치된 shadcn/ui 및 프로젝트 컴포넌트를 우선 사용하도록 했습니다.
 - Chrome 개발자 도구의 `Network`, `Disable cache`, 저속 Profile과 `Offline` 전환을 이용한 단계별 검증 절차를 추가했습니다.
 - Chrome Network Throttling은 Bundle·이미지·폰트·API를 포함한 저속 전송 환경 확인에 사용합니다.
@@ -239,14 +254,14 @@
 
 #### 주요 문서
 
-- [`성능 가이드 초안`](./guides/performance/draft.md) · [`성능 가이드`](./guides/performance/index.html)
-- [`performance.md`](./ai/performance.md)
-- [`api-mocking.md`](./common-source/api-mocking.md) · [`api-mocking.html`](./common-source/api-mocking.html)
-- [`network.md`](./common-source/network.md) · [`network.html`](./common-source/network.html)
+- [`성능 가이드 초안`](guides/performance/draft.md) · [`성능 가이드`](guides/performance/index.html)
+- [`performance.md`](ai/performance.md)
+- [`api-mocking.md`](common-source/api-mocking.md) · [`api-mocking.html`](common-source/api-mocking.html)
+- [`network.md`](common-source/network.md) · [`network.html`](common-source/network.html)
 
 ### 로컬 LLM 실사용 평가와 모델 선택 원칙 추가
 
-- [`react_code_exports.html`](./guides/ui/react_code_exports.html)에 파라미터 수나 출시 시점보다 동일한 실제 업무 프롬프트의 결과를 비교하는 원칙을 추가했습니다.
+- [`react_code_exports.html`](guides/ui/react_code_exports.html)에 파라미터 수나 출시 시점보다 동일한 실제 업무 프롬프트의 결과를 비교하는 원칙을 추가했습니다.
 - Gemma4는 커뮤니케이션과 Soul 준수가 뛰어나며 문서 리뷰, 프로젝트 전체 맥락 파악과 범용 Agent 작업을 안정적으로 수행하는 모델로 평가했습니다.
 - Qwen 계열은 Cline 코딩 작업에는 강점이 있지만 Hermes에서는 과도한 Reasoning과 출력 불안정이 관찰되어, 코드 구현·수정·리팩터링 용도로만 사용하도록 범위를 명시했습니다.
 - 모델 평가는 고정된 종합 순위가 아니라 현재 환경의 업무별 관찰값이며 모델이나 실행 도구가 바뀌면 같은 테스트를 다시 수행합니다.
@@ -271,10 +286,10 @@
 - “신뢰하지 않는다”는 값의 사용 금지가 아니라 저장·전달 당시의 상태를 단정하지 않고 위험도에 맞게 확인한다는 뜻으로 정의했으며, Storage는 UI 설정과 권한·사용자 데이터의 검증 수준을 구분했습니다.
 - 보안 용어를 삭제하거나 지나치게 단순화하지 않고, XSS, Sanitizer, Tag·Attribute, URL Scheme, CSRF, CORS, Origin, CSP, Client Bundle, Source Map과 공급망 보안이 처음 나오는 위치에 한글 의미와 원어 설명을 추가했습니다.
 - 아직 정하지 않은 Sanitizer 도구와 HTML 허용 범위는 승인된 것처럼 표현하지 않고 미정 상태로 바로잡았습니다.
-- [`보안 가이드`](./guides/security/index.html)와 [`보안 가이드 초안`](./guides/security/draft.md)을 추가했습니다.
+- [`보안 가이드`](guides/security/index.html)와 [`보안 가이드 초안`](guides/security/draft.md)을 추가했습니다.
 - Client 신뢰 경계, XSS, URL·Redirect, 인증·권한, Cookie·CSRF·CORS, Secret, 저장소, 개인정보·로그, CSP, WebView Bridge와 공급망 기준을 정리했습니다.
-- AI용 요약인 [`security.md`](./ai/security.md)와 [`security.html`](./ai/security.html)을 추가했습니다.
-- 성장 과정에 [`13-frontend-security-and-privacy.html`](./guides/learning/ai-frontend-growth/13-frontend-security-and-privacy.html)을 연결했습니다.
+- AI용 요약인 [`security.md`](ai/security.md)와 [`security.html`](ai/security.html)을 추가했습니다.
+- 성장 과정에 [`13-frontend-security-and-privacy.html`](guides/learning/ai-frontend-growth/13-frontend-security-and-privacy.html)을 연결했습니다.
 - 인증 제공자, Cookie 또는 token 방식, CSRF 구현, CSP 값, 허용 Origin, 개인정보 보존 기간과 외부 Script 목록은 확정하지 않았습니다.
 
 ### AI 협업 Front-end 성장 과정 실무 기준 보강
@@ -287,9 +302,9 @@
 
 ### Front-end 공통 소스와 AI 작업 기준 정비
 
-- [API 요청 기반](./common-source/network.md)에 `HttpError`, 공통 `request`, 빈 본문·JSON 오류·취소 신호와 기능별 parser 경계를 정리했습니다.
-- [세션과 회원 경계](./common-source/session.md)에 로그인 확인 중·비로그인·로그인·확인 실패 구분과 사용자 전환 시 Cache 정리 기준을 추가했습니다.
-- [API Mock 도입 판단 기준](./common-source/api-mocking.md)은 Backend 준비 전 임시 API를 만드는 가이드가 아니라, 승인된 API 계약 이후 지연·오류 상태를 반복 검증할 도구의 선택 기준으로 최신화했습니다.
+- [API 요청 기반](common-source/network.md)에 `HttpError`, 공통 `request`, 빈 본문·JSON 오류·취소 신호와 기능별 parser 경계를 정리했습니다.
+- [세션과 회원 경계](common-source/session.md)에 로그인 확인 중·비로그인·로그인·확인 실패 구분과 사용자 전환 시 Cache 정리 기준을 추가했습니다.
+- [API Mock 도입 판단 기준](common-source/api-mocking.md)은 Backend 준비 전 임시 API를 만드는 가이드가 아니라, 승인된 API 계약 이후 지연·오류 상태를 반복 검증할 도구의 선택 기준으로 최신화했습니다.
 - 공통 소스 진입점·브리핑·카탈로그·테스트·통합 예시와 Front-End·Test 가이드의 설명을 같은 기준으로 연결했습니다.
 - 인증 방식, API origin·endpoint·응답·오류 계약, Query 정책, Native Bridge와 CI 범위는 확정하지 않았습니다.
 - 사람은 상세 가이드를 보고 AI는 `AGENTS.md`에서 시작해 현재 작업에 필요한 문서만 선택하도록 진입 경로를 정리했습니다.
