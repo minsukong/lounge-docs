@@ -1,11 +1,16 @@
-# Lounge Front-end 가이드
+# Lounge Front-end 개발 가이드와 업무 지침
 
-이 폴더는 실제 프로젝트에서 사용하는 모든 가이드를 관리하는 기준 위치입니다. 상세 HTML 가이드는 `guides/`, AI 작업별 요약은 `ai/`, 파일 단위 적용 기준은 `common-source/`, 공통 문서 자산은 `assets/`에 둡니다. 팀 운영 기준·작업 기록·공용 스킬·보조 스크립트는 `workflow/`에서 관리합니다.
+이 폴더는 개발 참고 문서와 실제 업무 지침을 관리합니다. **guides/는 기술·구현 방법과 기준을 참고하는 개발 가이드, workflow/는 협의·작업·검증·기록에 사용하는 업무 지침입니다.** 상세 HTML 가이드는 `guides/`, AI 작업별 요약은 `ai/`, 파일 단위 적용 기준은 `common-source/`, 공통 문서 자산은 `assets/`에 둡니다. 팀 운영 기준·작업 기록·공용 스킬·보조 스크립트는 `workflow/`에서 관리합니다.
 
-## 공통 가이드
+## 업무 지침
 
-- [가이드 검색](./search/index.html)
-- [더라운지 3.0 팀 공용 개발 워크플로](./guides/workflow/index.html) · [Markdown 원본](./guides/workflow/index.md) · [운영 기준](./workflow/README.md)
+- 사람이 시작할 곳: [더라운지 3.0 업무 지침 안내](./workflow/index.html) · [Markdown](./workflow/index.md)
+- AI가 시작할 곳: [AI 작업 진입](./workflow/AGENTS.md) — 요청별로 필요한 문서·섹션만 선택
+- 세부 기준과 사용법: [업무 운영 기준](./workflow/README.md) · [업무 지침 사용법](./workflow/usage-guide.md)
+
+## 개발 참고 가이드
+
+- [문서 검색](./search/index.html)
 - [Front-end 구축 가이드 브리핑](./guides/briefing/index.html) · [PC 발표용](./guides/briefing/presentation.html)
 - [html template](./templates/index.html)
 - [Front-End 저장소 구조 기준](./guides/architecture/index.html) · [GitLab Pages와 Confluence 운영](./guides/architecture/index.html#document-pages)
@@ -46,12 +51,13 @@
     ├── AGENTS.md               # 가이드 작성과 HTML 검증 규칙
     ├── index.html              # 전체 가이드 진입점
     ├── assets/                 # HTML 공통 스타일·스크립트·이미지
-    ├── guides/                 # 사람이 읽는 상세 HTML 가이드와 원본
+    ├── guides/                 # 분야별 상세 HTML 가이드와 원본
+    ├── workflow/               # 업무 지침·운영 기록·양식·스킬·스크립트
     ├── ai/                     # AI 작업별 핵심 요약
     └── common-source/          # 실제 코드 적용 조건과 파일 단위 구현 기준
 ```
 
-상세 가이드의 기준 원본은 `guides/`입니다. 구현 작업은 저장소 루트 `AGENTS.md`에서 시작해 필요한 `ai/` 요약을 읽고, 세부 배경이나 적용 예시가 필요할 때 `guides/` 또는 `common-source/`로 이동합니다.
+분야별 상세 가이드의 기준 원본은 `guides/`이며, 업무 지침과 운영 기록은 `workflow/`에 함께 둡니다. 구현 작업은 저장소 루트 `AGENTS.md`에서 시작해 필요한 `ai/` 요약을 읽고, 세부 배경이나 적용 예시가 필요할 때 `guides/` 또는 `common-source/`로 이동합니다.
 
 실제 애플리케이션 `.ts`, `.tsx`, CSS와 package 설정은 별도 저장소에서 관리합니다. 이 저장소 `front-end/`는 참고 골격이며, `docs/`에는 애플리케이션 소스를 복사하지 않습니다.
 

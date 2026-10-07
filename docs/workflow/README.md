@@ -1,10 +1,13 @@
-# 더라운지 3.0 개발 워크플로
+# 더라운지 3.0 업무 지침 — 운영 기준
 
-이 워크플로는 기획·IA를 검토 가능한 명세와 작은 작업으로 바꾸고, 실제 코드 저장소에서 구현·검증하는 기준입니다. 문서 저장소와 실제 코드 저장소를 구분합니다.
+이 업무 지침은 기획·IA를 검토 가능한 명세와 작은 작업으로 바꾸고, 실제 코드 저장소에서 구현·검증하는 기준입니다. 문서 저장소와 실제 코드 저장소를 구분합니다.
+
+AI는 [AI 작업 진입](AGENTS.md)에서 요청에 필요한 문서·섹션을 선택합니다. 이 문서 전체를 먼저 읽는 것은 필수가 아닙니다.
 
 ## 시작하기
 
-- 사람이 사용하는 상세 안내: [사용 가이드](usage-guide.md)
+- 전체 문서의 역할과 연결: [업무 지침 안내](index.md) · [HTML](index.html)
+- 실제 작업 순서와 요청 예시: [업무 지침 사용법](usage-guide.md)
 - AI에게 전달하는 단위: [작업 카드](task-card.md)
 - 화면 후보와 작업 상태: [진행 현황](progress.md)
 - IA 근거와 충돌: [IA 기준](ia-baseline.md), [자동 대조 결과](ia-audit.md), [원본 ID 목록](ia-inventory.csv)
@@ -24,11 +27,12 @@ lounge-docs/
 │   ├── common-source/                     ← 공통 소스 가이드
 │   ├── diagrams/                          ← Archify 다이어그램
 │   ├── guides/                            ← 상세 가이드 (app, web, testing 등)
-│   │   └── workflow/
-│   │       └── index.md                   ← 사람용 워크플로 가이드 (HTML 동봉)
 │   ├── search/                            ← 검색 인덱스
 │   ├── templates/
-│   └── workflow/                          ← ★ 운영 원본
+│   └── workflow/                          ← 안내·운영 원본 통합
+│       ├── index.md                       ← 문서별 역할과 연결
+│       ├── index.html                     ← 사람용 HTML 안내
+│       ├── guide.css                      ← 안내 전용 스타일
 │       ├── AGENTS.md                      ← 요청별 문서·스킬 매핑
 │       ├── README.md                      ← 이 문서: 공통 기준
 │       ├── usage-guide.md                 ← 상세 운영 예시
@@ -55,16 +59,15 @@ lounge-docs/
 └── work/                                  ← IA 원본·검토 자료 전용
     ├── AGENTS.md                          ← "운영 기준은 docs/workflow" 명시
     ├── 더라운지_IA FO_v0.2.xlsx/          ← IA HTML 원본 (수정하지 않음)
-    └── inspect/                           ← 프로젝트 현황 브리핑·검토
+    └── inspect_sb/                        ← 기획 검토 A/B·진행 안내
 ```
 
 ### 영역 구분 원칙
 
 | 위치 | 역할 | 비고 |
 |------|------|------|
-| `docs/workflow/` | 운영 원본: 기준·양식·카드·결정·IA 대조·스킬·스크립트 | AI와 사람이 함께 사용하는 단일 소스 |
-| `docs/guides/workflow/` | 사람이 읽는 서술형 가이드 | HTML 포함, 운영 원본을 대체하지 않음 |
-| `work/` | IA 원본 HTML, 업무 검토 브리핑 | 읽기 전용. 운영 기준·스크립트 없음 |
+| `docs/workflow/` | 사람용 안내·HTML과 운영 기준·양식·결정·IA 대조·스킬·스크립트 | 문서 연결은 index.md, 기준은 README.md, 사용 순서는 usage-guide.md |
+| `work/` | IA 원본 HTML, 기획 검토 A/B와 근거 | IA 원본은 읽기 전용. 검토 자료는 해당 지침과 요청에 따라 갱신 |
 | `front-end/` | 참고 골격 | 실제 제품 코드 저장소와 다름 |
 
 ### 스크립트 실행
@@ -95,7 +98,7 @@ python docs/workflow/scripts/export_skills.py --workspace "코드 저장소 경�
 ## 기능 처리 흐름
 
 ```text
-IA·기획·요청 확인
+IA·기획·요청 확인 (기획 리뷰 A/B가 있으면 RC와 근거 연결)
   → 필요한 질문·용어·결정 기록
   → 명세 작성 (여러 세션에 걸칠 때)
   → 작업 카드 분해 + 실제 차단 조건
@@ -164,4 +167,4 @@ GitHub 연동은 선택입니다. 현재는 로컬 Markdown을 기준으로 합�
 
 공용 원본은 docs/workflow/skills/에 있습니다. [스킬 안내](skills/AGENTS.md)에서 필요한 SKILL.md만 선택합니다. [문서 영역 안내](../AGENTS.md) → [workflow 안내](AGENTS.md) → 해당 문서·스킬의 계층으로 읽습니다. Cline·Claude Code·Codex 또는 다른 AI의 선택은 워크플로 기준을 바꾸지 않습니다.
 
-자동 스킬 기능은 선택 사항입니다. [도구 연결 안내](agent-adapters.md)에 도구별 발견 위치와 공용 내보내기를 분리했습니다. 사용법과 Matt 방식의 대응은 [사용 가이드](usage-guide.md)를 확인합니다.
+자동 스킬 기능은 선택 사항입니다. [도구 연결 안내](agent-adapters.md)에 도구별 발견 위치와 공용 내보내기를 분리했습니다. 사용법과 Matt 방식의 대응은 [업무 지침 사용법](usage-guide.md)를 확인합니다.

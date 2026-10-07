@@ -66,6 +66,8 @@ const createRecords = (html, relativePath) => {
 };
 
 const htmlFiles = await collectHtmlFiles(guidesRoot);
+// 워크플로 안내는 운영 문서와 같은 폴더에서 관리합니다.
+htmlFiles.push(path.join(docsRoot, "workflow", "index.html"));
 
 const records = [];
 for (const htmlPath of htmlFiles) {

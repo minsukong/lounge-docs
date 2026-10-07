@@ -178,4 +178,4 @@ DEC-002~005는 인증·회원 정책·주문/결제·Bridge 계약입니다. DEC
 
 ## 운영 원본 위치 통합
 
-현재 기준은 docs/workflow/입니다. 공용 스킬은 skills/, 보조 도구는 scripts/에서 관리합니다. 사람용 설명은 docs/guides/workflow/에 유지하며 IA 원본은 work/에 보존합니다. 기존 코드 workspace의 내보내기본은 같은 명령으로 미리보기 후 갱신할 수 있습니다.
+현재 기준은 docs/workflow/입니다. 공용 스킬은 skills/, 보조 도구는 scripts/에서 관리합니다. 사람용 설명·HTML은 같은 폴더의 index.md·index.html에 통합하며 IA 원본은 work/에 보존합니다. 기존 코드 workspace의 내보내기본은 같은 명령으로 미리보기 후 갱신할 수 있습니다.

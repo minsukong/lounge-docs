@@ -1,30 +1,55 @@
-# 더라운지 3.0 팀 공용 개발 워크플로
+# 더라운지 3.0 업무 지침 안내
 
-## 1. 이 문서를 읽는 방법
+## 1. 업무 지침 빠른 시작
 
-이 가이드는 사람이 공용 개발 기준을 이해하고 실제 업무에 쓰기 위한 설명입니다. 운영 기준은 docs/workflow의 원본입니다. IA·미완성 기획을 질문과 결정 → 명세 → 카드 → Ready → 구현·검증·리뷰 → 인수인계로 연결합니다. Cline·Claude Code·Codex·다른 AI 중 도구는 팀원이 선택합니다. Strata와 Qwen Flash는 개인 환경 사례입니다.
+이 문서는 더라운지 3.0의 실제 업무를 진행하는 팀 공용 지침입니다. 기획 확인·Backend 및 앱 협의·작업 분해·착수 판단·구현·검증·이력을 연결합니다. 업무 지침과 기록은 docs/workflow에서 관리하고, 기술·구현 방법을 참고할 때는 docs/guides를 사용합니다.
+
+### 사람은 여기서 시작
+
+- 문서별 역할과 연결은 이 안내에서 확인합니다.
+- 실제 작업 순서와 요청 예시는 [업무 지침 사용법](usage-guide.md), 착수·완료의 세부 기준은 [업무 운영 기준](README.md)의 해당 항목을 봅니다.
+
+### AI는 요청에 필요한 부분부터
+
+[AI 작업 진입](AGENTS.md)의 최소 실행 기준과 요청별 표에서 경로를 선택합니다. 이 안내·사용법·전체 양식을 모두 읽는 것은 작업의 선행 조건이 아닙니다. 적용 지침과 선택한 스킬의 필수 읽기를 지키고, 이번 요청에 필요한 근거만 연결합니다.
+
+### 문서 간 연결
+
+기획 리뷰 A/B → 필요한 결정·계약 협의 → 기능 명세(필요할 때) → 실제 작업 카드 → 진행 현황으로 연결합니다. 모든 자료를 복사하지 않고 기존 ID와 근거 링크를 이어갑니다.
+
+| 문서 | 연결할 기록 |
+| --- | --- |
+| [기획 리뷰 A/B](../../work/inspect_sb/README.md) | A에 관찰·질문과 RC를 보존하고, B에 웹·앱 예상 영향을 연결한다. 개발 착수나 완료를 자동 승인하지 않는다. |
+| [결정 기록](decisions.md) | 실제 협의 대상으로 정한 질문을 DEC로 관리한다. 출처 RC를 연결하고 답변·결정 근거를 남긴다. |
+| [API·Bridge 계약 검토](contract-review.md) | 관련 RC·DEC·명세·카드를 연결하고 Backend·앱 전달 계약을 확인한다. 검토 체크와 계약 합의는 구분한다. |
+| [기능 명세 양식](spec-template.md) | 여러 카드에 걸친 기능의 합의된 흐름·정책·계약을 묶고, 남은 결정 ID와 연결한다. |
+| [작업 카드 양식](task-card.md) | 실제 카드에 명세·RC·DEC·IA·계약 근거와 허용 범위·Ready·검증을 기록한다. |
+| [진행 현황](progress.md) | 실제 카드의 Ready·진행 상태·차단 조건만 요약한다. 상세 근거는 카드에 두며 IA 후보를 자동으로 작업으로 바꾸지 않는다. |
+| [IA 기준](ia-baseline.md) | IA 원본 → ia-inventory.csv → ia-audit.md로 출처를 추적한다. IA ID와 RC·DEC·카드 ID를 구분한다. |
+
+현재 Backend 협의가 충분히 이루어지지 않은 상태이므로 기획 확인과 연동 계약 확인을 구분합니다. Figma 조회·토큰·OLD 제외 기준은 기획 리뷰 폴더의 AGENTS.md를 따릅니다. 질문 해소와 실제 구현·통합 완료는 별도로 기록합니다.
 
 ## 2. 계층 구조와 생성 이유
 
 루트에 상세 내용을 모두 복사하면 규칙이 중복되고 달라지기 쉽습니다. 공통 규칙은 루트, 문서 기준은 docs, 운영 절차는 docs/workflow, 실행 지침은 skills에 둡니다. 자동 계층 읽기를 지원하지 않는 AI에는 필요한 경로를 직접 알려줍니다.
 
-### [AGENTS.md](../../../AGENTS.md)
+### [AGENTS.md](../../AGENTS.md)
 
 저장소 공통 규칙과 상세 영역의 진입 경로. 모든 작업에서 먼저 확인합니다.
 
-### [docs/AGENTS.md](../../AGENTS.md)
+### [docs/AGENTS.md](../AGENTS.md)
 
 문서 편집 기준과 workflow 영역 안내. 문서 작업에서 먼저 확인합니다.
 
-### [docs/workflow/AGENTS.md](../../workflow/AGENTS.md)
+### [docs/workflow/AGENTS.md](AGENTS.md)
 
 질문별로 읽을 문서와 사용할 스킬을 연결합니다. 기록 책임도 안내합니다.
 
-### [docs/workflow/skills/AGENTS.md](../../workflow/skills/AGENTS.md)
+### [docs/workflow/skills/AGENTS.md](skills/AGENTS.md)
 
 스킬 선택과 공용 원본 편집 기준. 스킬 추가·수정 시 읽습니다.
 
-### [docs/workflow/scripts/AGENTS.md](../../workflow/scripts/AGENTS.md)
+### [docs/workflow/scripts/AGENTS.md](scripts/AGENTS.md)
 
 검사·IA 대조·내보내기의 실행 범위를 설명합니다. 실행 전에 읽습니다.
 
@@ -32,19 +57,19 @@
 
 기준·사용법·도구 연결·적용 이력을 구분하여 각 문서가 한 가지 책임을 갖게 했습니다.
 
-### [docs/workflow/README.md](../../workflow/README.md)
+### [docs/workflow/README.md](README.md)
 
 팀 공통 운영 기준. 흐름·Phase·Ready·진행·계약·검증을 정의합니다. 착수와 완료 판단 시 읽습니다.
 
-### [docs/workflow/usage-guide.md](../../workflow/usage-guide.md)
+### [docs/workflow/usage-guide.md](usage-guide.md)
 
 새 팀원의 실제 사용 안내. 읽는 순서·작업 위치·요청 예시를 설명합니다. 처음 참여할 때 읽습니다.
 
-### [docs/workflow/agent-adapters.md](../../workflow/agent-adapters.md)
+### [docs/workflow/agent-adapters.md](agent-adapters.md)
 
 AI 도구별 선택적 연결 안내. 직접 파일 읽기가 기본이며 스킬 내보내기는 선택 사항입니다.
 
-### [docs/workflow/implementation-report.md](../../workflow/implementation-report.md)
+### [docs/workflow/implementation-report.md](implementation-report.md)
 
 생성·변경 이유와 적용·검증 이력. 초기 Cline 구성부터 도구 중립 전환과 전용 폴더 제거까지 기록합니다. 과거 검사 수치는 당시 결과입니다.
 
@@ -52,23 +77,23 @@ AI 도구별 선택적 연결 안내. 직접 파일 읽기가 기본이며 스�
 
 템플릿은 양식이며 실제 업무 기록과 구분합니다. TASK-모듈-번호와 IA 화면 ID는 서로 다른 식별자입니다. 하나의 화면이 여러 카드로 나뉠 수 있습니다.
 
-### [docs/workflow/task-card.md](../../workflow/task-card.md)
+### [docs/workflow/task-card.md](task-card.md)
 
 생성 이유: 한 작업의 범위와 완료 조건을 검토 가능하게 하기 위해서입니다. 내용: 근거·담당·실제 코드 위치·Ready·차단 조건·영향·완료 조건·검증·재개 지점. 사용: 필요할 때 tasks/에 실제 카드를 만들고 작업자가 갱신합니다.
 
-### [docs/workflow/spec-template.md](../../workflow/spec-template.md)
+### [docs/workflow/spec-template.md](spec-template.md)
 
 생성 이유: 여러 카드에 걸친 큰 기능의 합의를 묶기 위해서입니다. 내용: 흐름·정책·계약·책임·검증·연결 카드. 사용: 필요할 때 specs/에 실제 명세를 만듭니다. 작은 수정은 생략합니다.
 
-### [docs/workflow/decisions.md](../../workflow/decisions.md)
+### [docs/workflow/decisions.md](decisions.md)
 
 생성 이유: 미정 질문을 대화 밖에서 담당과 근거로 추적하기 위해서입니다. 내용: TBD·Proposed·Confirmed·Rejected·Superseded. 사용: 결정이 생길 때 갱신하며 AI 제안만으로 Confirmed로 바꾸지 않습니다.
 
-### [docs/workflow/contract-review.md](../../workflow/contract-review.md)
+### [docs/workflow/contract-review.md](contract-review.md)
 
 생성 이유: FE·BE·Native 협의 누락을 드러내기 위해서입니다. 내용: API 필드·인증·오류·재시도·중복 요청·캐시와 Bridge 메시지·준비·취소·권한·뒤로가기·기기 검증. 사용: 계약 협의와 변경 시 활용합니다. 체크 완료가 계약 승인은 아닙니다.
 
-### [docs/workflow/progress.md](../../workflow/progress.md)
+### [docs/workflow/progress.md](progress.md)
 
 생성 이유: 팀의 현재 작업과 다음 행동을 보여주기 위해서입니다. 실제 카드 요약과 기존 IA 후보를 구분합니다. 시작·차단·리뷰·완료 시 갱신합니다. 기존 135개 후보는 승인된 개발량이나 완료 목록이 아닙니다.
 
@@ -76,15 +101,15 @@ AI 도구별 선택적 연결 안내. 직접 파일 읽기가 기본이며 스�
 
 IA는 화면과 메뉴의 뼈대이며 확정 정책을 대신하지 않습니다. 더라운지_IA FO_v0.2.xlsx는 HTML 내보내기 폴더입니다. 원본은 보존합니다. 현재 587개 추출 레코드는 작업 수가 아니며 병합 셀 의미를 자동 추론하지 않습니다.
 
-### [docs/workflow/ia-baseline.md](../../workflow/ia-baseline.md)
+### [docs/workflow/ia-baseline.md](ia-baseline.md)
 
 IA 활용 범위·원본·충돌 처리·추출 제한을 설명합니다. 기능 선정 전에 읽습니다.
 
-### [docs/workflow/ia-inventory.csv](../../workflow/ia-inventory.csv)
+### [docs/workflow/ia-inventory.csv](ia-inventory.csv)
 
 원본 파일·행·화면 ID·문맥·해시를 기록한 생성 자료입니다. 검색과 추적에 사용하며 직접 고치지 않습니다.
 
-### [docs/workflow/ia-audit.md](../../workflow/ia-audit.md)
+### [docs/workflow/ia-audit.md](ia-audit.md)
 
 파일별 ID와 progress 후보의 대조 자료입니다. ID 존재가 이름·담당·정책의 정확성을 보장하지 않습니다.
 
@@ -94,39 +119,39 @@ IA 활용 범위·원본·충돌 처리·추출 제한을 설명합니다. 기�
 
 Matt 방식의 질문·명세·작업 분해·구현·리뷰를 프로젝트 범위에 맞게 적용하고 Ready·API·Bridge·영향 분석을 보완했습니다. 스킬은 실행 지침이며 승인자나 자동 실행 프로그램이 아닙니다. 매번 전부 실행할 필요는 없습니다.
 
-### [docs/workflow/skills/lounge-grill/SKILL.md](../../workflow/skills/lounge-grill/SKILL.md)
+### [docs/workflow/skills/lounge-grill/SKILL.md](skills/lounge-grill/SKILL.md)
 
 기획이 모호할 때 질문·용어·결정 후보를 정리합니다. grill-with-docs와 domain-modeling의 역할입니다.
 
-### [docs/workflow/skills/lounge-spec/SKILL.md](../../workflow/skills/lounge-spec/SKILL.md)
+### [docs/workflow/skills/lounge-spec/SKILL.md](skills/lounge-spec/SKILL.md)
 
 큰 기능의 합의된 흐름·정책을 개발 가능한 명세로 묶습니다. to-spec의 역할입니다.
 
-### [docs/workflow/skills/lounge-tickets/SKILL.md](../../workflow/skills/lounge-tickets/SKILL.md)
+### [docs/workflow/skills/lounge-tickets/SKILL.md](skills/lounge-tickets/SKILL.md)
 
 검증 가능한 작은 작업과 실제 선행 조건·담당을 나눕니다. to-tickets의 역할입니다.
 
-### [docs/workflow/skills/lounge-ready/SKILL.md](../../workflow/skills/lounge-ready/SKILL.md)
+### [docs/workflow/skills/lounge-ready/SKILL.md](skills/lounge-ready/SKILL.md)
 
 이번 카드의 근거·계약·차단 조건을 확인하고 착수 범위를 판단합니다.
 
-### [docs/workflow/skills/lounge-api-review/SKILL.md](../../workflow/skills/lounge-api-review/SKILL.md)
+### [docs/workflow/skills/lounge-api-review/SKILL.md](skills/lounge-api-review/SKILL.md)
 
 API 필드·인증·오류·캐시·중복 요청 등 계약 누락을 검토합니다.
 
-### [docs/workflow/skills/lounge-bridge-review/SKILL.md](../../workflow/skills/lounge-bridge-review/SKILL.md)
+### [docs/workflow/skills/lounge-bridge-review/SKILL.md](skills/lounge-bridge-review/SKILL.md)
 
 웹뷰·Flutter 메시지·책임·생명주기·권한·플랫폼별 검증을 확인합니다.
 
-### [docs/workflow/skills/lounge-impact/SKILL.md](../../workflow/skills/lounge-impact/SKILL.md)
+### [docs/workflow/skills/lounge-impact/SKILL.md](skills/lounge-impact/SKILL.md)
 
 변경이 화면·상태·API·Bridge·플랫폼과 검증에 미치는 영향을 찾습니다.
 
-### [docs/workflow/skills/lounge-implement/SKILL.md](../../workflow/skills/lounge-implement/SKILL.md)
+### [docs/workflow/skills/lounge-implement/SKILL.md](skills/lounge-implement/SKILL.md)
 
 Ready가 확인된 카드 범위를 실제 코드 저장소에서 구현·검증하고 재개 기록을 남깁니다. 필요한 행동 테스트에 TDD를 적용합니다.
 
-### [docs/workflow/skills/lounge-review/SKILL.md](../../workflow/skills/lounge-review/SKILL.md)
+### [docs/workflow/skills/lounge-review/SKILL.md](skills/lounge-review/SKILL.md)
 
 저장소 규칙과 카드·명세 충족을 각각 검토합니다. 리뷰만 요청하면 임의 수정하지 않습니다.
 
@@ -162,15 +187,15 @@ AGENTS.md → docs/AGENTS.md → docs/workflow/AGENTS.md를 읽어줘.
 
 스크립트는 기계적 검사를 돕습니다. 정책의 정확성이나 AI가 실제로 지침을 따랐는지를 증명하지는 않습니다.
 
-### [docs/workflow/scripts/refresh_ia.py](../../workflow/scripts/refresh_ia.py)
+### [docs/workflow/scripts/refresh_ia.py](scripts/refresh_ia.py)
 
 원본 HTML에서 ID·근거를 추출해 inventory와 audit를 재생성합니다. IA 변경 시 실행하며 원본은 수정하지 않습니다.
 
-### [docs/workflow/scripts/validate_workflow.py](../../workflow/scripts/validate_workflow.py)
+### [docs/workflow/scripts/validate_workflow.py](scripts/validate_workflow.py)
 
 대상 Markdown 링크·스킬 메타데이터·인코딩·IA 근거·해시를 검사합니다. 공용 문서 변경 후 실행합니다.
 
-### [docs/workflow/scripts/export_skills.py](../../workflow/scripts/export_skills.py)
+### [docs/workflow/scripts/export_skills.py](scripts/export_skills.py)
 
 선택한 기존 workspace에 스킬을 연결합니다. 기본 미리보기, --apply가 실제 내보내기입니다. 사용자 파일 충돌을 보호합니다.
 

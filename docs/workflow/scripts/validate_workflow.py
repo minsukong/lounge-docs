@@ -12,7 +12,7 @@ def validate():
     errors = []
     files = list(WF.glob("*.md"))
     files += list((WF / "skills").glob("lounge-*/SKILL.md"))
-    files += [ROOT / "AGENTS.md", ROOT / "docs/AGENTS.md", ROOT / "work/AGENTS.md", WF / "skills/AGENTS.md", ROOT / "docs/guides/workflow/index.md", WF / "scripts/AGENTS.md"]
+    files += [ROOT / "AGENTS.md", ROOT / "docs/AGENTS.md", ROOT / "work/AGENTS.md", WF / "skills/AGENTS.md", WF / "scripts/AGENTS.md"]
     skills = list((WF / "skills").glob("lounge-*/SKILL.md"))
     if len(skills) != 9:
         errors.append("Expected nine canonical skills")

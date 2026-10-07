@@ -1,12 +1,12 @@
 # Lounge Front-end
 
-Front-end 애플리케이션의 구현 가이드·문서와 참고용 골격을 한 저장소에서 관리합니다. 실제 Front-end 소스·빌드·배포는 별도 저장소에서 진행하며, 이 저장소 `front-end/`는 참고 골격입니다. 향후 반응형 웹(브랜딩 사이트, 결제, 회원)까지 이 폴더에 포함됩니다.
+Front-end 개발 가이드·팀 업무 지침과 참고용 골격을 한 저장소에서 관리합니다. 실제 Front-end 소스·빌드·배포는 별도 저장소에서 진행하며, 이 저장소 `front-end/`는 참고 골격입니다. 향후 반응형 웹(브랜딩 사이트, 결제, 회원)까지 이 폴더에 포함됩니다.
 
 ## 시작 위치
 
 - 실제 애플리케이션: [`front-end`](./front-end/README.md)
-- 전체 가이드: [`docs/index.html`](./docs/index.html)
-- 가이드 목록: [`docs/README.md`](./docs/README.md)
+- 팀 업무 지침: [업무 지침 안내](./docs/workflow/index.html) · [AI 작업 진입](./docs/workflow/AGENTS.md)
+- 개발 가이드·업무 지침 목록: [`docs/index.html`](./docs/index.html) · [`docs/README.md`](./docs/README.md)
 - AI 구현 지침: [`AGENTS.md`](./AGENTS.md)
 - 문서 작성 지침: [`docs/AGENTS.md`](./docs/AGENTS.md)
 
@@ -37,7 +37,8 @@ Front-end 애플리케이션의 구현 가이드·문서와 참고용 골격을 
     ├── assets/
     ├── search/
     ├── templates/
-    ├── guides/
+    ├── guides/                  # 개발 방법·기준 참고
+    ├── workflow/                # 실제 업무 절차·기록·AI 작업 지침
     ├── ai/
     └── common-source/
 ```
