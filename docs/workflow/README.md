@@ -58,8 +58,7 @@ lounge-docs/
 ├── tokens/                                ← design tokens
 └── work/                                  ← IA 원본·검토 자료 전용
     ├── AGENTS.md                          ← "운영 기준은 docs/workflow" 명시
-    ├── 더라운지_IA FO_v0.2.xlsx/          ← IA HTML 원본 (수정하지 않음)
-    └── inspect_sb/                        ← 기획 검토 A/B·진행 안내
+    └── 더라운지_IA FO_v0.2.xlsx/          ← IA HTML 원본 (수정하지 않음)
 ```
 
 ### 영역 구분 원칙
@@ -67,7 +66,7 @@ lounge-docs/
 | 위치 | 역할 | 비고 |
 |------|------|------|
 | `docs/workflow/` | 사람용 안내·HTML과 운영 기준·양식·결정·IA 대조·스킬·스크립트 | 문서 연결은 index.md, 기준은 README.md, 사용 순서는 usage-guide.md |
-| `work/` | IA 원본 HTML, 기획 검토 A/B와 근거 | IA 원본은 읽기 전용. 검토 자료는 해당 지침과 요청에 따라 갱신 |
+| `work/더라운지_IA FO_v0.2.xlsx/` | IA 원본 HTML | 읽기 전용으로 참조 |
 | `front-end/` | 참고 골격 | 실제 제품 코드 저장소와 다름 |
 
 ### 스크립트 실행
@@ -98,7 +97,7 @@ python docs/workflow/scripts/export_skills.py --workspace "코드 저장소 경�
 ## 기능 처리 흐름
 
 ```text
-IA·기획·요청 확인 (기획 리뷰 A/B가 있으면 RC와 근거 연결)
+IA·기획·요청 확인
   → 필요한 질문·용어·결정 기록
   → 명세 작성 (여러 세션에 걸칠 때)
   → 작업 카드 분해 + 실제 차단 조건

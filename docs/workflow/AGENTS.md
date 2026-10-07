@@ -15,7 +15,6 @@
 
 | 이번 요청 | 먼저 읽을 문서·범위 | 사용할 스킬·추가 기준 |
 | --- | --- | --- |
-| 기획 리뷰 A/B 작성·검수 | [기획 검토 지침](../../work/inspect_sb/AGENTS.md) + 지정 A/B·Figma 근거 | 해당 폴더의 REST API·토큰·OLD 제외·Backend 협의 기준 적용. 구현 절차로 확대하지 않음 |
 | 요구사항·정책 질문 정리 | [결정 기록](decisions.md)의 관련 항목 + 지정 IA·기획 | [lounge-grill](skills/lounge-grill/SKILL.md) |
 | 여러 카드의 기능 명세 | [명세 양식](spec-template.md) + 관련 합의·결정 근거 | [lounge-spec](skills/lounge-spec/SKILL.md) |
 | 작업 분해·담당·의존성 | [작업 카드 양식](task-card.md) + 관련 명세 | [lounge-tickets](skills/lounge-tickets/SKILL.md) |
