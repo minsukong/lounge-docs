@@ -10,8 +10,8 @@
 | 파일 | 기준 역할 | 주의 |
 | --- | --- | --- |
 | 01.FO(MO_WEB)_IA.html | 하이브리드 앱 WebView 후보 | MO ID를 원본 그대로 사용 |
-| 01.FO_APP_IA.html | 앱 Native 책임과 WebView 경계 참고 | 제목은 Native 영역 정의지만 View에는 Native·webview가 혼재. ID는 FO |
-| 01.FO_WEB_IA.html | 반응형 홈페이지 후보 | FO ID를 PW로 자동 변환하지 않음 |
+| 01.FO_APP_IA.html | 앱 Native 책임과 WebView 경계 참고 | 제목은 Native 영역 정의지만 View에는 Native·webview가 혼재. ID는 FO. MO 목록과 같은 기능을 더 잘게 쪼갠 절단면이며 `FO-PRD`(상품), `FO-AIR`(공항안내), `FO-COU`(쿠폰북), `FO-SCM-C04*`~`C13*`(사용처 유형별 상세)처럼 MO 자료에 없는 화면군을 포함 |
+| 01.FO_WEB_IA.html | 반응형 홈페이지 후보 | FO ID를 PW로 자동 변환하지 않음. APP 자료와 화면군이 겹치나 `FO-PRD`가 없고 `FO-AIR`·`FO-CMM` 구성이 다름 |
 | 01.FO_판매채널_IA.html | 판매채널 후보 | 추가 정보 필요. FO ID를 다른 FO 화면과 구별 |
 | 03.PO_IA.html | 파트너오피스 후보 | 담당·과업 포함 여부 TBD |
 | 04.OO_IA.html | 현장 운영 후보 | HTML은 존재. FE 담당·범위 TBD |
@@ -28,6 +28,12 @@
 원본 HTML은 변경하지 않습니다. ID 개수는 텍스트에서 찾은 고유 ID의 수이며, 페이지·레이어·링크·Native/WebView·중복/취소 후보를 포함할 수 있어 개발량이나 출시 화면 수가 아닙니다.
 
 ia-audit는 progress의 정확한 ID가 해당 플랫폼 자료에 존재하는지 기계적으로 대조합니다. ID가 존재해도 화면명·기능 설명·구현 담당 일치를 보증하지 않습니다. 와일드카드 ID는 대조하지 않습니다.
+
+## 절단면이 다른 자료
+
+IA는 같은 화면을 서로 다른 세부 수준으로 적은 자료가 있습니다. `01.FO(MO_WEB)_IA.html`은 화면·메뉴 중심이고, `01.FO_APP_IA.html`과 `01.FO_WEB_IA.html`은 같은 기능을 사용자 흐름별로 잘게 쪼개 담당자와 View까지 적습니다. 그래서 MO 목록에 행이 없다고 해서 그 기능이 없는 것이 아니고, 두 자료의 행 수가 더해져 개발량이 늘지도 않습니다.
+
+progress는 MO·판매채널·PO·OO는 개별 행으로, APP·WEB은 화면군 요약으로 다룹니다. 화면군 요약을 개별 행으로 올리기 전에 원본 행의 화면명·담당·승인 여부를 확인하고, 같은 화면의 다른 표현인지 별개 화면인지 DEC-008로 정리합니다.
 
 ## 충돌 처리
 
