@@ -19,3 +19,9 @@ description: Ready가 확인된 더라운지 작업 카드 하나를 실제 저�
 5. diff를 규칙 적합성과 카드 명세 적합성으로 검토한다. 검증 실패·잔여 차단을 Done에 숨기지 않는다.
 6. 카드에 변경·검증·미완료·다음 행동을, progress 작업 대시보드에 요약을 기록한다.
 구현 요청만으로 commit·push·Issue/PR 게시·merge·배포를 실행하지 않는다. 현재 카드의 결과와 전체 기능의 출시 상태를 구분한다.
+
+## 출처와 적용 의도
+
+[implement](https://github.com/mattpocock/skills/blob/main/skills/engineering/implement/SKILL.md) · [tdd](https://github.com/mattpocock/skills/blob/main/skills/engineering/tdd/SKILL.md)의 역할을 참고해 더라운지에 맞게 재작성한 스킬이다. 명세·티켓 범위를 구현하고 관찰 가능한 행동을 테스트한 뒤 리뷰한다. Ready와 실제 코드 위치를 확인한다. 필요한 행동 테스트, Storybook·앱 build와 미검증 환경·재개 기록을 연결한다. commit은 자동 수행하지 않는다.
+
+[출처·대응·변경 이유 안내](../../index.md#6-공용-스킬-9개-선택-기준)는 참고 자료다. 원본 번들 설치·자동 갱신을 전제로 하지 않으며, 실행 기준은 이 스킬과 적용 지침·카드다.

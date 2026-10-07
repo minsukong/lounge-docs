@@ -17,3 +17,9 @@ description: 기획·IA의 애매한 요구사항을 질문과 결정 기록으�
 4. 사용자 답이 어느 범위를 결정하고 어떤 BE·Native·운영 협의가 남는지 구분한다.
 5. 문서 정리 요청이 있으면 docs/workflow/decisions.md에 질문·책임자·근거·적용 범위·해소 조건을 기록한다. 합의된 용어만 용어집에, 대안의 이유가 필요한 큰 결정만 ADR에 남긴다.
 결과는 확인된 사실 / 결정된 내용 / 남은 질문 / 시작 가능한 부분으로 보고한다. 질문을 정리했다는 이유로 실제 구현을 시작하지 않는다.
+
+## 출처와 적용 의도
+
+[grill-with-docs](https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md) · [domain-modeling](https://github.com/mattpocock/skills/blob/main/skills/engineering/domain-modeling/SKILL.md)의 역할을 참고해 더라운지에 맞게 재작성한 스킬이다. 질문으로 요구와 용어를 구체화하고 결정 이유를 남긴다. IA 파일·행·ID, 정책 결정자와 BE·Native 협의 범위를 연결한다. 합의된 용어와 필요한 큰 결정만 기록한다.
+
+[출처·대응·변경 이유 안내](../../index.md#6-공용-스킬-9개-선택-기준)는 참고 자료다. 원본 번들 설치·자동 갱신을 전제로 하지 않으며, 실행 기준은 이 스킬과 적용 지침·카드다.

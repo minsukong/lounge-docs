@@ -18,3 +18,9 @@ docs/workflow/task-card.md와 명세를 읽는다.
 4. 하나의 작은 맥락에서 완료할 크기로 분해하고 실제 책임자를 기록한다. IA 화면 ID와 고유 작업 ID를 구분한다.
 5. 분해 요청이면 카드 문서를 작성할 수 있다. 착수 Ready는 별도 근거로 판단한다. 명세가 있으니 모두 Ready라고 하지 않는다.
 결과에 카드별 결과·Blocked by·담당·Ready와 착수 가능한 후보를 보고한다. 외부 tracker 게시와 구현은 사용자의 요청 범위에서만 수행한다.
+
+## 출처와 적용 의도
+
+[to-tickets](https://github.com/mattpocock/skills/blob/main/skills/engineering/to-tickets/SKILL.md)의 역할을 참고해 더라운지에 맞게 재작성한 스킬이다. 검수 가능한 작은 결과와 실제 blocking dependency를 기준으로 작업을 나눈다. FE·BE·Native 책임을 연결하고, 계약 미정 시 독립 UI와 후속 통합을 별도 카드로 구분한다. Ready는 따로 판단한다.
+
+[출처·대응·변경 이유 안내](../../index.md#6-공용-스킬-9개-선택-기준)는 참고 자료다. 원본 번들 설치·자동 갱신을 전제로 하지 않으며, 실행 기준은 이 스킬과 적용 지침·카드다.

@@ -116,7 +116,50 @@ IA 활용 범위·원본·충돌 처리·추출 제한을 설명합니다. 기�
 
 ## 6. 공용 스킬 9개: 선택 기준
 
-Matt 방식의 질문·명세·작업 분해·구현·리뷰를 프로젝트 범위에 맞게 적용하고 Ready·API·Bridge·영향 분석을 보완했습니다. 스킬은 실행 지침이며 승인자나 자동 실행 프로그램이 아닙니다. 매번 전부 실행할 필요는 없습니다.
+출처는 [Matt Pocock의 skills 저장소](https://github.com/mattpocock/skills)입니다. 원본 README는 작은 지침을 필요에 따라 조합하고 프로젝트에 맞게 수정하는 방향을 설명합니다. 더라운지는 이 방향과 일부 스킬의 역할을 참고해 `lounge-*` 아홉 개를 재작성했습니다. Matt 원본 번들 설치본이나 이름만 바꾼 동일 파일이 아니며, 공식 호환·검증을 받은 구성이라는 뜻도 아닙니다.
+
+도입 의도는 AI가 기획의 빈칸을 추측한 채 구현하거나, 문서 작성·UI 완료를 계약 합의·기능 통합 완료로 오인하는 일을 줄이는 것입니다. 필요한 시점에 질문 → 명세 → 작업 분해 → 착수 판단 → 구현 → 리뷰를 연결하고, 남은 계약과 다음 행동을 사람이 추적하도록 합니다. 작은 수정에 모든 단계와 스킬을 강제하는 목적은 아닙니다.
+
+원본 출처와 아래 대응 관계는 기존 [적용 보고서](implementation-report.md)의 근거 링크와 현재 공개 원본, 로컬 스킬을 대조한 설명입니다. 최초 참고 시점의 upstream commit·원문 스냅샷은 기록되어 있지 않아 당시 버전의 완전한 재현은 확인할 수 없습니다. `main` 링크는 변경될 수 있으며, 이 저장소가 원본의 최신 변경을 자동으로 반영하지도 않습니다.
+
+### 원본과 프로젝트 스킬 대응
+
+| 프로젝트 스킬 | 참고한 Matt 원본 | 유지한 의도 | 프로젝트 보완과 이유 |
+| --- | --- | --- | --- |
+| [lounge-grill](skills/lounge-grill/SKILL.md) | [grill-with-docs](https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md) · [domain-modeling](https://github.com/mattpocock/skills/blob/main/skills/engineering/domain-modeling/SKILL.md) | 질문으로 요구와 용어를 구체화하고 결정 이유를 남긴다. | IA 파일·행·ID, 정책 결정자와 BE·Native 협의 범위를 연결한다. 합의된 용어와 필요한 큰 결정만 기록한다. 미완성 기획을 AI가 임의 정책으로 채우는 일을 줄이기 위해. |
+| [lounge-spec](skills/lounge-spec/SKILL.md) | [to-spec](https://github.com/mattpocock/skills/blob/main/skills/engineering/to-spec/SKILL.md) | 이미 논의한 사용자 목표·범위·구현 및 검증 결정을 명세로 정리한다. | 프로젝트 명세 양식과 로컬 기록을 사용한다. 미정 계약은 TBD로 남기며 명세 작성만으로 Ready·게시·구현을 부여하지 않는다. 문서가 만들어졌다는 사실과 계약 합의·착수 가능 여부를 구분하기 위해. |
+| [lounge-tickets](skills/lounge-tickets/SKILL.md) | [to-tickets](https://github.com/mattpocock/skills/blob/main/skills/engineering/to-tickets/SKILL.md) | 검수 가능한 작은 결과와 실제 blocking dependency를 기준으로 작업을 나눈다. | FE·BE·Native 책임을 연결하고, 계약 미정 시 독립 UI와 후속 통합을 별도 카드로 구분한다. Ready는 따로 판단한다. FE가 타 팀의 구현과 계약을 대신 확정하지 않으면서 가능한 범위를 진행하기 위해. |
+| [lounge-implement](skills/lounge-implement/SKILL.md) | [implement](https://github.com/mattpocock/skills/blob/main/skills/engineering/implement/SKILL.md) · [tdd](https://github.com/mattpocock/skills/blob/main/skills/engineering/tdd/SKILL.md) | 명세·티켓 범위를 구현하고 관찰 가능한 행동을 테스트한 뒤 리뷰한다. | Ready와 실제 코드 위치를 확인한다. 필요한 행동 테스트, Storybook·앱 build와 미검증 환경·재개 기록을 연결한다. commit은 자동 수행하지 않는다. 참고 골격을 제품 코드로 오인하거나 UI 완료를 전체 기능 완료로 처리하지 않기 위해. |
+| [lounge-review](skills/lounge-review/SKILL.md) | [code-review](https://github.com/mattpocock/skills/blob/main/skills/engineering/code-review/SKILL.md) | 저장소 규칙 적합성과 요청 명세 충족을 두 관점으로 나누어 검토한다. | API·Bridge·실기기 검증 경계를 추가하고, 병렬 에이전트 없이 순차 검토할 수 있게 한다. 명세가 없으면 해당 검토 한계를 남긴다. 기술 규칙을 지켰어도 요청을 잘못 구현한 변경을 별도로 찾기 위해. |
+| [lounge-ready](skills/lounge-ready/SKILL.md) | 프로젝트 추가: 1:1 참고 원본 지정 없음 | 이번 카드에서 착수 가능한 범위와 증거를 판단한다. | Ready-UI와 Ready-Integration을 구분하고 카드와 무관한 프로젝트 전체 미정을 blocker로 만들지 않는다. 기획·계약이 일부 미정이어도 독립 작업은 진행하고 필수 연동은 기다리기 위해. |
+| [lounge-api-review](skills/lounge-api-review/SKILL.md) | 프로젝트 추가: 1:1 참고 원본 지정 없음 | 실제 API 계약의 누락·충돌과 FE 영향을 검토한다. | 필드 의미·인증·오류·중복 처리 등 필요한 계약을 검토한다. 검토를 승인으로 처리하거나 endpoint·Mock을 발명하지 않는다. 서버 계약을 FE의 추측으로 대체하지 않기 위해. |
+| [lounge-bridge-review](skills/lounge-bridge-review/SKILL.md) | 프로젝트 추가: 1:1 참고 원본 지정 없음 | Flutter와 WebView의 책임·메시지 계약·기기 검증을 확인한다. | 플랫폼 차이·복귀·권한·뒤로가기 등 실제 흐름을 검토하고 Story와 실기기 검증을 구분한다. 하이브리드 앱의 Native 경계를 웹 화면 구현만으로 완료 처리하지 않기 위해. |
+| [lounge-impact](skills/lounge-impact/SKILL.md) | 프로젝트 추가: 1:1 참고 원본 지정 없음 | 변경이 실제 소비자·상태·계약·플랫폼에 미치는 영향을 확인한다. | 관련 호출자·카드·Story·검증을 연결한다. 반복 비용이나 결함 없이 공통화·아키텍처 개편을 시작하지 않는다. 공통 변경의 누락을 줄이되 사전 추상화로 작업 범위를 늘리지 않기 위해. |
+
+### 원본에서 참고한 것과 프로젝트에서 바꾼 것
+
+| 구분 | 참고한 원본의 방식 | 더라운지의 적용과 이유 |
+| --- | --- | --- |
+| 도구 호출 | grill-with-docs·implement 등은 다른 Skill tool 호출을 연결한다. | 같은 역할을 독립 Markdown으로 수행할 수 있게 재작성했다. Cline·Codex·Claude Code에서 전용 호출 지원을 공통 전제로 삼지 않는다. |
+| 질문·결정 기록 | grill-with-docs는 질문과 domain-modeling을 연결하고 용어·ADR을 기록한다. | IA 출처·담당·합의 범위를 붙이고, 문서 정리는 요청 범위에서 수행한다. 모든 질문을 정책 결정이나 ADR로 만들지 않는다. |
+| 명세·티켓과 Ready | to-spec·to-tickets에는 설정한 tracker 게시와 ready-for-agent 표시가 포함된다. | 로컬 명세·카드와 Ready 판단을 분리한다. 기록 생성만으로 계약 합의나 구현 권한이 생기지 않는다. 외부 게시에는 사용자 요청이 필요하다. |
+| 작업 분해 | to-tickets는 여러 계층을 관통하는 작은 완성 흐름과 blocker를 중시한다. | 검수 가능한 결과와 실제 선행 조건을 유지한다. 계약 미정 시 UI와 통합을 분리하되, UI 완료가 end-to-end 완료라고 기록하지 않는다. |
+| 테스트·구현 | implement는 tdd·code-review를 연결하고 마지막에 현재 브랜치에 commit하도록 한다. | 중요한 행동의 필요한 테스트와 리뷰를 유지한다. 단순 표시·클래스 테스트는 늘리지 않고, Story·앱 build·미실행 환경을 기록한다. commit·push·배포는 요청 권한을 따른다. |
+| 리뷰 | code-review는 규칙·명세 관점을 병렬 sub-agent로 검토한다. | 두 관점은 유지하되 순차 수행도 가능하다. 계약 근거와 미검증 환경을 확인하며 자동 수정 권한으로 확대하지 않는다. |
+
+### 프로젝트에서 추가한 네 스킬의 의미
+
+`lounge-ready`, `lounge-api-review`, `lounge-bridge-review`, `lounge-impact`는 이번 참고 원본에 대한 1:1 이식으로 설명하지 않습니다. 더라운지의 미완성 기획, FE·BE·Flutter 의존성과 계약 경계를 다루기 위해 프로젝트에서 보완한 지침입니다. AI는 누락과 착수 범위를 정리할 수 있지만 기획·Backend·Native 담당의 합의를 대신하지 않습니다.
+
+### 실제 사용 예: 제휴카드 등록
+
+IA에 화면 후보가 있더라도 등록 정책·검증·API·Native 책임이 확정되었다는 뜻은 아닙니다. 모호한 요구는 lounge-grill로 질문하고, 합의된 범위를 lounge-spec·lounge-tickets로 정리합니다. 계약이 없는 동안 디자인과 동작이 확인된 입력 UI만 독립 검수할 수 있다면 lounge-ready는 그 범위를 Ready-UI로 판단합니다. API·Bridge는 관련 계약 검토 후 연결합니다. lounge-implement는 허용된 카드만 구현하고, lounge-review는 규칙과 명세를 따로 검토합니다. UI 카드의 Done을 카드 등록 기능 전체의 Done으로 표시하지 않습니다. 이는 사용 예시이며 등록 정책 자체를 확정하지 않습니다.
+
+### 원본과 프로젝트 지침을 유지하는 방법
+
+실행 기준은 현재 `lounge-*`와 적용 AGENTS.md·카드입니다. 원본 링크는 출처와 비교를 위한 자료이며, 원본을 읽었다는 이유로 현재 실행 규칙을 덮어쓰지 않습니다. 원본 변경을 반영할 때는 사용할 commit이나 태그와 참고 파일, 변경 이유·프로젝트 영향·검증 결과를 남기고 선택적으로 적용합니다. 기존 원본 참고 버전이 고정되어 있지 않은 한계는 그대로 보존합니다. 참고 저장소의 [LICENSE](https://github.com/mattpocock/skills/blob/main/LICENSE)도 출처와 함께 확인할 수 있습니다.
+
+
 
 ### [docs/workflow/skills/lounge-grill/SKILL.md](skills/lounge-grill/SKILL.md)
 
