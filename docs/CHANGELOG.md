@@ -11,6 +11,24 @@
 - 변경한 파일 목록만 나열하지 않고 변경 목적, 주요 내용, 미확정 항목과 검증 결과를 함께 기록합니다.
 - 같은 작업에서 Markdown과 HTML을 함께 수정했다면 하나의 변경 항목으로 기록합니다.
 
+## 2026-10-08
+
+### 웹 영역 명칭과 구현 위치의 전체 대조
+
+- 웹 소스는 front-end/, 앱 WebView는 front-end/webview/로 유지하고 Flutter Native 소스만 별도 위치로 구분했습니다. FO 웹(PC WEB·반응형 홈페이지)·PO(파트너오피스)·OO(현장운영시스템)를 IA 기준으로 구분하고 AS-IS 홈페이지는 FO 웹의 참고 자료로 연결했습니다.
+- 루트·하위 지침·프로젝트 요약·구조 가이드·작업 가능 범위·workflow·다이어그램 원본의 명칭과 설명을 대조했습니다. 예전 보고서의 구현 위치 미정 설명은 현재 결정으로 갱신했고, 산정 가정과 현재 확정 구조를 구분했습니다. 하위 폴더·스택·공유 범위와 계약 미정은 임의 확정하지 않았습니다.
+- 검증: 변경 문서 25개의 추가 내용에서 HTML 구조·상대 링크·문자·공백 신규 오류 없음, workflow Markdown 27개·IA 레코드 587개 검사 통과, 검색 색인 39개 문서·390개 섹션 갱신, git diff --check 통과. 앱 Build는 제품 코드 미구현으로 미실행이며 브라우저 화면 검수는 미실행입니다.
+- 아래 이전 기록은 당시 변경 이력입니다. 과거의 참고용 골격·별도 웹 소스 위치 설명은 현재 운영 기준이 아니며 위의 구현 위치를 따릅니다.
+
+
+### Front-end 구현 위치를 lounge-docs의 front-end/로 확정
+
+- 문서 전반에 적혀 있던 "front-end/는 참고 골격, 실제 소스는 별도 저장소" 기준을 Front-end는 이 저장소 `front-end/`에서 구현하는 기준으로 바꿨습니다. WebView 화면은 `front-end/webview/`, 향후 반응형 웹은 `front-end/` 아래에 두고, Flutter Native 앱만 별도 위치로 남겼습니다.
+- 루트와 docs의 README·AGENTS.md, `front-end/`와 `front-end/webview/`의 README·AGENTS.md, `docs/ai/project.md`, 저장소 구조·Front-End·APP·브리핑 가이드의 구조 설명과 트리 주석을 같은 기준으로 맞췄습니다. `docs/workflow/`의 운영 기준·사용법·AI 진입·작업 카드 양식·lounge-implement 스킬에서도 "실제 코드 저장소" 표현을 `front-end/` 기준으로 바꿨습니다.
+- DEC-001을 Confirmed로 바꾸고 결정 근거를 기록했습니다. `front-end/webview/`의 package·설정, 패키지 관리 도구와 설치 버전, 반응형 웹의 공유 범위와 Flutter Native 연결·검증 환경는 여전히 미정입니다.
+- `docs/workflow/available-work.html`의 새 저장소 제안과 3장 구성을 실제 저장소 구조에 맞게 다시 쓰고, 사람이 읽는 안내 기준으로 문체를 정리했습니다.
+- 검증: 워크플로 Markdown 27개·IA 레코드 587개 검사 통과, 검색 색인 재생성(39개 문서·390개 섹션), HTML 태그와 내부 링크 확인. 앱 Build와 브라우저 화면 확인은 `front-end/webview/`에 아직 package가 없어 미실행입니다.
+
 ## 2026-10-07
 
 ### 개발 가이드와 업무 지침 구분 및 AI 진입 안내 정리

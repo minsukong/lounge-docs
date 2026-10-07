@@ -20,7 +20,7 @@
 | 플랫폼 | App-WebView / Responsive-Web / Flutter-Native / Sales-Channel / PO / OO / Shared |
 | 담당·협의자 | FE / BE / Native / 기획·운영. 미정은 TBD |
 | 우선순위 | P0 / P1 / P2 + 이유 |
-| 실제 코드 저장소·작업 위치 | 절대 경로. 문서 작업은 이 저장소라고 명시 |
+| 코드 위치 | `front-end/` 기준 경로. 예: `front-end/webview/src/components/ui` |
 | 문서 저장소 | lounge-docs의 절대 경로 |
 | 진행 상태 | Backlog / In Progress / Blocked / Review / Done / Deferred |
 | Ready | TBD / Ready-UI / Ready-Integration / Blocked / N/A |

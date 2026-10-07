@@ -1,6 +1,6 @@
 # 더라운지 3.0 업무 지침 — 운영 기준
 
-이 업무 지침은 기획·IA를 검토 가능한 명세와 작은 작업으로 바꾸고, 실제 코드 저장소에서 구현·검증하는 기준입니다. 문서 저장소와 실제 코드 저장소를 구분합니다.
+이 업무 지침은 기획·IA를 검토 가능한 명세와 작은 작업으로 바꾸고, `front-end/`에서 구현·검증하는 기준입니다. 문서 영역(`docs/`)과 구현 영역(`front-end/`)을 구분합니다.
 
 AI는 [AI 작업 진입](AGENTS.md)에서 요청에 필요한 문서·섹션을 선택합니다. 이 문서 전체를 먼저 읽는 것은 필수가 아닙니다.
 
@@ -54,7 +54,7 @@ lounge-docs/
 │           ├── refresh_ia.py
 │           ├── validate_workflow.py
 │           └── export_skills.py
-├── front-end/                             ← 참고 골격 (webview/)
+├── front-end/                             ← Front-end 소스 (webview/)
 ├── tokens/                                ← design tokens
 └── work/                                  ← IA 원본·검토 자료 전용
     ├── AGENTS.md                          ← "운영 기준은 docs/workflow" 명시
@@ -67,7 +67,7 @@ lounge-docs/
 |------|------|------|
 | `docs/workflow/` | 사람용 안내·HTML과 운영 기준·양식·결정·IA 대조·스킬·스크립트 | 문서 연결은 index.md, 기준은 README.md, 사용 순서는 usage-guide.md |
 | `work/더라운지_IA FO_v0.2.xlsx/` | IA 원본 HTML | 읽기 전용으로 참조 |
-| `front-end/` | 참고 골격 | 실제 제품 코드 저장소와 다름 |
+| `front-end/` | Front-end 소스·설정·Story | WebView 화면은 `front-end/webview/`. Flutter Native는 별도 위치 |
 
 ### 스크립트 실행
 
@@ -79,7 +79,7 @@ python docs/workflow/scripts/validate_workflow.py
 python docs/workflow/scripts/refresh_ia.py
 
 # 선택 AI 도구로 스킬 내보내기 (미리보기 기본)
-python docs/workflow/scripts/export_skills.py --workspace "코드 저장소 경로" --agent cline
+python docs/workflow/scripts/export_skills.py --workspace "lounge-docs 경로" --agent cline
 ```
 
 ## 기준 자료의 역할
@@ -118,7 +118,7 @@ IA·기획·요청 확인
 | 1 | 인증·회원가입·메인·검색 |
 | 2 | 사용처·상품·주문·결제·제휴카드·판매채널 후보 |
 | 3 | 마이페이지·월렛·프로모션·고객센터 |
-| 4 | 반응형 웹 차이·PO·OO 검토 |
+| 4 | FO 웹의 반응형 차이·PO·OO 검토 |
 
 Phase는 progress의 분류에 맞췄습니다. 출시 순서나 계약 독립성을 뜻하지 않습니다. 반응형 차이는 공통 UI 설계 시 함께 고려합니다. PO·OO는 담당과 범위가 정해질 때까지 별도 범위 후보로 둡니다. 리무진·다이닝 등은 실제 기능에 따라 사용처·상품·서비스 흐름에 연결하며 별도 개발량을 추정하지 않습니다.
 
@@ -146,7 +146,7 @@ Phase는 progress의 분류에 맞췄습니다. 출시 순서나 계약 독립�
 
 ## 검증
 
-실제 코드 저장소의 package에 정의된 명령만 실행합니다. 타입 검사와 린트를 기본으로, 사용자 행동·분기·폼·상태 전환은 필요한 테스트를 수행합니다. 단순 표시와 Tailwind 문자열 검사를 형식적으로 추가하지 않습니다.
+`front-end/` 앱의 package에 정의된 명령만 실행합니다. 타입 검사와 린트를 기본으로, 사용자 행동·분기·폼·상태 전환은 필요한 테스트를 수행합니다. 단순 표시와 Tailwind 문자열 검사를 형식적으로 추가하지 않습니다.
 
 Story 대상은 공통 UI, 독립 검수 가치가 있는 Feature, 대표 Screen과 주요 상태입니다. Story 변경 시 정적 Build, 통합 영향 시 앱 Build를 추가합니다. API 실패·로딩은 합의된 계약과 허용된 테스트 전략에서 검증합니다.
 
@@ -158,7 +158,7 @@ Story 대상은 공통 UI, 독립 검수 가치가 있는 Feature, 대표 Screen
 
 진행표의 작업 대시보드는 카드 ID·링크·Ready·상태·차단 조건만 요약합니다. 상세 정책·검증 결과는 카드가 기준입니다. 화면 후보 목록은 IA 대조 전 작업 대시보드로 자동 승격하지 않습니다.
 
-새 세션에서는 작업 카드, 관련 명세와 결정, 실제 코드 저장소, 마지막 diff와 실패 검사를 먼저 확인합니다. “다음 것”은 순번이나 Phase가 아니라 차단 조건이 해소된 카드 중 우선순위로 선택합니다.
+새 세션에서는 작업 카드, 관련 명세와 결정, `front-end/`의 현재 코드와 설정, 마지막 diff와 실패 검사를 먼저 확인합니다. “다음 것”은 순번이나 Phase가 아니라 차단 조건이 해소된 카드 중 우선순위로 선택합니다.
 
 GitHub 연동은 선택입니다. 현재는 로컬 Markdown을 기준으로 합니다. Issue·PR·게시·commit·push·merge는 해당 동작을 사용자가 요청한 범위에서만 수행합니다. Merge와 Done, 출시 검증은 팀이 정한 기준에 맞춰 각각 기록합니다.
 

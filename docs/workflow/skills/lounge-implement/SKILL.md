@@ -1,6 +1,6 @@
 ---
 name: lounge-implement
-description: Ready가 확인된 더라운지 작업 카드 하나를 실제 저장소에서 구현·검증·재개 기록한다. 기능 구현이나 승인된 수정에 사용한다.
+description: Ready가 확인된 더라운지 작업 카드 하나를 front-end/의 앱에서 구현·검증·재개 기록한다. 기능 구현이나 승인된 수정에 사용한다.
 ---
 
 # lounge-implement
@@ -11,7 +11,7 @@ description: Ready가 확인된 더라운지 작업 카드 하나를 실제 저�
 
 ## 작업
 
-카드의 실제 코드 저장소와 가까운 AGENTS.md, package·기존 코드·승인된 근거를 확인한다. lounge-docs의 front-end/는 참고 골격이다. package가 없으면 앱 생성이나 npm 명령을 추측하지 않는다.
+카드의 코드 위치와 가까운 AGENTS.md, package·기존 코드·승인된 근거를 확인한다. Front-end 구현 위치는 lounge-docs의 front-end/이며 WebView 화면은 front-end/webview/다. package가 아직 없으면 새 저장소를 만들지 않고 이 위치에 앱을 만들고, 앱 생성이나 npm 명령을 추측하지 않는다.
 1. 카드 범위와 Ready 근거·선행 조건을 검증한다. 미정 계약은 해당 연동을 보류하되 독립적으로 허용된 UI·문서 범위는 진행한다.
 2. 변경 영향과 기존 컴포넌트·폼·상태 패턴을 확인해 최소 범위로 구현한다. Ready-UI에서 fake 업무 성공을 만들지 않는다.
 3. 중요한 분기·폼·상태·사용자 행동은 카드에 적힌 관찰 경계에서 한 실패 테스트 → 최소 구현 → 검증을 반복한다. 단순 표시·클래스·라이브러리 내부를 테스트하지 않는다. 승인 계약 전 API mock·fixture·handler를 만들지 않는다.

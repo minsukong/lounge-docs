@@ -11,7 +11,7 @@
 | --- | --- | --- |
 | 01.FO(MO_WEB)_IA.html | 하이브리드 앱 WebView 후보 | MO ID를 원본 그대로 사용 |
 | 01.FO_APP_IA.html | 앱 Native 책임과 WebView 경계 참고 | 제목은 Native 영역 정의지만 View에는 Native·webview가 혼재. ID는 FO. MO 목록과 같은 기능을 더 잘게 쪼갠 절단면이며 `FO-PRD`(상품), `FO-AIR`(공항안내), `FO-COU`(쿠폰북), `FO-SCM-C04*`~`C13*`(사용처 유형별 상세)처럼 MO 자료에 없는 화면군을 포함 |
-| 01.FO_WEB_IA.html | 반응형 홈페이지 후보 | FO ID를 PW로 자동 변환하지 않음. APP 자료와 화면군이 겹치나 `FO-PRD`가 없고 `FO-AIR`·`FO-CMM` 구성이 다름 |
+| 01.FO_WEB_IA.html | FO 웹(원본 제목: 더라운지 3.0 FO IA(PC WEB)) 후보 | FO ID를 PW로 자동 변환하지 않음. APP 자료와 화면군이 겹치나 `FO-PRD`가 없고 `FO-AIR`·`FO-CMM` 구성이 다름 |
 | 01.FO_판매채널_IA.html | 판매채널 후보 | 추가 정보 필요. FO ID를 다른 FO 화면과 구별 |
 | 03.PO_IA.html | 파트너오피스 후보 | 담당·과업 포함 여부 TBD |
 | 04.OO_IA.html | 현장 운영 후보 | HTML은 존재. FE 담당·범위 TBD |

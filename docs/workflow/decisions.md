@@ -8,7 +8,7 @@
 
 | ID | 결정할 내용 | 상태 | 담당·협의 상대 | 차단되는 범위 | 현재 근거 |
 | --- | --- | --- | --- | --- | --- |
-| DEC-001 | 실제 FE·Flutter 코드 저장소와 AI 작업 루트 | TBD | 사용자·FE·Native 담당 | 앱 구현 착수·실행 검증 | lounge-docs와 THL_V3_FO_FE는 확인 범위에서 참고 골격이며 package 없음 |
+| DEC-001 | Front-end 구현 위치와 AI 작업 루트 | Confirmed | 사용자 | 앱 구현 착수·실행 검증 | 사용자 결정: Front-end는 lounge-docs의 `front-end/`에서 구현하고 WebView 화면은 `front-end/webview/`에 둔다. Flutter Native만 별도 위치. `front-end/webview/`의 package·설정은 아직 없음 |
 | DEC-002 | 인증 세션·저장·갱신·로그아웃과 Web/Native 책임 | TBD | BE·Native·FE | 인증 가드·로그인 연동 | project.md에서 계약 TBD |
 | DEC-003 | 회원가입·약관·미성년자·소셜 연결·탈퇴 정책 | TBD | 기획·운영·BE·Native | 해당 회원 업무 연동 | MO IA에 미성년자 정책·소셜 추가 확정 필요 표시 |
 | DEC-004 | 주문·결제·할인·취소와 PG 복귀·실패·중복 처리 | TBD | 기획·BE·Native·FE | 구매·결제·취소 연동 | 승인 계약 미확인 |
@@ -16,7 +16,7 @@
 | DEC-006 | 판매채널 기능·사용자·서비스 구분·담당 | TBD | 사용자·기획·BE | 판매채널 착수 범위 | 사용자: 추가 정보 필요 |
 | DEC-007 | PO·OO의 과업 포함 여부·담당·검수 책임 | TBD | 사용자·프로젝트 담당 | PO·OO 구현 착수 | 담당 미정. OO HTML은 존재 |
 | DEC-008 | MO/APP/WEB 중복 화면·ID 충돌과 실제 메뉴 범위 | TBD | 기획·FE·Native | 영향받는 카드의 화면 매핑 | ia-audit와 ia-inventory. `FO_APP`(226)·`FO_WEB`(167)는 MO 목록과 다른 절단면이며 `FO-PRD`(상품), `FO-AIR`(공항안내), `FO-COU`(쿠폰북), `FO-SCM-C04*`~`C13*`(사용처 유형별 상세)는 MO에 대응 없음. `FO-MEM-C10*` 9개는 원본 화면명 공백 |
-| DEC-009 | 반응형 웹의 스택·기능 공유·브랜딩 차이 | TBD | FE·프로젝트 담당 | 공유 구조·웹 연동 판단 | 사용자 과업은 확인, 상세 공유 전략은 project.md에서 TBD |
+| DEC-009 | FO 웹·PO·OO의 스택·기능 공유·화면별 환경 차이 | TBD | FE·프로젝트 담당 | 공유 구조·웹 연동 판단 | 사용자 과업은 확인, 상세 공유 전략은 project.md에서 TBD |
 | DEC-010 | API mock 필요 여부·계약 버전·관리 책임 | TBD | FE·BE·프로젝트 담당 | Contract-Mock 사용 | 계약 전 생성 금지 |
 | DEC-011 | Front-end WBS 중 IA에 근거가 없는 항목의 범위 포함 여부 | TBD | 사용자·기획·프로젝트 담당 | 해당 항목의 착수·견적 | 경영진 대시보드, K리무진 본사운영·홈페이지 구분, 결함 수정·안정화 공수는 IA v0.2와 `docs/` 어디에도 검색되지 않음. eSIM(`FO-SCM-C05*`)과 K공항리무진(`FO-SCM-C07*`, `OO-OOS-J*`~`O*`)은 원본에 존재 |
 

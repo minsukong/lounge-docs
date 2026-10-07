@@ -9,12 +9,13 @@
 더라운지는 이브릿지의 여행 서비스 모바일 플랫폼입니다. 공항라운지와 제휴카드 기반 서비스를 중심으로 다양한 여행 편의 서비스를 제공합니다.
 
 - [공식 서비스 소개](https://www.ebridge.co.kr/bbs/content.php?co_id=lounge): 기존 서비스의 배경과 소개 참고
-- [기존 홈페이지](https://theloungemembers.com/renew/): 반응형 홈페이지 구축 시 기존 콘텐츠와 서비스 안내 참고
+- [FO 웹 AS-IS 홈페이지](https://theloungemembers.com/renew/): FO 웹(PC WEB·반응형 홈페이지)의 기존 콘텐츠와 서비스 안내 참고. PO·OO의 AS-IS로 사용하지 않습니다.
 
 ## 라운지 3.0 과업
 
 - 하이브리드 앱: 기존 Android·iOS 앱을 Flutter 기반 하이브리드 앱으로 전면 리뉴얼합니다.
-- 반응형 홈페이지: 기존 홈페이지를 참고해 구축하며, 기존 사이트에 없는 결제·회원 기능 등을 추가합니다.
+- FO 웹(PC WEB·반응형 홈페이지): AS-IS 홈페이지를 참고하되 실제 기능 범위는 `01.FO_WEB_IA.html`과 승인된 기획으로 확인합니다. 회원·주문·결제 등을 포함한 사용자 웹 영역이며 브랜드 소개만을 뜻하지 않습니다.
+- PO(파트너오피스)·OO(현장운영시스템): 각각 `03.PO_IA.html`, `04.OO_IA.html`에 정의된 별도 영역입니다. 세부 과업·담당·검수 책임은 관련 결정과 카드에서 확인합니다.
 
 ### 플랫폼별 범위
 
@@ -22,7 +23,9 @@
 | --- | --- | --- |
 | Flutter Native | 하이브리드 앱의 Native 영역과 WebView 연동 | Flutter 기반. Native 기능의 상세 범위와 Bridge 계약은 `TBD` |
 | 앱 내부 WebView | Flutter 앱에서 WebView로 실행되는 웹 화면 | 아래 WebView 기술 스택 적용 |
-| 반응형 홈페이지 | 기존 사이트를 참고한 반응형 웹과 결제·회원 기능 | WebView와 동일한 스택을 적용할지와 기능 공유 범위는 `TBD` |
+| FO 웹(PC WEB·반응형 홈페이지) | `01.FO_WEB_IA.html`의 사용자 웹 영역. AS-IS 홈페이지를 참고 | WebView와의 스택·기능 공유 범위는 `TBD` |
+| PO(파트너오피스) | `03.PO_IA.html`의 파트너 업무 영역 | 스택·지원 환경·공유 범위·담당은 `TBD` |
+| OO(현장운영시스템) | `04.OO_IA.html`의 현장 운영 영역 | 스택·지원 환경·공유 범위·담당은 `TBD` |
 
 ### 미정 사항
 
@@ -34,7 +37,7 @@
 
 ## 현재 범위
 
-- `front-end/`는 Front-end(웹) 참고 골격으로, 실제 소스는 별도 저장소에서 관리합니다. `front-end/webview/`는 Flutter 앱에서 WebView로 실행되는 웹 화면이고, 향후 반응형 웹(브랜딩 사이트, 결제, 회원)까지 포함됩니다.
+- Front-end 소스는 `front-end/`에서 관리합니다. `front-end/webview/`는 Flutter 앱에서 WebView로 실행되는 웹 화면이고, FO 웹(PC WEB·반응형 홈페이지)과 PO(파트너오피스)·OO(현장운영시스템)까지 `front-end/`에 둡니다. Flutter Native 앱 소스는 별도 위치에서 관리합니다.
 - Native 기능은 화면에서 직접 구현하지 않고, 필요한 경우 타입이 정의된 Bridge adapter를 통해 요청합니다.
 - Android와 iOS의 전역 객체 차이를 화면 컴포넌트에 노출하지 않습니다.
 - 인증 토큰, 카드정보와 불필요한 개인정보를 브라우저 저장소에 보관하지 않습니다.
@@ -52,16 +55,16 @@
 | Form | React Hook Form 7.x | 폼 값, 입력 상태, 제출 상태와 오류 연결 |
 | UI Component | shadcn/ui | 프로젝트가 소유하고 수정하는 UI 원형의 출발점 |
 
-이 표는 WebView의 기술 기준입니다. 실제 설치 버전과 사용 여부는 실제 소스 저장소의 `package.json`, 잠금 파일과 import를 우선 확인합니다. TanStack Query, Zustand, React Hook Form은 각 책임이 실제로 필요할 때 사용하며, 기존 UI 기준에는 Base UI와 Lucide도 포함됩니다.
+이 표는 WebView의 기술 기준입니다. 실제 설치 버전과 사용 여부는 `front-end/webview/`의 `package.json`, 잠금 파일과 import를 우선 확인합니다. TanStack Query, Zustand, React Hook Form은 각 책임이 실제로 필요할 때 사용하며, 기존 UI 기준에는 Base UI와 Lucide도 포함됩니다.
 
 ## 저장소 구조
 
-이 저장소는 참고용 Front-end 골격과 모든 가이드를 함께 관리하며, 실제 애플리케이션 소스는 별도 저장소에 있습니다.
+이 저장소는 Front-end 애플리케이션과 모든 가이드를 함께 관리합니다. Flutter Native 앱만 별도 위치에서 관리합니다.
 
 ```text
 <repository-root>/
 ├── AGENTS.md
-├── front-end/              # Front-end 참고 골격 (실제 소스는 별도 저장소)
+├── front-end/              # Front-end 소스 (WebView · FO 웹 · PO · OO)
 │   ├── AGENTS.md
 │   └── webview/
 │       ├── AGENTS.md
@@ -75,7 +78,7 @@
     └── common-source/
 ```
 
-이 문서는 `docs/ai/project.md`, 상세 HTML 가이드는 `docs/guides/`에서 관리합니다. 실제 애플리케이션 소스는 별도 저장소에 있으며, 이 저장소 `front-end/webview/`는 참고 골격입니다.
+이 문서는 `docs/ai/project.md`, 상세 HTML 가이드는 `docs/guides/`에서 관리합니다. WebView 애플리케이션의 소스와 설정은 `front-end/webview/`에 두며, 이 폴더에는 아직 package가 생성되지 않았습니다.
 
 ```text
 front-end/webview/src/

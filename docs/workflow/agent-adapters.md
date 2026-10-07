@@ -34,11 +34,11 @@ AGENTS를 자동으로 읽지 않는 도구에는 위 읽기를 명시합니다.
 
 ## 내보내기
 
-문서 저장소 루트에서 실행합니다. 대상 workspace는 팀원이 실제로 연 로컬 폴더로 바꿉니다. 기본은 미리보기이며 --apply가 있어야 저장합니다.
+문서 저장소 루트에서 실행합니다. 대상 workspace는 팀원이 실제로 연 로컬 폴더로 바꿉니다. Front-end와 문서가 같은 저장소에 있으므로 보통은 lounge-docs 루트를 사용합니다. 기본은 미리보기이며 --apply가 있어야 저장합니다.
 
 ```text
-python docs/workflow/scripts/export_skills.py --workspace "실제 코드 저장소 경로" --agent codex
-python docs/workflow/scripts/export_skills.py --workspace "실제 코드 저장소 경로" --agent codex --apply
+python docs/workflow/scripts/export_skills.py --workspace "lounge-docs 경로" --agent codex
+python docs/workflow/scripts/export_skills.py --workspace "lounge-docs 경로" --agent codex --apply
 ```
 
 --agent는 cline / claude-code / codex / manual 중 선택합니다. manual은 대상의 docs/workflow/skills/로 복사하며 자동 발견을 주장하지 않습니다. 공용 원본은 문서 저장소의 docs/workflow/skills/입니다.

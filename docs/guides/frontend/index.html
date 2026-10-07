@@ -262,9 +262,9 @@ flowchart LR
         <h2 class="bx-active">4. 프로젝트 및 파일 구조</h2>
 
         <p>
-          Flutter Native 앱과 WebView Front-end의 실제 소스는 각각 별도
-          저장소에서 관리합니다. 이 저장소에는 WebView Front-end 참고 골격
-          (<code>front-end/webview</code>)와 구현·검토 문서(<code>docs</code>)를
+          Flutter Native 앱은 별도 위치에서 관리하고, WebView Front-end의 소스와
+          설정은 이 저장소에서 관리합니다. 이 저장소에는 WebView Front-end
+          애플리케이션(<code>front-end/webview</code>)와 구현·검토 문서(<code>docs</code>)를
           둡니다. 이 문서에서 Front-end 또는 Web은
           <code>front-end/webview</code> 구현 영역을 의미합니다.
         </p>
@@ -302,7 +302,7 @@ flowchart LR
         </ul>
         <pre class="hljs"><code data-language="text">&lt;repository-root&gt;/
 ├── AGENTS.md                    # 저장소 전체 구현 지침
-├── front-end/                   # Front-end 참고 골격 (실제 소스는 별도 저장소)
+├── front-end/                   # Front-end 소스 (WebView · FO 웹 · PO · OO)
 │   └── webview/
 │       └── src/
 │           ├── app/             # Routes, Layouts, Providers
@@ -524,14 +524,14 @@ flowchart LR
         </p>
         <h3>6.4 반응형 범위</h3>
         <ul>
-          <li>브랜드 사이트는 반응형 웹을 기준으로 구현합니다.</li>
+          <li>FO 웹(PC WEB·반응형 홈페이지)은 반응형 웹을 기준으로 구현합니다. PO(파트너오피스)·OO(현장운영시스템)는 별도 IA 영역으로 구분하고 각 화면의 지원 환경을 확인합니다.</li>
           <li>
             Flutter 앱 내부 WebView 서비스는 합의된 모바일 앱 환경을 우선합니다.
           </li>
         </ul>
         <p>
           <code class="badge-tbd">TBD</code> 지원 화면 크기, orientation, WebView 안전
-          영역, 브랜드 사이트 breakpoint와 데스크톱 상세 기준은 디자인 확정 후
+          영역, FO 웹 breakpoint와 PO·OO 화면별 지원 환경와 데스크톱 상세 기준은 디자인 확정 후
           정합니다.
         </p>
       </section>

@@ -4,9 +4,9 @@
 
 ## 작업 범위와 우선순위
 
-- 라운지 3.0 과업은 기존 Android·iOS 앱의 Flutter 기반 하이브리드 앱 전면 리뉴얼과 결제·회원 기능을 포함한 반응형 홈페이지 구축입니다. 서비스 배경, 과업 범위 또는 플랫폼별 기술 구성을 판단할 때는 [프로젝트 핵심 정보](docs/ai/project.md)를 먼저 확인합니다.
+- 라운지 3.0 과업은 기존 Android·iOS 앱의 Flutter 기반 하이브리드 앱 전면 리뉴얼과 FO 웹(PC WEB·반응형 홈페이지) 구축입니다. PO(파트너오피스)·OO(현장운영시스템)는 IA의 별도 영역으로 구분하며 구체적인 범위·담당은 관련 카드에서 확인합니다. 서비스 배경, 과업 범위 또는 플랫폼별 기술 구성을 판단할 때는 [프로젝트 핵심 정보](docs/ai/project.md)를 먼저 확인합니다.
 - 사용자가 파일, 선택자, 함수 또는 문구를 지정하면 해당 위치와 필요한 주변 범위부터 확인합니다. 작은 수정에 프로젝트 전체 구조나 관련 문서를 먼저 조사하지 않습니다.
-- 애플리케이션 기본 작업 범위는 `front-end/`입니다. 이 저장소 `front-end/`는 Front-end(웹) 참고 골격이며, `front-end/webview/`는 Flutter 앱에서 WebView로 실행되는 웹 화면입니다. 실제 Front-end 소스와 Flutter Native 소스는 각각 별도 저장소에서 관리합니다. `front-end/`에는 향후 반응형 웹(브랜딩 사이트, 결제, 회원)까지 포함됩니다.
+- 애플리케이션 기본 작업 범위는 `front-end/`입니다. `front-end/webview/`는 Flutter 앱에서 WebView로 실행되는 웹 화면의 실제 소스이며, `front-end/`에는 FO 웹(PC WEB·반응형 홈페이지)과 PO(파트너오피스)·OO(현장운영시스템)까지 둡니다. Flutter Native 앱 소스는 별도 위치에서 관리합니다. `front-end/`에 아직 package와 설정이 없으면 이 위치에서 앱 구성부터 시작합니다.
 - 실제 package, 잠금 파일, 설정, import와 기존 소스를 문서 예시보다 우선합니다. 확인되지 않은 기술 선택과 구조는 추측하지 않습니다.
 - 요청하지 않은 기능, 상태, 공통화, Wrapper, Adapter, Store 또는 package를 미리 추가하지 않습니다.
 - Front-end가 독립적으로 정할 수 없는 기획, 업무 규칙, API·인증·데이터 계약, Native Bridge, 배포·보안 정책은 승인되기 전까지 `TBD`로 둡니다. endpoint, parser, fixture, handler와 Mock을 임의로 구현하지 않습니다.

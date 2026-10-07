@@ -40,7 +40,7 @@
 <repository-root>/
 ├── AGENTS.md                   # 실제 구현 작업용 AI 최상위 지침
 ├── README.md
-├── front-end/                  # Front-end 참고 골격 (실제 소스는 별도 저장소)
+├── front-end/                  # Front-end 소스 (WebView · FO 웹 · PO · OO)
 │   ├── AGENTS.md
 │   ├── README.md
 │   └── webview/
@@ -59,7 +59,7 @@
 
 분야별 상세 가이드의 기준 원본은 `guides/`이며, 업무 지침과 운영 기록은 `workflow/`에 함께 둡니다. 구현 작업은 저장소 루트 `AGENTS.md`에서 시작해 필요한 `ai/` 요약을 읽고, 세부 배경이나 적용 예시가 필요할 때 `guides/` 또는 `common-source/`로 이동합니다.
 
-실제 애플리케이션 `.ts`, `.tsx`, CSS와 package 설정은 별도 저장소에서 관리합니다. 이 저장소 `front-end/`는 참고 골격이며, `docs/`에는 애플리케이션 소스를 복사하지 않습니다.
+Front-end 애플리케이션 `.ts`, `.tsx`, CSS와 package 설정은 `front-end/`에서 관리합니다. 아직 앱이 생성되지 않은 영역은 첫 착수 시 그 위치에 앱을 만든 뒤 구현하며, `docs/`에는 애플리케이션 소스를 복사하지 않습니다.
 
 ## HTML 발표자 모드
 

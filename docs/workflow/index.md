@@ -112,7 +112,7 @@ IA 활용 범위·원본·충돌 처리·추출 제한을 설명합니다. 기�
 
 파일별 ID와 progress 후보의 대조 자료입니다. ID 존재가 이름·담당·정책의 정확성을 보장하지 않습니다.
 
-원본 역할: 00_FO 메뉴구조도는 메뉴 구조, MO_WEB은 모바일 웹 후보, APP은 Native·웹뷰 후보, WEB은 반응형 홈페이지, 판매채널은 추가 협의가 필요한 범위입니다. PO는 파트너오피스, OO는 운영 영역 후보로 담당과 과업 포함 여부를 확인합니다. 화면ID_규격·표지·승인내역은 배경 자료이며 개별 API 계약 승인을 대신하지 않습니다.
+원본 역할: 00_FO 메뉴구조도는 메뉴 구조, MO_WEB은 모바일 웹 후보, APP은 Native·웹뷰 후보, WEB은 FO 웹(PC WEB·반응형 홈페이지), 판매채널은 추가 협의가 필요한 범위입니다. PO는 파트너오피스, OO는 현장운영시스템 후보로 담당과 과업 포함 여부를 확인합니다. 화면ID_규격·표지·승인내역은 배경 자료이며 개별 API 계약 승인을 대신하지 않습니다.
 
 ## 6. 공용 스킬 9개: 선택 기준
 
@@ -129,7 +129,7 @@ IA 활용 범위·원본·충돌 처리·추출 제한을 설명합니다. 기�
 | [lounge-grill](skills/lounge-grill/SKILL.md) | [grill-with-docs](https://github.com/mattpocock/skills/blob/main/skills/engineering/grill-with-docs/SKILL.md) · [domain-modeling](https://github.com/mattpocock/skills/blob/main/skills/engineering/domain-modeling/SKILL.md) | 질문으로 요구와 용어를 구체화하고 결정 이유를 남긴다. | IA 파일·행·ID, 정책 결정자와 BE·Native 협의 범위를 연결한다. 합의된 용어와 필요한 큰 결정만 기록한다. 미완성 기획을 AI가 임의 정책으로 채우는 일을 줄이기 위해. |
 | [lounge-spec](skills/lounge-spec/SKILL.md) | [to-spec](https://github.com/mattpocock/skills/blob/main/skills/engineering/to-spec/SKILL.md) | 이미 논의한 사용자 목표·범위·구현 및 검증 결정을 명세로 정리한다. | 프로젝트 명세 양식과 로컬 기록을 사용한다. 미정 계약은 TBD로 남기며 명세 작성만으로 Ready·게시·구현을 부여하지 않는다. 문서가 만들어졌다는 사실과 계약 합의·착수 가능 여부를 구분하기 위해. |
 | [lounge-tickets](skills/lounge-tickets/SKILL.md) | [to-tickets](https://github.com/mattpocock/skills/blob/main/skills/engineering/to-tickets/SKILL.md) | 검수 가능한 작은 결과와 실제 blocking dependency를 기준으로 작업을 나눈다. | FE·BE·Native 책임을 연결하고, 계약 미정 시 독립 UI와 후속 통합을 별도 카드로 구분한다. Ready는 따로 판단한다. FE가 타 팀의 구현과 계약을 대신 확정하지 않으면서 가능한 범위를 진행하기 위해. |
-| [lounge-implement](skills/lounge-implement/SKILL.md) | [implement](https://github.com/mattpocock/skills/blob/main/skills/engineering/implement/SKILL.md) · [tdd](https://github.com/mattpocock/skills/blob/main/skills/engineering/tdd/SKILL.md) | 명세·티켓 범위를 구현하고 관찰 가능한 행동을 테스트한 뒤 리뷰한다. | Ready와 실제 코드 위치를 확인한다. 필요한 행동 테스트, Storybook·앱 build와 미검증 환경·재개 기록을 연결한다. commit은 자동 수행하지 않는다. 참고 골격을 제품 코드로 오인하거나 UI 완료를 전체 기능 완료로 처리하지 않기 위해. |
+| [lounge-implement](skills/lounge-implement/SKILL.md) | [implement](https://github.com/mattpocock/skills/blob/main/skills/engineering/implement/SKILL.md) · [tdd](https://github.com/mattpocock/skills/blob/main/skills/engineering/tdd/SKILL.md) | 명세·티켓 범위를 구현하고 관찰 가능한 행동을 테스트한 뒤 리뷰한다. | Ready와 실제 코드 위치를 확인한다. 필요한 행동 테스트, Storybook·앱 build와 미검증 환경·재개 기록을 연결한다. commit은 자동 수행하지 않는다. UI 완료를 전체 기능 완료로 처리하지 않기 위해. |
 | [lounge-review](skills/lounge-review/SKILL.md) | [code-review](https://github.com/mattpocock/skills/blob/main/skills/engineering/code-review/SKILL.md) | 저장소 규칙 적합성과 요청 명세 충족을 두 관점으로 나누어 검토한다. | API·Bridge·실기기 검증 경계를 추가하고, 병렬 에이전트 없이 순차 검토할 수 있게 한다. 명세가 없으면 해당 검토 한계를 남긴다. 기술 규칙을 지켰어도 요청을 잘못 구현한 변경을 별도로 찾기 위해. |
 | [lounge-ready](skills/lounge-ready/SKILL.md) | 프로젝트 추가: 1:1 참고 원본 지정 없음 | 이번 카드에서 착수 가능한 범위와 증거를 판단한다. | Ready-UI와 Ready-Integration을 구분하고 카드와 무관한 프로젝트 전체 미정을 blocker로 만들지 않는다. 기획·계약이 일부 미정이어도 독립 작업은 진행하고 필수 연동은 기다리기 위해. |
 | [lounge-api-review](skills/lounge-api-review/SKILL.md) | 프로젝트 추가: 1:1 참고 원본 지정 없음 | 실제 API 계약의 누락·충돌과 FE 영향을 검토한다. | 필드 의미·인증·오류·중복 처리 등 필요한 계약을 검토한다. 검토를 승인으로 처리하거나 endpoint·Mock을 발명하지 않는다. 서버 계약을 FE의 추측으로 대체하지 않기 위해. |
@@ -191,7 +191,7 @@ API 필드·인증·오류·캐시·중복 요청 등 계약 누락을 검토합
 
 ### [docs/workflow/skills/lounge-implement/SKILL.md](skills/lounge-implement/SKILL.md)
 
-Ready가 확인된 카드 범위를 실제 코드 저장소에서 구현·검증하고 재개 기록을 남깁니다. 필요한 행동 테스트에 TDD를 적용합니다.
+Ready가 확인된 카드 범위를 `front-end/`의 해당 앱에서 구현·검증하고 재개 기록을 남깁니다. 필요한 행동 테스트에 TDD를 적용합니다.
 
 ### [docs/workflow/skills/lounge-review/SKILL.md](skills/lounge-review/SKILL.md)
 
@@ -209,15 +209,15 @@ Ready는 착수 가능한 범위이고 진행 상태는 현재 위치입니다. 
 
 아래 순서는 사용 방법의 예시이며 확정된 회원가입 정책이 아닙니다.
 
-① IA 파일·행·ID와 플랫폼 경계를 확인합니다. ② lounge-grill로 본인인증·약관·실패·재가입 질문을 decisions에 기록합니다. ③ API·Bridge 담당과 계약을 검토합니다. ④ 큰 흐름이면 명세를 만듭니다. ⑤ UI·협의·연동·검증을 실제 카드로 나눕니다. ⑥ 변경 영향을 확인합니다. ⑦ 카드별 Ready를 판단합니다. ⑧ 실제 코드 저장소에서 구현합니다. ⑨ 필요한 검사·테스트·기기 검증과 리뷰를 수행합니다. ⑩ 카드·progress에 결과와 다음 행동을 남깁니다.
+① IA 파일·행·ID와 플랫폼 경계를 확인합니다. ② lounge-grill로 본인인증·약관·실패·재가입 질문을 decisions에 기록합니다. ③ API·Bridge 담당과 계약을 검토합니다. ④ 큰 흐름이면 명세를 만듭니다. ⑤ UI·협의·연동·검증을 실제 카드로 나눕니다. ⑥ 변경 영향을 확인합니다. ⑦ 카드별 Ready를 판단합니다. ⑧ `front-end/`의 해당 앱에서 구현합니다. ⑨ 필요한 검사·테스트·기기 검증과 리뷰를 수행합니다. ⑩ 카드·progress에 결과와 다음 행동을 남깁니다.
 
 ## 9. AI에게 요청하기
 
-AI가 달라도 문서 위치·실제 코드 위치·작업 카드·필요한 지침을 전달합니다. 파일 읽기가 불가능한 환경에서는 원본 내용을 제공해야 합니다.
+AI가 달라도 저장소 위치·작업 위치(`front-end/` 또는 `docs/`)·작업 카드·필요한 지침을 전달합니다. 파일 읽기가 불가능한 환경에서는 원본 내용을 제공해야 합니다.
 
 ```text
-문서 저장소: <팀원의 lounge-docs 위치>
-코드 저장소: <실제 FE 또는 Flutter 위치>
+저장소: <팀원의 lounge-docs 위치>
+작업 위치: front-end/webview (Flutter Native는 별도 위치)
 AGENTS.md → docs/AGENTS.md → docs/workflow/AGENTS.md를 읽어줘.
 회원가입 IA 근거를 확인하고 lounge-grill로 미정 질문을 정리해줘.
 정책·API·Bridge를 추측해서 구현하지 마.
@@ -260,4 +260,4 @@ lounge-workflow.json: 문서 위치 연결
 
 기획·운영은 정책, BE는 서버 계약, Native는 Bridge·기기 동작, FE는 UI·웹 상태·웹뷰 사용 경계를 담당합니다. 작업자는 카드와 검증을 갱신하고 리뷰어는 범위·완료 조건을 확인합니다. AI는 질문·초안·허용된 구현을 지원합니다.
 
-카드에는 변경 결과·실제 파일·검증 Pass / Fail / Not Run / N/A·남은 차단 조건·다음 행동을 남깁니다. decisions에는 결정 담당과 근거, progress에는 카드 링크와 현재 상태를 남깁니다. Cline 전용 .cline/과 .clinerules/는 공용 저장소에서 제거했습니다. 도구별 연결은 각자 선택합니다. 제품 카드·기능 구현은 아직 자동으로 시작된 것이 아닙니다. 실제 저장소 위치·인증·회원·결제 정책·계약·판매채널·PO·OO 범위는 관련 작업에서 확인해야 합니다. 문서 검사와 모델 실행·제품 Build·실기기 검증은 별개입니다. 첫 참여자는 usage-guide를 읽고 작은 기능 하나의 근거·질문·카드를 만든 뒤 Ready 판단부터 시작합니다.
+카드에는 변경 결과·실제 파일·검증 Pass / Fail / Not Run / N/A·남은 차단 조건·다음 행동을 남깁니다. decisions에는 결정 담당과 근거, progress에는 카드 링크와 현재 상태를 남깁니다. Cline 전용 .cline/과 .clinerules/는 공용 저장소에서 제거했습니다. 도구별 연결은 각자 선택합니다. 제품 카드·기능 구현은 아직 자동으로 시작된 것이 아닙니다. 인증·회원·결제 정책·계약·판매채널·PO·OO 범위는 관련 작업에서 확인해야 합니다. 문서 검사와 모델 실행·제품 Build·실기기 검증은 별개입니다. 첫 참여자는 usage-guide를 읽고 작은 기능 하나의 근거·질문·카드를 만든 뒤 Ready 판단부터 시작합니다.

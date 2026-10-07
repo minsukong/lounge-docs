@@ -29,9 +29,9 @@ work/                             IA 원본·업무·검토 자료
 
 ## 3. 작업 위치와 공용 기준
 
-lounge-docs는 문서·스킬 기준 저장소입니다. 제품은 카드에 명시한 실제 FE·Flutter 저장소에서 구현합니다. 이번에 확인한 lounge-docs·THL_V3_FO_FE는 참고 골격이며 실제 앱 package가 확인되지 않았습니다.
+lounge-docs는 문서·스킬 기준과 Front-end 소스를 함께 관리하는 저장소입니다. WebView 화면은 `front-end/webview/`, FO 웹·PO·OO는 `front-end/`에서 영역별로 관리하고, Flutter Native는 별도 위치에서 구현합니다. `front-end/webview/`에는 아직 package와 설정이 없습니다.
 
-팀원별 절대 경로를 정책으로 고정하지 않습니다. 문서 저장소와 코드 저장소 위치를 요청 또는 카드에 적습니다. 별도 workspace로 스킬을 내보내면 lounge-workflow.json이 문서 위치를 연결합니다.
+팀원별 절대 경로를 정책으로 고정하지 않습니다. 카드에는 `front-end/` 기준 작업 위치를 적습니다. 다른 폴더에서 AI를 여는 경우를 위해 스킬을 내보내면 lounge-workflow.json이 문서 위치를 연결합니다.
 
 IA·정책·계약·Ready·완료·검증은 AI와 모델이 달라도 같습니다. 명세·카드·progress·decisions가 인수인계 기준이며 대화 기억에만 의존하지 않습니다.
 
@@ -73,7 +73,7 @@ workflow/AGENTS.md에서 해당 문서와 스킬을 찾아 필요한 파일만 �
 각 도구가 자체 스킬 발견을 지원한다면 [도구 연결 안내](agent-adapters.md)의 위치로 공용 원본을 내보냅니다. 사용하는 도구만 선택하면 됩니다.
 
 ```text
-python docs/workflow/scripts/export_skills.py --workspace "실제 코드 저장소 경로" --agent codex
+python docs/workflow/scripts/export_skills.py --workspace "lounge-docs 경로" --agent codex
 ```
 
 cline / claude-code / codex / manual 중 선택합니다. 기본은 미리보기이며 실제 저장할 때 --apply를 붙입니다. 파일·관리 기록이 변경되었으면 사용자 내용을 보호하며 중단합니다.
@@ -125,11 +125,11 @@ Ready-UI / Ready-Integration / Blocked 중 근거 있는 판정과
 
 ```text
 lounge-implement로 Ready가 확인된 TASK-MEM-001만 구현해줘.
-카드에 지정한 실제 코드 저장소에서 기존 패턴을 확인하고,
+카드에 지정한 front-end/ 위치에서 기존 패턴을 확인하고,
 필요 검증과 규칙·명세 리뷰까지 끝낸 뒤 카드와 progress를 갱신해줘.
 ```
 
-카드에 코드 위치가 없거나 실제 package가 없으면 구현 위치부터 확인합니다. 문서용 참고 골격에 임의로 앱을 생성하지 않습니다.
+카드에 코드 위치가 없으면 `front-end/`의 어느 앱인지부터 확인합니다. package가 아직 없는 영역은 앱 설정을 만드는 작업부터 시작하며, 정의되지 않은 script와 설정을 추측하지 않습니다.
 
 ## 8. Ready-UI를 이해하는 예
 

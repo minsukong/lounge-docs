@@ -180,10 +180,10 @@
               <h2>코드와 가이드를<br /><em>같은 저장소에</em></h2>
             </div>
             <p>
-              <code class="tree-folder app">front-end/</code>에는 앱 참고 골격,
+              <code class="tree-folder app">front-end/</code>에는 WebView와 반응형 웹 소스,
               <code class="tree-folder docs">docs/</code>에는 구현·검토 기준을
               둡니다.<br />
-              실제 앱 코드는 별도 저장소이며, 앱을 빌드할 때 문서는 포함하지 않습니다.
+              Flutter Native 앱만 별도 위치이며, 앱을 빌드할 때 문서는 포함하지 않습니다.
             </p>
           </div>
           <div class="diagram-panel repository-layout">
@@ -196,7 +196,7 @@
                 aria-label="저장소 구조"
               ><span class="tree-root">Root/</span>
 ├─ <span class="tree-file file1">AGENTS.md</span>                         <span class="tree-comment"># AI 최상위 작업 원칙</span>
-├─ <span class="tree-folder app">front-end/</span>                         <span class="tree-comment"># Front-end 참고 골격</span>
+├─ <span class="tree-folder app">front-end/</span>                         <span class="tree-comment"># Front-end 소스</span>
 │  └─ <span class="tree-folder app">webview/</span>                   <span class="tree-comment"># WebView Front-end</span>
 │     ├─ <span class="tree-folder app">.storybook/</span>                 <span class="tree-comment"># UI 확인</span>
 │     └─ <span class="tree-folder app">src/</span>                        <span class="tree-comment"># Source · Story · Test</span>
@@ -217,8 +217,8 @@
                 <b>FRONT-END SOURCE</b>
                 <h3>front-end/</h3>
                 <p>
-                  <strong>webview/</strong>는 WebView 화면 참고 골격, 실제 소스와
-                  Flutter Native는 별도 저장소
+                  <strong>webview/</strong>는 WebView 화면 소스, Build와 배포도 여기서
+                  수행. Flutter Native만 별도 위치
                 </p>
               </article>
               <article class="card-surface tone-ai">

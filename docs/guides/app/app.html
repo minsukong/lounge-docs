@@ -2192,7 +2192,7 @@ flowchart TD
       <section>
         <h2 class="bx-active">13. Project Structure</h2>
         <p>
-          Flutter Native source와 설정은 별도 저장소, WebView Front-end
+          Flutter Native source와 설정은 별도 위치, WebView Front-end
           source와 설정은 <code>front-end/webview</code>, 구현과 검토 문서는
           <code>docs</code>에서 관리합니다. API와 Bridge는 승인된 계약과 실제
           사용처를 기준으로 앱 내부에 연결합니다.
@@ -2201,7 +2201,7 @@ flowchart TD
         <h3>저장소 구조</h3>
         <pre class="hljs"><code data-language="text">&lt;repository-root&gt;/
 ├── AGENTS.md                    # 저장소 전체 구현 지침
-├── front-end/                   # Front-end 참고 골격 (실제 소스는 별도 저장소)
+├── front-end/                   # Front-end 소스 (WebView · FO 웹 · PO · OO)
 │   └── webview/                 # 앱 내 Next.js WebView
 │       ├── AGENTS.md            # 앱 전용 구현 지침
 │       ├── .storybook/          # Storybook 설정
