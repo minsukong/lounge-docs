@@ -534,8 +534,11 @@ flowchart LR
             파일은 사용 직후 삭제한 뒤 기존 화면으로 복귀합니다.
           </li>
           <li>
-            뒤로가기는 Native 화면에서 Native Navigation을 우선 처리하고,
-            WebView 화면에서는 Web History를 우선 적용합니다.
+            뒤로가기·상위 이동·완료·취소·닫기는 화면의 목적과 진입 경로에 따라
+            구분합니다. 안전한 앱 내부 이전 화면이 확인된 경우에만 이력으로
+            돌아가며, 그 외에는 합의된 내부 목적지를 사용합니다. 한 번의 입력은
+            Native와 Web 중 정해진 담당만 처리하고, 세부 조건은
+            <a href="../../workflow/contract-review.md#이동복귀-검토">이동·복귀 계약 검토</a>에서 합의합니다.
           </li>
           <li>
             Deep Link와 Push는 임의 URL을 직접 열지 않습니다. Native가 Scheme,
