@@ -1,6 +1,8 @@
-# 더라운지 3.0 업무 지침 — 운영 기준
+# 더라운지 3.0 업무 지침 — 구축·운영 작업 기준
 
 이 업무 지침은 기획·IA를 검토 가능한 명세와 작은 작업으로 바꾸고, `front-end/`에서 구현·검증하는 기준입니다. 문서 영역(`docs/`)과 구현 영역(`front-end/`)을 구분합니다.
+
+이 지침은 초기 구축의 요구사항 확인·설계·구현·검증부터 배포 준비와 운영 중 변경·유지 관리까지 이어서 사용합니다. 현재 작업 단계와 확인된 근거에 맞는 항목을 선택하고, 준비할 기준과 실제 적용·검증 결과를 구분해 기록합니다.
 
 AI는 [AI 작업 진입](AGENTS.md)에서 요청에 필요한 문서·섹션을 선택합니다. 이 문서 전체를 먼저 읽는 것은 필수가 아닙니다.
 
@@ -29,13 +31,13 @@ lounge-docs/
 │   ├── guides/                            ← 상세 가이드 (app, web, testing 등)
 │   ├── search/                            ← 검색 인덱스
 │   ├── templates/
-│   └── workflow/                          ← 안내·운영 원본 통합
+│   └── workflow/                          ← 안내·작업 기준 원본 통합
 │       ├── index.md                       ← 문서별 역할과 연결
 │       ├── index.html                     ← 사람용 HTML 안내
 │       ├── guide.css                      ← 안내 전용 스타일
 │       ├── AGENTS.md                      ← 요청별 문서·스킬 매핑
 │       ├── README.md                      ← 이 문서: 공통 기준
-│       ├── usage-guide.md                 ← 상세 운영 예시
+│       ├── usage-guide.md                 ← 구축·운영 작업 예시
 │       ├── task-card.md                   ← 카드 양식
 │       ├── spec-template.md               ← 명세 양식
 │       ├── contract-review.md             ← API·Bridge 계약 양식
@@ -43,7 +45,7 @@ lounge-docs/
 │       ├── progress.md                    ← IA 후보 + 작업 대시보드
 │       ├── ia-baseline.md                 ← IA 신뢰도·충돌 처리
 │       ├── ia-audit.md                    ← 자동 대조 결과
-│       ├── ia-inventory.csv               ← 원본 ID 추출 (587행)
+│       ├── ia-inventory.csv               ← 원본 ID 추출 (550개 레코드)
 │       ├── agent-adapters.md              ← 도구 연결 안내
 │       ├── implementation-report.md       ← 적용 보고서
 │       ├── skills/                        ← 공용 스킬 원본 (9개)
@@ -57,7 +59,7 @@ lounge-docs/
 ├── front-end/                             ← Front-end 소스 (webview/)
 ├── tokens/                                ← design tokens
 └── work/                                  ← IA 원본·검토 자료 전용
-    ├── AGENTS.md                          ← "운영 기준은 docs/workflow" 명시
+    ├── AGENTS.md                          ← "작업 기준은 docs/workflow" 명시
     └── 더라운지_IA FO_v0.2.xlsx/          ← IA HTML 원본 (수정하지 않음)
 ```
 
@@ -65,7 +67,7 @@ lounge-docs/
 
 | 위치 | 역할 | 비고 |
 |------|------|------|
-| `docs/workflow/` | 사람용 안내·HTML과 운영 기준·양식·결정·IA 대조·스킬·스크립트 | 문서 연결은 index.md, 기준은 README.md, 사용 순서는 usage-guide.md |
+| `docs/workflow/` | 사람용 안내·HTML과 구축·운영 작업 기준·양식·결정·IA 대조·스킬·스크립트 | 문서 연결은 index.md, 기준은 README.md, 사용 순서는 usage-guide.md |
 | `work/더라운지_IA FO_v0.2.xlsx/` | IA 원본 HTML | 읽기 전용으로 참조 |
 | `front-end/` | Front-end 소스·설정·Story | WebView 화면은 `front-end/webview/`. Flutter Native는 별도 위치 |
 

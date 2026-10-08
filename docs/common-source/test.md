@@ -116,7 +116,7 @@ export function renderWithProviders(
 }
 ```
 
-운영 QueryClient를 재사용하지 않는 이유는 테스트 간 캐시와 재시도를 분리하기 위해서입니다. Redux, Router, Theme Provider 등이 실제로 생기면 테스트용 Wrapper에 필요한 Provider만 추가합니다.
+앱의 QueryClient를 테스트에 재사용하지 않는 이유는 테스트 간 캐시와 재시도를 분리하기 위해서입니다. Redux, Router, Theme Provider 등이 실제로 생기면 테스트용 Wrapper에 필요한 Provider만 추가합니다.
 
 ## Query 컴포넌트 테스트 예시
 

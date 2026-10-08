@@ -21,8 +21,8 @@
 
 | 구분 | 범위 | 기술 기준 |
 | --- | --- | --- |
-| Flutter Native | 하이브리드 앱의 Native 영역과 WebView 연동 | Flutter 기반. Native 기능의 상세 범위와 Bridge 계약은 `TBD` |
-| 앱 내부 WebView | Flutter 앱에서 WebView로 실행되는 웹 화면 | 아래 WebView 기술 스택 적용 |
+| Flutter Native | 하이브리드 앱의 Native 영역과 WebView 연동 | Flutter 기반. Native 화면 후보는 현재 APP IA의 Native View 항목을 따름. 지원 기능의 상세 범위와 Bridge 계약은 `TBD` |
+| 앱 내부 WebView | Flutter 앱에서 WebView로 실행되는 웹 화면. 현재 APP IA의 대부분 업무 화면은 WebView | 아래 WebView 기술 스택 적용 |
 | FO 웹(PC WEB·반응형 홈페이지) | `01.FO_WEB_IA.html`의 사용자 웹 영역. AS-IS 홈페이지를 참고 | WebView와의 스택·기능 공유 범위는 `TBD` |
 | PO(파트너오피스) | `03.PO_IA.html`의 파트너 업무 영역 | 스택·지원 환경·공유 범위·담당은 `TBD` |
 | OO(현장운영시스템) | `04.OO_IA.html`의 현장 운영 영역 | 스택·지원 환경·공유 범위·담당은 `TBD` |

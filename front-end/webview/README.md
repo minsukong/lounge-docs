@@ -18,3 +18,11 @@ webview/
     ├── lib/
     └── test/
 ```
+## 작업 시작과 검증
+
+기술 구현 기준은 개발 가이드에서 확인하고, 이번 작업의 근거·허용 범위·착수 조건·결과 기록은 workflow에 연결합니다. skills는 요청에 맞는 확인·판단·구현·리뷰 방법을 제공하며, 필요한 항목만 선택합니다.
+
+- 팀 공용 절차: [업무 지침 안내](../../docs/workflow/index.html)
+- 구현 준비: [현재 기준 작업 가능한 내용](../../docs/workflow/available-work.html)
+- AI 요청별 문서·스킬 선택: [AI 작업 진입](../../docs/workflow/AGENTS.md)
+- 스킬 연결과 사용: [공용 스킬 안내](../../docs/workflow/skills/AGENTS.md)

@@ -1,5 +1,8 @@
 <!doctype html><html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>더라운지 3.0 업무 지침 안내</title><link rel="stylesheet" href="../assets/style/presentation-theme.css"><link rel="stylesheet" href="guide.css"></head><body><header><div class="type">팀 공용 업무 지침</div><h1>더라운지 3.0 업무 지침 안내</h1><p>기획 확인·협의·작업·검증·기록을 진행하는 기준</p></header><main><section><h2>1. 업무 지침 빠른 시작</h2><p>이 문서는 더라운지 3.0의 실제 업무를 진행하는 팀 공용 지침입니다. 기획 확인·Backend 및 앱 협의·작업 분해·착수 판단·구현·검증·이력을 연결합니다. 업무 지침과 기록은 docs/workflow에서 관리하고, 기술·구현 방법을 참고할 때는 docs/guides를 사용합니다.</p>
-<h3>사람은 여기서 시작</h3><ul><li>문서별 역할과 연결은 이 안내에서 확인합니다.</li><li>실제 작업 순서와 요청 예시는 <a href="usage-guide.md">업무 지침 사용법</a>, 착수·완료의 세부 기준은 <a href="README.md">업무 운영 기준</a>의 해당 항목을 봅니다.</li></ul>
+<p>이 지침은 초기 구축의 요구사항 확인·설계·구현·검증부터 배포 준비와 운영 중 변경·유지 관리까지 이어서 사용합니다. 현재 작업 단계와 확인된 근거에 맞는 항목을 선택하고, 준비할 기준과 실제 적용·검증 결과를 구분해 기록합니다.</p>
+<h3>개발 가이드와 workflow·skills의 역할</h3><p>개발 가이드는 기술·구조·품질 기준을 설명하고, workflow는 그 기준을 실제 요청의 근거 확인·범위 결정·구현·검증·기록으로 연결합니다. skills는 요청 종류에 맞는 확인·판단·결과 작성 방법을 제공하는 실행 지침입니다. 이번 작업에 필요한 문서와 스킬만 선택하며 모든 지침을 매번 읽지는 않습니다.</p>
+<ul><li>먼저 할 수 있는 구현 범위: <a href="available-work.html">현재 기준 작업 가능한 내용</a></li><li>질문·명세·구현·리뷰의 실행 지침: <a href="skills/AGENTS.md">공용 스킬 선택과 사용</a></li><li>스킬의 배경: <a href="#workflow-skill-origin">Matt 원본 출처와 프로젝트 적용 의도</a></li></ul>
+<h3>사람은 여기서 시작</h3><ul><li>문서별 역할과 연결은 이 안내에서 확인합니다.</li><li>실제 작업 순서와 요청 예시는 <a href="usage-guide.md">업무 지침 사용법</a>, 착수·완료의 세부 기준은 <a href="README.md">업무 구축·운영 기준</a>의 해당 항목을 봅니다.</li></ul>
 <h3>AI는 요청에 필요한 부분부터</h3><p><a href="AGENTS.md">AI 작업 진입</a>의 최소 실행 기준과 요청별 표에서 경로를 선택합니다. 이 안내·사용법·전체 양식을 모두 읽는 것은 작업의 선행 조건이 아닙니다. 적용 지침과 선택한 스킬의 필수 읽기를 지키고, 이번 요청에 필요한 근거만 연결합니다.</p>
 <h3>문서 간 연결</h3><p>업무 요청·기획 확인 → 필요한 결정·계약 협의 → 기능 명세(필요할 때) → 실제 작업 카드 → 진행 현황으로 연결합니다. 모든 자료를 복사하지 않고 기존 ID와 근거 링크를 이어갑니다.</p>
 <table><thead><tr><th scope="col">문서</th><th scope="col">연결할 기록</th></tr></thead><tbody>
@@ -10,14 +13,14 @@
 <tr><th scope="row"><a href="progress.md">진행 현황</a></th><td>실제 카드의 Ready·진행 상태·차단 조건만 요약한다. 상세 근거는 카드에 두며 IA 후보를 자동으로 작업으로 바꾸지 않는다.</td></tr>
 <tr><th scope="row"><a href="ia-baseline.md">IA 기준</a></th><td>IA 원본 → ia-inventory.csv → ia-audit.md로 출처를 추적한다. IA ID와 DEC·카드 ID를 구분한다.</td></tr>
 </tbody></table><p>현재 Backend 협의가 충분히 이루어지지 않은 상태이므로 기획 확인과 연동 계약 확인을 구분합니다. 질문 해소와 실제 구현·통합 완료는 별도로 기록합니다.</p>
-</section><hr><section><h2>2. 계층 구조와 생성 이유</h2><p>루트에 상세 내용을 모두 복사하면 규칙이 중복되고 달라지기 쉽습니다. 공통 규칙은 루트, 문서 기준은 docs, 운영 절차는 docs/workflow, 실행 지침은 skills에 둡니다. 자동 계층 읽기를 지원하지 않는 AI에는 필요한 경로를 직접 알려줍니다.</p>
+</section><hr><section><h2>2. 계층 구조와 생성 이유</h2><p>루트에 상세 내용을 모두 복사하면 규칙이 중복되고 달라지기 쉽습니다. 공통 규칙은 루트, 문서 기준은 docs, 구축·운영 작업 절차는 docs/workflow, 실행 지침은 skills에 둡니다. 자동 계층 읽기를 지원하지 않는 AI에는 필요한 경로를 직접 알려줍니다.</p>
 <article class="wf-file"><h3><a href="../../AGENTS.md">AGENTS.md</a></h3><p>저장소 공통 규칙과 상세 영역의 진입 경로. 모든 작업에서 먼저 확인합니다.</p></article>
 <article class="wf-file"><h3><a href="../AGENTS.md">docs/AGENTS.md</a></h3><p>문서 편집 기준과 workflow 영역 안내. 문서 작업에서 먼저 확인합니다.</p></article>
 <article class="wf-file"><h3><a href="AGENTS.md">docs/workflow/AGENTS.md</a></h3><p>질문별로 읽을 문서와 사용할 스킬을 연결합니다. 기록 책임도 안내합니다.</p></article>
 <article class="wf-file"><h3><a href="skills/AGENTS.md">docs/workflow/skills/AGENTS.md</a></h3><p>스킬 선택과 공용 원본 편집 기준. 스킬 추가·수정 시 읽습니다.</p></article>
 <article class="wf-file"><h3><a href="scripts/AGENTS.md">docs/workflow/scripts/AGENTS.md</a></h3><p>검사·IA 대조·내보내기의 실행 범위를 설명합니다. 실행 전에 읽습니다.</p></article>
-</section><hr><section><h2>3. 운영 안내 파일</h2><p>기준·사용법·도구 연결·적용 이력을 구분하여 각 문서가 한 가지 책임을 갖게 했습니다.</p>
-<article class="wf-file"><h3><a href="README.md">docs/workflow/README.md</a></h3><p>팀 공통 운영 기준. 흐름·Phase·Ready·진행·계약·검증을 정의합니다. 착수와 완료 판단 시 읽습니다.</p></article>
+</section><hr><section><h2>3. 구축·운영 작업 안내 파일</h2><p>기준·사용법·도구 연결·적용 이력을 구분하여 각 문서가 한 가지 책임을 갖게 했습니다.</p>
+<article class="wf-file"><h3><a href="README.md">docs/workflow/README.md</a></h3><p>팀 공통 구축·운영 작업 기준. 흐름·Phase·Ready·진행·계약·검증을 정의합니다. 착수와 완료 판단 시 읽습니다.</p></article>
 <article class="wf-file"><h3><a href="usage-guide.md">docs/workflow/usage-guide.md</a></h3><p>새 팀원의 실제 사용 안내. 읽는 순서·작업 위치·요청 예시를 설명합니다. 처음 참여할 때 읽습니다.</p></article>
 <article class="wf-file"><h3><a href="agent-adapters.md">docs/workflow/agent-adapters.md</a></h3><p>AI 도구별 선택적 연결 안내. 직접 파일 읽기가 기본이며 스킬 내보내기는 선택 사항입니다.</p></article>
 <article class="wf-file"><h3><a href="implementation-report.md">docs/workflow/implementation-report.md</a></h3><p>생성·변경 이유와 적용·검증 이력. 초기 Cline 구성부터 도구 중립 전환과 전용 폴더 제거까지 기록합니다. 과거 검사 수치는 당시 결과입니다.</p></article>
@@ -27,7 +30,7 @@
 <article class="wf-file"><h3><a href="decisions.md">docs/workflow/decisions.md</a></h3><p>생성 이유: 미정 질문을 대화 밖에서 담당과 근거로 추적하기 위해서입니다. 내용: <code class="badge-tbd">TBD</code>·Proposed·Confirmed·Rejected·Superseded. 사용: 결정이 생길 때 갱신하며 AI 제안만으로 Confirmed로 바꾸지 않습니다.</p></article>
 <article class="wf-file"><h3><a href="contract-review.md">docs/workflow/contract-review.md</a></h3><p>생성 이유: FE·BE·Native 협의 누락을 드러내기 위해서입니다. 내용: API 필드·인증·오류·재시도·중복 요청·캐시와 Bridge 메시지·준비·취소·권한·뒤로가기·기기 검증. 사용: 계약 협의와 변경 시 활용합니다. 체크 완료가 계약 승인은 아닙니다.</p></article>
 <article class="wf-file"><h3><a href="progress.md">docs/workflow/progress.md</a></h3><p>생성 이유: 팀의 현재 작업과 다음 행동을 보여주기 위해서입니다. 실제 카드 요약과 기존 IA 후보를 구분합니다. 시작·차단·리뷰·완료 시 갱신합니다. 기존 135개 후보는 승인된 개발량이나 완료 목록이 아닙니다.</p></article>
-</section><hr><section><h2>5. IA 자료의 역할과 신뢰도</h2><p>IA는 화면과 메뉴의 뼈대이며 확정 정책을 대신하지 않습니다. 더라운지_IA FO_v0.2.xlsx는 HTML 내보내기 폴더입니다. 원본은 보존합니다. 현재 587개 추출 레코드는 작업 수가 아니며 병합 셀 의미를 자동 추론하지 않습니다.</p>
+</section><hr><section><h2>5. IA 자료의 역할과 신뢰도</h2><p>IA는 화면과 메뉴의 뼈대이며 확정 정책을 대신하지 않습니다. 더라운지_IA FO_v0.2.xlsx는 HTML 내보내기 폴더입니다. 원본은 보존합니다. 현재 550개 추출 레코드는 작업 수가 아니며 병합 셀 의미를 자동 추론하지 않습니다.</p>
 <article class="wf-file"><h3><a href="ia-baseline.md">docs/workflow/ia-baseline.md</a></h3><p>IA 활용 범위·원본·충돌 처리·추출 제한을 설명합니다. 기능 선정 전에 읽습니다.</p></article>
 <article class="wf-file"><h3><a href="ia-inventory.csv">docs/workflow/ia-inventory.csv</a></h3><p>원본 파일·행·화면 ID·문맥·해시를 기록한 생성 자료입니다. 검색과 추적에 사용하며 직접 고치지 않습니다.</p></article>
 <article class="wf-file"><h3><a href="ia-audit.md">docs/workflow/ia-audit.md</a></h3><p>파일별 ID와 progress 후보의 대조 자료입니다. ID 존재가 이름·담당·정책의 정확성을 보장하지 않습니다.</p></article>

@@ -44,7 +44,7 @@
 </section><hr>
 <section>
 <h2>3. 소스는 어디에 두고 무엇을 먼저 만드는가</h2>
-<p>Front-end 소스는 이 저장소 <code>front-end/</code>에서 관리합니다. Flutter 앱에서 WebView로 실행되는 화면은 <code>front-end/webview/</code>, FO 웹(PC WEB·반응형 홈페이지)과 PO(파트너오피스)·OO(현장운영시스템)은 <code>front-end/</code> 아래 별도 영역으로 둡니다. Flutter Native 앱만 별도 위치에 있으며, WebView 화면과는 합의된 Bridge 계약으로 연결합니다. <code>front-end/webview/</code>에는 아직 package와 설정이 없으므로, 첫 작업은 이 위치에 앱을 만드는 것부터 시작합니다.</p>
+<p>Front-end 소스는 이 저장소 <code>front-end/</code>에서 관리합니다. Flutter 앱에서 WebView로 실행되는 화면은 <code>front-end/webview/</code>, FO 웹(PC WEB·반응형 홈페이지)과 PO(파트너오피스)·OO(현장운영시스템)은 <code>front-end/</code> 아래 별도 영역으로 둡니다. APP IA의 업무 화면은 대부분 WebView이며, Native 잔여 항목은 <a href="ia-audit.md#app에서-native로-남은-행">현재 원본 View 대조</a>를 따릅니다. 파일 제목만으로 APP 전체를 Native로 분류하지 않습니다. Flutter Native 앱만 별도 위치에 있으며, WebView 화면과는 합의된 Bridge 계약으로 연결합니다. <code>front-end/webview/</code>에는 아직 package와 설정이 없으므로, 첫 작업은 이 위치에 앱을 만드는 것부터 시작합니다.</p>
 <p>웹 영역은 <strong>앱 WebView / FO 웹 / PO / OO</strong>로 구분합니다. FO 웹은 <a href="https://theloungemembers.com/renew/">기존 더라운지 홈페이지</a>를 AS-IS로 참고하는 사용자 웹이며, PO·OO와 서로 대체되는 명칭이 아닙니다. FO 웹·PO·OO의 하위 폴더와 공통화 범위는 아직 정하지 않습니다. <a href="ia-baseline.md">IA 영역별 근거</a>를 확인한 뒤 필요한 구조를 정합니다.</p>
 <figure class="diagram" aria-label="같은 저장소 안의 Front-end 영역과 별도 위치에 있는 Flutter Native의 역할 구분">
 <div class="grid">
@@ -160,7 +160,7 @@
 <h2>8. 착수할 때 사용할 공통 기준</h2>
 <ul><li>front-end/의 현재 파일과 그 근처의 지침을 문서 예시보다 우선합니다.</li><li>첫 작업은 Foundation과 확인된 소수의 UI·Storybook으로 범위를 정합니다.</li><li>디자인 확인과 API·Native 계약 확인은 나누어 보고, 정해지지 않은 부분은 영향을 받는 범위만 보류합니다.</li><li>완료 보고에는 변경한 파일, Story 상태, 실제 검사 결과, 검증하지 못한 환경과 다음 행동을 함께 적습니다.</li><li>IA 후보의 수나 UI 검수 완료를 전체 개발량이나 기능 통합 완료로 표시하지 않습니다.</li></ul>
 <p>이 문서에서 다음으로 할 일은 팀이 이 범위를 함께 검토하는 것입니다. 구현이 승인되면 front-end/webview/의 현재 파일을 확인한 뒤, 첫 작업 묶음의 구체적인 파일과 완료 조건을 정해서 진행하면 됩니다.</p>
-<p><a href="index.html">업무 지침 안내</a> · <a href="README.md">업무 운영 기준</a> · <a href="../ai/project.md">프로젝트 범위와 기술 기준</a></p>
+<p><a href="index.html">업무 지침 안내</a> · <a href="README.md">업무 구축·운영 기준</a> · <a href="../ai/project.md">프로젝트 범위와 기술 기준</a></p>
 </section>
 </main><footer><p>더라운지 3.0 현재 기준 작업 가능한 내용</p></footer>
 <script src="../assets/js/common.js"></script>

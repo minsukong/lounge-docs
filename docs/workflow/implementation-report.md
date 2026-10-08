@@ -9,7 +9,7 @@
 사용자의 후속 요청에 따라 Cline 전용 복사본·룰·호환 설치 명령은 제거했습니다. 공용 원본과 계층 안내만 유지합니다. 새 export_skills.py는 선택한 도구의 프로젝트 위치 또는 manual 위치로 내보내고, 문서 연결을 상대 경로 중심으로 기록하며 기존 사용자 변경을 보호합니다. 현재 도구 독립 구조의 검증은 아래 최종 검증에 별도로 기록합니다.
 
 ## 적용 범위
-기준 저장소는 C:/Users/mansu/Desktop/lounge/lounge-docs입니다. docs/workflow의 세 기존 문서를 개편하고, 도구 독립적인 프로젝트 스킬 아홉 개와 운영·계약·IA 근거·검증 도구를 추가했습니다.
+기준 저장소는 C:/Users/mansu/Desktop/lounge/lounge-docs입니다. docs/workflow의 세 기존 문서를 개편하고, 도구 독립적인 프로젝트 스킬 아홉 개와 구축·운영 작업 기준·계약·IA 근거·검증 도구를 추가했습니다.
 
 Strata·Qwen·Cline 설정이나 실제 제품 코드는 변경하지 않았습니다. 원본 Matt 번들 전체 설치, 외부 Issue/PR 게시, commit·push·merge·배포는 수행하지 않았습니다.
 
@@ -74,7 +74,7 @@ Matt의 작은 지침 조합, 명세 보존, 검수 가능한 작업, 실제 blo
 
 ## IA 해석
 
-사용자 설명에 따라 MO_WEB은 앱 WebView, WEB은 FO 웹(PC WEB·반응형 홈페이지), 판매채널은 추가 정보가 필요한 범위, PO는 파트너오피스로 연결했습니다. APP 원본 제목은 Native 영역 정의이지만 Native·webview 행이 섞여 있음을 확인했습니다.
+사용자 설명에 따라 MO_WEB은 앱 WebView, WEB은 FO 웹(PC WEB·반응형 홈페이지), 판매채널은 추가 정보가 필요한 범위, PO는 파트너오피스로 연결했습니다. APP은 사용자 수정 후 대부분 WebView로 구분하며, 원본 View가 Native인 5개 ID만 Native 화면 후보로 남깁니다. 기존 제목의 Native 영역 정의로 전체 APP을 Native로 해석하지 않습니다. 원본 행·ID와 추출 주의 사항은 ia-audit에서 확인합니다.
 
 추출은 정확한 ID 패턴의 셀 텍스트 기준입니다. 병합 셀의 메뉴 의미·취소선·기획 승인·서비스 공유·최종 담당을 자동 판정하지 않습니다. 이 제한 때문에 파생 수치를 개발량으로 사용하지 않습니다.
 
@@ -112,7 +112,7 @@ DEC-002~005는 인증·회원 정책·주문/결제·Bridge 계약입니다. DEC
 | 앱 typecheck·lint·test·Storybook·Build | N/A. 제품 코드 변경 없음, 실제 package 미확인 |
 | Android/iOS 실기기 통합 | Not Run. 제품 기능 구현 없음 |
 
-파생 ID 수는 MO 127, APP 226, WEB 167, 판매채널 14, PO 9, OO 44입니다. 이는 각 파일에서 추출한 고유 ID 수이며 파일 간 중복과 기능의 관계를 보정한 개발량이 아닙니다.
+현재 파생 ID 수는 MO 127, APP 193, WEB 161, 판매채널 14, PO 9, OO 44이며 추출 레코드는 550개입니다. APP의 중복 ID는 행별로 보존하고, 상품 등 ID 공백·수식 오류와 WEB 이벤트의 ID 공백을 기능 삭제로 해석하지 않습니다. 이는 각 파일에서 추출한 고유 ID 수이며 파일 간 중복과 기능의 관계를 보정한 개발량이 아닙니다.
 
 기존 원본 세 문서 백업: C:/Users/Public/Documents/ESTsoft/CreatorTemp/lounge-workflow-backup-q9guh5pq/
 복사 도구 검증용 임시 workspace: C:/Users/Public/Documents/ESTsoft/CreatorTemp/lounge-cline-smoke-3juv87x8/
@@ -176,7 +176,7 @@ DEC-002~005는 인증·회원 정책·주문/결제·Bridge 계약입니다. DEC
 
 제거 전 백업: C:/Users/Public/Documents/ESTsoft/CreatorTemp/lounge-remove-cline-backup-ljb4zgn0/
 
-## 운영 원본 위치 통합
+## 작업 기준 원본 위치 통합
 
 현재 기준은 docs/workflow/입니다. 공용 스킬은 skills/, 보조 도구는 scripts/에서 관리합니다. 사람용 설명·HTML은 같은 폴더의 index.md·index.html에 통합하며 IA 원본은 work/에 보존합니다. 기존 코드 workspace의 내보내기본은 같은 명령으로 미리보기 후 갱신할 수 있습니다.
 

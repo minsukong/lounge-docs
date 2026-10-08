@@ -11,7 +11,7 @@
 | `[TBD]_api-layers.md` | API 레이어별 통신 구조 및 인증 | TBD |
 | `[TBD]_webview-bridge.md` | WebView ↔ Native(Bridge) 통신 흐름 | TBD |
 | `[TBD]_frontend-internal.md` | Front-end(webview) 내부 구조 | TBD |
-| `index.html` | 폴더 가이드 — 목적, Archify 활용 기준, 운영 기준과 데모 임베드 | 유지 관리 |
+| `index.html` | 폴더 가이드 — 목적, Archify 활용 기준, 작성·갱신·공유 기준과 데모 임베드 | 유지 관리 |
 | `archify-demo-web-app.html` | Archify 예제 "Sample Web App" 인터랙티브 HTML 데모 | 데모 |
 | `build-scenario-webview.workflow.json` | webview 빌드·검증·배포 예상 흐름의 Archify workflow 기준 원본 | 가상 시나리오 · showcase 검증 통과 |
 | `build-scenario-webview.html` | workflow JSON에서 생성한 셀프컨테이너 인터랙티브 HTML | Archify 생성물 |

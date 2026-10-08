@@ -26,6 +26,7 @@
           않은 설계를 미리 고정하지 않고, 변경과 유지보수가 쉬운 구현을 위한
           최소 기준만 제공합니다.
         </p>
+        <p><strong>실제 작업으로 연결:</strong> 이 가이드는 기술·구조·품질 기준을 설명합니다. 작업의 근거·범위·착수 조건·구현·검증·기록은 <a href="../../workflow/index.html">업무 지침(workflow)</a>으로 연결합니다. <a href="../../workflow/AGENTS.md">AI 작업 진입</a>에서 요청에 맞는 실행 스킬을 선택하고, 선행 구현 범위는 <a href="../../workflow/available-work.html">현재 기준 작업 가능한 내용</a>에서 확인합니다.</p>
         <h3>1.1 핵심 원칙</h3>
         <ul>
           <li>
@@ -80,6 +81,7 @@
 
       <section>
         <h2 class="bx-active">2. 서비스 및 Native-WebView 역할</h2>
+        <p>앱 화면의 구현 구분은 현재 <code>01.FO_APP_IA.html</code>의 View를 따릅니다. 업무 화면은 대부분 WebView이며, Native로 남은 항목은 <a href="../../workflow/ia-audit.md#app에서-native로-남은-행">IA 원본 행·ID 대조</a>에서 확인합니다. 화면이 WebView여도 기기 기능·외부 앱 실행에 필요한 Native 지원과 Bridge 계약은 별도로 검토합니다.</p>
 
         <figure class="diagram-frame">
           <!-- prettier-ignore -->
@@ -353,7 +355,7 @@ flowchart LR
           </li>
         </ol>
 
-        <h3>4.4 저장소 운영 기준</h3>
+        <h3>4.4 저장소 관리·배포 기준</h3>
         <ul>
           <li>
             Flutter Native 앱과 WebView Front-end는 Pipeline, 환경 설정,
@@ -969,8 +971,8 @@ flowchart TD
             UI를 탐색하고 독립적으로 렌더링하여 주요 상태, Viewport, 접근성과
             Interaction을 확인하는 UI 개발·검수 환경으로 사용합니다. 실제 Routing,
             Backend 연동, Native 기능과 전체 E2E 검증은 애플리케이션 환경에서 별도로
-            수행합니다. Story 작성 대상과 반자동 운영 기준은
-            <a href="../storybook/index.html">Storybook 운영 가이드</a>를
+            수행합니다. Story 작성 대상과 반자동 작성·검수·유지 관리 기준은
+            <a href="../storybook/index.html">Storybook 구축·운영 가이드</a>를
             따릅니다.
           </li>
         </ul>

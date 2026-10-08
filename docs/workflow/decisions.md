@@ -15,7 +15,7 @@
 | DEC-005 | Bridge 명령·응답·버전·수명 주기·플랫폼 차이 | TBD | Native·FE | Native 기능 호출 | 계약 TBD |
 | DEC-006 | 판매채널 기능·사용자·서비스 구분·담당 | TBD | 사용자·기획·BE | 판매채널 착수 범위 | 사용자: 추가 정보 필요 |
 | DEC-007 | PO·OO의 과업 포함 여부·담당·검수 책임 | TBD | 사용자·프로젝트 담당 | PO·OO 구현 착수 | 담당 미정. OO HTML은 존재 |
-| DEC-008 | MO/APP/WEB 중복 화면·ID 충돌과 실제 메뉴 범위 | TBD | 기획·FE·Native | 영향받는 카드의 화면 매핑 | ia-audit와 ia-inventory. `FO_APP`(226)·`FO_WEB`(167)는 MO 목록과 다른 절단면이며 `FO-PRD`(상품), `FO-AIR`(공항안내), `FO-COU`(쿠폰북), `FO-SCM-C04*`~`C13*`(사용처 유형별 상세)는 MO에 대응 없음. `FO-MEM-C10*` 9개는 원본 화면명 공백 |
+| DEC-008 | MO/APP/WEB 중복 화면·ID 충돌과 실제 메뉴 범위 | TBD | 기획·FE·Native | 영향받는 카드의 화면 매핑 | ia-audit와 ia-inventory. `FO_APP`(193)·`FO_WEB`(161)는 MO 목록과 다른 절단면이며 APP은 대부분 WebView이며 Native 잔여 5개 ID는 원본 View 기준. 상품·일부 사용처·WEB 이벤트의 ID 공백/수식 오류와 사용처 중복 ID·재편을 확인해야 함. `FO-MEM-C10*` 9개는 내 여정 관리로 확인됨. 과거 ID를 현재 ID로 임의 대응시키거나 ID 미추출을 기능 제외로 확정하지 않음 |
 | DEC-009 | FO 웹·PO·OO의 스택·기능 공유·화면별 환경 차이 | TBD | FE·프로젝트 담당 | 공유 구조·웹 연동 판단 | 사용자 과업은 확인, 상세 공유 전략은 project.md에서 TBD |
 | DEC-010 | API mock 필요 여부·계약 버전·관리 책임 | TBD | FE·BE·프로젝트 담당 | Contract-Mock 사용 | 계약 전 생성 금지 |
 | DEC-011 | Front-end WBS 중 IA에 근거가 없는 항목의 범위 포함 여부 | TBD | 사용자·기획·프로젝트 담당 | 해당 항목의 착수·견적 | 경영진 대시보드, K리무진 본사운영·홈페이지 구분, 결함 수정·안정화 공수는 IA v0.2와 `docs/` 어디에도 검색되지 않음. eSIM(`FO-SCM-C05*`)과 K공항리무진(`FO-SCM-C07*`, `OO-OOS-J*`~`O*`)은 원본에 존재 |

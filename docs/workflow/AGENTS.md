@@ -7,7 +7,7 @@
 1. 사용자 요청의 대상·행동·결과를 확인하고 아래 표에서 해당 경로만 선택합니다. 작은 문구·스타일 수정에는 명세·카드·전체 절차를 추가하지 않습니다.
 2. 정책·API·인증·Bridge·담당을 추측하지 않습니다. 기획 확인과 Backend·앱 계약 협의를 구분하고, 미확인 부분은 근거와 질문으로 남깁니다.
 3. 구현은 실제 카드·소스·설정에서 허용 범위와 코드 위치를 확인합니다. 구현 위치는 `front-end/`이며, `docs/`는 제품 구현 위치로 가정하지 않습니다.
-4. Ready는 이번 범위의 착수 조건, 진행 상태는 실제 작업 상태입니다. 질문 해소·UI 완료·계약 검토만으로 기능 통합 완료를 표시하지 않습니다. 판정이 필요할 때 [운영 기준](README.md)의 해당 섹션을 읽습니다.
+4. Ready는 이번 범위의 착수 조건, 진행 상태는 실제 작업 상태입니다. 질문 해소·UI 완료·계약 검토만으로 기능 통합 완료를 표시하지 않습니다. 판정이 필요할 때 [구축·운영 작업 기준](README.md)의 해당 섹션을 읽습니다.
 5. 기존 변경·ID·결정 이력을 보존하고 요청된 범위만 수정합니다. 외부 요청·게시·원본 변경은 사용자에게 허용된 범위에서만 수행합니다.
 6. 수행한 작업·검증·미확인 범위·다음 행동을 대상 문서나 실제 카드에 남깁니다. 확인하지 않은 원본·계약·실행 결과를 확인 완료로 기록하지 않습니다.
 
@@ -18,7 +18,7 @@
 | 요구사항·정책 질문 정리 | [결정 기록](decisions.md)의 관련 항목 + 지정 IA·기획 | [lounge-grill](skills/lounge-grill/SKILL.md) |
 | 여러 카드의 기능 명세 | [명세 양식](spec-template.md) + 관련 합의·결정 근거 | [lounge-spec](skills/lounge-spec/SKILL.md) |
 | 작업 분해·담당·의존성 | [작업 카드 양식](task-card.md) + 관련 명세 | [lounge-tickets](skills/lounge-tickets/SKILL.md) |
-| UI·연동 착수 판단 | 실제 카드 + [운영 기준](README.md)의 “Ready와 진행 상태는 별도”, “API·Bridge 미정 시” | [lounge-ready](skills/lounge-ready/SKILL.md) |
+| UI·연동 착수 판단 | 실제 카드 + [구축·운영 작업 기준](README.md)의 “Ready와 진행 상태는 별도”, “API·Bridge 미정 시” | [lounge-ready](skills/lounge-ready/SKILL.md) |
 | API 계약 확인 | [계약 검토](contract-review.md)의 API·공통 기록 + 해당 실제 계약·카드 | [lounge-api-review](skills/lounge-api-review/SKILL.md) |
 | Flutter/WebView 경계 | [계약 검토](contract-review.md)의 Bridge·공통 기록 + 실제 계약·카드 | [lounge-bridge-review](skills/lounge-bridge-review/SKILL.md) |
 | 변경 영향 확인 | 지정 변경 + 실제 소비자·카드·계약 | [lounge-impact](skills/lounge-impact/SKILL.md) |
@@ -45,4 +45,4 @@
 
 ## 영역과 계층
 
-루트 AGENTS.md → docs/AGENTS.md → 이 안내 → 필요한 문서·skills 또는 scripts의 하위 안내 순서로 확인합니다. docs의 편집 규칙은 문서 파일에 적용합니다. 이 영역은 운영 기준·명세·카드·결정·검증 기록을 관리하며 제품 구현은 카드에 명시한 `front-end/` 위치에서 수행합니다. IA 원본과 검토 자료는 work/에 보존합니다.
+루트 AGENTS.md → docs/AGENTS.md → 이 안내 → 필요한 문서·skills 또는 scripts의 하위 안내 순서로 확인합니다. docs의 편집 규칙은 문서 파일에 적용합니다. 이 영역은 구축·운영 작업 기준·명세·카드·결정·검증 기록을 관리하며 제품 구현은 카드에 명시한 `front-end/` 위치에서 수행합니다. IA 원본과 검토 자료는 work/에 보존합니다.

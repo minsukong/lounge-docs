@@ -39,6 +39,40 @@ class Rows(HTMLParser):
             self.rows.append(self.row)
             self.row = None
 
+def platform_audit(lines, records):
+    lines += ["", "## APP·WEB View와 ID 추출 주의", "",
+              "파일 제목이나 FO 접두어 대신 각 행의 View 셀을 기준으로 구분합니다. View는 화면 구현 구분이며 API·권한·외부 앱 실행 등의 Bridge 계약 확정을 대신하지 않습니다.", "",
+              "| 원본 파일 | ID가 있는 행 | 고유 ID | Native 행 / 고유 ID | WebView 행 / 고유 ID |",
+              "| --- | --- | --- | --- | --- |"]
+    for name in ("01.FO_APP_IA.html", "01.FO_WEB_IA.html"):
+        subset = [r for r in records if r["source_file"] == name]
+        groups = {view: [r for r in subset if view in [v.strip().lower() for v in r["raw_after_id"].split("|")]] for view in ("native", "webview")}
+        measure = lambda rows: str(len(rows)) + " / " + str(len({r["screen_id"] for r in rows}))
+        lines.append("| " + name + " | " + str(len(subset)) + " | " + str(len({r["screen_id"] for r in subset})) + " | " + measure(groups["native"]) + " | " + measure(groups["webview"]) + " |")
+    lines += ["", "### APP에서 Native로 남은 행", "",
+              "아래는 현재 원본의 Native 표기입니다. 원본 메뉴·기능 설명 간 차이나 실제 구현·메시지 계약은 별도로 확인합니다.", "",
+              "| 원본 행 | ID | ID 앞 원본 셀 텍스트 |", "| --- | --- | --- |"]
+    for r in records:
+        if r["source_file"] == "01.FO_APP_IA.html" and "native" in [v.strip().lower() for v in r["raw_after_id"].split("|")]:
+            context = r["raw_context"].replace("|", " / ").strip(" / ")
+            lines.append("| " + r["source_row"] + " | " + r["screen_id"] + " | " + context + " |")
+    lines += ["", "### View는 있으나 유효 ID를 추출하지 못한 행", "",
+              "유효 ID 미추출은 기능 제외나 삭제 승인이 아닙니다. ID 공백·수식 오류와 원본 메뉴를 함께 확인하고, 과거 ID를 임의로 새 ID에 대응시키지 않습니다.", ""]
+    for name in ("01.FO_APP_IA.html", "01.FO_WEB_IA.html"):
+        parser = Rows()
+        parser.feed((IA / name).read_text(encoding="utf-8-sig"))
+        unresolved = [cells for cells in parser.rows if cells and cells[0].isdigit() and any(c.lower() in ("native", "webview") for c in cells) and not any(ID_RE.search(c) for c in cells)]
+        refs = [cells[0] for cells in parser.rows if cells and cells[0].isdigit() and any("#REF!" in c for c in cells)]
+        lines.append("- " + name + ": View가 있으나 유효 ID가 없는 행 " + str(len(unresolved)) + "개. 원본 행: " + (", ".join(c[0] for c in unresolved) or "없음") + ".")
+        lines.append("- " + name + ": #REF! 표시 원본 행: " + (", ".join(refs) or "없음") + ".")
+        by_id = {}
+        for r in records:
+            if r["source_file"] == name:
+                by_id.setdefault(r["screen_id"], []).append(r["source_row"])
+        for screen_id, rows in sorted(by_id.items()):
+            if len(rows) > 1:
+                lines.append("- " + name + ": 동일 ID " + screen_id + "가 원본 행 " + ", ".join(rows) + "에 존재합니다. 파일·행을 함께 보존하며 같은 화면인지 별도 확인합니다.")
+
 def build():
     records, counts, hashes, file_ids = [], {}, {}, {}
     for name in SOURCES:
@@ -104,6 +138,7 @@ def build():
               "## 원본 해시", "",
               "원본 갱신을 식별하기 위한 SHA-256입니다. 스크립트는 원본을 읽기만 합니다.", ""]
     lines.extend("- " + name + ": " + hashes[name] for name in SOURCES)
+    platform_audit(lines, records)
     return output.getvalue(), "\n".join(lines) + "\n", counts, progress_only
 
 if __name__ == "__main__":

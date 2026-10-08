@@ -1,6 +1,6 @@
 # UI 구현 핵심 규칙
 
-> 기준 원본: [Front-End 개발 가이드](../guides/frontend/index.html), [React Code Exports 가이드](../guides/ui/react_code_exports.html), [디자인 토큰 가이드](../guides/ui/design_tokens.html), [WebView 가이드](../guides/platform/webview/webView_guide.html), [Storybook 운영 가이드](../guides/storybook/index.html)
+> 기준 원본: [Front-End 개발 가이드](../guides/frontend/index.html), [React Code Exports 가이드](../guides/ui/react_code_exports.html), [디자인 토큰 가이드](../guides/ui/design_tokens.html), [WebView 가이드](../guides/platform/webview/webView_guide.html), [Storybook 구축·운영 가이드](../guides/storybook/index.html)
 >
 > 이 문서는 AI 코딩용 요약입니다. 충돌하거나 세부 판단이 필요하면 기준 원본을 확인합니다.
 

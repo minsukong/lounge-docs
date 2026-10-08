@@ -10,8 +10,8 @@
 | 파일 | 기준 역할 | 주의 |
 | --- | --- | --- |
 | 01.FO(MO_WEB)_IA.html | 하이브리드 앱 WebView 후보 | MO ID를 원본 그대로 사용 |
-| 01.FO_APP_IA.html | 앱 Native 책임과 WebView 경계 참고 | 제목은 Native 영역 정의지만 View에는 Native·webview가 혼재. ID는 FO. MO 목록과 같은 기능을 더 잘게 쪼갠 절단면이며 `FO-PRD`(상품), `FO-AIR`(공항안내), `FO-COU`(쿠폰북), `FO-SCM-C04*`~`C13*`(사용처 유형별 상세)처럼 MO 자료에 없는 화면군을 포함 |
-| 01.FO_WEB_IA.html | FO 웹(원본 제목: 더라운지 3.0 FO IA(PC WEB)) 후보 | FO ID를 PW로 자동 변환하지 않음. APP 자료와 화면군이 겹치나 `FO-PRD`가 없고 `FO-AIR`·`FO-CMM` 구성이 다름 |
+| 01.FO_APP_IA.html | 앱 화면 후보와 WebView·Native 구현 구분 | 기존 제목의 Native 영역 정의로 전체를 Native로 분류하지 않음. 사용자 수정에 따라 업무 화면은 대부분 WebView이고, Native는 현재 View가 Native인 행으로 구분. 고유 ID 193개 중 WebView 188개·Native 5개. 상품 등 ID 공백과 수식 오류가 있어 ID 목록에 없는 기능을 제외로 판단하지 않음 |
+| 01.FO_WEB_IA.html | FO 웹(원본 제목: 더라운지 3.0 FO IA(PC WEB)) 후보 | FO ID를 PW로 자동 변환하지 않음. APP 자료와 화면군이 겹치나 메뉴·ID·View 구성이 다름. 이벤트 메뉴 등 유효 ID 미추출 행이 있으므로 ID 수만으로 기능 유무를 판단하지 않음 |
 | 01.FO_판매채널_IA.html | 판매채널 후보 | 추가 정보 필요. FO ID를 다른 FO 화면과 구별 |
 | 03.PO_IA.html | 파트너오피스 후보 | 담당·과업 포함 여부 TBD |
 | 04.OO_IA.html | 현장 운영 후보 | HTML은 존재. FE 담당·범위 TBD |
@@ -20,6 +20,10 @@
 | 표지·승인내역.html | 자료 배경 | 이번 기능별 승인 계약을 대신하지 않음 |
 
 기존 앱스토어·Google Play 페이지와 기존 홈페이지는 사용자 제공 배경 링크입니다. 이번 작업에서는 기존 서비스 동작을 리뉴얼 정책으로 전환하지 않았습니다.
+
+## 앱 View 구분
+
+`01.FO_APP_IA.html`의 현재 View 표기를 구현 구분의 근거로 사용합니다. Native로 남은 항목과 원본 행은 [IA 대조 결과](ia-audit.md#app에서-native로-남은-행)에 있으며, 나머지 유효 ID는 WebView입니다. WebView 화면에서도 기기 기능·외부 앱 실행 등에 Native 지원이 필요할 수 있으므로 화면 구현 구분과 Bridge·API 계약을 별도로 확인합니다. 원본 제목·FO 접두어나 MO 목록만으로 책임을 추정하지 않습니다.
 
 ## 파생 목록
 

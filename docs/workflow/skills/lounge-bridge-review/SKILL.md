@@ -12,7 +12,7 @@ description: Flutter와 WebView의 Native Bridge 책임·계약·검증을 검�
 ## 작업
 
 docs/workflow/contract-review.md의 Bridge 부분을 읽고 실제 Native·Web 구현 또는 합의 계약을 확인한다.
-- APP IA 파일에도 Native·WebView가 혼재한다. 원본 View 셀과 기능의 실제 책임으로 구분한다.
+- APP IA는 대부분 WebView이며 Native는 현재 원본 View가 Native인 항목으로 구분한다. 파일 제목·FO 접두어로 전체 APP을 Native로 분류하지 않는다. 화면 구현 구분과 필요한 Native 지원·Bridge 계약은 별도로 확인한다.
 - 명령·payload·응답·버전·요청 연결·준비 상태·timeout·취소·중복 callback 중 필요한 계약을 확인한다.
 - Android/iOS 차이와 웹 브라우저 제외·대체 동작을 승인 근거로 확인한다.
 - 뒤로가기·권한 거부·외부 앱/PG 복귀·딥링크·세션 갱신은 이번 기능의 실제 흐름으로 검토한다.
