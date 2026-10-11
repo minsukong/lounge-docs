@@ -34,11 +34,17 @@ jobs:
           git -c "http.extraheader=$auth_header" fetch --no-tags "$target_url" '+refs/heads/main:refs/heads/target-main'
           source_sha=$(git rev-parse refs/heads/source-main)
           target_sha=$(git rev-parse refs/heads/target-main)
-          if [ "$source_sha" = "$target_sha" ]; then
+          # Use source files while preserving the target's own .github directory.
+          git read-tree "$source_sha"
+          git ls-tree -r --name-only -z "$source_sha" -- .github/ | git update-index --force-remove -z --stdin
+          git read-tree --prefix=.github/ "$target_sha:.github"
+          sync_tree=$(git write-tree)
+          if [ "$sync_tree" = "$(git rev-parse "$target_sha^{tree}")" ]; then
             echo 'Already synchronized.' >> "$GITHUB_STEP_SUMMARY"
             exit 0
           fi
-          git -c "http.extraheader=$auth_header" push \
-            "--force-with-lease=refs/heads/main:$target_sha" \
-            "$target_url" refs/heads/source-main:refs/heads/main
-          printf 'Synchronized main to `%s`.\n' "$source_sha" >> "$GITHUB_STEP_SUMMARY"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          sync_commit=$(printf 'Sync files from lounge-docs (%s)\n' "${source_sha:0:12}" | git commit-tree "$sync_tree" -p "$target_sha")
+          git -c "http.extraheader=$auth_header" push "$target_url" "$sync_commit:refs/heads/main"
+          printf 'Synchronized files from `%s`; source `.github/` excluded.\n' "$source_sha" >> "$GITHUB_STEP_SUMMARY"
