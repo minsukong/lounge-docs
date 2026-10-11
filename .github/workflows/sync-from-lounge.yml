@@ -1,0 +1,44 @@
+name: Sync entire repository from lounge-docs
+
+on:
+  schedule:
+    - cron: '2-57/5 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-from-lounge
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: github.repository == 'THLV3FOFE/THL_V3_FO_FE' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Synchronize main with the public source repository
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          source_url='https://github.com/minsukong/lounge-docs.git'
+          target_url='https://github.com/THLV3FOFE/THL_V3_FO_FE.git'
+          auth_header="AUTHORIZATION: basic $(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)"
+          echo "::add-mask::${auth_header}"
+          git init --bare sync.git
+          cd sync.git
+          git fetch --no-tags "$source_url" '+refs/heads/main:refs/heads/source-main'
+          git -c "http.extraheader=$auth_header" fetch --no-tags "$target_url" '+refs/heads/main:refs/heads/target-main'
+          source_sha=$(git rev-parse refs/heads/source-main)
+          target_sha=$(git rev-parse refs/heads/target-main)
+          if [ "$source_sha" = "$target_sha" ]; then
+            echo 'Already synchronized.' >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          git -c "http.extraheader=$auth_header" push \
+            "--force-with-lease=refs/heads/main:$target_sha" \
+            "$target_url" refs/heads/source-main:refs/heads/main
+          printf 'Synchronized main to `%s`.\n' "$source_sha" >> "$GITHUB_STEP_SUMMARY"
