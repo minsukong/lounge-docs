@@ -28,8 +28,8 @@ jobs:
           target_url='https://github.com/THLV3FOFE/THL_V3_FO_FE.git'
           auth_header="AUTHORIZATION: basic $(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)"
           echo "::add-mask::${auth_header}"
-          git init --bare sync.git
-          cd sync.git
+          git init sync
+          cd sync
           git fetch --no-tags "$source_url" '+refs/heads/main:refs/heads/source-main'
           git -c "http.extraheader=$auth_header" fetch --no-tags "$target_url" '+refs/heads/main:refs/heads/target-main'
           source_sha=$(git rev-parse refs/heads/source-main)
