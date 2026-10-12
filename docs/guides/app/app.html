@@ -572,6 +572,8 @@ flowchart LR
           인증·API·배포 구조가 확정된 뒤 반영합니다.
         </p>
 
+        <p>웹 화면의 접근 통제와 API 오류 의미는 백엔드 측 <a href="https://ebridgelounge.atlassian.net/wiki/spaces/301/pages/116031516/Java+Spring+Boot+Next.js+URL">URL 접근 통제 및 보안 개발 가이드</a>의 3.4·4.1~4.3절에 맞춥니다. Next.js는 보호 콘텐츠 렌더링 전 사용자를 확인하고 Spring은 API의 인증·역할·객체 소유권을 최종 검증합니다.</p>
+        <p><code class="badge-tbd">TBD</code> Native 또는 WebView의 로그인 상태를 Next.js의 첫 요청·새로고침·앱 내 이동에서 확인하는 방법, Spring 인증 정보 전달과 갱신·로그아웃 담당. 아래 Cookie 흐름은 조건부 예시이며 인증 수단의 확정을 뜻하지 않습니다.</p>
         <h4>인증 설계 결정 항목</h4>
         <ul>
           <li>로그인 주체·화면, 인증 제공자·프로토콜과 재인증·계정 복구 요구사항</li>
@@ -602,7 +604,9 @@ flowchart LR
       → HTTPS로 서버에 로그인 요청
         → 서버가 자격 증명과 계정 상태 검증
           → Secure·HttpOnly 세션 Cookie 발급
-            → 권한 확인 후 Main 화면 표시</code></pre>
+            → Next.js가 요청 사용자를 확인하고 보호 데이터 요청
+              → Spring API가 인증·권한·소유권 검증 후 데이터 제공
+                → Next.js가 보호 콘텐츠 렌더링</code></pre>
         <p>
           Native는 WebView의 화면 전환과 수명주기를 관리하지만 자격 증명이나
           세션 값을 직접 취급하지 않습니다. 보호된 요청마다 서버가 세션과 권한을
@@ -616,7 +620,8 @@ sequenceDiagram
   accDescr: Cookie 기반 WebView 인증을 채택한 경우 사용자가 WebView에서 인증하고 서버가 보안 Cookie 세션을 발급하는 참고 흐름입니다.
   participant U as 사용자
   participant N as Flutter Native
-  participant BE as Backend
+   participant BE as Spring Backend
+   participant FE as Next.js 서버
   participant W as WebView
   N->>W: 로그인 또는 Main URL 진입
   W-->>U: WebView 로그인 화면 표시
@@ -624,9 +629,12 @@ sequenceDiagram
   W->>BE: HTTPS 로그인 요청
   BE->>BE: 자격 증명·계정 상태 검증
   BE-->>W: Secure · HttpOnly Session Cookie
-  W->>BE: 보호된 화면 요청
-  BE->>BE: 세션·권한 검증
-  BE-->>W: Main 화면 응답
+   W->>FE: 보호 페이지 요청
+   FE->>FE: 계약에 따른 요청 사용자 확인
+   FE->>BE: 승인된 인증 정보로 보호 데이터 요청
+   BE->>BE: 인증·역할·객체 소유권 검증
+   BE-->>FE: 허용된 데이터
+   FE-->>W: 보호 콘텐츠 렌더링 응답
   W-->>U: Main 화면 표시
           </div>
           <figcaption>Cookie 기반 WebView 인증을 채택한 경우의 참고 흐름</figcaption>
@@ -637,8 +645,9 @@ sequenceDiagram
           URL을 WebView에 표시하지만 사용자의 자격 증명을 직접 읽거나 저장하지
           않습니다. 사용자가 WebView에서 로그인하면 Backend가 자격 증명과 계정
           상태를 검증하고 Secure·HttpOnly Cookie를 발급합니다. 이후 보호된
-          화면을 요청할 때마다 Backend가 세션과 권한을 다시 확인하며, 검증을
-          통과한 경우에만 Main 화면을 반환합니다.
+           화면을 요청하면 Next.js가 사용자를 확인하고 Spring API가 데이터의
+           인증·역할·소유권을 검증합니다. Cookie 발급·전달 범위와 서버 간 인증 연결은
+           <code class="badge-tbd">TBD</code>이며 계약 확정 후 실제 흐름에 맞춥니다.
         </p>
 
         <h4>인증 수단별 저장 기준 (조건부 MUST)</h4>
@@ -1993,13 +2002,14 @@ flowchart TD
         <h3>API</h3>
         <ul>
           <li>
-            Dio Interceptor에서 Trace ID, Timeout과 표준 오류 형식을 공통 처리
+            Flutter Native가 직접 호출하는 API는 Dio Interceptor에서 승인된 Trace ID, Timeout과 오류 계약을 처리합니다. WebView 요청은 Next.js 서버 또는 브라우저 fetch의 처리 기준을 따릅니다.
           </li>
           <li>
             401의 비로그인·만료·갱신 실패 의미를 API 계약에 따라 구분하고 승인된
             인증 흐름으로 이동
           </li>
           <li>403은 권한 부족으로 처리하며 세션 갱신을 반복하지 않음</li>
+          <li>404는 없는 리소스 또는 타인 리소스 접근으로 처리하고 존재 여부를 구분해 노출하지 않음</li>
           <li>
             429는 <code>Retry-After</code>를 존중하고 Exponential Backoff 적용
           </li>

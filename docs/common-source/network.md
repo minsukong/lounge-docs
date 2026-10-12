@@ -15,8 +15,8 @@ Backend 담당자가 승인한 API 계약이 전달된 뒤 화면과 기능 코�
 다음 내용은 확정하지 않습니다.
 
 - API 기본 URL과 version 경로
-- Cookie, access token 또는 WebView Bridge를 사용하는 인증 방식
-- 서버의 공통 성공·오류 응답 형식
+- Cookie·token의 저장·전달과 WebView 세션 연결 방식. Bridge로 자격 증명을 전달하지 않는 기준은 유지합니다.
+- 성공·오류 응답의 API별 상세 필드. 401·403·404 의미는 백엔드 가이드의 공통 기준을 따릅니다.
 - 공통 timeout 값과 재시도 정책
 
 ## 적용할 파일
@@ -56,7 +56,7 @@ export function isHttpError(error: unknown): error is HttpError {
 }
 ```
 
-`HttpError`는 상태 코드와 읽을 수 있었던 응답 본문만 보존합니다. 서버의 `code`, `message`, `details` 구조가 확정되기 전에는 선택 속성이 많은 공통 오류 type을 만들지 않습니다.
+`HttpError`는 상태 코드와 읽을 수 있었던 응답 본문을 보존합니다. 백엔드 가이드 3.4절은 `code`·`message`를 오류 본문 예시로 제시합니다. API별 실제 응답을 확인한 뒤 검증하며 추가 필드나 공통 오류 type을 임의로 확정하지 않습니다.
 
 ## 공통 요청 함수
 
@@ -159,6 +159,20 @@ Cookie·CSRF·CORS, Client Secret과 민감정보 전달은 [Front-End 보안과
 - Server Component와 Client Component의 기본 URL이 다르면 runtime 환경별 URL 결정 함수를 별도로 둡니다.
 
 `TBD`: API origin, 인증 전달 방식과 환경변수 이름은 backend·배포 구성이 확정된 뒤 결정합니다.
+
+## 요청 위치와 보호 데이터
+
+백엔드 측 [URL 접근 통제 및 보안 개발 가이드](https://ebridgelounge.atlassian.net/wiki/spaces/301/pages/116031516/Java+Spring+Boot+Next.js+URL)의 3.4·4.1~4.3절을 연동 기준으로 반영합니다. 표준 `fetch`를 사용하고 `response.status`·`response.ok`를 확인합니다. 문서 반영은 실제 API 계약이나 구현 완료를 뜻하지 않습니다.
+
+- Server Component·서버 데이터 접근 계층: 요청 사용자를 확인한 뒤 보호 데이터를 조회합니다. Spring에 전달할 인증 정보와 서버용 URL은 승인된 계약으로 연결하고 Client에는 필요한 필드만 전달합니다.
+- Client Component·브라우저/WebView: 갱신·동기화가 필요한 서버 상태는 TanStack Query로 관리하며 요청 함수에서 `fetch`를 사용합니다. 기능별로 처리할 수 있는 오류까지 전역 이동으로 바꾸지 않습니다.
+- Route Handler·Server Action: 직접 호출을 포함한 각 요청에서 인증·역할·객체 접근 권한을 확인하고 Spring의 최종 검증을 유지합니다. Proxy·페이지 검사로 대신하지 않습니다. Server Action은 채택한 반환 계약으로 오류를 표현하며 API와 동일한 HTTP 반환 방식을 임의로 강제하지 않습니다.
+
+401은 미인증·만료, 403은 권한 부족, 404는 없는 리소스 또는 타인 리소스 접근으로 처리합니다. 403·404에서 token 갱신을 반복하거나 타인 리소스의 존재를 구분해 안내하지 않습니다.
+
+사용자·권한별 응답과 렌더링 결과를 공용 서버·CDN 캐시에 저장하지 않습니다. 서버 `fetch`·브라우저 HTTP·Query 캐시를 구분하고, 요청 중복 제거를 사용자 간 영구 캐시로 취급하지 않습니다.
+
+`TBD`: API별 직접 호출/Next.js 경유, 첫 페이지 인증, 쿠키·헤더 전달 범위, 갱신·로그아웃 담당, 요청 위치별 오류 전달과 캐시 무효화 계약.
 
 ## Timeout과 오류 문구
 

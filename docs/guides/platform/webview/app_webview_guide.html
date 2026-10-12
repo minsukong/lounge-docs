@@ -725,6 +725,9 @@
           토큰은 URL Query Parameter에 포함하지 않습니다.
         </p>
 
+        <p>보호 콘텐츠 렌더링 전 Next.js 서버가 사용자를 확인할 수 있어야 합니다. Native에 저장된 인증 정보나 초기 URL의 헤더가 이후 페이지·API 요청에도 자동으로 전달된다고 가정하지 않습니다.</p>
+        <p><code class="badge-tbd">TBD</code> 첫 페이지·새로고침·앱 내 이동의 인증 연결, Spring 직접 호출/Next.js 경유, 쿠키·헤더 전달과 갱신·로그아웃 담당. 세부 협의는 <a href="../../../workflow/contract-review.md">API·Native Bridge 계약 검토</a>에 기록합니다.</p>
+        <p>401은 미인증·만료, 403은 권한 부족, 404는 없는 리소스 또는 타인 리소스 접근으로 구분합니다. HTTP 오류와 WebView 로딩 실패를 구분하며 모든 오류에서 WebView를 다시 만들거나 로그인으로 이동하지 않습니다.</p>
         <h3>오류 상태</h3>
         <ul>
           <li>최초 로딩과 정상 표시</li>

@@ -172,15 +172,18 @@
 <hr />
 
 <section>
-<h2 class="bx-active">8. 401 처리 기준</h2>
+<h2 class="bx-active">8. 401·403·404 처리 기준</h2>
 <p>모든 <code>401</code>에서 즉시 전역 logout을 실행하는 코드는 API와 갱신 정책이 정해지기 전에는 추가하지 않습니다.</p>
 <ul>
 <li>세션 조회 API가 비로그인을 <code>401</code>로 표현한다면 <code>getSession</code>에서만 <code>anonymous</code>로 변환합니다.</li>
-<li>다른 기능 API의 <code>401</code>은 세션 만료, 권한 부족 또는 token 갱신 실패 중 무엇인지 계약을 확인합니다.</li>
-<li>같은 응답이 반복될 때만 공통 interceptor 또는 전역 처리 경계를 검토합니다.</li>
-<li><code>403</code>은 로그인 여부와 별개의 권한 실패로 처리합니다.</li>
+<li>다른 기능 API의 <code>401</code>은 미인증·token 만료로 처리합니다. 갱신 가능 여부, 실패·재요청·로그인 이동은 인증 계약으로 확인하며 권한 부족은 <code>403</code>으로 처리합니다.</li>
+<li>같은 처리가 반복될 때만 공통 fetch 요청 함수의 오류 처리 경계를 검토합니다.</li>
+<li><code>403</code>은 권한 실패이며 token 갱신을 반복하지 않습니다.</li>
+<li><code>404</code>는 없는 리소스 또는 타인 리소스 접근으로 처리하고 존재 여부를 구분해 노출하지 않습니다.</li>
 </ul>
 <p><code class="badge-tbd">TBD</code>: 세션 만료, token 갱신과 재요청 정책은 인증 계약이 확정된 뒤 추가합니다.</p>
+<p>백엔드 측 <a href="https://ebridgelounge.atlassian.net/wiki/spaces/301/pages/116031516/Java+Spring+Boot+Next.js+URL">URL 접근 통제 및 보안 개발 가이드</a>의 3.4·4.1~4.3절을 연동 기준으로 반영합니다. 이 예시의 세션 Query와 화면 분기는 Client 상태 표현이며 보호 페이지의 접근 통제가 아닙니다. 보호 콘텐츠 렌더링 전에 Next.js 서버가 사용자를 확인하고 Spring API가 인증·역할·객체 소유권을 최종 검증합니다. Proxy·layout·Client 로그인 상태만으로 보호하지 않습니다.</p>
+<p><code class="badge-tbd">TBD</code>: 첫 페이지·직접 진입·새로고침·앱 내 이동에서 Next.js가 인증 정보를 확인하고 Spring에 전달하는 방식, 갱신·로그아웃 담당. Client 또는 Native에만 Bearer token이 있으면 서버가 자동으로 읽을 수 있다고 가정하지 않습니다.</p>
 </section>
 
 <hr />

@@ -6,6 +6,8 @@
 
 ## 작업 전 확인
 
+- 접근 통제·오류 연동은 백엔드 측 [URL 접근 통제 및 보안 개발 가이드](https://ebridgelounge.atlassian.net/wiki/spaces/301/pages/116031516/Java+Spring+Boot+Next.js+URL)의 3.4·4.1~4.3절을 기준으로 합니다. 원칙 반영과 실제 구현 확인을 구분하고 인증 전달·API 호출·갱신·배포의 미합의 내용은 `TBD`로 유지합니다.
+
 - 사용자 요청에 인증, 회원, 권한, 외부 HTML·URL, 파일, WebView Bridge, 저장소, 로그, 분석 SDK, 환경변수 또는 새 package가 포함되는지 확인합니다.
 - 관련 실제 소스와 설치 package를 먼저 확인합니다.
 - API·인증·CSP·Cookie·Origin과 개인정보 정책이 없으면 임의로 확정하지 않고 `TBD`로 분리합니다.
@@ -23,7 +25,10 @@
 - 인증 token, Session ID, 비밀번호, 인증번호, 카드정보와 불필요한 개인정보를 URL, Web Storage, Persist Store, Bridge와 로그에 넣지 않습니다.
 - `NEXT_PUBLIC_` 값과 Client Bundle에 들어간 환경값은 공개 정보로 취급합니다.
 - UI에서 숨긴 Menu, Button과 Route를 권한 통제로 표현하지 않습니다.
-- 모든 `401`을 즉시 로그아웃으로 처리하지 않고 `403`과 구분합니다.
+- `401`은 미인증·만료, `403`은 권한 부족, `404`는 없는 리소스 또는 타인 리소스 접근입니다. 모든 `401`을 즉시 로그아웃으로 처리하지 않고 갱신·재요청 계약을 확인합니다.
+- 보호 콘텐츠 렌더링 전 Next.js 서버에서 사용자를 확인합니다. Proxy·layout·Client 세션 Query는 요청별 페이지·데이터 검사를 대신하지 않습니다.
+- Route Handler·Server Action도 각 요청에서 인증·역할·객체 접근 권한을 확인하고 Spring의 최종 인가를 유지합니다.
+- 권한 없는 요청의 HTML·RSC·Client props에 보호 데이터가 없고 사용자별 응답이 공용 서버·CDN 캐시나 다른 사용자에게 전달되지 않는지 확인합니다.
 - 로그아웃과 사용자 전환 뒤 이전 사용자의 Query Cache와 Persist 상태를 정리합니다.
 - Cookie 인증이면 CSRF, SameSite, Secure, HttpOnly, Domain, CORS와 Origin 검증 계약을 확인합니다.
 - Client의 파일 형식·크기 검사는 UX이며 Backend 검증을 대신하지 않습니다.

@@ -255,6 +255,20 @@ flowchart LR
           </li>
         </ul>
         <p>
+          접근 통제와 오류 처리는 백엔드 측
+          <a href="https://ebridgelounge.atlassian.net/wiki/spaces/301/pages/116031516/Java+Spring+Boot+Next.js+URL">URL 접근 통제 및 보안 개발 가이드</a>의 3.4·4.1~4.3절을 기준으로 연결합니다. 문서 예시를 실제 인증·API 계약이 확정된 것으로 간주하지 않습니다.
+        </p>
+        <h3>보호 페이지와 데이터 요청</h3>
+        <ul>
+          <li>보호 콘텐츠 렌더링 전에 Next.js 서버에서 사용자를 확인하고 Spring API는 인증·역할·객체 소유권을 최종 검증합니다.</li>
+          <li>Proxy는 사전 이동을 위한 보조 검사입니다. layout의 화면 숨김이나 Client 세션 Query로 페이지·데이터 검사를 대신하지 않습니다.</li>
+          <li>Route Handler·Server Action도 각 요청에서 인증·역할·객체 접근 권한을 확인하고 Spring의 최종 검증을 유지합니다.</li>
+          <li>서버 조회는 Server Component 또는 서버 데이터 접근 계층에서 수행하고, 브라우저 갱신·동기화가 필요한 조회는 Query 요청 함수에서 표준 fetch를 사용합니다.</li>
+          <li>401은 미인증·만료, 403은 권한 부족, 404는 없는 리소스 또는 타인 리소스 접근으로 구분합니다. 갱신·재요청·이동 조건은 인증 계약으로 정합니다.</li>
+          <li>사용자·권한별 응답과 렌더링 결과를 공용 서버·CDN 캐시에 저장하지 않으며 HTML·RSC 응답·Client Component props에는 허용된 최소 데이터만 전달합니다.</li>
+        </ul>
+        <p><code class="badge-tbd">TBD</code> Next.js의 첫 페이지 인증 정보, API별 직접 호출/서버 경유, 쿠키·헤더 전달, 갱신·로그아웃 담당과 캐시 무효화 계약.</p>
+        <p>
           <code class="badge-tbd">TBD</code> Server Component와 Client Component의 세부
           경계, SSR·SSG·ISR, 캐싱 및 데이터 패칭 정책은 화면과 API 구조가
           확정된 후 결정합니다.
@@ -1027,6 +1041,8 @@ flowchart TD
           <li>
             Figma 또는 AI export 코드를 토큰과 프로젝트 구조에 맞게 정리했는가?
           </li>
+          <li>직접 URL 진입·새로고침·앱 내 이동·Prefetch와 Handler·Action 직접 호출에서 보호 데이터가 노출되지 않는가?</li>
+          <li>A 사용자 요청 뒤 B 사용자의 HTML·RSC·API 응답에 A의 데이터가 남지 않는가?</li>
           <li>변경 위험에 맞는 테스트 또는 검수 근거가 있는가?</li>
         </ul>
       </section>
@@ -1052,7 +1068,7 @@ flowchart TD
             브라우저의 백엔드 직접 호출, Next.js BFF, Route Handler 또는 Server
             Action 사용 범위
           </li>
-          <li>API 공통 응답, 오류 형식, 타입 생성과 OpenAPI 연계</li>
+          <li>API별 성공·오류 응답 상세, 타입 생성과 OpenAPI 연계. 401·403·404 의미는 백엔드 공통 기준 적용</li>
         </ul>
         <h3>인증과 오프라인</h3>
         <ul>
