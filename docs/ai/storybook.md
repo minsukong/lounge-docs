@@ -1,5 +1,7 @@
 # Storybook 작업 핵심 규칙
 
+Storybook 설정과 개발 검수 환경을 만들거나 바꿀 때는 [앱·개발 화면·배포 경계 필수 기준](../guides/architecture/build-boundary.md)을 반드시 확인합니다. Storybook은 전체 UI 검수, 개발용 preview는 화면 조합·이동 확인에 사용하며 두 환경의 전용 코드와 결과물은 제품 배포에서 제외합니다.
+
 > 기준 원본: [Storybook 구축·운영 가이드](../guides/storybook/index.html)
 >
 > 이 문서는 AI 코딩용 요약입니다. 충돌하거나 세부 판단이 필요하면 기준 원본을 확인합니다.

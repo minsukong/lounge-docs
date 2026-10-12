@@ -1,5 +1,7 @@
 # webview 작업 지침
 
+앱 초기 구성·라우트 추가·개발용 preview·Storybook 설정·빌드·배포 설정 변경 전에는 [공용 배포 경계 필수 기준](../../docs/guides/architecture/build-boundary.md)과 [이 앱의 빌드 안내](BUILD.md)를 반드시 확인합니다. 실제 앱은 일반 라우트, 개발 화면은 `src/dev/`·`src/app/preview/`의 `*.dev.*`, Storybook은 별도 검수 환경으로 관리하며 제품 배포 대상은 `dist/runtime/`입니다.
+
 ## 구현 기준
 
 - 이 폴더는 Flutter 하이브리드 앱에서 WebView로 실행되는 웹 화면의 실제 소스입니다. 아직 package와 설정이 없으면 이 위치에 앱을 구성한 뒤 구현합니다. 저장소 루트 `AGENTS.md`와 이 폴더의 현재 소스·설정 파일을 먼저 확인합니다. `docs/ai/` 문서는 실제 소스만으로 판단하기 어렵거나 작업에 세부 기준이 필요할 때 관련 문서만 선택해서 읽습니다.

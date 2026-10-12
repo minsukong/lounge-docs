@@ -1,0 +1,109 @@
+@import "tailwindcss" source(none);
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@source "../";
+@source not "../dev";
+@source not "./preview";
+@source not "../test";
+@source not "../**/*.stories.tsx";
+@source not "../**/*.test.tsx";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Neutral shadcn defaults for foundation review; brand tokens are not approved. */
+:root {
+  color-scheme: light;
+  --background: #fafafa;
+  --foreground: #171717;
+  --card: #ffffff;
+  --card-foreground: #171717;
+  --popover: #ffffff;
+  --popover-foreground: #171717;
+  --primary: #171717;
+  --primary-foreground: #fafafa;
+  --secondary: #f0f0f0;
+  --secondary-foreground: #171717;
+  --muted: #f0f0f0;
+  --muted-foreground: #595959;
+  --accent: #ededed;
+  --accent-foreground: #171717;
+  --destructive: #b91c1c;
+  --border: #d4d4d4;
+  --input: #a3a3a3;
+  --ring: #525252;
+  --radius: 0.75rem;
+}
+
+.dark {
+  color-scheme: dark;
+  --background: #171717;
+  --foreground: #fafafa;
+  --card: #212121;
+  --card-foreground: #fafafa;
+  --popover: #212121;
+  --popover-foreground: #fafafa;
+  --primary: #fafafa;
+  --primary-foreground: #171717;
+  --secondary: #303030;
+  --secondary-foreground: #fafafa;
+  --muted: #303030;
+  --muted-foreground: #b8b8b8;
+  --accent: #383838;
+  --accent-foreground: #fafafa;
+  --destructive: #fca5a5;
+  --border: #525252;
+  --input: #737373;
+  --ring: #d4d4d4;
+}
+
+@theme inline {
+  --font-sans: Arial, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+@layer base {
+  * { border-color: var(--border); }
+  body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font-sans); }
+  button, input, textarea { font: inherit; }
+  button:not(:disabled), a { touch-action: manipulation; }
+  :focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; }
+}
+
+/* Keep core layout dimensions independent of newer viewport features. */
+body { margin: 0; background: var(--background); color: var(--foreground); font-family: var(--font-sans); }
+button, input, textarea { font: inherit; }
+:focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; }
+.app-shell { min-height: 100vh; padding-top: env(safe-area-inset-top, 0px); }
+@supports (min-height: 100dvh) { .app-shell { min-height: 100dvh; } }
+[data-slot="button"], [data-slot="input"] { min-height: 2.75rem; }
+.overlay-backdrop { background: rgba(0, 0, 0, 0.35); }
+.dialog-popup { top: 50%; left: 50%; width: calc(100% - 2rem); max-width: 26rem; max-height: 85vh; overflow-y: auto; transform: translate(-50%, -50%); }
+.sheet-popup { max-height: 90vh; overflow-y: auto; }
+.sheet-popup[data-side="bottom"] { bottom: 0; left: 0; right: 0; border-radius: 1rem 1rem 0 0; padding-bottom: env(safe-area-inset-bottom, 0px); }
+.sheet-popup[data-side="top"] { top: 0; left: 0; right: 0; padding-top: env(safe-area-inset-top, 0px); }
+.sheet-popup[data-side="right"] { top: 0; right: 0; bottom: 0; width: 85%; max-width: 24rem; max-height: 100%; }
+.sheet-popup[data-side="left"] { top: 0; left: 0; bottom: 0; width: 85%; max-width: 24rem; max-height: 100%; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}

@@ -6,7 +6,7 @@
   - `webview/` — Flutter 하이브리드 앱에서 WebView로 실행되는 웹 화면의 실제 소스
   - FO 웹(PC WEB·반응형 홈페이지), PO(파트너오피스), OO(현장운영시스템) — 구체적인 영역 구성·담당은 IA와 작업 카드에서 확인
 - Front-end 구현은 이 저장소에서 진행합니다. Flutter Native 앱 소스는 별도 위치에서 관리하며, WebView 화면과는 합의된 Bridge 계약으로 연결합니다.
-- `webview/`에 아직 package와 설정이 없습니다. 첫 착수 시 이 위치에 앱을 만들고, 존재하지 않는 script·설정·package는 추측하지 않습니다.
+- `webview/`의 실제 package·잠금 파일·설정을 먼저 확인합니다. 새 앱의 초기 구성이나 라우트·개발 검수·빌드 설정 변경 전에는 [앱·개발 화면·배포 경계 필수 기준](../docs/guides/architecture/build-boundary.md)을 반드시 적용합니다. 존재하지 않는 script·설정·package는 추측하지 않습니다.
 - 저장소 루트 `AGENTS.md`와 이 폴더의 현재 소스·설정 파일을 먼저 확인합니다. `docs/ai/` 문서는 실제 소스만으로 판단하기 어렵거나 작업에 세부 기준이 필요할 때 관련 문서만 선택해서 읽습니다.
 
 ## 공통 기준

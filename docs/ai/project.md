@@ -78,7 +78,7 @@
     └── common-source/
 ```
 
-이 문서는 `docs/ai/project.md`, 상세 HTML 가이드는 `docs/guides/`에서 관리합니다. WebView 애플리케이션의 소스와 설정은 `front-end/webview/`에 두며, 이 폴더에는 아직 package가 생성되지 않았습니다.
+이 문서는 `docs/ai/project.md`, 상세 HTML 가이드는 `docs/guides/`에서 관리합니다. WebView 애플리케이션의 소스와 설정은 `front-end/webview/`에 있으며 현재 package·실행·UI 검수 기반이 있습니다. 초기 구성·라우트·개발 검수·빌드 설정 변경 전에는 [앱·개발 화면·배포 경계 필수 기준](../guides/architecture/build-boundary.md)을 반드시 확인합니다. 실제 앱, Storybook, 개발용 preview와 `dist/runtime/` 배포 결과물을 구분합니다.
 
 ```text
 front-end/webview/src/
