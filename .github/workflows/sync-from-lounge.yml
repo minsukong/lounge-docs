@@ -45,6 +45,6 @@ jobs:
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          sync_commit=$(printf 'Sync files from lounge-docs (%s)\n' "${source_sha:0:12}" | git commit-tree "$sync_tree" -p "$target_sha")
+          sync_commit=$(git show -s --format=%B "$source_sha" | git commit-tree "$sync_tree" -p "$target_sha")
           git -c "http.extraheader=$auth_header" push "$target_url" "$sync_commit:refs/heads/main"
           printf 'Synchronized files from `%s`; source `.github/` excluded.\n' "$source_sha" >> "$GITHUB_STEP_SUMMARY"
