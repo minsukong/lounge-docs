@@ -46,6 +46,7 @@
 - 공통 CSS 하한은 Safari 15입니다. 최신 CSS 표현보다 핵심 정보, 입력, 이동과 업무 흐름의 동작을 우선하고 필요한 경우 호환 표현으로 대체합니다.
 - 디자인 토큰은 Figma Tokens Studio에서만 생성·수정·삭제합니다. 저장소의 생성된 토큰 파일을 직접 수정하지 않습니다.
 - 기존 feature 구현과 `src/components/ui`를 새 컴포넌트보다 우선하며, import, Props와 variant를 실제 코드에서 확인합니다.
+- 화면·Feature 신규 구현과 데이터·상태·주요 UI 영역 확장 전에는 [TSX 가독성과 데이터·로직·UI 분리 기준](docs/guides/frontend/component-structure.md)을 반드시 적용합니다. 긴 고정 데이터·복잡한 처리·큰 UI를 한 파일에 누적하지 않고, 직접 작성한 TSX가 약 200줄을 넘으면 구조 검토와 분리 또는 유지 이유를 작업 기록에 남깁니다. 줄 수는 강제 상한이 아니며 작은 수정에 전체 개편을 추가하지 않습니다.
 - 공통 UI, 독립 검수 가치가 있는 Feature 또는 사용자 노출 Screen을 추가하거나 공개 Props·주요 상태·화면 구조를 바꾸면 관련 Storybook 대상도 확인합니다. Storybook을 위해 제품에 필요 없는 Props나 Mock을 추가하지 않습니다.
 - 세부 앱 규칙과 검증은 `front-end/webview/AGENTS.md`를 따릅니다.
 

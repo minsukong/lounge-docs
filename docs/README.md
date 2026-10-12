@@ -23,6 +23,7 @@
 - [APP 개발 표준](./guides/app/app.html)
 - [Flutter 카드 스캔 기술 가이드](./guides/platform/webview/card_scan.html)
 - [Front-End 개발 가이드](./guides/frontend/index.html)
+- [TSX 가독성과 데이터·로직·UI 분리 기준](./guides/frontend/component-structure.html) · [기준 원본](./guides/frontend/component-structure.md)
 - [앱·개발 화면·배포 경계 필수 기준](./guides/architecture/build-boundary.html) · [기준 원본](./guides/architecture/build-boundary.md)
 - [Front-end 구축 일정 산정 보고서](./guides/planning/web.html)
 - [Flutter APP 구축 일정 산정 보고서](./guides/planning/app.html)
