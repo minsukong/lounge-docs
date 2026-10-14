@@ -13,6 +13,12 @@
 
 ## 2026-10-14
 
+### 빌드 시나리오 다이어그램을 현재 워크스페이스 기준으로 갱신
+
+- `docs/diagrams/build-scenario-webview.*`가 2026-09-28 시점의 "초기화 전 가상 시나리오"에 머물러 실제 구성과 어긋난 것을 바로잡았습니다. 기준 원본인 workflow JSON에 npm workspace 세 단위와 공통 UI 패키지, `postbuild` 런타임 패키징, `build:preview` 정적 경로·GitHub Pages 갈래를 반영하고, 실제 exit code가 확인된 노드만 `PASS`로 표시했습니다. 배포 대상과 API 통합 검사, 실기기 검증은 계속 TBD로 남겼습니다.
+- 인터랙티브 HTML은 Archify 생성물이라 새 노드까지 되살릴 수 없어, 노드 문구·상태 태그·안내 카드와 `index.html` 설명만 현재 사실로 사후 반영했습니다. 새 단계가 화면에 나타나려면 Archify 재생성이 필요하며, 이 경계는 `docs/diagrams/README.md`에 기록했습니다.
+- `[TBD]_frontend-internal.md`의 공통 UI·Storybook·테스트 위치를 `packages/ui` 기준으로 고르고 의존 방향에 import 경계 규칙을 적었습니다. workflow JSON의 파싱과 노드·연결 참조 정합성은 확인했지만, 다이어그램 표시는 브라우저로 열어 확인하지 않았습니다.
+
 ### 홈페이지 테스트 실행 누락 보완
 
 - 홈페이지에 Vitest 실행 명령·jsdom·React 변환·앱 경로 설정과 Testing Library 초기화·정리 설정을 추가했습니다. 루트 workspace 테스트가 홈페이지를 건너뛰던 누락을 보완하고 테스트 도구를 해당 앱의 개발 의존성으로 명시했습니다.

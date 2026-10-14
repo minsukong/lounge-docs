@@ -1,7 +1,7 @@
 # 아키텍처 다이어그램
 
-> ⚠️ **TBD** — 이 다이어그램들은 인터페이스 설계서 v0.8.1 기반 **예상 시나리오**입니다.
-> Backend 확인 및 기획 승인 전까지 참고용입니다.
+> ⚠️ **TBD** — `[TBD]_`로 시작하는 문서는 인터페이스 설계서 v0.8.1 기반 **예상 시나리오**입니다.
+> Backend 확인 및 기획 승인 전까지 참고용입니다. `build-scenario-*`는 실제 워크스페이스 구성과 실행 결과를 반영합니다.
 
 ## 파일 목록
 
@@ -13,8 +13,8 @@
 | `[TBD]_frontend-internal.md` | Front-end(webview) 내부 구조 | TBD |
 | `index.html` | 폴더 가이드 — 목적, Archify 활용 기준, 작성·갱신·공유 기준과 데모 임베드 | 유지 관리 |
 | `archify-demo-web-app.html` | Archify 예제 "Sample Web App" 인터랙티브 HTML 데모 | 데모 |
-| `build-scenario-webview.workflow.json` | webview 빌드·검증·배포 예상 흐름의 Archify workflow 기준 원본 | 가상 시나리오 · showcase 검증 통과 |
-| `build-scenario-webview.html` | workflow JSON에서 생성한 셀프컨테이너 인터랙티브 HTML | Archify 생성물 |
+| `build-scenario-webview.workflow.json` | front-end 워크스페이스(webview·website·packages/ui)의 빌드·검증·배포 흐름 Archify workflow 기준 원본 | 현재 구성 반영 · 2026-10-14 실행 결과 기준 |
+| `build-scenario-webview.html` | workflow JSON에서 생성한 셀프컨테이너 인터랙티브 HTML | Archify 생성물 · 문구와 상태 태그만 사후 반영, 구조 재생성 대기 |
 
 ## Archify 활용
 
@@ -56,16 +56,17 @@ Archify의 기본 역할은 실제 소스 파일, import와 의존 관계를 근
 
 | 항목 | 상태 |
 |------|------|
-| `front-end/webview/` | 초기화 전 (코드 없음) |
-| 다이어그램 | **초기 계획용** — 예상 시나리오 기반, 실제 코드·실행 검증 불가 |
-| 빌드 시나리오 | Archify workflow v2 적용 및 showcase 검증 완료 · 실행 상태는 `NOT RUN` |
-| 실제 코드 기반 Archify 검증 | ⏳ 코드 구현 후 (Phase 1~2 완료 시점) |
+| `front-end/` | npm workspace 구성 완료 — `webview` · `website` · `packages/ui` |
+| 다이어그램 | **현재 구성 반영** — 실제 Script와 2026-10-14 실행 결과를 기준으로 갱신 |
+| 빌드 시나리오 | workflow JSON은 런타임 패키징·preview 정적 빌드·GitHub Pages까지 반영 · HTML은 문구와 상태 태그만 반영했고 새 노드는 재생성 대기 |
+| 실행 상태 | 타입·린트·테스트·Storybook 정적 Build·두 앱 운영 Build·preview Build는 `PASS` · API 통합 검사와 실기기 검증은 미실행 |
+| 실제 코드 기반 Archify 검증 | ⏳ 부분 — 구조는 실제 구성 기준, 실행 상태는 직접 실행한 결과만 기록. CI 연동은 미구현 |
 
 ### 언제 적용하는가
 
 | 시점 | Archify 용도 |
 |------|-------------|
-| Phase 1 완료 (UI 컴포넌트 + API adapter 구현 후) | 초기 아키텍처 맵 생성 + 검증 |
+| 공통 UI·워크스페이스 구성 완료 (현재) | 빌드·검증·배포 흐름 다이어그램 갱신 — API adapter·Feature 화면이 붙는 시점에 Delta로 확장 |
 | Feature 추가/변경 시 | Delta 다이어그램 (무엇이 바뀌었는지) |
 | 운영 이관 시 | 최종 아키텍처 HTML 산출물 전달 |
 | 온보딩 시 | "저장소 아키텍처 맵 만들어줘" |
