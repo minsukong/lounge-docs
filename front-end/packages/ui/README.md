@@ -12,3 +12,7 @@ import "@lounge/ui/styles.css";
 의존성 설치는 `front-end/`에서 `npm ci`로 수행합니다. 이 폴더에서는 `npm run storybook`, `npm run build-storybook`, `npm run typecheck`, `npm run lint`, `npm run test`를 사용할 수 있습니다. Storybook은 http://127.0.0.1:6006 이며 공통 UI와 두 앱의 개발 화면 Story를 함께 탐색합니다. 공통 컴포넌트와 개발 예제의 행동 테스트는 이 패키지의 `src/**`에 두고, 앱 화면·Native 연동 테스트는 해당 앱에 둡니다.
 
 공통 개발 예제와 테마 전환은 `src/dev/`에 있으며 `@lounge/ui/preview*`는 개발용 화면에서만 가져옵니다. 두 앱 preview의 본문은 같은 예제를 사용하고, 앱별 헤더·하단 탐색·푸터는 각 앱이 소유합니다. 예제 소스·전용 스타일은 운영 빌드에 포함하지 않습니다.
+
+## 색상 초안 검수
+
+Storybook의 `Foundations/Colors`에서 Figma `02 Color`의 전체 색상과 그룹별 색상표를 확인합니다. `src/dev/colors/`의 검수용 스냅샷이며 실제 Figma 색상값을 우선하고, 변수가 없는 회색은 도형의 채움값을 사용했습니다. 디자인 작업 중이므로 토큰 생성·테마 매핑·앱 스타일 적용은 후속 작업입니다. 기존 light/dark 스타일과 공개 export는 유지합니다.

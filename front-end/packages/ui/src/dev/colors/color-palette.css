@@ -1,0 +1,30 @@
+.color-preview { background: #fff; color: #333; font-family: "Pretendard", system-ui, sans-serif; min-height: 100vh; color-scheme: light; }
+.color-preview__header { background: #000; color: #fff; padding: 64px clamp(24px, 6vw, 110px); }
+.color-preview__header h1 { margin: 16px 0 24px; font-size: clamp(40px, 6vw, 80px); font-weight: 600; line-height: 1.2; }
+.color-preview__header p { margin: 0; font-size: 16px; line-height: 1.5; }
+.color-preview__header p:first-child { font-size: 12px; letter-spacing: .12em; }
+.color-preview__body { max-width: 1700px; margin: 0 auto; padding: 48px clamp(16px, 3.5vw, 60px) 80px; }
+.color-preview__intro { margin-bottom: 32px; }
+.color-preview__intro h2 { margin: 0 0 16px; font-size: 40px; line-height: 1.3; font-weight: 700; }
+.color-preview__intro p { margin: 8px 0; font-size: 14px; line-height: 1.6; }
+.color-preview__intro a { display: inline-block; color: #364996; text-decoration: underline; text-underline-offset: 4px; padding: 10px 0; font-size: 14px; }
+.color-preview__intro a:focus-visible { outline: 2px solid #364996; outline-offset: 4px; }
+.color-preview__sections { background: #f6f8fc; padding: clamp(24px, 3vw, 48px); display: grid; gap: 64px; }
+.color-preview__sections h3 { margin: 0; padding-bottom: 16px; border-bottom: 1px solid #d8d8d8; font-size: 24px; line-height: 1.3; font-weight: 700; }
+.color-preview__description { margin: 16px 0 32px; font-size: 15px; line-height: 1.6; }
+.color-preview__panel { background: #fff; padding: clamp(24px, 3vw, 60px); display: flex; flex-wrap: wrap; align-items: flex-start; gap: 48px; }
+.color-preview__list { display: flex; flex-wrap: wrap; gap: 20px; padding: 0; margin: 0; list-style: none; }
+.color-preview .color-preview__swatch { display: block; width: 110px; height: 155px; padding: 0; gap: 0; border: 0; border-radius: 8px; background: #fff; color: #2c2c2c; box-shadow: 0 4px 15px rgb(0 0 0 / .15); overflow: hidden; }
+.color-preview__chip { display: block; width: 110px; height: 80px; }
+.color-preview__label { padding: 10px 14px; }
+.color-preview__label span { display: block; font-size: 15px; font-weight: 600; line-height: 1.3; }
+.color-preview__label code { display: block; margin-top: 5px; font-family: inherit; font-size: 15px; line-height: 1.3; color: #70777d; }
+.color-preview__pairs { display: flex; flex-wrap: wrap; gap: 32px; }
+.color-preview__pairs figure { margin: 0; }
+.color-preview__sample { width: 136px; height: 126px; border: 1px solid; border-radius: 8px; }
+.color-preview__pairs figcaption { margin-top: 20px; color: #2c2c2c; font-size: 15px; font-weight: 600; line-height: 1.3; }
+@media (max-width: 480px) {
+  .color-preview__sections { padding: 20px 12px; gap: 40px; }
+  .color-preview__panel { padding: 24px 12px; }
+  .color-preview__list { gap: 16px; }
+}

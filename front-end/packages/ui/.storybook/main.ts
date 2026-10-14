@@ -3,6 +3,7 @@ import { fileURLToPath } from "node:url";
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.stories.@(ts|tsx)", "../../../webview/src/**/*.stories.@(ts|tsx)", "../../../website/src/**/*.stories.@(ts|tsx)"],
+  staticDirs: ["./public"],
   addons: ["@storybook/addon-docs"],
   framework: "@storybook/nextjs-vite",
   viteFinal: async (config) => {
