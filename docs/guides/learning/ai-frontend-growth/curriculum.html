@@ -69,7 +69,18 @@
       </section>
       <hr />
       <section>
-        <h2 class="bx-active">6. 프로젝트 적용 확장 학습</h2>
+        <h2 class="bx-active">6. 고급 트랙 — 성능과 다국어 심화</h2>
+        <p>고급 트랙은 13단계 핵심 과정을 완료한 뒤 선택하는 심화 과정입니다. 공통 완료 기준의 전제가 되지 않으며, 화면에서 실제 성능 문제가 발생하거나 WebView 환경 검증·다국어 제공이 필요할 때 학습합니다.</p>
+        <ol start="14">
+          <li><a href="./14-react-rendering-performance.html">React 렌더링 비용과 성능</a> — re-render 전파와 범위, 상태 위치 설계, 참조 동일성과 memo의 경계, Profiler 증거 기반 최적화</li>
+          <li><a href="./15-webview-performance-verification.html">WebView 실기기 성능 검증</a> — 네트워크·기기·코드 느림의 구분, 저속·저사양 재현, WebView 수명과 상태 보존, 초기 리소스 비용</li>
+          <li><a href="./16-i18n-and-localization.html">다국어와 번역 경계</a> — UI 메시지 카탈로그와 서버 콘텐츠·기기 번역의 분리, 정적 추출과 자리표시자 보존, 언어 선택 우선순위와 fallback</li>
+        </ol>
+        <p>이 구간을 마치면 느림의 원인을 측정 근거와 함께 구분하고 상태 위치 → 참조 안정화 → memoization → 가상화 순서로 개선한 뒤 전후를 재측정하는 절차를 지킬 수 있어야 하며, 세 종류 콘텐츠의 경계와 언어 선택·fallback 규칙을 다국어 가이드 기준으로 설명할 수 있어야 합니다.</p>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">7. 프로젝트 적용 확장 학습</h2>
         <p>13단계의 공통 흐름을 실제 Lounge 기능에 적용할 때는 작업 성격에 맞는 현재 가이드를 추가로 학습합니다. 아래 항목을 모든 기능에 기계적으로 적용하지 않고, 해당 화면과 데이터 흐름에 실제로 필요한 범위만 선택합니다.</p>
         <ul>
           <li><a href="../../ui/react_code_exports.html">React Code Exports 가이드</a>와 <a href="../../storybook/index.html">Storybook 구축·운영 가이드</a> — Figma 의도, 기존 컴포넌트, Semantic Token, Story와 실제 코드 연결</li>
@@ -80,7 +91,7 @@
       </section>
       <hr />
       <section>
-        <h2 class="bx-active">7. 공통 완료 기준</h2>
+        <h2 class="bx-active">8. 공통 완료 기준</h2>
         <ul>
           <li>핵심 개념을 자신의 말로 설명할 수 있습니다.</li>
           <li>AI가 만든 코드에서 해당 단계의 위험을 찾을 수 있습니다.</li>

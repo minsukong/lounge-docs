@@ -87,6 +87,12 @@
         <p><a href="https://nextjs.org/docs/pages/building-your-application/rendering/server-side-rendering">Server-Side Rendering (SSR)</a>은 요청마다 HTML을 만들고, <a href="https://nextjs.org/docs/pages/building-your-application/rendering/static-site-generation">Static Site Generation (SSG)</a>은 빌드 시 미리 만들며, <a href="https://nextjs.org/docs/app/guides/incremental-static-regeneration">Incremental Static Regeneration (ISR)</a>은 정적 결과를 재검증합니다. 이름을 외우기보다 개인화 여부, 신선도, 캐시 격리, 배포 환경을 기준으로 선택합니다.</p>
         <h3>Hydration 실패 분석</h3>
         <p>시간, 난수, Browser 전용 값과 서버·클라이언트의 다른 데이터가 첫 렌더에 들어가면 Hydration이 불일치할 수 있습니다. 경고를 숨기지 말고 서버 HTML과 첫 Client 결과가 달라진 최초 지점을 찾습니다.</p>
+        <h3>Client Bundle은 경계의 비용으로 측정합니다</h3>
+        <p>Client Component와 그것이 import한 모듈은 브라우저로 전달됩니다. 경계 설계는 파일 정리 문제가 아니라 전송량 문제입니다. 서버 전용 모듈(비밀값 사용, 데이터 직접 접근)이 Client Component에서 import되면 Client Bundle에 포함되므로, Build 결과에서 서버 전용 모듈이 Client Bundle에 들어가지 않는지 확인합니다.</p>
+        <h3>환경 변수 노출 경계</h3>
+        <p>Next.js에서는 <code>NEXT_PUBLIC_</code> 접두사가 붙은 값만 Client Bundle에 포함됩니다. 비밀값은 Server 경계에서만 사용하고, Server에서 읽은 비밀값을 Props로 거쳐 Client에 다시 노출하는 것은 경계 위반입니다. 실제 환경 변수 구성과 이름은 배포 설정이 확정되기 전까지 <code class="badge-tbd">TBD</code>로 둡니다.</p>
+        <h3>Code splitting은 첫 화면 비용 근거로</h3>
+        <p>Route 단위 분할은 자동으로 이루어지므로 관습적으로 <code>next/dynamic</code>와 dynamic import를 추가하지 않습니다. 초기 화면의 리소스 비용이 실제로 문제인 경우에만 검토하고, WebView 실기기 조건에서 변경 전후를 재측정합니다(15단계).</p>
       </section>
       <section>
         <h2 class="bx-active">7. 마스터 실습과 증거</h2>

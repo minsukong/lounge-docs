@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="저속 네트워크와 저사양 WebView 조건을 재현하고, 느림의 원인을 구분해 전후 증거로 검증하는 방법을 학습합니다." />
+    <title>15. WebView 실기기 성능 검증</title>
+    <link rel="stylesheet" href="../../../assets/style/presentation-theme.css" />
+  </head>
+  <body>
+    <header>
+      <div class="type">FRONT-END EDUCATION · ADVANCED 15</div>
+      <h1>15. WebView 실기기 성능 검증</h1>
+      <p>개발 환경이 아닌 목표 환경에서 느림의 원인을 구분하고, 재현과 전후 증거로 성능을 검증합니다.</p>
+    </header>
+    <main>
+      <section>
+        <h2 class="bx-active">1. 학습 목표</h2>
+        <p><a href="./14-react-rendering-performance.html">이전: React 렌더링 비용과 성능</a> · <a href="./curriculum.html">교육 과정</a></p>
+        <p>고급 트랙입니다. 14단계의 렌더링 비용 이해를 전제로, 실제 WebView 환경의 조건을 추가합니다. 네트워크 지연 대응의 전체 기준은 <a href="../../performance/index.html">네트워크 지연 대응 및 성능 검증 가이드</a>를 따릅니다.</p>
+        <ul>
+          <li>네트워크·기기·코드라는 서로 다른 느림의 원인을 구분합니다.</li>
+          <li>저속 네트워크와 저사양 조건을 의도적으로 재현하고 측정합니다.</li>
+          <li>WebView 수명이 화면 상태에 미치는 영향을 설계에 반영합니다.</li>
+        </ul>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">2. 꼭 알아야 할 내용</h2>
+        <h3>개발 장비가 목표 환경이 아닙니다</h3>
+        <p>지원 하한은 Safari 15와 구형 WebView입니다(7단계). 최신 개발 장비와 브라우저에서 확인한 빠름은 목표 환경의 보장이 아닙니다. 성능 판단은 실제 목표 기기 또는 그 조건을 재현한 측정 기준으로 합니다.</p>
+        <h3>느림은 서로 다른 세 조건입니다</h3>
+        <p>전송이 느린 것(네트워크), 처리가 느린 것(기기와 JavaScript), 늦게 그려지는 것(코드와 리소스 구조)은 원인과 대응이 다릅니다. Network Throttling과 CPU Throttling은 별개의 실험 조건이며, 한쪽을 느리게 해 놓고 다른 쪽 원인을 지목하지 않습니다.</p>
+        <h3>WebView 수명은 브라우저 탭과 다릅니다</h3>
+        <p>Flutter 앱의 WebView는 Native 화면 전환, 앱 백그라운드, 메모리 압력 등에 따라 새로고침되거나 상태가 사라질 수 있습니다. 메모리 상태에 의존한 화면은 재로드에서 사용자 입력과 진행 상태를 잃습니다. 복원이 필요한 검색·필터와 초안은 URL 상태 등 보존 가능한 위치와 설계로 대비합니다(9단계).</p>
+        <h3>초기 리소스 비용이 첫 화면을 결정합니다</h3>
+        <p>JavaScript 번들, 폰트, 이미지의 크기와 로딩 순서는 첫 화면 표시 시간에 직접 영향을 줍니다. Server·Client 경계와 Client Bundle 범위를 확인하는 6단계 기준이 여기서 측정 대상으로 이어집니다. 이미지 크기 지정, 로딩 범위와 지연 로딩은 화면 의미에 맞춰 적용합니다.</p>
+        <h3>성능 예산과 합격 수치는 계약입니다</h3>
+        <p>목표 LCP·INP 수치, 허용 번들 크기, 저속 네트워크 기준선처럼 제품과 배포가 결정하는 값은 Front-end가 임의로 정지 않습니다. 확인 전에는 <code class="badge-tbd">TBD</code>로 두고, 지금은 측정 방법과 전후 비교라는 검증 절차부터 준비합니다.</p>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">3. 코드 읽기</h2>
+        <pre class="hljs"><code data-language="tsx"><span class="hljs-comment">// 메모리 상태는 WebView가 새로고침되면 사라지고 URL 상태는 복원됩니다</span>
+<span class="hljs-keyword">const</span> [searchParams, setSearchParams] = <span class="hljs-title function_">useSearchParams</span>();
+<span class="hljs-keyword">const</span> keyword = searchParams.<span class="hljs-title function_">get</span>(<span class="hljs-string">"keyword"</span>) ?? <span class="hljs-string">""</span>;
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">updateKeyword</span>(<span class="hljs-params">value: string</span>) {
+  <span class="hljs-title function_">setSearchParams</span>({ keyword: value });
+}</code></pre>
+        <p>검색어를 지역 상태에만 두면 WebView 재로드에서 조건이 사라집니다. 주소로 공유·복원할 값은 URL에 두고(9단계), Query Key와 연결해 재로드 후에도 같은 결과를 보이게 합니다. 모든 상태를 URL에 넣는 것이 아니라, 사라지면 사용자가 처음부터 다시 해야 하는 값을 기준으로 판단합니다.</p>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">4. AI와 함께 연습</h2>
+        <ol>
+          <li>AI에게 화면의 초기 로딩 경로를 리소스·요청·렌더링 단계로 나눠 설명하게 합니다.</li>
+          <li>WebView 재로드 시 사라지는 상태와 복원되는 상태를 분류하게 합니다.</li>
+          <li>저속 네트워크에서 보여야 할 상태(로딩·지연·실패·재시도)와 현재 구현의 차이를 찾게 합니다(성능 검증 가이드).</li>
+          <li>측정 절차와 목표 수치를 구분해 묻고, 수치가 미확정이면 <code class="badge-tbd">TBD</code>로 정리하게 합니다.</li>
+        </ol>
+        <pre class="hljs"><code data-language="text">이 화면의 첫 진입 경로를 리소스 로딩, 초기 요청, 첫 렌더링, 상호작용 준비로 나눠 설명해줘.
+WebView가 새로고침될 때 사라지는 메모리 상태와 URL·Cache로 복원되는 값을 분류하고,
+저속 네트워크에서 구현이 부족한 상태 처리를 성능 검증 가이드 기준으로 찾아줘.
+목표 수치는 임의로 정하지 말고 무엇을 어디서 측정할지 절차만 먼저 적어줘.</code></pre>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">5. 완료 확인</h2>
+        <ul>
+          <li>느림의 원인을 네트워크·기기·코드로 구분해 각각의 측정 방법을 설명할 수 있습니다.</li>
+          <li>WebView 재로드 조건에서 사라지는 상태와 대비책을 설명할 수 있습니다.</li>
+          <li>초기 리소스 비용이 첫 화면에 미치는 영향을 Client Bundle 경계와 연결할 수 있습니다.</li>
+          <li>목표 수치가 미확정일 때 검증 절차와 <code class="badge-tbd">TBD</code>를 분리해 관리할 수 있습니다.</li>
+        </ul>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">6. 측정과 재현 심화</h2>
+        <h3>실기기 원격 디버깅</h3>
+        <p>Android은 Chrome DevTools 원격 디버깅으로 WebView의 Network·Performance를, iOS는 Safari 개발용 도구로 WebView를 관찰합니다. 시뮬레이터 결과는 참고일 뿐이며, 판단은 실제 목표 기기 또는 그 조건을 재현한 측정 기준으로 합니다.</p>
+        <h3>Lab 측정과 실제 사용자 측정</h3>
+        <p>개발 중 측정(Lab)은 재현과 비교에, 실제 사용자 측정(RUM)은 배포 후 확인에 적합합니다. Lab 수치가 좋아도 실제 기기와 네트워크 조건이 다르면 경험이 다릅니다. Core Web Vitals인 Largest Contentful Paint (LCP), Interaction to Next Paint (INP), Cumulative Layout Shift (CLS)는 각자의 의미와 측정 조건을 이해하고 사용하고, 어떤 수치를 어디서 보는지 기록합니다.</p>
+        <h3>Bridge 호출 비용</h3>
+        <p>WebView와 Native 사이의 호출은 함수 호출보다 비쌉니다. 렌더링마다 반복되는 Bridge 호출, 큰 payload, 응답을 기다리는 체감 지연은 10단계의 요청 수명·배치 설계로 줄입니다. Bridge 지연과 네트워크 지연을 같은 원인으로 섞지 않습니다.</p>
+        <h3>메모리와 정리</h3>
+        <p>정리되지 않은 Timer·Listener·구독(1·5단계)과 큰 데이터 Cache는 오래 사용될수록 WebView를 무겁게 하거나 종료시킵니다. 사용자 전환과 화면 이탈에서 정리되는지, Persist 데이터가 무한히 커지지 않는지 확인합니다.</p>
+      </section>
+      <section>
+        <h2 class="bx-active">7. 마스터 실습과 증거</h2>
+        <p>14단계의 검색 목록 화면을 목표 WebView에서 실행합니다. 저속 네트워크 Throttling과 CPU Throttling을 각각 적용해 첫 진입과 검색 입력 체감을 측정하고, WebView 재로드 후 검색 조건과 입력값이 어떻게 되는지 확인합니다. 원인별로 한 가지만 개선한 뒤 같은 조건으로 재측정합니다.</p>
+        <p><strong>통과 기준:</strong> 느림의 원인을 네트워크·기기·코드 중 어느 것으로 판정했는지 측정 근거와 함께 설명하고, 재로드 후 상태 보존 여부를 실제 동작으로 확인해야 합니다. 목표 수치가 계약되지 않은 상태에서는 개선 전후 비교와 <code class="badge-tbd">TBD</code> 목록을 제출하는 것으로 충분합니다.</p>
+      </section>
+      <hr />
+      <section aria-label="학습 단계 이동">
+        <p><a href="./14-react-rendering-performance.html">이전: React 렌더링 비용과 성능</a> · <a href="./curriculum.html">교육 과정</a> · <a href="./16-i18n-and-localization.html">다음: 다국어와 번역 경계</a> · <a href="../../performance/index.html">네트워크 지연 대응 및 성능 검증 가이드</a> · <a href="../../platform/webview/webView_guide.html">Flutter WebView 설정 가이드</a></p>
+      </section>
+    </main>
+    <footer><p>15. WebView 실기기 성능 검증</p></footer>
+    <script src="../../../assets/js/common.js"></script>
+  </body>
+</html>
+

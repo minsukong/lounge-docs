@@ -34,7 +34,7 @@
           <tbody>
             <tr><td>입력</td><td>API, URL, Storage, 외부 SDK와 Bridge 응답을 어디에서 Runtime 검증하는가?</td></tr>
             <tr><td>출력</td><td>React Escape를 유지하는가? HTML, URL, Script와 CSS의 위험한 실행 경계가 있는가?</td></tr>
-            <tr><td>인증·권한</td><td>UI 제한과 Backend 최종 검증을 구분하는가? <code>401</code>과 <code>403</code>의 의미를 단정하지 않는가?</td></tr>
+            <tr><td>인증·권한</td><td>UI 제한과 Backend 최종 검증을 구분하는가? <code>401</code> 미인증·만료와 <code>403</code> 권한 부족을 구분하고, 갱신·이동 정책은 인증 계약으로 확인하는가?</td></tr>
             <tr><td>저장</td><td>자격 증명, 개인정보, Query Cache와 Persist 상태의 수명과 삭제 조건은 무엇인가?</td></tr>
             <tr><td>전달</td><td>URL, Network, Redirect, Deep Link, Bridge, 분석과 로그에 어떤 값이 포함되는가?</td></tr>
             <tr><td>실행 환경</td><td>Front-end가 사용하는 공개 환경값과 외부 Resource는 무엇인가? Backend·배포·보안 담당이 CSP와 허용 Origin을 어디에 적용하는가?</td></tr>

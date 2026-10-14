@@ -129,7 +129,7 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
     "document": "11. 테스트와 디버깅",
     "section": "위험 기반 검증과 원인 추적",
     "excerpt": "테스트 수준 선택 Pure Function은 Unit, 컴포넌트 상호작용은 Integration, 실제 사용자 핵심 경로는 End-to-End (E2E) Test 가 적합할 수 있습니다. 모든 테스트를 같은 비율로 만들지 말고 실패 가능성, 사용자 영향과 탐지 난이도로 우선순위를 정합니다. Mock의 신뢰 한계 Mock은 Front-end 분기를 재현하지만 실제 API, 브라우저 Layout…",
-    "content": "6. 위험 기반 검증과 원인 추적 테스트 수준 선택 Pure Function은 Unit, 컴포넌트 상호작용은 Integration, 실제 사용자 핵심 경로는 End-to-End (E2E) Test 가 적합할 수 있습니다. 모든 테스트를 같은 비율로 만들지 말고 실패 가능성, 사용자 영향과 탐지 난이도로 우선순위를 정합니다. Mock의 신뢰 한계 Mock은 Front-end 분기를 재현하지만 실제 API, 브라우저 Layout, 인증 Cookie, CORS, WebView와 배포 구성을 보장하지 않습니다. 실제 계약과 다른 Mock이 테스트를 통과시키는 위험을 막기 위해 출처와 관리 책임을 기록합니다. 증거 기반 디버깅 재현 조건을 고정하고 관찰 사실과 가설을 분리합니다. Network Timing, Console Stack, React State, 서버 요청 식별자를 시간 순서로 연결한 뒤 가장 작은 반증 실험을 수행합니다. 수정 전 실패하는 회귀 테스트를 먼저 만들 수 있는지 검토합니다.",
+    "content": "6. 위험 기반 검증과 원인 추적 테스트 수준 선택 Pure Function은 Unit, 컴포넌트 상호작용은 Integration, 실제 사용자 핵심 경로는 End-to-End (E2E) Test 가 적합할 수 있습니다. 모든 테스트를 같은 비율로 만들지 말고 실패 가능성, 사용자 영향과 탐지 난이도로 우선순위를 정합니다. Mock의 신뢰 한계 Mock은 Front-end 분기를 재현하지만 실제 API, 브라우저 Layout, 인증 Cookie, CORS, WebView와 배포 구성을 보장하지 않습니다. 실제 계약과 다른 Mock이 테스트를 통과시키는 위험을 막기 위해 출처와 관리 책임을 기록합니다. 증거 기반 디버깅 재현 조건을 고정하고 관찰 사실과 가설을 분리합니다. Network Timing, Console Stack, React State, 서버 요청 식별자를 시간 순서로 연결한 뒤 가장 작은 반증 실험을 수행합니다. 수정 전 실패하는 회귀 테스트를 먼저 만들 수 있는지 검토합니다. 운영 오류와 Source Map 프로덕션 Build의 Stack은 최소화·변경되어 그대로는 소스를 가리키지 않습니다. Source Map으로 원본 위치를 되돌리는 과정이 운영 오류 진단의 전제이며, Source Map을 어디까지 올리고 어디에 보관하는지는 배포 정책이므로 확정 전까지 TBD 로 둡니다. 운영 조건과 재현의 분리 실제 인증 Cookie, WebView 실기기 조건, CDN과 네트워크 조건은 개발 환경에서 재현되지 않습니다. 운영에서 관찰하는 것(오류 수집, 실제 사용자 측정)과 개발에서 재현하는 것을 분리하고, 각각 어떤 판단에 쓰이는지 기록합니다. WebView 실기기 관찰은 15단계의 원격 디버깅을 사용합니다. 로그도 개인정보 기준을 따릅니다 오류 보고와 로그는 다른 사람이 보관·열람하는 기록입니다. 정책 없이 개인정보, 토큰, 응답 전문을 로그에 남기지 않습니다. 13단계의 개인정보 기준은 운영 진단에도 그대로 적용됩니다.",
     "url": "./../guides/learning/ai-frontend-growth/11-testing-and-debugging.html#section-6"
   },
   {
@@ -213,7 +213,7 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
     "document": "13. Front-End 보안과 개인정보",
     "section": "반드시 이해할 보안 경계",
     "excerpt": "보안 경계는 값이나 실행 책임이 한 영역에서 다른 영역으로 넘어가는 지점입니다. API 응답이 Front-end로 들어올 때, URL 값을 화면 상태로 사용할 때, Browser 저장값을 다시 읽을 때와 WebView가 Native App 기능을 호출할 때가 대표적인 예입니다. “Client를 신뢰하지 않는다”는 Browser와 WebView의 값을 사용하지 말라는 뜻이 아닙니다. 사용자가…",
-    "content": "2. 반드시 이해할 보안 경계 보안 경계는 값이나 실행 책임이 한 영역에서 다른 영역으로 넘어가는 지점입니다. API 응답이 Front-end로 들어올 때, URL 값을 화면 상태로 사용할 때, Browser 저장값을 다시 읽을 때와 WebView가 Native App 기능을 호출할 때가 대표적인 예입니다. “Client를 신뢰하지 않는다”는 Browser와 WebView의 값을 사용하지 말라는 뜻이 아닙니다. 사용자가 값을 확인·변경할 수 있고 이전 Version의 값이 남을 수도 있으므로, 그 값만으로 권한이나 중요한 업무 결과를 확정하지 않는다는 뜻입니다. 경계 개발자가 판단할 내용 입력 API, URL, Storage, 외부 SDK와 Bridge 응답을 어디에서 Runtime 검증하는가? 출력 React Escape를 유지하는가? HTML, URL, Script와 CSS의 위험한 실행 경계가 있는가? 인증·권한 UI 제한과 Backend 최종 검증을 구분하는가? 401 과 403 의 의미를 단정하지 않는가? 저장 자격 증명, 개인정보, Query Cache와 Persist 상태의 수명과 삭제 조건은 무엇인가? 전달 URL, Network, Redirect, Deep Link, Bridge, 분석과 로그에 어떤 값이 포함되는가? 실행 환경 Front-end가 사용하는 공개 환경값과 외부 Resource는 무엇인가? Backend·배포·보안 담당이 CSP와 허용 Origin을 어디에 적용하는가? 공급망 새 package가 필요한가? Lock File, 실제 설치·배포 Version, 공식 보안 공지와 업데이트 책임을 확인했는가? TypeScript 타입과 Runtime 검증 TypeScript 타입은 개발 중 코드의 실수를 줄여주지만 실행 중 들어온 API·Storage·Bridge 응답을 자동으로 검사하지 않습니다. 아래처럼 응답을 바로 단정하면 서버 변경, 오래된 저장값 또는 잘못된 외부 응답이 타입 검사 없이 화면으로 들어옵니다. type User = { id: string ; name: string } // 타입 선언만으로 실제 응답 형태가 보장되지는 않습니다. const user = ( await response. json ()) as User 승인된 API 계약이 전달된 뒤 Front-end 요청 경계에서 실제 값의 형태와 필수 항목을 확인하고, 검증 실패를 정상적인 오류 상태로 처리합니다. 사용할 Schema 도구와 Parser 구현은 API 계약이 확정되기 전에 만들지 않습니다. React 기본 출력과 XSS React는 JSX 표현식의 일반 문자열을 Escape(HTML 코드를 실행하지 않고 글자로 표시하는 처리)합니다. 따라서 {userInput} 처럼 출력하는 기본 경로는 유지합니다. 반면 dangerouslySetInnerHTML , 문자열로 만든 HTML, 검증하지 않은 외부 URL처럼 기본 보호를 우회하는 지점은 별도로 검토해야 합니다. XSS(Cross-Site Scripting)는 외부에서 들어온 문자열이 화면에서 Script처럼 실행되는 공격입니다. CSP(Content Security Policy)는 실행 가능한 리소스를 제한하는 추가 방어 수단이지만, 위험한 HTML 출력 자체를 안전하게 바꾸지는 않습니다. 화면 제한과 실제 권한 Menu나 Button을 숨기는 것은 사용할 수 없는 기능을 보여주지 않는 사용자 경험 처리입니다. 사용자는 Client 코드와 요청값을 변경할 수 있으므로, 숨긴 Button의 API를 직접 호출하는 것까지 막지는 못합니다. Front-end는 화면 상태를 올바르게 표현하고, 데이터 접근·소유권·업무 규칙의 최종 판단은 승인된 Backend 계약에서 처리되는지 확인합니다. Storage와 공개되는 Client 값 localStorage , sessionStorage , IndexedDB와 Persist 상태는 사용자가 열람·수정할 수 있고 로그아웃 뒤에도 남을 수 있습니다. Theme나 접힘 상태처럼 영향이 작은 값은 허용값과 기본값을 확인하여 사용할 수 있지만, role: \"admin\" 같은 저장값만으로 권한을 부여해서는 안 됩니다. NEXT_PUBLIC_ 환경변수와 Client Component에 포함된 값은 최종적으로 Browser에 전달됩니다. 이름에 SECRET 이나 KEY 가 들어가도 보호되지 않으므로 서버 자격 증명과 Private Key를 넣지 않습니다. 의존성과 공급망 package를 하나 설치하면 직접 선택한 코드뿐 아니라 하위 의존성과 설치 Script도 함께 실행될 수 있습니다. 유명 package와 공식 Registry도 계정이나 배포 권한이 침해되면 악성 Version이 게시될 수 있으므로, 필요성·Lock File 변경·공식 보안 공지와 실제 설치 Version을 함께 확인합니다. 최신 Version을 무조건 설치하는 것과 오래된 Version을 계속 유지하는 것 모두 기준이 아닙니다. 초기 도입은 공식 지원·보안 공지·호환성을 검토한 안정 Version을 고정하고, 고위험 취약점이 확인되면 현재 사용 계열의 공식 수정 Version을 우선 적용합니다.",
+    "content": "2. 반드시 이해할 보안 경계 보안 경계는 값이나 실행 책임이 한 영역에서 다른 영역으로 넘어가는 지점입니다. API 응답이 Front-end로 들어올 때, URL 값을 화면 상태로 사용할 때, Browser 저장값을 다시 읽을 때와 WebView가 Native App 기능을 호출할 때가 대표적인 예입니다. “Client를 신뢰하지 않는다”는 Browser와 WebView의 값을 사용하지 말라는 뜻이 아닙니다. 사용자가 값을 확인·변경할 수 있고 이전 Version의 값이 남을 수도 있으므로, 그 값만으로 권한이나 중요한 업무 결과를 확정하지 않는다는 뜻입니다. 경계 개발자가 판단할 내용 입력 API, URL, Storage, 외부 SDK와 Bridge 응답을 어디에서 Runtime 검증하는가? 출력 React Escape를 유지하는가? HTML, URL, Script와 CSS의 위험한 실행 경계가 있는가? 인증·권한 UI 제한과 Backend 최종 검증을 구분하는가? 401 미인증·만료와 403 권한 부족을 구분하고, 갱신·이동 정책은 인증 계약으로 확인하는가? 저장 자격 증명, 개인정보, Query Cache와 Persist 상태의 수명과 삭제 조건은 무엇인가? 전달 URL, Network, Redirect, Deep Link, Bridge, 분석과 로그에 어떤 값이 포함되는가? 실행 환경 Front-end가 사용하는 공개 환경값과 외부 Resource는 무엇인가? Backend·배포·보안 담당이 CSP와 허용 Origin을 어디에 적용하는가? 공급망 새 package가 필요한가? Lock File, 실제 설치·배포 Version, 공식 보안 공지와 업데이트 책임을 확인했는가? TypeScript 타입과 Runtime 검증 TypeScript 타입은 개발 중 코드의 실수를 줄여주지만 실행 중 들어온 API·Storage·Bridge 응답을 자동으로 검사하지 않습니다. 아래처럼 응답을 바로 단정하면 서버 변경, 오래된 저장값 또는 잘못된 외부 응답이 타입 검사 없이 화면으로 들어옵니다. type User = { id: string ; name: string } // 타입 선언만으로 실제 응답 형태가 보장되지는 않습니다. const user = ( await response. json ()) as User 승인된 API 계약이 전달된 뒤 Front-end 요청 경계에서 실제 값의 형태와 필수 항목을 확인하고, 검증 실패를 정상적인 오류 상태로 처리합니다. 사용할 Schema 도구와 Parser 구현은 API 계약이 확정되기 전에 만들지 않습니다. React 기본 출력과 XSS React는 JSX 표현식의 일반 문자열을 Escape(HTML 코드를 실행하지 않고 글자로 표시하는 처리)합니다. 따라서 {userInput} 처럼 출력하는 기본 경로는 유지합니다. 반면 dangerouslySetInnerHTML , 문자열로 만든 HTML, 검증하지 않은 외부 URL처럼 기본 보호를 우회하는 지점은 별도로 검토해야 합니다. XSS(Cross-Site Scripting)는 외부에서 들어온 문자열이 화면에서 Script처럼 실행되는 공격입니다. CSP(Content Security Policy)는 실행 가능한 리소스를 제한하는 추가 방어 수단이지만, 위험한 HTML 출력 자체를 안전하게 바꾸지는 않습니다. 화면 제한과 실제 권한 Menu나 Button을 숨기는 것은 사용할 수 없는 기능을 보여주지 않는 사용자 경험 처리입니다. 사용자는 Client 코드와 요청값을 변경할 수 있으므로, 숨긴 Button의 API를 직접 호출하는 것까지 막지는 못합니다. Front-end는 화면 상태를 올바르게 표현하고, 데이터 접근·소유권·업무 규칙의 최종 판단은 승인된 Backend 계약에서 처리되는지 확인합니다. Storage와 공개되는 Client 값 localStorage , sessionStorage , IndexedDB와 Persist 상태는 사용자가 열람·수정할 수 있고 로그아웃 뒤에도 남을 수 있습니다. Theme나 접힘 상태처럼 영향이 작은 값은 허용값과 기본값을 확인하여 사용할 수 있지만, role: \"admin\" 같은 저장값만으로 권한을 부여해서는 안 됩니다. NEXT_PUBLIC_ 환경변수와 Client Component에 포함된 값은 최종적으로 Browser에 전달됩니다. 이름에 SECRET 이나 KEY 가 들어가도 보호되지 않으므로 서버 자격 증명과 Private Key를 넣지 않습니다. 의존성과 공급망 package를 하나 설치하면 직접 선택한 코드뿐 아니라 하위 의존성과 설치 Script도 함께 실행될 수 있습니다. 유명 package와 공식 Registry도 계정이나 배포 권한이 침해되면 악성 Version이 게시될 수 있으므로, 필요성·Lock File 변경·공식 보안 공지와 실제 설치 Version을 함께 확인합니다. 최신 Version을 무조건 설치하는 것과 오래된 Version을 계속 유지하는 것 모두 기준이 아닙니다. 초기 도입은 공식 지원·보안 공지·호환성을 검토한 안정 Version을 고정하고, 고위험 취약점이 확인되면 현재 사용 계열의 공식 수정 Version을 우선 적용합니다.",
     "url": "./../guides/learning/ai-frontend-growth/13-frontend-security-and-privacy.html#section-2"
   },
   {
@@ -250,6 +250,153 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
     "excerpt": "아래 항목은 도구나 기능 자체가 잘못됐다는 뜻이 아닙니다. 한 가지 보호 장치가 다른 보안 책임까지 해결한다고 확대 해석하는 것이 문제입니다. TypeScript 타입이 있으므로 API와 Bridge 응답도 안전하다고 판단합니다. React가 기본 Escape하므로 dangerouslySetInnerHTML 과 동적 URL도 자동으로 안전하다고 생각합니다. Menu와 Button을 숨겼으므로…",
     "content": "3. 흔한 잘못된 판단 아래 항목은 도구나 기능 자체가 잘못됐다는 뜻이 아닙니다. 한 가지 보호 장치가 다른 보안 책임까지 해결한다고 확대 해석하는 것이 문제입니다. TypeScript 타입이 있으므로 API와 Bridge 응답도 안전하다고 판단합니다. React가 기본 Escape하므로 dangerouslySetInnerHTML 과 동적 URL도 자동으로 안전하다고 생각합니다. Menu와 Button을 숨겼으므로 권한이 통제됐다고 표현합니다. 환경변수 이름에 Secret이 들어가면 Client에서도 보호된다고 생각합니다. Cookie의 SameSite 만으로 모든 CSRF가 해결됐다고 단정합니다. Client의 MIME·확장자 검사만으로 업로드 파일이 안전하다고 판단합니다. CSP를 추가했으므로 XSS 원인을 수정하지 않아도 된다고 생각합니다. npm audit fix --force 를 검토 없이 실행해 취약점과 Breaking Change가 모두 해결됐다고 판단합니다. 프로젝트 생성 때 최신 Version을 설치했으므로 이후 React·Next.js 보안 공지를 확인하지 않아도 된다고 생각합니다. WAF, 입력 검증이나 CSP를 적용했으므로 취약한 Framework package를 업데이트하지 않아도 된다고 판단합니다.",
     "url": "./../guides/learning/ai-frontend-growth/13-frontend-security-and-privacy.html#section-3"
+  },
+  {
+    "document": "14. React 렌더링 비용과 성능",
+    "section": "꼭 알아야 할 내용",
+    "excerpt": "re-render는 DOM 자체가 아닙니다 상태가 바뀌면 React는 해당 컴포넌트 함수를 다시 실행하고 결과를 이전 결과와 비교합니다. 화면이 실제로 바뀌지 않으면 DOM 작업은 일어나지 않습니다. 따라서 \"render가 많다\"와 \"사용자가 느낀다\"는 다른 관찰이며, 실제 비용은 다시 실행되는 계산, 큰 트리 비교와 실제 DOM·Layout 작업에서 발생합니다. re-render는 아래로…",
+    "content": "2. 꼭 알아야 할 내용 re-render는 DOM 자체가 아닙니다 상태가 바뀌면 React는 해당 컴포넌트 함수를 다시 실행하고 결과를 이전 결과와 비교합니다. 화면이 실제로 바뀌지 않으면 DOM 작업은 일어나지 않습니다. 따라서 \"render가 많다\"와 \"사용자가 느낀다\"는 다른 관찰이며, 실제 비용은 다시 실행되는 계산, 큰 트리 비교와 실제 DOM·Layout 작업에서 발생합니다. re-render는 아래로 전파됩니다 부모가 다시 렌더링되면 자식도 기본적으로 다시 실행됩니다. 자식이 아무리 작아도 부모 트리의 re-render 범위에 포함됩니다. 그래서 성능 문제는 대개 개별 컴포넌트가 아니라 상태가 트리 어디에 있는지의 문제입니다. 상태 위치가 re-render 범위를 결정합니다 입력창 상태를 큰 목록과 같은 레벨에 두면 키 입력마다 목록까지 다시 실행됩니다. 첫 번째 대응은 memo가 아니라 상태 위치를 입력을 소유한 가장 가까운 곳으로 내리거나, 목록을 children처럼 props로 받아 다시 렌더링되지 않게 구성하는 것입니다. 4단계의 상태 소유자 설계가 성능 설계의 출발점입니다. 파생 값은 렌더링 중 계산합니다 filter·sort 결과는 별도 상태로 저장하지 않고 원본과 조건에서 계산합니다(1단계). 계산 자체가 실제로 비싸고 입력이 같은데 반복 실행될 때만 useMemo 를 검토하며, 도입 전 계산 비용과 입력 변경 빈도를 확인합니다. 참조 동일성이 memo의 기준입니다 memo 는 Props를 값이 아니라 참조로 비교합니다. 렌더링마다 새로 만드는 객체·함수·배열은 Props에 넣으면 비교가 항상 실패합니다. 1단계의 참조 공유 이해가 여기서 그대로 검사 기준으로 쓰입니다. 증거 먼저, 최적화 나중 체감이나 코드 양으로 성능 문제를 판단하지 않습니다. Profiler로 어떤 컴포넌트가 얼마나 다시 실행되는지 확인한 뒤, 효과가 확인된 한 가지만 바꾸고 다시 측정합니다. AI가 제안한 memo·virtualization·debounce를 순서 근거 없이 적용하지 않습니다.",
+    "url": "./../guides/learning/ai-frontend-growth/14-react-rendering-performance.html#section-2"
+  },
+  {
+    "document": "14. React 렌더링 비용과 성능",
+    "section": "마스터 실습과 증거",
+    "excerpt": "검색 입력과 함께 2,000개 이상의 목록을 렌더링하는 화면을 준비합니다. Profiler로 키 입력 시 re-render 범위를 기록하고, 상태 위치 분리 → 참조 안정화 → memo → 필요 시 가상화 순서로 한 단계씩 바꾸며 전후 수치를 남깁니다. 의도적으로 onOpen 을 인라인 함수로 두어 memo 가 동작하지 않는 상태를 재현합니다. 통과 기준: 수치를 옮기기만 하지 말고, re-…",
+    "content": "7. 마스터 실습과 증거 검색 입력과 함께 2,000개 이상의 목록을 렌더링하는 화면을 준비합니다. Profiler로 키 입력 시 re-render 범위를 기록하고, 상태 위치 분리 → 참조 안정화 → memo → 필요 시 가상화 순서로 한 단계씩 바꾸며 전후 수치를 남깁니다. 의도적으로 onOpen 을 인라인 함수로 두어 memo 가 동작하지 않는 상태를 재현합니다. 통과 기준: 수치를 옮기기만 하지 말고, re-render의 원인을 상태 변경까지 설명하고, memo보다 상태 위치 분리를 먼저 선택한 근거와 각 변경의 전후 증거를 제출해야 합니다. memo 를 붙였는데 동작하지 않는 이유를 참조 기준으로 설명할 수 있어야 합니다. 교육 과정 · 다음: WebView 실기기 성능 검증 · 네트워크 지연 대응 및 성능 검증 가이드 · TSX 가독성과 분리 기준 14. React 렌더링 비용과 성능",
+    "url": "./../guides/learning/ai-frontend-growth/14-react-rendering-performance.html#section-7"
+  },
+  {
+    "document": "14. React 렌더링 비용과 성능",
+    "section": "완료 확인",
+    "excerpt": "re-render와 실제 DOM 작업 비용을 구분해 설명할 수 있습니다. 상태 위치를 옮겨 re-render 범위를 줄이는 방법을 memo보다 먼저 검토할 수 있습니다. 새로 만들어진 참조가 memo 를 무력화하는 조건을 코드에서 찾을 수 있습니다. 측정 → 한 가지 변경 → 재측정 순서를 지키지 않은 최적화를 반려할 수 있습니다.",
+    "content": "5. 완료 확인 re-render와 실제 DOM 작업 비용을 구분해 설명할 수 있습니다. 상태 위치를 옮겨 re-render 범위를 줄이는 방법을 memo보다 먼저 검토할 수 있습니다. 새로 만들어진 참조가 memo 를 무력화하는 조건을 코드에서 찾을 수 있습니다. 측정 → 한 가지 변경 → 재측정 순서를 지키지 않은 최적화를 반려할 수 있습니다.",
+    "url": "./../guides/learning/ai-frontend-growth/14-react-rendering-performance.html#section-5"
+  },
+  {
+    "document": "14. React 렌더링 비용과 성능",
+    "section": "코드 읽기",
+    "excerpt": "function TicketListPage ( ) { const [keyword, setKeyword] = useState ( \"\" ); const ticketQuery = useTickets (); const visibleTickets = ticketQuery.data. filter ( ( ticket ) => ticket.title. includes (keyword), ); return…",
+    "content": "3. 코드 읽기 function TicketListPage ( ) { const [keyword, setKeyword] = useState ( \"\" ); const ticketQuery = useTickets (); const visibleTickets = ticketQuery.data. filter ( ( ticket ) => ticket.title. includes (keyword), ); return ( <> < input value ={keyword} onChange ={ ( event ) => setKeyword (event.target.value)} /> < TicketRows tickets ={visibleTickets} onOpen ={ ( ticket ) => openTicket (ticket.id)} /> </> ); } 키 입력마다 keyword 상태가 트리 전체를 다시 실행합니다. filter 재계산 자체는 작을 수 있고, 실제 비용은 목록 컴포넌트 전체의 재실행과 비교입니다. 첫 대응은 memo 가 아니라 입력과 목록의 상태를 분리하고, 목록이 키 입력 re-render 범위에 들어가지 않게 구성하는 것입니다. 바꾼 뒤에는 같은 입력으로 전후를 다시 측정합니다.",
+    "url": "./../guides/learning/ai-frontend-growth/14-react-rendering-performance.html#section-3"
+  },
+  {
+    "document": "14. React 렌더링 비용과 성능",
+    "section": "학습 목표",
+    "excerpt": "교육 과정 · 다음: WebView 실기기 성능 검증 고급 트랙입니다. 13단계 핵심 과정을 완료한 뒤, 화면이 무거워지는 원인을 판단해야 할 때 학습합니다. re-render 발생 조건과 실제 DOM 작업 비용을 구분합니다. 상태 위치를 옮겨 re-render 범위를 먼저 줄이는 순서를 이해합니다. memoization이 효과 있는 조건과 해가 되는 조건을 판별합니다.",
+    "content": "1. 학습 목표 교육 과정 · 다음: WebView 실기기 성능 검증 고급 트랙입니다. 13단계 핵심 과정을 완료한 뒤, 화면이 무거워지는 원인을 판단해야 할 때 학습합니다. re-render 발생 조건과 실제 DOM 작업 비용을 구분합니다. 상태 위치를 옮겨 re-render 범위를 먼저 줄이는 순서를 이해합니다. memoization이 효과 있는 조건과 해가 되는 조건을 판별합니다.",
+    "url": "./../guides/learning/ai-frontend-growth/14-react-rendering-performance.html#section-1"
+  },
+  {
+    "document": "14. React 렌더링 비용과 성능",
+    "section": "AI와 함께 연습",
+    "excerpt": "AI에게 화면의 상태를 소유자별로 그리고, 각 상태가 바뀔 때 다시 실행되는 컴포넌트 범위를 설명하게 합니다. memo를 제안하기 전에 상태 위치를 옮겨 해결할 수 있는지 먼저 검토하게 합니다. Props로 전달되는 객체·함수 중 렌더링마다 새로 만들어지는 참조를 찾게 합니다. 변경 전후 Profiler 수치를 제시하고, 어떤 변경이 어떤 수치에 영향을 주었는지 설명하게 합니다. 이 화면에서…",
+    "content": "4. AI와 함께 연습 AI에게 화면의 상태를 소유자별로 그리고, 각 상태가 바뀔 때 다시 실행되는 컴포넌트 범위를 설명하게 합니다. memo를 제안하기 전에 상태 위치를 옮겨 해결할 수 있는지 먼저 검토하게 합니다. Props로 전달되는 객체·함수 중 렌더링마다 새로 만들어지는 참조를 찾게 합니다. 변경 전후 Profiler 수치를 제시하고, 어떤 변경이 어떤 수치에 영향을 주었는지 설명하게 합니다. 이 화면에서 상태별로 re-render 범위를 설명해줘. memo를 제안하기 전에 상태 위치 분리나 children 구성으로 해결 가능한지 먼저 검토하고, 렌더링마다 새로 만들어지는 참조가 memo를 무력화하는 위치도 찾아줘. 변경 제안에는 각각 무엇을 측정해 검증해야 하는지 적어줘.",
+    "url": "./../guides/learning/ai-frontend-growth/14-react-rendering-performance.html#section-4"
+  },
+  {
+    "document": "14. React 렌더링 비용과 성능",
+    "section": "memo, 목록과 Context 비용 심화",
+    "excerpt": "Profiler 읽기 React DevTools Profiler로 commit 단위의 실행 시간과 다시 렌더링된 컴포넌트를 확인합니다. Flame Graph에서 비용이 큰 서브트리와 그 re-render를 유발한 상태 변경을 연결합니다. 숫자만 옮겨 적지 말고 \"왜 다시 실행됐는가\"를 상태 변경까지 설명합니다. 긴 목록과 가상화 항목이 많아 DOM 자체가 커지면 렌더링 비교가 아니라 DOM…",
+    "content": "6. memo, 목록과 Context 비용 심화 Profiler 읽기 React DevTools Profiler로 commit 단위의 실행 시간과 다시 렌더링된 컴포넌트를 확인합니다. Flame Graph에서 비용이 큰 서브트리와 그 re-render를 유발한 상태 변경을 연결합니다. 숫자만 옮겨 적지 말고 \"왜 다시 실행됐는가\"를 상태 변경까지 설명합니다. 긴 목록과 가상화 항목이 많아 DOM 자체가 커지면 렌더링 비교가 아니라 DOM 크기·스크롤 비용이 문제가 됩니다. 이때만 보이는 범위만 렌더링하는 가상화를 검토합니다. 도입 전 항목 수와 실제 렌더링 비용으로 필요를 확인하고, 스크롤 중 포커스·접근성·텍스트 검색 동작이 유지되는지 함께 검증합니다. Context의 소비자 비용 Context 값이 바뀌면 그 Context를 읽는 모든 소비자가 다시 실행됩니다. 자주 바뀌는 값을 넓은 Context에 넣지 않고, 변경 빈도와 소비 범위에 따라 Context를 나누거나 상태를 아래로 내립니다. 공유 범위가 좁다면 Props로 충분한지부터 확인합니다(4단계). memo·useMemo·useCallback의 경계 memo 는 자식의 re-render를 막는 도구이고, useMemo · useCallback 은 참조를 유지해 그 조건을 만족시키는 보조 수단입니다. 비교 비용과 메모리, 참조 관리 실수라는 대가가 있으므로 Profiler로 효과가 확인된 위치에만 남기고, 근거가 사라진 memoization은 제거합니다. memo 가 동작하지 않는 경우(새 참조 Props)를 찾으면 memo를 추가하지 말고 참조부터 고칩니다.",
+    "url": "./../guides/learning/ai-frontend-growth/14-react-rendering-performance.html#section-6"
+  },
+  {
+    "document": "15. WebView 실기기 성능 검증",
+    "section": "꼭 알아야 할 내용",
+    "excerpt": "개발 장비가 목표 환경이 아닙니다 지원 하한은 Safari 15와 구형 WebView입니다(7단계). 최신 개발 장비와 브라우저에서 확인한 빠름은 목표 환경의 보장이 아닙니다. 성능 판단은 실제 목표 기기 또는 그 조건을 재현한 측정 기준으로 합니다. 느림은 서로 다른 세 조건입니다 전송이 느린 것(네트워크), 처리가 느린 것(기기와 JavaScript), 늦게 그려지는 것(코드와 리소스 구…",
+    "content": "2. 꼭 알아야 할 내용 개발 장비가 목표 환경이 아닙니다 지원 하한은 Safari 15와 구형 WebView입니다(7단계). 최신 개발 장비와 브라우저에서 확인한 빠름은 목표 환경의 보장이 아닙니다. 성능 판단은 실제 목표 기기 또는 그 조건을 재현한 측정 기준으로 합니다. 느림은 서로 다른 세 조건입니다 전송이 느린 것(네트워크), 처리가 느린 것(기기와 JavaScript), 늦게 그려지는 것(코드와 리소스 구조)은 원인과 대응이 다릅니다. Network Throttling과 CPU Throttling은 별개의 실험 조건이며, 한쪽을 느리게 해 놓고 다른 쪽 원인을 지목하지 않습니다. WebView 수명은 브라우저 탭과 다릅니다 Flutter 앱의 WebView는 Native 화면 전환, 앱 백그라운드, 메모리 압력 등에 따라 새로고침되거나 상태가 사라질 수 있습니다. 메모리 상태에 의존한 화면은 재로드에서 사용자 입력과 진행 상태를 잃습니다. 복원이 필요한 검색·필터와 초안은 URL 상태 등 보존 가능한 위치와 설계로 대비합니다(9단계). 초기 리소스 비용이 첫 화면을 결정합니다 JavaScript 번들, 폰트, 이미지의 크기와 로딩 순서는 첫 화면 표시 시간에 직접 영향을 줍니다. Server·Client 경계와 Client Bundle 범위를 확인하는 6단계 기준이 여기서 측정 대상으로 이어집니다. 이미지 크기 지정, 로딩 범위와 지연 로딩은 화면 의미에 맞춰 적용합니다. 성능 예산과 합격 수치는 계약입니다 목표 LCP·INP 수치, 허용 번들 크기, 저속 네트워크 기준선처럼 제품과 배포가 결정하는 값은 Front-end가 임의로 정지 않습니다. 확인 전에는 TBD 로 두고, 지금은 측정 방법과 전후 비교라는 검증 절차부터 준비합니다.",
+    "url": "./../guides/learning/ai-frontend-growth/15-webview-performance-verification.html#section-2"
+  },
+  {
+    "document": "15. WebView 실기기 성능 검증",
+    "section": "마스터 실습과 증거",
+    "excerpt": "14단계의 검색 목록 화면을 목표 WebView에서 실행합니다. 저속 네트워크 Throttling과 CPU Throttling을 각각 적용해 첫 진입과 검색 입력 체감을 측정하고, WebView 재로드 후 검색 조건과 입력값이 어떻게 되는지 확인합니다. 원인별로 한 가지만 개선한 뒤 같은 조건으로 재측정합니다. 통과 기준: 느림의 원인을 네트워크·기기·코드 중 어느 것으로 판정했는지 측정 근…",
+    "content": "7. 마스터 실습과 증거 14단계의 검색 목록 화면을 목표 WebView에서 실행합니다. 저속 네트워크 Throttling과 CPU Throttling을 각각 적용해 첫 진입과 검색 입력 체감을 측정하고, WebView 재로드 후 검색 조건과 입력값이 어떻게 되는지 확인합니다. 원인별로 한 가지만 개선한 뒤 같은 조건으로 재측정합니다. 통과 기준: 느림의 원인을 네트워크·기기·코드 중 어느 것으로 판정했는지 측정 근거와 함께 설명하고, 재로드 후 상태 보존 여부를 실제 동작으로 확인해야 합니다. 목표 수치가 계약되지 않은 상태에서는 개선 전후 비교와 TBD 목록을 제출하는 것으로 충분합니다. 이전: React 렌더링 비용과 성능 · 교육 과정 · 다음: 다국어와 번역 경계 · 네트워크 지연 대응 및 성능 검증 가이드 · Flutter WebView 설정 가이드 15. WebView 실기기 성능 검증",
+    "url": "./../guides/learning/ai-frontend-growth/15-webview-performance-verification.html#section-7"
+  },
+  {
+    "document": "15. WebView 실기기 성능 검증",
+    "section": "완료 확인",
+    "excerpt": "느림의 원인을 네트워크·기기·코드로 구분해 각각의 측정 방법을 설명할 수 있습니다. WebView 재로드 조건에서 사라지는 상태와 대비책을 설명할 수 있습니다. 초기 리소스 비용이 첫 화면에 미치는 영향을 Client Bundle 경계와 연결할 수 있습니다. 목표 수치가 미확정일 때 검증 절차와 TBD 를 분리해 관리할 수 있습니다.",
+    "content": "5. 완료 확인 느림의 원인을 네트워크·기기·코드로 구분해 각각의 측정 방법을 설명할 수 있습니다. WebView 재로드 조건에서 사라지는 상태와 대비책을 설명할 수 있습니다. 초기 리소스 비용이 첫 화면에 미치는 영향을 Client Bundle 경계와 연결할 수 있습니다. 목표 수치가 미확정일 때 검증 절차와 TBD 를 분리해 관리할 수 있습니다.",
+    "url": "./../guides/learning/ai-frontend-growth/15-webview-performance-verification.html#section-5"
+  },
+  {
+    "document": "15. WebView 실기기 성능 검증",
+    "section": "측정과 재현 심화",
+    "excerpt": "실기기 원격 디버깅 Android은 Chrome DevTools 원격 디버깅으로 WebView의 Network·Performance를, iOS는 Safari 개발용 도구로 WebView를 관찰합니다. 시뮬레이터 결과는 참고일 뿐이며, 판단은 실제 목표 기기 또는 그 조건을 재현한 측정 기준으로 합니다. Lab 측정과 실제 사용자 측정 개발 중 측정(Lab)은 재현과 비교에, 실제 사용자 측정…",
+    "content": "6. 측정과 재현 심화 실기기 원격 디버깅 Android은 Chrome DevTools 원격 디버깅으로 WebView의 Network·Performance를, iOS는 Safari 개발용 도구로 WebView를 관찰합니다. 시뮬레이터 결과는 참고일 뿐이며, 판단은 실제 목표 기기 또는 그 조건을 재현한 측정 기준으로 합니다. Lab 측정과 실제 사용자 측정 개발 중 측정(Lab)은 재현과 비교에, 실제 사용자 측정(RUM)은 배포 후 확인에 적합합니다. Lab 수치가 좋아도 실제 기기와 네트워크 조건이 다르면 경험이 다릅니다. Core Web Vitals인 Largest Contentful Paint (LCP), Interaction to Next Paint (INP), Cumulative Layout Shift (CLS)는 각자의 의미와 측정 조건을 이해하고 사용하고, 어떤 수치를 어디서 보는지 기록합니다. Bridge 호출 비용 WebView와 Native 사이의 호출은 함수 호출보다 비쌉니다. 렌더링마다 반복되는 Bridge 호출, 큰 payload, 응답을 기다리는 체감 지연은 10단계의 요청 수명·배치 설계로 줄입니다. Bridge 지연과 네트워크 지연을 같은 원인으로 섞지 않습니다. 메모리와 정리 정리되지 않은 Timer·Listener·구독(1·5단계)과 큰 데이터 Cache는 오래 사용될수록 WebView를 무겁게 하거나 종료시킵니다. 사용자 전환과 화면 이탈에서 정리되는지, Persist 데이터가 무한히 커지지 않는지 확인합니다.",
+    "url": "./../guides/learning/ai-frontend-growth/15-webview-performance-verification.html#section-6"
+  },
+  {
+    "document": "15. WebView 실기기 성능 검증",
+    "section": "코드 읽기",
+    "excerpt": "// 메모리 상태는 WebView가 새로고침되면 사라지고 URL 상태는 복원됩니다 const [searchParams, setSearchParams] = useSearchParams (); const keyword = searchParams. get ( \"keyword\" ) ?? \"\" ; function updateKeyword ( value: string ) { setSearchParams…",
+    "content": "3. 코드 읽기 // 메모리 상태는 WebView가 새로고침되면 사라지고 URL 상태는 복원됩니다 const [searchParams, setSearchParams] = useSearchParams (); const keyword = searchParams. get ( \"keyword\" ) ?? \"\" ; function updateKeyword ( value: string ) { setSearchParams ({ keyword: value }); } 검색어를 지역 상태에만 두면 WebView 재로드에서 조건이 사라집니다. 주소로 공유·복원할 값은 URL에 두고(9단계), Query Key와 연결해 재로드 후에도 같은 결과를 보이게 합니다. 모든 상태를 URL에 넣는 것이 아니라, 사라지면 사용자가 처음부터 다시 해야 하는 값을 기준으로 판단합니다.",
+    "url": "./../guides/learning/ai-frontend-growth/15-webview-performance-verification.html#section-3"
+  },
+  {
+    "document": "15. WebView 실기기 성능 검증",
+    "section": "학습 목표",
+    "excerpt": "이전: React 렌더링 비용과 성능 · 교육 과정 고급 트랙입니다. 14단계의 렌더링 비용 이해를 전제로, 실제 WebView 환경의 조건을 추가합니다. 네트워크 지연 대응의 전체 기준은 네트워크 지연 대응 및 성능 검증 가이드 를 따릅니다. 네트워크·기기·코드라는 서로 다른 느림의 원인을 구분합니다. 저속 네트워크와 저사양 조건을 의도적으로 재현하고 측정합니다. WebView 수명이 화면…",
+    "content": "1. 학습 목표 이전: React 렌더링 비용과 성능 · 교육 과정 고급 트랙입니다. 14단계의 렌더링 비용 이해를 전제로, 실제 WebView 환경의 조건을 추가합니다. 네트워크 지연 대응의 전체 기준은 네트워크 지연 대응 및 성능 검증 가이드 를 따릅니다. 네트워크·기기·코드라는 서로 다른 느림의 원인을 구분합니다. 저속 네트워크와 저사양 조건을 의도적으로 재현하고 측정합니다. WebView 수명이 화면 상태에 미치는 영향을 설계에 반영합니다.",
+    "url": "./../guides/learning/ai-frontend-growth/15-webview-performance-verification.html#section-1"
+  },
+  {
+    "document": "15. WebView 실기기 성능 검증",
+    "section": "AI와 함께 연습",
+    "excerpt": "AI에게 화면의 초기 로딩 경로를 리소스·요청·렌더링 단계로 나눠 설명하게 합니다. WebView 재로드 시 사라지는 상태와 복원되는 상태를 분류하게 합니다. 저속 네트워크에서 보여야 할 상태(로딩·지연·실패·재시도)와 현재 구현의 차이를 찾게 합니다(성능 검증 가이드). 측정 절차와 목표 수치를 구분해 묻고, 수치가 미확정이면 TBD 로 정리하게 합니다. 이 화면의 첫 진입 경로를 리소스…",
+    "content": "4. AI와 함께 연습 AI에게 화면의 초기 로딩 경로를 리소스·요청·렌더링 단계로 나눠 설명하게 합니다. WebView 재로드 시 사라지는 상태와 복원되는 상태를 분류하게 합니다. 저속 네트워크에서 보여야 할 상태(로딩·지연·실패·재시도)와 현재 구현의 차이를 찾게 합니다(성능 검증 가이드). 측정 절차와 목표 수치를 구분해 묻고, 수치가 미확정이면 TBD 로 정리하게 합니다. 이 화면의 첫 진입 경로를 리소스 로딩, 초기 요청, 첫 렌더링, 상호작용 준비로 나눠 설명해줘. WebView가 새로고침될 때 사라지는 메모리 상태와 URL·Cache로 복원되는 값을 분류하고, 저속 네트워크에서 구현이 부족한 상태 처리를 성능 검증 가이드 기준으로 찾아줘. 목표 수치는 임의로 정하지 말고 무엇을 어디서 측정할지 절차만 먼저 적어줘.",
+    "url": "./../guides/learning/ai-frontend-growth/15-webview-performance-verification.html#section-4"
+  },
+  {
+    "document": "16. 다국어와 번역 경계",
+    "section": "꼭 알아야 할 내용",
+    "excerpt": "한국어 원문을 코드에 작성하고, 번역 키는 도구가 만듭니다 개발자는 번역 키를 먼저 만들지 않고 한국어 문구를 코드에 직접 작성합니다. 추출 도구가 소스를 검색해 자동 ID와 언어별 카탈로그를 생성·병합하고, 카탈로그는 소스와 함께 검토해 저장소에 반영합니다. 생성된 실행 카탈로그는 사람이 직접 수정하지 않습니다. 정적 표현만 추출됩니다 추출 도구가 JSX에서 정적으로 확인할 수 있는 메시지…",
+    "content": "2. 꼭 알아야 할 내용 한국어 원문을 코드에 작성하고, 번역 키는 도구가 만듭니다 개발자는 번역 키를 먼저 만들지 않고 한국어 문구를 코드에 직접 작성합니다. 추출 도구가 소스를 검색해 자동 ID와 언어별 카탈로그를 생성·병합하고, 카탈로그는 소스와 함께 검토해 저장소에 반영합니다. 생성된 실행 카탈로그는 사람이 직접 수정하지 않습니다. 정적 표현만 추출됩니다 추출 도구가 JSX에서 정적으로 확인할 수 있는 메시지 번역 대상입니다. 동적 값은 메시지 안의 변수로 전달하고, 같은 한국어가 문맥에 따라 다르게 번역되어야 하면 context 로 구분합니다. 변수에 저장한 일반 문자열을 나중에 번역 함수에 넘기는 패턴은 추출되지 않습니다. 세 종류 콘텐츠는 소유자가 다릅니다 UI 문구는 Lingui 카탈로그로 관리합니다. 서버가 주는 상품명과 API 오류 문구는 서버 콘텐츠이며 다국어 계약이 UI 카탈로그와 별도로 정의됩니다. 사용자가 작성한 리뷰·댓글·게시글은 카탈로그에 넣지 않고, 사용자가 요청한 경우에만 기기에서 번역합니다. 사용자명, 브랜드명, 코드 같은 고유 식별값은 번역하지 않습니다. 언어 선택에는 우선순위와 fallback 체인이 있습니다 실행 언어는 앱 설정에서 사용자가 직접 선택한 언어, Flutter가 WebView 초기 요청에 전달한 값, Accept-Language , 브라우저 언어 순으로 결정하고 마지막에 영어를 기본으로 둡니다. 받은 언어 코드는 BCP 47 기준으로 정규화해 지원 언어( ko , zh-CN , ja , en )에 매핑하고, 번역이 누락되면 영어를, 영어도 없으면 한국어 원문을 사용합니다. 첫 화면이 fallback 언어로 잠깐 보였다가 바뀌지 않도록 최초 문서 요청 전에 언어를 결정합니다. 로컬 LLM은 개발 중 도구입니다 로컬 LLM은 비어 있거나 원문이 변경된 항목만 번역해 개발 중 카탈로그 후보를 만드는 데 사용합니다. 실행 중에는 준비된 카탈로그만 읽으며 사용자 요청 경로에서 LLM을 호출하지 않습니다. 자동 번역 결과는 후보이며 결제·환불·개인정보·약관처럼 의미 오류의 영향이 큰 문구는 담당자 검토 없이 확정 문구로 쓰지 않습니다. 기기 번역은 capability 계약입니다 기기 번역 지원 여부는 WebView의 User-Agent나 OS 버전 문자열 추측이 아니라 Flutter Bridge가 전달하는 capability로 판단합니다. 지원되지 않거나 번역이 실패하면 기능만 비활성화하고 원문을 표시하며, 번역되지 않은 문장을 빈 문자열로 숨기지 않습니다.",
+    "url": "./../guides/learning/ai-frontend-growth/16-i18n-and-localization.html#section-2"
+  },
+  {
+    "document": "16. 다국어와 번역 경계",
+    "section": "레이아웃과 품질 게이트 심화",
+    "excerpt": "긴 문구 레이아웃 같은 메시지도 언어마다 길이가 다릅니다. 고정 너비, 절대 위치와 버튼 너비를 전제한 배치는 문구가 긴 언어에서 깨집니다. 핵심 화면은 길이가 긴 후보 문구로 레이아웃을 확인하고, 텍스트가 잘리지 않고 컨테이너가 늘어나는 방향으로 설계·검증합니다. 자리표시자 보존은 코드로 검증합니다 변수, ICU 문법과 요소 자리표시자는 번역 전후에 유지되어야 합니다. 원본 변수와 태그가…",
+    "content": "6. 레이아웃과 품질 게이트 심화 긴 문구 레이아웃 같은 메시지도 언어마다 길이가 다릅니다. 고정 너비, 절대 위치와 버튼 너비를 전제한 배치는 문구가 긴 언어에서 깨집니다. 핵심 화면은 길이가 긴 후보 문구로 레이아웃을 확인하고, 텍스트가 잘리지 않고 컨테이너가 늘어나는 방향으로 설계·검증합니다. 자리표시자 보존은 코드로 검증합니다 변수, ICU 문법과 요소 자리표시자는 번역 전후에 유지되어야 합니다. 원본 변수와 태그가 프롬프트 지시만으로 보존되었다고 판단하지 않고, 키·변수·태그·JSON 구조를 코드로 검사합니다. 누락 번역을 품질 게이트로 두는 시점 누락 번역을 CI 오류로 처리할 시점과 배포 품질 Gate는 아직 확정되지 않았습니다( TBD ). 확정 전에는 누락 항목을 반복 확인 가능한 절차로 관리하고, 임의로 Build를 막지 않습니다.",
+    "url": "./../guides/learning/ai-frontend-growth/16-i18n-and-localization.html#section-6"
+  },
+  {
+    "document": "16. 다국어와 번역 경계",
+    "section": "마스터 실습과 증거",
+    "excerpt": "UI 문구, 상품명과 사용자 리뷰가 섞인 화면에서 세 종류 콘텐츠 분류표를 작성합니다. UI 문구는 추출 가능한 메시지로 작성하고, 언어 선택 우선순위와 fallback 표, 추출 불가능 메시지 목록, 확정이 필요한 TBD 목록(Bridge 계약, 카탈로그 경로, 검토 담당자)을 함께 제출합니다. 통과 기준: 세 종류 콘텐츠의 경계와 언어 선택·fallback 규칙을 다국어 가이드 기준으로…",
+    "content": "7. 마스터 실습과 증거 UI 문구, 상품명과 사용자 리뷰가 섞인 화면에서 세 종류 콘텐츠 분류표를 작성합니다. UI 문구는 추출 가능한 메시지로 작성하고, 언어 선택 우선순위와 fallback 표, 추출 불가능 메시지 목록, 확정이 필요한 TBD 목록(Bridge 계약, 카탈로그 경로, 검토 담당자)을 함께 제출합니다. 통과 기준: 세 종류 콘텐츠의 경계와 언어 선택·fallback 규칙을 다국어 가이드 기준으로 설명하고, 지금 구현할 수 있는 것과 계약 확정을 기다리는 것을 분리할 수 있어야 합니다. 실행 중에 번역 LLM을 호출하지 않고, 사용자 콘텐츠를 UI 카탈로그에 넣지 않아야 합니다. 이전: WebView 실기기 성능 검증 · 교육 과정 · 다국어 및 로컬 LLM 번역 가이드 16. 다국어와 번역 경계",
+    "url": "./../guides/learning/ai-frontend-growth/16-i18n-and-localization.html#section-7"
+  },
+  {
+    "document": "16. 다국어와 번역 경계",
+    "section": "완료 확인",
+    "excerpt": "UI 문구, 서버 콘텐츠, 사용자 콘텐츠를 구분하고 각각의 관리 방법을 설명할 수 있습니다. 언어 선택 우선순위, 정규화와 fallback 체인을 설명할 수 있습니다. 로컬 LLM 번역의 개발 중 역할과 실행 중 경계를 구분할 수 있습니다. 도구와 계약이 미확정일 때 검증 절차와 TBD 를 분리해 관리할 수 있습니다.",
+    "content": "5. 완료 확인 UI 문구, 서버 콘텐츠, 사용자 콘텐츠를 구분하고 각각의 관리 방법을 설명할 수 있습니다. 언어 선택 우선순위, 정규화와 fallback 체인을 설명할 수 있습니다. 로컬 LLM 번역의 개발 중 역할과 실행 중 경계를 구분할 수 있습니다. 도구와 계약이 미확정일 때 검증 절차와 TBD 를 분리해 관리할 수 있습니다.",
+    "url": "./../guides/learning/ai-frontend-growth/16-i18n-and-localization.html#section-5"
+  },
+  {
+    "document": "16. 다국어와 번역 경계",
+    "section": "코드 읽기",
+    "excerpt": "첫 번째는 추출되는 메시지입니다. 한국어 원문이 정적으로 작성되어 있고, 이름은 메시지 안의 변수로 전달됩니다. import { Trans } from '@lingui/react/macro' ; interface WelcomeMessageProps { name : string ; } export function WelcomeMessage ({ name }: WelcomeMessageProps…",
+    "content": "3. 코드 읽기 첫 번째는 추출되는 메시지입니다. 한국어 원문이 정적으로 작성되어 있고, 이름은 메시지 안의 변수로 전달됩니다. import { Trans } from '@lingui/react/macro' ; interface WelcomeMessageProps { name : string ; } export function WelcomeMessage ({ name }: WelcomeMessageProps ) { return < p >< Trans > {name}님, 환영합니다 </ Trans ></ p > ; } 두 번째는 추출되지 않습니다. 추출기가 label 의 실제 값을 확인할 수 없어 카탈로그에 들어가지 못하고, 실행 중에 번역되지 않은 채 남습니다. // 추출기가 label의 실제 값을 확인할 수 없습니다. const label = getLoginLabel (); return < button > {label} </ button > ;",
+    "url": "./../guides/learning/ai-frontend-growth/16-i18n-and-localization.html#section-3"
+  },
+  {
+    "document": "16. 다국어와 번역 경계",
+    "section": "학습 목표",
+    "excerpt": "교육 과정 · 다국어 및 로컬 LLM 번역 가이드 고급 트랙입니다. 13단계 핵심 과정을 완료한 뒤, 화면을 여러 언어로 제공해야 할 때 학습합니다. 상세 기준은 다국어 및 로컬 LLM 번역 가이드 가 소유하며, 이 단위는 그 가이드를 적용할 수 있게 익히는 경로입니다. UI 문구, 서버 콘텐츠, 사용자 작성 콘텐츠 세 종류를 구분합니다. 실행 언어 선택의 우선순위와 fallback 체인을…",
+    "content": "1. 학습 목표 교육 과정 · 다국어 및 로컬 LLM 번역 가이드 고급 트랙입니다. 13단계 핵심 과정을 완료한 뒤, 화면을 여러 언어로 제공해야 할 때 학습합니다. 상세 기준은 다국어 및 로컬 LLM 번역 가이드 가 소유하며, 이 단위는 그 가이드를 적용할 수 있게 익히는 경로입니다. UI 문구, 서버 콘텐츠, 사용자 작성 콘텐츠 세 종류를 구분합니다. 실행 언어 선택의 우선순위와 fallback 체인을 설명합니다. 로컬 LLM 번역의 개발 시 역할과 실행 중 경계를 구분합니다.",
+    "url": "./../guides/learning/ai-frontend-growth/16-i18n-and-localization.html#section-1"
+  },
+  {
+    "document": "16. 다국어와 번역 경계",
+    "section": "AI와 함께 연습",
+    "excerpt": "AI에게 화면의 문구를 UI 문구·서버 콘텐츠·사용자 작성 콘텐츠로 분류하게 한 뒤, 분류 기준이 다국어 가이드와 일치하는지 대조합니다. 변수에 저장한 문자열, 조합되는 문장처럼 정적으로 추출되지 않는 메시지를 찾게 합니다. 언어 선택 우선순위와 fallback 체인을 표로 만들게 하고, 가이드의 기준과 다른 지점을 지적하게 합니다. Bridge 계약, 카탈로그 경로, 검토 담당자처럼 아직…",
+    "content": "4. AI와 함께 연습 AI에게 화면의 문구를 UI 문구·서버 콘텐츠·사용자 작성 콘텐츠로 분류하게 한 뒤, 분류 기준이 다국어 가이드와 일치하는지 대조합니다. 변수에 저장한 문자열, 조합되는 문장처럼 정적으로 추출되지 않는 메시지를 찾게 합니다. 언어 선택 우선순위와 fallback 체인을 표로 만들게 하고, 가이드의 기준과 다른 지점을 지적하게 합니다. Bridge 계약, 카탈로그 경로, 검토 담당자처럼 아직 확정되지 않은 항목과 지금 구현할 수 있는 항목을 분리하게 합니다.",
+    "url": "./../guides/learning/ai-frontend-growth/16-i18n-and-localization.html#section-4"
   },
   {
     "document": "2. TypeScript 기본",
@@ -458,7 +605,7 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
     "document": "6. Next.js App Router",
     "section": "렌더링과 실행 경계 심화",
     "excerpt": "요구에서 경계를 선택하기 상태와 Event Handler, Browser API가 필요한 가장 작은 부분만 Client Component로 둡니다. 데이터 접근, 비밀값, 권한에 따른 서버 결정은 Server 경계에 남깁니다. Server Component와 Client Component는 반드시 별도 파일 예시로 작성하고 use client 가 파일 최상단 경계라는 점을 확인합니다. 렌더링…",
-    "content": "6. 렌더링과 실행 경계 심화 요구에서 경계를 선택하기 상태와 Event Handler, Browser API가 필요한 가장 작은 부분만 Client Component로 둡니다. 데이터 접근, 비밀값, 권한에 따른 서버 결정은 Server 경계에 남깁니다. Server Component와 Client Component는 반드시 별도 파일 예시로 작성하고 use client 가 파일 최상단 경계라는 점을 확인합니다. 렌더링 전략 Server-Side Rendering (SSR) 은 요청마다 HTML을 만들고, Static Site Generation (SSG) 은 빌드 시 미리 만들며, Incremental Static Regeneration (ISR) 은 정적 결과를 재검증합니다. 이름을 외우기보다 개인화 여부, 신선도, 캐시 격리, 배포 환경을 기준으로 선택합니다. Hydration 실패 분석 시간, 난수, Browser 전용 값과 서버·클라이언트의 다른 데이터가 첫 렌더에 들어가면 Hydration이 불일치할 수 있습니다. 경고를 숨기지 말고 서버 HTML과 첫 Client 결과가 달라진 최초 지점을 찾습니다.",
+    "content": "6. 렌더링과 실행 경계 심화 요구에서 경계를 선택하기 상태와 Event Handler, Browser API가 필요한 가장 작은 부분만 Client Component로 둡니다. 데이터 접근, 비밀값, 권한에 따른 서버 결정은 Server 경계에 남깁니다. Server Component와 Client Component는 반드시 별도 파일 예시로 작성하고 use client 가 파일 최상단 경계라는 점을 확인합니다. 렌더링 전략 Server-Side Rendering (SSR) 은 요청마다 HTML을 만들고, Static Site Generation (SSG) 은 빌드 시 미리 만들며, Incremental Static Regeneration (ISR) 은 정적 결과를 재검증합니다. 이름을 외우기보다 개인화 여부, 신선도, 캐시 격리, 배포 환경을 기준으로 선택합니다. Hydration 실패 분석 시간, 난수, Browser 전용 값과 서버·클라이언트의 다른 데이터가 첫 렌더에 들어가면 Hydration이 불일치할 수 있습니다. 경고를 숨기지 말고 서버 HTML과 첫 Client 결과가 달라진 최초 지점을 찾습니다. Client Bundle은 경계의 비용으로 측정합니다 Client Component와 그것이 import한 모듈은 브라우저로 전달됩니다. 경계 설계는 파일 정리 문제가 아니라 전송량 문제입니다. 서버 전용 모듈(비밀값 사용, 데이터 직접 접근)이 Client Component에서 import되면 Client Bundle에 포함되므로, Build 결과에서 서버 전용 모듈이 Client Bundle에 들어가지 않는지 확인합니다. 환경 변수 노출 경계 Next.js에서는 NEXT_PUBLIC_ 접두사가 붙은 값만 Client Bundle에 포함됩니다. 비밀값은 Server 경계에서만 사용하고, Server에서 읽은 비밀값을 Props로 거쳐 Client에 다시 노출하는 것은 경계 위반입니다. 실제 환경 변수 구성과 이름은 배포 설정이 확정되기 전까지 TBD 로 둡니다. Code splitting은 첫 화면 비용 근거로 Route 단위 분할은 자동으로 이루어지므로 관습적으로 next/dynamic 와 dynamic import를 추가하지 않습니다. 초기 화면의 리소스 비용이 실제로 문제인 경우에만 검토하고, WebView 실기기 조건에서 변경 전후를 재측정합니다(15단계).",
     "url": "./../guides/learning/ai-frontend-growth/06-nextjs-app-router.html#section-6"
   },
   {
@@ -619,7 +766,7 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
     "document": "9. 서버·클라이언트 상태",
     "section": "캐시 일관성과 사용자 격리",
     "excerpt": "Query Key는 데이터의 주소 응답을 바꾸는 사용자, 필터, 정렬, 페이지와 권한 범위가 Query Key에 포함되어야 합니다. 화면 이름만 넣으면 서로 다른 데이터가 같은 캐시를 공유할 수 있습니다. Key를 문자열 조각으로 흩뿌리지 말고 Factory로 중앙화해 무효화 범위를 검토합니다. Mutation 이후 전략 무조건 전체 무효화하지 않습니다. 서버 응답으로 정확히 갱신, 관련 Q…",
-    "content": "6. 캐시 일관성과 사용자 격리 Query Key는 데이터의 주소 응답을 바꾸는 사용자, 필터, 정렬, 페이지와 권한 범위가 Query Key에 포함되어야 합니다. 화면 이름만 넣으면 서로 다른 데이터가 같은 캐시를 공유할 수 있습니다. Key를 문자열 조각으로 흩뿌리지 말고 Factory로 중앙화해 무효화 범위를 검토합니다. Mutation 이후 전략 무조건 전체 무효화하지 않습니다. 서버 응답으로 정확히 갱신, 관련 Query 무효화, 낙관적 갱신과 Rollback 중 제품 요구와 실패 비용에 맞게 선택합니다. 동시에 실행된 Mutation의 완료 순서가 UI 일관성에 미치는 영향도 확인합니다. 세션 전환은 보안 경계 로그아웃, 계정 전환과 권한 변경 때 메모리 캐시, Persist Store, 폼 초안과 진행 중 요청 중 무엇을 취소·삭제·재조회할지 표로 만듭니다. 이전 사용자 데이터가 잠깐 보이는 것도 개인정보 노출입니다.",
+    "content": "6. 캐시 일관성과 사용자 격리 Query Key는 데이터의 주소 응답을 바꾸는 사용자, 필터, 정렬, 페이지와 권한 범위가 Query Key에 포함되어야 합니다. 화면 이름만 넣으면 서로 다른 데이터가 같은 캐시를 공유할 수 있습니다. Key를 문자열 조각으로 흩뿌리지 말고 Factory로 중앙화해 무효화 범위를 검토합니다. Mutation 이후 전략 무조건 전체 무효화하지 않습니다. 서버 응답으로 정확히 갱신, 관련 Query 무효화, 낙관적 갱신과 Rollback 중 제품 요구와 실패 비용에 맞게 선택합니다. 동시에 실행된 Mutation의 완료 순서가 UI 일관성에 미치는 영향도 확인합니다. 세션 전환은 보안 경계 로그아웃, 계정 전환과 권한 변경 때 메모리 캐시, Persist Store, 폼 초안과 진행 중 요청 중 무엇을 취소·삭제·재조회할지 표로 만듭니다. 이전 사용자 데이터가 잠깐 보이는 것도 개인정보 노출입니다. 동시 변경 충돌은 계약 문제입니다 같은 자원을 두 기기나 두 세션에서 수정하면 마지막 저장만 남고 앞 변경은 조용히 사라집니다. 충돌 감지는 자원 버전, ETag · If-Match 같은 낙관적 동시성이나 비관적 잠금으로 하는데, 어떤 방식을 쓰고 충돌 응답이 어떤 형태인지는 API 계약이므로 확정 전까지 TBD 로 둡니다. 충돌 감지와 복구 흐름 충돌 응답에서 조용히 재저장하지 않습니다. 무엇이 바뀌었는지 보여주고 사용자의 입력을 다시 적용할지 폐기할지 사용자가 결정하게 합니다. 사용자의 미전송 입력은 서버 데이터와 분리해 재조회로 사라지지 않게 보존합니다. 초안은 서버 데이터와 다른 Client 상태입니다 폼 초안과 미전송 입력은 서버 캐시가 아니라 4단계의 Client 상태 영역에 속합니다. WebView 재로드로 메모리가 사라질 수 있으므로(15단계), 화면의 업무 가치에 따라 초안 보존·복원 여부와 저장 위치를 정하고, 개인정보가 보존 정책에 없이 저장소에 남지 않게 합니다.",
     "url": "./../guides/learning/ai-frontend-growth/09-server-and-client-state.html#section-6"
   },
   {
@@ -1269,8 +1416,8 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
   {
     "document": "AI 협업 기반 Front-End 성장 가이드",
     "section": "순차 교육 과정",
-    "excerpt": "JavaScript와 TypeScript 기초부터 React, Next.js, API, WebView, UI·브라우저·다국어 검증, 테스트, 기능 통합과 보안 리뷰까지 순서대로 학습할 수 있는 교육 문서를 제공합니다. AI 협업 Front-End 교육 과정 시작하기 AI 협업 기반 Front-End 성장 가이드",
-    "content": "11. 순차 교육 과정 JavaScript와 TypeScript 기초부터 React, Next.js, API, WebView, UI·브라우저·다국어 검증, 테스트, 기능 통합과 보안 리뷰까지 순서대로 학습할 수 있는 교육 문서를 제공합니다. AI 협업 Front-End 교육 과정 시작하기 AI 협업 기반 Front-End 성장 가이드",
+    "excerpt": "JavaScript와 TypeScript 기초부터 React, Next.js, API, WebView, UI·브라우저·다국어 검증, 테스트, 기능 통합과 보안 리뷰까지 순서대로 학습할 수 있는 교육 문서를 제공합니다. 핵심 13단계 완료 후에는 React 렌더링 성능, WebView 실기기 성능 검증, 다국어와 번역 경계를 다루는 고급 트랙(14~16단계)을 선택적으로 학습할 수 있습니다.…",
+    "content": "11. 순차 교육 과정 JavaScript와 TypeScript 기초부터 React, Next.js, API, WebView, UI·브라우저·다국어 검증, 테스트, 기능 통합과 보안 리뷰까지 순서대로 학습할 수 있는 교육 문서를 제공합니다. 핵심 13단계 완료 후에는 React 렌더링 성능, WebView 실기기 성능 검증, 다국어와 번역 경계를 다루는 고급 트랙(14~16단계)을 선택적으로 학습할 수 있습니다. AI 협업 Front-End 교육 과정 시작하기 AI 협업 기반 Front-End 성장 가이드",
     "url": "./../guides/learning/ai-frontend-growth/index.html#section-11"
   },
   {
@@ -1310,10 +1457,17 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
   },
   {
     "document": "AI 협업 Front-End 교육 과정",
+    "section": "고급 트랙 — 성능과 다국어 심화",
+    "excerpt": "고급 트랙은 13단계 핵심 과정을 완료한 뒤 선택하는 심화 과정입니다. 공통 완료 기준의 전제가 되지 않으며, 화면에서 실제 성능 문제가 발생하거나 WebView 환경 검증·다국어 제공이 필요할 때 학습합니다. React 렌더링 비용과 성능 — re-render 전파와 범위, 상태 위치 설계, 참조 동일성과 memo의 경계, Profiler 증거 기반 최적화 WebView 실기기 성능 검증…",
+    "content": "6. 고급 트랙 — 성능과 다국어 심화 고급 트랙은 13단계 핵심 과정을 완료한 뒤 선택하는 심화 과정입니다. 공통 완료 기준의 전제가 되지 않으며, 화면에서 실제 성능 문제가 발생하거나 WebView 환경 검증·다국어 제공이 필요할 때 학습합니다. React 렌더링 비용과 성능 — re-render 전파와 범위, 상태 위치 설계, 참조 동일성과 memo의 경계, Profiler 증거 기반 최적화 WebView 실기기 성능 검증 — 네트워크·기기·코드 느림의 구분, 저속·저사양 재현, WebView 수명과 상태 보존, 초기 리소스 비용 다국어와 번역 경계 — UI 메시지 카탈로그와 서버 콘텐츠·기기 번역의 분리, 정적 추출과 자리표시자 보존, 언어 선택 우선순위와 fallback 이 구간을 마치면 느림의 원인을 측정 근거와 함께 구분하고 상태 위치 → 참조 안정화 → memoization → 가상화 순서로 개선한 뒤 전후를 재측정하는 절차를 지킬 수 있어야 하며, 세 종류 콘텐츠의 경계와 언어 선택·fallback 규칙을 다국어 가이드 기준으로 설명할 수 있어야 합니다.",
+    "url": "./../guides/learning/ai-frontend-growth/curriculum.html#section-6"
+  },
+  {
+    "document": "AI 협업 Front-End 교육 과정",
     "section": "공통 완료 기준",
     "excerpt": "핵심 개념을 자신의 말로 설명할 수 있습니다. AI가 만든 코드에서 해당 단계의 위험을 찾을 수 있습니다. Lounge 프로젝트의 작은 기능에 적용할 수 있습니다. 확인된 기준과 미확정 계약을 구분할 수 있습니다. 실행한 검사와 직접 확인한 항목을 구분해 설명할 수 있습니다. AI의 조사 범위, 변경 파일과 추측을 통제하고 Diff를 근거로 승인할 수 있습니다. API가 확정되지 않았을 때…",
-    "content": "7. 공통 완료 기준 핵심 개념을 자신의 말로 설명할 수 있습니다. AI가 만든 코드에서 해당 단계의 위험을 찾을 수 있습니다. Lounge 프로젝트의 작은 기능에 적용할 수 있습니다. 확인된 기준과 미확정 계약을 구분할 수 있습니다. 실행한 검사와 직접 확인한 항목을 구분해 설명할 수 있습니다. AI의 조사 범위, 변경 파일과 추측을 통제하고 Diff를 근거로 승인할 수 있습니다. API가 확정되지 않았을 때 구현을 선행하지 않고 Backend 확인 질문과 TBD 를 정리할 수 있습니다. API 확정 뒤 화면을 다시 만들지 않고 계약 경계와 테스트를 함께 교체할 수 있습니다. 세션·회원·서버·폼·UI 상태의 소유자와 사용자 전환 시 정리 범위를 설명할 수 있습니다. 외부 입력, 인증·권한, Client 저장소, 개인정보와 Bridge의 보안 경계를 검토할 수 있습니다. UI 변경 시 Figma·실제 코드·Story의 차이와 Safari 15 호환 여부를 확인할 수 있습니다. 다국어 대상 문구와 사용자·서버 콘텐츠를 구분하고 번역 Fallback과 변수 보존을 검증할 수 있습니다. 1단계 JavaScript 기초 시작하기 AI 협업 Front-End 교육 과정",
-    "url": "./../guides/learning/ai-frontend-growth/curriculum.html#section-7"
+    "content": "8. 공통 완료 기준 핵심 개념을 자신의 말로 설명할 수 있습니다. AI가 만든 코드에서 해당 단계의 위험을 찾을 수 있습니다. Lounge 프로젝트의 작은 기능에 적용할 수 있습니다. 확인된 기준과 미확정 계약을 구분할 수 있습니다. 실행한 검사와 직접 확인한 항목을 구분해 설명할 수 있습니다. AI의 조사 범위, 변경 파일과 추측을 통제하고 Diff를 근거로 승인할 수 있습니다. API가 확정되지 않았을 때 구현을 선행하지 않고 Backend 확인 질문과 TBD 를 정리할 수 있습니다. API 확정 뒤 화면을 다시 만들지 않고 계약 경계와 테스트를 함께 교체할 수 있습니다. 세션·회원·서버·폼·UI 상태의 소유자와 사용자 전환 시 정리 범위를 설명할 수 있습니다. 외부 입력, 인증·권한, Client 저장소, 개인정보와 Bridge의 보안 경계를 검토할 수 있습니다. UI 변경 시 Figma·실제 코드·Story의 차이와 Safari 15 호환 여부를 확인할 수 있습니다. 다국어 대상 문구와 사용자·서버 콘텐츠를 구분하고 번역 Fallback과 변수 보존을 검증할 수 있습니다. 1단계 JavaScript 기초 시작하기 AI 협업 Front-End 교육 과정",
+    "url": "./../guides/learning/ai-frontend-growth/curriculum.html#section-8"
   },
   {
     "document": "AI 협업 Front-End 교육 과정",
@@ -1347,8 +1501,8 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
     "document": "AI 협업 Front-End 교육 과정",
     "section": "프로젝트 적용 확장 학습",
     "excerpt": "13단계의 공통 흐름을 실제 Lounge 기능에 적용할 때는 작업 성격에 맞는 현재 가이드를 추가로 학습합니다. 아래 항목을 모든 기능에 기계적으로 적용하지 않고, 해당 화면과 데이터 흐름에 실제로 필요한 범위만 선택합니다. React Code Exports 가이드 와 Storybook 구축·운영 가이드 — Figma 의도, 기존 컴포넌트, Semantic Token, Story와 실제 코드…",
-    "content": "6. 프로젝트 적용 확장 학습 13단계의 공통 흐름을 실제 Lounge 기능에 적용할 때는 작업 성격에 맞는 현재 가이드를 추가로 학습합니다. 아래 항목을 모든 기능에 기계적으로 적용하지 않고, 해당 화면과 데이터 흐름에 실제로 필요한 범위만 선택합니다. React Code Exports 가이드 와 Storybook 구축·운영 가이드 — Figma 의도, 기존 컴포넌트, Semantic Token, Story와 실제 코드 연결 Flutter WebView 설정 가이드 와 네트워크 지연 대응 및 성능 검증 가이드 — Safari 15·구형 WebView 호환, 저속 네트워크, Offline과 변경 전후 성능 확인 다국어 및 로컬 LLM 번역 가이드 — 한국어 원문 작성, 메시지 추출, 번역 검토, Locale 선택과 Fallback 검증 정확한 Storybook Script, 번역 도구와 Runtime 구성은 실제 애플리케이션에 설치되고 승인된 설정을 확인한 뒤 사용합니다. 가이드에 후보가 있다는 이유만으로 구현이 완료됐다고 가정하지 않습니다.",
-    "url": "./../guides/learning/ai-frontend-growth/curriculum.html#section-6"
+    "content": "7. 프로젝트 적용 확장 학습 13단계의 공통 흐름을 실제 Lounge 기능에 적용할 때는 작업 성격에 맞는 현재 가이드를 추가로 학습합니다. 아래 항목을 모든 기능에 기계적으로 적용하지 않고, 해당 화면과 데이터 흐름에 실제로 필요한 범위만 선택합니다. React Code Exports 가이드 와 Storybook 구축·운영 가이드 — Figma 의도, 기존 컴포넌트, Semantic Token, Story와 실제 코드 연결 Flutter WebView 설정 가이드 와 네트워크 지연 대응 및 성능 검증 가이드 — Safari 15·구형 WebView 호환, 저속 네트워크, Offline과 변경 전후 성능 확인 다국어 및 로컬 LLM 번역 가이드 — 한국어 원문 작성, 메시지 추출, 번역 검토, Locale 선택과 Fallback 검증 정확한 Storybook Script, 번역 도구와 Runtime 구성은 실제 애플리케이션에 설치되고 승인된 설정을 확인한 뒤 사용합니다. 가이드에 후보가 있다는 이유만으로 구현이 완료됐다고 가정하지 않습니다.",
+    "url": "./../guides/learning/ai-frontend-growth/curriculum.html#section-7"
   },
   {
     "document": "AI 협업 Front-End 교육 과정",
@@ -1942,7 +2096,7 @@ window.LOUNGE_GUIDE_SEARCH_INDEX = [
     "document": "Front-End 보안과 개인정보 가이드",
     "section": "검증과 사고 대응",
     "excerpt": "변경 위험별 확인 아래 검사는 서로 대체하지 않습니다. Typecheck와 Lint는 코드 작성 단계의 문제를 찾고, Test는 정해진 입력의 동작을 확인하며, 실제 Browser·WebView·Backend 연동 검증은 환경 설정과 시스템 사이의 문제를 확인합니다. 검증 확인할 보안 경계 Typecheck·Lint 잘못된 타입 경계, 위험 API와 정적 규칙 위반 Unit Test URL·…",
-    "content": "9. 검증과 사고 대응 변경 위험별 확인 아래 검사는 서로 대체하지 않습니다. Typecheck와 Lint는 코드 작성 단계의 문제를 찾고, Test는 정해진 입력의 동작을 확인하며, 실제 Browser·WebView·Backend 연동 검증은 환경 설정과 시스템 사이의 문제를 확인합니다. 검증 확인할 보안 경계 Typecheck·Lint 잘못된 타입 경계, 위험 API와 정적 규칙 위반 Unit Test URL·Parser·Masking 같은 순수 보안 경계 Component Test 권한별 UI, 오류 노출과 사용자 행동 Request Mock Test 401 , 403 , 잘못된 응답, CSRF 오류와 Cache 정리 Browser·WebView CSP, Cookie, Redirect, Bridge와 실제 Network Payload Backend·App 통합 권한 우회, 사용자 전환, 중복 요청과 실제 저장소 보안 검사는 기능 완료 뒤 한 번만 수행하지 않습니다. 인증·권한·외부 입력·파일·Bridge·개인정보 흐름이 바뀌면 해당 경계를 다시 검토합니다. 보안 문제가 의심되면 민감정보를 채팅, Issue와 일반 로그에 복사하지 않습니다. 재현 조건, 영향 범위, 노출된 데이터 종류와 임시 완화 상태를 최소 정보로 기록하고 프로젝트의 보고 절차를 따릅니다.",
+    "content": "9. 검증과 사고 대응 변경 위험별 확인 아래 검사는 서로 대체하지 않습니다. Typecheck와 Lint는 코드 작성 단계의 문제를 찾고, Test는 정해진 입력의 동작을 확인하며, 실제 Browser·WebView·Backend 연동 검증은 환경 설정과 시스템 사이의 문제를 확인합니다. 검증 확인할 보안 경계 Typecheck·Lint 잘못된 타입 경계, 위험 API와 정적 규칙 위반 Unit Test URL·Parser·Masking 같은 순수 보안 경계 Component Test 권한별 UI, 오류 노출과 사용자 행동 Request Mock Test 401 , 403 , 404 , 타인 리소스 존재 비노출, 잘못된 응답, CSRF 오류와 Cache 정리 Browser·WebView CSP, Cookie, Redirect, Bridge와 실제 Network Payload Backend·App 통합 권한 우회, 사용자 전환, 중복 요청과 실제 저장소 보안 검사는 기능 완료 뒤 한 번만 수행하지 않습니다. 인증·권한·외부 입력·파일·Bridge·개인정보 흐름이 바뀌면 해당 경계를 다시 검토합니다. 보안 문제가 의심되면 민감정보를 채팅, Issue와 일반 로그에 복사하지 않습니다. 재현 조건, 영향 범위, 노출된 데이터 종류와 임시 완화 상태를 최소 정보로 기록하고 프로젝트의 보고 절차를 따릅니다.",
     "url": "./../guides/security/index.html#section-9"
   },
   {

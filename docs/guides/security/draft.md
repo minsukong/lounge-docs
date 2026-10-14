@@ -99,6 +99,17 @@ export function parseExternalUrl(value: unknown): URL | null {
 - Menu, Button과 Route를 숨기는 것은 UX 처리이며 서버 권한 검증이 아닙니다.
 - 객체 ID, 회원 ID와 역할 값은 Client에서 변경될 수 있으므로 Backend가 소유권과 권한을 다시 확인합니다.
 
+### Next.js의 서버 검사와 출력
+
+백엔드 측 [URL 접근 통제 및 보안 개발 가이드](https://ebridgelounge.atlassian.net/wiki/spaces/301/pages/116031516/Java+Spring+Boot+Next.js+URL)의 4.1~4.3절을 적용합니다. 보호 콘텐츠 렌더링 전 Next.js 서버에서 사용자를 확인하고 Route Handler·Server Action도 각 요청에서 인증·역할·객체 접근 권한을 확인합니다. Spring API의 최종 인가를 유지하며 업무 규칙을 서로 다르게 구현하지 않도록 검사 범위를 계약으로 정합니다.
+
+- Proxy는 보조 검사이며 layout의 화면 숨김과 Client 로그인 상태로 서버 검사를 대신하지 않습니다.
+- 권한 없는 요청의 HTML·RSC 응답·Client Component props에 보호 데이터나 비밀값이 포함되지 않는지 확인합니다.
+- 사용자·권한별 응답과 렌더링 결과를 공용 서버·CDN 캐시에 저장하지 않습니다. 서버 fetch·브라우저 HTTP·Query 캐시의 범위와 무효화를 구분합니다.
+- 401은 미인증·만료, 403은 권한 부족, 404는 없는 리소스 또는 타인 리소스 접근으로 처리하고 내부 오류나 타인 리소스의 존재를 드러내지 않습니다.
+
+`TBD` 첫 페이지 인증 정보 전달, API별 직접 호출/Next.js 경유, 갱신·로그아웃 담당과 사용자별 캐시 계약. JWT·Stateless라는 이유만으로 CSRF를 비활성화하지 않고 실제 쿠키·헤더 전달 방식에 따라 Backend와 보호 조건을 확인합니다.
+
 ### 자격 증명과 세션
 
 자격 증명(Credential)은 사용자를 증명하는 Cookie, token과 인증 코드 등을 말합니다. 세션은 로그인한 사용자의 상태를 일정 기간 이어가는 방식입니다. 어떤 방식을 사용할지는 아직 확정하지 않습니다.
@@ -252,7 +263,7 @@ React2Shell은 React Server Components의 취약점과 Next.js App Router에 미
 - Typecheck와 Lint: 잘못된 타입 경계, 위험 API와 규칙 위반
 - Unit Test: URL·Parser·Masking 같은 순수 보안 경계
 - Component Test: 권한별 UI, 오류 노출과 사용자 행동
-- Request Mock Test: `401`, `403`, 잘못된 응답, CSRF 오류와 Cache 정리
+- Request Mock Test: `401`, `403`, `404`, 타인 리소스 존재 비노출, 잘못된 응답, CSRF 오류와 Cache 정리
 - 실제 브라우저·WebView: CSP, Cookie, Redirect, Focus, Bridge와 Network Payload
 - Backend·App 통합: 권한 우회, 사용자 전환, 중복 요청과 실제 저장소
 
@@ -285,6 +296,8 @@ AI는 보안 정책을 확정하거나 “안전하다”고 단정하지 않습
 - React Escape를 우회하거나 신뢰하지 않은 HTML을 실행하지 않는가?
 - URL, Redirect, Deep Link와 외부 리소스가 허용 범위를 확인하는가?
 - UI 숨김을 서버 권한 검증으로 오해하지 않는가?
+- 직접 진입·새로고침·앱 내 이동·Prefetch와 Handler·Action 직접 호출에서 HTML·RSC·API·props의 보호 데이터 노출을 확인했는가?
+- A 사용자 요청 뒤 B 사용자에게 A의 응답이나 렌더링 결과가 전달되지 않는가?
 - 자격 증명과 개인정보가 URL, 저장소, Bundle, Bridge와 로그에 남지 않는가?
 - Cookie 인증에서 CSRF와 Credential CORS 정책을 확인했는가?
 - 로그아웃과 사용자 전환 뒤 이전 사용자 데이터가 남지 않는가?

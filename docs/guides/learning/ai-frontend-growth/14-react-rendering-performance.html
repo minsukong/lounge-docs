@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="React 렌더링의 실제 비용을 이해하고, 증거 기반으로 re-render 범위를 줄이는 순서를 학습합니다." />
+    <title>14. React 렌더링 비용과 성능</title>
+    <link rel="stylesheet" href="../../../assets/style/presentation-theme.css" />
+  </head>
+  <body>
+    <header>
+      <div class="type">FRONT-END EDUCATION · ADVANCED 14</div>
+      <h1>14. React 렌더링 비용과 성능</h1>
+      <p>re-render가 언제 일어나고 무엇이 실제 비용인지 이해하고, 추측이 아니라 증거로 최적화 순서를 정합니다.</p>
+    </header>
+    <main>
+      <section>
+        <h2 class="bx-active">1. 학습 목표</h2>
+        <p><a href="./curriculum.html">교육 과정</a> · <a href="./15-webview-performance-verification.html">다음: WebView 실기기 성능 검증</a></p>
+        <p>고급 트랙입니다. 13단계 핵심 과정을 완료한 뒤, 화면이 무거워지는 원인을 판단해야 할 때 학습합니다.</p>
+        <ul>
+          <li>re-render 발생 조건과 실제 DOM 작업 비용을 구분합니다.</li>
+          <li>상태 위치를 옮겨 re-render 범위를 먼저 줄이는 순서를 이해합니다.</li>
+          <li>memoization이 효과 있는 조건과 해가 되는 조건을 판별합니다.</li>
+        </ul>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">2. 꼭 알아야 할 내용</h2>
+        <h3>re-render는 DOM 자체가 아닙니다</h3>
+        <p>상태가 바뀌면 React는 해당 컴포넌트 함수를 다시 실행하고 결과를 이전 결과와 비교합니다. 화면이 실제로 바뀌지 않으면 DOM 작업은 일어나지 않습니다. 따라서 "render가 많다"와 "사용자가 느낀다"는 다른 관찰이며, 실제 비용은 다시 실행되는 계산, 큰 트리 비교와 실제 DOM·Layout 작업에서 발생합니다.</p>
+        <h3>re-render는 아래로 전파됩니다</h3>
+        <p>부모가 다시 렌더링되면 자식도 기본적으로 다시 실행됩니다. 자식이 아무리 작아도 부모 트리의 re-render 범위에 포함됩니다. 그래서 성능 문제는 대개 개별 컴포넌트가 아니라 상태가 트리 어디에 있는지의 문제입니다.</p>
+        <h3>상태 위치가 re-render 범위를 결정합니다</h3>
+        <p>입력창 상태를 큰 목록과 같은 레벨에 두면 키 입력마다 목록까지 다시 실행됩니다. 첫 번째 대응은 memo가 아니라 상태 위치를 입력을 소유한 가장 가까운 곳으로 내리거나, 목록을 children처럼 props로 받아 다시 렌더링되지 않게 구성하는 것입니다. 4단계의 상태 소유자 설계가 성능 설계의 출발점입니다.</p>
+        <h3>파생 값은 렌더링 중 계산합니다</h3>
+        <p>filter·sort 결과는 별도 상태로 저장하지 않고 원본과 조건에서 계산합니다(1단계). 계산 자체가 실제로 비싸고 입력이 같은데 반복 실행될 때만 <code>useMemo</code>를 검토하며, 도입 전 계산 비용과 입력 변경 빈도를 확인합니다.</p>
+        <h3>참조 동일성이 memo의 기준입니다</h3>
+        <p><code>memo</code>는 Props를 값이 아니라 참조로 비교합니다. 렌더링마다 새로 만드는 객체·함수·배열은 Props에 넣으면 비교가 항상 실패합니다. 1단계의 참조 공유 이해가 여기서 그대로 검사 기준으로 쓰입니다.</p>
+        <h3>증거 먼저, 최적화 나중</h3>
+        <p>체감이나 코드 양으로 성능 문제를 판단하지 않습니다. Profiler로 어떤 컴포넌트가 얼마나 다시 실행되는지 확인한 뒤, 효과가 확인된 한 가지만 바꾸고 다시 측정합니다. AI가 제안한 memo·virtualization·debounce를 순서 근거 없이 적용하지 않습니다.</p>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">3. 코드 읽기</h2>
+        <pre class="hljs"><code data-language="tsx"><span class="hljs-keyword">function</span> <span class="hljs-title function_">TicketListPage</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> [keyword, setKeyword] = <span class="hljs-title function_">useState</span>(<span class="hljs-string">""</span>);
+  <span class="hljs-keyword">const</span> ticketQuery = <span class="hljs-title function_">useTickets</span>();
+
+  <span class="hljs-keyword">const</span> visibleTickets = ticketQuery.data.<span class="hljs-title function_">filter</span>(
+    (<span class="hljs-params">ticket</span>) =&gt; ticket.title.<span class="hljs-title function_">includes</span>(keyword),
+  );
+
+  <span class="hljs-keyword">return</span> (
+    &lt;&gt;
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span></span>
+        <span class="hljs-attr">value</span>={keyword}
+        <span class="hljs-attr">onChange</span>={<span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> <span class="hljs-title function_">setKeyword</span>(event.target.value)}
+      <span class="hljs-tag">/&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">TicketRows</span></span>
+        <span class="hljs-attr">tickets</span>={visibleTickets}
+        <span class="hljs-attr">onOpen</span>={<span class="hljs-function">(<span class="hljs-params">ticket</span>) =&gt;</span> <span class="hljs-title function_">openTicket</span>(ticket.id)}
+      <span class="hljs-tag">/&gt;</span>
+    &lt;/&gt;
+  );
+}</code></pre>
+        <p>키 입력마다 <code>keyword</code> 상태가 트리 전체를 다시 실행합니다. <code>filter</code> 재계산 자체는 작을 수 있고, 실제 비용은 목록 컴포넌트 전체의 재실행과 비교입니다. 첫 대응은 <code>memo</code>가 아니라 입력과 목록의 상태를 분리하고, 목록이 키 입력 re-render 범위에 들어가지 않게 구성하는 것입니다. 바꾼 뒤에는 같은 입력으로 전후를 다시 측정합니다.</p>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">4. AI와 함께 연습</h2>
+        <ol>
+          <li>AI에게 화면의 상태를 소유자별로 그리고, 각 상태가 바뀔 때 다시 실행되는 컴포넌트 범위를 설명하게 합니다.</li>
+          <li>memo를 제안하기 전에 상태 위치를 옮겨 해결할 수 있는지 먼저 검토하게 합니다.</li>
+          <li>Props로 전달되는 객체·함수 중 렌더링마다 새로 만들어지는 참조를 찾게 합니다.</li>
+          <li>변경 전후 Profiler 수치를 제시하고, 어떤 변경이 어떤 수치에 영향을 주었는지 설명하게 합니다.</li>
+        </ol>
+        <pre class="hljs"><code data-language="text">이 화면에서 상태별로 re-render 범위를 설명해줘.
+memo를 제안하기 전에 상태 위치 분리나 children 구성으로 해결 가능한지 먼저 검토하고,
+렌더링마다 새로 만들어지는 참조가 memo를 무력화하는 위치도 찾아줘.
+변경 제안에는 각각 무엇을 측정해 검증해야 하는지 적어줘.</code></pre>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">5. 완료 확인</h2>
+        <ul>
+          <li>re-render와 실제 DOM 작업 비용을 구분해 설명할 수 있습니다.</li>
+          <li>상태 위치를 옮겨 re-render 범위를 줄이는 방법을 memo보다 먼저 검토할 수 있습니다.</li>
+          <li>새로 만들어진 참조가 <code>memo</code>를 무력화하는 조건을 코드에서 찾을 수 있습니다.</li>
+          <li>측정 → 한 가지 변경 → 재측정 순서를 지키지 않은 최적화를 반려할 수 있습니다.</li>
+        </ul>
+      </section>
+      <hr />
+      <section>
+        <h2 class="bx-active">6. memo, 목록과 Context 비용 심화</h2>
+        <h3>Profiler 읽기</h3>
+        <p>React DevTools Profiler로 commit 단위의 실행 시간과 다시 렌더링된 컴포넌트를 확인합니다. Flame Graph에서 비용이 큰 서브트리와 그 re-render를 유발한 상태 변경을 연결합니다. 숫자만 옮겨 적지 말고 "왜 다시 실행됐는가"를 상태 변경까지 설명합니다.</p>
+        <h3>긴 목록과 가상화</h3>
+        <p>항목이 많아 DOM 자체가 커지면 렌더링 비교가 아니라 DOM 크기·스크롤 비용이 문제가 됩니다. 이때만 보이는 범위만 렌더링하는 가상화를 검토합니다. 도입 전 항목 수와 실제 렌더링 비용으로 필요를 확인하고, 스크롤 중 포커스·접근성·텍스트 검색 동작이 유지되는지 함께 검증합니다.</p>
+        <h3>Context의 소비자 비용</h3>
+        <p>Context 값이 바뀌면 그 Context를 읽는 모든 소비자가 다시 실행됩니다. 자주 바뀌는 값을 넓은 Context에 넣지 않고, 변경 빈도와 소비 범위에 따라 Context를 나누거나 상태를 아래로 내립니다. 공유 범위가 좁다면 Props로 충분한지부터 확인합니다(4단계).</p>
+        <h3>memo·useMemo·useCallback의 경계</h3>
+        <p><code>memo</code>는 자식의 re-render를 막는 도구이고, <code>useMemo</code>·<code>useCallback</code>은 참조를 유지해 그 조건을 만족시키는 보조 수단입니다. 비교 비용과 메모리, 참조 관리 실수라는 대가가 있으므로 Profiler로 효과가 확인된 위치에만 남기고, 근거가 사라진 memoization은 제거합니다. <code>memo</code>가 동작하지 않는 경우(새 참조 Props)를 찾으면 memo를 추가하지 말고 참조부터 고칩니다.</p>
+      </section>
+      <section>
+        <h2 class="bx-active">7. 마스터 실습과 증거</h2>
+        <p>검색 입력과 함께 2,000개 이상의 목록을 렌더링하는 화면을 준비합니다. Profiler로 키 입력 시 re-render 범위를 기록하고, 상태 위치 분리 → 참조 안정화 → memo → 필요 시 가상화 순서로 한 단계씩 바꾸며 전후 수치를 남깁니다. 의도적으로 <code>onOpen</code>을 인라인 함수로 두어 <code>memo</code>가 동작하지 않는 상태를 재현합니다.</p>
+        <p><strong>통과 기준:</strong> 수치를 옮기기만 하지 말고, re-render의 원인을 상태 변경까지 설명하고, memo보다 상태 위치 분리를 먼저 선택한 근거와 각 변경의 전후 증거를 제출해야 합니다. <code>memo</code>를 붙였는데 동작하지 않는 이유를 참조 기준으로 설명할 수 있어야 합니다.</p>
+      </section>
+      <hr />
+      <section aria-label="학습 단계 이동">
+        <p><a href="./curriculum.html">교육 과정</a> · <a href="./15-webview-performance-verification.html">다음: WebView 실기기 성능 검증</a> · <a href="../../performance/index.html">네트워크 지연 대응 및 성능 검증 가이드</a> · <a href="../../frontend/component-structure.html">TSX 가독성과 분리 기준</a></p>
+      </section>
+    </main>
+    <footer><p>14. React 렌더링 비용과 성능</p></footer>
+    <script src="../../../assets/js/common.js"></script>
+  </body>
+</html>
+
