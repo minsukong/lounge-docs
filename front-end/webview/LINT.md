@@ -16,7 +16,7 @@ npm run lint
 | --- | --- |
 | 앱·Feature·화면 조합·일반 공통 코드 | Next.js·React·TypeScript 기본 규칙 + 프로젝트 접근성 규칙 |
 | Story·테스트·테스트 설정 | 기본 규칙 유지, 프로젝트 접근성 승격은 적용하지 않음 |
-| `src/components/ui/` | 수정 가능한 primitive 구현. 기본 규칙 유지, 사용하는 화면에서 라벨 등 프로젝트 규칙 적용 |
+| `../packages/ui/src/components/` | 공통 UI 패키지의 별도 lint script로 검사하는 primitive 구현. 기본 규칙 유지, 사용하는 화면에서 라벨 등 프로젝트 규칙 적용 |
 | Next.js·ESLint·Storybook 등의 설정 | 기본 규칙 유지, 제품 화면의 접근성 규칙은 적용하지 않음 |
 | 설치 패키지·생성 선언·빌드·커버리지 결과물 | 제외 |
 

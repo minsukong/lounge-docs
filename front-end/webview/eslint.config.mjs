@@ -22,7 +22,6 @@ export default defineConfig([
       "src/**/*.stories.{ts,tsx}",
       "src/**/*.test.{ts,tsx}",
       "src/test/**",
-      "src/components/ui/**",
     ],
     settings: {
       "jsx-a11y": {
@@ -55,7 +54,7 @@ export default defineConfig([
     rules: {
       "no-restricted-imports": ["error", {
         patterns: [{
-          group: ["@/dev", "@/dev/**", "@/test", "@/test/**", "**/dev/**", "**/test/**", "**/docs/**", "@storybook/**", "storybook", "storybook/**", "vitest", "vitest/**", "@testing-library/**", "**/*.stories.*", "**/*.test.*", "**/*.dev.*"],
+          group: ["@lounge/ui/preview", "@lounge/ui/preview/*", "@/dev", "@/dev/**", "@/test", "@/test/**", "**/dev/**", "**/test/**", "**/docs/**", "@storybook/**", "storybook", "storybook/**", "vitest", "vitest/**", "@testing-library/**", "**/*.stories.*", "**/*.test.*", "**/*.dev.*"],
           message: "앱 코드에서 개발용 화면·Story·테스트·개발 도구를 가져올 수 없습니다.",
         }],
       }],

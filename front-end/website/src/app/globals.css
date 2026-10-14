@@ -1,0 +1,8 @@
+@import "@lounge/ui/styles.css";
+@source "../";
+@source not "../dev";
+@source not "./preview";
+@source not "../test";
+@source not "../**/*.stories.tsx";
+@source not "../**/*.test.tsx";
+

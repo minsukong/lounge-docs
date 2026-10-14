@@ -23,7 +23,7 @@
 | --- | --- | --- |
 | Flutter Native | 하이브리드 앱의 Native 영역과 WebView 연동 | Flutter 기반. Native 화면 후보는 현재 APP IA의 Native View 항목을 따름. 지원 기능의 상세 범위와 Bridge 계약은 `TBD` |
 | 앱 내부 WebView | Flutter 앱에서 WebView로 실행되는 웹 화면. 현재 APP IA의 대부분 업무 화면은 WebView | 아래 WebView 기술 스택 적용 |
-| FO 웹(PC WEB·반응형 홈페이지) | `01.FO_WEB_IA.html`의 사용자 웹 영역. AS-IS 홈페이지를 참고 | WebView와의 스택·기능 공유 범위는 `TBD` |
+| FO 웹(PC WEB·반응형 홈페이지) | `front-end/website/`. `01.FO_WEB_IA.html`의 사용자 웹 영역. AS-IS 홈페이지를 참고 | WebView와 동일한 웹 기술 스택·디자인 시스템 적용. 공통 스타일·토큰·기본 UI는 `front-end/packages/ui/`에서 공유 |
 | PO(파트너오피스) | `03.PO_IA.html`의 파트너 업무 영역 | 스택·지원 환경·공유 범위·담당은 `TBD` |
 | OO(현장운영시스템) | `04.OO_IA.html`의 현장 운영 영역 | 스택·지원 환경·공유 범위·담당은 `TBD` |
 
@@ -42,7 +42,7 @@
 - Android와 iOS의 전역 객체 차이를 화면 컴포넌트에 노출하지 않습니다.
 - 인증 토큰, 카드정보와 불필요한 개인정보를 브라우저 저장소에 보관하지 않습니다.
 
-## WebView 기술 스택
+## WebView·website 공통 기술 스택
 
 | 구분 | 기술 | 역할 |
 | --- | --- | --- |
@@ -55,7 +55,25 @@
 | Form | React Hook Form 7.x | 폼 값, 입력 상태, 제출 상태와 오류 연결 |
 | UI Component | shadcn/ui | 프로젝트가 소유하고 수정하는 UI 원형의 출발점 |
 
-이 표는 WebView의 기술 기준입니다. 실제 설치 버전과 사용 여부는 `front-end/webview/`의 `package.json`, 잠금 파일과 import를 우선 확인합니다. TanStack Query, Zustand, React Hook Form은 각 책임이 실제로 필요할 때 사용하며, 기존 UI 기준에는 Base UI와 Lucide도 포함됩니다.
+이 표는 WebView와 website의 공통 기술 기준입니다. 실제 설치 버전과 사용 여부는 `front-end/webview/`의 `package.json`, 잠금 파일과 import를 우선 확인합니다. TanStack Query, Zustand, React Hook Form은 각 책임이 실제로 필요할 때 사용하며, 기존 UI 기준에는 Base UI와 Lucide도 포함됩니다.
+
+## WebView와 website의 공통 기반
+
+### 결정 근거와 변경 이유
+
+WebView와 website의 공통 요소·디자인 시스템·공통 컴포넌트는 하나로 관리합니다. 앱별로 같은 UI를 따로 보유하면 동일한 디자인 수정이 두 곳에 필요하고 스타일·Props·동작·검수 결과가 서로 달라질 수 있으므로, 공통 소스를 `front-end/packages/ui/`로 모아 두 앱이 같은 구현을 사용합니다.
+
+공통 UI의 소유 위치는 하나로 유지하고 각 앱은 이를 의존성으로 사용합니다. 공통화 대상은 토큰·스타일·기본 UI와 그 Storybook이며, 앱별 페이지·라우트·레이아웃·Native 연동은 각 앱이 관리합니다.
+
+### 공유 범위와 현재 상태
+
+- `front-end/webview/`는 Flutter 앱 내부 웹 화면, `front-end/website/`는 PC·모바일 브라우저용 FO 반응형 홈페이지입니다. 기존 홈페이지 https://theloungemembers.com/renew/ 는 콘텐츠·서비스 안내의 참고 자료이며 리뉴얼의 회원·주문·결제 정책을 대신하지 않습니다.
+- 하나의 디자인 시스템을 사용합니다. 색상·폰트·간격·라운드 등 디자인 토큰, 기본 스타일과 Button·Input·Card·Dialog 등 기본 UI는 `front-end/packages/ui/`에서 단일 소스로 관리하고 두 앱이 함께 사용합니다. 생성된 토큰은 Tokens Studio 원본에서 관리하며 직접 수정하지 않습니다.
+- 공통 UI Storybook은 공통 패키지를 기준으로 한곳에서 관리합니다. 각 앱의 Feature·Screen Story는 실제 구현 가까이에 두고 검수 환경에서 탐색할 수 있도록 구성합니다. Story·테스트·검수 전용 코드는 제품 배포에서 제외합니다.
+- 페이지·라우트·앱별 레이아웃은 각 앱에서 조합합니다. website의 PC 메뉴·반응형 배치와 WebView의 하단 메뉴·Safe Area·Native 연동은 해당 앱이 소유합니다. 공통 UI는 특정 앱의 라우터·인증·API·Native Bridge에 의존하지 않습니다.
+- 공통 UI는 단일 소스로 관리합니다. 공통 패키지의 위치는 `front-end/packages/ui/`입니다. 공통 UI 11종·스타일·유틸리티·공통 Story를 이전했고 두 앱은 `@lounge/ui/*`로 가져옵니다. website에는 Next.js 기반과 개발용 `/preview`를 구성했습니다. 의존성·잠금 파일은 `front-end/`의 npm workspace에서 함께 관리합니다. 실제 서비스 화면과 연동은 별도 범위입니다.
+- 각 앱의 빌드 입력에는 해당 앱과 공통 UI 패키지를 함께 포함하고 배포 결과물은 앱별로 생성합니다. 패키지 연결·CSS 검색·외부 소스 추적·검수 코드 제외와 standalone 실행 경로는 [공용 빌드 기준](../guides/architecture/build-boundary.md#공통-ui를-사용하는-앱의-빌드)에 따라 확인합니다.
+- 이번 FO 공통 구현 초안에서는 실기기 검증을 완료 조건으로 요구하지 않습니다. 기존 지원 환경과 Safari 15 CSS 하한은 유지하며, 타입·린트·해당 테스트·빌드 및 브라우저 검수 결과와 실기기 미검증 상태를 구분합니다.
 
 ## 저장소 구조
 
@@ -66,8 +84,12 @@
 ├── AGENTS.md
 ├── front-end/              # Front-end 소스 (WebView · FO 웹 · PO · OO)
 │   ├── AGENTS.md
-│   └── webview/
-│       ├── AGENTS.md
+│   ├── webview/
+│   │   ├── AGENTS.md
+│   │   └── src/
+│   ├── website/           # FO 반응형 홈페이지 소스 위치
+│   │   └── AGENTS.md
+│   └── packages/ui/       # 공통 UI·스타일·Storybook 실제 소스
 │       ├── .storybook/
 │       └── src/
 └── docs/
@@ -88,19 +110,7 @@ front-end/webview/src/
 └── test/         # 테스트 공통 설정
 ```
 
-Storybook 애플리케이션 설정은 `front-end/webview/.storybook`에 두고, Story 파일은 실제 컴포넌트 가까이에 둡니다.
-
-```text
-front-end/webview/
-├── .storybook/           # Storybook 실행과 전역 렌더링 설정
-└── src/
-    ├── components/ui/
-    │   ├── button.tsx
-    │   └── button.stories.tsx
-    └── features/         # 독립 검증 가치가 있는 기능 컴포넌트만 Story 작성
-```
-
-Storybook 설정은 `front-end/webview/.storybook`, Story는 실제 컴포넌트 가까이에서 관리합니다. 실제 파일에서 확인되지 않는 별도 Storybook 앱이나 공통 package 구성을 추측하지 않습니다.
+Storybook 설정은 `front-end/packages/ui/.storybook/`, 공통 컴포넌트와 Story는 `front-end/packages/ui/src/components/`에서 관리합니다. 각 앱의 Feature·Screen Story는 구현 가까이에 유지하며 공통 Storybook에서 함께 수집합니다. 실행·빌드 명령은 [Front-end README](../../front-end/README.md)를 확인합니다.
 
 ## 구현 원칙
 

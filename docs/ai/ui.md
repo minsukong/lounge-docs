@@ -1,6 +1,6 @@
 # UI 구현 핵심 규칙
 
-> 기준 원본: [Front-End 개발 가이드](../guides/frontend/index.html), [React Code Exports 가이드](../guides/ui/react_code_exports.html), [디자인 토큰 가이드](../guides/ui/design_tokens.html), [WebView 가이드](../guides/platform/webview/webView_guide.html), [Storybook 구축·운영 가이드](../guides/storybook/index.html)
+> 기준 원본: [Front-End 개발 가이드](../guides/frontend/index.html), [React Code Exports 가이드](../guides/ui/react_code_exports.html), [디자인 토큰 가이드](../guides/ui/design_tokens.html), [WebView 가이드](../guides/platform/webview/app_webview_guide.html), [Storybook 구축·운영 가이드](../guides/storybook/index.html)
 >
 > 이 문서는 AI 코딩용 요약입니다. 충돌하거나 세부 판단이 필요하면 기준 원본을 확인합니다.
 
@@ -11,7 +11,7 @@
 - 스타일은 Tailwind CSS 4 유틸리티를 기본으로 작성합니다.
 - 공통 CSS 하한은 Safari 15입니다. Safari 15에서 지원되지 않는 최신 CSS 기반 Utility는 사용하지 않고 호환 가능한 기본 Utility나 기존 프로젝트 패턴으로 대체합니다.
 - Android와 다른 브라우저는 Safari 15에 특정 제품 버전을 대응시키지 않고 지원 대상 구형 버전에서 실제 사용하는 Utility와 핵심 기능을 확인합니다.
-- 조건부 클래스는 기존 `@/lib/utils`의 `cn`을 사용합니다.
+- 조건부 클래스는 기존 `@lounge/ui/utils`의 `cn`을 사용합니다.
 
 ## TSX 가독성과 책임 분리
 
@@ -35,7 +35,7 @@
 ## 토큰과 컴포넌트
 
 - 토큰의 종류와 연결 방식은 `docs/ai/design-tokens.md`를 함께 확인합니다.
-- 먼저 `src/app/globals.css`의 토큰과 `src/components/ui`의 기존 컴포넌트를 확인합니다.
+- 먼저 `front-end/packages/ui/src/styles.css`의 토큰과 `front-end/packages/ui/src/components`의 기존 컴포넌트를 확인합니다.
 - 색상, 배경, 테두리와 상태는 의미 기반 토큰을 우선합니다.
 - Figma의 원시 색상값을 JSX에 그대로 복사하지 않습니다.
 - Tailwind 임의 값은 프로젝트 토큰으로 표현하기 어려운 실제 요구가 있을 때만 사용합니다.

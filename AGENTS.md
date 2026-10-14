@@ -6,7 +6,8 @@
 
 - 라운지 3.0 과업은 기존 Android·iOS 앱의 Flutter 기반 하이브리드 앱 전면 리뉴얼과 FO 웹(PC WEB·반응형 홈페이지) 구축입니다. PO(파트너오피스)·OO(현장운영시스템)는 IA의 별도 영역으로 구분하며 구체적인 범위·담당은 관련 카드에서 확인합니다. 서비스 배경, 과업 범위 또는 플랫폼별 기술 구성을 판단할 때는 [프로젝트 핵심 정보](docs/ai/project.md)를 먼저 확인합니다.
 - 사용자가 파일, 선택자, 함수 또는 문구를 지정하면 해당 위치와 필요한 주변 범위부터 확인합니다. 작은 수정에 프로젝트 전체 구조나 관련 문서를 먼저 조사하지 않습니다.
-- 애플리케이션 기본 작업 범위는 `front-end/`입니다. `front-end/webview/`는 Flutter 앱에서 WebView로 실행되는 웹 화면의 실제 소스이며, `front-end/`에는 FO 웹(PC WEB·반응형 홈페이지)과 PO(파트너오피스)·OO(현장운영시스템)까지 둡니다. Flutter Native 앱 소스는 별도 위치에서 관리합니다. `front-end/`에 아직 package와 설정이 없으면 이 위치에서 앱 구성부터 시작합니다.
+- 애플리케이션 기본 작업 범위는 `front-end/`입니다. `front-end/webview/`는 Flutter 앱 내부 웹 화면, `front-end/website/`는 FO 웹(PC WEB·반응형 홈페이지)의 소스 위치입니다. Flutter Native 앱 소스는 별도 위치에서 관리하며, PO·OO의 위치와 담당은 관련 카드에서 확인합니다. 새 앱은 해당 앱 폴더의 실제 package·설정 유무를 확인한 뒤 구성합니다.
+- WebView와 website는 하나의 디자인 시스템과 동일한 웹 기술 스택을 사용합니다. 공통 스타일·디자인 토큰·기본 UI는 `front-end/packages/ui/`에서 단일 소스로 공유하고 공통 Storybook도 이 패키지의 `.storybook/`에서 관리합니다. npm workspace 설치·잠금 파일은 `front-end/`에서 관리합니다. 현재 코드의 이전·패키지 구성 여부는 실제 파일로 확인하며, 세부 범위는 [프로젝트 핵심 정보](docs/ai/project.md)의 공통 기반 기준을 따릅니다.
 - 실제 package, 잠금 파일, 설정, import와 기존 소스를 문서 예시보다 우선합니다. 확인되지 않은 기술 선택과 구조는 추측하지 않습니다.
 - 요청하지 않은 기능, 상태, 공통화, Wrapper, Adapter, Store 또는 package를 미리 추가하지 않습니다.
 - Front-end가 독립적으로 정할 수 없는 기획, 업무 규칙, API·인증·데이터 계약, Native Bridge, 배포·보안 정책은 승인되기 전까지 `TBD`로 둡니다. endpoint, parser, fixture, handler와 Mock을 임의로 구현하지 않습니다.
@@ -42,13 +43,13 @@
 
 ## 앱 구현 핵심
 
-- `front-end/webview/`에서는 Next.js 16 App Router, React 19, TypeScript 6, Tailwind CSS 4와 프로젝트의 shadcn/ui 및 의미 기반 토큰을 사용합니다.
+- `front-end/webview/`와 `front-end/website/`에서는 Next.js 16 App Router, React 19, TypeScript 6, Tailwind CSS 4와 프로젝트의 shadcn/ui 및 의미 기반 토큰을 사용합니다.
 - 공통 CSS 하한은 Safari 15입니다. 최신 CSS 표현보다 핵심 정보, 입력, 이동과 업무 흐름의 동작을 우선하고 필요한 경우 호환 표현으로 대체합니다.
 - 디자인 토큰은 Figma Tokens Studio에서만 생성·수정·삭제합니다. 저장소의 생성된 토큰 파일을 직접 수정하지 않습니다.
-- 기존 feature 구현과 `src/components/ui`를 새 컴포넌트보다 우선하며, import, Props와 variant를 실제 코드에서 확인합니다.
+- 기존 feature 구현과 `front-end/packages/ui/src/components`를 새 컴포넌트보다 우선하며, import, Props와 variant를 실제 코드에서 확인합니다.
 - 화면·Feature 신규 구현과 데이터·상태·주요 UI 영역 확장 전에는 [TSX 가독성과 데이터·로직·UI 분리 기준](docs/guides/frontend/component-structure.md)을 반드시 적용합니다. 긴 고정 데이터·복잡한 처리·큰 UI를 한 파일에 누적하지 않고, 직접 작성한 TSX가 약 200줄을 넘으면 구조 검토와 분리 또는 유지 이유를 작업 기록에 남깁니다. 줄 수는 강제 상한이 아니며 작은 수정에 전체 개편을 추가하지 않습니다.
 - 공통 UI, 독립 검수 가치가 있는 Feature 또는 사용자 노출 Screen을 추가하거나 공개 Props·주요 상태·화면 구조를 바꾸면 관련 Storybook 대상도 확인합니다. Storybook을 위해 제품에 필요 없는 Props나 Mock을 추가하지 않습니다.
-- 세부 앱 규칙과 검증은 `front-end/webview/AGENTS.md`를 따릅니다.
+- 세부 앱 규칙과 검증은 해당 앱의 `AGENTS.md`를 따릅니다. 이번 FO 공통 구현 초안에서는 실기기 검증을 완료 조건으로 요구하지 않습니다. 지원 환경 기준은 유지하며 미검증 결과를 검증 완료로 기록하지 않습니다.
 
 ## 작업과 편집 방식
 

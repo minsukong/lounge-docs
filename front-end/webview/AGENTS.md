@@ -7,8 +7,8 @@
 - 이 폴더는 Flutter 하이브리드 앱에서 WebView로 실행되는 웹 화면의 실제 소스입니다. 아직 package와 설정이 없으면 이 위치에 앱을 구성한 뒤 구현합니다. 저장소 루트 `AGENTS.md`와 이 폴더의 현재 소스·설정 파일을 먼저 확인합니다. `docs/ai/` 문서는 실제 소스만으로 판단하기 어렵거나 작업에 세부 기준이 필요할 때 관련 문서만 선택해서 읽습니다.
 - package, script, 설정, import 경로와 설치 버전은 이 앱에 존재하는 실제 파일과 잠금 파일을 기준으로 사용하며, 확인되지 않은 구성을 추측하지 않습니다.
 - Next.js 16 App Router, React 19, TypeScript 6, Tailwind CSS 4와 shadcn/ui `base-nova`를 프로젝트 기술 기준으로 사용합니다.
-- 공통 CSS 하한은 Safari 15이며, 핵심 흐름을 Safari 15에서 실제 검증합니다.
-- 기존 `src/components/ui`와 feature 내부 구현을 새 공통화보다 우선합니다.
+- 공통 CSS 하한은 Safari 15입니다. 이번 FO 공통 구현 초안에서는 실기기 검증을 완료 조건으로 요구하지 않습니다. 미검증 결과를 실제 지원 환경의 검증 완료로 표시하지 않습니다.
+- WebView와 `../website/`는 하나의 디자인 시스템을 사용합니다. 공통 스타일·디자인 토큰·기본 UI는 `../packages/ui/`의 단일 소스로 공유하고 공통 Storybook도 해당 패키지의 `.storybook/`에서 관리합니다. 공통 UI는 `@lounge/ui/*`로 가져오고 패키지의 기존 구현을 재사용하며 앱별 복제본을 추가하지 않습니다. 앱별 페이지·라우트·Safe Area·Native 연동은 이 앱에서 관리합니다.
 - 화면·Feature 작성과 확장에는 [TSX 구조 기준](../../docs/guides/frontend/component-structure.md)을 적용합니다. 화면은 주요 영역과 표시 흐름을 조합하고, 필요한 데이터·변환·상태 처리·UI는 기능 가까이에서 분리합니다. 상태 소유권과 Server/Client 경계, 제품/개발 코드 경계를 유지합니다.
 - 공통 UI, 독립 검수 가치가 있는 Feature와 사용자 노출 Screen은 Storybook 대상을 함께 확인합니다.
 - 기획과 승인된 Backend·Native 계약이 없는 API, 인증, 세션, Bridge, fixture와 Mock은 구현하지 않습니다.

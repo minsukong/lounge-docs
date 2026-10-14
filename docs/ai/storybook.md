@@ -6,6 +6,10 @@ Storybook 설정과 개발 검수 환경을 만들거나 바꿀 때는 [앱·개
 >
 > 이 문서는 AI 코딩용 요약입니다. 충돌하거나 세부 판단이 필요하면 기준 원본을 확인합니다.
 
+## 현재 실행 위치
+
+공통 설정은 `front-end/packages/ui/.storybook/`에 있습니다. `front-end/`에서 `npm run storybook` 또는 `npm run build-storybook`을 실행합니다. 공통 UI와 WebView·website의 Feature·Screen Story를 함께 수집하며 결과물은 `front-end/packages/ui/storybook-static/`입니다.
+
 ## 목적
 
 Storybook은 공통 컴포넌트만 제작하거나 전시하는 곳이 아닙니다. 실제 코드로 구현된 Component, Feature와 사용자에게 노출되는 Screen을 한곳에서 탐색하고, Application 전체를 실행하지 않아도 주요 UI 상태를 고정된 조건으로 재현·검수하는 환경입니다.
@@ -21,7 +25,7 @@ Storybook은 실제 Routing, Backend 연동과 권한, Native App 기능, 배포
 
 ## 작성 대상
 
-- `front-end/webview/src/components/ui`의 공통 UI
+- `front-end/packages/ui/src/components`의 공통 UI
 - 상태 전환과 사용자 Interaction을 독립적으로 검수할 가치가 있는 Feature
 - 라우터를 통해 사용자에게 제공되는 Page와 Screen UI
 - Desktop, Tablet과 Mobile에서 배치가 달라지는 주요 화면

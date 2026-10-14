@@ -75,10 +75,14 @@
 ├── front-end/
 │   ├── AGENTS.md                # Front-end 폴더 구현 지침
 │   ├── README.md
-│   └── webview/                 # 앱 내 Next.js WebView Front-end
-│       ├── AGENTS.md            # 앱 전용 구현 지침
-│       ├── .storybook/          # Storybook 설정
-│       └── src/                 # 애플리케이션 source
+│   ├── webview/                 # 앱 내 Next.js WebView Front-end
+│   │   ├── AGENTS.md            # 앱 전용 구현 지침
+│   │   └── src/                 # 애플리케이션 source
+│   ├── website/                 # FO 반응형 홈페이지 소스 위치
+│   │   └── AGENTS.md            # 홈페이지 전용 구현 지침
+│   └── packages/ui/             # 공통 UI·스타일·Storybook 실제 소스
+│       ├── .storybook/
+│       └── src/
 └── docs/
     ├── AGENTS.md                # 문서 작성 지침
     ├── guides/                  # 상세 가이드
@@ -89,6 +93,8 @@
           WebView 애플리케이션의 소스·빌드·배포는 이 저장소 <code>front-end/webview</code>에서 관리합니다.
           Flutter Native 앱은 별도 위치에서 관리하며, WebView 화면과는 합의된 Bridge 계약으로 연결합니다.
         </p>
+
+        <p>공통 요소·디자인 시스템·공통 컴포넌트는 하나로 관리합니다. 앱별 중복 수정과 스타일·동작·검수 차이를 방지하기 위해 공통 UI를 단일 소스로 공유합니다. 공통 UI·스타일·Storybook은 <code>packages/ui/</code>로 이전했고 npm workspace로 두 앱에 연결했습니다. website에는 Next.js 기반과 개발용 preview가 있습니다. <a href="../../ai/project.md#webview와-website의-공통-기반">WebView·website 공통 기반 기준</a>에서 공유 범위와 현재 상태를 확인합니다. 이번 FO 공통 구현 초안의 완료 조건에서는 실기기 검증을 제외하며, 지원 환경 기준과 미검증 기록은 유지합니다.</p>
 
         <h3>애플리케이션 범위</h3>
         <table>
@@ -113,7 +119,7 @@
             <tr>
               <td>FO 웹(PC WEB·반응형 홈페이지)</td>
               <td>01.FO_WEB_IA.html의 사용자 웹. 기존 홈페이지를 AS-IS로 참고</td>
-              <td>front-end/에서 관리. 하위 구조·스택·공유 범위는 <code class="badge-tbd">TBD</code></td>
+              <td><code>front-end/website/</code>에서 관리. WebView와 동일한 웹 기술 스택·디자인 시스템 사용. 공통 스타일·토큰·기본 UI는 <code>front-end/packages/ui/</code>의 단일 소스로 공유하는 방향으로 합의</td>
             </tr>
             <tr>
               <td>PO(파트너오피스)</td>
@@ -144,7 +150,7 @@
           <tbody>
             <tr>
               <td><code>front-end</code></td>
-              <td>Front-end 소스와 설정. <code>front-end/webview</code>는 Flutter 앱에서 WebView로 실행되는 웹 화면이고 FO 웹·PO·OO를 구분해 관리합니다. 세부 폴더와 공유 범위는 필요에 따라 정합니다. Build와 배포도 각 앱에서 수행</td>
+              <td>Front-end 소스와 설정. <code>front-end/webview</code>는 앱 내부 웹 화면, <code>front-end/website</code>는 FO 반응형 홈페이지입니다. 공통 스타일·토큰·기본 UI는 <code>front-end/packages/ui</code>에서 공유하고 공통 Storybook도 이 패키지를 기준으로 관리합니다. 페이지·라우트·앱별 레이아웃·Native 연동과 Build·배포는 각 앱에서 관리합니다. PO·OO 범위는 별도 확인</td>
               <td>docs를 제품 Build 입력·정적 자산에 포함하지 않음</td>
             </tr>
             <tr>

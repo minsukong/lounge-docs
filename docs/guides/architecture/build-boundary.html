@@ -27,15 +27,27 @@
 <section><h2>3. WebView의 현재 적용 위치</h2>
 <div class="table-wrap"><table><thead><tr><th scope="col">범위</th><th scope="col">현재 위치·처리</th></tr></thead><tbody>
 <tr><th scope="row">실제 앱</th><td>front-end/webview/src/app/의 일반 page.tsx·layout.tsx·route.ts</td></tr>
-<tr><th scope="row">공통 UI·기능</th><td>src/components/·src/features/·src/lib/. 실제 앱이 사용하는 모듈 연결</td></tr>
+<tr><th scope="row">공통 UI·기능</th><td>front-end/packages/ui/src/와 앱의 src/features/·src/lib/. 실제 사용하는 모듈 연결</td></tr>
 <tr><th scope="row">개발용 preview</th><td>src/dev/와 src/app/preview/. 개발 서버에서만 *.dev.tsx·*.dev.ts 라우트 인식</td></tr>
-<tr><th scope="row">Storybook</th><td>.storybook/와 구현 가까이의 *.stories.tsx</td></tr>
+<tr><th scope="row">Storybook</th><td>front-end/packages/ui/.storybook/와 공통 UI·각 앱의 *.stories.tsx</td></tr>
 <tr><th scope="row">테스트</th><td>src/test/와 *.test.*·*.spec.*. 제품 실행 코드에서 제외</td></tr>
 <tr><th scope="row">제품 배포</th><td>npm run build 후 dist/runtime/. Next.js 서버와 필요한 정적 자산 포함</td></tr>
 </tbody></table></div>
-<p>WebView의 개발 화면은 npm run dev 실행 후 /preview에서 확인합니다. Storybook은 npm run storybook으로 실행합니다. 운영의 기본 페이지는 실제 서비스 진입점이며 검수 화면 목록으로 사용하지 않습니다.</p>
-<p>구체적인 명령과 배포 방법은 <a href="../../../front-end/webview/BUILD.md">WebView BUILD.md</a>를 확인합니다. 실제 제외 설정은 <a href="../../../front-end/webview/next.config.ts">Next 설정</a>, <a href="../../../front-end/webview/tsconfig.build.json">운영 TypeScript 설정</a>, <a href="../../../front-end/webview/scripts/package-runtime.mjs">런타임 패키징</a>, <a href="../../../front-end/webview/package.json">실행 명령</a>에 있습니다. 경로·명령이 바뀌면 이 표와 앱 안내를 같은 변경에서 갱신합니다.</p>
+<p>WebView의 개발 화면은 npm run dev 실행 후 /preview에서 확인합니다. Storybook은 front-end/에서 npm run storybook으로 실행합니다. 운영의 기본 페이지는 실제 서비스 진입점이며 검수 화면 목록으로 사용하지 않습니다.</p>
+<p>구체적인 명령과 배포 방법은 <a href="../../../front-end/webview/BUILD.md">WebView BUILD.md</a>를 확인합니다. 실제 제외 설정은 <a href="../../../front-end/webview/next.config.ts">Next 설정</a>, <a href="../../../front-end/webview/tsconfig.build.json">운영 TypeScript 설정</a>, <a href="../../../front-end/scripts/package-runtime.mjs">런타임 패키징</a>, <a href="../../../front-end/webview/package.json">실행 명령</a>에 있습니다. 경로·명령이 바뀌면 이 표와 앱 안내를 같은 변경에서 갱신합니다.</p>
 <p>FO 웹·PO·OO에도 같은 분리 원칙을 적용합니다. 구체적인 라우트 방식과 결과물 경로는 해당 앱의 실제 설정이 정해질 때 기록하며 WebView 설정을 그대로 가정하지 않습니다.</p>
+<h3 id="공통-ui를-사용하는-앱의-빌드">공통 UI를 사용하는 앱의 빌드</h3>
+<p>WebView와 website는 하나의 디자인 시스템과 공통 컴포넌트를 사용합니다. 동일한 UI를 앱별로 보유하면 수정·스타일·동작·검수가 중복되고 서로 달라질 수 있으므로 공통 소스를 <code>front-end/packages/ui/</code>에서 단일 관리합니다. 공통 UI·스타일·Storybook은 공통 패키지로 이전했고 npm workspace로 두 앱에 연결했습니다. 두 앱은 같은 공개 export와 스타일을 사용하며 각자 운영 결과물을 생성합니다.</p>
+<ul>
+<li>빌드 작업은 앱별로 수행하되 빌드 입력에는 해당 앱, 공통 UI 패키지와 workspace package·잠금 파일을 함께 제공합니다. 공통 패키지는 각 앱의 실제 의존성으로 연결하고 공개 export를 사용합니다. <code>@lounge/ui/button</code> 같은 패키지 경로는 공통 UI, <code>@/</code>는 앱 내부 소스에 사용합니다. 실제 패키지 이름과 export는 구성 시 확인합니다.</li>
+<li>공통 TypeScript·TSX가 Next.js 빌드에서 처리되는지 확인하고 필요하면 실제 패키지 이름으로 <code>transpilePackages</code>를 설정합니다. React는 앱과 호환되는 peer dependency로 관리합니다.</li>
+<li>각 앱은 공통 스타일·토큰을 불러오고 Tailwind CSS 4의 검색 범위에 공통 패키지의 제품 소스를 포함합니다. Story·테스트·검수 전용 소스는 운영 CSS 검색과 제품 import에서 제외합니다.</li>
+<li>standalone 배포에서는 앱 밖의 공통 의존성을 추적할 수 있도록 <code>outputFileTracingRoot</code>를 실제 공통 루트에 맞춥니다. 추적 범위가 넓어진 만큼 공통 패키지의 문서·Story·테스트·Storybook·검수 전용 파일도 제외합니다. 공통 소스 폴더 전체를 배포하지 않습니다.</li>
+<li>추적 루트 변경으로 standalone 내부의 앱 경로·server.js 위치가 바뀌면 앱별 패키징·정적 자산 복사·시작 명령도 실제 출력 구조에 맞춰 갱신합니다. 기존 단일 앱 패키징 스크립트가 그대로 동작한다고 가정하지 않습니다.</li>
+<li>공통 UI의 제품 코드·CSS·필요한 런타임 의존성은 해당 앱의 배포 결과물에 포함합니다. 공통 UI는 독립 서비스 배포 대상이 아니며, Storybook은 별도 검수 결과물입니다.</li>
+<li>이전 후 각 앱의 타입·운영 빌드를 확인하고 배포 결과물만으로 실행해 공통 의존성·자산 누락이 없는지 검증합니다. 다른 앱의 라우트나 Story·테스트·검수 자료가 포함되지 않는지도 확인합니다.</li>
+</ul>
+<p>WebView의 현재 명령·패키징 전제와 이전 시 변경 항목은 <a href="../../../front-end/webview/BUILD.md">WebView BUILD.md</a>, website의 실제 빌드·배포 방법은 <a href="../../../front-end/website/BUILD.md">website BUILD.md</a>를 확인합니다.</p>
 </section><hr>
 <section><h2>4. 제품 빌드와 배포에서 제외할 내용</h2>
 <ul>

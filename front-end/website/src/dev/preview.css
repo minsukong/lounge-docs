@@ -1,0 +1,6 @@
+@import "tailwindcss/utilities" source(none);
+@reference "tailwindcss";
+@reference "@lounge/ui/styles.css";
+@source "./";
+@source "../app/preview";
+@source "../../../packages/ui/src/dev";

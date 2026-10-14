@@ -1,0 +1,53 @@
+{
+  "name": "lounge-front-end",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "workspaces": [
+    "webview",
+    "website",
+    "packages/ui"
+  ],
+  "scripts": {
+    "dev:webview": "npm run dev --workspace lounge-webview",
+    "dev:website": "npm run dev --workspace lounge-website",
+    "build:webview": "npm run build --workspace lounge-webview",
+    "build:website": "npm run build --workspace lounge-website",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "storybook": "npm run storybook --workspace @lounge/ui",
+    "build-storybook": "npm run build-storybook --workspace @lounge/ui",
+    "build:preview:webview": "npm run build:preview --workspace lounge-webview",
+    "build:preview:website": "npm run build:preview --workspace lounge-website"
+  },
+  "devDependencies": {
+    "@storybook/addon-docs": "10.6.1",
+    "@storybook/nextjs-vite": "10.6.1",
+    "@tailwindcss/postcss": "4.3.3",
+    "@testing-library/jest-dom": "7.0.1",
+    "@testing-library/react": "16.3.3",
+    "@testing-library/user-event": "14.6.7",
+    "@types/node": "24.19.2",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "5.2.0",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.2.12",
+    "jsdom": "30.1.2",
+    "shadcn": "4.21.4",
+    "storybook": "10.6.1",
+    "tailwindcss": "4.3.3",
+    "typescript": "6.0.3",
+    "vite": "7.3.7",
+    "vitest": "4.1.11",
+    "next": "16.2.12"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true,
+    "unrs-resolver@1.12.2": true,
+    "sharp@0.34.5": true
+  }
+}

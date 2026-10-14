@@ -13,7 +13,8 @@
 
 | 작업 | 브랜치·상태 | 다음 행동 |
 | --- | --- | --- |
-| [TASK-P0-FOUNDATION-001: 실행 기반과 공통 UI 초안](tasks/phase-0-foundation.md) | `phase-0-foundation` · Review · 사용자 요청으로 검증 미실행 | 타입·린트·폼 테스트·Storybook·앱 빌드와 실제 WebView 확인 후 범위별 완료 판정 |
+| [TASK-P0-FOUNDATION-001: 실행 기반과 공통 UI 초안](tasks/phase-0-foundation.md) | `phase-0-foundation` · Review · 기존 초안 이력 | 공통 UI 이전과 실행 검증은 아래 후속 카드 참조. 실제 서비스 범위는 별도 완료 판정 |
+| [TASK-P0-SHARED-UI-001: 공통 UI 이전과 website 실행 기반](tasks/common-ui-workspaces.md) | Done · 공통 소스·workspace·두 앱 preview 구성 및 빌드 확인 | 실제 서비스 화면·승인 디자인·계약 연동은 별도 작업 |
 
 아래 IA 후보의 완료 표시와 별도로 관리합니다. 검수용 UI 초안은 실제 서비스 공통 셸이나 연동의 완료를 뜻하지 않습니다.
 

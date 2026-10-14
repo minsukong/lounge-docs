@@ -1,8 +1,9 @@
 @import "tailwindcss/utilities" source(none);
-@reference "../app/globals.css";
+@reference "tailwindcss";
+@reference "@lounge/ui/styles.css";
 @source "./";
 @source "../app/preview";
-@source "../components/**/*.stories.tsx";
 
 .app-main { padding-bottom: calc(6rem + env(safe-area-inset-bottom, 0px)); }
 .bottom-nav { padding-bottom: env(safe-area-inset-bottom, 0px); }
+@source "../../../packages/ui/src/dev";

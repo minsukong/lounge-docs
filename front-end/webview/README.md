@@ -2,18 +2,13 @@
 
 Flutter 앱에서 WebView로 실행되는 웹 화면의 소스를 두는 폴더입니다.
 
-이 폴더의 package, 설정과 source를 여기서 관리합니다. `phase-0-foundation` 브랜치에서 Next.js 앱과 공통 기반 검수 화면을 작성했습니다. 초안 작성 시 전체 검증은 사용자 요청에 따라 생략했습니다. 이후 Storybook 라우터 오류를 수정하고 Button 기본 Story와 Foundation의 공통 UI 화면 표시를 확인했습니다. 린트와 앱 전용 운영 빌드·운영 타입 검사는 통과했습니다. 전체 typecheck·테스트·Storybook 정적 빌드·실기기 검증은 미실행입니다. Flutter Native 앱은 별도 위치에서 관리합니다.
+이 앱의 페이지·라우트·검수 화면을 관리합니다. 공통 UI·스타일·유틸리티는 `../packages/ui/`의 단일 소스로 이전했고 `@lounge/ui/*`로 가져옵니다. Flutter Native 앱은 별도 위치에서 관리합니다.
 
 ## 실행
 
-Node.js 22.12 이상에서 이 폴더를 열고 실행합니다. 의존성 버전은 `package-lock.json`에 고정합니다. Next.js 16.4의 라우터 구조와 Storybook 10.6.1의 가상 라우터가 맞지 않아 Next.js와 eslint-config-next를 16.2.12로 고정했습니다.
+Node.js 22.12 이상에서 의존성 설치는 `front-end/`의 `npm ci`로 수행합니다. 잠금 파일은 `front-end/package-lock.json` 하나로 관리합니다. Next.js와 eslint-config-next는 Storybook App Router 호환성을 위해 16.2.12로 고정했습니다. workspace 루트의 Storybook 의존성도 같은 Next.js를 사용합니다.
 
-```bash
-npm ci
-npm run dev
-```
-
-앱 주소는 `http://127.0.0.1:3000`입니다. Storybook은 별도 터미널에서 `npm run storybook`으로 열며 주소는 `http://127.0.0.1:6006`입니다.
+이 앱 폴더에서는 `npm run dev`를 실행합니다. 앱은 http://127.0.0.1:3000, 검수 화면은 http://127.0.0.1:3000/preview 입니다. Storybook은 `front-end/`에서 `npm run storybook`으로 실행하며 http://127.0.0.1:6006 에서 공통 UI와 두 앱의 Story를 확인합니다.
 
 ## Phase 0에서 작성한 범위
 
@@ -28,7 +23,7 @@ npm run dev
 
 이 화면의 메뉴와 폼은 기반 검수용이며 확정된 서비스 메뉴나 회원가입 정책이 아닙니다. 폼은 입력 형식만 확인하고 전송하지 않습니다. 화면 상태 선택은 지역 UI 미리보기이며 API Mock이 아닙니다. 인증·세션·토큰 저장, 실제 API, Native Bridge, 업무 데이터와 보호 라우트는 미구현입니다.
 
-스타일은 shadcn `base-nova`에서 출발한 임시 neutral 기본값입니다. `tokens/tokens.json`은 수정하지 않았으며 Tokens Studio와 실제 화면의 승인된 연결은 이후 적용합니다. 앱 최소 지원 범위는 `app_webview_guide.html` 4·5번 섹션과 `react_code_exports.html`의 프로젝트 기준을 따릅니다. 최신 CSS 표현은 기본 스타일로 대체했지만 iOS 15 WKWebView·Android System WebView 호환 결과는 미검증입니다.
+공통 스타일은 `../packages/ui/src/styles.css`에 있으며 shadcn `base-nova`에서 출발한 임시 neutral 기본값입니다. `tokens/tokens.json`은 수정하지 않았으며 Tokens Studio와 실제 화면의 승인된 연결은 이후 적용합니다. 앱 최소 지원 범위는 `app_webview_guide.html` 4·5번 섹션과 `react_code_exports.html`의 프로젝트 기준을 따릅니다. 최신 CSS 표현은 기본 스타일로 대체했지만 iOS 15 WKWebView·Android System WebView 호환 결과는 미검증입니다.
 
 ## 추후 검증 명령
 
@@ -36,13 +31,13 @@ npm run dev
 npm run typecheck
 npm run lint
 npm run test
-npm run build-storybook
+npm run build-storybook --prefix ..
 npm run build
 ```
 
-위 명령 중 린트와 운영 빌드는 통과했습니다. 운영 빌드의 타입 검사도 통과했습니다. 전체 typecheck·테스트·Storybook 정적 빌드·실기기 검증은 미실행입니다. 설치 중 개발 도구의 전이 의존성 취약점 경고가 있었으며, 검증 재개 시 업데이트 범위도 확인해야 합니다. 실제 기기의 키보드·Safe Area·포커스·화면 복귀·글자 확대는 별도 검증이 필요합니다.
+공통 UI 이전 후 전체 타입·린트·폼 테스트 2개·공통 Storybook 정적 빌드·운영 빌드와 배포 결과물 단독 실행을 확인했습니다. 운영의 `/preview`는 404로 제외되며 홈페이지 preview의 모바일·데스크톱 배치를 확인했습니다. 실제 서비스 연동과 실기기는 검증하지 않았으며 이번 초안 완료 조건에서 실기기 검증은 제외합니다.
 
-작업 범위와 재개 기록은 [Phase 0 작업 카드](../../docs/workflow/tasks/phase-0-foundation.md)에 있습니다. 앱과 Storybook은 `docs/`를 제품 자산으로 복사하지 않습니다.
+작업 범위와 재개 기록은 [공통 UI 이전 작업 카드](../../docs/workflow/tasks/common-ui-workspaces.md)에 있습니다. 앱과 Storybook은 `docs/`를 제품 자산으로 복사하지 않습니다.
 
 ## 기본 영역
 
@@ -50,11 +45,9 @@ npm run build
 webview/
 ├── AGENTS.md
 ├── README.md
-├── .storybook/
 └── src/
     ├── app/
-    ├── components/ui/
-    ├── features/
+    ├── dev/
     ├── lib/
     └── test/
 ```

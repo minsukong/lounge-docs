@@ -1,7 +1,11 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "types": ["node", "react", "react-dom"],
+    "types": [
+      "node",
+      "react",
+      "react-dom"
+    ],
     "tsBuildInfoFile": ".next/cache/tsconfig.build.tsbuildinfo"
   },
   "include": [
@@ -11,8 +15,17 @@
     ".next/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules", ".next/dev", "dist", "storybook-static", "coverage",
-    "src/dev", "src/test", "src/app/preview",
-    "**/*.stories.ts", "**/*.stories.tsx", "**/*.test.ts", "**/*.test.tsx"
+    "node_modules",
+    ".next/dev",
+    "dist",
+    "storybook-static",
+    "coverage",
+    "src/dev",
+    "src/test",
+    "src/app/preview",
+    "**/*.stories.ts",
+    "**/*.stories.tsx",
+    "**/*.test.ts",
+    "**/*.test.tsx"
   ]
 }
