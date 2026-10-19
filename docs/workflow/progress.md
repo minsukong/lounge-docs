@@ -3,7 +3,7 @@
 실제 작업은 [작업 카드 양식](task-card.md)으로 만든 카드에서 관리합니다. [결정 기록](decisions.md)·[계약 검토](contract-review.md)·[IA 기준](ia-baseline.md)의 근거를 카드에 연결하고, 여기에는 상태와 다음 행동을 요약합니다. [전체 연결 안내](index.md)를 참고합니다.
 
 > 후보 목록의 기존 표시: `[ ]` 대기 / `[~]` 진행중 / `[x]` 완료. 아래 표의 `[ ]`는 Ready 판정이 아닙니다.
-> IA 기준: 더라운지_IA FO_v0.2 (2026-10 기준, 100% 확정 아님)
+> IA 기준: 더라운지_IA FO_v0.2의 기존 추출 기록이며 확정 범위가 아닙니다. 현재 원본과 추출 해시가 불일치하므로 아래 수치·View 구분을 최신 확인 결과로 사용하지 않습니다. [재대조 기준](ia-baseline.md)에 따라 필요한 원본 행을 확인합니다.
 > 화면 ID와 화면명은 기존 진행표를 보존한 후보이며 원본 일치가 보증되지 않습니다. MO = 앱 WebView 후보. FO·PW는 파일과 역할을 함께 확인하고 PO 담당은 별도 확인합니다.
 > 이 문서의 개별 행은 `01.FO(MO_WEB)_IA.html`(MO), `01.FO_판매채널_IA.html`(FO), `03.PO_IA.html`(PO), `04.OO_IA.html`(OO)를 그대로 따릅니다. `01.FO_APP_IA.html`·`01.FO_WEB_IA.html`은 개별 행이 아니라 [APP·WEB(FO) 계열 화면군](#appwebfo-계열-화면군)에서 화면군 단위로만 다룹니다. 두 자료는 같은 기능의 다른 절단면이라 MO 행과 1:1로 대응하지 않습니다.
 
@@ -13,10 +13,16 @@
 
 | 작업 | 브랜치·상태 | 다음 행동 |
 | --- | --- | --- |
-| [TASK-P0-FOUNDATION-001: 실행 기반과 공통 UI 초안](tasks/phase-0-foundation.md) | `phase-0-foundation` · Review · 기존 초안 이력 | 공통 UI 이전과 실행 검증은 아래 후속 카드 참조. 실제 서비스 범위는 별도 완료 판정 |
+| [TASK-P0-FOUNDATION-001: 실행 기반과 공통 UI 초안](tasks/phase-0-foundation.md) | Review · 초기 카드의 최종 리뷰 미완료. `phase-0-foundation`은 초기 브랜치 이력 | 후속 카드의 완료·검증 기록을 반영해 초기 범위의 리뷰·완료 조건 정리 |
 | [TASK-P0-SHARED-UI-001: 공통 UI 이전과 website 실행 기반](tasks/common-ui-workspaces.md) | Done · 공통 소스·workspace·두 앱 preview 구성 및 빌드 확인 | 실제 서비스 화면·승인 디자인·계약 연동은 별도 작업 |
 
-아래 IA 후보의 완료 표시와 별도로 관리합니다. 검수용 UI 초안은 실제 서비스 공통 셸이나 연동의 완료를 뜻하지 않습니다.
+**Phase 0 전체는 미완료입니다.** 공통 실행 기반·UI 초안·두 앱 preview는 후속 카드 범위에서 완료됐고, 검증은 해당 카드의 실행 기록입니다. 이번 상태 갱신에서 앱 검사를 재실행하지 않았습니다.
+
+- 남은 구현·합의: 실제 서비스 셸·메뉴·설정·승인 디자인, 보호 라우트·인증·API/Query, 업무 오류·재시도·캐시·복구·Native 연동.
+- 남은 검증: 실제 서비스 흐름과 대상 WebView의 키보드·회전·Safe Area 등. 초안의 일부 브라우저 확인을 전체 검증으로 해석하지 않습니다.
+- 다음 행동: 남은 목표별 범위·담당·근거를 확인하고 후속 카드에서 착수 조건을 판정합니다. 계약이 필요한 항목과 독립 UI 작업을 구분합니다.
+
+아래 IA 후보의 완료 표시와 별도로 관리합니다. 검수용 UI 초안은 실제 서비스 공통 셸이나 연동의 완료를 뜻하지 않습니다. 인프라의 `[~]`는 일부 기반·초안이 구현됐다는 뜻이며 해당 항목 전체의 완료나 Ready를 뜻하지 않습니다.
 
 ## Phase 0: 공통 기반 (계약 필요 여부는 카드별 판정)
 
@@ -55,15 +61,15 @@
 
 | ID | 항목 | 상태 | 비고 |
 |----|------|------|------|
-| INFRA-01 | 라우팅 구조 (app/ 폴더, protected route) | [ ] | |
-| INFRA-02 | WebView Safe Area, viewport, 키보드 대응 | [ ] | |
-| INFRA-03 | shadcn/ui 커스텀 세트 | [ ] | 버튼, 입력, 카드, 시트, 다이얼로그 |
-| INFRA-04 | Skeleton, Empty State, Error Boundary | [ ] | |
-| INFRA-05 | Zustand auth store 골격 | [ ] | 인증 상태 책임 TBD. 토큰 저장 방식은 계약·보안 기준 확인 |
-| INFRA-06 | API 클라이언트 wrapper + TanStack Query Provider | [ ] | query key 컨벤션 |
-| INFRA-07 | React Hook Form + zod 공통 폼 패턴 | [ ] | |
-| INFRA-08 | 공통 에러 처리 (Toast, Alert, 인라인 분기) | [ ] | |
-| INFRA-09 | 네트워크 끊김 / 오프라인 대응 | [ ] | |
+| INFRA-01 | 라우팅 구조 (app/ 폴더, protected route) | [~] | App Router 기본 라우트 구현. 서비스 라우트·보호 라우트와 인증 계약은 남음 |
+| INFRA-02 | WebView Safe Area, viewport, 키보드 대응 | [~] | viewport·Safe Area 기본 스타일 구현. 실기기 키보드·회전·Native 컨테이너 미검증 |
+| INFRA-03 | shadcn/ui 커스텀 세트 | [~] | 공통 UI 패키지·Storybook과 일부 브라우저 확인 기록. 승인 디자인·토큰·대상 기기 검수는 남음 |
+| INFRA-04 | Skeleton, Empty State, Error Boundary | [~] | 공통 상태 표현·라우트 오류 경계 구현. 실제 데이터·업무 오류 통합은 남음 |
+| INFRA-05 | Zustand auth store 골격 | [ ] | 미착수. 인증 상태 책임·토큰 저장 계약·보안 기준과 실제 필요 확인 후 판단 |
+| INFRA-06 | API 클라이언트 wrapper + TanStack Query Provider | [ ] | 미착수. API 계약·실제 조회 책임 확인 후 client·Provider·query key 범위 판단 |
+| INFRA-07 | React Hook Form + zod 공통 폼 패턴 | [~] | 공통 폼 예제·행동 테스트 2개 통과 기록. 실제 업무별 규칙·화면 적용은 남음 |
+| INFRA-08 | 공통 에러 처리 (Toast, Alert, 인라인 분기) | [~] | 인라인 오류·Dialog 구조 구현. 실제 오류 계약·분기·Toast 사용처는 남음 |
+| INFRA-09 | 네트워크 끊김 / 오프라인 대응 | [~] | 연결 안내·상태 표현 구현. 요청 재시도·캐시·복구 정책과 연동은 남음 |
 
 ---
 

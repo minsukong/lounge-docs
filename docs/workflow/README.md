@@ -56,7 +56,11 @@ lounge-docs/
 │           ├── refresh_ia.py
 │           ├── validate_workflow.py
 │           └── export_skills.py
-├── front-end/                             ← Front-end 소스 (webview/)
+├── front-end/                             ← npm workspace·공용 잠금 파일
+│   ├── webview/                           ← 앱 내부 WebView
+│   ├── website/                           ← FO 웹·반응형 홈페이지
+│   ├── packages/ui/                       ← 공통 UI·스타일·Storybook
+│   └── scripts/                           ← 앱 빌드·패키징 공용 도구
 ├── tokens/                                ← design tokens
 └── work/                                  ← IA 원본·검토 자료 전용
     ├── AGENTS.md                          ← "작업 기준은 docs/workflow" 명시
@@ -95,6 +99,12 @@ python docs/workflow/scripts/export_skills.py --workspace "lounge-docs 경로" -
 | 작업 카드 | 이번에 허용된 범위, 완료 조건, 차단 조건 | 다른 카드의 미정 부분 |
 
 자료가 충돌하면 출처와 차이를 기록하고 영향을 받는 부분만 보류합니다. 구현 권한이 있는 사람의 명시적 결정은 문서에 반영하되, BE·Native·운영 계약을 대신 승인한 것으로 해석하지 않습니다.
+
+## docs를 실제 작업에 적용하기
+
+각 공용 스킬 본문의 “docs 적용”에서 작업 조건에 맞는 문서와 확인 항목을 선택합니다. `docs/ai/` 요약으로 판단하고, 세부 기준이 부족하거나 충돌하면 연결된 `docs/guides/` 원본의 관련 부분을 확인합니다. `docs/common-source/` 예시는 실제 소스·설치 버전·승인 계약과 비교해 사용합니다.
+
+카드·명세에는 선택한 문서·항목과 적용할 판단을 연결하고, 구현·리뷰에서는 그 기준에 따른 검증 결과와 미검증 범위를 기록합니다. 문서 전체를 읽거나 링크 목록만 채우는 절차로 만들지 않습니다. 공통 해석과 충돌 처리는 [AI 작업 진입의 docs 활용 기준](AGENTS.md#docs-기준을-작업에-연결하기)을 따릅니다.
 
 ## 기능 처리 흐름
 

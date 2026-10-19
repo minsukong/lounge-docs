@@ -1,15 +1,17 @@
 # 더라운지 3.0 워크플로 적용 보고서
 
+이 보고서는 워크플로 도입·개편 당시의 적용 이력입니다. 아래 과거 경로·설치 전 상태·검증·백업 위치는 현재 작업 환경이나 재실행 결과를 보증하지 않습니다. 현재 구조·명령은 [프로젝트 기준](../ai/project.md)과 [workspace 설정](../../front-end/package.json), 진행·검증 기록은 [Phase 0 카드](tasks/phase-0-foundation.md)·[후속 완료 카드](tasks/common-ui-workspaces.md)를 확인합니다. WebView·홈페이지·공통 UI의 실행 기반은 구성됐으며 실제 서비스·계약 연동은 별도 범위입니다.
+
 ## 팀 공용 구조로 보완
 
 사용자 요청에 따라 특정 AI 도구를 기본으로 삼던 초기 구성을 보완했습니다. 공용 스킬 원본은 docs/workflow/skills/이며 Cline·Claude Code·Codex 또는 다른 AI가 같은 Markdown을 읽습니다. 자동 발견과 전용 호출은 선택적 도구 연결로 분리합니다.
 
-루트 AGENTS.md에는 진입 링크 두 개만 추가했습니다. docs/workflow/AGENTS.md, docs/workflow/AGENTS.md, docs/workflow/skills/AGENTS.md, docs/workflow/scripts/AGENTS.md에 영역별 선택·문서·스킬·검증 안내를 배치했습니다.
+루트 AGENTS.md에는 진입 링크 두 개만 추가했습니다. docs/AGENTS.md, docs/workflow/AGENTS.md, docs/workflow/skills/AGENTS.md, docs/workflow/scripts/AGENTS.md에 영역별 선택·문서·스킬·검증 안내를 배치했습니다.
 
 사용자의 후속 요청에 따라 Cline 전용 복사본·룰·호환 설치 명령은 제거했습니다. 공용 원본과 계층 안내만 유지합니다. 새 export_skills.py는 선택한 도구의 프로젝트 위치 또는 manual 위치로 내보내고, 문서 연결을 상대 경로 중심으로 기록하며 기존 사용자 변경을 보호합니다. 현재 도구 독립 구조의 검증은 아래 최종 검증에 별도로 기록합니다.
 
 ## 적용 범위
-기준 저장소는 C:/Users/mansu/Desktop/lounge/lounge-docs입니다. docs/workflow의 세 기존 문서를 개편하고, 도구 독립적인 프로젝트 스킬 아홉 개와 구축·운영 작업 기준·계약·IA 근거·검증 도구를 추가했습니다.
+당시 작업 경로는 C:/Users/mansu/Desktop/lounge/lounge-docs였습니다. 현재 작업 경로는 사용자가 지정한 저장소와 실제 파일에서 확인합니다. docs/workflow의 세 기존 문서를 개편하고, 도구 독립적인 프로젝트 스킬 아홉 개와 구축·운영 작업 기준·계약·IA 근거·검증 도구를 추가했습니다.
 
 Strata·Qwen·Cline 설정이나 실제 제품 코드는 변경하지 않았습니다. 원본 Matt 번들 전체 설치, 외부 Issue/PR 게시, commit·push·merge·배포는 수행하지 않았습니다.
 
@@ -41,7 +43,7 @@ Strata·Qwen·Cline 설정이나 실제 제품 코드는 변경하지 않았습�
 | docs/workflow/usage-guide.md | 팀 공용 시작·스킬 읽기·기록·재개 안내 |
 | docs/workflow/spec-template.md | 여러 카드의 기능 명세 |
 | docs/workflow/contract-review.md | API·Bridge 협의 양식 |
-| docs/workflow/decisions.md | 현재 확인이 필요한 DEC-001~010 |
+| docs/workflow/decisions.md | 도입 당시 DEC-001~010. 이후 항목과 현재 상태는 decisions.md 참조 |
 | docs/workflow/ia-baseline.md | IA 신뢰도·파일 역할·대조 원칙 |
 | docs/workflow/ia-audit.md | 자동 대조·원본 해시 |
 | docs/workflow/ia-inventory.csv | 원본 파일·행·화면 ID·원본 텍스트 |
@@ -80,11 +82,11 @@ Matt의 작은 지침 조합, 명세 보존, 검수 가능한 작업, 실제 blo
 
 MO 후보의 미일치 ID 두 개는 MO-MEM-A000000, MO-PMT-A010000입니다. 기존 후보 행을 삭제하거나 임의 ID로 변경하지 않았습니다. 같은 ID의 화면명 차이는 별도 확인해야 합니다. 전체 후보와 계약을 개발 Ready로 만들었다고 주장하지 않습니다.
 
-## 현재 남은 결정
+## 결정과 이후 반영 상태
 
-DEC-001은 Front-end 구현 위치와 AI 작업 루트입니다. 사용자 확인으로 구현 위치는 `front-end/`, 앱 WebView는 `front-end/webview/`로 확정했습니다. 해당 위치에 package·설정이 아직 없다는 점은 앱 초기 구성이 필요하다는 뜻이며, 구현 위치가 미정이라는 뜻은 아닙니다. Flutter Native 소스는 별도 위치에서 관리합니다.
+DEC-001은 Front-end 구현 위치와 AI 작업 루트입니다. 사용자 확인으로 구현 위치는 `front-end/`, 앱 WebView는 `front-end/webview/`로 확정했습니다. 초기 보고 당시에는 해당 위치에 package·설정이 없었지만, 이후 WebView·홈페이지·공통 UI 기반과 npm workspace를 구성했습니다. 현재 상태는 상단의 실제 설정·후속 카드 링크에서 확인합니다. Flutter Native 소스는 별도 위치에서 관리합니다.
 
-DEC-002~005는 인증·회원 정책·주문/결제·Bridge 계약입니다. DEC-006~007은 판매채널·PO/OO 담당과 범위입니다. DEC-008은 IA 매핑, DEC-009는 반응형 웹의 공유 전략, DEC-010은 mock 관리 책임입니다.
+DEC-002~005는 인증·회원 정책·주문/결제·Bridge 계약입니다. DEC-006~007은 판매채널·PO/OO 담당과 범위입니다. DEC-008은 IA 매핑, DEC-009는 업무 기능 공유·환경 차이와 PO·OO 구성, DEC-010은 mock 관리 책임입니다. FO 웹의 위치·웹 스택·공통 UI 공유는 현재 프로젝트 기준에 반영됐습니다. DEC-011 등 이후 항목은 decisions.md를 확인합니다.
 
 이 미정 항목을 전부 해결해야 모든 일을 시작할 수 있다는 뜻은 아닙니다. 이번 카드 목표에 실제로 필요한 결정만 차단 조건으로 연결합니다.
 
@@ -112,7 +114,7 @@ DEC-002~005는 인증·회원 정책·주문/결제·Bridge 계약입니다. DEC
 | 앱 typecheck·lint·test·Storybook·Build | N/A. 제품 코드 변경 없음, 실제 package 미확인 |
 | Android/iOS 실기기 통합 | Not Run. 제품 기능 구현 없음 |
 
-현재 파생 ID 수는 MO 127, APP 193, WEB 161, 판매채널 14, PO 9, OO 44이며 추출 레코드는 550개입니다. APP의 중복 ID는 행별로 보존하고, 상품 등 ID 공백·수식 오류와 WEB 이벤트의 ID 공백을 기능 삭제로 해석하지 않습니다. 이는 각 파일에서 추출한 고유 ID 수이며 파일 간 중복과 기능의 관계를 보정한 개발량이 아닙니다.
+기존 추출 기록의 ID 수는 MO 127, APP 193, WEB 161, 판매채널 14, PO 9, OO 44이며 추출 레코드는 550개입니다. 현재 IA 원본 6개와 추출 해시가 불일치하므로 최신 대조 완료 수치로 사용하지 않습니다. 원본 재대조 상태는 [IA 기준](ia-baseline.md)을 확인합니다. APP의 중복 ID는 행별로 보존하고, 상품 등 ID 공백·수식 오류와 WEB 이벤트의 ID 공백을 기능 삭제로 해석하지 않습니다. 이는 각 파일에서 추출한 고유 ID 수이며 파일 간 중복과 기능의 관계를 보정한 개발량이 아닙니다.
 
 기존 원본 세 문서 백업: C:/Users/Public/Documents/ESTsoft/CreatorTemp/lounge-workflow-backup-q9guh5pq/
 복사 도구 검증용 임시 workspace: C:/Users/Public/Documents/ESTsoft/CreatorTemp/lounge-cline-smoke-3juv87x8/
@@ -168,7 +170,7 @@ DEC-002~005는 인증·회원 정책·주문/결제·Bridge 계약입니다. DEC
 
 원본은 docs/workflow/skills에서 관리하고 도구별 복사본은 선택적으로 내보냅니다. native 자동 발견이 없어도 docs/workflow/AGENTS → 하위 안내 → SKILL.md를 직접 읽는 공통 방식으로 사용할 수 있습니다. 실제 도구·모델마다 파일 접근과 지침 수행은 별도 확인합니다.
 
-## 현재 최종 상태 — Cline 전용 파일 제거
+## Cline 전용 파일 제거 당시 상태
 
 사용자 요청으로 .cline/와 .clinerules/ 및 install_cline_skills.py를 제거했습니다. 삭제 전에 파일 구성을 확인하고 공용 원본과 동일한 복사본만 있는지 검증했습니다. 관련 안내와 검사 도구의 필수 호환본 의존도 제거했습니다.
 

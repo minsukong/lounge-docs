@@ -6,9 +6,11 @@
 
 ## 현재 확인이 필요한 항목
 
+IA 관련 수치·View 분류는 기존 추출 기록이며 현재 원본과 추출 해시가 불일치합니다. [IA 신뢰도와 재대조 기준](ia-baseline.md)을 따르고, 필요한 원본 행을 확인한 뒤 해당 결정의 근거를 갱신합니다.
+
 | ID | 결정할 내용 | 상태 | 담당·협의 상대 | 차단되는 범위 | 현재 근거 |
 | --- | --- | --- | --- | --- | --- |
-| DEC-001 | Front-end 구현 위치와 AI 작업 루트 | Confirmed | 사용자 | 앱 구현 착수·실행 검증 | 사용자 결정: Front-end는 lounge-docs의 `front-end/`에서 구현하고 WebView 화면은 `front-end/webview/`에 둔다. Flutter Native만 별도 위치. `front-end/webview/`의 package·설정은 아직 없음 |
+| DEC-001 | Front-end 구현 위치와 AI 작업 루트 | Confirmed | 사용자 | 앱 구현 착수·실행 검증 | 사용자 결정: Front-end는 lounge-docs의 `front-end/`에서 구현하고 WebView 화면은 `front-end/webview/`에 둔다. Flutter Native만 별도 위치. 초기 결정 뒤 WebView·홈페이지·공통 UI의 실행 기반을 구성함. [프로젝트 기준](../ai/project.md), [workspace 설정](../../front-end/package.json), [후속 완료 카드](tasks/common-ui-workspaces.md) 참조 |
 | DEC-002 | 인증 세션·저장·갱신·로그아웃과 Web/Native 책임 | TBD | BE·Native·FE | 인증 가드·로그인 연동 | project.md에서 계약 TBD |
 | DEC-003 | 회원가입·약관·미성년자·소셜 연결·탈퇴 정책 | TBD | 기획·운영·BE·Native | 해당 회원 업무 연동 | MO IA에 미성년자 정책·소셜 추가 확정 필요 표시 |
 | DEC-004 | 주문·결제·할인·취소와 PG 복귀·실패·중복 처리 | TBD | 기획·BE·Native·FE | 구매·결제·취소 연동 | 승인 계약 미확인 |
@@ -16,7 +18,7 @@
 | DEC-006 | 판매채널 기능·사용자·서비스 구분·담당 | TBD | 사용자·기획·BE | 판매채널 착수 범위 | 사용자: 추가 정보 필요 |
 | DEC-007 | PO·OO의 과업 포함 여부·담당·검수 책임 | TBD | 사용자·프로젝트 담당 | PO·OO 구현 착수 | 담당 미정. OO HTML은 존재 |
 | DEC-008 | MO/APP/WEB 중복 화면·ID 충돌과 실제 메뉴 범위 | TBD | 기획·FE·Native | 영향받는 카드의 화면 매핑 | ia-audit와 ia-inventory. `FO_APP`(193)·`FO_WEB`(161)는 MO 목록과 다른 절단면이며 APP은 대부분 WebView이며 Native 잔여 5개 ID는 원본 View 기준. 상품·일부 사용처·WEB 이벤트의 ID 공백/수식 오류와 사용처 중복 ID·재편을 확인해야 함. `FO-MEM-C10*` 9개는 내 여정 관리로 확인됨. 과거 ID를 현재 ID로 임의 대응시키거나 ID 미추출을 기능 제외로 확정하지 않음 |
-| DEC-009 | FO 웹·PO·OO의 스택·기능 공유·화면별 환경 차이 | TBD | FE·프로젝트 담당 | 공유 구조·웹 연동 판단 | 사용자 과업은 확인, 상세 공유 전략은 project.md에서 TBD |
+| DEC-009 | FO 웹·PO·OO의 스택·기능 공유·화면별 환경 차이 | TBD | FE·프로젝트 담당 | 미정인 업무 기능 공유·PO/OO 구성·환경 차이의 판단 | FO 웹은 `front-end/website/`이며 WebView와 같은 웹 스택·디자인 시스템을 사용하고 `front-end/packages/ui/`를 공유함. [확정된 공통 기반](../ai/project.md#webview와-website의-공통-기반)·[후속 완료 카드](tasks/common-ui-workspaces.md) 참조. 업무 기능 공유·화면별 환경 차이와 PO·OO의 스택·담당은 별도 확인 |
 | DEC-010 | API mock 필요 여부·계약 버전·관리 책임 | TBD | FE·BE·프로젝트 담당 | Contract-Mock 사용 | 계약 전 생성 금지 |
 | DEC-011 | Front-end WBS 중 IA에 근거가 없는 항목의 범위 포함 여부 | TBD | 사용자·기획·프로젝트 담당 | 해당 항목의 착수·견적 | 경영진 대시보드, K리무진 본사운영·홈페이지 구분, 결함 수정·안정화 공수는 IA v0.2와 `docs/` 어디에도 검색되지 않음. eSIM(`FO-SCM-C05*`)과 K공항리무진(`FO-SCM-C07*`, `OO-OOS-J*`~`O*`)은 원본에 존재 |
 

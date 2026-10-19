@@ -9,6 +9,15 @@ description: 더라운지 명세를 검증 가능한 작은 작업 카드와 선
 사용자가 지정한 문서 저장소에서 루트 AGENTS.md, docs/AGENTS.md와 docs/workflow/AGENTS.md의 해당 항목을 확인한다. 실제 코드 workspace의 lounge-workflow.json이 있으면 docs_root를 workspace 기준으로 해석해 문서 저장소를 찾는다. 설정이 없고 현재 저장소에 docs/workflow/가 있으면 그 위치를 사용한다. 그 외에는 문서 위치를 먼저 확인하고 임의 경로를 만들지 않는다. 자동 스킬 호출이 없어도 이 SKILL.md를 직접 읽어 수행할 수 있다.
 가까운 AGENTS.md와 이번 카드·근거를 우선한다. 참고 문서는 이번 판단에 필요한 것만 읽는다. IA는 후보 자료이며, 승인 없는 정책·endpoint·parser·API mock·fixture·handler·Bridge command를 만들지 않는다.
 
+## docs 적용
+
+이번 작업에 해당하는 항목만 읽고 아래 기준을 판단에 적용한다. 아래 상대 링크는 공용 원본 SKILL.md 위치 기준이며, 내보낸 복사본에서는 시작 위치에서 찾은 문서 저장소의 `docs/workflow/skills/[스킬 이름]/`를 기준으로 해석한다.
+
+- 플랫폼별 담당·공유 기반 분해에는 [프로젝트 핵심 정보](../../../ai/project.md)를 사용한다. 실제 코드·사용처와 비교해 공통 UI와 앱별 작업의 책임을 나눈다.
+- UI 카드는 [UI 기준](../../../ai/ui.md)·[접근성 기준](../../../ai/accessibility.md)·[Storybook 기준](../../../ai/storybook.md), 비동기 카드는 [네트워크·성능 기준](../../../ai/performance.md)으로 구현과 검수 범위를 함께 잡는다.
+- 인증·API·Native 경계는 해당하는 [보안 기준](../../../ai/security.md)·[네트워크 참고 구현](../../../common-source/network.md)·[WebView 가이드](../../../guides/platform/webview/app_webview_guide.html)로 필요한 협의와 검증을 찾는다. 참고 구현을 합의된 계약이나 실제 선행 작업으로 간주하지 않는다.
+- [품질 기준](../../../ai/quality.md)으로 카드별 검증 방법을 정하고, 각 카드의 적용 문서·항목을 완료 조건·검증 계획에 연결한다. 문서 목록만으로 별도 카드나 의존성을 만들지 않는다.
+
 ## 작업
 
 docs/workflow/task-card.md와 명세를 읽는다.

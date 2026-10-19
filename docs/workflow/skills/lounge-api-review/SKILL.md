@@ -9,9 +9,18 @@ description: 더라운지 API 계약의 FE 영향과 누락을 검토한다. API
 사용자가 지정한 문서 저장소에서 루트 AGENTS.md, docs/AGENTS.md와 docs/workflow/AGENTS.md의 해당 항목을 확인한다. 실제 코드 workspace의 lounge-workflow.json이 있으면 docs_root를 workspace 기준으로 해석해 문서 저장소를 찾는다. 설정이 없고 현재 저장소에 docs/workflow/가 있으면 그 위치를 사용한다. 그 외에는 문서 위치를 먼저 확인하고 임의 경로를 만들지 않는다. 자동 스킬 호출이 없어도 이 SKILL.md를 직접 읽어 수행할 수 있다.
 가까운 AGENTS.md와 이번 카드·근거를 우선한다. 참고 문서는 이번 판단에 필요한 것만 읽는다. IA는 후보 자료이며, 승인 없는 정책·endpoint·parser·API mock·fixture·handler·Bridge command를 만들지 않는다.
 
+## docs 적용
+
+이번 작업에 해당하는 항목만 읽고 아래 기준을 판단에 적용한다. 아래 상대 링크는 공용 원본 SKILL.md 위치 기준이며, 내보낸 복사본에서는 시작 위치에서 찾은 문서 저장소의 `docs/workflow/skills/[스킬 이름]/`를 기준으로 해석한다.
+
+- 요청·응답·오류 처리는 [네트워크 참고 구현](../../../common-source/network.md), 로딩·timeout·재시도·오프라인은 [네트워크·성능 기준](../../../ai/performance.md)을 승인 계약과 비교해 누락·충돌과 FE 영향을 찾는다.
+- 로그인·만료·로그아웃·캐시 경계는 [세션 참고 구현](../../../common-source/session.md), 인증·개인정보·외부 입력은 [보안 기준](../../../ai/security.md)으로 검토한다. 예시 endpoint·DTO·상태 코드를 실제 계약으로 채택하지 않는다.
+- 주문·외부 결제 계약이면 [외부 결제 기준](../../../ai/app_external_payment.md)으로 복귀 후 서버 상태 확인과 Web·Native·Backend 책임을 대조한다.
+- [품질 기준](../../../ai/quality.md)과 관련 [테스트 참고 구현](../../../common-source/test.md)으로 계약 검증 방법·재현 환경을 확인한다. 결과의 누락·질문마다 문서 항목과 실제 계약 근거를 연결하고, 가이드와 계약의 차이를 별도 기록한다.
+
 ## 작업
 
-docs/workflow/contract-review.md의 API 부분과 승인 계약, 관련 카드만 읽는다.
+docs/workflow/contract-review.md의 API 부분·승인 계약·관련 카드와 위 조건에 해당하는 docs를 읽는다.
 입출력 의미·필수/null·enum·검증, 인증·권한·만료, 업무 오류·전송 오류, 목록·금액·시간의 의미, 필요한 재시도·중복 제출, Query 캐시·로그아웃, 소비자·버전·배포 순서를 관련 범위에서 검토한다.
 - 계약 문서에 없는 endpoint·DTO·parser를 생성해 계약으로 제시하지 않는다.
 - 프론트 판단과 BE·운영 승인 항목을 구분한다. API Agreed와 mock 전략은 별도다.

@@ -9,6 +9,16 @@ description: 더라운지 기능 변경의 화면·계약·상태·플랫폼 영
 사용자가 지정한 문서 저장소에서 루트 AGENTS.md, docs/AGENTS.md와 docs/workflow/AGENTS.md의 해당 항목을 확인한다. 실제 코드 workspace의 lounge-workflow.json이 있으면 docs_root를 workspace 기준으로 해석해 문서 저장소를 찾는다. 설정이 없고 현재 저장소에 docs/workflow/가 있으면 그 위치를 사용한다. 그 외에는 문서 위치를 먼저 확인하고 임의 경로를 만들지 않는다. 자동 스킬 호출이 없어도 이 SKILL.md를 직접 읽어 수행할 수 있다.
 가까운 AGENTS.md와 이번 카드·근거를 우선한다. 참고 문서는 이번 판단에 필요한 것만 읽는다. IA는 후보 자료이며, 승인 없는 정책·endpoint·parser·API mock·fixture·handler·Bridge command를 만들지 않는다.
 
+## docs 적용
+
+이번 작업에 해당하는 항목만 읽고 아래 기준을 판단에 적용한다. 아래 상대 링크는 공용 원본 SKILL.md 위치 기준이며, 내보낸 복사본에서는 시작 위치에서 찾은 문서 저장소의 `docs/workflow/skills/[스킬 이름]/`를 기준으로 해석한다.
+
+- 플랫폼·공통 UI·상태 소유권 영향은 [프로젝트 핵심 정보](../../../ai/project.md)·[UI 기준](../../../ai/ui.md)을 실제 import·소비자와 비교한다. 문서의 공유 계획만으로 실제 공유 구현이라고 판단하지 않는다.
+- 공통 UI·토큰 변경은 [디자인 토큰 기준](../../../ai/design-tokens.md)·[접근성 기준](../../../ai/accessibility.md)·[Storybook 기준](../../../ai/storybook.md)으로 영향받는 화면·상태·검수 대상을 찾는다.
+- API·세션·인증 변경은 해당하는 [네트워크 참고 구현](../../../common-source/network.md)·[세션 참고 구현](../../../common-source/session.md)·[보안 기준](../../../ai/security.md)·[네트워크·성능 기준](../../../ai/performance.md)으로 캐시·로그아웃·실패·복구 영향을 추적한다.
+- Native·외부 결제 변경은 [WebView 가이드](../../../guides/platform/webview/app_webview_guide.html)·[외부 결제 기준](../../../ai/app_external_payment.md), 빌드·라우트·검수 설정 변경은 [빌드 경계 기준](../../../guides/architecture/build-boundary.md)으로 경계를 확인한다.
+- [품질 기준](../../../ai/quality.md)으로 영향에 맞는 검증을 연결하고, 결과에 실제 소비자 근거와 적용 문서·항목·갱신 대상을 함께 남긴다.
+
 ## 작업
 
 관련 카드와 요청한 변경, 실제 호출자·공유 상태·라우트·계약을 필요한 범위에서 탐색한다.

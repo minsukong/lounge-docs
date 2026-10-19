@@ -9,6 +9,15 @@ description: Flutter와 WebView의 Native Bridge 책임·계약·검증을 검�
 사용자가 지정한 문서 저장소에서 루트 AGENTS.md, docs/AGENTS.md와 docs/workflow/AGENTS.md의 해당 항목을 확인한다. 실제 코드 workspace의 lounge-workflow.json이 있으면 docs_root를 workspace 기준으로 해석해 문서 저장소를 찾는다. 설정이 없고 현재 저장소에 docs/workflow/가 있으면 그 위치를 사용한다. 그 외에는 문서 위치를 먼저 확인하고 임의 경로를 만들지 않는다. 자동 스킬 호출이 없어도 이 SKILL.md를 직접 읽어 수행할 수 있다.
 가까운 AGENTS.md와 이번 카드·근거를 우선한다. 참고 문서는 이번 판단에 필요한 것만 읽는다. IA는 후보 자료이며, 승인 없는 정책·endpoint·parser·API mock·fixture·handler·Bridge command를 만들지 않는다.
 
+## docs 적용
+
+이번 작업에 해당하는 항목만 읽고 아래 기준을 판단에 적용한다. 아래 상대 링크는 공용 원본 SKILL.md 위치 기준이며, 내보낸 복사본에서는 시작 위치에서 찾은 문서 저장소의 `docs/workflow/skills/[스킬 이름]/`를 기준으로 해석한다.
+
+- 플랫폼 책임을 판단할 때 [프로젝트 핵심 정보](../../../ai/project.md)·[WebView 개요](../../../guides/platform/webview/app_webview_overview.html)를, 명령·수명주기·뒤로가기·권한·플랫폼 차이를 검토할 때 [WebView 상세 가이드](../../../guides/platform/webview/app_webview_guide.html)를 실제 구현·계약과 비교한다.
+- 인증·세션·URL·메시지 경계는 [보안 기준](../../../ai/security.md)과 해당하는 [세션 참고 구현](../../../common-source/session.md)으로 검토한다. 가이드의 예시 전역 객체·command를 합의된 Bridge로 간주하지 않는다.
+- PG·외부 앱 이동·앱 복귀가 관련되면 [외부 결제 기준](../../../ai/app_external_payment.md)과 필요한 [외부 결제 상세 가이드](../../../guides/platform/webview/app_external_payment.html)를 확인해 플랫폼별 책임·복귀·중복·결과 조회의 누락을 찾는다.
+- 지연·timeout·오프라인은 [네트워크·성능 기준](../../../ai/performance.md), 검증은 [품질 기준](../../../ai/quality.md)을 참고해 웹 자동 검증과 Native·실기기 확인을 나눈다. 결과에 적용 문서·계약 항목·담당·미검증 경계를 연결한다.
+
 ## 작업
 
 docs/workflow/contract-review.md의 Bridge 부분을 읽고 실제 Native·Web 구현 또는 합의 계약을 확인한다.

@@ -20,7 +20,7 @@
 | 플랫폼 | App-WebView / Responsive-Web / Flutter-Native / Sales-Channel / PO / OO / Shared |
 | 담당·협의자 | FE / BE / Native / 기획·운영. 미정은 TBD |
 | 우선순위 | P0 / P1 / P2 + 이유 |
-| 코드 위치 | `front-end/` 기준 경로. 예: `front-end/webview/src/components/ui` |
+| 코드 위치 | `front-end/` 기준 경로. 예: 앱 화면은 `front-end/webview/src/app/`, 공통 UI는 `front-end/packages/ui/src/components/` |
 | 문서 저장소 | lounge-docs의 절대 경로 |
 | 진행 상태 | Backlog / In Progress / Blocked / Review / Done / Deferred |
 | Ready | TBD / Ready-UI / Ready-Integration / Blocked / N/A |
@@ -45,6 +45,16 @@
 | Native 경계 | | Confirmed / Candidate / TBD | |
 
 가정은 구현 근거가 아닙니다. Ready-UI의 표시 범위에 허용된 가정이 있다면 제한과 교체 영향도 적습니다.
+
+## 적용 docs와 작업 기준
+
+선택한 스킬의 “docs 적용”에서 이번 범위에 해당하는 문서·항목만 연결합니다. 기술 가이드와 승인 기획·계약은 구분하며, 참고 구현은 실제 소스·설치 버전과 비교합니다. 작은 문구·스타일 수정은 필요한 근거만 짧게 남깁니다.
+
+| 문서·항목 링크 | 이번 작업에 적용할 판단·제약 | 완료 조건·검증 연결 |
+| --- | --- | --- |
+| 관련 docs의 해당 항목 | 구현·협의·리뷰에서 확인할 기준 | 확인할 사용자 결과·검사와 결과 기록 위치 |
+
+- 문서·실제 코드·승인 계약의 차이와 처리 근거: 해당할 때만 기록
 
 ## 선행 조건과 질문
 

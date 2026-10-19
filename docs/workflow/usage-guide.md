@@ -29,7 +29,9 @@ work/                             IA 원본·업무·검토 자료
 
 ## 3. 작업 위치와 공용 기준
 
-lounge-docs는 문서·스킬 기준과 Front-end 소스를 함께 관리하는 저장소입니다. WebView 화면은 `front-end/webview/`, FO 웹·PO·OO는 `front-end/`에서 영역별로 관리하고, Flutter Native는 별도 위치에서 구현합니다. `front-end/webview/`에는 아직 package와 설정이 없습니다.
+lounge-docs는 문서·스킬 기준과 Front-end 소스를 함께 관리하는 저장소입니다. WebView는 `front-end/webview/`, FO 웹은 `front-end/website/`, 두 앱이 공유하는 UI·스타일·Storybook은 `front-end/packages/ui/`에서 관리합니다. 두 앱과 공통 패키지의 실행 기반이 있으며 npm workspace·공용 잠금 파일은 `front-end/`에 있습니다. PO·OO의 구체적인 위치·스택·담당은 해당 카드에서 확인하며 Flutter Native 소스는 별도 위치입니다.
+
+설치는 `front-end/`에서 `npm ci`, 개발은 `npm run dev:webview`·`npm run dev:website`·`npm run storybook`을 사용합니다. 두 앱의 개발 검수 경로는 `/preview`이며 운영 홈은 준비 안내 화면입니다. [Phase 0 진행 현황](progress.md#phase-0-선행-구현-작업)과 [공통 UI 후속 카드](tasks/common-ui-workspaces.md)에서 완료된 초안 범위와 남은 서비스·연동 작업을 확인합니다.
 
 팀원별 절대 경로를 정책으로 고정하지 않습니다. 카드에는 `front-end/` 기준 작업 위치를 적습니다. 다른 폴더에서 AI를 여는 경우를 위해 스킬을 내보내면 lounge-workflow.json이 문서 위치를 연결합니다.
 
@@ -129,7 +131,7 @@ lounge-implement로 Ready가 확인된 TASK-MEM-001만 구현해줘.
 필요 검증과 규칙·명세 리뷰까지 끝낸 뒤 카드와 progress를 갱신해줘.
 ```
 
-카드에 코드 위치가 없으면 `front-end/`의 어느 앱인지부터 확인합니다. package가 아직 없는 영역은 앱 설정을 만드는 작업부터 시작하며, 정의되지 않은 script와 설정을 추측하지 않습니다.
+카드에 코드 위치가 없으면 `front-end/`의 어느 앱 또는 공통 패키지인지부터 확인합니다. WebView·홈페이지·공통 UI는 기존 package·설정·사용처를 이어서 사용합니다. 실제로 package가 없는 새 영역을 구성하는 요청일 때만 초기 구성을 검토하며, 정의되지 않은 script와 설정을 추측하지 않습니다.
 
 ## 8. Ready-UI를 이해하는 예
 
