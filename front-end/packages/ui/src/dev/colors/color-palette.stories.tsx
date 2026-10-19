@@ -3,24 +3,20 @@ import { Card } from "../../components/card";
 import { colorGroups, figmaColorUrl, grayscale, type ColorGroup, type ColorSwatch } from "./color-palette";
 import "./color-palette.css";
 
-function Swatch({ color }: { color: ColorSwatch }) {
+function Swatch({ color, theme }: { color: ColorSwatch; theme: "light" | "dark" }) {
+  const hex = theme === "dark" ? color.darkHex : color.hex;
+  const alpha = theme === "dark" ? color.darkAlpha : color.alpha;
   return (
     <li>
       <Card className="color-preview__swatch">
-        {color.image ? (
-          // Figma에서 제공한 스와치 SVG를 원본 크기로 표시합니다.
-          // eslint-disable-next-line @next/next/no-img-element
-          <img src={color.image} alt="" width={110} height={80} className="color-preview__chip" />
-        ) : (
-          <div aria-hidden="true" className="color-preview__chip" style={{ backgroundColor: color.hex }} />
-        )}
-        <div className="color-preview__label"><span>{color.name}</span><code>{color.hex}</code></div>
+        <div aria-hidden="true" className="color-preview__chip" style={{ backgroundColor: `var(${color.cssVariable})` }} />
+        <div className="color-preview__label"><span>{color.name}</span><code>{hex}{alpha < 1 ? ` / ${Math.round(alpha * 100)}%` : ""}</code></div>
       </Card>
     </li>
   );
 }
 
-function ColorPalette({ groups = colorGroups }: { groups?: readonly ColorGroup[] }) {
+function ColorPalette({ groups = colorGroups, theme = "light" }: { groups?: readonly ColorGroup[]; theme?: "light" | "dark" }) {
   return (
     <main className="color-preview">
       <header className="color-preview__header">
@@ -31,8 +27,8 @@ function ColorPalette({ groups = colorGroups }: { groups?: readonly ColorGroup[]
       <div className="color-preview__body">
         <div className="color-preview__intro">
           <h2>Colors</h2>
-          <p><strong>디자인 작업 중인 초안</strong> · 2026-10-14 기준</p>
-          <p>Figma의 실제 색상값을 기준으로 표시했습니다. 이 색상표는 앱의 현재 테마와 별도로 검수합니다.</p>
+          <p><strong>Figma 색상 export 기준</strong></p>
+          <p>전달된 light·dark 팔레트를 공통 CSS 변수로 표시합니다. 현재 두 모드의 색상값은 같으며, 버튼·배경 등 용도별 연결은 별도로 확인합니다.</p>
           <a href={figmaColorUrl} target="_blank" rel="noreferrer">Figma 색상 기준 보기</a>
         </div>
         <div className="color-preview__sections">
@@ -41,12 +37,12 @@ function ColorPalette({ groups = colorGroups }: { groups?: readonly ColorGroup[]
               <h3 id={`color-title-${group.id}`}>{group.title}</h3>
               <p className="color-preview__description">{group.description}</p>
               <div className="color-preview__panel">
-                <ul className="color-preview__list">{group.colors.map((color) => <Swatch key={color.name} color={color} />)}</ul>
+                <ul className="color-preview__list">{group.colors.map((color) => <Swatch key={color.name} color={color} theme={theme} />)}</ul>
                 {group.id === "grid-table-tab" && (
                   <div className="color-preview__pairs" aria-label="배경과 구분선 조합">
                     {grayscale.slice(0, 2).map((color) => (
                       <figure key={color.name}>
-                        <div aria-hidden="true" className="color-preview__sample" style={{ backgroundColor: color.hex, borderColor: grayscale[3].hex }} />
+                        <div aria-hidden="true" className="color-preview__sample" style={{ backgroundColor: `var(${color.cssVariable})`, borderColor: `var(${grayscale[3].cssVariable})` }} />
                         <figcaption>Bg: {color.name}<br />Line: {grayscale[3].name}</figcaption>
                       </figure>
                     ))}
@@ -64,6 +60,7 @@ function ColorPalette({ groups = colorGroups }: { groups?: readonly ColorGroup[]
 const meta = {
   title: "Foundations/Colors",
   component: ColorPalette,
+  render: (args, context) => <ColorPalette {...args} theme={context.globals.theme === "dark" ? "dark" : "light"} />,
   parameters: { layout: "fullscreen", controls: { disable: true } },
 } satisfies Meta<typeof ColorPalette>;
 export default meta;
@@ -75,3 +72,5 @@ export const Brand: Story = { name: "브랜드", args: { groups: [colorGroups[1]
 export const BlackAndWhite: Story = { name: "흑백", args: { groups: [colorGroups[2]] } };
 export const StatusAndError: Story = { name: "상태와 오류", args: { groups: [colorGroups[3]] } };
 export const GridTableTab: Story = { name: "표와 탭", args: { groups: [colorGroups[4]] } };
+
+export const Dim: Story = { name: "오버레이", args: { groups: [colorGroups[5]] } };

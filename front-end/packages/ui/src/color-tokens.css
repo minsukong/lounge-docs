@@ -1,0 +1,90 @@
+/* Generated from tokens/figma/color/*.tokens.json. Run npm run tokens:colors from front-end/. */
+:root {
+  --lounge-bw-black: #000000;
+  --lounge-bw-white: #FFFFFF;
+  --lounge-gray-50: #FAFAFA;
+  --lounge-gray-100: #F6F7F8;
+  --lounge-gray-150: #EFF1F4;
+  --lounge-gray-200: #E8EBF0;
+  --lounge-gray-300: #D8DDE4;
+  --lounge-gray-400: #B0B8C1;
+  --lounge-gray-500: #808790;
+  --lounge-gray-600: #696F75;
+  --lounge-gray-700: #4C5054;
+  --lounge-gray-800: #303438;
+  --lounge-gray-900: #111111;
+  --lounge-brand-blue-100: #ECEFF8;
+  --lounge-brand-blue-200: #D9DEF2;
+  --lounge-brand-blue-300: #B4BEE4;
+  --lounge-brand-blue-400: #697CC9;
+  --lounge-brand-blue-500: #566CC2;
+  --lounge-brand-blue-600: #435CBC;
+  --lounge-brand-blue-700: #1B254B;
+  --lounge-brand-blue-800: #131920;
+  --lounge-status-error: #E63838;
+  --lounge-status-warning: #FF7752;
+  --lounge-status-blue: #217DE2;
+  --lounge-status-green: #16B06B;
+  --lounge-dim-60: rgba(0, 0, 0, 0.6);
+  --lounge-dim-toast: rgba(40, 54, 114, 0.8);
+}
+
+.dark {
+  --lounge-bw-black: #000000;
+  --lounge-bw-white: #FFFFFF;
+  --lounge-gray-50: #FAFAFA;
+  --lounge-gray-100: #F6F7F8;
+  --lounge-gray-150: #EFF1F4;
+  --lounge-gray-200: #E8EBF0;
+  --lounge-gray-300: #D8DDE4;
+  --lounge-gray-400: #B0B8C1;
+  --lounge-gray-500: #808790;
+  --lounge-gray-600: #696F75;
+  --lounge-gray-700: #4C5054;
+  --lounge-gray-800: #303438;
+  --lounge-gray-900: #111111;
+  --lounge-brand-blue-100: #ECEFF8;
+  --lounge-brand-blue-200: #D9DEF2;
+  --lounge-brand-blue-300: #B4BEE4;
+  --lounge-brand-blue-400: #697CC9;
+  --lounge-brand-blue-500: #566CC2;
+  --lounge-brand-blue-600: #435CBC;
+  --lounge-brand-blue-700: #1B254B;
+  --lounge-brand-blue-800: #131920;
+  --lounge-status-error: #E63838;
+  --lounge-status-warning: #FF7752;
+  --lounge-status-blue: #217DE2;
+  --lounge-status-green: #16B06B;
+  --lounge-dim-60: rgba(0, 0, 0, 0.6);
+  --lounge-dim-toast: rgba(40, 54, 114, 0.8);
+}
+
+@theme inline {
+  --color-lounge-bw-black: var(--lounge-bw-black);
+  --color-lounge-bw-white: var(--lounge-bw-white);
+  --color-lounge-gray-50: var(--lounge-gray-50);
+  --color-lounge-gray-100: var(--lounge-gray-100);
+  --color-lounge-gray-150: var(--lounge-gray-150);
+  --color-lounge-gray-200: var(--lounge-gray-200);
+  --color-lounge-gray-300: var(--lounge-gray-300);
+  --color-lounge-gray-400: var(--lounge-gray-400);
+  --color-lounge-gray-500: var(--lounge-gray-500);
+  --color-lounge-gray-600: var(--lounge-gray-600);
+  --color-lounge-gray-700: var(--lounge-gray-700);
+  --color-lounge-gray-800: var(--lounge-gray-800);
+  --color-lounge-gray-900: var(--lounge-gray-900);
+  --color-lounge-brand-blue-100: var(--lounge-brand-blue-100);
+  --color-lounge-brand-blue-200: var(--lounge-brand-blue-200);
+  --color-lounge-brand-blue-300: var(--lounge-brand-blue-300);
+  --color-lounge-brand-blue-400: var(--lounge-brand-blue-400);
+  --color-lounge-brand-blue-500: var(--lounge-brand-blue-500);
+  --color-lounge-brand-blue-600: var(--lounge-brand-blue-600);
+  --color-lounge-brand-blue-700: var(--lounge-brand-blue-700);
+  --color-lounge-brand-blue-800: var(--lounge-brand-blue-800);
+  --color-lounge-status-error: var(--lounge-status-error);
+  --color-lounge-status-warning: var(--lounge-status-warning);
+  --color-lounge-status-blue: var(--lounge-status-blue);
+  --color-lounge-status-green: var(--lounge-status-green);
+  --color-lounge-dim-60: var(--lounge-dim-60);
+  --color-lounge-dim-toast: var(--lounge-dim-toast);
+}

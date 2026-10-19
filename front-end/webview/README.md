@@ -23,7 +23,7 @@ Node.js 22.12 이상에서 의존성 설치는 `front-end/`의 `npm ci`로 수�
 
 이 화면의 메뉴와 폼은 기반 검수용이며 확정된 서비스 메뉴나 회원가입 정책이 아닙니다. 폼은 입력 형식만 확인하고 전송하지 않습니다. 화면 상태 선택은 지역 UI 미리보기이며 API Mock이 아닙니다. 인증·세션·토큰 저장, 실제 API, Native Bridge, 업무 데이터와 보호 라우트는 미구현입니다.
 
-공통 스타일은 `../packages/ui/src/styles.css`에 있으며 shadcn `base-nova`에서 출발한 임시 neutral 기본값입니다. `tokens/tokens.json`은 수정하지 않았으며 Tokens Studio와 실제 화면의 승인된 연결은 이후 적용합니다. 앱 최소 지원 범위는 `app_webview_guide.html` 4·5번 섹션과 `react_code_exports.html`의 프로젝트 기준을 따릅니다. 최신 CSS 표현은 기본 스타일로 대체했지만 iOS 15 WKWebView·Android System WebView 호환 결과는 미검증입니다.
+공통 스타일은 `../packages/ui/src/styles.css`에 있습니다. `tokens/figma/color/`의 light·dark 색상 export를 공통 CSS·Tailwind 팔레트에 연결했으며, 현재 두 팔레트의 표시 색상은 같습니다. 버튼·본문·배경 등 의미 토큰은 용도별 연결을 확인하기 전까지 기존 neutral 초안입니다. 기존 `tokens/tokens.json`은 수정하지 않았습니다. 상세 범위는 `docs/workflow/tasks/phase-0-color-tokens.md`에 기록합니다. 앱 최소 지원 범위는 `app_webview_guide.html` 4·5번 섹션과 `react_code_exports.html`의 프로젝트 기준을 따릅니다. 최신 CSS 표현은 기본 스타일로 대체했지만 iOS 15 WKWebView·Android System WebView 호환 결과는 미검증입니다.
 
 ## 추후 검증 명령
 

@@ -11,6 +11,7 @@
     "packages/ui"
   ],
   "scripts": {
+    "tokens:colors": "node scripts/sync-color-tokens.mjs",
     "dev:webview": "npm run dev --workspace lounge-webview",
     "dev:website": "npm run dev --workspace lounge-website",
     "build:webview": "npm run build --workspace lounge-webview",
