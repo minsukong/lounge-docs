@@ -29,9 +29,9 @@ work/                             IA 원본·업무·검토 자료
 
 ## 3. 작업 위치와 공용 기준
 
-lounge-docs는 문서·스킬 기준과 Front-end 소스를 함께 관리하는 저장소입니다. WebView는 `front-end/webview/`, FO 웹은 `front-end/website/`, 두 앱이 공유하는 UI·스타일·Storybook은 `front-end/packages/ui/`에서 관리합니다. 두 앱과 공통 패키지의 실행 기반이 있으며 npm workspace·공용 잠금 파일은 `front-end/`에 있습니다. PO·OO의 구체적인 위치·스택·담당은 해당 카드에서 확인하며 Flutter Native 소스는 별도 위치입니다.
+lounge-docs는 문서·스킬 기준과 Front-end 소스를 함께 관리하는 저장소입니다. 브라우저와 앱 내부 WebView에서 함께 실행되는 단일 웹 애플리케이션은 `front-end/web/`, 공통 UI·스타일·Storybook은 `front-end/packages/ui/`에서 관리합니다(과거 `front-end/webview/`·`front-end/website/` 분리 구조는 [통합 카드](tasks/phase-0-web-integration.md) 기준으로 통합됐습니다). 앱과 공통 패키지의 실행 기반이 있으며 npm workspace·공용 잠금 파일은 `front-end/`에 있습니다. PO·OO의 구체적인 위치·스택·담당은 해당 카드에서 확인하며 Flutter Native 소스는 별도 위치입니다.
 
-설치는 `front-end/`에서 `npm ci`, 개발은 `npm run dev:webview`·`npm run dev:website`·`npm run storybook`을 사용합니다. 두 앱의 개발 검수 경로는 `/preview`이며 운영 홈은 준비 안내 화면입니다. [Phase 0 진행 현황](progress.md#phase-0-선행-구현-작업)과 [공통 UI 후속 카드](tasks/common-ui-workspaces.md)에서 완료된 초안 범위와 남은 서비스·연동 작업을 확인합니다.
+설치는 `front-end/`에서 `npm ci`, 개발은 `npm run dev`·`npm run storybook`을 사용합니다. 개발 검수 경로는 `/preview`이며 운영 홈은 준비 안내 화면입니다. [Phase 0 진행 현황](progress.md#phase-0-선행-구현-작업)과 [공통 UI 후속 카드](tasks/common-ui-workspaces.md), [통합 카드](tasks/phase-0-web-integration.md)에서 완료된 초안 범위와 남은 서비스·연동 작업을 확인합니다.
 
 팀원별 절대 경로를 정책으로 고정하지 않습니다. 카드에는 `front-end/` 기준 작업 위치를 적습니다. 다른 폴더에서 AI를 여는 경우를 위해 스킬을 내보내면 lounge-workflow.json이 문서 위치를 연결합니다.
 

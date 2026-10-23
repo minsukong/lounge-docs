@@ -1,6 +1,6 @@
 # [TBD] 전체 시스템 아키텍처
 
-> 예상 시나리오 기반. 확정 전 참고용. 웹 소스는 front-end/, 앱 WebView는 front-end/webview/에서 관리하고 Flutter Native 소스만 별도 위치에 있습니다. Backend·인프라·통신 경로의 표시는 합의된 계약을 대신하지 않습니다.
+> 예상 시나리오 기반. 확정 전 참고용. 웹 소스는 front-end/, 앱 WebView는 front-end/web/에서 관리하고 Flutter Native 소스만 별도 위치에 있습니다. Backend·인프라·통신 경로의 표시는 합의된 계약을 대신하지 않습니다.
 
 ## 시스템 구성
 

@@ -83,7 +83,7 @@ AI IDE (Cursor, Claude Code 등)에서:
 ```
 "docs/diagrams/[TBD]_architecture-overview.md의 내용을 archify로
 검증 가능한 아키텍처 다이어그램으로 만들어줘.
-front-end/webview 실제 코드 기준으로 확인하고,
+front-end/web 실제 코드 기준으로 확인하고,
 코드에 없는 컴포넌트나 연결은 제외해줘."
 ```
 

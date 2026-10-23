@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: { default: "더라운지", template: "%s · 더라운지" },
-  description: "더라운지 앱",
+  description: "더라운지",
   robots: { index: false, follow: false },
 };
 

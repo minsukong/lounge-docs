@@ -16,6 +16,7 @@
 | [TASK-P0-FOUNDATION-001: 실행 기반과 공통 UI 초안](tasks/phase-0-foundation.md) | Review · 초기 카드의 최종 리뷰 미완료. `phase-0-foundation`은 초기 브랜치 이력 | 후속 카드의 완료·검증 기록을 반영해 초기 범위의 리뷰·완료 조건 정리 |
 | [TASK-P0-COLOR-001: Figma 색상 export와 공통 CSS 연결](tasks/phase-0-color-tokens.md) | In Progress · 원시 팔레트·CSS 연결과 검증 완료, 의미 토큰 근거 대기 | 디자인 토큰·CSS를 우선 완료한 뒤 서비스 셸·연동 등 후속 작업 진행 |
 | [TASK-P0-SHARED-UI-001: 공통 UI 이전과 website 실행 기반](tasks/common-ui-workspaces.md) | Done · 공통 소스·workspace·두 앱 preview 구성 및 빌드 확인 | 실제 서비스 화면·승인 디자인·계약 연동은 별도 작업 |
+| [TASK-P0-WEB-INTEGRATION-001: WebView·website 단일 웹 애플리케이션 통합](tasks/phase-0-web-integration.md) | Done · `front-end/web/` 단일 앱 통합, packages/ui 독립 패키지 유지, 구조·설정·문서 정리와 코드 검증 | Bridge 환경 판별 구현은 DEC-005 계약 후, APP/WEB IA 대조와 환경별 동작 정리는 후속 카드 |
 
 **Phase 0 전체는 미완료입니다.** 공통 실행 기반·UI 초안·두 앱 preview는 후속 카드 범위에서 완료됐고, 검증은 해당 카드의 실행 기록입니다. 이번 상태 갱신에서 앱 검사를 재실행하지 않았습니다.
 
@@ -398,6 +399,7 @@
 
 | 날짜 | 변경 |
 |------|------|
+| 2026-10-23 | WebView·website를 `front-end/web/` 단일 앱으로 통합(TASK-P0-WEB-INTEGRATION-001, DEC-012). 실행 기반 행과 Phase 0 구조 문서의 위치 표기를 갱신. 과거 카드·검증 기록은 원본대로 보존하고 후속 카드로 연결 |
 | 2026-10-06 | 초기 생성 |
 | 2026-10-06 | 기존 IA 기반 화면 후보 입력. 원본 ID·이름·담당 일치 재검토 필요 |
 | 2026-10-06 | Ready·실제 카드 대시보드 분리, Phase·계약 규칙 정합, 원본 IA 대조 연결 |

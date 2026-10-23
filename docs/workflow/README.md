@@ -57,8 +57,7 @@ lounge-docs/
 │           ├── validate_workflow.py
 │           └── export_skills.py
 ├── front-end/                             ← npm workspace·공용 잠금 파일
-│   ├── webview/                           ← 앱 내부 WebView
-│   ├── website/                           ← FO 웹·반응형 홈페이지
+│   ├── web/                               ← 브라우저·앱 WebView 공용 단일 Next.js 앱
 │   ├── packages/ui/                       ← 공통 UI·스타일·Storybook
 │   └── scripts/                           ← 앱 빌드·패키징 공용 도구
 ├── tokens/                                ← design tokens
@@ -73,7 +72,7 @@ lounge-docs/
 |------|------|------|
 | `docs/workflow/` | 사람용 안내·HTML과 구축·운영 작업 기준·양식·결정·IA 대조·스킬·스크립트 | 문서 연결은 index.md, 기준은 README.md, 사용 순서는 usage-guide.md |
 | `work/더라운지_IA FO_v0.2.xlsx/` | IA 원본 HTML | 읽기 전용으로 참조 |
-| `front-end/` | Front-end 소스·설정·Story | WebView 화면은 `front-end/webview/`. Flutter Native는 별도 위치 |
+| `front-end/` | Front-end 소스·설정·Story | `front-end/web/`가 브라우저·앱 WebView 공용 단일 앱. Flutter Native는 별도 위치 |
 
 ### 스크립트 실행
 

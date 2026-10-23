@@ -48,13 +48,13 @@
 <repository-root>/
 ├── AGENTS.md                   # 실제 구현 작업용 AI 최상위 지침
 ├── README.md
-├── front-end/                  # Front-end 소스 (WebView · FO 웹 · PO · OO)
+├── front-end/                  # Front-end 소스 (웹 애플리케이션 · PO · OO)
 │   ├── AGENTS.md
 │   ├── README.md
-│   └── webview/
-│       ├── AGENTS.md           # WebView 앱 전용 지침
-│       ├── .storybook/
-│       └── src/
+│   ├── web/
+│   │   ├── AGENTS.md           # 웹 애플리케이션 전용 지침
+│   │   └── src/
+│   └── packages/ui/            # 공통 UI·스타일·Storybook
 └── docs/
     ├── AGENTS.md               # 가이드 작성과 HTML 검증 규칙
     ├── index.html              # 전체 가이드 진입점

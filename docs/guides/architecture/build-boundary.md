@@ -21,36 +21,36 @@ Storybook과 preview는 실제 앱에서 사용하는 UI를 가져와 확인합�
 - 빌드 명령, 결과물 경로, 배포에 필요한 서버·정적 자산을 실제 설정으로 확인합니다. dist라는 이름만으로 정적 사이트 배포를 가정하지 않습니다.
 - 완료 기록에 변경한 경계와 확인 결과를 남깁니다. 검증을 생략한 경우 생략한 항목을 적고, 배포 경계가 검증됐다고 표시하지 않습니다.
 
-## 3. WebView의 현재 적용 위치
+## 3. 웹 애플리케이션의 현재 적용 위치
 
 | 범위 | 현재 위치·처리 |
 | --- | --- |
-| 실제 앱 | front-end/webview/src/app/의 일반 page.tsx·layout.tsx·route.ts |
+| 실제 앱 | front-end/web/src/app/의 일반 page.tsx·layout.tsx·route.ts |
 | 공통 UI·기능 | front-end/packages/ui/src/와 앱의 src/features/·src/lib/. 실제 사용하는 모듈 연결 |
 | 개발용 preview | src/dev/와 src/app/preview/. 개발 서버에서만 *.dev.tsx·*.dev.ts 라우트 인식 |
-| Storybook | front-end/packages/ui/.storybook/와 공통 UI·각 앱의 *.stories.tsx |
+| Storybook | front-end/packages/ui/.storybook/와 공통 UI·앱의 *.stories.tsx |
 | 테스트 | src/test/와 *.test.*·*.spec.*. 제품 실행 코드에서 제외 |
 | 제품 배포 | npm run build 후 dist/runtime/. Next.js 서버와 필요한 정적 자산 포함 |
 
-WebView의 개발 화면은 npm run dev 실행 후 /preview에서 확인합니다. Storybook은 front-end/에서 npm run storybook으로 실행합니다. 운영의 기본 페이지는 실제 서비스 진입점이며 검수 화면 목록으로 사용하지 않습니다.
+웹 애플리케이션의 개발 화면은 npm run dev 실행 후 /preview에서 확인합니다. Storybook은 front-end/에서 npm run storybook으로 실행합니다. 운영의 기본 페이지는 실제 서비스 진입점이며 검수 화면 목록으로 사용하지 않습니다.
 
-구체적인 명령과 배포 방법은 [WebView BUILD.md](../../../front-end/webview/BUILD.md)를 확인합니다. 실제 제외 설정은 [Next 설정](../../../front-end/webview/next.config.ts), [운영 TypeScript 설정](../../../front-end/webview/tsconfig.build.json), [런타임 패키징](../../../front-end/scripts/package-runtime.mjs), [실행 명령](../../../front-end/webview/package.json)에 있습니다. 경로·명령이 바뀌면 이 표와 앱 안내를 같은 변경에서 갱신합니다.
+구체적인 명령과 배포 방법은 [웹 애플리케이션 BUILD.md](../../../front-end/web/BUILD.md)를 확인합니다. 실제 제외 설정은 [Next 설정](../../../front-end/web/next.config.ts), [운영 TypeScript 설정](../../../front-end/web/tsconfig.build.json), [런타임 패키징](../../../front-end/scripts/package-runtime.mjs), [실행 명령](../../../front-end/web/package.json)에 있습니다. 경로·명령이 바뀌면 이 표와 앱 안내를 같은 변경에서 갱신합니다.
 
-FO 웹·PO·OO에도 같은 분리 원칙을 적용합니다. 구체적인 라우트 방식과 결과물 경로는 해당 앱의 실제 설정이 정해질 때 기록하며 WebView 설정을 그대로 가정하지 않습니다.
+이 단일 앱은 PC·모바일 브라우저와 Flutter 앱 내부 WebView에서 함께 실행됩니다. PO·OO에도 같은 분리 원칙을 적용합니다. 구체적인 라우트 방식과 결과물 경로는 해당 앱의 실제 설정이 정해질 때 기록하며 기존 앱 설정을 그대로 가정하지 않습니다.
 
 ### 공통 UI를 사용하는 앱의 빌드
 
-WebView와 website는 하나의 디자인 시스템과 공통 컴포넌트를 사용합니다. 동일한 UI를 앱별로 보유하면 수정·스타일·동작·검수가 중복되고 서로 달라질 수 있으므로 공통 소스를 `front-end/packages/ui/`에서 단일 관리합니다. 공통 UI·스타일·Storybook은 공통 패키지로 이전했고 npm workspace로 두 앱에 연결했습니다. 두 앱은 같은 공개 export와 스타일을 사용하며 각자 운영 결과물을 생성합니다.
+웹 애플리케이션은 하나의 디자인 시스템과 공통 컴포넌트를 사용합니다. 같은 UI를 앱에 복사하면 수정·스타일·동작·검수가 중복되고 서로 달라질 수 있으므로 공통 소스를 `front-end/packages/ui/`에서 단일 관리합니다. 공통 UI·스타일·Storybook은 독립 패키지로 유지하고 npm workspace로 앱에 연결하며, 앱은 공개 export와 스타일을 사용하고 운영 결과물을 생성합니다.
 
-- 빌드 작업은 앱별로 수행하되 빌드 입력에는 해당 앱, 공통 UI 패키지와 workspace package·잠금 파일을 함께 제공합니다. 공통 패키지는 각 앱의 실제 의존성으로 연결하고 공개 export를 사용합니다. `@lounge/ui/button` 같은 패키지 경로는 공통 UI, `@/`는 앱 내부 소스에 사용합니다. 실제 패키지 이름과 export는 구성 시 확인합니다.
+- 빌드 작업은 앱에서 수행하되 빌드 입력에는 앱, 공통 UI 패키지와 workspace package·잠금 파일을 함께 제공합니다. 공통 패키지는 앱의 실제 의존성으로 연결하고 공개 export를 사용합니다. `@lounge/ui/button` 같은 패키지 경로는 공통 UI, `@/`는 앱 내부 소스에 사용합니다. 실제 패키지 이름과 export는 구성 시 확인합니다.
 - 공통 TypeScript·TSX가 Next.js 빌드에서 처리되는지 확인하고 필요하면 실제 패키지 이름으로 `transpilePackages`를 설정합니다. React는 앱과 호환되는 peer dependency로 관리합니다.
-- 각 앱은 공통 스타일·토큰을 불러오고 Tailwind CSS 4의 검색 범위에 공통 패키지의 제품 소스를 포함합니다. Story·테스트·검수 전용 소스는 운영 CSS 검색과 제품 import에서 제외합니다.
+- 앱은 공통 스타일·토큰을 불러오고 Tailwind CSS 4의 검색 범위에 공통 패키지의 제품 소스를 포함합니다. Story·테스트·검수 전용 소스는 운영 CSS 검색과 제품 import에서 제외합니다.
 - standalone 배포에서는 앱 밖의 공통 의존성을 추적할 수 있도록 `outputFileTracingRoot`를 실제 공통 루트에 맞춥니다. 추적 범위가 넓어진 만큼 공통 패키지의 문서·Story·테스트·Storybook·검수 전용 파일도 제외합니다. 공통 소스 폴더 전체를 배포하지 않습니다.
 - 추적 루트 변경으로 standalone 내부의 앱 경로·server.js 위치가 바뀌면 앱별 패키징·정적 자산 복사·시작 명령도 실제 출력 구조에 맞춰 갱신합니다. 기존 단일 앱 패키징 스크립트가 그대로 동작한다고 가정하지 않습니다.
 - 공통 UI의 제품 코드·CSS·필요한 런타임 의존성은 해당 앱의 배포 결과물에 포함합니다. 공통 UI는 독립 서비스 배포 대상이 아니며, Storybook은 별도 검수 결과물입니다.
-- 이전 후 각 앱의 타입·운영 빌드를 확인하고 배포 결과물만으로 실행해 공통 의존성·자산 누락이 없는지 검증합니다. 다른 앱의 라우트나 Story·테스트·검수 자료가 포함되지 않는지도 확인합니다.
+- 통합 후 앱의 타입·운영 빌드를 확인하고 배포 결과물만으로 실행해 공통 의존성·자산 누락이 없는지 검증합니다. Story·테스트·검수 자료가 포함되지 않는지도 확인합니다.
 
-WebView의 현재 명령·패키징 전제와 이전 시 변경 항목은 [WebView BUILD.md](../../../front-end/webview/BUILD.md), website의 실제 빌드·배포 방법은 [website BUILD.md](../../../front-end/website/BUILD.md)를 확인합니다.
+웹 애플리케이션의 현재 명령·패키징 전제와 통합 시 변경 항목은 [웹 애플리케이션 BUILD.md](../../../front-end/web/BUILD.md)를 확인합니다.
 
 ## 4. 제품 빌드와 배포에서 제외할 내용
 

@@ -1,14 +1,14 @@
-# webview
+# web
 
-Flutter 앱에서 WebView로 실행되는 웹 화면의 소스를 두는 폴더입니다.
+PC·모바일 브라우저와 Flutter 앱 내부 WebView에서 함께 실행되는 단일 Next.js 웹 애플리케이션의 소스입니다. 과거 `webview/`와 `website/`로 분리돼 있던 앱은 하나의 앱으로 통합됐으며, 통합 근거와 검증 기록은 [웹 애플리케이션 통합 작업 카드](../../docs/workflow/tasks/phase-0-web-integration.md)에 있습니다.
 
-이 앱의 페이지·라우트·검수 화면을 관리합니다. 공통 UI·스타일·유틸리티는 `../packages/ui/`의 단일 소스로 이전했고 `@lounge/ui/*`로 가져옵니다. Flutter Native 앱은 별도 위치에서 관리합니다.
+이 앱의 페이지·라우트·환경별 동작·검수 화면을 관리합니다. 공통 UI·스타일·유틸리티는 `../packages/ui/`의 단일 소스로 유지하며 `@lounge/ui/*`로 가져옵니다. Flutter Native 앱은 별도 위치에서 관리합니다.
 
 ## 실행
 
 Node.js 22.12 이상에서 의존성 설치는 `front-end/`의 `npm ci`로 수행합니다. 잠금 파일은 `front-end/package-lock.json` 하나로 관리합니다. Next.js와 eslint-config-next는 Storybook App Router 호환성을 위해 16.2.12로 고정했습니다. workspace 루트의 Storybook 의존성도 같은 Next.js를 사용합니다.
 
-이 앱 폴더에서는 `npm run dev`를 실행합니다. 앱은 http://127.0.0.1:3000, 검수 화면은 http://127.0.0.1:3000/preview 입니다. Storybook은 `front-end/`에서 `npm run storybook`으로 실행하며 http://127.0.0.1:6006 에서 공통 UI와 두 앱의 Story를 확인합니다.
+이 앱 폴더에서는 `npm run dev`를 실행합니다. 앱은 http://127.0.0.1:3000, 검수 화면은 http://127.0.0.1:3000/preview 입니다. Storybook은 `front-end/`에서 `npm run storybook`으로 실행하며 http://127.0.0.1:6006 에서 공통 UI와 앱의 Story를 확인합니다.
 
 ## Phase 0에서 작성한 범위
 
@@ -37,12 +37,12 @@ npm run build
 
 공통 UI 이전 후 전체 타입·린트·폼 테스트 2개·공통 Storybook 정적 빌드·운영 빌드와 배포 결과물 단독 실행을 확인했습니다. 운영의 `/preview`는 404로 제외되며 홈페이지 preview의 모바일·데스크톱 배치를 확인했습니다. 실제 서비스 연동과 실기기는 검증하지 않았으며 이번 초안 완료 조건에서 실기기 검증은 제외합니다.
 
-작업 범위와 재개 기록은 [공통 UI 이전 작업 카드](../../docs/workflow/tasks/common-ui-workspaces.md)에 있습니다. 앱과 Storybook은 `docs/`를 제품 자산으로 복사하지 않습니다.
+작업 범위와 재개 기록은 [공통 UI 이전 작업 카드](../../docs/workflow/tasks/common-ui-workspaces.md)와 [웹 애플리케이션 통합 작업 카드](../../docs/workflow/tasks/phase-0-web-integration.md)에 있습니다. 앱과 Storybook은 `docs/`를 제품 자산으로 복사하지 않습니다.
 
 ## 기본 영역
 
 ```text
-webview/
+web/
 ├── AGENTS.md
 ├── README.md
 └── src/

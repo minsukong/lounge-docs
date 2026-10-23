@@ -8,7 +8,7 @@ Storybook 설정과 개발 검수 환경을 만들거나 바꿀 때는 [앱·개
 
 ## 현재 실행 위치
 
-공통 설정은 `front-end/packages/ui/.storybook/`에 있습니다. `front-end/`에서 `npm run storybook` 또는 `npm run build-storybook`을 실행합니다. 공통 UI와 WebView·website의 Feature·Screen Story를 함께 수집하며 결과물은 `front-end/packages/ui/storybook-static/`입니다.
+공통 설정은 `front-end/packages/ui/.storybook/`에 있습니다. `front-end/`에서 `npm run storybook` 또는 `npm run build-storybook`을 실행합니다. 공통 UI와 웹 애플리케이션의 Feature·Screen Story를 함께 수집하며 결과물은 `front-end/packages/ui/storybook-static/`입니다.
 
 ## 목적
 

@@ -2,8 +2,7 @@
 @reference "tailwindcss";
 @reference "../src/styles.css";
 @source "../src/**/*.stories.tsx";
-@source "../../../webview/src/dev";
-@source "../../../website/src/dev";
+@source "../../../web/src/dev";
 
 .app-shell { min-height: 100vh; padding-top: env(safe-area-inset-top, 0px); }
 .app-main { padding-bottom: calc(6rem + env(safe-area-inset-bottom, 0px)); }

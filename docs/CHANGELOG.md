@@ -11,6 +11,18 @@
 - 변경한 파일 목록만 나열하지 않고 변경 목적, 주요 내용, 미확정 항목과 검증 결과를 함께 기록합니다.
 - 같은 작업에서 Markdown과 HTML을 함께 수정했다면 하나의 변경 항목으로 기록합니다.
 
+## 2026-10-23
+
+### WebView·website 단일 웹 애플리케이션 통합
+
+- 분리돼 있던 `front-end/webview/`와 `front-end/website/`를 브라우저와 Flutter 앱 내부 WebView에서 함께 실행되는 단일 Next.js 앱 `front-end/web/`(package `lounge-web`)로 통합했습니다. 기준 앱은 superset인 webview였고 `git mv`로 이력을 보존했으며, website의 preview·Story는 같은 FoundationPreview 본문 기반 중복으로 정리했습니다. workspace·실행·빌드 명령은 `dev`/`build`/`build:preview` 단일 체계로 정리했습니다.
+- `packages/ui`는 실제 소비자(앱 import, 패키지 기준 Storybook, 토큰 생성 출력 경로)와 디자인 시스템·앱 경계를 근거로 독립 패키지를 유지했습니다. Storybook Story 수집 경로와 alias, 공용 패키징 스크립트의 앱 이름 검사를 새 구조에 맞췄습니다.
+- 화면 너비 반응형 배치와 앱 환경 판별을 별개 기준으로 두고, Bridge 환경 값 기준 판별·Native 기능 사용 원칙을 루트·front-end·앱 AGENTS.md와 project.md에 반영했습니다. 환경 값과 Native 기능 계약은 TBD(DEC-005)로 남기고 Bridge 코드는 구현하지 않았습니다.
+- 문서: project.md·build-boundary(md/html)·architecture/index.html·storybook/quality/common-source 요약·workflow README/index/usage-guide/task-card/available-work.html·lounge-implement 스킬·frontend-internal 다이어그램의 위치 표기를 갱신했습니다. 결정 기록에 DEC-012를 추가하고 progress.md에 TASK-P0-WEB-INTEGRATION-001(Done)를 연결했습니다. 과거 카드·검증 기록은 소급 수정하지 않았습니다.
+- 검증: 두 workspace 타입·린트, packages/ui 폼 테스트 2개(web 앱 테스트 파일 없음은 미검증으로 기록), Storybook 정적 빌드 34 Story 수집, production 빌드 후 `dist/runtime/` 단독 실행(홈·CSS 200, `/preview` 404), 운영 결과물 개발 파일 0건, `build:preview` 4화면 생성을 확인했습니다. 브라우저·실기기와 Bridge 환경 판별은 미검증·미구현입니다.
+
+- Codex 후속 검수에서 남은 구조도·두 앱 표현·검수 문구와 제품 metadata를 보완했습니다. 토큰 검사의 Windows 줄바꿈 오탐을 수정했고 토큰 값은 보존했습니다. 타입·린트·폼 테스트 2개·Storybook·운영/preview 빌드·결과물 단독 실행을 재확인하고, 브라우저 부분 검수·문서 검사 결과와 미검증 범위를 [통합 카드](workflow/tasks/phase-0-web-integration.md#codex-후속-검수와-보완)에 기록했습니다.
+
 ## 2026-10-19
 
 ### Figma 색상 export와 공통 CSS 팔레트 연결

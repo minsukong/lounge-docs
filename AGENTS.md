@@ -6,8 +6,8 @@
 
 - 라운지 3.0 과업은 기존 Android·iOS 앱의 Flutter 기반 하이브리드 앱 전면 리뉴얼과 FO 웹(PC WEB·반응형 홈페이지) 구축입니다. PO(파트너오피스)·OO(현장운영시스템)는 IA의 별도 영역으로 구분하며 구체적인 범위·담당은 관련 카드에서 확인합니다. 서비스 배경, 과업 범위 또는 플랫폼별 기술 구성을 판단할 때는 [프로젝트 핵심 정보](docs/ai/project.md)를 먼저 확인합니다.
 - 사용자가 파일, 선택자, 함수 또는 문구를 지정하면 해당 위치와 필요한 주변 범위부터 확인합니다. 작은 수정에 프로젝트 전체 구조나 관련 문서를 먼저 조사하지 않습니다.
-- 애플리케이션 기본 작업 범위는 `front-end/`입니다. `front-end/webview/`는 Flutter 앱 내부 웹 화면, `front-end/website/`는 FO 웹(PC WEB·반응형 홈페이지)의 소스 위치입니다. Flutter Native 앱 소스는 별도 위치에서 관리하며, PO·OO의 위치와 담당은 관련 카드에서 확인합니다. 새 앱은 해당 앱 폴더의 실제 package·설정 유무를 확인한 뒤 구성합니다.
-- WebView와 website는 하나의 디자인 시스템과 동일한 웹 기술 스택을 사용합니다. 공통 스타일·디자인 토큰·기본 UI는 `front-end/packages/ui/`에서 단일 소스로 공유하고 공통 Storybook도 이 패키지의 `.storybook/`에서 관리합니다. npm workspace 설치·잠금 파일은 `front-end/`에서 관리합니다. 현재 코드의 이전·패키지 구성 여부는 실제 파일로 확인하며, 세부 범위는 [프로젝트 핵심 정보](docs/ai/project.md)의 공통 기반 기준을 따릅니다.
+- 애플리케이션 기본 작업 범위는 `front-end/`입니다. `front-end/web/`은 PC·모바일 브라우저와 Flutter 앱 내부 WebView에서 함께 실행되는 단일 Next.js 웹 애플리케이션입니다. Flutter Native 앱 소스는 별도 위치에서 관리하며, PO·OO의 위치와 담당은 관련 카드에서 확인합니다. 새 앱은 해당 앱 폴더의 실제 package·설정 유무를 확인한 뒤 구성합니다.
+- 웹 애플리케이션과 UI 패키지는 하나의 디자인 시스템과 동일한 웹 기술 스택을 사용합니다. 공통 스타일·디자인 토큰·기본 UI는 `front-end/packages/ui/`에서 단일 소스로 공유하고 공통 Storybook도 이 패키지의 `.storybook/`에서 관리합니다. npm workspace 설치·잠금 파일은 `front-end/`에서 관리합니다. 현재 코드의 이전·패키지 구성 여부는 실제 파일로 확인하며, 세부 범위는 [프로젝트 핵심 정보](docs/ai/project.md)의 공통 기반 기준을 따릅니다.
 - 실제 package, 잠금 파일, 설정, import와 기존 소스를 문서 예시보다 우선합니다. 확인되지 않은 기술 선택과 구조는 추측하지 않습니다.
 - 요청하지 않은 기능, 상태, 공통화, Wrapper, Adapter, Store 또는 package를 미리 추가하지 않습니다.
 - Front-end가 독립적으로 정할 수 없는 기획, 업무 규칙, API·인증·데이터 계약, Native Bridge, 배포·보안 정책은 승인되기 전까지 `TBD`로 둡니다. endpoint, parser, fixture, handler와 Mock을 임의로 구현하지 않습니다.
@@ -43,7 +43,8 @@
 
 ## 앱 구현 핵심
 
-- `front-end/webview/`와 `front-end/website/`에서는 Next.js 16 App Router, React 19, TypeScript 6, Tailwind CSS 4와 프로젝트의 shadcn/ui 및 의미 기반 토큰을 사용합니다.
+- `front-end/web/`에서는 Next.js 16 App Router, React 19, TypeScript 6, Tailwind CSS 4와 프로젝트의 shadcn/ui 및 의미 기반 토큰을 사용합니다.
+- 앱 환경과 일반 웹 환경은 Bridge로 전달되는 환경 값을 기준으로 판별하며, 화면 너비에 따른 반응형 배치와 앱 실행 환경 판별은 별개의 기준입니다. 앱 환경으로 확인된 경우에만 합의된 Native 기능을 사용하고, Native 기능 실행 지점에서도 사용 가능 여부를 확인합니다. Bridge 값 수신 전의 초기 상태와 일반 웹으로 판별된 상태를 구분하며, 값이 없거나 시간 제한만으로 일반 웹을 확정하지 않습니다. 환경 값의 이름·형식·전달 방식과 Native 기능별 지원 계약은 `TBD`이므로 미정 Bridge command, 전역 객체, handler와 parser를 추측해서 구현하지 않습니다. 클라이언트의 앱 환경 값은 UI와 기능 실행 경로를 선택하는 기준이며 서버 인증·권한 검증을 대신하지 않습니다.
 - 공통 CSS 하한은 Safari 15입니다. 최신 CSS 표현보다 핵심 정보, 입력, 이동과 업무 흐름의 동작을 우선하고 필요한 경우 호환 표현으로 대체합니다.
 - 디자인 토큰은 Figma Tokens Studio에서만 생성·수정·삭제합니다. 저장소의 생성된 토큰 파일을 직접 수정하지 않습니다.
 - 기존 feature 구현과 `front-end/packages/ui/src/components`를 새 컴포넌트보다 우선하며, import, Props와 variant를 실제 코드에서 확인합니다.

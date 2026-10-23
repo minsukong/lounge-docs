@@ -68,7 +68,7 @@ const outputs = [
 for (const [relative, content] of outputs) {
   const destination = new URL(relative, root);
   if (process.argv.includes("--check")) {
-    if (await readFile(destination, "utf8") !== content) throw new Error(`Generated file out of date: ${relative}`);
+    if ((await readFile(destination, "utf8")).replace(/\r\n/g, "\n") !== content.replace(/\r\n/g, "\n")) throw new Error(`Generated file out of date: ${relative}`);
   } else {
     await writeFile(destination, content, "utf8");
   }

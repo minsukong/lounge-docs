@@ -20,7 +20,7 @@ Front-end 개발 가이드·팀 업무 지침과 Front-end 소스를 한 저장�
 
 ## 빌드 범위
 
-애플리케이션 Build와 배포는 `front-end/`의 각 앱에서 수행합니다. `front-end/webview/`에는 아직 package와 설정이 없으므로, 첫 착수 시 이 위치에 앱을 만든 뒤 Build를 추가합니다. `docs/`는 개발·검토용 문서이므로 제품 Bundle, 정적 자산과 배포 Artifact에 포함하지 않습니다. 문서 검색 데이터 생성과 링크 검사는 애플리케이션 Build와 분리해 문서 변경 검증으로만 실행합니다.
+애플리케이션 Build와 배포는 `front-end/web/`에서 수행합니다. 단일 웹 애플리케이션이 브라우저와 앱 내부 WebView를 함께 지원하며, 실행·빌드 방법은 [front-end README](./front-end/README.md)와 [앱 BUILD 안내](./front-end/web/BUILD.md)를 확인합니다. `docs/`는 개발·검토용 문서이므로 제품 Bundle, 정적 자산과 배포 Artifact에 포함하지 않습니다. 문서 검색 데이터 생성과 링크 검사는 애플리케이션 Build와 분리해 문서 변경 검증으로만 실행합니다.
 
 ## 기준 구조
 
@@ -28,14 +28,14 @@ Front-end 개발 가이드·팀 업무 지침과 Front-end 소스를 한 저장�
 .
 ├── AGENTS.md
 ├── README.md
-├── front-end/                   # Front-end 소스 (WebView · FO 웹 · PO · OO)
+├── front-end/                   # Front-end 소스 (웹 애플리케이션 · PO · OO)
 │   ├── AGENTS.md
 │   ├── README.md
-│   └── webview/
-│       ├── AGENTS.md
-│       ├── README.md
-│       ├── .storybook/
-│       └── src/
+│   ├── web/                     # 브라우저·앱 WebView 공용 단일 Next.js 앱
+│   │   ├── AGENTS.md
+│   │   ├── README.md
+│   │   └── src/
+│   └── packages/ui/             # 공통 UI·스타일·Storybook
 └── docs/
     ├── AGENTS.md
     ├── README.md

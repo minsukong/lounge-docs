@@ -1,6 +1,6 @@
 # [TBD] Front-end 워크스페이스 내부 구조
 
-> 2026-10-14 기준 실제 npm workspace 구성(`webview` · `website` · `packages/ui`)을 반영합니다.
+> 2026-10-23 기준 실제 npm workspace 구성(`web` · `packages/ui`)을 반영합니다. 과거 `webview` · `website` 분리 구성은 [통합 카드](../workflow/tasks/phase-0-web-integration.md) 기준으로 단일 앱 `web`으로 통합됐습니다.
 > 기능 화면과 API·Bridge 연동은 아직 미구현이므로 해당 부분은 **TBD**로 남깁니다.
 
 ## 내부 아키텍처
@@ -9,8 +9,8 @@
   <!-- prettier-ignore -->
   <div class="mermaid">
 flowchart TB
-  accTitle: front-end 워크스페이스 내부 구조 (webview 기준)
-  accDescr: Next.js App Router 기반 WebView 애플리케이션과 packages/ui 공통 UI 패키지, API/유틸리티, 테스트로 구성됩니다.
+  accTitle: front-end 워크스페이스 내부 구조 (web 기준)
+  accDescr: Next.js App Router 기반 단일 웹 애플리케이션과 packages/ui 공통 UI 패키지, API/유틸리티, 테스트로 구성됩니다.
   
   subgraph APP["src/app/ (App Router)"]
     LAYOUT["layout.tsx<br/>- 전역 Provider<br/>- viewport (safe area)<br/>- globals.css"]
@@ -18,15 +18,15 @@ flowchart TB
     LAYOUT --> PAGES
   end
 
-  subgraph SHARED["packages/ui (@lounge/ui) — 두 앱 공통"]
+  subgraph SHARED["packages/ui (@lounge/ui) — 공통 패키지"]
     UI["src/components/ (shadcn/ui)<br/>- button, input, dialog<br/>- card, select, label<br/>- icon (Lucide)"]
     TOKENS["styles · tokens<br/>- 의미 기반 디자인 토큰"]
     UTEST["src/test/ · src/dev/<br/>- 공통 UI 행동 테스트·예제"]
   end
 
-  subgraph COMPONENTS["src/components/ (webview 전용)"]
+  subgraph COMPONENTS["src/components/ (web 앱 전용)"]
     FEATURES["features/ (기능 컴포넌트)<br/>- lounge/<br/>- ticket/<br/>- esim/<br/>- payment/"]
-    COMMON["공통 (webview 전용)<br/>- loading-skeleton<br/>- error-boundary<br/>- empty-state"]
+    COMMON["공통 (web 앱 전용)<br/>- loading-skeleton<br/>- error-boundary<br/>- empty-state"]
   end
 
   subgraph LIB["src/lib/ (유틸리티·어댑터)"]
@@ -36,7 +36,7 @@ flowchart TB
   end
 
   subgraph STORIES["packages/ui/.storybook/ (공통)"]
-    SB_MAIN["main.ts<br/>(glob, addons, framework)<br/>- webview·website Story 함께 검수"]
+    SB_MAIN["main.ts<br/>(glob, addons, framework)<br/>- packages/ui·web 앱 Story 함께 검수"]
     SB_PREVIEW["preview.ts<br/>(globals.css, providers,<br/>viewport mobile)"]
   end
 
@@ -54,7 +54,7 @@ flowchart TB
   TEST -- "테스트" --> LIB
   UTEST -- "테스트" --> UI
   </div>
-  <figcaption>앱은 화면과 기능만 담당하고, shadcn/ui 원형·디자인 토큰·Storybook·공통 테스트는 packages/ui에서 두 앱에 공유합니다. Bridge adapter와 API 파서는 앱에 남습니다.</figcaption>
+  <figcaption>앱은 화면과 기능만 담당하고, shadcn/ui 원형·디자인 토큰·Storybook·공통 테스트는 packages/ui에서 단일 소스로 공유합니다. Bridge adapter와 API 파서는 앱에 남습니다.</figcaption>
 </figure>
 
 ## 데이터 흐름
@@ -122,15 +122,15 @@ flowchart TB
 |------|------|------|
 | npm workspace | — | `front-end/` 단일 잠금 파일 · `@lounge/ui` 공통 패키지 공유 |
 
-| Next.js | 16 (App Router) | SSR/SSG, 라우팅 (webview · website 각각, 단일 workspace에서 실행) |
+| Next.js | 16 (App Router) | SSR/SSG, 라우팅 (단일 앱 `front-end/web`, 브라우저·앱 WebView 공용) |
 | React | 19 | UI 렌더링 |
 | TypeScript | 6 | 타입 안전성 |
 | Tailwind CSS | 4.1+ | 스타일링 (Semantic Tokens) |
-| shadcn/ui | base-nova | UI 컴포넌트 — `packages/ui`에서 두 앱에 공유 |
+| shadcn/ui | base-nova | UI 컴포넌트 — `packages/ui`에서 단일 소스로 공유 |
 | TanStack Query | — | 서버 상태 관리 |
 | Zustand | — | Client 상태 (필요 시) |
 | Lucide React | — | 아이콘 |
-| Vitest + Testing Library | — | 테스트 — 공통은 `packages/ui`, 앱 화면은 각 앱 |
+| Vitest + Testing Library | — | 테스트 — 공통은 `packages/ui`, 앱 화면은 `web` |
 | Storybook | — | UI 검수/문서화 — `packages/ui/.storybook` 단일 소스 |
 
 ## 브라우저 하한

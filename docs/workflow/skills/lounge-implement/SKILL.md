@@ -22,7 +22,7 @@ description: Ready가 확인된 더라운지 작업 카드 하나를 front-end/�
 
 ## 작업
 
-카드의 코드 위치와 가까운 AGENTS.md, package·기존 코드·승인된 근거를 확인한다. Front-end 구현 위치는 lounge-docs의 front-end/이며 WebView는 front-end/webview/, FO 웹은 front-end/website/, 공통 UI·스타일·Storybook은 front-end/packages/ui/다. 기존 workspace·공용 잠금 파일과 대상 package·사용처를 확인해 이어서 구현한다. 실제로 package가 없는 새 영역의 초기 구성이 요청된 경우에만 생성 범위를 확인하며, 새 저장소·앱 생성이나 npm 명령을 추측하지 않는다.
+카드의 코드 위치와 가까운 AGENTS.md, package·기존 코드·승인된 근거를 확인한다. Front-end 구현 위치는 lounge-docs의 front-end/이며 브라우저·앱 WebView 공용 단일 웹 애플리케이션은 front-end/web/, 공통 UI·스타일·Storybook은 front-end/packages/ui/다. 기존 workspace·공용 잠금 파일과 대상 package·사용처를 확인해 이어서 구현한다. 실제로 package가 없는 새 영역의 초기 구성이 요청된 경우에만 생성 범위를 확인하며, 새 저장소·앱 생성이나 npm 명령을 추측하지 않는다.
 앱 초기 구성·라우트 추가·개발용 preview·Storybook 설정·빌드·배포 설정 변경 전에는 [앱·개발 화면·배포 경계 필수 기준](../../../guides/architecture/build-boundary.md)과 해당 앱의 BUILD.md를 반드시 확인한다. 변경 코드의 앱·검수 범위와 최종 배포 경로를 정하고, 운영 라우트·import·스타일·결과물의 제외 설정을 구현과 함께 반영한다. 검증 생략은 기록하되 검증 완료로 표시하지 않는다.
 
 1. 카드 범위와 Ready 근거·선행 조건을 검증한다. 미정 계약은 해당 연동을 보류하되 독립적으로 허용된 UI·문서 범위는 진행한다.

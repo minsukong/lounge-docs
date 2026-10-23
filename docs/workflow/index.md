@@ -227,7 +227,7 @@ AI가 달라도 저장소 위치·작업 위치(`front-end/` 또는 `docs/`)·�
 
 ```text
 저장소: <팀원의 lounge-docs 위치>
-작업 위치: front-end/webview (Flutter Native는 별도 위치)
+작업 위치: front-end/web (Flutter Native는 별도 위치)
 AGENTS.md → docs/AGENTS.md → docs/workflow/AGENTS.md를 읽어줘.
 회원가입 IA 근거를 확인하고 lounge-grill로 미정 질문을 정리해줘.
 정책·API·Bridge를 추측해서 구현하지 마.

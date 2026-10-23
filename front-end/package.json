@@ -6,23 +6,19 @@
     "node": ">=22.12.0"
   },
   "workspaces": [
-    "webview",
-    "website",
+    "web",
     "packages/ui"
   ],
   "scripts": {
     "tokens:colors": "node scripts/sync-color-tokens.mjs",
-    "dev:webview": "npm run dev --workspace lounge-webview",
-    "dev:website": "npm run dev --workspace lounge-website",
-    "build:webview": "npm run build --workspace lounge-webview",
-    "build:website": "npm run build --workspace lounge-website",
+    "dev": "npm run dev --workspace lounge-web",
+    "build": "npm run build --workspace lounge-web",
     "typecheck": "npm run typecheck --workspaces --if-present",
     "lint": "npm run lint --workspaces --if-present",
     "test": "npm run test --workspaces --if-present",
     "storybook": "npm run storybook --workspace @lounge/ui",
     "build-storybook": "npm run build-storybook --workspace @lounge/ui",
-    "build:preview:webview": "npm run build:preview --workspace lounge-webview",
-    "build:preview:website": "npm run build:preview --workspace lounge-website"
+    "build:preview": "npm run build:preview --workspace lounge-web"
   },
   "devDependencies": {
     "@storybook/addon-docs": "10.6.1",

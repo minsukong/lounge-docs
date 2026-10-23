@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 const workspaceRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const appRoot = path.resolve(process.cwd(), process.argv[2] ?? ".");
 const appName = path.basename(appRoot);
-if (!["webview", "website"].includes(appName) || path.dirname(appRoot) !== workspaceRoot) throw new Error("Unexpected app root");
+if (appName !== "web" || path.dirname(appRoot) !== workspaceRoot) throw new Error("Unexpected app root");
 const nextRoot = path.join(appRoot, ".next");
 const standaloneRoot = path.join(nextRoot, "standalone");
 const outputRoot = path.join(appRoot, "dist", "runtime");
@@ -16,7 +16,6 @@ function allowedFile(file) {
   const name = path.basename(file);
   const relative = path.relative(standaloneRoot, file).split(path.sep);
   if ([".git", ".github", ".storybook", "docs", "work", "coverage", "test-results", "playwright-report", "storybook-static"].includes(name) || name.startsWith(".env")) return false;
-  if ((relative[0] === "webview" || relative[0] === "website") && relative[0] !== appName) return false;
   if (relative.slice(0, 4).join("/") === "packages/ui/src/dev") return false;
   if (relative.slice(0, 3).join("/") === `${appName}/src/dev` || relative.slice(0, 3).join("/") === `${appName}/src/test`) return false;
   return !/^(AGENTS|README|LINT|BUILD)\.md$/i.test(name)

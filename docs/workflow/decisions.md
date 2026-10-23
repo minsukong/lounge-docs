@@ -10,7 +10,7 @@ IA 관련 수치·View 분류는 기존 추출 기록이며 현재 원본과 추
 
 | ID | 결정할 내용 | 상태 | 담당·협의 상대 | 차단되는 범위 | 현재 근거 |
 | --- | --- | --- | --- | --- | --- |
-| DEC-001 | Front-end 구현 위치와 AI 작업 루트 | Confirmed | 사용자 | 앱 구현 착수·실행 검증 | 사용자 결정: Front-end는 lounge-docs의 `front-end/`에서 구현하고 WebView 화면은 `front-end/webview/`에 둔다. Flutter Native만 별도 위치. 초기 결정 뒤 WebView·홈페이지·공통 UI의 실행 기반을 구성함. [프로젝트 기준](../ai/project.md), [workspace 설정](../../front-end/package.json), [후속 완료 카드](tasks/common-ui-workspaces.md) 참조 |
+| DEC-001 | Front-end 구현 위치와 AI 작업 루트 | Confirmed | 사용자 | 앱 구현 착수·실행 검증 | 사용자 결정: Front-end는 lounge-docs의 `front-end/`에서 구현한다. 초기 결정 뒤 WebView·홈페이지·공통 UI의 실행 기반을 구성했고, 이후 단일 웹 애플리케이션 `front-end/web/`으로 통합했다(DEC-012). [프로젝트 기준](../ai/project.md), [workspace 설정](../../front-end/package.json), [후속 완료 카드](tasks/common-ui-workspaces.md), [통합 카드](tasks/phase-0-web-integration.md) 참조 |
 | DEC-002 | 인증 세션·저장·갱신·로그아웃과 Web/Native 책임 | TBD | BE·Native·FE | 인증 가드·로그인 연동 | project.md에서 계약 TBD |
 | DEC-003 | 회원가입·약관·미성년자·소셜 연결·탈퇴 정책 | TBD | 기획·운영·BE·Native | 해당 회원 업무 연동 | MO IA에 미성년자 정책·소셜 추가 확정 필요 표시 |
 | DEC-004 | 주문·결제·할인·취소와 PG 복귀·실패·중복 처리 | TBD | 기획·BE·Native·FE | 구매·결제·취소 연동 | 승인 계약 미확인 |
@@ -18,9 +18,10 @@ IA 관련 수치·View 분류는 기존 추출 기록이며 현재 원본과 추
 | DEC-006 | 판매채널 기능·사용자·서비스 구분·담당 | TBD | 사용자·기획·BE | 판매채널 착수 범위 | 사용자: 추가 정보 필요 |
 | DEC-007 | PO·OO의 과업 포함 여부·담당·검수 책임 | TBD | 사용자·프로젝트 담당 | PO·OO 구현 착수 | 담당 미정. OO HTML은 존재 |
 | DEC-008 | MO/APP/WEB 중복 화면·ID 충돌과 실제 메뉴 범위 | TBD | 기획·FE·Native | 영향받는 카드의 화면 매핑 | ia-audit와 ia-inventory. `FO_APP`(193)·`FO_WEB`(161)는 MO 목록과 다른 절단면이며 APP은 대부분 WebView이며 Native 잔여 5개 ID는 원본 View 기준. 상품·일부 사용처·WEB 이벤트의 ID 공백/수식 오류와 사용처 중복 ID·재편을 확인해야 함. `FO-MEM-C10*` 9개는 내 여정 관리로 확인됨. 과거 ID를 현재 ID로 임의 대응시키거나 ID 미추출을 기능 제외로 확정하지 않음 |
-| DEC-009 | FO 웹·PO·OO의 스택·기능 공유·화면별 환경 차이 | TBD | FE·프로젝트 담당 | 미정인 업무 기능 공유·PO/OO 구성·환경 차이의 판단 | FO 웹은 `front-end/website/`이며 WebView와 같은 웹 스택·디자인 시스템을 사용하고 `front-end/packages/ui/`를 공유함. [확정된 공통 기반](../ai/project.md#webview와-website의-공통-기반)·[후속 완료 카드](tasks/common-ui-workspaces.md) 참조. 업무 기능 공유·화면별 환경 차이와 PO·OO의 스택·담당은 별도 확인 |
+| DEC-009 | FO 웹·PO·OO의 스택·기능 공유·화면별 환경 차이 | TBD | FE·프로젝트 담당 | 미정인 업무 기능 공유·PO/OO 구성·환경 차이의 판단 | FO 웹과 앱 WebView는 `front-end/web/`의 단일 웹 애플리케이션에서 실행되고 같은 웹 스택·디자인 시스템을 사용하며 `front-end/packages/ui/`를 공유함. [확정된 공통 기반](../ai/project.md#웹-애플리케이션과-ui-패키지의-공통-기반)·[통합 카드](tasks/phase-0-web-integration.md) 참조. 화면별 환경 차이(APP/WEB IA 대조)는 원본 구분과 식별자를 보존하며 카드에서 확인하고, 업무 기능 공유와 PO·OO의 스택·담당은 별도 확인 |
 | DEC-010 | API mock 필요 여부·계약 버전·관리 책임 | TBD | FE·BE·프로젝트 담당 | Contract-Mock 사용 | 계약 전 생성 금지 |
 | DEC-011 | Front-end WBS 중 IA에 근거가 없는 항목의 범위 포함 여부 | TBD | 사용자·기획·프로젝트 담당 | 해당 항목의 착수·견적 | 경영진 대시보드, K리무진 본사운영·홈페이지 구분, 결함 수정·안정화 공수는 IA v0.2와 `docs/` 어디에도 검색되지 않음. eSIM(`FO-SCM-C05*`)과 K공항리무진(`FO-SCM-C07*`, `OO-OOS-J*`~`O*`)은 원본에 존재 |
+| DEC-012 | WebView·website 두 앱의 단일 웹 애플리케이션 통합 | Confirmed | 사용자 | front-end 구조·실행·빌드·배포 명령 | 사용자 인계 방향으로 확정: 하나의 Next.js 앱(`front-end/web/`, package `lounge-web`)이 PC·모바일 브라우저와 Flutter 앱 내부 WebView를 함께 지원한다. 기준 앱은 superset인 webview이고(`git mv`로 이력 보존), website의 preview는 같은 FoundationPreview 본문 기반 중복으로 정리했다. `packages/ui`는 실제 소비자(앱 import·패키지 기준 Storybook·토큰 생성 출력)와 디자인 시스템 경계를 근거로 독립 패키지로 유지한다. 화면 너비 반응형 배치와 앱 환경 판별은 별개 기준이며, 환경 값·Native 기능 계약은 DEC-005와 함께 `TBD`로 남긴다. 구현과 검증은 [통합 카드](tasks/phase-0-web-integration.md) 참조 |
 
 모든 항목이 모든 카드를 막지는 않습니다. 예를 들어 합의된 버튼 표시 작업은 결제 정책 결정에 종속되지 않습니다.
 
