@@ -44,15 +44,16 @@ flowchart TD
 
       <section>
         <h2 class="bx-active">2. 작업 대상과 저장소 구조</h2>
-        <p>WebView 서비스 화면과 업무 흐름은 <code>front-end/webview</code>에 구현합니다.</p>
+        <p>브라우저와 Flutter 앱 내부 WebView에서 함께 실행되는 화면과 업무 흐름은 단일 앱 <code>front-end/web</code>에 구현합니다.</p>
         <pre class="hljs"><code data-language="text">front-end/
-└── webview/             # Front-end가 구현하는 WebView 화면
+├── web/                 # 브라우저·앱 WebView 공용 웹
+└── packages/ui/         # 공통 UI·토큰·Storybook
 
 docs/                        # 구현·검토 기준과 예시</code></pre>
         <h3>Application 가까이에서 시작합니다</h3>
-        <p><code>front-end/webview</code> 안에서는 Routing과 화면 진입점, 기능 코드와 WebView 전용 UI를 가까운 위치에서 관리합니다. webview 한 곳에서만 사용하는 shadcn/ui 원형과 Wrapper는 <code>front-end/webview/src/components/ui</code>에 둡니다.</p>
+        <p><code>front-end/web</code> 안에서는 Routing과 화면 진입점, 기능 코드와 환경별 동작을 가까운 위치에서 관리합니다. shadcn/ui 기반 공통 UI·스타일·토큰은 <code>front-end/packages/ui</code>에서 관리하고 앱이 공개 export로 가져옵니다. 화면 너비에 따른 반응형 배치와 Bridge 기반 앱 환경 판별은 별개의 기준이며, 실제 Native 기능은 승인된 계약에 따라 연결합니다.</p>
         <h3>검증된 구현만 공통으로 관리합니다</h3>
-        <p>여러 기능에서 실제로 재사용되고 의미와 변경 이유가 같은 UI만 <code>src/components/ui</code>에서 공통으로 관리합니다. 한 화면에서만 사용하는 Wrapper, 공통화 가능성을 예상한 Type과 Adapter는 미리 만들지 않습니다.</p>
+        <p>여러 기능에서 실제로 재사용되고 의미와 변경 이유가 같은 UI는 <code>front-end/packages/ui/src/components</code>에서 공통으로 관리합니다. 한 화면에서만 사용하는 Wrapper, 공통화 가능성을 예상한 Type과 Adapter는 미리 만들지 않습니다.</p>
         <p><code>front-end/</code>와 <code>docs/</code>의 최상위 분리는 실제 프로젝트 기준입니다. 앱 내부 Package 경계와 Build 구성은 실제 사용처와 현재 설정을 기준으로 판단합니다.</p>
         <p><strong>상세 기준:</strong> 저장소 경계와 공통화 기준은 <a href="../architecture/index.html">Front-End 저장소 구조 기준</a>에서 확인합니다.</p>
       </section>
@@ -217,7 +218,7 @@ flowchart TD
           <li>iOS와 Android 지원 범위</li>
         </ul>
         <p>Bridge는 인증 Token 전달이나 Backend 권한 검증 우회 수단으로 사용하지 않습니다.</p>
-        <p><strong>상세 기준:</strong> Native와 WebView의 전체 책임은 <a href="../app/app.html">APP 개발 표준</a>, Bridge 계약과 구현 흐름은 <a href="../platform/webview/webView_guide.html">WebView 개발 가이드</a>에서 확인합니다.</p>
+        <p><strong>상세 기준:</strong> Native와 WebView의 전체 책임은 <a href="../app/app.html">APP 개발 표준</a>, Bridge 계약과 구현 흐름은 <a href="../platform/webview/app_webview_guide.html">WebView 개발 가이드</a>에서 확인합니다.</p>
       </section>
 
       <hr />
@@ -234,7 +235,7 @@ flowchart TD
           <tbody><tr><td>Mobile</td><td>320~767px</td><td>입력, 터치, 긴 문구와 Overflow</td></tr><tr><td>Tablet</td><td>768~1023px</td><td>열 전환, 방향과 밀도</td></tr><tr><td>PC</td><td>1024px 이상</td><td>최대 너비와 다단 Layout</td></tr></tbody>
         </table>
         <p>767·768px, 1023·1024px 경계값을 함께 검증합니다. 지원 Browser에서 사용할 수 없는 CSS는 피하거나 동등한 Fallback을 제공합니다.</p>
-        <p><strong>상세 기준:</strong> 국가별 점유율 근거, 자동 업데이트 예외와 대표 검증 너비는 <a href="../browser-support/index.html">반응형 웹 Browser 지원 가이드</a>, App WebView 최소 OS 근거는 <a href="../platform/webview/webView_overview.html">WebView 지원 환경 개요</a>에서 확인합니다.</p>
+        <p><strong>상세 기준:</strong> 국가별 점유율 근거, 자동 업데이트 예외와 대표 검증 너비는 <a href="../browser-support/index.html">반응형 웹 Browser 지원 가이드</a>, App WebView 최소 OS 근거는 <a href="../platform/webview/app_webview_overview.html">WebView 지원 환경 개요</a>에서 확인합니다.</p>
       </section>
 
       <hr />

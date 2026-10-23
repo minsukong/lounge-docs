@@ -91,7 +91,7 @@
 
 - FO 반응형 홈페이지의 소스 위치를 `front-end/website/`로 정하고 WebView와 동일한 웹 기술 스택을 적용했습니다. 기존 홈페이지는 콘텐츠·서비스 안내의 참고 자료로 연결했습니다.
 - 하나의 디자인 시스템을 사용하는 공통 스타일·토큰·기본 컴포넌트와 공통 UI Storybook은 `front-end/packages/ui/`에서 단일 소스로 관리하도록 기준을 정리했습니다. 앱별 중복 수정과 스타일·Props·동작·검수 차이를 방지하고, 페이지·라우트·앱별 레이아웃·Native 연동은 각 앱에 유지합니다.
-- 루트·Front-end·앱 지침, 프로젝트 요약·구조 가이드와 [공용 빌드 기준](guides/architecture/build-boundary.md), [WebView 빌드 안내](../front-end/webview/BUILD.md), [website 빌드 기준](../front-end/website/BUILD.md)에 공유 범위와 변경 이유를 반영했습니다. 앱별 빌드에 공통 의존성·스타일을 포함하고, CSS 검색·외부 파일 추적·standalone 실행 및 자산 경로·검수 코드 제외를 함께 확인하도록 명시했습니다.
+- 루트·Front-end·앱 지침, 프로젝트 요약·구조 가이드와 [공용 빌드 기준](guides/architecture/build-boundary.md), [WebView 빌드 안내](../front-end/web/BUILD.md), [website 빌드 기준](../front-end/web/BUILD.md)에 공유 범위와 변경 이유를 반영했습니다. 앱별 빌드에 공통 의존성·스타일을 포함하고, CSS 검색·외부 파일 추적·standalone 실행 및 자산 경로·검수 코드 제외를 함께 확인하도록 명시했습니다.
 - 공통 패키지 생성·기존 UI와 Storybook 이전·website 앱 구성·실제 빌드 설정 변경은 아직 진행하지 않았습니다. 패키지 연결과 공개 export, 앱별 배포 결과물·실행 경로는 실제 구성 시 검증합니다. 이번 FO 공통 구현 초안의 완료 조건에서는 실기기 검증을 제외합니다.
 - 검증: 변경 문서의 내부 링크·HTML 구조·Markdown/HTML 빌드 기준 일치·인코딩·줄바꿈·공백을 확인하고 공식 검색 색인을 갱신했습니다. 앱 코드는 변경하지 않았으며 공통 패키지 이전 후의 빌드·배포 검증은 수행하지 않았습니다.
 

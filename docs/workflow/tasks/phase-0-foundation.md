@@ -21,7 +21,7 @@
 
 **Phase 0 전체는 완료되지 않았습니다.** 초기 WebView 기반과 공통 UI 초안이 작성됐고, [공통 UI 이전과 website 실행 기반 카드](common-ui-workspaces.md)의 한정된 범위는 Done입니다. 이 카드의 Review와 후속 카드의 Done, Phase 0 전체 완료는 별도로 판단합니다.
 
-- 현재 공통 UI·스타일·Storybook·개발 예제는 `front-end/packages/ui/`에서 관리하고 WebView와 홈페이지가 사용합니다. 설치·공용 잠금 파일은 `front-end/` 기준입니다.
+- 현재 공통 UI·스타일·Storybook·개발 예제는 `front-end/packages/ui/`에서 관리하고 브라우저·앱 WebView 공용 단일 앱 `front-end/web/`이 사용합니다. 구조 통합과 최신 검증은 [통합 카드](phase-0-web-integration.md)를 확인합니다. 설치·공용 잠금 파일은 `front-end/` 기준입니다.
 - 검수 화면은 `/preview`와 그 하위 개발 전용 경로에 있습니다. 초기 `/components`·`/states`·`/settings` 경로 설명은 아래 구현 이력이며 현재 서비스 라우트가 아닙니다. 운영 홈은 준비 안내 화면입니다.
 - 후속 카드에는 세 workspace 타입·린트, 공통 폼 테스트 2개, Storybook·두 앱 운영 빌드·패키징·일부 브라우저 확인의 통과 기록이 있습니다. 이번 문서 갱신에서 앱 검사를 다시 실행한 결과는 아닙니다.
 - 실제 서비스 셸·메뉴·설정·승인 디자인, 보호 라우트·인증 상태·API client·Query Provider, 업무 오류·재시도·캐시·복구와 Native 연동은 남아 있습니다. 실기기 키보드·회전·Safe Area 등은 미검증입니다.
@@ -31,7 +31,7 @@
 - [프로젝트 핵심 정보](../../ai/project.md): WebView·홈페이지·공통 UI의 위치와 책임을 현재 소스와 비교했습니다.
 - [UI 기준](../../ai/ui.md)·[Storybook 기준](../../ai/storybook.md): 개발 예제·공통 UI 초안과 실제 서비스 화면·승인 디자인을 구분합니다.
 - [품질 기준](../../ai/quality.md)·[빌드 경계 기준](../../guides/architecture/build-boundary.md): 후속 검증 기록의 범위와 운영·검수 경계를 구분하고, 과거 Pass를 이번 실행이나 서비스·실기기 검증으로 확대하지 않습니다.
-- 근거 기록: [후속 완료 카드](common-ui-workspaces.md). 현재 위치·명령은 [workspace 설정](../../../front-end/package.json), 운영 진입 화면은 [WebView 홈 소스](../../../front-end/webview/src/app/page.tsx)와 대조했습니다.
+- 근거 기록: [후속 완료 카드](common-ui-workspaces.md). 현재 위치·명령은 [workspace 설정](../../../front-end/package.json), 운영 진입 화면은 [웹 홈 소스](../../../front-end/web/src/app/page.tsx)와 대조했습니다.
 
 ## 초기 구현 이력
 

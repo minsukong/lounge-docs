@@ -180,7 +180,7 @@
               <h2>코드와 가이드를<br /><em>같은 저장소에</em></h2>
             </div>
             <p>
-              <code class="tree-folder app">front-end/</code>에는 WebView와 반응형 웹 소스,
+              <code class="tree-folder app">front-end/</code>에는 브라우저·앱 WebView 공용 웹 소스,
               <code class="tree-folder docs">docs/</code>에는 구현·검토 기준을
               둡니다.<br />
               Flutter Native 앱만 별도 위치이며, 앱을 빌드할 때 문서는 포함하지 않습니다.
@@ -197,9 +197,9 @@
               ><span class="tree-root">Root/</span>
 ├─ <span class="tree-file file1">AGENTS.md</span>                         <span class="tree-comment"># AI 최상위 작업 원칙</span>
 ├─ <span class="tree-folder app">front-end/</span>                         <span class="tree-comment"># Front-end 소스</span>
-│  └─ <span class="tree-folder app">webview/</span>                   <span class="tree-comment"># WebView Front-end</span>
-│     ├─ <span class="tree-folder app">.storybook/</span>                 <span class="tree-comment"># UI 확인</span>
-│     └─ <span class="tree-folder app">src/</span>                        <span class="tree-comment"># Source · Story · Test</span>
+│  ├─ <span class="tree-folder app">web/</span>                       <span class="tree-comment"># 브라우저·앱 WebView 공용 웹</span>
+│  │  └─ <span class="tree-folder app">src/</span>                        <span class="tree-comment"># Source · Story · Test</span>
+│  └─ <span class="tree-folder app">packages/ui/</span>               <span class="tree-comment"># 공통 UI · 토큰 · Storybook</span>
 └─ <span class="tree-folder docs">docs/</span>                             <span class="tree-comment"># 가이드</span>
    ├─ <span class="tree-file file1">AGENTS.md</span>                      <span class="tree-comment"># AI 가이드 작성 기준</span>
    ├─ <span class="tree-folder docs">guides/</span>                        <span class="tree-comment"># 사람과 AI가 확인하는 상세 HTML 가이드</span>
@@ -217,7 +217,7 @@
                 <b>FRONT-END SOURCE</b>
                 <h3>front-end/</h3>
                 <p>
-                  <strong>webview/</strong>는 WebView 화면 소스, Build와 배포도 여기서
+                  <strong>web/</strong>은 브라우저·앱 공용 웹 소스, Build와 배포도 여기서
                   수행. Flutter Native만 별도 위치
                 </p>
               </article>
@@ -575,7 +575,7 @@ flowchart TB
   B --> C["AI · 2. 현재 코드 확인<br/>설치된 기능 · 기존 UI · 재사용 방법 확인"]
   C --> D["AI · 3. 필요한 문서 확인<br/>이번 작업에 필요한 가이드만 선택"]
   D --> E{"AI · 바로 구현할 수<br/>있는가?"}
-  E -->|"YES"| I["AI · 4. 화면 구현<br/>front-end/webview에 코드 작성"]
+  E -->|"YES"| I["AI · 4. 화면 구현<br/>front-end/web에 코드 작성"]
   E -->|"NO"| F{"AI · 서비스·업무 결정이<br/>필요한가?"}
   F -->|"YES"| G["담당자 · 기준 결정<br/>업무 규칙 · 서버 연결 · 앱 연동 방식 답변"]
   F -->|"NO"| H["AI · 구현 방법 확인<br/>구현 예시와 상세 가이드 확인"]
