@@ -23,7 +23,9 @@ IA 관련 수치·View 분류는 기존 추출 기록이며 현재 원본과 추
 | DEC-011 | Front-end WBS 중 IA에 근거가 없는 항목의 범위 포함 여부 | TBD | 사용자·기획·프로젝트 담당 | 해당 항목의 착수·견적 | 경영진 대시보드, K리무진 본사운영·홈페이지 구분, 결함 수정·안정화 공수는 IA v0.2와 `docs/` 어디에도 검색되지 않음. eSIM(`FO-SCM-C05*`)과 K공항리무진(`FO-SCM-C07*`, `OO-OOS-J*`~`O*`)은 원본에 존재 |
 | DEC-012 | WebView·website 두 앱의 단일 웹 애플리케이션 통합 | Confirmed | 사용자 | front-end 구조·실행·빌드·배포 명령 | 사용자 인계 방향으로 확정: 하나의 Next.js 앱(`front-end/web/`, package `lounge-web`)이 PC·모바일 브라우저와 Flutter 앱 내부 WebView를 함께 지원한다. 기준 앱은 superset인 webview이고(`git mv`로 이력 보존), website의 preview는 같은 FoundationPreview 본문 기반 중복으로 정리했다. `packages/ui`는 실제 소비자(앱 import·패키지 기준 Storybook·토큰 생성 출력)와 디자인 시스템 경계를 근거로 독립 패키지로 유지한다. 화면 너비 반응형 배치와 앱 환경 판별은 별개 기준이며, 환경 값·Native 기능 계약은 DEC-005와 함께 `TBD`로 남긴다. 구현과 검증은 [통합 카드](tasks/phase-0-web-integration.md) 참조 |
 
-| DEC-013 | shadcn 기반 디자인과 코드 반영 시점 | Confirmed | 사용자·디자인·FE | 디자인 확정 전 공통 UI·토큰의 디자인 변경 반영 | 사용자 결정: 디자인도 프로젝트의 `base-nova` 컴포넌트·variant·size·의미 토큰명을 공유하고 기존 구성을 조합한다. 필요한 확장은 함께 정한다. 이번 단계는 문서·기준 변경이며 `front-end/` 수정은 디자인 확정 후 별도 작업으로 진행한다. [상세 근거](#dec-013-shadcn-기반-디자인과-코드-반영-시점) 참조 |
+| DEC-013 | shadcn 기반 디자인과 코드 반영 시점 | Confirmed · 반영 유예는 DEC-014로 대체 | 사용자·디자인·FE | 디자인 확정 전 공통 UI·토큰의 디자인 변경 반영 | 사용자 결정: 디자인도 프로젝트의 `base-nova` 컴포넌트·variant·size·의미 토큰명을 공유하고 기존 구성을 조합한다. 필요한 확장은 함께 정한다. 이번 단계는 문서·기준 변경이며 `front-end/` 수정은 디자인 확정 후 별도 작업으로 진행한다. [상세 근거](#dec-013-shadcn-기반-디자인과-코드-반영-시점) 참조 |
+
+| DEC-014 | 공식 base-nova·neutral 기본값 즉시 적용과 기존 자산 삭제 | Confirmed | 사용자·디자인·FE | 기본화 검증 범위 | 디자인 확정 전 소스 적용 승인. DEC-013의 코드 반영 유예 해제. [작업 카드](tasks/phase-0-shadcn-defaults.md) 참조 |
 
 모든 항목이 모든 카드를 막지는 않습니다. 예를 들어 합의된 버튼 표시 작업은 결제 정책 결정에 종속되지 않습니다.
 
@@ -35,6 +37,14 @@ IA 관련 수치·View 분류는 기존 추출 기록이며 현재 원본과 추
 - 공유 문서: [shadcn 기반 디자인 작업 기준](../../work/design_tobe.md). 디자인 전달 문서이며 개발 기준은 project·UI·Figma·토큰·상세 가이드에 함께 반영한다.
 - 적용 경계: 이번 변경은 문서에 한정한다. 실제 컴포넌트·스타일·토큰·설정·Story 수정과 검증은 디자인 확정 후 별도 작업으로 진행한다.
 - 미확정: 브랜드 팔레트와 의미 토큰의 연결, 최종 폰트·수치·추가 variant·dark 디자인 범위. 현재 neutral 초안의 최종 승인이나 Phase 0 완료를 뜻하지 않는다.
+
+## DEC-014 공식 base-nova 기본값 즉시 적용
+
+- 상태: Confirmed. 2026-10-27 사용자가 디자인 확정 전 소스 반영과 필요 없는 토큰·CSS·팔레트 삭제를 명시 승인함.
+- DEC-013의 shadcn 공유 체계는 유지하며, 코드 반영 유예는 이번 결정으로 해제함. 기본값은 공식 base-nova 컴포넌트와 neutral light·dark 테마로 통일함.
+- 디자인팀도 이 코드·이름·값을 기준으로 작업함. 기존 Figma 팔레트 보존·추가 매핑 대기를 현재 착수 조건으로 사용하지 않음.
+- 토큰 원본은 tokens/shadcn/neutral.tokens.json. Figma·Tokens Studio도 이 원본에 맞춤. 실제 Figma 동기화나 업무 계약은 이번 작업에서 수행하지 않음.
+- 실행과 검증: [TASK-P0-SHADCN-001](tasks/phase-0-shadcn-defaults.md).
 
 ## 개별 결정 기록 양식
 

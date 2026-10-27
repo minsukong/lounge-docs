@@ -43,7 +43,7 @@
         <h2 class="bx-active">2. 현재 프로젝트 기준</h2>
         <p>디자인도 프로젝트의 <code>base-nova</code> 컴포넌트와 의미 토큰 체계에서 시작합니다. <code>base</code>는 Base UI 동작 기반, <code>nova</code>는 외형 스타일이며, 현재 프로젝트의 컴포넌트 조정 사항을 포함해 맞춥니다. <a href="../../../work/design_tobe.md">디자인 공유 기준</a>에서 컴포넌트·속성·토큰 이름을 확인합니다.</p>
         <p>Figma의 의미 변수도 <code>primary</code>, <code>primary-foreground</code> 등 코드와 같은 이름을 사용합니다. CSS용 <code>--</code>와 Tailwind용 <code>bg-</code>·<code>text-</code>는 Figma 이름에 붙이지 않습니다. 원시 팔레트와 의미 역할은 구분하고, 필요한 추가 이름과 값은 디자인·개발이 함께 정합니다.</p>
-        <p>현재 자동 변환은 전달된 원시 색상에 한정됩니다. 원시 팔레트의 light·dark 값은 같지만 코드의 의미 테마 값은 서로 다릅니다. 의미 색상은 neutral 초안이며 폰트·간격·라운드까지 자동 연결되거나 최종 디자인으로 확정된 상태가 아닙니다. 이번에는 문서만 갱신하고 코드·생성 토큰은 디자인 확정 후 반영합니다.</p>
+        <p>단일 원본은 <code>tokens/shadcn/neutral.tokens.json</code>입니다. 공식 neutral light·dark 의미 색상 31개와 radius 0.625rem을 사용하며, <code>npm run tokens:sync</code>로 공통 theme-tokens.css와 Storybook 참조를 생성하고 <code>npm run tokens:check</code>로 검사합니다. 기존 Figma 팔레트와 lounge-* 변수는 삭제했습니다. 간격·글자·sans 폰트는 Tailwind 기본 체계를 사용합니다. Figma도 같은 원본에 맞춥니다.</p>
         <p>
           애플리케이션은 React 19, Tailwind CSS 4와 shadcn/ui를 사용합니다.
           정확한 버전과 기술 책임은
@@ -60,7 +60,7 @@
           <tbody>
             <tr>
               <td>Tokens Studio</td>
-              <td>Token Set 작성과 Figma Variables·Styles 반영</td>
+              <td>공통 neutral 기본 토큰을 기준으로 Figma Variables·Styles 구성</td>
             </tr>
             <tr>
               <td>Figma Variables</td>
@@ -98,29 +98,28 @@
       <section>
         <h2 class="bx-active">3. 토큰 연결 구조</h2>
         <p>
-          Tokens Studio와 Figma는 디자인 값을 관리하고, 코드에서는 승인된 값을
-          CSS Variables와 Tailwind 유틸리티로 사용합니다. 무료 구성에서는 자동
-          변환을 전제로 하지 않고 변경 시 두 영역을 함께 확인합니다.
+          기본값은 저장소의 neutral.tokens.json에서 관리하고 Figma와 Tokens Studio도 같은 이름·값을 사용합니다. 코드에서는 이 값을
+          CSS Variables와 Tailwind 유틸리티로 사용합니다. 저장소에서는 생성 스크립트로 변환하고, Figma와의 자동 동기화는 별도로 검증합니다.
         </p>
         <figure class="diagram-frame">
           <!-- prettier-ignore -->
           <div class="mermaid">
 flowchart LR
   accTitle: 디자인 토큰을 Figma와 React 코드에 연결하는 구조
-  accDescr: Tokens Studio의 base와 semantic Token Set을 Figma Variables에 반영하고, 승인된 값을 globals.css의 CSS Variables와 Tailwind theme variable로 연결하여 shadcn UI와 기능 컴포넌트에서 사용합니다.
-  A["Tokens Studio · base / semantic"] --> B["Figma Variables / Styles"]
-  A --> C["승인된 토큰 값 확인"]
-  C --> D["globals.css · :root / .dark"]
+  accDescr: neutral.tokens.json의 기본값을 Figma Variables와 CSS 변수에 함께 연결하고, 생성된 theme-tokens.css의 값을 Tailwind 유틸리티와 shadcn 컴포넌트에서 사용합니다.
+  A["neutral.tokens.json · shadcn 기본"] --> B["Figma Variables / Styles"]
+  A --> C["npm run tokens:sync"]
+  C --> D["theme-tokens.css · :root / .dark"]
   D --> E["Tailwind CSS 4 · @theme inline"]
   E --> F["bg-background · text-foreground 등"]
   F --> G["shadcn/ui와 기능 컴포넌트"]
           </div>
-          <figcaption>Tokens Studio에서 Tailwind CSS 4 코드까지의 연결</figcaption>
+          <figcaption>neutral 토큰 원본에서 Figma와 Tailwind CSS 4로 연결</figcaption>
         </figure>
         <blockquote>
           <p>
             가이드의 기준 원본은 이 문서이며, 현재 코드에서 실제 적용되는 값의
-            기준은 <code>globals.css</code>입니다. 두 값이 다르면 어느 한쪽을
+            단일 원본은 <code>neutral.tokens.json</code>이고 CSS는 생성 결과입니다. 두 값이 다르면 어느 한쪽을
             임의로 덮어쓰지 않고 변경 의도와 영향 범위를 먼저 확인합니다.
           </p>
         </blockquote>
@@ -241,15 +240,14 @@ flowchart LR
           확인합니다.
         </p>
         <ul>
-          <li><code>base</code>와 <code>semantic</code> 두 Token Set으로 시작합니다.</li>
-          <li><code>semantic</code>은 <code>base</code> 값을 참조합니다.</li>
+          <li>공식 neutral의 light·dark 의미 이름을 그대로 사용하고 임의의 자체 팔레트를 추가하지 않습니다.</li>
+          <li>Figma와 Tokens Studio 구성은 neutral.tokens.json의 이름·값에 맞춥니다.</li>
           <li>무료 범위에서 Theme와 여러 Mode를 자동 생성하는 흐름을 전제로 하지 않습니다.</li>
           <li>Token 이름과 타입을 바꿀 때 Figma 사용처와 코드 영향을 함께 확인합니다.</li>
           <li>여러 Token Set과 Mode가 실제로 필요해진 뒤 유료 기능이나 자동화를 검토합니다.</li>
         </ul>
         <p>
-          <strong>관리 원칙</strong>: 디자인 토큰은 Figma에서만 생성·수정·삭제합니다.
-          저장소의 토큰 파일을 직접 수정하는 것은 금지합니다.
+          <strong>관리 원칙</strong>: 단일 원본 neutral.tokens.json을 수정하고 Figma의 대응 값을 함께 갱신합니다. 생성된 theme-tokens.css와 개발 참조를 직접 수정하지 않습니다.
         </p>
       </section>
 
@@ -262,7 +260,7 @@ flowchart LR
           <li>Auto Layout의 간격은 승인된 spacing 값에 맞춥니다.</li>
           <li>Semantic Token은 실제 사용 목적이 드러나는 이름으로 연결합니다.</li>
           <li>공통 컴포넌트 인스턴스는 Variables와 함께 유지합니다.</li>
-          <li>Tokens Studio에서 지원하지 않는 타입은 억지로 Variable로 변환하지 않습니다.</li>
+          <li>Figma에서 지원하지 않는 타입은 Styles 또는 명시적 대응으로 관리하며 원본과 별도 값을 만들지 않습니다.</li>
         </ul>
         <p>
           무료 Token Set 내보내기에서는 Mode를 만들 수 없으므로, 현재 코드의
@@ -353,9 +351,9 @@ flowchart LR
         <h2 class="bx-active">8. 변경과 동기화</h2>
         <ol>
           <li>변경할 토큰의 사용 목적과 영향을 확인합니다.</li>
-          <li>Tokens Studio의 Base Token과 Semantic Token 참조를 수정합니다.</li>
+          <li>neutral.tokens.json의 해당 의미 토큰과 Figma 값을 함께 수정합니다.</li>
           <li>Figma Variables 또는 Styles를 다시 내보내고 주요 컴포넌트를 확인합니다.</li>
-          <li><code>globals.css</code>의 실제 값과 <code>@theme inline</code> 연결을 갱신합니다.</li>
+          <li><code>npm run tokens:sync</code>로 생성하고 <code>npm run tokens:check</code>로 일치를 확인합니다.</li>
           <li>기존 shadcn/ui와 기능 화면에서 대비, 상태와 반응형 결과를 확인합니다.</li>
           <li>관련 AI 요약 문서와 가이드 내용이 달라졌는지 확인합니다.</li>
         </ol>
@@ -373,7 +371,7 @@ flowchart LR
           <li>새 토큰이 실제로 반복되는 디자인 결정인가?</li>
           <li>Base Token과 Semantic Token의 역할이 구분되어 있는가?</li>
           <li>컴포넌트에서 원시 색상과 임의 값을 불필요하게 사용하지 않았는가?</li>
-          <li>Figma Variables와 <code>globals.css</code>의 이름 및 값이 일치하는가?</li>
+          <li>Figma Variables·neutral.tokens.json·생성 CSS의 이름과 값이 일치하는가?</li>
           <li>shadcn/ui의 기존 Semantic Token과 접근성 동작을 유지하는가?</li>
           <li>사용하지 않는 Component Token과 자동화 구조를 미리 추가하지 않았는가?</li>
           <li>미확정된 브랜드, 상태와 다크 모드 값을 확정된 기준처럼 사용하지 않았는가?</li>

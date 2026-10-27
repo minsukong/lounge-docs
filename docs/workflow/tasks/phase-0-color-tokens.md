@@ -1,8 +1,10 @@
 # TASK-P0-COLOR-001: Figma 색상 export와 공통 CSS 연결
 
+이 카드는 이전 Figma 팔레트 연결 작업의 이력입니다. 2026-10-27 사용자 결정으로 관련 원본·생성물·변환기는 삭제했고 [base-nova 기본화 작업](phase-0-shadcn-defaults.md)으로 전환했습니다. 아래 검증은 당시 결과이며 현재 기준이 아닙니다.
+
 ## 범위와 상태
 
-- Phase 0 / Shared / Ready-UI / In Progress
+- Phase 0 / Shared / Superseded — 공식 shadcn 기본값 전환으로 대체
 - 사용자 지정 순서: 디자인 토큰·CSS부터 진행하며 서비스 셸·인증·API·통합 검수 등 후속 2~5번 작업은 이후 진행합니다.
 - 근거: 사용자가 제공한 light.tokens.json·dark.tokens.json. 현재 두 파일의 표시 색상은 같으며 dark는 디자이너가 이후 변경합니다. 임의의 dark 색상은 만들지 않습니다.
 - 이번 허용 범위: 원시 색상 팔레트 27개·투명도·테마 구분, 공통 CSS 변수·Tailwind 연결과 개발 색상표 갱신.
@@ -10,9 +12,9 @@
 
 ## 원본과 생성 경로
 
-- [light 원본](../../../tokens/figma/color/light.tokens.json)·[dark 원본](../../../tokens/figma/color/dark.tokens.json)은 받은 파일의 바이트를 그대로 보존합니다. 기존 tokens/tokens.json은 변경하지 않습니다.
-- [변환 스크립트](../../../front-end/scripts/sync-color-tokens.mjs): front-end/에서 npm run tokens:colors. 원본을 재수정하지 않고 CSS·개발 색상표만 생성합니다. --check는 파생 파일의 최신 여부를 쓰기 없이 검사합니다.
-- [공통 색상 CSS](../../../front-end/packages/ui/src/color-tokens.css): :root·.dark별 원시 변수와 Tailwind 색상 연결. [공통 스타일](../../../front-end/packages/ui/src/styles.css)에서 가져오며 두 앱과 Storybook이 사용합니다.
+- light 원본 (`../../../tokens/figma/color/light.tokens.json`, 현재 삭제됨)·dark 원본 (`../../../tokens/figma/color/dark.tokens.json`, 현재 삭제됨)은 받은 파일의 바이트를 그대로 보존합니다. 기존 tokens/tokens.json은 변경하지 않습니다.
+- 변환 스크립트 (`../../../front-end/scripts/sync-color-tokens.mjs`, 현재 삭제됨): front-end/에서 npm run tokens:colors. 원본을 재수정하지 않고 CSS·개발 색상표만 생성합니다. --check는 파생 파일의 최신 여부를 쓰기 없이 검사합니다.
+- 공통 색상 CSS (`../../../front-end/packages/ui/src/color-tokens.css`, 현재 삭제됨): :root·.dark별 원시 변수와 Tailwind 색상 연결. [공통 스타일](../../../front-end/packages/ui/src/styles.css)에서 가져오며 두 앱과 Storybook이 사용합니다.
 - [색상표 Story](../../../front-end/packages/ui/src/dev/colors/color-palette.stories.tsx): 이전 스냅샷의 Gray 400·Blue 500·Blue 600을 최신 export 값으로 바꾸고 Dim 투명도와 테마별 값 표시를 연결합니다.
 - CSS에서는 sRGB 8비트 색상과 alpha를 유지합니다. 일부 원본 RGB 소수점 정밀도 차이는 있으며, 원본 파일은 보존합니다.
 

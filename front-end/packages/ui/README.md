@@ -1,18 +1,16 @@
-# 공통 UI
+# @lounge/ui
 
-`@lounge/ui`는 웹 애플리케이션이 사용하는 스타일·기본 컴포넌트 패키지입니다.
+브라우저와 Flutter 앱 WebView가 함께 사용하는 shadcn/ui Base UI + Nova 공통 패키지입니다. 공식 neutral light·dark 토큰과 기본 컴포넌트 크기를 사용합니다.
 
 ```tsx
 import { Button } from "@lounge/ui/button";
 import "@lounge/ui/styles.css";
 ```
 
-공통 UI는 이곳에서 수정하고 앱별 페이지·라우트·레이아웃은 해당 앱에서 관리합니다. 스타일은 기존 neutral 초안이며 생성 토큰은 변경하지 않았습니다.
+토큰 원본은 `../../../tokens/shadcn/neutral.tokens.json`입니다. `front-end/`에서 `npm run tokens:sync`와 `npm run tokens:check`를 실행합니다. 생성 파일을 직접 고치지 않습니다. 기존 자체 팔레트와 lounge-* 색상 변수는 제거했습니다.
 
-의존성 설치는 `front-end/`에서 `npm ci`로 수행합니다. 이 폴더에서는 `npm run storybook`, `npm run build-storybook`, `npm run typecheck`, `npm run lint`, `npm run test`를 사용할 수 있습니다. Storybook은 http://127.0.0.1:6006 이며 공통 UI와 앱의 개발 화면 Story를 함께 탐색합니다. 공통 컴포넌트와 개발 예제의 행동 테스트는 이 패키지의 `src/**`에 두고, 앱 화면·Native 연동 테스트는 `front-end/web/`에 둡니다.
+버튼 크기는 xs 24px·sm 28px·default 32px·lg 36px이며 아이콘 전용 크기도 동일한 단계입니다(기본 글자 크기 16px 기준). 터치 화면에서 필요한 조작 영역은 사용처에서 확보하며 기본 시각 크기를 전역 CSS로 덮어쓰지 않습니다.
 
-공통 개발 예제와 테마 전환은 `src/dev/`에 있으며 `@lounge/ui/preview*`는 개발용 화면에서만 가져옵니다. 앱 preview의 본문은 이 예제를 사용하고, 앱의 헤더·하단 탐색·푸터는 앱이 소유합니다. 예제 소스·전용 스타일은 운영 빌드에 포함하지 않습니다.
+Storybook은 `npm run storybook`으로 실행합니다. `Foundations/Colors`에서 의미 토큰 31개와 radius 단계를, `Components/Button`에서 종류와 크기를 확인합니다. 상단 테마 메뉴는 포털로 열리는 Dialog·Sheet에도 적용됩니다.
 
-## 색상 초안 검수
-
-Storybook의 `Foundations/Colors`에서 Figma `02 Color`의 전체 색상과 그룹별 색상표를 확인합니다. `src/dev/colors/`의 검수용 스냅샷이며 실제 Figma 색상값을 우선하고, 변수가 없는 회색은 도형의 채움값을 사용했습니다. 디자인 작업 중이므로 토큰 생성·테마 매핑·앱 스타일 적용은 후속 작업입니다. 기존 light/dark 스타일과 공개 export는 유지합니다.
+공통 UI·Storybook·폼 테스트는 이 패키지에서, 실제 라우트·페이지·Native 연동은 `web/`에서 관리합니다. `src/dev/`와 `@lounge/ui/preview*`는 개발용이며 운영 제품에서 가져오지 않습니다. 타입·린트·테스트·Storybook 및 웹 운영 빌드를 검증합니다.

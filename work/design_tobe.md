@@ -25,10 +25,10 @@ Base UI는 동작을 제공하는 기반이고, shadcn은 여기에 스타일과
 
 - Figma 키트를 사용한다면 Nova 스타일과 Base UI 기반 구성에 대응하는지 확인한다. `shadcn`이라는 이름만 같다고 동일한 구성으로 보지 않는다.
 - Base UI와 Radix UI는 다른 기반이다. Radix 기반 키트도 외형은 활용할 수 있지만, 컴포넌트 구성·상태가 우리 코드와 대응하는지 먼저 확인한다.
-- 현재 프로젝트에는 모바일 조작 영역과 호환성을 위해 조정한 코드가 있다. **공식 Nova 원본보다 프로젝트의 실제 컴포넌트와 Storybook을 우선한다.**
+- 현재 프로젝트는 공식 Nova 기본 크기·종류와 neutral 테마를 사용한다. import·아이콘·한국어 문구와 스크롤·Safe Area 등 실행에 필요한 연결만 조정한다. 실제 표본은 프로젝트 Storybook에서 확인한다.
 - Nova를 선택했다고 폰트·브랜드 색상·모든 수치가 자동 확정되지는 않는다. 공통값을 바꿀 때에는 개별 화면마다 수정하지 않고 공통 컴포넌트·토큰에 반영한다.
 
-예를 들어 현재 버튼은 기본형과 작은 크기 모두 최소 높이가 44px이다. Figma 키트의 작은 버튼 높이가 더 낮더라도 그대로 적용하지 않고 현재 프로젝트 기준과 맞춘다. 이 문서의 px 환산은 기본 글자 크기 16px 기준이다.
+버튼의 기본 시각 높이는 xs 24px·sm 28px·default 32px·lg 36px이며 아이콘 전용도 같은 단계다. 전역 44px 강제 크기는 제거했다. 터치 사용처에서 필요한 조작 영역은 배치·여백과 함께 별도로 확보한다. px 환산은 기본 글자 크기 16px 기준이다.
 
 ## 3. 공통 컴포넌트와 이름
 
@@ -52,13 +52,13 @@ Select·RadioGroup·Switch·Tabs 등은 실제 화면에서 필요해지면 같�
 | 속성 | 공통으로 사용하는 값 |
 | --- | --- |
 | `variant` | `default`, `secondary`, `outline`, `ghost`, `destructive`, `link` |
-| `size` | `default`, `sm`, `lg`, `icon`, `icon-sm` |
+| `size` | `xs`, `sm`, `default`, `lg`, `icon-xs`, `icon-sm`, `icon`, `icon-lg` |
 
 Figma에서도 `Button`의 `variant`와 `size`에 같은 값을 사용한다. 주요 버튼을 표현하더라도 variant 이름을 별도로 `primary`로 바꾸지 않는다. **버튼 종류는 `default`, 사용하는 색상 역할은 `primary`**로 구분한다.
 
 기본·hover·누름·포커스·비활성·로딩 등의 상태도 디자인에서 확인한다. Figma에서 상태를 표현하는 속성이 코드의 동일한 이름의 속성을 의미하지는 않는다. 로딩처럼 추가 구현이 필요한 상태는 개발과 대응 방식을 확인한다.
 
-현재 `destructive` 버튼은 위험 색상의 테두리·글자와 기본 배경을 사용하는 형태다. 다른 키트의 채움형 위험 버튼을 기본값으로 혼용하지 않는다.
+`destructive` 버튼은 공식 Nova의 옅은 위험 배경과 위험 글자색을 사용한다. 임의의 채움형·테두리형을 별도 기본값으로 혼용하지 않는다.
 
 Dialog와 Sheet는 서로 다른 컴포넌트로 구분한다. 현재 Sheet는 `top`, `right`, `bottom`, `left` 방향을 지원한다. 아래에서 열리는 Sheet에 끌어서 닫기 같은 Drawer 동작이 자동 포함된 것으로 가정하지 않는다.
 
@@ -84,35 +84,24 @@ Figma의 의미 토큰명에는 CSS용 접두사 `--`나 Tailwind용 접두사 `
 
 shadcn은 배경 역할과 그 위에 놓이는 글자·아이콘 역할을 짝으로 사용한다. 예를 들어 주요 버튼에는 `primary`와 `primary-foreground`를 함께 적용한다. `primary`라는 이름이 특정 파란색 값 자체를 의미하지는 않는다. [shadcn 공식 테마 기준](https://ui.shadcn.com/docs/theming)
 
-### 원시 팔레트와 의미 토큰 구분
+### 단일 토큰 원본
 
-기존 원시 색상은 역할 토큰에서 참조하는 재료로 활용한다. 원시 팔레트 이름과 컴포넌트 역할 이름을 혼용하지 않는다.
+`tokens/shadcn/neutral.tokens.json`을 디자인·개발의 기본값으로 사용한다. 기존 Figma 원시 팔레트, 자체 브랜드 색상 변수와 샘플 토큰은 삭제했다. 공식 neutral의 light·dark 의미 색상 31개를 사용하며, 필요한 서비스 색상은 이후 함께 확장한다.
 
-| 단계 | 예시 | 현재 상태 |
-| --- | --- | --- |
-| 원시 팔레트 | Figma export 경로 `Brand/blue500` | 전달된 색상값 존재 |
-| 생성된 원시 CSS 변수 | `--lounge-brand-blue-500` | 코드 연결됨 |
-| 의미 토큰 | `primary` | 브랜드 팔레트와의 연결은 미확정 |
-| 컴포넌트 | `Button`, `variant=default` | 현재 의미 토큰을 사용함 |
+차트는 `chart-1`~`chart-5`, 사이드바는 `sidebar`, `sidebar-foreground`, `sidebar-primary`, `sidebar-primary-foreground`, `sidebar-accent`, `sidebar-accent-foreground`, `sidebar-border`, `sidebar-ring` 이름을 그대로 사용한다.
 
-`primary`를 Blue 500에 연결할지는 실제 버튼·글자 대비를 확인해 정한다. 이미 전달된 색상을 활용하되 이름이 비슷하다는 이유만으로 자동 대응시키지 않는다.
+## 5. 공통 수치와 변경 방법
 
-성공·경고·안내·Dim 등 기본 의미 토큰만으로 표현하기 어려운 반복 요구는 필요한 시점에 이름과 용도를 함께 추가한다. 같은 역할에 디자인과 개발이 서로 다른 이름을 만들지 않는다.
+| 항목 | 현재 기본값 |
+| --- | --- |
+| 기반·스타일·색상 | Base UI + Nova + neutral |
+| 테마 | 공식 neutral light·dark 의미 토큰 |
+| 폰트·글자 크기 | Tailwind 기본 sans 스택과 text-* 단계 |
+| 간격 | Tailwind 기본 0.25rem 단위와 gap-*·p-*·m-* |
+| 라운드 | 기준 radius 0.625rem. sm·md·lg·xl·2xl·3xl·4xl은 기준값의 0.6·0.8·1·1.4·1.8·2.2·2.6배 |
+| 토큰 생성 | JSON 원본 → theme-tokens.css·Storybook 참조 |
 
-## 5. 값의 확정 상태와 변경 방법
-
-| 항목 | 현재 상태 | 적용 방법 |
-| --- | --- | --- |
-| shadcn 기반·스타일 | `base-nova` | 같은 구성으로 디자인 시작 |
-| 원시 색상 | light·dark export와 코드 연결 있음 | 기존 팔레트 활용 |
-| 의미 색상 | 코드에 neutral 초안 있음 | 현재값과 최종 브랜드 적용값을 구분 |
-| light·dark | 원시 팔레트는 같은 값, 의미 테마는 서로 다른 값 | dark 디자인 범위를 별도 확인. 현재 dark 미리보기를 최종 디자인으로 보지 않음 |
-| 폰트·간격·라운드 | 현재 코드에 기본값 있음 | 프로젝트 컴포넌트 기준으로 시작하고 필요한 공통 변경만 합의 |
-| 자동 토큰 변환 | 현재 원시 색상에 적용 | 의미 토큰·폰트·간격까지 자동 변환된다고 가정하지 않음 |
-
-Figma의 반복되는 값은 Variables와 공통 스타일에 연결한다. 디자인 토큰의 생성·수정·삭제는 프로젝트의 Tokens Studio 원본 관리 기준을 따르고, Figma Variables와의 적용 관계를 맞춘다. 생성된 코드 파일을 직접 수정해 디자인과 다른 값을 만들지 않는다.
-
-폰트·간격·크기·라운드는 기존 컴포넌트의 체계를 우선한다. 기본값으로 화면 구성을 시작할 수 있으며, 공통값을 바꾸는 경우에는 여러 화면에 미치는 영향을 확인한다. 폰트·간격 등 추가 토큰의 이름과 변환 방식은 디자인·개발이 함께 정한다.
+디자인 Figma와 Tokens Studio도 같은 이름·값에 맞춘다. 코드의 기본값 반영은 디자인 완료를 기다리지 않고 먼저 진행한다. 이후 공통값 변경 시 JSON 원본과 Figma를 함께 갱신하고 개발에서 생성·검사한다. 원본과 다른 생성 CSS를 직접 만들지 않는다.
 
 ## 6. 화면 구성과 상태 디자인
 
@@ -144,7 +133,7 @@ Figma의 반복되는 값은 Variables와 공통 스타일에 연결한다. 디�
 - [현재 shadcn 설정](../front-end/packages/ui/components.json)
 - [공통 컴포넌트 코드](../front-end/packages/ui/src/components/)
 - [현재 의미 토큰과 공통 스타일](../front-end/packages/ui/src/styles.css)
-- [Figma 원시 색상 export](../tokens/figma/color/)
+- [공통 neutral 토큰 원본](../tokens/shadcn/neutral.tokens.json)
 - [프로젝트 토큰 연결 기준](../docs/ai/design-tokens.md)
 
 공식 문서와 다른 Figma 키트는 참고 자료로 활용하고, 실제 적용 기준은 이 프로젝트에서 공유한 컴포넌트·토큰과 합의된 변경사항으로 맞춘다.

@@ -1,6 +1,15 @@
+import { useEffect } from "react";
 import type { Preview } from "@storybook/nextjs-vite";
 import "../src/styles.css";
 import "./preview.css";
+
+function ThemeRoot({ theme, children }: { theme: string; children: React.ReactNode }) {
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    return () => document.documentElement.classList.remove("dark");
+  }, [theme]);
+  return <div className={theme === "dark" ? "dark" : ""}>{children}</div>;
+}
 
 const preview: Preview = {
   parameters: {
@@ -22,9 +31,9 @@ const preview: Preview = {
   },
   initialGlobals: { theme: "light" },
   decorators: [(Story, context) => (
-    <div className={context.globals.theme === "dark" ? "dark" : ""}>
+    <ThemeRoot theme={context.globals.theme === "dark" ? "dark" : "light"}>
       <Story />
-    </div>
+    </ThemeRoot>
   )],
 };
 

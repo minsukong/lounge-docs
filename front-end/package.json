@@ -10,7 +10,6 @@
     "packages/ui"
   ],
   "scripts": {
-    "tokens:colors": "node scripts/sync-color-tokens.mjs",
     "dev": "npm run dev --workspace lounge-web",
     "build": "npm run build --workspace lounge-web",
     "typecheck": "npm run typecheck --workspaces --if-present",
@@ -18,7 +17,10 @@
     "test": "npm run test --workspaces --if-present",
     "storybook": "npm run storybook --workspace @lounge/ui",
     "build-storybook": "npm run build-storybook --workspace @lounge/ui",
-    "build:preview": "npm run build:preview --workspace lounge-web"
+    "build:preview": "npm run build:preview --workspace lounge-web",
+    "tokens:sync": "node scripts/sync-theme-tokens.mjs",
+    "tokens:check": "node scripts/sync-theme-tokens.mjs --check",
+    "test:tokens": "node --test scripts/sync-theme-tokens.test.mjs"
   },
   "devDependencies": {
     "@storybook/addon-docs": "10.6.1",

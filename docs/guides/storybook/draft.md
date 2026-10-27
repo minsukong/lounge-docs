@@ -135,7 +135,7 @@ Autodocs 설정은 [Storybook Autodocs 문서](https://storybook.js.org/docs/wri
 
 Figma는 프로젝트의 shadcn/ui `base-nova` 컴포넌트·의미 토큰을 공유해 화면과 디자인 변경 의도를 표현하고, Storybook은 현재 코드의 실제 구성·공개 API·렌더링 상태를 제공합니다. [디자인 공유 기준](../../../work/design_tobe.md)에 따라 컴포넌트명·variant·size·의미 토큰명을 함께 맞춥니다.
 
-현재 neutral 색상과 기본 수치를 최종 디자인으로 확정하지 않습니다. 이번에는 문서만 변경하고, 디자인이 확정된 뒤 코드·토큰·Story를 같은 후속 작업에서 반영·검증합니다.
+공식 neutral 색상과 Nova 크기를 현재 공통 기본값으로 적용합니다. 디자인팀도 같은 구성에서 작업하며, 이후 공통값 변경은 Figma·코드·토큰·Story에 함께 반영·검증합니다.
 
 ![@storybook/addon-designs 공식 데모에서 Embed Frame Story의 구현 Button과 아래 Design 패널의 Figma Frame을 표시한 실제 화면](../../assets/design/storybook-figma-ui-review-demo.png)
 

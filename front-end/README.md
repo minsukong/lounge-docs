@@ -13,6 +13,10 @@ Front-end 애플리케이션의 package, 설정과 source는 각 폴더에서 �
 웹 애플리케이션과 UI 패키지는 동일한 기술 스택과 하나의 디자인 시스템을 사용하고, 공통 스타일·토큰·기본 UI를 `packages/ui/`의 단일 소스로 공유합니다. 공통 UI Storybook도 이 패키지를 기준으로 관리합니다. 앱은 `@lounge/ui/*` 공개 export로 같은 컴포넌트와 스타일을 사용합니다. 페이지·라우트·레이아웃·환경별 동작·Native 연동은 `web/`에서 관리합니다. [공통 기반 기준](../docs/ai/project.md#웹-애플리케이션과-ui-패키지의-공통-기반)에서 범위를 확인합니다.
 
 이번 FO 공통 구현 초안의 완료 조건에서는 실기기 검증을 제외합니다.
+## 디자인 기준
+
+공통 UI는 shadcn/ui `base-nova`, 색상은 공식 neutral 기본 테마를 사용합니다. 디자인팀도 같은 컴포넌트·variant·size·의미 토큰명을 사용합니다. 토큰 원본은 `../tokens/shadcn/neutral.tokens.json`이며 `npm run tokens:sync`로 생성하고 `npm run tokens:check`로 검사합니다.
+
 ## 실행
 
 Node.js 22.12 이상에서 이 폴더를 기준으로 의존성을 설치합니다.

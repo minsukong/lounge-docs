@@ -85,7 +85,7 @@
 <tr><th scope="row">Dialog·BottomSheet</th><td>진입·닫기·포커스 복귀, 스크롤, 모바일 키보드, 접근 가능한 이름을 봅니다.</td><td>복합 상호작용을 따로 검수해 실제 화면에서 같은 문제가 반복되는 것을 줄이기 위한 것입니다.</td></tr>
 </tbody></table></div>
 <p>Story의 단순한 문구와 UI 상태 예시는 검수에 필요한 최소 범위로 작성할 수 있습니다. 서버 응답·인증·결제 상태를 흉내 낸 fixture·handler는 계약이 승인된 뒤에 만듭니다. 후보를 한 번에 모두 만들기보다, 사용처가 확인된 소수부터 완성합니다.</p>
-<p class="note">디자인 토큰은 Tokens Studio에서만 생성하고 수정합니다. 저장소에 생성된 토큰 파일을 직접 바꾸거나, 정해지지 않은 브랜드 색상을 임의로 정하지는 않습니다. 토큰 파일이 있다는 사실만으로 내보내기·CSS 변환·앱 적용까지 끝난 것으로 보지는 않습니다.</p>
+<p class="note">기본 토큰은 tokens/shadcn/neutral.tokens.json의 공식 neutral 값으로 관리합니다. Figma도 같은 이름·값에 맞추고 npm run tokens:sync로 생성한 뒤 npm run tokens:check로 확인합니다. 기존 자체 팔레트는 사용하지 않습니다. 서비스별 추가 역할은 별도 합의합니다.</p>
 <p class="source">근거: <a href="../ai/design-tokens.md">토큰 관리 기준</a>, <a href="../ai/storybook.md">Story 대상과 작성 원칙</a>, <a href="../ai/accessibility.md">접근성 기준</a>.</p>
 </section><hr>
 <section>

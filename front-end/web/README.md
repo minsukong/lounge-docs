@@ -4,6 +4,10 @@ PC·모바일 브라우저와 Flutter 앱 내부 WebView에서 함께 실행되�
 
 이 앱의 페이지·라우트·환경별 동작·검수 화면을 관리합니다. 공통 UI·스타일·유틸리티는 `../packages/ui/`의 단일 소스로 유지하며 `@lounge/ui/*`로 가져옵니다. Flutter Native 앱은 별도 위치에서 관리합니다.
 
+## 공통 디자인 기준
+
+공통 UI와 스타일은 `@lounge/ui/*`를 사용합니다. 공식 shadcn `base-nova`·neutral 의미 토큰이 기본값이며 `../`에서 `npm run tokens:sync`와 `npm run tokens:check`를 실행합니다.
+
 ## 실행
 
 Node.js 22.12 이상에서 의존성 설치는 `front-end/`의 `npm ci`로 수행합니다. 잠금 파일은 `front-end/package-lock.json` 하나로 관리합니다. Next.js와 eslint-config-next는 Storybook App Router 호환성을 위해 16.2.12로 고정했습니다. workspace 루트의 Storybook 의존성도 같은 Next.js를 사용합니다.
@@ -23,7 +27,7 @@ Node.js 22.12 이상에서 의존성 설치는 `front-end/`의 `npm ci`로 수�
 
 이 화면의 메뉴와 폼은 기반 검수용이며 확정된 서비스 메뉴나 회원가입 정책이 아닙니다. 폼은 입력 형식만 확인하고 전송하지 않습니다. 화면 상태 선택은 지역 UI 미리보기이며 API Mock이 아닙니다. 인증·세션·토큰 저장, 실제 API, Native Bridge, 업무 데이터와 보호 라우트는 미구현입니다.
 
-공통 스타일은 `../packages/ui/src/styles.css`에 있습니다. `tokens/figma/color/`의 light·dark 색상 export를 공통 CSS·Tailwind 팔레트에 연결했으며, 현재 두 팔레트의 표시 색상은 같습니다. 버튼·본문·배경 등 의미 토큰은 용도별 연결을 확인하기 전까지 기존 neutral 초안입니다. 기존 `tokens/tokens.json`은 수정하지 않았습니다. 상세 범위는 `docs/workflow/tasks/phase-0-color-tokens.md`에 기록합니다. 앱 최소 지원 범위는 `app_webview_guide.html` 4·5번 섹션과 `react_code_exports.html`의 프로젝트 기준을 따릅니다. 최신 CSS 표현은 기본 스타일로 대체했지만 iOS 15 WKWebView·Android System WebView 호환 결과는 미검증입니다.
+공통 스타일은 `../packages/ui/src/styles.css`에 있으며 공식 shadcn base-nova·neutral 기본값을 사용합니다. 원본은 `tokens/shadcn/neutral.tokens.json`이고 기존 Figma 팔레트와 별도 색상 변수는 삭제했습니다. 앱 최소 지원 범위는 `app_webview_guide.html` 4·5번 섹션과 `react_code_exports.html`의 프로젝트 기준을 따릅니다. 최신 CSS 표현은 기본 스타일로 대체했지만 iOS 15 WKWebView·Android System WebView 호환 결과는 미검증입니다.
 
 ## 추후 검증 명령
 

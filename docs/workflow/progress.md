@@ -13,12 +13,13 @@
 
 | 작업 | 브랜치·상태 | 다음 행동 |
 | --- | --- | --- |
+| [TASK-P0-SHADCN-001: base-nova 기본 컴포넌트와 neutral 토큰](tasks/phase-0-shadcn-defaults.md) | Done · 공식 기본값·토큰·Storybook·운영 빌드·부분 브라우저 검수 | Figma 동일 기준 적용과 서비스 화면 설계, 실기기 검증은 후속 |
 | [TASK-P0-FOUNDATION-001: 실행 기반과 공통 UI 초안](tasks/phase-0-foundation.md) | Review · 초기 카드의 최종 리뷰 미완료. `phase-0-foundation`은 초기 브랜치 이력 | 후속 카드의 완료·검증 기록을 반영해 초기 범위의 리뷰·완료 조건 정리 |
-| [TASK-P0-COLOR-001: Figma 색상 export와 공통 CSS 연결](tasks/phase-0-color-tokens.md) | In Progress · 원시 팔레트·CSS 연결과 검증 완료, 의미 토큰 근거 대기 | 디자인 토큰·CSS를 우선 완료한 뒤 서비스 셸·연동 등 후속 작업 진행 |
+| [TASK-P0-COLOR-001: Figma 색상 export와 공통 CSS 연결](tasks/phase-0-color-tokens.md) | Superseded · 공식 shadcn 기본값 전환으로 대체 | TASK-P0-SHADCN-001 참조 |
 | [TASK-P0-SHARED-UI-001: 공통 UI 이전과 website 실행 기반](tasks/common-ui-workspaces.md) | Done · 공통 소스·workspace·두 앱 preview 구성 및 빌드 확인 | 실제 서비스 화면·승인 디자인·계약 연동은 별도 작업 |
 | [TASK-P0-WEB-INTEGRATION-001: WebView·website 단일 웹 애플리케이션 통합](tasks/phase-0-web-integration.md) | Done · `front-end/web/` 단일 앱 통합, packages/ui 독립 패키지 유지, 구조·설정·문서 정리와 코드 검증 | Bridge 환경 판별 구현은 DEC-005 계약 후, APP/WEB IA 대조와 환경별 동작 정리는 후속 카드 |
 
-**Phase 0 전체는 미완료입니다.** 공통 실행 기반·UI 초안·두 앱 preview는 후속 카드 범위에서 완료됐고, 검증은 해당 카드의 실행 기록입니다. 이번 상태 갱신에서 앱 검사를 재실행하지 않았습니다.
+**Phase 0 전체는 미완료입니다.** 공통 실행 기반·UI 초안·두 앱 preview는 후속 카드 범위에서 완료됐고, 검증은 해당 카드의 실행 기록입니다. 최신 기본화 검증 결과는 TASK-P0-SHADCN-001에 기록하며 전체 서비스 연동 검증과 구분합니다.
 
 - 남은 구현·합의: 실제 서비스 셸·메뉴·설정·승인 디자인, 보호 라우트·인증·API/Query, 업무 오류·재시도·캐시·복구·Native 연동.
 - 남은 검증: 실제 서비스 흐름과 대상 WebView의 키보드·회전·Safe Area 등. 초안의 일부 브라우저 확인을 전체 검증으로 해석하지 않습니다.
