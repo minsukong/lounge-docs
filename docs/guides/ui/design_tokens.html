@@ -41,6 +41,9 @@
 
       <section>
         <h2 class="bx-active">2. 현재 프로젝트 기준</h2>
+        <p>디자인도 프로젝트의 <code>base-nova</code> 컴포넌트와 의미 토큰 체계에서 시작합니다. <code>base</code>는 Base UI 동작 기반, <code>nova</code>는 외형 스타일이며, 현재 프로젝트의 컴포넌트 조정 사항을 포함해 맞춥니다. <a href="../../../work/design_tobe.md">디자인 공유 기준</a>에서 컴포넌트·속성·토큰 이름을 확인합니다.</p>
+        <p>Figma의 의미 변수도 <code>primary</code>, <code>primary-foreground</code> 등 코드와 같은 이름을 사용합니다. CSS용 <code>--</code>와 Tailwind용 <code>bg-</code>·<code>text-</code>는 Figma 이름에 붙이지 않습니다. 원시 팔레트와 의미 역할은 구분하고, 필요한 추가 이름과 값은 디자인·개발이 함께 정합니다.</p>
+        <p>현재 자동 변환은 전달된 원시 색상에 한정됩니다. 원시 팔레트의 light·dark 값은 같지만 코드의 의미 테마 값은 서로 다릅니다. 의미 색상은 neutral 초안이며 폰트·간격·라운드까지 자동 연결되거나 최종 디자인으로 확정된 상태가 아닙니다. 이번에는 문서만 갱신하고 코드·생성 토큰은 디자인 확정 후 반영합니다.</p>
         <p>
           애플리케이션은 React 19, Tailwind CSS 4와 shadcn/ui를 사용합니다.
           정확한 버전과 기술 책임은
@@ -68,11 +71,11 @@
               <td>shadcn/ui의 CSS Variables 사용과 Tailwind CSS 경로 설정</td>
             </tr>
             <tr>
-              <td><code>src/app/globals.css</code></td>
+              <td><code>front-end/packages/ui/src/styles.css</code></td>
               <td>실제 CSS 값과 Tailwind theme variable 연결</td>
             </tr>
             <tr>
-              <td><code>src/components/ui</code></td>
+              <td><code>front-end/packages/ui/src/components</code></td>
               <td>프로젝트가 소유하고 수정하는 shadcn/ui 컴포넌트</td>
             </tr>
           </tbody>
@@ -80,7 +83,7 @@
         <p>
           현재 <code>components.json</code>은 <code>cssVariables</code>를 사용하고,
           Tailwind CSS 4 기준으로 별도 <code>tailwind.config</code> 경로를 두지
-          않습니다. <code>globals.css</code>는 <code>:root</code>와
+          않습니다. 공통 <code>styles.css</code>는 <code>:root</code>와
           <code>.dark</code>의 값을 <code>@theme inline</code>으로 연결합니다.
         </p>
         <p>

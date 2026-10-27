@@ -470,6 +470,9 @@ flowchart LR
         <h2 class="bx-active">6. UI, Figma, shadcn/ui 및 Tailwind CSS</h2>
 
         <h3>6.1 Figma와 디자인 시스템</h3>
+        <p>디자인은 프로젝트의 shadcn/ui <code>base-nova</code> 컴포넌트와 의미 토큰을 기준으로 시작합니다. Figma와 코드는 컴포넌트명·variant·size·의미 토큰명을 공유하고, 기존 구성을 조합해 화면을 만듭니다. 필요한 공통 확장은 디자인·개발이 함께 정합니다. <a href="../../../work/design_tobe.md">디자인 공유 기준</a>을 따릅니다.</p>
+        <p><code>base</code>는 Base UI의 동작 기반이고 <code>nova</code>는 외형 스타일입니다. 현재 프로젝트에서 조정한 조작 영역·호환성을 포함한 컴포넌트와 Storybook을 공식 예제보다 우선합니다.</p>
+        <p>현재 단계에서는 문서 기준만 갱신합니다. <code>front-end/</code>의 코드·토큰·스타일·설정은 디자인 확정 후 별도 작업에서 반영·검증하며, 현재 neutral 값과 기본 수치를 최종 브랜드 디자인으로 확정하지 않습니다.</p>
         <ul>
           <li>
             Figma의 색상, 타이포그래피, 간격과 컴포넌트 상태를 디자인 토큰
@@ -495,9 +498,9 @@ flowchart LR
           >를 따릅니다.
         </p>
         <p>
-          <code class="badge-tbd">TBD</code> 최종 토큰 이름, breakpoint, 타이포그래피 단계,
-          컴포넌트 variant와 Figma-Code 동기화 방식은 디자인 시스템 확정 후
-          반영합니다.
+          <code class="badge-tbd">TBD</code> 브랜드 값의 의미 토큰 연결, breakpoint, 타이포그래피 단계,
+          추가 variant와 Figma-Code 동기화 방식은 디자인 확정 후 반영합니다.
+          기존 shadcn 의미 토큰명과 프로젝트 variant·size 이름은 공통 기준으로 유지합니다.
         </p>
         <h3>6.2 shadcn/ui</h3>
         <ul>
