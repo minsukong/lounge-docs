@@ -17,6 +17,7 @@
 | 이번 요청 | 먼저 읽을 문서·범위 | 사용할 스킬·추가 기준 |
 | --- | --- | --- |
 | 요구사항·정책 질문 정리 | [결정 기록](decisions.md)의 관련 항목 + 지정 IA·기획 | [lounge-grill](skills/lounge-grill/SKILL.md) |
+| Figma(기획서) 보완 코멘트 작성·게시 | [프론트·백엔드 공통 코멘트 양식](decisions.md#comment-template) + 대상 화면·기존 코멘트 | [lounge-grill](skills/lounge-grill/SKILL.md). 초안·게시 요청을 구분하고 답변 후 DEC·카드 갱신 |
 | 여러 카드의 기능 명세 | [명세 양식](spec-template.md) + 관련 합의·결정 근거 | [lounge-spec](skills/lounge-spec/SKILL.md) |
 | 작업 분해·담당·의존성 | [작업 카드 양식](task-card.md) + 관련 명세 | [lounge-tickets](skills/lounge-tickets/SKILL.md) |
 | UI·연동 착수 판단 | 실제 카드 + [구축·운영 작업 기준](README.md)의 “Ready와 진행 상태는 별도”, “API·Bridge 미정 시” | [lounge-ready](skills/lounge-ready/SKILL.md) |
